@@ -90,7 +90,7 @@ public class BlockFluidicCompressor extends BlockBuildCraft {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		textureFront = par1IconRegister.registerIcon(Props.FluidicCompressorTextureFront);
-		textureSide = par1IconRegister.registerIcon("FluidicCompressor/fluidicCompressor_sides.png");
+		textureSide = par1IconRegister.registerIcon("fluidicCompressor:fluidicCompressor_sides");
 		textureTop = par1IconRegister.registerIcon("fluidicCompressor:fluidicCompressor_top");
 		textureBack = par1IconRegister.registerIcon("fluidicCompressor:fluidicCompressor_back");
 		textureBottom = par1IconRegister.registerIcon("fluidicCompressor:fluidicCompressor_bottom");

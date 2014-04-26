@@ -20,16 +20,16 @@ import fluidicCompressor.stuff.BlockFluidicCompressor;
 import fluidicCompressor.stuff.ItemCanister;
 import fluidicCompressor.stuff.TileFluidicCompressor;
 
-@Mod(modid="FluidicCompressor", name="Fluidic Compressor", version = "1.0",dependencies = "required-after:BuildCraft|Energy@{6.0.5}")
+@Mod(modid="fluidicCompressor", name="Fluidic Compressor", version = "1.0",dependencies = "required-after:BuildCraft|Energy@{6.0.5}")
 public class FluidicCompressor {
 	
-	public static final String MODID = "FluidicCompressor";
+	public static final String MODID = "fluidicCompressor";
 	public static ItemCanister ironCanister;
 	public static ItemCanister goldCanister;
 	public static ItemCanister diamondCanister;
 	public static BlockFluidicCompressor fluidicCompressorBlock;
 	
-	@Instance(value="FluidicCompressor")
+	@Instance(value="fluidicCompressor")
 	public static FluidicCompressor instance;
 	
 	@SidedProxy(clientSide="fluidicCompressor.core.ClientProxy", serverSide="fluidicCompressor.core.CommonProxy")
