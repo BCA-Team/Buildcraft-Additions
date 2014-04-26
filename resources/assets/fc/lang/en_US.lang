@@ -1,0 +1,7 @@
+tile.blockFluidicCompressor.name=Fluidic Compressor
+item.ironCanister.name=Iron Canister
+item.goldCanister.name=Gold Canister
+item.diamondCanister.name=Diamond Canister
+gui.progress=Progress
+gui.fluid=Fluid
+gui.fluidStored=Amount of fluid

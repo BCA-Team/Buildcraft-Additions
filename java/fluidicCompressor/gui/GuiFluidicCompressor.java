@@ -18,7 +18,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class GuiFluidicCompressor extends GuiBuildCraft {
 
     TileFluidicCompressor fluidicCompressor;
-    private static final ResourceLocation texture = new ResourceLocation("fluidicCompressor", "textures/gui/FluidicCompressorGUI.png");
+    private static final ResourceLocation texture = new ResourceLocation("fc", "textures/guis/FluidicCompressorGUI.png");
     private static final ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
     private static final ResourceLocation ITEM_TEXTURE = TextureMap.locationItemsTexture;
 
@@ -110,7 +110,7 @@ public class GuiFluidicCompressor extends GuiBuildCraft {
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         super.drawGuiContainerForegroundLayer(par1, par2);
-        String title = Utils.localize("tile.blockCanner.name");
+        String title = Utils.localize("tile.blockFluidicCompressor.name");
         fontRendererObj.drawString(Utils.localize(title), getCenteredOffset(title), 6, 0x404040);
         fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 96) + 2, 0x404040);
     }

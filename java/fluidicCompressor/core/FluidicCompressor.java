@@ -23,7 +23,7 @@ import fluidicCompressor.stuff.TileFluidicCompressor;
 @Mod(modid="fluidicCompressor", name="Fluidic Compressor", version = "1.0",dependencies = "required-after:BuildCraft|Energy@{6.0.5}")
 public class FluidicCompressor {
 	
-	public static final String MODID = "fluidicCompressor";
+	public static final String MODID = "fc";
 	public static ItemCanister ironCanister;
 	public static ItemCanister goldCanister;
 	public static ItemCanister diamondCanister;

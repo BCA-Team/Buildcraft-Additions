@@ -46,8 +46,8 @@ public class ItemCanister extends ItemFluidContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon("fluidicCompressor:" + name);
-		this.overlay = iconRegister.registerIcon("fluidicCompressor:fluidOverlay");
+		this.itemIcon = iconRegister.registerIcon("fc:" + name);
+		this.overlay = iconRegister.registerIcon("fc:fluidOverlay");
 		System.out.println(itemIcon);
 	}
 
