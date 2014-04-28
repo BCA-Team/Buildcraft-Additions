@@ -1,11 +1,11 @@
-package fluidicCompressor.gui;
+package buildcraftAdditions.gui;
 
-import fluidicCompressor.core.Utils;
-import fluidicCompressor.stuff.TileFluidicCompressor;
 import buildcraft.BuildCraftCore;
 import buildcraft.core.CoreIconProvider;
 import buildcraft.core.gui.GuiBuildCraft;
 import buildcraft.core.render.RenderUtils;
+import buildcraftAdditions.core.Utils;
+import buildcraftAdditions.stuff.TileFluidicCompressor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -18,9 +18,9 @@ import net.minecraftforge.fluids.FluidStack;
 public class GuiFluidicCompressor extends GuiBuildCraft {
 
     TileFluidicCompressor fluidicCompressor;
-    private static final ResourceLocation texture = new ResourceLocation("fc", "textures/guis/FluidicCompressorGUI.png");
-    private static final ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
-    private static final ResourceLocation ITEM_TEXTURE = TextureMap.locationItemsTexture;
+    public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/FluidicCompressorGUI.png");
+    public static final ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
+    public static final ResourceLocation ITEM_TEXTURE = TextureMap.locationItemsTexture;
 
     public GuiFluidicCompressor(InventoryPlayer inventoryplayer, TileFluidicCompressor canner) {
         super(new ContainerFluidicCompressor(inventoryplayer, canner), canner, texture);

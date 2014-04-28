@@ -1,7 +1,7 @@
-package fluidicCompressor.gui;
+package buildcraftAdditions.gui;
 
+import buildcraftAdditions.stuff.TileFluidicCompressor;
 import cpw.mods.fml.common.network.IGuiHandler;
-import fluidicCompressor.stuff.TileFluidicCompressor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

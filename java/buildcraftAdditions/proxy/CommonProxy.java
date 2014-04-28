@@ -1,4 +1,4 @@
-package fluidicCompressor.core;
+package buildcraftAdditions.proxy;
 
 public class CommonProxy {
 	

@@ -1,9 +1,9 @@
-package fluidicCompressor.gui;
+package buildcraftAdditions.gui;
 
-import fluidicCompressor.stuff.TileFluidicCompressor;
 import buildcraft.core.gui.BuildCraftContainer;
 import buildcraft.core.gui.slots.SlotOutput;
 import buildcraft.core.gui.slots.SlotValidated;
+import buildcraftAdditions.stuff.TileFluidicCompressor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;

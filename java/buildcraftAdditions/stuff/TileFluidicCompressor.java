@@ -1,8 +1,5 @@
-package fluidicCompressor.stuff;
+package buildcraftAdditions.stuff;
 
-
-
-import fluidicCompressor.core.Utils;
 import io.netty.buffer.ByteBuf;
 
 import java.io.ByteArrayOutputStream;
@@ -31,6 +28,7 @@ import buildcraft.core.network.NetworkData;
 import buildcraft.core.network.PacketGuiReturn;
 import buildcraft.core.network.PacketPayload;
 import buildcraft.core.network.PacketUpdate;
+import buildcraftAdditions.core.Utils;
 
 
 public class TileFluidicCompressor extends TileBuildCraft implements ISidedInventory, IFluidHandler, IGuiReturnHandler {

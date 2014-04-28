@@ -1,6 +1,7 @@
-package fluidicCompressor.stuff;
+package buildcraftAdditions.stuff;
 
-import buildcraft.core.CreativeTabBuildCraft;
+import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.core.Utils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -12,8 +13,6 @@ import net.minecraftforge.fluids.ItemFluidContainer;
 
 import java.util.List;
 
-import fluidicCompressor.core.Utils;
-
 public class ItemCanister extends ItemFluidContainer {
 
 	public IIcon overlay;
@@ -22,7 +21,7 @@ public class ItemCanister extends ItemFluidContainer {
 	public ItemCanister(String name, int canisterCapacity) {
 		super(0);
 		this.setMaxStackSize(4);
-		this.setCreativeTab(CreativeTabBuildCraft.TIER_3.get());
+		this.setCreativeTab(BuildcraftAdditions.bcadditions);
 		this.setUnlocalizedName(name);
 		this.setCapacity(canisterCapacity);
 		this.name = name;
@@ -46,9 +45,8 @@ public class ItemCanister extends ItemFluidContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon("fc:" + name);
-		this.overlay = iconRegister.registerIcon("fc:fluidOverlay");
-		System.out.println(itemIcon);
+		this.itemIcon = iconRegister.registerIcon("bcadditions:" + name);
+		this.overlay = iconRegister.registerIcon("bcadditions:fluidOverlay");
 	}
 
 	@Override

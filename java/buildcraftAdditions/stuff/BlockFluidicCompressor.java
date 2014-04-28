@@ -1,14 +1,13 @@
-package fluidicCompressor.stuff;
+package buildcraftAdditions.stuff;
 
 import buildcraft.BuildCraftFactory;
-import buildcraft.core.BlockBuildCraft;
 import buildcraft.core.CreativeTabBuildCraft;
 import buildcraft.core.IItemPipe;
+import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.core.Utils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import fluidicCompressor.core.FluidicCompressor;
-import fluidicCompressor.core.Props;
-import fluidicCompressor.core.Utils;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,7 +18,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockFluidicCompressor extends BlockBuildCraft {
+public class BlockFluidicCompressor extends BlockContainer {
 	
 	IIcon textureFront;
 	IIcon textureTop;
@@ -28,7 +27,7 @@ public class BlockFluidicCompressor extends BlockBuildCraft {
 	IIcon textureBottom;
 
 	public BlockFluidicCompressor() {
-		super(Material.iron, CreativeTabBuildCraft.TIER_3);
+		super(Material.iron);
 		setHardness(5F);
 		setResistance(10F);
 	}
@@ -52,7 +51,7 @@ public class BlockFluidicCompressor extends BlockBuildCraft {
         }
 
 		if (!world.isRemote)
-			entityplayer.openGui(FluidicCompressor.instance, 70, world, x, y, z);
+			entityplayer.openGui(BuildcraftAdditions.instance, 70, world, x, y, z);
 
 		return true;
 	}
@@ -89,10 +88,10 @@ public class BlockFluidicCompressor extends BlockBuildCraft {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		textureFront = par1IconRegister.registerIcon("fc:fluidicCompressor_front");
-		textureSide = par1IconRegister.registerIcon("fc:fluidicCompressor_sides");
-		textureTop = par1IconRegister.registerIcon("fc:fluidicCompressor_top");
-		textureBack = par1IconRegister.registerIcon("fc:fluidicCompressor_back");
-		textureBottom = par1IconRegister.registerIcon("fc:fluidicCompressor_bottom");
+		textureFront = par1IconRegister.registerIcon("bcadditions:fluidicCompressor_front");
+		textureSide = par1IconRegister.registerIcon("bcadditions:fluidicCompressor_sides");
+		textureTop = par1IconRegister.registerIcon("bcadditions:fluidicCompressor_top");
+		textureBack = par1IconRegister.registerIcon("bcadditions:fluidicCompressor_back");
+		textureBottom = par1IconRegister.registerIcon("bcadditions:fluidicCompressor_bottom");
 	}
 }

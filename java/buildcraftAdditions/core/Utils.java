@@ -1,4 +1,4 @@
-package fluidicCompressor.core;
+package buildcraftAdditions.core;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;

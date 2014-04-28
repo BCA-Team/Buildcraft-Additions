@@ -1,12 +1,25 @@
-package fluidicCompressor.core;
+package buildcraftAdditions.core;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 import buildcraft.BuildCraftCore;
 import buildcraft.BuildCraftFactory;
 import buildcraft.BuildCraftTransport;
 import buildcraft.core.proxy.CoreProxy;
+import buildcraftAdditions.gui.GuiHandler;
+import buildcraftAdditions.proxy.CommonProxy;
+import buildcraftAdditions.stuff.BlockFluidicCompressor;
+import buildcraftAdditions.stuff.ItemCanister;
+import buildcraftAdditions.stuff.TileFluidicCompressor;
+import buildcraftAdditions.villager.ComponentWorkshop;
+import buildcraftAdditions.villager.VillagerTradeHandler;
+import buildcraftAdditions.villager.WorkshopCreationHandeler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -15,25 +28,31 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import fluidicCompressor.gui.GuiHandler;
-import fluidicCompressor.stuff.BlockFluidicCompressor;
-import fluidicCompressor.stuff.ItemCanister;
-import fluidicCompressor.stuff.TileFluidicCompressor;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 
-@Mod(modid="fluidicCompressor", name="Fluidic Compressor", version = "1.0",dependencies = "required-after:BuildCraft|Energy@{6.0.5}")
-public class FluidicCompressor {
+@Mod(modid="bcadditions", name="Buildcraft Additions", version = "1.1",dependencies = "required-after:BuildCraft|Energy@{6.0.5}")
+public class BuildcraftAdditions {
 	
-	public static final String MODID = "fc";
 	public static ItemCanister ironCanister;
 	public static ItemCanister goldCanister;
 	public static ItemCanister diamondCanister;
 	public static BlockFluidicCompressor fluidicCompressorBlock;
+	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/FluidicCompressorGUI.png");
 	
-	@Instance(value="fluidicCompressor")
-	public static FluidicCompressor instance;
+	@Instance(value="bcadditions")
+	public static BuildcraftAdditions instance;
 	
-	@SidedProxy(clientSide="fluidicCompressor.core.ClientProxy", serverSide="fluidicCompressor.core.CommonProxy")
+	@SidedProxy(clientSide="buildcraftAdditions.proxy.ClientProxy", serverSide="buildcraftAdditions.proxy.CommonProxy")
     public static CommonProxy proxy;
+	
+	public static CreativeTabs bcadditions = new CreativeTabs("BuildcraftAdditions") {
+
+		@Override
+		public Item getTabIconItem() {
+			return new ItemStack(fluidicCompressorBlock, 1).getItem();
+		}
+        
+};
 	
 	@EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -53,6 +72,8 @@ public class FluidicCompressor {
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(ironCanister), "PIP", "IGI", "PIP", 'P', BuildCraftTransport.pipeWaterproof, 'I', Items.iron_ingot, 'G', Blocks.glass_pane);
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(goldCanister), "PGP", "GIG", "PGP", 'P', BuildCraftTransport.pipeWaterproof, 'G', Items.gold_ingot, 'I', ironCanister);
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(diamondCanister), "PDP", "DGD", "PDP", 'P', BuildCraftTransport.pipeWaterproof, 'D', Items.diamond, 'G', goldCanister);
+		
+		
 	}
     
     @EventHandler
@@ -70,7 +91,7 @@ public class FluidicCompressor {
     @Mod.EventHandler
 	public void initialize(FMLPreInitializationEvent evt) {
     	fluidicCompressorBlock = new BlockFluidicCompressor();
-    	CoreProxy.proxy.registerBlock(fluidicCompressorBlock.setBlockName("blockFluidicCompressor"));
+    	CoreProxy.proxy.registerBlock(fluidicCompressorBlock.setBlockName("blockFluidicCompressor").setCreativeTab(bcadditions));
     	
     }
 
