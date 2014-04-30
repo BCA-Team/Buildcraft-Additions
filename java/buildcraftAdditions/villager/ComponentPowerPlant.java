@@ -44,23 +44,42 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
         }
         
         
-        fillWithMetadataBlocks(world, sbb, 1, 0, 1, 11, 0, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false); // floor
+        fillWithMetadataBlocks(world, sbb, 1, -1, 1, 11, -1, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false); // floor
         //walls
-        this.fillWithMetadataBlocks(world, sbb, 1, 1, 1, 11, 1, 1, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
-        this.fillWithMetadataBlocks(world, sbb, 1, 1, 1, 1, 1, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
-        this.fillWithMetadataBlocks(world, sbb, 11, 1, 1, 11, 1, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
-        this.fillWithMetadataBlocks(world, sbb, 1, 1, 11, 11, 1, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
+        this.fillWithMetadataBlocks(world, sbb, 1, 0, 1, 11, 1, 1, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
+        this.fillWithMetadataBlocks(world, sbb, 1, 0, 1, 1, 1, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
+        this.fillWithMetadataBlocks(world, sbb, 11, 0, 1, 11, 1, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
+        this.fillWithMetadataBlocks(world, sbb, 1, 0, 11, 11, 1, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
         
         this.fillWithMetadataBlocks(world, sbb, 1, 2, 1, 11, 2, 1, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
         this.fillWithMetadataBlocks(world, sbb, 1, 2, 1, 1, 2, 11, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
         this.fillWithMetadataBlocks(world, sbb, 11, 2, 1, 11, 2, 11, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
         this.fillWithMetadataBlocks(world, sbb, 1, 2, 11, 11, 2, 11, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
         
-        this.fillWithMetadataBlocks(world, sbb, 1, 3, 1, 11, 4, 1, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
-        this.fillWithMetadataBlocks(world, sbb, 1, 3, 1, 1, 4, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
-        this.fillWithMetadataBlocks(world, sbb, 11, 3, 1, 11, 4, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
-        this.fillWithMetadataBlocks(world, sbb, 1, 3, 11, 11, 4, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
+        this.fillWithMetadataBlocks(world, sbb, 1, 3, 1, 11, 3, 1, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
+        this.fillWithMetadataBlocks(world, sbb, 1, 3, 1, 1, 3, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
+        this.fillWithMetadataBlocks(world, sbb, 11, 3, 1, 11, 3, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
+        this.fillWithMetadataBlocks(world, sbb, 1, 3, 11, 11, 3, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
         
+        this.fillWithMetadataBlocks(world, sbb, 1, 4, 1, 11, 4, 11, Blocks.stained_hardened_clay, 12, Blocks.stained_hardened_clay, 12, false);
+        
+        this.placeDoorAtCurrentPosition(world, sbb, random, 6, 0, 1, this.getMetadataWithOffset(Blocks.wooden_door, 4));
+        
+        this.fillWithAir(world, sbb, 4, 4, 4, 8, 4, 8);
+        
+        this.fillWithMetadataBlocks(world, sbb, 4, 5, 4, 4, 8, 4,  Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
+        this.fillWithMetadataBlocks(world, sbb, 8, 5, 4, 8, 8, 4, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
+        this.fillWithMetadataBlocks(world, sbb, 4, 5, 8, 4, 8, 8, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
+        this.fillWithMetadataBlocks(world, sbb, 8, 5, 8, 8, 8, 8, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
+        
+        
+        this.fillWithMetadataBlocks(world, sbb, 5, 5, 4, 7, 7, 4, Blocks.stained_hardened_clay, 1, Blocks.stained_hardened_clay, 1, false);
+        this.fillWithMetadataBlocks(world, sbb, 5, 5, 8, 7, 7, 8, Blocks.stained_hardened_clay, 1, Blocks.stained_hardened_clay, 1, false);
+        this.fillWithMetadataBlocks(world, sbb, 4, 5, 5, 4, 7, 7, Blocks.stained_hardened_clay, 1, Blocks.stained_hardened_clay, 1, false);
+        this.fillWithMetadataBlocks(world, sbb, 8, 5, 5, 8, 7, 7, Blocks.stained_hardened_clay, 1, Blocks.stained_hardened_clay, 1, false);
+        
+        this.fillWithMetadataBlocks(world, sbb, 4, 8, 4, 8, 8, 8, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
+        this.fillWithMetadataBlocks(world, sbb, 5, 8, 5, 7, 8, 7, Blocks.stained_hardened_clay, 1, Blocks.stained_hardened_clay, 1, false);
         
         spawnVillagers(world, sbb, 0, 0, 0, 2);
         return true;
