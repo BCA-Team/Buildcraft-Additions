@@ -80,9 +80,9 @@ public class BuildcraftAdditions {
         VillagerRegistry.instance().registerVillageCreationHandler(new PowerPlantCreationHandeler());
         try
         {
-        	MapGenStructureIO.func_143031_a(ComponentPowerPlant.class, "bcadditions:PowerPlant");
+        	MapGenStructureIO.func_143031_a(ComponentPowerPlant.class, "bcadditions:powerplant");
         }
-        catch (Throwable e){}
+        catch (Throwable e){System.out.println("ERROR");}
 	}
     
     @EventHandler

@@ -11,7 +11,7 @@ public class PowerPlantCreationHandeler implements IVillageCreationHandler {
 
 	@Override
 	public PieceWeight getVillagePieceWeight(Random random, int i) {
-		 return new PieceWeight(ComponentPowerPlant.class, 9, 1);
+		 return new PieceWeight(ComponentPowerPlant.class, 1, 1);
 	}
 
 	@Override
