@@ -17,9 +17,9 @@ import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.stuff.BlockFluidicCompressor;
 import buildcraftAdditions.stuff.ItemCanister;
 import buildcraftAdditions.stuff.TileFluidicCompressor;
-import buildcraftAdditions.villager.ComponentWorkshop;
+import buildcraftAdditions.villager.ComponentPowerPlant;
+import buildcraftAdditions.villager.PowerPlantCreationHandeler;
 import buildcraftAdditions.villager.VillagerTradeHandler;
-import buildcraftAdditions.villager.WorkshopCreationHandeler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -37,7 +37,7 @@ public class BuildcraftAdditions {
 	public static ItemCanister goldCanister;
 	public static ItemCanister diamondCanister;
 	public static BlockFluidicCompressor fluidicCompressorBlock;
-	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/FluidicCompressorGUI.png");
+	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 	
 	@Instance(value="bcadditions")
 	public static BuildcraftAdditions instance;
@@ -74,6 +74,15 @@ public class BuildcraftAdditions {
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(diamondCanister), "PDP", "DGD", "PDP", 'P', BuildCraftTransport.pipeWaterproof, 'D', Items.diamond, 'G', goldCanister);
 		
 		
+		VillagerRegistry.instance().registerVillagerId(457);
+		VillagerRegistry.instance().registerVillagerSkin(457, texture);
+        VillagerRegistry.instance().registerVillageTradeHandler(457, new VillagerTradeHandler());
+        VillagerRegistry.instance().registerVillageCreationHandler(new PowerPlantCreationHandeler());
+        try
+        {
+        	MapGenStructureIO.func_143031_a(ComponentPowerPlant.class, "bcadditions:PowerPlant");
+        }
+        catch (Throwable e){}
 	}
     
     @EventHandler
