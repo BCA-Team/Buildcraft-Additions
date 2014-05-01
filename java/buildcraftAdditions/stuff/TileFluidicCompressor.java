@@ -18,13 +18,13 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.ItemFluidContainer;
+import buildcraft.api.core.NetworkData;
 import buildcraft.api.mj.MjBattery;
 import buildcraft.core.TileBuildCraft;
 import buildcraft.core.fluids.Tank;
 import buildcraft.core.fluids.TankManager;
 import buildcraft.core.inventory.SimpleInventory;
 import buildcraft.core.network.IGuiReturnHandler;
-import buildcraft.core.network.NetworkData;
 import buildcraft.core.network.PacketGuiReturn;
 import buildcraft.core.network.PacketPayload;
 import buildcraft.core.network.PacketUpdate;
@@ -284,17 +284,17 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {
-		return Utils.createSlotArray(0, 1);
+		return Utils.createSlotArray(0, 2);
 	}
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack stack, int side) {
-		return side != 0 && slot != 2 && isItemValidForSlot(slot, stack);
+		return side != 0 && isItemValidForSlot(slot, stack);
 	}
 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack stack, int side) {
-		return side != 1 && slot == 1;
+		return (slot == 1);
 	}
 
 	public double getEnergyStored() {
