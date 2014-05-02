@@ -3,6 +3,8 @@ package buildcraftAdditions.villager;
 import java.util.List;
 import java.util.Random;
 
+import buildcraft.BuildCraftTransport;
+import buildcraft.transport.BlockGenericPipe;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -64,7 +66,9 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
         lock = true;
         }
         
-        fillWithMetadataBlocks(world, sbb, 1, -1, 1, 11, -1, 11, Blocks.stained_hardened_clay, colorBottomPart, Blocks.stained_hardened_clay, colorBottomPart, false); // floor
+        //floor
+        fillWithMetadataBlocks(world, sbb, 1, -1, 1, 11, -1, 11, Blocks.stained_hardened_clay, colorBottomPart, Blocks.stained_hardened_clay, colorBottomPart, false);
+        
         //walls
         this.fillWithMetadataBlocks(world, sbb, 1, 0, 1, 11, 1, 1, Blocks.stained_hardened_clay, colorBottomPart, Blocks.stained_hardened_clay, colorBottomPart, false);
         this.fillWithMetadataBlocks(world, sbb, 1, 0, 1, 1, 1, 11, Blocks.stained_hardened_clay, colorBottomPart, Blocks.stained_hardened_clay, colorBottomPart, false);
@@ -83,16 +87,19 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
         
         this.fillWithMetadataBlocks(world, sbb, 1, 4, 1, 11, 4, 11, Blocks.stained_hardened_clay, colorBottomPart, Blocks.stained_hardened_clay, colorBottomPart, false);
         
+        //door
         this.placeDoorAtCurrentPosition(world, sbb, random, 6, 0, 1, this.getMetadataWithOffset(Blocks.wooden_door, 4));
         
+        //hole in ceiling
         this.fillWithAir(world, sbb, 4, 4, 4, 8, 4, 8);
         
+        //engine top outline
         this.fillWithMetadataBlocks(world, sbb, 4, 5, 4, 4, 8, 4,  Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
         this.fillWithMetadataBlocks(world, sbb, 8, 5, 4, 8, 8, 4, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
         this.fillWithMetadataBlocks(world, sbb, 4, 5, 8, 4, 8, 8, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
         this.fillWithMetadataBlocks(world, sbb, 8, 5, 8, 8, 8, 8, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
         
-        
+        //top part of the engine
         this.fillWithMetadataBlocks(world, sbb, 5, 5, 4, 7, 7, 4, Blocks.stained_hardened_clay, colorTopPart, Blocks.stained_hardened_clay, colorTopPart, false);
         this.fillWithMetadataBlocks(world, sbb, 5, 5, 8, 7, 7, 8, Blocks.stained_hardened_clay, colorTopPart, Blocks.stained_hardened_clay, colorTopPart, false);
         this.fillWithMetadataBlocks(world, sbb, 4, 5, 5, 4, 7, 7, Blocks.stained_hardened_clay, colorTopPart, Blocks.stained_hardened_clay, colorTopPart, false);
@@ -101,11 +108,13 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
         this.fillWithMetadataBlocks(world, sbb, 4, 8, 4, 8, 8, 8, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
         this.fillWithMetadataBlocks(world, sbb, 5, 8, 5, 7, 8, 7, Blocks.stained_hardened_clay, colorTopPart, Blocks.stained_hardened_clay, colorTopPart, false);
         
+        //torches on the wall
         this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 2, 2, sbb);
         this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 10, 2, 2, sbb);
         this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 2, 2, 10, sbb);
         this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 10, 2, 10, sbb);
         
+        //redstone wiring
         this.fillWithBlocks(world, sbb, 2, 0, 3, 2, 0, 10, Blocks.redstone_wire, Blocks.redstone_wire, false);
         this.placeBlockAtCurrentPosition(world, Blocks.lever, 5, 2, 0, 2, sbb);
         this.placeBlockAtCurrentPosition(world, Blocks.unpowered_repeater, 2, 3, 0, 10, sbb);
@@ -115,6 +124,26 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
         this.fillWithMetadataBlocks(world, sbb, 4, 0, 9, 8, 0, 9, Blocks.unpowered_repeater, 3, Blocks.unpowered_repeater, 3, false);
         this.fillWithMetadataBlocks(world, sbb, 9, 0, 3, 9, 0, 8, Blocks.unpowered_repeater, 0, Blocks.unpowered_repeater, 0, false);
         
+        int i = this.boundingBox.minX;
+        int j = this.boundingBox.minY;
+        int k = this.boundingBox.minZ;
+        
+        //power piping
+        for (int teller=3; teller<=8; teller++){
+        	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerWood), world, i + teller, j + 1, k + 4, BuildCraftTransport.genericPipeBlock, 0);
+        	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerQuartz), world, i + teller, j + 2, k + 4, BuildCraftTransport.genericPipeBlock, 0);
+        	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerWood), world, i + teller, j + 1, k + 8, BuildCraftTransport.genericPipeBlock, 0);
+        	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerQuartz), world, i + teller, j + 2, k + 8, BuildCraftTransport.genericPipeBlock, 0);
+        }
+        for (int teller=4; teller<=8; teller++){
+        	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerWood), world, i + 8, j + 1, k + teller, BuildCraftTransport.genericPipeBlock, 0);
+        	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerQuartz), world, i + 8, j + 2, k + teller, BuildCraftTransport.genericPipeBlock, 0);
+        }
+        
+        for (int teller = 6; teller<=7; teller++)
+        	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerQuartz), world, i + teller, j + 2, k + 6, BuildCraftTransport.genericPipeBlock, 0);
+        
+        	
         spawnVillagers(world, sbb, 0, 0, 0, 2);
         return true;
     }
