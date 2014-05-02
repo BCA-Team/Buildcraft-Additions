@@ -126,22 +126,30 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
         
         int i = this.boundingBox.minX;
         int j = this.boundingBox.minY;
-        int k = this.boundingBox.minZ;
+        int k = this.boundingBox.minZ;        
         
-        //power piping
+        //piping
         for (int teller=3; teller<=8; teller++){
         	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerWood), world, i + teller, j + 1, k + 4, BuildCraftTransport.genericPipeBlock, 0);
         	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerQuartz), world, i + teller, j + 2, k + 4, BuildCraftTransport.genericPipeBlock, 0);
         	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerWood), world, i + teller, j + 1, k + 8, BuildCraftTransport.genericPipeBlock, 0);
         	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerQuartz), world, i + teller, j + 2, k + 8, BuildCraftTransport.genericPipeBlock, 0);
+        	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipeItemsCobblestone), world, i + teller, j - 1, k+ 4, BuildCraftTransport.genericPipeBlock, 0);
+        	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipeItemsCobblestone), world, i + teller, j - 1, k+ 8, BuildCraftTransport.genericPipeBlock, 0);
         }
         for (int teller=4; teller<=8; teller++){
         	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerWood), world, i + 8, j + 1, k + teller, BuildCraftTransport.genericPipeBlock, 0);
         	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerQuartz), world, i + 8, j + 2, k + teller, BuildCraftTransport.genericPipeBlock, 0);
+        	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipeItemsCobblestone), world, i + 3, j - 1, k + teller, BuildCraftTransport.genericPipeBlock, 0);
+        	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipeItemsCobblestone), world, i + 8, j - 1, k + teller, BuildCraftTransport.genericPipeBlock, 0);
         }
         
         for (int teller = 6; teller<=7; teller++)
         	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerQuartz), world, i + teller, j + 2, k + 6, BuildCraftTransport.genericPipeBlock, 0);
+        
+        for (int teller = 3; teller<=8; teller++){
+        	BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipePowerQuartz), world, i + 6, j + teller, k + 6, BuildCraftTransport.genericPipeBlock, 0);
+        }
         
         	
         spawnVillagers(world, sbb, 0, 0, 0, 2);
