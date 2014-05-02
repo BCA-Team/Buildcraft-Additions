@@ -35,7 +35,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 
 	private final SimpleInventory _inventory = new SimpleInventory(3, "Canner", 1);
 	public final int maxLiquid = FluidContainerRegistry.BUCKET_VOLUME * 10;
-	@MjBattery(maxCapacity = 5000.0, maxReceivedPerCycle = 25.0)
+	@MjBattery(maxCapacity = 5000.0, maxReceivedPerCycle = 100.0)
 	public double energyStored = 0;
 	public Tank tank = new Tank("tank", maxLiquid, this);
 	private TankManager tankManager = new TankManager();
@@ -56,9 +56,9 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 				item = (ItemCanister) itemstack.getItem();
 			}
 			if (item != null) {
-				int amount = 50;
+				int amount = 100;
 				if (fill && !tank.isEmpty()) {
-					if (tank.getFluid().amount < 25)
+					if (tank.getFluid().amount < 100)
 						amount = tank.getFluid().amount;
 					if (energyStored >= amount) {
 						tank.drain(item.fill(itemstack, new FluidStack(tank.getFluid(), amount), true), true);
@@ -75,7 +75,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 					amount = 50;
 					if (!fill && !tank.isFull() && Utils.getFluidStackFromItemStack(itemstack) != null) {
 						if (!tank.isEmpty()) {
-							if ((tank.getCapacity() - tank.getFluid().amount) < 50) {
+							if ((tank.getCapacity() - tank.getFluid().amount) < 1000) {
 								amount = tank.getCapacity() - tank.getFluid().amount;
 							}
 						}

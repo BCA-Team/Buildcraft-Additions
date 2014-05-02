@@ -60,16 +60,16 @@ public class BuildcraftAdditions {
 		ironCanister = new ItemCanister("ironCanister", 1000);
 		CoreProxy.proxy.registerItem(ironCanister);
 
-		goldCanister = new ItemCanister("goldCanister", 3000);
+		goldCanister = new ItemCanister("goldCanister", 4000);
 		CoreProxy.proxy.registerItem(goldCanister);
 		
-		diamondCanister = new ItemCanister("diamondCanister", 9000);
+		diamondCanister = new ItemCanister("diamondCanister", 16000);
 		CoreProxy.proxy.registerItem(diamondCanister);
     }
 	
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent evt) {
-		CoreProxy.proxy.addCraftingRecipe(new ItemStack(ironCanister), "PIP", "IGI", "PIP", 'P', BuildCraftTransport.pipeWaterproof, 'I', Items.iron_ingot, 'G', Blocks.glass_pane);
+		CoreProxy.proxy.addCraftingRecipe(new ItemStack(ironCanister, 4), "PIP", "IGI", "PIP", 'P', BuildCraftTransport.pipeWaterproof, 'I', Items.iron_ingot, 'G', Blocks.glass_pane);
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(goldCanister), "PGP", "GIG", "PGP", 'P', BuildCraftTransport.pipeWaterproof, 'G', Items.gold_ingot, 'I', ironCanister);
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(diamondCanister), "PDP", "DGD", "PDP", 'P', BuildCraftTransport.pipeWaterproof, 'D', Items.diamond, 'G', goldCanister);
 		
