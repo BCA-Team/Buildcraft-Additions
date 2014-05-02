@@ -107,10 +107,13 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
         this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 10, 2, 10, sbb);
         
         this.fillWithBlocks(world, sbb, 2, 0, 3, 2, 0, 10, Blocks.redstone_wire, Blocks.redstone_wire, false);
-        this.placeBlockAtCurrentPosition(world, Blocks.lever, 0, 2, 0, 2, sbb);
-        this.placeBlockAtCurrentPosition(world, Blocks.unpowered_repeater, 0, 3, 0, 10, sbb);
+        this.placeBlockAtCurrentPosition(world, Blocks.lever, 5, 2, 0, 2, sbb);
+        this.placeBlockAtCurrentPosition(world, Blocks.unpowered_repeater, 2, 3, 0, 10, sbb);
         this.fillWithBlocks(world, sbb, 4, 0, 10, 10, 0, 10, Blocks.redstone_wire, Blocks.redstone_wire, false);
-        
+        this.fillWithBlocks(world, sbb, 10, 0, 3, 10, 0, 10, Blocks.redstone_wire, Blocks.redstone_wire, false);
+        this.fillWithMetadataBlocks(world, sbb, 3, 0, 3, 3, 0, 8, Blocks.unpowered_repeater, 2, Blocks.unpowered_repeater, 2, false);
+        this.fillWithMetadataBlocks(world, sbb, 4, 0, 9, 8, 0, 9, Blocks.unpowered_repeater, 3, Blocks.unpowered_repeater, 3, false);
+        this.fillWithMetadataBlocks(world, sbb, 9, 0, 3, 9, 0, 8, Blocks.unpowered_repeater, 0, Blocks.unpowered_repeater, 0, false);
         
         spawnVillagers(world, sbb, 0, 0, 0, 2);
         return true;
