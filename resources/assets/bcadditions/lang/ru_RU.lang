@@ -1,0 +1,11 @@
+tile.blockFluidicCompressor.name=Жидкостный компрессор
+item.ironCanister.name=Железная канистра
+item.goldCanister.name=Золотая канистра
+item.diamondCanister.name=Алмазная канистра
+
+gui.progress=Прогресс
+gui.fluid=Жидкость
+gui.noFluid=Пусто
+gui.fluidStored=Количество жидкости
+
+itemGroup.BuildcraftAdditions=Buildcraft: Дополнения
