@@ -1,19 +1,26 @@
 package buildcraftAdditions.villager;
 
+import java.io.File;
+import java.net.URL;
 import java.util.List;
 import java.util.Random;
 
+import buildcraft.BuildCraftBuilders;
 import buildcraft.BuildCraftEnergy;
 import buildcraft.BuildCraftTransport;
+import buildcraft.api.blueprints.BlueprintDeployer;
+import buildcraft.core.blueprints.RealBlueprintDeployer;
 import buildcraft.transport.BlockGenericPipe;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 	
@@ -21,6 +28,7 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 	private boolean lock = false;
 	int colorBottomPart = 12;
     int colorTopPart = 1;
+    public ResourceLocation bptCreativeEngine = new ResourceLocation("bcadditions", "blueprints/CreativeEngine-4d51adf8e7ea8e20374f67f8985965bcbaf5e208efdf4691fe767f84d34348bb.bpt");
 	
 	public ComponentPowerPlant(){}
 
@@ -67,7 +75,7 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
         lock = true;
         }
         
-        //floor
+       /*//floor
         fillWithMetadataBlocks(world, sbb, 1, -1, 1, 11, -1, 11, Blocks.stained_hardened_clay, colorBottomPart, Blocks.stained_hardened_clay, colorBottomPart, false);
         
         //walls
@@ -161,7 +169,19 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
         BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipeItemsCobblestone), world, i + 6, j - 1, k + 5, BuildCraftTransport.genericPipeBlock, 0);
         BlockGenericPipe.placePipe(BlockGenericPipe.createPipe(BuildCraftTransport.pipeItemsWood), world, i + 6, j - 1, k + 6, BuildCraftTransport.genericPipeBlock, 0);
         this.placeBlockAtCurrentPosition(world, BuildCraftEnergy.engineBlock, 0, 6, -2, 6, sbb);
-        this.placeBlockAtCurrentPosition(world, Blocks.redstone_torch, 1, 6, -3, 6, sbb);
+        this.placeBlockAtCurrentPosition(world, Blocks.redstone_torch, 1, 6, -3, 6, sbb);*/
+        
+        URL url = ComponentPowerPlant.class.getResource("/assets/bcadditions/blueprints/combustion-6f3d68e6b2040cef2279575035a268d9d4388e7412d47d35a05b21694c7e5c18.bpt");
+        File file = new File(url.getFile());
+        System.out.println(file.exists());
+        
+        int i = this.boundingBox.minX;
+        int j = this.boundingBox.minY;
+        int k = this.boundingBox.minZ;
+        System.out.println(i +" "+j + " "+ k);
+        BlueprintDeployer bptd = new RealBlueprintDeployer();
+        
+        bptd.deployBlueprint(world, i, j, k, ForgeDirection.SOUTH, file);
         
         	
         spawnVillagers(world, sbb, 0, 0, 0, 2);
