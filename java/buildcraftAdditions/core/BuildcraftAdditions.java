@@ -16,6 +16,7 @@ import buildcraftAdditions.gui.GuiHandler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.stuff.BlockFluidicCompressor;
 import buildcraftAdditions.stuff.ItemCanister;
+import buildcraftAdditions.stuff.ItemMjMeter;
 import buildcraftAdditions.stuff.TileFluidicCompressor;
 import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
@@ -37,6 +38,7 @@ public class BuildcraftAdditions {
 	public static ItemCanister goldCanister;
 	public static ItemCanister diamondCanister;
 	public static BlockFluidicCompressor fluidicCompressorBlock;
+	public static Item mjMeter;
 	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 	
 	@Instance(value="bcadditions")
@@ -65,6 +67,9 @@ public class BuildcraftAdditions {
 		
 		diamondCanister = new ItemCanister("diamondCanister", 16000);
 		CoreProxy.proxy.registerItem(diamondCanister);
+		
+		mjMeter = new ItemMjMeter();
+		CoreProxy.proxy.registerItem(mjMeter);
     }
 	
 	@Mod.EventHandler
