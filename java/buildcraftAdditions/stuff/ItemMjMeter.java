@@ -35,7 +35,7 @@ public class ItemMjMeter extends Item {
 		if (entity instanceof TileAbstractBuilder){
 			TileAbstractBuilder machine = (TileAbstractBuilder) entity;
 			double energy = machine.energyAvailable();
-			player.addChatMessage(var1);
+			//player.addChatMessage(var1);
 		}
 			
 		return false;

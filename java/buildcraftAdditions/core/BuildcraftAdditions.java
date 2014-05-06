@@ -30,6 +30,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid="bcadditions", name="Buildcraft Additions", version = "1.1.0",dependencies = "required-after:BuildCraft|Energy@{6.0.6}")
 public class BuildcraftAdditions {
@@ -68,8 +69,8 @@ public class BuildcraftAdditions {
 		diamondCanister = new ItemCanister("diamondCanister", 16000);
 		CoreProxy.proxy.registerItem(diamondCanister);
 		
-		mjMeter = new ItemMjMeter();
-		CoreProxy.proxy.registerItem(mjMeter);
+		//mjMeter = new ItemMjMeter();
+		//CoreProxy.proxy.registerItem(mjMeter);
     }
 	
 	@Mod.EventHandler
@@ -78,16 +79,19 @@ public class BuildcraftAdditions {
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(goldCanister), "PGP", "GIG", "PGP", 'P', BuildCraftTransport.pipeWaterproof, 'G', Items.gold_ingot, 'I', ironCanister);
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(diamondCanister), "PDP", "DGD", "PDP", 'P', BuildCraftTransport.pipeWaterproof, 'D', Items.diamond, 'G', goldCanister);
 		
+		if (evt.getSide()==Side.CLIENT){
+			VillagerRegistry.instance().registerVillagerId(457);
+			VillagerRegistry.instance().registerVillagerSkin(457, texture);
+	        VillagerRegistry.instance().registerVillageTradeHandler(457, new VillagerTradeHandler());
+	        VillagerRegistry.instance().registerVillageCreationHandler(new PowerPlantCreationHandeler());
+	        try
+	        {
+	        	MapGenStructureIO.func_143031_a(ComponentPowerPlant.class, "bcadditions:powerplant");
+	        }
+	        catch (Throwable e){
+	        }
+		}
 		
-		VillagerRegistry.instance().registerVillagerId(457);
-		VillagerRegistry.instance().registerVillagerSkin(457, texture);
-        VillagerRegistry.instance().registerVillageTradeHandler(457, new VillagerTradeHandler());
-        VillagerRegistry.instance().registerVillageCreationHandler(new PowerPlantCreationHandeler());
-        try
-        {
-        	MapGenStructureIO.func_143031_a(ComponentPowerPlant.class, "bcadditions:powerplant");
-        }
-        catch (Throwable e){System.out.println("ERROR");}
 	}
     
     @EventHandler
