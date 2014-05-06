@@ -1,0 +1,13 @@
+tile.blockFluidicCompressor.name=Flüssigkeitskompressor
+
+item.ironCanister.name=Eisenkanister
+item.goldCanister.name=Goldkanister
+item.diamondCanister.name=Diamantkanister
+item.mjMeter.name=MJ-Meter
+
+gui.progress=Fortschritt
+gui.fluid=Flüssigk.
+gui.noFluid=Leer
+gui.fluidStored=Flüssigkeitsmenge
+
+itemGroup.BuildcraftAdditions=Buildcraft Additions
