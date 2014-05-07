@@ -1,0 +1,13 @@
+tile.blockFluidicCompressor.name=流体压缩机
+
+item.ironCanister.name=铁罐
+item.goldCanister.name=金罐
+item.diamondCanister.name=钻石罐
+item.mjMeter.name=MJ仪
+
+gui.progress=进度
+gui.fluid=流体
+gui.noFluid=空
+gui.fluidStored=流体量
+
+itemGroup.BuildcraftAdditions=建筑|附件
