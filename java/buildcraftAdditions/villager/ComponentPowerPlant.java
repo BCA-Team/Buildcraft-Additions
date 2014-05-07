@@ -44,8 +44,7 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
     }
     
     @Override
-    public boolean addComponentParts (World world, Random random, StructureBoundingBox sbb)
-    {
+    public boolean addComponentParts (World world, Random random, StructureBoundingBox sbb){
     	if (world.isRemote)
     		return true;
     	
@@ -60,10 +59,10 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 
             this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.maxY + 11, 0);
         }
-        
-        URL url = ComponentPowerPlant.class.getResource("/assets/bcadditions/blueprints/redstone-b56a3e73126b0b7710609f3fa4b674514259d82eac9cbe2ebb77f8c107d755e3.bpt");
+        URL url = ComponentPowerPlant.class.getResource("/assets/bcadditions/blueprints/Stilingengine-6a8295b667031a4687a626ecb7c6bef997dc7e62c19f9e0941c64b33198f87d4.bpt");
+        if(random.nextBoolean())
+        	url = ComponentPowerPlant.class.getResource("/assets/bcadditions/blueprints/Redstoneengine-357d6c42def2dad519636d8e7980d72a5284b3de708febd300bb1fc1525f785b.bpt");
         File file = new File(url.getFile());
-        System.out.println(file.exists());
         
         int i = this.boundingBox.minX;
         int j = this.boundingBox.minY;
