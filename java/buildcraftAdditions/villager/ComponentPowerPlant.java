@@ -74,9 +74,7 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 			f.close();
 			
 			BlueprintDeployer.instance.deployBlueprintFromFileStream(world, i, j-3, k, ForgeDirection.getOrientation(this.getMetadataWithOffset(BuildCraftBuilders.builderBlock, 0)), data);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}*/
         	
