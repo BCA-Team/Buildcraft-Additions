@@ -1,11 +1,11 @@
-package buildcraftAdditions.gui;
+package buildcraftAdditions.client.gui;
 
 import buildcraft.BuildCraftCore;
 import buildcraft.core.CoreIconProvider;
 import buildcraft.core.gui.GuiBuildCraft;
 import buildcraft.core.render.RenderUtils;
 import buildcraftAdditions.core.Utils;
-import buildcraftAdditions.stuff.TileFluidicCompressor;
+import buildcraftAdditions.entities.TileFluidicCompressor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;

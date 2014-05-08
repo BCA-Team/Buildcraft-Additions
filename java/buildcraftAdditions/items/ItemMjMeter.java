@@ -1,4 +1,4 @@
-package buildcraftAdditions.stuff;
+package buildcraftAdditions.items;
 
 import buildcraft.api.mj.MjAPI;
 import buildcraft.api.mj.MjAPI.BatteryObject;

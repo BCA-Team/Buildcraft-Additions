@@ -1,4 +1,4 @@
-package buildcraftAdditions.stuff;
+package buildcraftAdditions.items;
 
 import buildcraftAdditions.core.BuildcraftAdditions;
 import buildcraftAdditions.core.Utils;

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.Random;
@@ -59,17 +60,15 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 
             this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.maxY + 11, 0);
         }
-        URL url = ComponentPowerPlant.class.getResource("/assets/bcadditions/blueprints/Stilingengine-6a8295b667031a4687a626ecb7c6bef997dc7e62c19f9e0941c64b33198f87d4.bpt");
+        /*InputStream stream = ComponentPowerPlant.class.getResourceAsStream("/assets/bcadditions/blueprints/Redstoneengine-357d6c42def2dad519636d8e7980d72a5284b3de708febd300bb1fc1525f785b.bpt");
         if(random.nextBoolean())
-        	url = ComponentPowerPlant.class.getResource("/assets/bcadditions/blueprints/Redstoneengine-357d6c42def2dad519636d8e7980d72a5284b3de708febd300bb1fc1525f785b.bpt");
-        File file = new File(url.getFile());
-        
+        	stream = ComponentPowerPlant.class.getResourceAsStream("/assets/bcadditions/blueprints/Stilingengine-6a8295b667031a4687a626ecb7c6bef997dc7e62c19f9e0941c64b33198f87d4.bpt");
+        	FileInputStream inputStream = new FileInputStream(new File(getClass().getResource("/assets/bcadditions/blueprints/Redstoneengine-357d6c42def2dad519636d8e7980d72a5284b3de708febd300bb1fc1525f785b.bpt").toURI()));
         int i = this.boundingBox.minX;
         int j = this.boundingBox.minY;
         int k = this.boundingBox.minZ;
-        FileInputStream f;
+
 		try {
-			f = new FileInputStream(file);
 			byte [] data = new byte [(int) file.length()];
 			f.read (data);
 			f.close();
@@ -79,7 +78,7 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
         	
         spawnVillagers(world, sbb, 0, 0, 0, 2);
         return true;

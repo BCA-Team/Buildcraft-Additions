@@ -1,4 +1,4 @@
-package buildcraftAdditions.stuff;
+package buildcraftAdditions.client.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -10,7 +10,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+
 import org.lwjgl.opengl.GL11;
+
+import buildcraftAdditions.items.ItemCanister;
 
 public class CanisterItemRender implements IItemRenderer {
 

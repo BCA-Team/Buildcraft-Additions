@@ -1,6 +1,6 @@
-package buildcraftAdditions.gui;
+package buildcraftAdditions.client.gui;
 
-import buildcraftAdditions.stuff.TileFluidicCompressor;
+import buildcraftAdditions.entities.TileFluidicCompressor;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

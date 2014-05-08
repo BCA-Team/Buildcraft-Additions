@@ -1,10 +1,11 @@
-package buildcraftAdditions.stuff;
+package buildcraftAdditions.blocks;
 
 import buildcraft.BuildCraftFactory;
 import buildcraft.core.CreativeTabBuildCraft;
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.core.BuildcraftAdditions;
 import buildcraftAdditions.core.Utils;
+import buildcraftAdditions.entities.TileFluidicCompressor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
