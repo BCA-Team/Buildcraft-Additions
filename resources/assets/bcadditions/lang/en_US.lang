@@ -1,13 +1,17 @@
 tile.blockFluidicCompressor.name=Fluidic Compressor
+tile.blockChargingStation.name=Charging Station
 
 item.ironCanister.name=Iron Canister
 item.goldCanister.name=Gold Canister
 item.diamondCanister.name=Diamond Canister
 item.mjMeter.name=MJ Meter
+item.poweredShovel.name=Digger
 
 gui.progress=Progress
 gui.fluid=Fluid
 gui.noFluid=Empty
 gui.fluidStored=Amount of fluid
+gui.energyInTool=Energy Stored
+gui.maxEnergy=Max Energy
 
 itemGroup.BuildcraftAdditions=Buildcraft Additions

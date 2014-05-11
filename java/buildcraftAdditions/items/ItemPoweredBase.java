@@ -1,5 +1,9 @@
 package buildcraftAdditions.items;
 
+import java.util.List;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,17 +16,26 @@ public class ItemPoweredBase extends Item{
 	
 	private int x, y, z;
 	private World world;
+	public int capacity;
+	
+	public ItemPoweredBase(){
+		
+	}
 	
 	public void decreaseEnergy(ItemStack stack, double energy){
 		double energyStored = getEnergy(stack);
 		energyStored -= energy;
-		stack.stackTagCompound.setDouble("energy", Math.round(energyStored));
+		if (energyStored < 0)
+			energyStored=0;
+		stack.stackTagCompound.setDouble("energy", Math.floor(energyStored));
+		this.setDamage(stack, (int) (capacity - energyStored));
 	}
 	
 	public void increaseEnergy(ItemStack stack, double energy){
 		double energyStored = getEnergy(stack);
 		energyStored +=energy;
 		stack.stackTagCompound.setDouble("energy", Math.round(energyStored));
+		this.setDamage(stack, (int) (capacity - energyStored));
 	}
 	
 	public double getEnergy(ItemStack stack){
@@ -32,6 +45,14 @@ public class ItemPoweredBase extends Item{
 			stack.stackTagCompound.setDouble("energy", 0);
 		}
 		return stack.stackTagCompound.getDouble("energy");
+	}
+	
+	public void setCapacity(int capacity){
+		this.capacity = capacity;
+	}
+	
+	public int getCapacity(){
+		return this.capacity;
 	}
 	
 	@Override
@@ -45,8 +66,14 @@ public class ItemPoweredBase extends Item{
 	
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entity){
-		decreaseEnergy(stack, block.getBlockHardness(world, x, y, z)* ((world.difficultySetting.getDifficultyId()+1)/2));
+		decreaseEnergy(stack, block.getBlockHardness(world, x, y, z) * ((world.difficultySetting.getDifficultyId()+2)/2));
 		return true;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
+		list.add(Double.toString(getEnergy(stack)) + "/" + Integer.toString(capacity) + " MJ");
 	}
 
 }

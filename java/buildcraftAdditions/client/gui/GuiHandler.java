@@ -1,5 +1,6 @@
 package buildcraftAdditions.client.gui;
 
+import buildcraftAdditions.entities.TileChargingStation;
 import buildcraftAdditions.entities.TileFluidicCompressor;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,6 +21,9 @@ public class GuiHandler implements IGuiHandler {
 		case 70:
 			if (tile instanceof TileFluidicCompressor)
 			return new GuiFluidicCompressor(player.inventory, (TileFluidicCompressor) tile);
+		case 71:
+			if (tile instanceof TileChargingStation)
+				return new GuiChargingStation(player.inventory, (TileChargingStation) tile);
 			}
 		return null;	
 		}
@@ -36,6 +40,9 @@ public class GuiHandler implements IGuiHandler {
 		case 70:
 			if (tile instanceof TileFluidicCompressor)
 			return new ContainerFluidicCompressor(player.inventory, (TileFluidicCompressor) tile);
+		case 71:
+			if (tile instanceof TileChargingStation)
+				return new ContainerChargingStation(player.inventory, (TileChargingStation) tile);
 		}
 		return null;
 	}

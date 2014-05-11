@@ -12,8 +12,10 @@ import buildcraft.BuildCraftCore;
 import buildcraft.BuildCraftFactory;
 import buildcraft.BuildCraftTransport;
 import buildcraft.core.proxy.CoreProxy;
+import buildcraftAdditions.blocks.BlockChargingStation;
 import buildcraftAdditions.blocks.BlockFluidicCompressor;
 import buildcraftAdditions.client.gui.GuiHandler;
+import buildcraftAdditions.entities.TileChargingStation;
 import buildcraftAdditions.entities.TileFluidicCompressor;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemMjMeter;
@@ -40,6 +42,7 @@ public class BuildcraftAdditions {
 	public static ItemCanister goldCanister;
 	public static ItemCanister diamondCanister;
 	public static BlockFluidicCompressor fluidicCompressorBlock;
+	public static BlockChargingStation chargingStationBlock;
 	public static Item mjMeter;
 	public static Item poweredShovel;
 	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
@@ -104,6 +107,8 @@ public class BuildcraftAdditions {
     	
     	proxy.registerRenderers();
     	CoreProxy.proxy.registerTileEntity(TileFluidicCompressor.class, "TileFluidicCompressor");
+    	CoreProxy.proxy.registerTileEntity(TileChargingStation.class, "TileChargingStation");
+    	
     	CoreProxy.proxy.addCraftingRecipe(new ItemStack(fluidicCompressorBlock), "IFI", "PGP", "IMI", 'I', BuildCraftCore.ironGearItem, 'F', BuildCraftFactory.floodGateBlock, 'P', Blocks.piston, 'G', goldCanister, 'M', BuildCraftFactory.pumpBlock);
     	NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
     	}
@@ -116,6 +121,8 @@ public class BuildcraftAdditions {
     	fluidicCompressorBlock = new BlockFluidicCompressor();
     	CoreProxy.proxy.registerBlock(fluidicCompressorBlock.setBlockName("blockFluidicCompressor").setCreativeTab(bcadditions));
     	
+    	chargingStationBlock = new BlockChargingStation();
+    	CoreProxy.proxy.registerBlock(chargingStationBlock.setBlockName("blockChargingStation").setCreativeTab(bcadditions));
     }
 
 }

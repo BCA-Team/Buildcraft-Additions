@@ -20,6 +20,8 @@ public class ItemPoweredShovel extends ItemPoweredBase {
 		this.maxStackSize = 1;
 		this.setCreativeTab(BuildcraftAdditions.bcadditions);
 		this.setUnlocalizedName("poweredShovel");
+		setCapacity(1000);
+		this.setMaxDamage(1000);
 	}
 	
 	@Override
@@ -29,5 +31,7 @@ public class ItemPoweredShovel extends ItemPoweredBase {
 				return 5;
 		return 1;
 	}
+	
+	
 	
 }
