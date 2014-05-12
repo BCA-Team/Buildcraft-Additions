@@ -77,12 +77,15 @@ public class BuildcraftAdditions {
 		//mjMeter = new ItemMjMeter();
 		//CoreProxy.proxy.registerItem(mjMeter);
 		
-		poweredShovel = new ItemPoweredShovel();
+		poweredShovel = new ItemPoweredShovel(4000);
 		CoreProxy.proxy.registerItem(poweredShovel);
+		
+		
     }
 	
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent evt) {
+		
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(ironCanister, 4), "PIP", "IGI", "PIP", 'P', BuildCraftTransport.pipeWaterproof, 'I', Items.iron_ingot, 'G', Blocks.glass_pane);
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(goldCanister), "PGP", "GIG", "PGP", 'P', BuildCraftTransport.pipeWaterproof, 'G', Items.gold_ingot, 'I', ironCanister);
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(diamondCanister), "PDP", "DGD", "PDP", 'P', BuildCraftTransport.pipeWaterproof, 'D', Items.diamond, 'G', goldCanister);

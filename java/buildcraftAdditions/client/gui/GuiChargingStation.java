@@ -53,7 +53,7 @@ public class GuiChargingStation extends GuiBuildCraft{
 				fontRendererObj.drawStringWithShadow(Utils.localize("gui.progress"), x + 22, y + 8, headerColour);
 				
 				fontRendererObj.drawStringWithShadow(Utils.localize("gui.progress") + ":", x + 22, y + 20, subheaderColour);
-				fontRendererObj.drawString(String.format("%.1f ", chargingStation.getProgress()*6.25) + "%", x + 22, y + 32, textColour);
+				fontRendererObj.drawString(String.format("%.1f ", chargingStation.getProgress()*100) + "%", x + 22, y + 32, textColour);
 				
 				fontRendererObj.drawStringWithShadow(Utils.localize("gui.energyInTool") + ":", x + 22, y + 44, subheaderColour);
 				fontRendererObj.drawString(Integer.toString(chargingStation.getToolEnergy()) + " MJ", x + 22, y + 56, textColour);

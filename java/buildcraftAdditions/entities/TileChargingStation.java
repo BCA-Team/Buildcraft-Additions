@@ -16,7 +16,7 @@ import buildcraftAdditions.items.ItemPoweredBase;
 
 public class TileChargingStation extends TileBuildCraft implements IInventory {
 	
-	@MjBattery(maxCapacity=1000)
+	@MjBattery(maxCapacity=1000, maxReceivedPerCycle = 40)
 	double energy = 0;
 	private final SimpleInventory inventory = new SimpleInventory(1, "ChargingStation", 1);
 	
@@ -26,17 +26,17 @@ public class TileChargingStation extends TileBuildCraft implements IInventory {
 	
 	@Override
 	public void updateEntity() {
-		int charge = 10;
+		int charge = 40;
 		ItemStack stack = inventory.getStackInSlot(0);
 		if (stack==null)
 			return;
 		if (!(stack.getItem() instanceof ItemPoweredBase))
 			return;
 		ItemPoweredBase tool = (ItemPoweredBase) stack.getItem();
-		if (tool.getEnergy(stack) + charge > tool.getCapacity())
-			charge = tool.getCapacity() - (int) tool.getEnergy(stack);
+		if (tool.getEnergy(stack) + charge > tool.getCapacity(stack.getUnlocalizedName()))
+			charge = tool.getCapacity(stack.getUnlocalizedName()) - (int) tool.getEnergy(stack);
 		if (energy < charge)
-			return;
+			charge = (int) energy;
 		tool.increaseEnergy(stack, charge);
 		energy -= charge;
 	}
@@ -110,8 +110,10 @@ public class TileChargingStation extends TileBuildCraft implements IInventory {
 	public double getProgress() {
 		ItemStack stack = inventory.getStackInSlot(0);
 		if (stack != null)
-			if (stack.getItem() instanceof ItemPoweredBase)
-				return inventory.getStackInSlot(0).getItemDamage();
+			if (stack.getItem() instanceof ItemPoweredBase){
+				ItemPoweredBase tool = (ItemPoweredBase) stack.getItem();
+				return tool.getEnergy(stack) / tool.getCapacity(stack.getUnlocalizedName());
+			}
 		return 0;
 	}
 
@@ -127,8 +129,8 @@ public class TileChargingStation extends TileBuildCraft implements IInventory {
 		ItemStack stack = inventory.getStackInSlot(0);
 		if (stack != null)
 			if (stack.getItem() instanceof ItemPoweredBase) {
-				ItemPoweredBase item = (ItemPoweredBase) stack.getItem();
-				return item.getCapacity();
+				ItemPoweredBase tool = (ItemPoweredBase) stack.getItem();
+				return tool.getCapacity(stack.getUnlocalizedName());
 			}
 		return 0;
 	}

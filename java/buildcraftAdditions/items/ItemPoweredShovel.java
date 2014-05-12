@@ -16,12 +16,11 @@ public class ItemPoweredShovel extends ItemPoweredBase {
 	private int x, y, z;
 	private World world;
 	
-	public ItemPoweredShovel(){
+	public ItemPoweredShovel(int maxEnergy){
 		this.maxStackSize = 1;
-		this.setCreativeTab(BuildcraftAdditions.bcadditions);
-		this.setUnlocalizedName("poweredShovel");
-		setCapacity(1000);
-		this.setMaxDamage(1000);
+		setCreativeTab(BuildcraftAdditions.bcadditions);
+		setUnlocalizedName("poweredShovel");
+		this.setMaxDamage(maxEnergy);
 	}
 	
 	@Override
