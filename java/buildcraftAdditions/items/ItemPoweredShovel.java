@@ -13,8 +13,6 @@ import net.minecraft.world.World;
 
 public class ItemPoweredShovel extends ItemPoweredBase {
 	
-	private int x, y, z;
-	private World world;
 	
 	public ItemPoweredShovel(int maxEnergy){
 		this.maxStackSize = 1;

@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 
 public class ItemPoweredBase extends Item{
 	
-	private int x, y, z;
-	private World world;
+	public int x, y, z;
+	public World world;
 	
 	public ItemPoweredBase(){
 		
@@ -38,18 +38,14 @@ public class ItemPoweredBase extends Item{
 	}
 	
 	public double getEnergy(ItemStack stack){
-		double energy = 0;
-		if (stack.stackTagCompound == null){
-			stack.stackTagCompound = new NBTTagCompound();
-			stack.stackTagCompound.setDouble("energy", 0);
-		}
 		return stack.stackTagCompound.getDouble("energy");
 	}
 	
 	public int getCapacity(String name){
-		switch(name){
-		case "item.poweredShovel": return 4000;
-		}
+		if(name == "item.poweredShovel")
+			return 4000;
+		if(name == "item.drill")
+			return 8000;
 		return 0;
 	}
 	
@@ -71,6 +67,12 @@ public class ItemPoweredBase extends Item{
 	@Override
 	public boolean showDurabilityBar(ItemStack stack){
 		return true;
+	}
+	
+	@Override
+	public void onCreated(ItemStack stack, World world, EntityPlayer player){
+		stack.stackTagCompound = new NBTTagCompound();
+		stack.stackTagCompound.setDouble("energy", 0);
 	}
 	
 	@Override

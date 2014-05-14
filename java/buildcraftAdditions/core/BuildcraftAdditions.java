@@ -18,6 +18,7 @@ import buildcraftAdditions.client.gui.GuiHandler;
 import buildcraftAdditions.entities.TileChargingStation;
 import buildcraftAdditions.entities.TileFluidicCompressor;
 import buildcraftAdditions.items.ItemCanister;
+import buildcraftAdditions.items.ItemDrill;
 import buildcraftAdditions.items.ItemMjMeter;
 import buildcraftAdditions.items.ItemPoweredShovel;
 import buildcraftAdditions.proxy.CommonProxy;
@@ -35,7 +36,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid="bcadditions", name="Buildcraft Additions", version = "1.1.0",dependencies = "required-after:BuildCraft|Energy@{6.0.6}")
+@Mod(modid="bcadditions", name="Buildcraft Additions", version = "1.3.0",dependencies = "required-after:BuildCraft|Energy@{6.0.13}")
 public class BuildcraftAdditions {
 	
 	public static ItemCanister ironCanister;
@@ -45,6 +46,7 @@ public class BuildcraftAdditions {
 	public static BlockChargingStation chargingStationBlock;
 	public static Item mjMeter;
 	public static Item poweredShovel;
+	public static Item drill;
 	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 	
 	@Instance(value="bcadditions")
@@ -80,7 +82,8 @@ public class BuildcraftAdditions {
 		poweredShovel = new ItemPoweredShovel(4000);
 		CoreProxy.proxy.registerItem(poweredShovel);
 		
-		
+		drill = new ItemDrill(8000);
+		CoreProxy.proxy.registerItem(drill);
     }
 	
 	@Mod.EventHandler

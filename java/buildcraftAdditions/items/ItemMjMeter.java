@@ -1,7 +1,7 @@
 package buildcraftAdditions.items;
 
+import buildcraft.api.mj.IBatteryObject;
 import buildcraft.api.mj.MjAPI;
-import buildcraft.api.mj.MjAPI.BatteryObject;
 import buildcraft.api.transport.PipeWire;
 import buildcraft.builders.TileAbstractBuilder;
 import buildcraftAdditions.core.BuildcraftAdditions;
@@ -40,7 +40,7 @@ public class ItemMjMeter extends Item{
 		if (entity == null)
 			return false;
 		if (!world.isRemote){
-		BatteryObject battery = MjAPI.getMjBattery(entity);
+		IBatteryObject battery = MjAPI.getMjBattery(entity);
 		if (battery == null)
 			return false;
 		energyStored = battery.getEnergyStored();
