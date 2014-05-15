@@ -17,7 +17,7 @@ public class ItemDrill extends ItemPoweredBase{
 	public float getDigSpeed(ItemStack stack, Block block, int meta){
 		if (getEnergy(stack) >= block.getBlockHardness(world, x, y, z))
 			if(block.getHarvestTool(0) == "pickaxe")
-				return 20;
+				return 40;
 		return 1;
 	}
 

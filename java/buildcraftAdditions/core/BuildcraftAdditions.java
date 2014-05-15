@@ -79,7 +79,7 @@ public class BuildcraftAdditions {
 		//mjMeter = new ItemMjMeter();
 		//CoreProxy.proxy.registerItem(mjMeter);
 		
-		poweredShovel = new ItemPoweredShovel(4000);
+		poweredShovel = (new ItemPoweredShovel(4000));
 		CoreProxy.proxy.registerItem(poweredShovel);
 		
 		drill = new ItemDrill(8000);

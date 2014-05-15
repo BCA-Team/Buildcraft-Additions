@@ -33,8 +33,8 @@ public class TileChargingStation extends TileBuildCraft implements IInventory {
 		if (!(stack.getItem() instanceof ItemPoweredBase))
 			return;
 		ItemPoweredBase tool = (ItemPoweredBase) stack.getItem();
-		if (tool.getEnergy(stack) + charge > tool.getCapacity(stack.getUnlocalizedName()))
-			charge = tool.getCapacity(stack.getUnlocalizedName()) - (int) tool.getEnergy(stack);
+		if (tool.getEnergy(stack) + charge > tool.getCapacity())
+			charge = tool.getCapacity() - (int) tool.getEnergy(stack);
 		if (energy < charge)
 			charge = (int) energy;
 		tool.increaseEnergy(stack, charge);
@@ -112,7 +112,7 @@ public class TileChargingStation extends TileBuildCraft implements IInventory {
 		if (stack != null)
 			if (stack.getItem() instanceof ItemPoweredBase){
 				ItemPoweredBase tool = (ItemPoweredBase) stack.getItem();
-				return tool.getEnergy(stack) / tool.getCapacity(stack.getUnlocalizedName());
+				return tool.getEnergy(stack) / tool.getCapacity();
 			}
 		return 0;
 	}
@@ -130,7 +130,7 @@ public class TileChargingStation extends TileBuildCraft implements IInventory {
 		if (stack != null)
 			if (stack.getItem() instanceof ItemPoweredBase) {
 				ItemPoweredBase tool = (ItemPoweredBase) stack.getItem();
-				return tool.getCapacity(stack.getUnlocalizedName());
+				return tool.getCapacity();
 			}
 		return 0;
 	}

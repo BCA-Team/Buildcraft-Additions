@@ -32,7 +32,7 @@ import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class ComponentPowerPlant extends StructureVillagePieces.House1 {
-	public static final ResourceLocation blueprint = new ResourceLocation("bcadditions", "blueprints/Redstoneengine-357d6c42def2dad519636d8e7980d72a5284b3de708febd300bb1fc1525f785b.bpt");
+	public static final ResourceLocation blueprint = new ResourceLocation("bcadditions", "blueprints/Redstone-engine-357d6c42def2dad519636d8e7980d72a5284b3de708febd300bb1fc1525f785b.bpt");
 	
 	private int averageGroundLevel = -1;
 	
@@ -66,7 +66,6 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 
             this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.maxY + 11, 0);
         }
-        URL url = ComponentPowerPlant.class.getResource("/assets/bcadditions/blueprints/Redstoneengine-357d6c42def2dad519636d8e7980d72a5284b3de708febd300bb1fc1525f785b.bpt");
         try{
         InputStream f =  Minecraft.getMinecraft().getResourceManager().getResource(blueprint).getInputStream();
         
@@ -87,7 +86,7 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
                 int k = this.boundingBox.minZ;
         		BlueprintDeployer.instance.deployBlueprintFromFileStream(world, i, j-3, k, ForgeDirection.getOrientation(this.getMetadataWithOffset(BuildCraftBuilders.builderBlock, 0)), data);
         } catch (Throwable e){
-        	System.out.println(e.getStackTrace());
+        	e.printStackTrace();
         }
         
         

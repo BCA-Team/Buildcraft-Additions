@@ -27,26 +27,26 @@ public class ItemPoweredBase extends Item{
 		if (energyStored < 0)
 			energyStored=0;
 		stack.stackTagCompound.setDouble("energy", Math.floor(energyStored));
-		this.setDamage(stack, (int) (getCapacity(stack.getUnlocalizedName()) - energyStored));
+		this.setDamage(stack, (int) (getCapacity() - energyStored));
 	}
 	
 	public void increaseEnergy(ItemStack stack, double energy){
 		double energyStored = getEnergy(stack);
 		energyStored +=energy;
 		stack.stackTagCompound.setDouble("energy", Math.round(energyStored));
-		this.setDamage(stack, (int) (getCapacity(stack.getUnlocalizedName()) - energyStored));
+		this.setDamage(stack, (int) (getCapacity() - energyStored));
 	}
 	
 	public double getEnergy(ItemStack stack){
+		if (stack.stackTagCompound == null){
+			stack.stackTagCompound = new NBTTagCompound();
+			stack.stackTagCompound.setDouble("energy", 0);
+		}
 		return stack.stackTagCompound.getDouble("energy");
 	}
 	
-	public int getCapacity(String name){
-		if(name == "item.poweredShovel")
-			return 4000;
-		if(name == "item.drill")
-			return 8000;
-		return 0;
+	public int getCapacity(){
+		return 6000;
 	}
 	
 	@Override
@@ -64,21 +64,16 @@ public class ItemPoweredBase extends Item{
 		return true;
 	}
 	
-	@Override
-	public boolean showDurabilityBar(ItemStack stack){
-		return true;
-	}
 	
 	@Override
-	public void onCreated(ItemStack stack, World world, EntityPlayer player){
-		stack.stackTagCompound = new NBTTagCompound();
-		stack.stackTagCompound.setDouble("energy", 0);
+	public int getDisplayDamage(ItemStack stack){
+		return (int) (getCapacity() - getEnergy(stack));
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
-		list.add(Double.toString(getEnergy(stack)) + "/" + Integer.toString(getCapacity(stack.getUnlocalizedName())) + " MJ");
+		list.add(Integer.toString((int) getEnergy(stack)) + "/" + Integer.toString(getCapacity()) + " MJ");
 	}
 
 }
