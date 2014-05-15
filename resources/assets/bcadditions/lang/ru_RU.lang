@@ -1,12 +1,18 @@
 tile.blockFluidicCompressor.name=Жидкостный компрессор
+tile.blockChargingStation.name=Зарядная станция
+
 item.ironCanister.name=Железная канистра
 item.goldCanister.name=Золотая канистра
 item.diamondCanister.name=Алмазная канистра
 item.mjMeter.name=Измеритель мДж
+item.poweredShovel.name=Копатель
+item.drill.name=Дрель
 
 gui.progress=Прогресс
 gui.fluid=Жидкость
 gui.noFluid=Пусто
 gui.fluidStored=Количество жидкости
+gui.energyInTool=Хранится энергии
+gui.maxEnergy=Макс. энергии
 
 itemGroup.BuildcraftAdditions=Buildcraft: Дополнения
