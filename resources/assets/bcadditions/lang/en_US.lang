@@ -7,6 +7,7 @@ item.diamondCanister.name=Diamond Canister
 item.mjMeter.name=MJ Meter
 item.poweredShovel.name=Digger
 item.drill.name=Drill
+item.chainsaw.name=Chainsaw
 
 gui.progress=Progress
 gui.fluid=Fluid

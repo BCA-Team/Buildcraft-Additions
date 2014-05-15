@@ -18,6 +18,7 @@ import buildcraftAdditions.client.gui.GuiHandler;
 import buildcraftAdditions.entities.TileChargingStation;
 import buildcraftAdditions.entities.TileFluidicCompressor;
 import buildcraftAdditions.items.ItemCanister;
+import buildcraftAdditions.items.ItemChainsaw;
 import buildcraftAdditions.items.ItemDrill;
 import buildcraftAdditions.items.ItemMjMeter;
 import buildcraftAdditions.items.ItemPoweredShovel;
@@ -47,6 +48,7 @@ public class BuildcraftAdditions {
 	public static Item mjMeter;
 	public static Item poweredShovel;
 	public static Item drill;
+	public static Item chainsaw;
 	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 	
 	@Instance(value="bcadditions")
@@ -79,11 +81,14 @@ public class BuildcraftAdditions {
 		//mjMeter = new ItemMjMeter();
 		//CoreProxy.proxy.registerItem(mjMeter);
 		
-		poweredShovel = (new ItemPoweredShovel(4000));
+		poweredShovel = new ItemPoweredShovel(6000);
 		CoreProxy.proxy.registerItem(poweredShovel);
 		
-		drill = new ItemDrill(8000);
+		drill = new ItemDrill(6000);
 		CoreProxy.proxy.registerItem(drill);
+		
+		chainsaw = new ItemChainsaw(6000);
+		CoreProxy.proxy.registerItem(chainsaw);
     }
 	
 	@Mod.EventHandler

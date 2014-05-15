@@ -25,7 +25,7 @@ public class ItemPoweredShovel extends ItemPoweredBase {
 	public float getDigSpeed(ItemStack stack, Block block, int meta){
 		if (getEnergy(stack) >= block.getBlockHardness(world, x, y, z))
 			if(block.getHarvestTool(0) == "shovel")
-				return 10;
+				return 15;
 		return 1;
 	}
 	
