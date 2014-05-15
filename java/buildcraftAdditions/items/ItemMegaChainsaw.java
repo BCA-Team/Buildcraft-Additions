@@ -4,20 +4,20 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import buildcraftAdditions.core.BuildcraftAdditions;
 
-public class ItemDrill extends ItemPoweredBase{
+public class ItemMegaChainsaw extends ItemPoweredBase {
 	
-	public ItemDrill(int maxEnergy){
+	public ItemMegaChainsaw(int maxEnergy){
 		this.maxStackSize = 1;
 		setCreativeTab(BuildcraftAdditions.bcadditions);
-		setUnlocalizedName("drill");
+		setUnlocalizedName("chainsaw");
 		this.setMaxDamage(maxEnergy);
 	}
 	
 	@Override
 	public float getDigSpeed(ItemStack stack, Block block, int meta){
 		if (getEnergy(stack) >= block.getBlockHardness(world, x, y, z))
-			if(block.getHarvestTool(0) == "pickaxe")
-				return 40;
+			if(block.getHarvestTool(0) == "axe")
+				return 30;
 		return 1;
 	}
 

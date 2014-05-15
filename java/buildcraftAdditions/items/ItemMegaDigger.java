@@ -11,10 +11,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
-public class ItemPoweredShovel extends ItemPoweredBase {
+public class ItemMegaDigger extends ItemPoweredBase {
 	
 	
-	public ItemPoweredShovel(int maxEnergy){
+	public ItemMegaDigger(int maxEnergy){
 		this.maxStackSize = 1;
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		setUnlocalizedName("poweredShovel");

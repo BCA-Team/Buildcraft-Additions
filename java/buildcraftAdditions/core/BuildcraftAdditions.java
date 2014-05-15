@@ -18,10 +18,11 @@ import buildcraftAdditions.client.gui.GuiHandler;
 import buildcraftAdditions.entities.TileChargingStation;
 import buildcraftAdditions.entities.TileFluidicCompressor;
 import buildcraftAdditions.items.ItemCanister;
-import buildcraftAdditions.items.ItemChainsaw;
-import buildcraftAdditions.items.ItemDrill;
+import buildcraftAdditions.items.ItemMegaChainsaw;
+import buildcraftAdditions.items.ItemMegaDrill;
+import buildcraftAdditions.items.ItemMegaHoe;
 import buildcraftAdditions.items.ItemMjMeter;
-import buildcraftAdditions.items.ItemPoweredShovel;
+import buildcraftAdditions.items.ItemMegaDigger;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
@@ -49,6 +50,7 @@ public class BuildcraftAdditions {
 	public static Item poweredShovel;
 	public static Item drill;
 	public static Item chainsaw;
+	public static Item megaHoe;
 	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 	
 	@Instance(value="bcadditions")
@@ -81,14 +83,17 @@ public class BuildcraftAdditions {
 		//mjMeter = new ItemMjMeter();
 		//CoreProxy.proxy.registerItem(mjMeter);
 		
-		poweredShovel = new ItemPoweredShovel(6000);
+		poweredShovel = new ItemMegaDigger(6000);
 		CoreProxy.proxy.registerItem(poweredShovel);
 		
-		drill = new ItemDrill(6000);
+		drill = new ItemMegaDrill(6000);
 		CoreProxy.proxy.registerItem(drill);
 		
-		chainsaw = new ItemChainsaw(6000);
+		chainsaw = new ItemMegaChainsaw(6000);
 		CoreProxy.proxy.registerItem(chainsaw);
+		
+		megaHoe = new ItemMegaHoe(6000);
+		CoreProxy.proxy.registerItem(megaHoe);
     }
 	
 	@Mod.EventHandler
