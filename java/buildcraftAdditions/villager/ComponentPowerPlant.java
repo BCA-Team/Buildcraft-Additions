@@ -32,7 +32,8 @@ import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class ComponentPowerPlant extends StructureVillagePieces.House1 {
-	public static final ResourceLocation blueprint = new ResourceLocation("bcadditions", "blueprints/Redstone-engine-357d6c42def2dad519636d8e7980d72a5284b3de708febd300bb1fc1525f785b.bpt");
+	public static final ResourceLocation redstoneEngine = new ResourceLocation("bcadditions", "blueprints/Redstone-Engine-df2e537ac33b4d684e783cd4b41653bc872d638e1f0c1afecada2a30e670aa39.bpt");
+	public static final ResourceLocation stirlingEngine = new ResourceLocation("bcadditions", "blueprints/Stirling-Engine-6a8295b667031a4687a626ecb7c6bef997dc7e62c19f9e0941c64b33198f87d4.bpt");
 	
 	private int averageGroundLevel = -1;
 	
@@ -66,25 +67,26 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 
             this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.maxY + 11, 0);
         }
+        	
         try{
-        InputStream f =  Minecraft.getMinecraft().getResourceManager().getResource(blueprint).getInputStream();
-        
-        		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        	 InputStream f;
+        	if (random.nextBoolean())
+        		f =  Minecraft.getMinecraft().getResourceManager().getResource(redstoneEngine).getInputStream();
+        	else
+        		f =  Minecraft.getMinecraft().getResourceManager().getResource(stirlingEngine).getInputStream();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        int nRead;
+        byte[] data = new byte[16384];
+        while ((nRead = f.read(data, 0, data.length)) != -1) {
+        	buffer.write(data, 0, nRead);
+        	}
 
-        		int nRead;
-        		byte[] data = new byte[16384];
-
-        		while ((nRead = f.read(data, 0, data.length)) != -1) {
-        		  buffer.write(data, 0, nRead);
-        		}
-
-        		buffer.flush();
-
-        		data =  buffer.toByteArray();
-        		int i = this.boundingBox.minX;
-                int j = this.boundingBox.minY;
-                int k = this.boundingBox.minZ;
-        		BlueprintDeployer.instance.deployBlueprintFromFileStream(world, i, j-3, k, ForgeDirection.getOrientation(this.getMetadataWithOffset(BuildCraftBuilders.builderBlock, 0)), data);
+        buffer.flush();
+        data =  buffer.toByteArray();
+        int i = this.boundingBox.minX;
+        int j = this.boundingBox.minY;
+        int k = this.boundingBox.minZ;
+        BlueprintDeployer.instance.deployBlueprintFromFileStream(world, i, j-3, k, ForgeDirection.getOrientation(this.getMetadataWithOffset(BuildCraftBuilders.builderBlock, 0)), data);
         } catch (Throwable e){
         	e.printStackTrace();
         }
