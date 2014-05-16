@@ -5,8 +5,10 @@ item.ironCanister.name=Железная канистра
 item.goldCanister.name=Золотая канистра
 item.diamondCanister.name=Алмазная канистра
 item.mjMeter.name=Измеритель мДж
-item.poweredShovel.name=Копатель
-item.drill.name=Дрель
+item.poweredShovel.name=Мега-копалка
+item.drill.name=Мега-дрель
+item.chainsaw.name=Мега-цепная пила
+item.megaHoe.name=Мега-мотыга
 
 gui.progress=Прогресс
 gui.fluid=Жидкость
