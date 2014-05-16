@@ -11,6 +11,7 @@ public class ItemMegaDrill extends ItemPoweredBase{
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		setUnlocalizedName("drill");
 		this.setMaxDamage(maxEnergy);
+		this.setHarvestLevel("pickaxe", 3);
 	}
 	
 	@Override

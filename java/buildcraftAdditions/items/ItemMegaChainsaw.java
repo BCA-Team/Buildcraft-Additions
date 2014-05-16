@@ -11,6 +11,7 @@ public class ItemMegaChainsaw extends ItemPoweredBase {
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		setUnlocalizedName("chainsaw");
 		this.setMaxDamage(maxEnergy);
+		this.setHarvestLevel("axe", 3);
 	}
 	
 	@Override

@@ -19,6 +19,7 @@ public class ItemMegaDigger extends ItemPoweredBase {
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		setUnlocalizedName("poweredShovel");
 		this.setMaxDamage(maxEnergy);
+		this.setHarvestLevel("shovel", 3);
 	}
 	
 	@Override
