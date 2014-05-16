@@ -8,12 +8,12 @@ item.mjMeter.name=MJ Meter
 item.poweredShovel.name=Mega Digger
 item.drill.name=Mega Drill
 item.chainsaw.name=Mega Chainsaw
-item.megaHoe.name=Mega hoe
+item.megaHoe.name=Mega Hoe
 
 gui.progress=Progress
 gui.fluid=Fluid
 gui.noFluid=Empty
-gui.fluidStored=Amount of fluid
+gui.fluidStored=Amount of Fluid
 gui.energyInTool=Energy Stored
 gui.maxEnergy=Max Energy
 
