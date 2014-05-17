@@ -1,6 +1,7 @@
 package buildcraftAdditions.items;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import buildcraftAdditions.core.BuildcraftAdditions;
 
@@ -17,7 +18,7 @@ public class ItemMegaChainsaw extends ItemPoweredBase {
 	@Override
 	public float getDigSpeed(ItemStack stack, Block block, int meta){
 		if (getEnergy(stack) >= block.getBlockHardness(world, x, y, z))
-			if(block.getHarvestTool(0) == "axe")
+			if(block.getHarvestTool(0) == "axe" || block.getMaterial() == Material.leaves || block.getMaterial() == Material.wood || block.getMaterial() == Material.vine)
 				return 30;
 		return 1;
 	}

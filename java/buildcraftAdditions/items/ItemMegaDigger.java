@@ -3,6 +3,7 @@ package buildcraftAdditions.items;
 import ibxm.Player;
 import buildcraftAdditions.core.BuildcraftAdditions;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -25,7 +26,7 @@ public class ItemMegaDigger extends ItemPoweredBase {
 	@Override
 	public float getDigSpeed(ItemStack stack, Block block, int meta){
 		if (getEnergy(stack) >= block.getBlockHardness(world, x, y, z))
-			if(block.getHarvestTool(0) == "shovel")
+			if(block.getHarvestTool(0) == "shovel" || block.getMaterial() == Material.clay || block.getMaterial() == Material.grass || block.getMaterial() == Material.ground || block.getMaterial() == Material.snow || block.getMaterial() == Material.sand || block.getMaterial() == Material.craftedSnow)
 				return 10;
 		return 1;
 	}
