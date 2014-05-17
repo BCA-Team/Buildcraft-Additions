@@ -2,6 +2,7 @@ package buildcraftAdditions.client.gui;
 
 import buildcraftAdditions.entities.TileChargingStation;
 import buildcraftAdditions.entities.TileFluidicCompressor;
+import buildcraftAdditions.items.ItemMegaDigger;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -12,8 +13,6 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
-		if (!world.blockExists(x, y, z))
-			return null;
 
 		TileEntity tile = world.getTileEntity(x, y, z);
 
@@ -24,6 +23,7 @@ public class GuiHandler implements IGuiHandler {
 		case 71:
 			if (tile instanceof TileChargingStation)
 				return new GuiChargingStation(player.inventory, (TileChargingStation) tile);
+		case 72: return new GuiDigger(player.inventory, (ItemMegaDigger) player.getCurrentEquippedItem().getItem());
 			}
 		return null;	
 		}
@@ -31,8 +31,6 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
-		if (!world.blockExists(x, y, z))
-			return null;
 
 		TileEntity tile = world.getTileEntity(x, y, z);
 
@@ -43,6 +41,7 @@ public class GuiHandler implements IGuiHandler {
 		case 71:
 			if (tile instanceof TileChargingStation)
 				return new ContainerChargingStation(player.inventory, (TileChargingStation) tile);
+		case 72: return new ContainerDigger(player.inventory, (ItemMegaDigger) player.getCurrentEquippedItem().getItem());
 		}
 		return null;
 	}

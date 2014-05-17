@@ -31,6 +31,13 @@ public class ItemMegaDigger extends ItemPoweredBase {
 		return 1;
 	}
 	
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player){
+		if (player.isSneaking() && !world.isRemote)
+			player.openGui(BuildcraftAdditions.instance, 72, world, x, y, z);
+		return stack;
+	}
+	
 	
 	
 }

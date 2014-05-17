@@ -2,24 +2,32 @@ package buildcraftAdditions.items;
 
 import java.util.List;
 
+import javax.swing.text.html.parser.Entity;
+
+import buildcraft.BuildCraftCore;
+import buildcraft.core.DefaultProps;
+import buildcraft.core.inventory.SimpleInventory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class ItemPoweredBase extends Item{
+public class ItemPoweredBase extends Item implements IInventory{
 	
 	public int x, y, z;
 	public World world;
+	private final SimpleInventory inventory = new SimpleInventory(3, "BatteryStorage", 1);
 	
 	public ItemPoweredBase(){
 		
 	}
+	
 	
 	public void decreaseEnergy(ItemStack stack, double energy){
 		double energyStored = getEnergy(stack);
@@ -74,6 +82,61 @@ public class ItemPoweredBase extends Item{
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
 		list.add(Integer.toString((int) getEnergy(stack)) + "/" + Integer.toString(getCapacity()) + " MJ");
+	}
+
+	@Override
+	public int getSizeInventory() {
+		return inventory.getSizeInventory();
+	}
+	@Override
+	public ItemStack getStackInSlot(int var1) {
+		return inventory.getStackInSlot(var1);
+	}
+	@Override
+	public ItemStack decrStackSize(int var1, int var2) {
+		return inventory.decrStackSize(var1, var2);
+	}
+	@Override
+	public ItemStack getStackInSlotOnClosing(int var1) {
+		return inventory.getStackInSlotOnClosing(var1);
+	}
+	@Override
+	public void setInventorySlotContents(int var1, ItemStack var2) {
+		inventory.setInventorySlotContents(var1, var2);
+	}
+	@Override
+	public String getInventoryName() {
+		return inventory.getInventoryName();
+	}
+	@Override
+	public boolean hasCustomInventoryName() {
+		return inventory.hasCustomInventoryName();
+	}
+	@Override
+	public int getInventoryStackLimit() {
+		return inventory.getInventoryStackLimit();
+	}
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer var1) {
+		return true;
+	}
+	@Override
+	public void openInventory() {
+		
+	}
+	@Override
+	public void closeInventory() {
+		
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+		return stack.getItem() instanceof BatteryBase;
+	}
+
+	@Override
+	public void markDirty() {
+		
 	}
 
 }

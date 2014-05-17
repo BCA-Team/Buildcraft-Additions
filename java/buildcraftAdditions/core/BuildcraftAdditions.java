@@ -17,6 +17,7 @@ import buildcraftAdditions.blocks.BlockFluidicCompressor;
 import buildcraftAdditions.client.gui.GuiHandler;
 import buildcraftAdditions.entities.TileChargingStation;
 import buildcraftAdditions.entities.TileFluidicCompressor;
+import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemMegaChainsaw;
 import buildcraftAdditions.items.ItemMegaDrill;
@@ -51,6 +52,7 @@ public class BuildcraftAdditions {
 	public static Item drill;
 	public static Item chainsaw;
 	public static Item megaHoe;
+	public static Item baseBattery;
 	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 	
 	@Instance(value="bcadditions")
@@ -94,6 +96,9 @@ public class BuildcraftAdditions {
 		
 		megaHoe = new ItemMegaHoe(6000);
 		CoreProxy.proxy.registerItem(megaHoe);
+		
+		baseBattery = new BatteryBase();
+		CoreProxy.proxy.registerItem(baseBattery);
     }
 	
 	@Mod.EventHandler
