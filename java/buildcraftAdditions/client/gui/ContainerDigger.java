@@ -44,38 +44,36 @@ public class ContainerDigger extends Container{
 	}
 	
 	@Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
-            ItemStack stack = null;
-            Slot slotObject = (Slot) inventorySlots.get(slot);
+    public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex){
+        ItemStack newItemStack = null;
+        Slot slot = (Slot) inventorySlots.get(slotIndex);
 
-            //null checks and checks if the item can be stacked (maxStackSize > 1)
-            if (slotObject != null && slotObject.getHasStack()) {
-                    ItemStack stackInSlot = slotObject.getStack();
-                    stack = stackInSlot.copy();
-
-                    //merges the item into player inventory since its in the tileEntity
-                    if (slot < 9) {
-                            if (!this.mergeItemStack(stackInSlot, 0, 35, true)) {
-                                    return null;
-                            }
-                    }
-                    //places it into the tileEntity is possible since its in the player inventory
-                    else if (!this.mergeItemStack(stackInSlot, 0, 9, false)) {
-                            return null;
-                    }
-
-                    if (stackInSlot.stackSize == 0) {
-                            slotObject.putStack(null);
-                    } else {
-                            slotObject.onSlotChanged();
-                    }
-
-                    if (stackInSlot.stackSize == stack.stackSize) {
-                            return null;
-                    }
-                    slotObject.onPickupFromSlot(player, stackInSlot);
+        if (slot != null && slot.getHasStack()){
+            ItemStack stack = slot.getStack();
+            newItemStack = stack.copy();
+            if (slotIndex < 3){
+                if (!this.mergeItemStack(stack, 3, inventorySlots.size(), false)){
+                    return null;
+                }
+            } else if (!this.mergeItemStack(stack, 0, 3, false)){
+                return null;
             }
-            return stack;
+            if (stack.stackSize == 0) {
+                slot.putStack(null);
+            } else {
+                slot.onSlotChanged();
+            }
+        }
+        digger.save();
+        return newItemStack;
+    }
+	
+	public void onContainerClosed(EntityPlayer player){
+        super.onContainerClosed(player);
+
+        if (!player.worldObj.isRemote) {
+        	digger.save();
+        }
     }
 
 }

@@ -16,18 +16,19 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
 public class ItemPoweredBase extends Item implements IInventory{
 	
 	public int x, y, z;
 	public World world;
-	private final SimpleInventory inventory = new SimpleInventory(3, "BatteryStorage", 1);
+	protected ItemStack[] storage;
+	public ItemStack stack;
 	
 	public ItemPoweredBase(){
-		
+		storage = new ItemStack[3];
 	}
-	
 	
 	public void decreaseEnergy(ItemStack stack, double energy){
 		double energyStored = getEnergy(stack);
@@ -86,35 +87,61 @@ public class ItemPoweredBase extends Item implements IInventory{
 
 	@Override
 	public int getSizeInventory() {
-		return inventory.getSizeInventory();
+		return storage.length;
 	}
 	@Override
-	public ItemStack getStackInSlot(int var1) {
-		return inventory.getStackInSlot(var1);
+	public ItemStack getStackInSlot(int slot) {
+		return storage[slot];
 	}
 	@Override
-	public ItemStack decrStackSize(int var1, int var2) {
-		return inventory.decrStackSize(var1, var2);
+	public ItemStack decrStackSize(int slot, int amount) {
+		ItemStack stack = getStackInSlot(slot);
+        if (stack != null)
+        {
+            if (stack.stackSize <= amount)
+            {
+                setInventorySlotContents(slot, null);
+            }
+            else
+            {
+                stack = stack.splitStack(amount);
+                if (stack.stackSize == 0)
+                {
+                    setInventorySlotContents(slot, null);
+                }
+            }
+        }
+
+        return stack;
 	}
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		return inventory.getStackInSlotOnClosing(var1);
+	public ItemStack getStackInSlotOnClosing(int slot) {
+		if (storage[slot] != null)
+        {
+            ItemStack stack = storage[slot];
+            storage[slot] = null;
+            return stack;
+        }
+        else
+        {
+            return null;
+        }
 	}
 	@Override
-	public void setInventorySlotContents(int var1, ItemStack var2) {
-		inventory.setInventorySlotContents(var1, var2);
+	public void setInventorySlotContents(int slot, ItemStack stack) {
+		storage[slot] = stack;
 	}
 	@Override
 	public String getInventoryName() {
-		return inventory.getInventoryName();
+		return "BatteryStorage";
 	}
 	@Override
 	public boolean hasCustomInventoryName() {
-		return inventory.hasCustomInventoryName();
+		return false;
 	}
 	@Override
 	public int getInventoryStackLimit() {
-		return inventory.getInventoryStackLimit();
+		return 1;
 	}
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer var1) {
@@ -138,5 +165,40 @@ public class ItemPoweredBase extends Item implements IInventory{
 	public void markDirty() {
 		
 	}
+	
+	public void readFromNBT(NBTTagCompound nbtTagCompound){
+        if (nbtTagCompound != null && nbtTagCompound.hasKey("Items")){
+            if (nbtTagCompound.hasKey("Items")){
+                NBTTagList tagList = nbtTagCompound.getTagList("Items", 10);
+                storage = new ItemStack[this.getSizeInventory()];
+                for (int i = 0; i < tagList.tagCount(); ++i){
+                    NBTTagCompound tagCompound = tagList.getCompoundTagAt(i);
+                    byte slotIndex = tagCompound.getByte("Slot");
+                    if (slotIndex >= 0 && slotIndex < storage.length){
+                        storage[slotIndex] = ItemStack.loadItemStackFromNBT(tagCompound);
+                    }
+                }
+            }
+        }
+    }
+
+    public void writeToNBT(NBTTagCompound nbtTagCompound){
+        NBTTagList tagList = new NBTTagList();
+        for (int index = 0; index < storage.length; ++index){
+            if (storage[index] != null){
+                NBTTagCompound tagCompound = new NBTTagCompound();
+                tagCompound.setByte("Slot", (byte) index);
+                storage[index].writeToNBT(tagCompound);
+                tagList.appendTag(tagCompound);
+            }
+        }
+        nbtTagCompound.setTag("Items", tagList);
+    }
+    
+    public void save(){
+    	NBTTagCompound tag = stack.getTagCompound();
+    	writeToNBT(tag);
+    	stack.setTagCompound(tag);
+    }
 
 }

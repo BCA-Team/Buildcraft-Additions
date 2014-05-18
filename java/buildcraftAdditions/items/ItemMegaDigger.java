@@ -33,6 +33,9 @@ public class ItemMegaDigger extends ItemPoweredBase {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player){
+		if (stack.getTagCompound() == null)
+			stack.setTagCompound(new NBTTagCompound());
+		this.stack = stack;
 		if (player.isSneaking() && !world.isRemote)
 			player.openGui(BuildcraftAdditions.instance, 72, world, x, y, z);
 		return stack;
