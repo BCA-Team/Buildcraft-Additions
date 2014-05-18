@@ -11,6 +11,7 @@ import buildcraft.core.gui.slots.SlotOutput;
 import buildcraft.core.gui.slots.SlotValidated;
 import buildcraftAdditions.core.InventoryTool;
 import buildcraftAdditions.entities.TileFluidicCompressor;
+import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemMegaDigger;
 
 public class ContainerDigger extends Container{
@@ -18,10 +19,14 @@ public class ContainerDigger extends Container{
 	IInventory playerIInventory;
 	ItemMegaDigger digger;
 	InventoryTool diggerInventory;
+	ItemStack stack;
+	EntityPlayer player;
 
-	public ContainerDigger(InventoryPlayer inventory, ItemMegaDigger digger, IInventory toolInventory) {
+	public ContainerDigger(InventoryPlayer inventory, ItemMegaDigger digger, IInventory toolInventory, ItemStack stack, EntityPlayer player) {
 		this.digger = digger;
 		this.playerIInventory = inventory;
+		this.stack = stack;
+		this.player = player;
 		
 		toolInventory.openInventory();
 		addSlotToContainer(new SlotValidated(toolInventory, 0, 60, 29));
@@ -156,6 +161,11 @@ public class ContainerDigger extends Container{
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
 		return true;
+	}
+	
+	@Override
+	public void onContainerClosed(EntityPlayer player){
+		digger.readBateries(stack, player);
 	}
 
 }

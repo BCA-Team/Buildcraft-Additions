@@ -2,7 +2,7 @@ package buildcraftAdditions.items;
 
 import java.util.List;
 
-import javax.swing.text.html.parser.Entity;
+
 
 import buildcraft.BuildCraftCore;
 import buildcraft.core.DefaultProps;
@@ -11,6 +11,7 @@ import buildcraftAdditions.core.InventoryTool;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -24,37 +25,56 @@ public class ItemPoweredBase extends Item {
 	
 	public int x, y, z;
 	public World world;
-	public ItemStack stack;
+	private int storageB1, storageB2, storageB3;
+	private double energyB1, energyB2, energyB3;
+	EntityPlayer player;
 	
 	public ItemPoweredBase(){
 	}
 	
-	public void decreaseEnergy(ItemStack stack, double energy){
+	public void decreaseEnergy(ItemStack stack, double energy, EntityPlayer player){
 		double energyStored = getEnergy(stack);
 		energyStored -= energy;
 		if (energyStored < 0)
 			energyStored=0;
-		stack.stackTagCompound.setDouble("energy", Math.floor(energyStored));
-		this.setDamage(stack, (int) (getCapacity() - energyStored));
+		
+		if (energyB1 - energy < 0){
+			energy -= energyB1;
+			energyB1=0;
+		}
+		if (energyB1 > energy){
+			energyB1 -= energy;
+			energy = 0;
+		}
+		if (energyB2 - energy < 0){
+			energy -= energyB1;
+			energyB2=0;
+		}
+		if (energyB2 > energy){
+			energyB2 -= energy;
+			energy = 0;
+		}
+		if (energyB3 - energy < 0){
+			energy -= energyB3;
+			energyB3=0;
+		}
+		if (energyB3 > energy){
+			energyB3 -= energy;
+			energy = 0;
+		}
+		writeBateries(stack, player);
+		readBateries(stack, player);
+		
 	}
 	
-	public void increaseEnergy(ItemStack stack, double energy){
-		double energyStored = getEnergy(stack);
-		energyStored +=energy;
-		stack.stackTagCompound.setDouble("energy", Math.round(energyStored));
-		this.setDamage(stack, (int) (getCapacity() - energyStored));
-	}
 	
 	public double getEnergy(ItemStack stack){
-		if (stack.stackTagCompound == null){
-			stack.stackTagCompound = new NBTTagCompound();
-			stack.stackTagCompound.setDouble("energy", 0);
-		}
-		return stack.stackTagCompound.getDouble("energy");
+		return energyB1 + energyB2 + energyB3;
 	}
 	
-	public int getCapacity(){
-		return 6000;
+	
+	public int getCapacity(ItemStack stack){
+		return storageB1 + storageB2 + storageB3;
 	}
 	
 	@Override
@@ -63,25 +83,24 @@ public class ItemPoweredBase extends Item {
 		this.y = y;
 		this.z = z;
 		this.world = player.worldObj;
+		this.player = player;
 		return false;
 	}
 	
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entity){
-		decreaseEnergy(stack, block.getBlockHardness(world, x, y, z) * ((world.difficultySetting.getDifficultyId()+40)/2));
+		decreaseEnergy(stack, block.getBlockHardness(world, x, y, z) * ((world.difficultySetting.getDifficultyId()+1)*20), player);
 		return true;
 	}
 	
 	
-	@Override
-	public int getDisplayDamage(ItemStack stack){
-		return (int) (getCapacity() - getEnergy(stack));
-	}
+	
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
-		list.add(Integer.toString((int) getEnergy(stack)) + "/" + Integer.toString(getCapacity()) + " MJ");
+		readBateries(stack, player);
+		list.add(Integer.toString((int) getEnergy(stack)) + "/" + Integer.toString(getCapacity(stack)) + " MJ");
 	}
 
 	
@@ -107,5 +126,58 @@ public class ItemPoweredBase extends Item {
 
 		return toolInventory;
 	}
+	
+	public void readBateries(ItemStack stack, EntityPlayer player){
+		IInventory inventory = getInventory(player, stack);
+		inventory.openInventory();
+		BatteryBase battery = null;
+		ItemStack batteryStack = inventory.getStackInSlot(0);
+		storageB1 = 0;
+		storageB2 = 0;
+		storageB3 = 0;
+		energyB1 = 0;
+		energyB2 = 0;
+		energyB3 = 0;
+		if (batteryStack != null){
+			battery = (BatteryBase) batteryStack.getItem();
+			storageB1 = battery.getCapacity();
+			energyB1 = battery.getEnergy(batteryStack);
+			}
+		batteryStack = inventory.getStackInSlot(1);
+		if (batteryStack != null){
+			battery = (BatteryBase) batteryStack.getItem();
+			storageB2 += battery.getCapacity();
+			energyB2 = battery.getEnergy(batteryStack);
+			}
+		batteryStack = inventory.getStackInSlot(2);
+		if (batteryStack != null){
+			battery = (BatteryBase) batteryStack.getItem();
+			storageB3 = battery.getCapacity();
+			energyB3 = battery.getEnergy(batteryStack);
+			}		
+		inventory.closeInventory();
+	}
+	
+	public void writeBateries(ItemStack stack, EntityPlayer player){
+		IInventory inventory = getInventory(player, stack);
+		inventory.openInventory();
+		BatteryBase battery = null;
+		ItemStack batteryStack = inventory.getStackInSlot(0);
+		if (batteryStack != null){
+			battery = (BatteryBase) batteryStack.getItem();
+			battery.setEnergy(batteryStack, energyB1); 
+			}
+		batteryStack = inventory.getStackInSlot(1);
+		if (batteryStack != null){
+			battery = (BatteryBase) batteryStack.getItem();
+			battery.setEnergy(batteryStack, energyB2);
+			}
+		batteryStack = inventory.getStackInSlot(2);
+		if (batteryStack != null){
+			battery = (BatteryBase) batteryStack.getItem();
+			battery.setEnergy(batteryStack, energyB3);
+			}			
+	}
+	
 
 }

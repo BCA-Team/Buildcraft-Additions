@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -35,7 +36,6 @@ public class ItemMegaDigger extends ItemPoweredBase {
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player){
 		if (stack.getTagCompound() == null)
 			stack.setTagCompound(new NBTTagCompound());
-		this.stack = stack;
 		if (player.isSneaking() && !world.isRemote)
 			player.openGui(BuildcraftAdditions.instance, 72, world, x, y, z);
 		return stack;

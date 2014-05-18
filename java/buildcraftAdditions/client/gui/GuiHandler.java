@@ -24,7 +24,7 @@ public class GuiHandler implements IGuiHandler {
 			if (tile instanceof TileChargingStation)
 				return new GuiChargingStation(player.inventory, (TileChargingStation) tile);
 		case 72: ItemMegaDigger digger = (ItemMegaDigger) player.getCurrentEquippedItem().getItem(); 
-			return new GuiDigger(player.inventory, digger, digger.getInventory(player));
+			return new GuiDigger(player.inventory, digger, digger.getInventory(player), player.getCurrentEquippedItem(), player);
 			}
 		return null;	
 		}
@@ -43,7 +43,7 @@ public class GuiHandler implements IGuiHandler {
 			if (tile instanceof TileChargingStation)
 				return new ContainerChargingStation(player.inventory, (TileChargingStation) tile);
 		case 72: ItemMegaDigger digger = (ItemMegaDigger) player.getCurrentEquippedItem().getItem();
-			return new ContainerDigger(player.inventory, digger, digger.getInventory(player));
+			return new ContainerDigger(player.inventory, digger, digger.getInventory(player), player.getCurrentEquippedItem(), player);
 		}
 		return null;
 	}

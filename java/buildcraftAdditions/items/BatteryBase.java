@@ -38,6 +38,12 @@ public class BatteryBase extends Item{
 		return stack.stackTagCompound.getDouble("energy");
 	}
 	
+	public void setEnergy (ItemStack stack, double energy){
+		if (stack.stackTagCompound == null)
+			stack.stackTagCompound = new NBTTagCompound();
+		stack.stackTagCompound.setDouble("energy", energy);
+	}
+	
 	public int getCapacity(){
 		return 1000;
 	}

@@ -19,10 +19,14 @@ import buildcraftAdditions.items.ItemMegaDigger;
 public class GuiDigger extends GuiContainer{
 	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/DiggerGUI.png");
 	ItemMegaDigger digger;
+	ItemStack stack;
+	EntityPlayer player;
 
-	public GuiDigger(InventoryPlayer inventoryplayer, ItemMegaDigger digger, IInventory inventory) {
-		super(new ContainerDigger(inventoryplayer, digger, inventory));
+	public GuiDigger(InventoryPlayer inventoryplayer, ItemMegaDigger digger, IInventory inventory, ItemStack stack, EntityPlayer player) {
+		super(new ContainerDigger(inventoryplayer, digger, inventory, stack, player));
 		this.digger = digger;
+		this.stack = stack;
+		this.player = player;
 	}
 	
 	@Override
@@ -45,6 +49,11 @@ public class GuiDigger extends GuiContainer{
 		int mY = mouseY - guiTop;
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+	}
+	
+	@Override
+	public void onGuiClosed(){
+		digger.readBateries(stack, player);
 	}
 	
 	 

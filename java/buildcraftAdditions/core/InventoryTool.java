@@ -1,5 +1,6 @@
 package buildcraftAdditions.core;
 
+import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemPoweredBase;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +26,8 @@ public class InventoryTool extends InventoryBasic {
 	}
 	
 	private boolean hasInventory() {
+		if (tool.stackTagCompound == null)
+			return false;
 		return tool.stackTagCompound.getTag("Inventory") != null;
 	}
 	
@@ -46,6 +49,8 @@ public class InventoryTool extends InventoryBasic {
 		
 		NBTTagCompound inventory = new NBTTagCompound();
 		inventory.setTag("Items", itemList);
+		if (tool.stackTagCompound == null)
+			tool.stackTagCompound = new NBTTagCompound();
 		tool.stackTagCompound.setTag("Inventory", inventory);
 	}
 	
@@ -106,5 +111,10 @@ public class InventoryTool extends InventoryBasic {
 		}
 		reading = false;
 	}
+	
+	@Override
+	 public boolean isItemValidForSlot(int slot, ItemStack stack) {
+		return stack.getItem() instanceof BatteryBase;
+		}
 
 }
