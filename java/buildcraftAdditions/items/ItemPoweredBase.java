@@ -7,6 +7,7 @@ import javax.swing.text.html.parser.Entity;
 import buildcraft.BuildCraftCore;
 import buildcraft.core.DefaultProps;
 import buildcraft.core.inventory.SimpleInventory;
+import buildcraftAdditions.core.InventoryTool;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -19,15 +20,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
-public class ItemPoweredBase extends Item implements IInventory{
+public class ItemPoweredBase extends Item {
 	
 	public int x, y, z;
 	public World world;
-	protected ItemStack[] storage;
 	public ItemStack stack;
 	
 	public ItemPoweredBase(){
-		storage = new ItemStack[3];
 	}
 	
 	public void decreaseEnergy(ItemStack stack, double energy){
@@ -85,120 +84,28 @@ public class ItemPoweredBase extends Item implements IInventory{
 		list.add(Integer.toString((int) getEnergy(stack)) + "/" + Integer.toString(getCapacity()) + " MJ");
 	}
 
-	@Override
-	public int getSizeInventory() {
-		return storage.length;
-	}
-	@Override
-	public ItemStack getStackInSlot(int slot) {
-		return storage[slot];
-	}
-	@Override
-	public ItemStack decrStackSize(int slot, int amount) {
-		ItemStack stack = getStackInSlot(slot);
-        if (stack != null)
-        {
-            if (stack.stackSize <= amount)
-            {
-                setInventorySlotContents(slot, null);
-            }
-            else
-            {
-                stack = stack.splitStack(amount);
-                if (stack.stackSize == 0)
-                {
-                    setInventorySlotContents(slot, null);
-                }
-            }
-        }
+	
+	public static IInventory getInventory(EntityPlayer player) {
+		ItemStack tool;
+		IInventory toolInventory = null;
+		tool = player.getCurrentEquippedItem();
 
-        return stack;
-	}
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-		if (storage[slot] != null)
-        {
-            ItemStack stack = storage[slot];
-            storage[slot] = null;
-            return stack;
-        }
-        else
-        {
-            return null;
-        }
-	}
-	@Override
-	public void setInventorySlotContents(int slot, ItemStack stack) {
-		storage[slot] = stack;
-	}
-	@Override
-	public String getInventoryName() {
-		return "BatteryStorage";
-	}
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
-	@Override
-	public int getInventoryStackLimit() {
-		return 1;
-	}
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer var1) {
-		return true;
-	}
-	@Override
-	public void openInventory() {
-		
-	}
-	@Override
-	public void closeInventory() {
-		
-	}
+		if (tool != null && tool.getItem() instanceof ItemPoweredBase) {
+			toolInventory = new InventoryTool(player, tool);
+		}
 
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return stack.getItem() instanceof BatteryBase;
-	}
-
-	@Override
-	public void markDirty() {
-		
+		return toolInventory;
 	}
 	
-	public void readFromNBT(NBTTagCompound nbtTagCompound){
-        if (nbtTagCompound != null && nbtTagCompound.hasKey("Items")){
-            if (nbtTagCompound.hasKey("Items")){
-                NBTTagList tagList = nbtTagCompound.getTagList("Items", 10);
-                storage = new ItemStack[this.getSizeInventory()];
-                for (int i = 0; i < tagList.tagCount(); ++i){
-                    NBTTagCompound tagCompound = tagList.getCompoundTagAt(i);
-                    byte slotIndex = tagCompound.getByte("Slot");
-                    if (slotIndex >= 0 && slotIndex < storage.length){
-                        storage[slotIndex] = ItemStack.loadItemStackFromNBT(tagCompound);
-                    }
-                }
-            }
-        }
-    }
+	public static IInventory getInventory(EntityPlayer player, ItemStack stack) {
+		IInventory toolInventory = null;
 
-    public void writeToNBT(NBTTagCompound nbtTagCompound){
-        NBTTagList tagList = new NBTTagList();
-        for (int index = 0; index < storage.length; ++index){
-            if (storage[index] != null){
-                NBTTagCompound tagCompound = new NBTTagCompound();
-                tagCompound.setByte("Slot", (byte) index);
-                storage[index].writeToNBT(tagCompound);
-                tagList.appendTag(tagCompound);
-            }
-        }
-        nbtTagCompound.setTag("Items", tagList);
-    }
-    
-    public void save(){
-    	NBTTagCompound tag = stack.getTagCompound();
-    	writeToNBT(tag);
-    	stack.setTagCompound(tag);
-    }
+		if (stack != null && stack.getItem() instanceof ItemPoweredBase)
+		{
+			toolInventory = new InventoryTool(player, stack);
+		}
+
+		return toolInventory;
+	}
 
 }

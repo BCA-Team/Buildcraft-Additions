@@ -20,8 +20,8 @@ public class GuiDigger extends GuiContainer{
 	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/DiggerGUI.png");
 	ItemMegaDigger digger;
 
-	public GuiDigger(InventoryPlayer inventoryplayer, ItemMegaDigger digger) {
-		super(new ContainerDigger(inventoryplayer, digger));
+	public GuiDigger(InventoryPlayer inventoryplayer, ItemMegaDigger digger, IInventory inventory) {
+		super(new ContainerDigger(inventoryplayer, digger, inventory));
 		this.digger = digger;
 	}
 	
