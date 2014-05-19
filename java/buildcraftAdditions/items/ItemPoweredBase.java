@@ -4,6 +4,7 @@ import java.util.List;
 
 
 
+
 import buildcraft.BuildCraftCore;
 import buildcraft.core.DefaultProps;
 import buildcraft.core.inventory.SimpleInventory;
@@ -27,6 +28,7 @@ public class ItemPoweredBase extends Item {
 	public World world;
 	private int storageB1, storageB2, storageB3;
 	private double energyB1, energyB2, energyB3;
+	public String typeB1, typeB2, typeB3;
 	EntityPlayer player;
 	
 	public ItemPoweredBase(){
@@ -101,6 +103,13 @@ public class ItemPoweredBase extends Item {
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
 		readBateries(stack, player);
 		list.add(Integer.toString((int) getEnergy(stack)) + "/" + Integer.toString(getCapacity(stack)) + " MJ");
+		if (storageB1>0)
+			list.add("   Battery 1 " + typeB1 + Integer.toString((int) energyB1) + "/" + Integer.toString(storageB1) + " MJ");
+		if (storageB2>0)
+			list.add("   Battery 2 " + typeB2 + Integer.toString((int) energyB2) + "/" + Integer.toString(storageB2) + " MJ");
+		if (storageB3>0)
+			list.add("   Battery 3 " + typeB3 + Integer.toString((int) energyB3) + "/" + Integer.toString(storageB3) + " MJ");
+		
 	}
 
 	
@@ -138,6 +147,9 @@ public class ItemPoweredBase extends Item {
 		energyB1 = 0;
 		energyB2 = 0;
 		energyB3 = 0;
+		typeB1 ="";
+		typeB2="";
+		typeB3="";
 		if (batteryStack != null){
 			battery = (BatteryBase) batteryStack.getItem();
 			storageB1 = battery.getCapacity();
@@ -157,7 +169,24 @@ public class ItemPoweredBase extends Item {
 			}
 		this.setMaxDamage(storageB1 + storageB2 + storageB3);
 		this.setDamage(stack, (int) (storageB1 + storageB2 + storageB3 - energyB1 - energyB2 - energyB3));
-		
+		if (storageB1 == 1000)
+			typeB1 ="(Tier 1): ";
+		if (storageB1 == 2000)
+			typeB1 = "(Tier 2): ";
+		if (storageB1 == 4000)
+			typeB1 = "(Tier 3): ";
+		if (storageB2 == 1000)
+			typeB2 ="(Tier 1): ";
+		if (storageB2 == 2000)
+			typeB2 = "(Tier 2): ";
+		if (storageB2 == 4000)
+			typeB2 = "(Tier 3): ";
+		if (storageB3 == 1000)
+			typeB1 ="(Tier 1): ";
+		if (storageB3 == 2000)
+			typeB1 = "(Tier 2): ";
+		if (storageB3 == 4000)
+			typeB3 = "(Tier 3): ";
 	}
 	
 	public void writeBateries(ItemStack stack, EntityPlayer player){

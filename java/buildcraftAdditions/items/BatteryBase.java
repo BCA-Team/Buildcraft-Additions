@@ -1,6 +1,11 @@
 package buildcraftAdditions.items;
 
+import java.util.List;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import buildcraftAdditions.core.BuildcraftAdditions;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -50,6 +55,12 @@ public class BatteryBase extends Item{
 	@Override
 	public int getDisplayDamage(ItemStack stack){
 		return (int) (getCapacity() - getEnergy(stack));
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
+		list.add(Integer.toString((int) getEnergy(stack)) + "/" + Integer.toString(getCapacity()) + " MJ");
 	}
 
 }
