@@ -24,6 +24,9 @@ import buildcraftAdditions.items.ItemMegaDrill;
 import buildcraftAdditions.items.ItemMegaHoe;
 import buildcraftAdditions.items.ItemMjMeter;
 import buildcraftAdditions.items.ItemMegaDigger;
+import buildcraftAdditions.items.ItemPowerCapsuleTier1;
+import buildcraftAdditions.items.ItemPowerCapsuleTier2;
+import buildcraftAdditions.items.ItemPowerCapsuleTier3;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
@@ -52,7 +55,9 @@ public class BuildcraftAdditions {
 	public static Item drill;
 	public static Item chainsaw;
 	public static Item megaHoe;
-	public static Item baseBattery;
+	public static Item powerCapsuleTier1;
+	public static Item powerCapsuleTier2;
+	public static Item powerCapsuleTier3;
 	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 	
 	@Instance(value="bcadditions")
@@ -85,7 +90,7 @@ public class BuildcraftAdditions {
 		//mjMeter = new ItemMjMeter();
 		//CoreProxy.proxy.registerItem(mjMeter);
 		
-		poweredShovel = new ItemMegaDigger(6000);
+		poweredShovel = new ItemMegaDigger();
 		CoreProxy.proxy.registerItem(poweredShovel);
 		
 		drill = new ItemMegaDrill(6000);
@@ -97,8 +102,14 @@ public class BuildcraftAdditions {
 		megaHoe = new ItemMegaHoe(6000);
 		CoreProxy.proxy.registerItem(megaHoe);
 		
-		baseBattery = new BatteryBase();
-		CoreProxy.proxy.registerItem(baseBattery);
+		powerCapsuleTier1 = new ItemPowerCapsuleTier1();
+		CoreProxy.proxy.registerItem(powerCapsuleTier1);
+		
+		powerCapsuleTier2 = new ItemPowerCapsuleTier2();
+		CoreProxy.proxy.registerItem(powerCapsuleTier2);
+		
+		powerCapsuleTier3 = new ItemPowerCapsuleTier3();
+		CoreProxy.proxy.registerItem(powerCapsuleTier3);
     }
 	
 	@Mod.EventHandler

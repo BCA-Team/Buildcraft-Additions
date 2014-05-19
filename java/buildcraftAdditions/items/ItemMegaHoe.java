@@ -3,8 +3,10 @@ package buildcraftAdditions.items;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.core.Variables;
 
 public class ItemMegaHoe extends ItemPoweredBase{
 	
@@ -24,5 +26,14 @@ public class ItemMegaHoe extends ItemPoweredBase{
 		}
         return false;
     }
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player){
+		if (stack.getTagCompound() == null)
+			stack.setTagCompound(new NBTTagCompound());
+		if (player.isSneaking() && !world.isRemote)
+			player.openGui(BuildcraftAdditions.instance, Variables.GuiHoe, world, x, y, z);
+		return stack;
+	}
 
 }

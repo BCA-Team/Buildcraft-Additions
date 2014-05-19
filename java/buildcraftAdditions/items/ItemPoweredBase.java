@@ -154,8 +154,10 @@ public class ItemPoweredBase extends Item {
 			battery = (BatteryBase) batteryStack.getItem();
 			storageB3 = battery.getCapacity();
 			energyB3 = battery.getEnergy(batteryStack);
-			}		
-		inventory.closeInventory();
+			}
+		this.setMaxDamage(storageB1 + storageB2 + storageB3);
+		this.setDamage(stack, (int) (storageB1 + storageB2 + storageB3 - energyB1 - energyB2 - energyB3));
+		
 	}
 	
 	public void writeBateries(ItemStack stack, EntityPlayer player){
@@ -176,8 +178,8 @@ public class ItemPoweredBase extends Item {
 		if (batteryStack != null){
 			battery = (BatteryBase) batteryStack.getItem();
 			battery.setEnergy(batteryStack, energyB3);
-			}			
-	}
+			}
+		}
 	
 
 }

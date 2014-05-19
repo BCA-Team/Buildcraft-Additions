@@ -10,7 +10,6 @@ public class BatteryBase extends Item{
 	public BatteryBase(){
 		this.maxStackSize = 1;
 		setCreativeTab(BuildcraftAdditions.bcadditions);
-		this.setMaxDamage(1000);
 		this.setUnlocalizedName("batteryBase");
 	}
 	
@@ -45,7 +44,7 @@ public class BatteryBase extends Item{
 	}
 	
 	public int getCapacity(){
-		return 1000;
+		return 0;
 	}
 	
 	@Override

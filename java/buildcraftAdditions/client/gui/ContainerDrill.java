@@ -1,29 +1,26 @@
 package buildcraftAdditions.client.gui;
 
+import buildcraft.core.gui.slots.SlotValidated;
+import buildcraftAdditions.core.InventoryTool;
+import buildcraftAdditions.items.BatteryBase;
+import buildcraftAdditions.items.ItemMegaDrill;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import buildcraft.core.gui.BuildCraftContainer;
-import buildcraft.core.gui.slots.SlotOutput;
-import buildcraft.core.gui.slots.SlotValidated;
-import buildcraftAdditions.core.InventoryTool;
-import buildcraftAdditions.entities.TileFluidicCompressor;
-import buildcraftAdditions.items.BatteryBase;
-import buildcraftAdditions.items.ItemMegaDigger;
 
-public class ContainerDigger extends Container{
+public class ContainerDrill extends Container{
 	
 	IInventory playerIInventory;
-	ItemMegaDigger digger;
+	ItemMegaDrill drill;
 	InventoryTool diggerInventory;
 	ItemStack stack;
 	EntityPlayer player;
 
-	public ContainerDigger(InventoryPlayer inventory, ItemMegaDigger digger, IInventory toolInventory, ItemStack stack, EntityPlayer player) {
-		this.digger = digger;
+	public ContainerDrill(InventoryPlayer inventory, ItemMegaDrill drill, IInventory toolInventory, ItemStack stack, EntityPlayer player) {
+		this.drill = drill;
 		this.playerIInventory = inventory;
 		this.stack = stack;
 		this.player = player;
@@ -50,7 +47,6 @@ public class ContainerDigger extends Container{
 	@Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex){
 		
-		
         ItemStack stack = null;
 		Slot slot = (Slot) this.inventorySlots.get(slotIndex);
 
@@ -62,8 +58,7 @@ public class ContainerDigger extends Container{
 				if (!this.mergeItemStack(itemstack1, 3, 39, true)) {
 					return null;
 				}
-			}
-			else if (!this.mergeItemStack(itemstack1, 0, 3, false)) {
+			} else if (!this.mergeItemStack(itemstack1, 0, 3, false)) {
 				return null;
 			}
 
@@ -88,6 +83,7 @@ public class ContainerDigger extends Container{
 	public boolean mergeItemStack(ItemStack inputStack, int par2, int par3, boolean doMerge) {
 		if (!(inputStack.getItem() instanceof BatteryBase))
 			return false;
+			
 		boolean merged = false;
 		int k = par2;
 
@@ -168,7 +164,7 @@ public class ContainerDigger extends Container{
 	
 	@Override
 	public void onContainerClosed(EntityPlayer player){
-		digger.readBateries(stack, player);
+		drill.readBateries(stack, player);
 	}
 
 }

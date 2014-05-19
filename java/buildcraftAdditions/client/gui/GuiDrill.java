@@ -2,29 +2,26 @@ package buildcraftAdditions.client.gui;
 
 import org.lwjgl.opengl.GL11;
 
+import buildcraftAdditions.core.Utils;
+import buildcraftAdditions.items.ItemMegaDrill;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import buildcraft.core.gui.BuildCraftContainer;
-import buildcraft.core.gui.GuiBuildCraft;
-import buildcraft.core.gui.widgets.Widget;
-import buildcraftAdditions.core.Utils;
-import buildcraftAdditions.items.ItemMegaDigger;
 
-public class GuiDigger extends GuiContainer{
+public class GuiDrill extends GuiContainer {
+	
 	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/GUITool.png");
-	ItemMegaDigger digger;
+	ItemMegaDrill drill;
 	ItemStack stack;
 	EntityPlayer player;
 
-	public GuiDigger(InventoryPlayer inventoryplayer, ItemMegaDigger digger, IInventory inventory, ItemStack stack, EntityPlayer player) {
-		super(new ContainerDigger(inventoryplayer, digger, inventory, stack, player));
-		this.digger = digger;
+	public GuiDrill(InventoryPlayer inventoryplayer, ItemMegaDrill drill, IInventory inventory, ItemStack stack, EntityPlayer player) {
+		super(new ContainerDrill(inventoryplayer, drill, inventory, stack, player));
+		this.drill = drill;
 		this.stack = stack;
 		this.player = player;
 	}
@@ -32,7 +29,7 @@ public class GuiDigger extends GuiContainer{
 	@Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         super.drawGuiContainerForegroundLayer(par1, par2);
-        String title = Utils.localize("item.poweredShovel.name");
+        String title = Utils.localize("item.drill.name");
         fontRendererObj.drawString(Utils.localize(title), (xSize - fontRendererObj.getStringWidth(title)) / 2, 6, 0x404040);
         fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize-110) + 2, 0x404040);
     }
@@ -53,9 +50,7 @@ public class GuiDigger extends GuiContainer{
 	
 	@Override
 	public void onGuiClosed(){
-		digger.readBateries(stack, player);
+		drill.readBateries(stack, player);
 	}
-	
-	 
 
 }

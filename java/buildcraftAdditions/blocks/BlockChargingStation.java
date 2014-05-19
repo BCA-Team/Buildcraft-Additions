@@ -3,6 +3,7 @@ package buildcraftAdditions.blocks;
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.core.BuildcraftAdditions;
 import buildcraftAdditions.core.Utils;
+import buildcraftAdditions.core.Variables;
 import buildcraftAdditions.entities.TileChargingStation;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -40,7 +41,7 @@ public class BlockChargingStation extends BlockContainer {
         }
 
 		if (!world.isRemote)
-			entityplayer.openGui(BuildcraftAdditions.instance, 71, world, x, y, z);
+			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GuiChargingStation, world, x, y, z);
 
 		return true;
 	}

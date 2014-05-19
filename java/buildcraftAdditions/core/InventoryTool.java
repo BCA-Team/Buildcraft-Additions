@@ -113,7 +113,7 @@ public class InventoryTool extends InventoryBasic {
 	}
 	
 	@Override
-	 public boolean isItemValidForSlot(int slot, ItemStack stack) {
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		return stack.getItem() instanceof BatteryBase;
 		}
 

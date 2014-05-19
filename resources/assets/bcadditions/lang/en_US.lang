@@ -9,6 +9,9 @@ item.poweredShovel.name=Mega Digger
 item.drill.name=Mega Drill
 item.chainsaw.name=Mega Chainsaw
 item.megaHoe.name=Mega Hoe
+item.PowerCapsuleTier1.name=Power Capsule Tier 1
+item.PowerCapsuleTier2.name=Power Capsule Tier 2
+item.PowerCapsuleTier3.name=Power Capsule Tier 3
 
 gui.progress=Progress
 gui.fluid=Fluid

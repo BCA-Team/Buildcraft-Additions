@@ -5,6 +5,7 @@ import buildcraft.core.CreativeTabBuildCraft;
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.core.BuildcraftAdditions;
 import buildcraftAdditions.core.Utils;
+import buildcraftAdditions.core.Variables;
 import buildcraftAdditions.entities.TileFluidicCompressor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -52,7 +53,7 @@ public class BlockFluidicCompressor extends BlockContainer {
         }
 
 		if (!world.isRemote)
-			entityplayer.openGui(BuildcraftAdditions.instance, 70, world, x, y, z);
+			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GuiFluidicCompressor, world, x, y, z);
 
 		return true;
 	}

@@ -2,6 +2,7 @@ package buildcraftAdditions.items;
 
 import ibxm.Player;
 import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.core.Variables;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,11 +17,10 @@ import net.minecraft.world.World;
 public class ItemMegaDigger extends ItemPoweredBase {
 	
 	
-	public ItemMegaDigger(int maxEnergy){
+	public ItemMegaDigger(){
 		this.maxStackSize = 1;
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		setUnlocalizedName("poweredShovel");
-		this.setMaxDamage(maxEnergy);
 		this.setHarvestLevel("shovel", 3);
 	}
 	
@@ -37,7 +37,7 @@ public class ItemMegaDigger extends ItemPoweredBase {
 		if (stack.getTagCompound() == null)
 			stack.setTagCompound(new NBTTagCompound());
 		if (player.isSneaking() && !world.isRemote)
-			player.openGui(BuildcraftAdditions.instance, 72, world, x, y, z);
+			player.openGui(BuildcraftAdditions.instance, Variables.GuiDigger, world, x, y, z);
 		return stack;
 	}
 	

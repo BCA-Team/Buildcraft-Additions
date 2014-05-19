@@ -6,24 +6,21 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import buildcraft.core.gui.BuildCraftContainer;
-import buildcraft.core.gui.slots.SlotOutput;
 import buildcraft.core.gui.slots.SlotValidated;
 import buildcraftAdditions.core.InventoryTool;
-import buildcraftAdditions.entities.TileFluidicCompressor;
 import buildcraftAdditions.items.BatteryBase;
-import buildcraftAdditions.items.ItemMegaDigger;
+import buildcraftAdditions.items.ItemMegaChainsaw;
 
-public class ContainerDigger extends Container{
+public class ContainerChainsaw extends Container{
 	
 	IInventory playerIInventory;
-	ItemMegaDigger digger;
+	ItemMegaChainsaw chainSaw;
 	InventoryTool diggerInventory;
 	ItemStack stack;
 	EntityPlayer player;
 
-	public ContainerDigger(InventoryPlayer inventory, ItemMegaDigger digger, IInventory toolInventory, ItemStack stack, EntityPlayer player) {
-		this.digger = digger;
+	public ContainerChainsaw(InventoryPlayer inventory, ItemMegaChainsaw chainSaw, IInventory toolInventory, ItemStack stack, EntityPlayer player) {
+		this.chainSaw = chainSaw;
 		this.playerIInventory = inventory;
 		this.stack = stack;
 		this.player = player;
@@ -49,7 +46,6 @@ public class ContainerDigger extends Container{
 	
 	@Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex){
-		
 		
         ItemStack stack = null;
 		Slot slot = (Slot) this.inventorySlots.get(slotIndex);
@@ -168,7 +164,7 @@ public class ContainerDigger extends Container{
 	
 	@Override
 	public void onContainerClosed(EntityPlayer player){
-		digger.readBateries(stack, player);
+		chainSaw.readBateries(stack, player);
 	}
 
 }

@@ -1,29 +1,26 @@
 package buildcraftAdditions.client.gui;
 
+import buildcraft.core.gui.slots.SlotValidated;
+import buildcraftAdditions.core.InventoryTool;
+import buildcraftAdditions.items.BatteryBase;
+import buildcraftAdditions.items.ItemMegaHoe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import buildcraft.core.gui.BuildCraftContainer;
-import buildcraft.core.gui.slots.SlotOutput;
-import buildcraft.core.gui.slots.SlotValidated;
-import buildcraftAdditions.core.InventoryTool;
-import buildcraftAdditions.entities.TileFluidicCompressor;
-import buildcraftAdditions.items.BatteryBase;
-import buildcraftAdditions.items.ItemMegaDigger;
 
-public class ContainerDigger extends Container{
+public class ContainerHoe extends Container {
 	
 	IInventory playerIInventory;
-	ItemMegaDigger digger;
-	InventoryTool diggerInventory;
+	ItemMegaHoe hoe;
+	InventoryTool hoeInventory;
 	ItemStack stack;
 	EntityPlayer player;
 
-	public ContainerDigger(InventoryPlayer inventory, ItemMegaDigger digger, IInventory toolInventory, ItemStack stack, EntityPlayer player) {
-		this.digger = digger;
+	public ContainerHoe(InventoryPlayer inventory, ItemMegaHoe hoe, IInventory toolInventory, ItemStack stack, EntityPlayer player) {
+		this.hoe = hoe;
 		this.playerIInventory = inventory;
 		this.stack = stack;
 		this.player = player;
@@ -49,7 +46,6 @@ public class ContainerDigger extends Container{
 	
 	@Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex){
-		
 		
         ItemStack stack = null;
 		Slot slot = (Slot) this.inventorySlots.get(slotIndex);
@@ -168,7 +164,7 @@ public class ContainerDigger extends Container{
 	
 	@Override
 	public void onContainerClosed(EntityPlayer player){
-		digger.readBateries(stack, player);
+		hoe.readBateries(stack, player);
 	}
 
 }
