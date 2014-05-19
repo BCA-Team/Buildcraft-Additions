@@ -1,7 +1,5 @@
 package buildcraftAdditions.client.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import buildcraftAdditions.core.Utils;
 import buildcraftAdditions.items.ItemMegaHoe;
 import net.minecraft.client.Minecraft;
@@ -11,6 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class GuiHoe extends GuiContainer {
 	
@@ -29,9 +28,9 @@ public class GuiHoe extends GuiContainer {
 	@Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         super.drawGuiContainerForegroundLayer(par1, par2);
-        String title = Utils.localize("item.drill.name");
+        String title = Utils.localize("item.megaHoe.name");
         fontRendererObj.drawString(Utils.localize(title), (xSize - fontRendererObj.getStringWidth(title)) / 2, 6, 0x404040);
-        fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize-110) + 2, 0x404040);
+        fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 110) + 2, 0x404040);
     }
 
 	@Override
@@ -42,15 +41,12 @@ public class GuiHoe extends GuiContainer {
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
-		int mX = mouseX - guiLeft;
-		int mY = mouseY - guiTop;
-
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 	}
 	
 	@Override
-	public void onGuiClosed(){
-		hoe.readBateries(stack, player);
-	}
+    public void onGuiClosed() {
+        hoe.readBateries(stack, player);
+    }
 
 }
