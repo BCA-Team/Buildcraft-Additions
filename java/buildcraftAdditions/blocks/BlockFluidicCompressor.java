@@ -1,7 +1,5 @@
 package buildcraftAdditions.blocks;
 
-import buildcraft.BuildCraftFactory;
-import buildcraft.core.CreativeTabBuildCraft;
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.core.BuildcraftAdditions;
 import buildcraftAdditions.core.Utils;

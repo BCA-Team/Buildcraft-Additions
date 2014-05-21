@@ -1,28 +1,13 @@
 package buildcraftAdditions.villager;
 
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
-import java.nio.Buffer;
 import java.util.List;
 import java.util.Random;
 
 import buildcraft.BuildCraftBuilders;
-import buildcraft.BuildCraftEnergy;
-import buildcraft.BuildCraftTransport;
 import buildcraft.api.blueprints.BlueprintDeployer;
-import buildcraft.core.blueprints.RealBlueprintDeployer;
-import buildcraft.transport.BlockGenericPipe;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;

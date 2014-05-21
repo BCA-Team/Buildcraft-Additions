@@ -2,7 +2,6 @@ package buildcraftAdditions.core;
 
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemPoweredBase;
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
@@ -26,9 +25,7 @@ public class InventoryTool extends InventoryBasic {
 	}
 	
 	private boolean hasInventory() {
-		if (tool.stackTagCompound == null)
-			return false;
-		return tool.stackTagCompound.getTag("Inventory") != null;
+        return tool.stackTagCompound!=null && tool.stackTagCompound.getTag("Inventory") != null;
 	}
 	
 	private void createInventory() {

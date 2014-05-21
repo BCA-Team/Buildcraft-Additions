@@ -3,9 +3,7 @@ package buildcraftAdditions.villager;
 import java.util.Random;
 
 import buildcraft.BuildCraftCore;
-import buildcraft.BuildCraftEnergy;
 import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipe;

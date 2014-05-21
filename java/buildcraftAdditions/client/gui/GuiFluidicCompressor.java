@@ -70,7 +70,7 @@ public class GuiFluidicCompressor extends GuiBuildCraft {
 
 		@Override
 		public String getTooltip() {
-			return String.format("%.1f", canner.getProgress()*6.25)+"%";
+			return String.format("%.1f", canner.getProgress()*100)+"%";
 		}
 	}
     

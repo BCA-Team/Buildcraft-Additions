@@ -7,7 +7,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 import buildcraft.BuildCraftCore;
 import buildcraft.core.CoreIconProvider;
-import buildcraft.core.gui.BuildCraftContainer;
 import buildcraft.core.gui.GuiBuildCraft;
 import buildcraftAdditions.core.Utils;
 import buildcraftAdditions.entities.TileChargingStation;

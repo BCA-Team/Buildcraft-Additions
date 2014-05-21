@@ -42,9 +42,6 @@ public class GuiDrill extends GuiContainer {
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
-		int mX = mouseX - guiLeft;
-		int mY = mouseY - guiTop;
-
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 	}
 	

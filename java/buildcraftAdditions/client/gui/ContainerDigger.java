@@ -6,11 +6,8 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import buildcraft.core.gui.BuildCraftContainer;
-import buildcraft.core.gui.slots.SlotOutput;
 import buildcraft.core.gui.slots.SlotValidated;
 import buildcraftAdditions.core.InventoryTool;
-import buildcraftAdditions.entities.TileFluidicCompressor;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemMegaDigger;
 
@@ -68,7 +65,7 @@ public class ContainerDigger extends Container{
 			}
 
 			if (itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			}
 			else {
 				slot.onSlotChanged();

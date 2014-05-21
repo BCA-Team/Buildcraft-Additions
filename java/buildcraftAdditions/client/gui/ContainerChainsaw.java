@@ -15,7 +15,6 @@ public class ContainerChainsaw extends Container{
 	
 	IInventory playerIInventory;
 	ItemMegaChainsaw chainSaw;
-	InventoryTool diggerInventory;
 	ItemStack stack;
 	EntityPlayer player;
 
@@ -64,7 +63,7 @@ public class ContainerChainsaw extends Container{
 			}
 
 			if (itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			}
 			else {
 				slot.onSlotChanged();

@@ -1,19 +1,13 @@
 package buildcraftAdditions.entities;
 
-import java.util.Stack;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 import buildcraft.api.mj.MjBattery;
-import buildcraft.core.IItemPipe;
 import buildcraft.core.TileBuildCraft;
 import buildcraft.core.inventory.SimpleInventory;
-import buildcraftAdditions.core.BuildcraftAdditions;
 import buildcraftAdditions.items.BatteryBase;
-import buildcraftAdditions.items.ItemPoweredBase;
 
 public class TileChargingStation extends TileBuildCraft implements IInventory {
 	

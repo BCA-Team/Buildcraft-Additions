@@ -5,10 +5,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import buildcraft.core.gui.BuildCraftContainer;
-import buildcraft.core.gui.slots.SlotOutput;
 import buildcraft.core.gui.slots.SlotValidated;
 import buildcraftAdditions.entities.TileChargingStation;
-import buildcraftAdditions.entities.TileFluidicCompressor;
 
 public class ContainerChargingStation extends BuildCraftContainer{
 	IInventory playerIInventory;

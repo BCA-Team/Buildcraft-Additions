@@ -2,24 +2,15 @@ package buildcraftAdditions.items;
 
 import java.util.List;
 
-
-
-
-import buildcraft.BuildCraftCore;
-import buildcraft.core.DefaultProps;
-import buildcraft.core.inventory.SimpleInventory;
 import buildcraftAdditions.core.InventoryTool;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
 public class ItemPoweredBase extends Item {
@@ -35,11 +26,6 @@ public class ItemPoweredBase extends Item {
 	}
 	
 	public void decreaseEnergy(ItemStack stack, double energy, EntityPlayer player){
-		double energyStored = getEnergy(stack);
-		energyStored -= energy;
-		if (energyStored < 0)
-			energyStored=0;
-		
 		if (energyB1 - energy < 0){
 			energy -= energyB1;
 			energyB1=0;

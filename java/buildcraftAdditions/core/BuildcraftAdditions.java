@@ -1,6 +1,5 @@
 package buildcraftAdditions.core;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,12 +16,10 @@ import buildcraftAdditions.blocks.BlockFluidicCompressor;
 import buildcraftAdditions.client.gui.GuiHandler;
 import buildcraftAdditions.entities.TileChargingStation;
 import buildcraftAdditions.entities.TileFluidicCompressor;
-import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemMegaChainsaw;
 import buildcraftAdditions.items.ItemMegaDrill;
 import buildcraftAdditions.items.ItemMegaHoe;
-import buildcraftAdditions.items.ItemMjMeter;
 import buildcraftAdditions.items.ItemMegaDigger;
 import buildcraftAdditions.items.ItemPowerCapsuleTier1;
 import buildcraftAdditions.items.ItemPowerCapsuleTier2;
@@ -144,10 +141,7 @@ public class BuildcraftAdditions {
     	CoreProxy.proxy.addCraftingRecipe(new ItemStack(fluidicCompressorBlock), "IFI", "PGP", "IMI", 'I', BuildCraftCore.ironGearItem, 'F', BuildCraftFactory.floodGateBlock, 'P', Blocks.piston, 'G', goldCanister, 'M', BuildCraftFactory.pumpBlock);
     	NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
     	}
-    
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-    }
+
     @Mod.EventHandler
 	public void initialize(FMLPreInitializationEvent evt) {
     	fluidicCompressorBlock = new BlockFluidicCompressor();

@@ -7,12 +7,8 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import buildcraft.core.gui.BuildCraftContainer;
-import buildcraft.core.gui.GuiBuildCraft;
-import buildcraft.core.gui.widgets.Widget;
 import buildcraftAdditions.core.Utils;
 import buildcraftAdditions.items.ItemMegaDigger;
 
@@ -44,9 +40,6 @@ public class GuiDigger extends GuiContainer{
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-
-		int mX = mouseX - guiLeft;
-		int mY = mouseY - guiTop;
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 	}
