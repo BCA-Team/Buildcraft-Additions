@@ -1,5 +1,7 @@
 package buildcraftAdditions.core;
 
+import buildcraft.*;
+import buildcraft.silicon.ItemRedstoneChipset;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -7,9 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-import buildcraft.BuildCraftCore;
-import buildcraft.BuildCraftFactory;
-import buildcraft.BuildCraftTransport;
 import buildcraft.core.proxy.CoreProxy;
 import buildcraftAdditions.blocks.BlockChargingStation;
 import buildcraftAdditions.blocks.BlockFluidicCompressor;
@@ -115,7 +114,18 @@ public class BuildcraftAdditions {
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(ironCanister, 4), "PIP", "IGI", "PIP", 'P', BuildCraftTransport.pipeWaterproof, 'I', Items.iron_ingot, 'G', Blocks.glass_pane);
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(goldCanister), "PGP", "GIG", "PGP", 'P', BuildCraftTransport.pipeWaterproof, 'G', Items.gold_ingot, 'I', ironCanister);
 		CoreProxy.proxy.addCraftingRecipe(new ItemStack(diamondCanister), "PDP", "DGD", "PDP", 'P', BuildCraftTransport.pipeWaterproof, 'D', Items.diamond, 'G', goldCanister);
-		
+        CoreProxy.proxy.addCraftingRecipe(new ItemStack(fluidicCompressorBlock), "IFI", "PGP", "IMI", 'I', BuildCraftCore.ironGearItem, 'F', BuildCraftFactory.floodGateBlock, 'P', Blocks.piston, 'G', goldCanister, 'M', BuildCraftFactory.pumpBlock);
+        CoreProxy.proxy.addCraftingRecipe(new ItemStack(poweredShovel), " D ", " C ", "GSG", 'D', Items.diamond, 'C', ItemRedstoneChipset.Chipset.DIAMOND.getStack(), 'G', BuildCraftCore.goldGearItem, 'S', Items.stick);
+        CoreProxy.proxy.addCraftingRecipe(new ItemStack(drill), "DDD", " C ", "GSG", 'D', Items.diamond, 'C', ItemRedstoneChipset.Chipset.DIAMOND.getStack(), 'G', BuildCraftCore.goldGearItem, 'S', Items.stick);
+        CoreProxy.proxy.addCraftingRecipe(new ItemStack(chainsaw), "DD ", "DC ", "GSG", 'D', Items.diamond, 'C', ItemRedstoneChipset.Chipset.DIAMOND.getStack(), 'G', BuildCraftCore.goldGearItem, 'S', Items.stick);
+        CoreProxy.proxy.addCraftingRecipe(new ItemStack(chainsaw), " DD", " CD", "GSG", 'D', Items.diamond, 'C', ItemRedstoneChipset.Chipset.DIAMOND.getStack(), 'G', BuildCraftCore.goldGearItem, 'S', Items.stick);
+        CoreProxy.proxy.addCraftingRecipe(new ItemStack(megaHoe), "DD ", " C ", "GSG", 'D', Items.diamond, 'C', ItemRedstoneChipset.Chipset.DIAMOND.getStack(), 'G', BuildCraftCore.goldGearItem, 'S', Items.stick);
+        CoreProxy.proxy.addCraftingRecipe(new ItemStack(megaHoe), " DD", " C ", "GSG", 'D', Items.diamond, 'C', ItemRedstoneChipset.Chipset.DIAMOND.getStack(), 'G', BuildCraftCore.goldGearItem, 'S', Items.stick);
+        CoreProxy.proxy.addCraftingRecipe(new ItemStack(chargingStationBlock), "I I", "WBW", "I I", 'I', Items.iron_ingot, 'W', BuildCraftTransport.pipePowerWood, 'B', Blocks.iron_block);
+        CoreProxy.proxy.addCraftingRecipe(new ItemStack(powerCapsuleTier1), "IGI","IRI", "IGI", 'I', Items.iron_ingot, 'G', Items.gold_ingot, 'R', Blocks.redstone_block);
+        CoreProxy.proxy.addCraftingRecipe(new ItemStack(powerCapsuleTier2), "GDG", "GPG", "GDG", 'G', Items.gold_ingot, 'D', Items.diamond, 'P', powerCapsuleTier1);
+        CoreProxy.proxy.addCraftingRecipe(new ItemStack(powerCapsuleTier3), "DED", "DPD", "DED", 'D', Items.diamond, 'E', Items.emerald, 'P', powerCapsuleTier2);
+
 		if (evt.getSide()==Side.CLIENT){
 			VillagerRegistry.instance().registerVillagerId(457);
 			VillagerRegistry.instance().registerVillagerSkin(457, texture);
@@ -128,9 +138,9 @@ public class BuildcraftAdditions {
 	        catch (Throwable e){
 	        }
 		}
-		
+
 	}
-    
+
     @EventHandler
     public void load(FMLInitializationEvent event) {
     	
@@ -138,7 +148,7 @@ public class BuildcraftAdditions {
     	CoreProxy.proxy.registerTileEntity(TileFluidicCompressor.class, "TileFluidicCompressor");
     	CoreProxy.proxy.registerTileEntity(TileChargingStation.class, "TileChargingStation");
     	
-    	CoreProxy.proxy.addCraftingRecipe(new ItemStack(fluidicCompressorBlock), "IFI", "PGP", "IMI", 'I', BuildCraftCore.ironGearItem, 'F', BuildCraftFactory.floodGateBlock, 'P', Blocks.piston, 'G', goldCanister, 'M', BuildCraftFactory.pumpBlock);
+
     	NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
     	}
 
