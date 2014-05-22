@@ -5,16 +5,27 @@ import buildcraftAdditions.core.BuildcraftAdditions;
 import buildcraftAdditions.core.Utils;
 import buildcraftAdditions.core.Variables;
 import buildcraftAdditions.entities.TileChargingStation;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockChargingStation extends BlockContainer {
+
+    public IIcon textureFront;
+    public IIcon textureBack;
+    public IIcon textureLeft;
+    public IIcon textureRight;
+    public IIcon textureTop;
+    public IIcon textureBottom;
 
 	public BlockChargingStation() {
 		super(Material.iron);
@@ -52,6 +63,36 @@ public class BlockChargingStation extends BlockContainer {
 
 		ForgeDirection orientation = Utils.get2dOrientation(entityliving);
 		world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(), 1);
+        return;
 	}
+
+    @Override
+    public IIcon getIcon(int i, int j) {
+        // If no metadata is set, then this is an icon.
+        if (j == 0 && i == 3)
+            return textureFront;
+
+        if (i == j && i > 1)
+            return textureFront;
+
+        switch (i) {
+            case 0:
+                return textureBottom;
+            case 1:
+                return textureBottom;
+            default:
+                return textureBack;
+        }
+    }
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
+        textureFront = par1IconRegister.registerIcon("bcadditions:charger_front");
+        textureTop = par1IconRegister.registerIcon("bcadditions:charger_top");
+        textureBack = par1IconRegister.registerIcon("bcadditions:charger_back");
+        textureBottom = par1IconRegister.registerIcon("bcadditions:charger_bottom");
+        textureLeft = par1IconRegister.registerIcon("bcadditions:charger_leftSide");
+        textureRight = par1IconRegister.registerIcon("bcadditions:charger_rightSide");
+    }
 
 }
