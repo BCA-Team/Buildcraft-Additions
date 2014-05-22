@@ -24,12 +24,17 @@ public class ItemMegaHoe extends ItemPoweredBase{
 	
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int geenIdee, float hitX, float hitY, float hitZ){
-		if ((world.getBlock(x, y, z) == Blocks.dirt || world.getBlock(x, y, z) == Blocks.grass) && getEnergy(stack) >=5){
-			world.setBlock(x, y, z, Blocks.farmland);
-			decreaseEnergy(stack, 5, player);
-			return true;
-		}
-        return false;
+        boolean tilted = false;
+		for (int i = x-1; i <= x+1; i++){
+            for (int j = z-1; j <= z+1; j++){
+                if ((world.getBlock(i, y, j) == Blocks.dirt || world.getBlock(i, y, j) == Blocks.grass) && getEnergy(stack) >=5) {
+                    world.setBlock(i, y, j, Blocks.farmland);
+                    decreaseEnergy(stack, 5, player);
+                    tilted = true;
+                }
+            }
+        }
+        return tilted;
     }
 	
 	@Override

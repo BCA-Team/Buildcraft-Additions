@@ -26,7 +26,7 @@ public class ItemPoweredBase extends Item {
 	}
 	
 	public void decreaseEnergy(ItemStack stack, double energy, EntityPlayer player){
-		if (energyB1 - energy < 0){
+		if (energyB1 - energy <= 0){
 			energy -= energyB1;
 			energyB1=0;
 		}
@@ -34,7 +34,7 @@ public class ItemPoweredBase extends Item {
 			energyB1 -= energy;
 			energy = 0;
 		}
-		if (energyB2 - energy < 0){
+		if (energyB2 - energy <= 0){
 			energy -= energyB1;
 			energyB2=0;
 		}
@@ -42,7 +42,7 @@ public class ItemPoweredBase extends Item {
 			energyB2 -= energy;
 			energy = 0;
 		}
-		if (energyB3 - energy < 0){
+		if (energyB3 - energy <= 0){
 			energy -= energyB3;
 			energyB3=0;
 		}
