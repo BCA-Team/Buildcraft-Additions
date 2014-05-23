@@ -5,10 +5,13 @@ item.ironCanister.name=Железная канистра
 item.goldCanister.name=Золотая канистра
 item.diamondCanister.name=Алмазная канистра
 item.mjMeter.name=Измеритель мДж
-item.poweredShovel.name=Мега-копалка
-item.drill.name=Мега-дрель
-item.chainsaw.name=Мега-цепная пила
-item.megaHoe.name=Мега-мотыга
+item.poweredShovel.name=Кинетическая копалка
+item.drill.name=Кинетическая дрель
+item.chainsaw.name=Кинетическая цепная пила
+item.megaHoe.name=Кинетическая мотыга
+item.PowerCapsuleTier1.name=Кинетическая капсула 1-ого уровня
+item.PowerCapsuleTier2.name=Кинетическая капсула 2-ого уровня
+item.PowerCapsuleTier3.name=Кинетическая капсула 3-его уровня
 
 gui.progress=Прогресс
 gui.fluid=Жидкость
