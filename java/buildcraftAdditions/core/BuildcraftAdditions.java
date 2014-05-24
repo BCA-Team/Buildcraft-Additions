@@ -38,7 +38,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid="bcadditions", name="Buildcraft Additions", version = "1.3.0",dependencies = "required-after:BuildCraft|Energy@{6.0.13}")
+@Mod(modid="bcadditions", name="Buildcraft Additions", version = "1.3.1",dependencies = "required-after:BuildCraft|Energy@{6.0.13}")
 public class BuildcraftAdditions {
 	
 	public static ItemCanister ironCanister;
