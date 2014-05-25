@@ -3,6 +3,7 @@ package buildcraftAdditions.villager;
 import java.util.Random;
 
 import buildcraft.BuildCraftCore;
+import buildcraftAdditions.core.BuildcraftAdditions;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -14,11 +15,14 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
 
     public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
     {
-    	//this is where the custom villager trades are specified
-        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1), null, new ItemStack(BuildCraftCore.stoneGearItem, 1)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2), null, new ItemStack(BuildCraftCore.ironGearItem, 1)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 4), null, new ItemStack(BuildCraftCore.goldGearItem, 1)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 8), null, new ItemStack(BuildCraftCore.diamondGearItem, 1)));
+    	//canisters
+        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1), null, new ItemStack(BuildcraftAdditions.ironCanister, 2)));
+        recipeList.add(new MerchantRecipe(new ItemStack(BuildcraftAdditions.ironCanister, 1), new ItemStack(Items.emerald, 1), new ItemStack(BuildcraftAdditions.goldCanister, 1)));
+        recipeList.add(new MerchantRecipe(new ItemStack(BuildcraftAdditions.goldCanister, 1), new ItemStack(Items.emerald, 4), new ItemStack(BuildcraftAdditions.diamondCanister, 1)));
+
+        //kinetic capsules
+
+
     }
 
 }
