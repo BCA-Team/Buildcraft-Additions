@@ -2,7 +2,6 @@ package buildcraftAdditions.villager;
 
 import java.util.Random;
 
-import buildcraft.BuildCraftCore;
 import buildcraftAdditions.core.BuildcraftAdditions;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
@@ -21,8 +20,9 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
         recipeList.add(new MerchantRecipe(new ItemStack(BuildcraftAdditions.goldCanister, 1), new ItemStack(Items.emerald, 4), new ItemStack(BuildcraftAdditions.diamondCanister, 1)));
 
         //kinetic capsules
-
-
+        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2), null, new ItemStack(BuildcraftAdditions.powerCapsuleTier1, 1)));
+        recipeList.add(new MerchantRecipe(new ItemStack(BuildcraftAdditions.powerCapsuleTier1, 1), new ItemStack(Items.emerald, 3), new ItemStack(BuildcraftAdditions.powerCapsuleTier2, 1)));
+        recipeList.add(new MerchantRecipe(new ItemStack(BuildcraftAdditions.powerCapsuleTier2, 1), new ItemStack(Items.emerald, 10), new ItemStack(BuildcraftAdditions.powerCapsuleTier3, 1)));
     }
 
 }

@@ -1,6 +1,7 @@
 package buildcraftAdditions.core;
 
 import buildcraft.*;
+import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraft.silicon.ItemRedstoneChipset;
 import buildcraftAdditions.items.*;
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,13 +26,12 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid="bcadditions", name="Buildcraft Additions", version = "1.3.1",dependencies = "required-after:BuildCraft|Energy@{6.0.13}")
+@Mod(modid="bcadditions", name="Buildcraft Additions", version = "1.3.2",dependencies = "required-after:BuildCraft|Energy@{6.0.13}")
 public class BuildcraftAdditions {
 
     public static ItemCanister ironCanister;
@@ -103,6 +103,8 @@ public class BuildcraftAdditions {
 
         ironStick = new ItemIronStick();
         CoreProxy.proxy.registerItem(ironStick);
+
+        BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
     }
 
     @Mod.EventHandler
