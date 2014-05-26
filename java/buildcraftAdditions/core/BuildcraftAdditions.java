@@ -3,6 +3,7 @@ package buildcraftAdditions.core;
 import buildcraft.*;
 import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraft.silicon.ItemRedstoneChipset;
+import buildcraftAdditions.blocks.BlockEngine;
 import buildcraftAdditions.items.*;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -39,6 +40,7 @@ public class BuildcraftAdditions {
     public static ItemCanister diamondCanister;
     public static BlockFluidicCompressor fluidicCompressorBlock;
     public static BlockChargingStation chargingStationBlock;
+    public static BlockEngine engineBlock;
     public static Item mjMeter;
     public static Item poweredShovel;
     public static Item drill;
@@ -158,6 +160,9 @@ public class BuildcraftAdditions {
 
         chargingStationBlock = new BlockChargingStation();
         CoreProxy.proxy.registerBlock(chargingStationBlock.setBlockName("blockChargingStation").setCreativeTab(bcadditions));
+
+        //engineBlock = new BlockEngine();
+        //CoreProxy.proxy.registerBlock(engineBlock.setBlockName("blockEngine").setCreativeTab(bcadditions));
     }
 
 }
