@@ -84,7 +84,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 							amount = Utils.getFluidStackFromItemStack(itemstack).amount;
 						}
 						tank.fill(item.drain(itemstack, amount, true), true);
-						if (getProgress() == 16&& _inventory.getStackInSlot(1) == null) {
+						if (getProgress() == 16 && _inventory.getStackInSlot(1) == null) {
 							itemstack.getTagCompound().removeTag("Fluid");
 							_inventory.setInventorySlotContents(1, itemstack);
 							_inventory.setInventorySlotContents(0, null);

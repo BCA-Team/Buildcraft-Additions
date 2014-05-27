@@ -56,7 +56,7 @@ public class GuiFluidicCompressor extends GuiBuildCraft {
 
 			fontRendererObj.drawStringWithShadow(Utils.localize("gui.progress"), x + 22, y + 8, headerColour);
 			fontRendererObj.drawStringWithShadow(Utils.localize("gui.progress") + ":", x + 22, y + 20, subheaderColour);
-			fontRendererObj.drawString(canner.getProgress() * 100 + "%", x + 22, y + 32, textColour);
+			fontRendererObj.drawString(canner.getProgress() * 100 /16 + "%", x + 22, y + 32, textColour);
 			fontRendererObj.drawStringWithShadow(Utils.localize("gui.fluid") + ":", x + 22, y + 44, subheaderColour);
 			if (canner.tank.getFluid() != null) {
 				fontRendererObj.drawString(canner.tank.getFluid().getFluid().getName(), x + 22, y + 56, textColour);
@@ -70,7 +70,7 @@ public class GuiFluidicCompressor extends GuiBuildCraft {
 
 		@Override
 		public String getTooltip() {
-			return Integer.toString(canner.getProgress()*100)+"%";
+			return Integer.toString(canner.getProgress()*100 / 16)+"%";
 		}
 	}
     
