@@ -1,7 +1,14 @@
 package buildcraftAdditions.client.gui;
 
+/**
+ * Copyright (c) 2014, AEnterprise
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
+ * License 1.0, or MMPL. Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ */
+
 import buildcraft.core.gui.slots.SlotValidated;
-import buildcraftAdditions.core.InventoryTool;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemMegaDrill;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +22,6 @@ public class ContainerDrill extends Container{
 	
 	IInventory playerIInventory;
 	ItemMegaDrill drill;
-	InventoryTool diggerInventory;
 	ItemStack stack;
 	EntityPlayer player;
 

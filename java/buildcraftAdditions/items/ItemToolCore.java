@@ -1,4 +1,4 @@
-package buildcraftAdditions.proxy;
+package buildcraftAdditions.items;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -7,10 +7,5 @@ package buildcraftAdditions.proxy;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-
-public class CommonProxy {
-	
-	public void registerRenderers() {
-	}
-
+public class ItemToolCore {
 }

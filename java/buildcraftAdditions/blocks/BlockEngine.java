@@ -1,9 +1,16 @@
 package buildcraftAdditions.blocks;
 
+/**
+ * Copyright (c) 2014, AEnterprise
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
+ * License 1.0, or MMPL. Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ */
+
 import buildcraft.core.IItemPipe;
 import buildcraft.energy.TileEngine;
 import buildcraftAdditions.entities.TileAmplifiedEngine;
-import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
