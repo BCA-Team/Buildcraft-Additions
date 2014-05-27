@@ -10,7 +10,6 @@ package buildcraftAdditions.core;
 
 import buildcraft.*;
 import buildcraft.api.recipes.BuildcraftRecipes;
-import buildcraft.silicon.ItemRedstoneChipset;
 import buildcraftAdditions.blocks.BlockEngine;
 import buildcraftAdditions.items.*;
 import net.minecraft.creativetab.CreativeTabs;
@@ -58,6 +57,7 @@ public class BuildcraftAdditions {
     public static Item powerCapsuleTier2;
     public static Item powerCapsuleTier3;
     public static Item ironStick;
+    public static Item toolCore;
     public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 
     @Instance(value="bcadditions")
@@ -114,7 +114,15 @@ public class BuildcraftAdditions {
         ironStick = new ItemIronStick();
         CoreProxy.proxy.registerItem(ironStick);
 
+        toolCore = new ItemToolCore();
+        CoreProxy.proxy.registerItem(toolCore);
+
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
+        BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(poweredShovel), Items.diamond, ironStick, toolCore);
+        BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(drill), new ItemStack (Items.diamond, 3), ironStick, toolCore);
+        BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(chainsaw), new ItemStack(Items.diamond, 3), ironStick, toolCore);
+        BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(megaHoe), new ItemStack(Items.diamond, 2), ironStick, toolCore);
+        BuildcraftRecipes.integrationTable.addRecipe(new ToolCoreRecepie());
     }
 
     @Mod.EventHandler
@@ -124,12 +132,6 @@ public class BuildcraftAdditions {
         CoreProxy.proxy.addCraftingRecipe(new ItemStack(goldCanister), "PGP", "GIG", "PGP", 'P', BuildCraftTransport.pipeWaterproof, 'G', Items.gold_ingot, 'I', ironCanister);
         CoreProxy.proxy.addCraftingRecipe(new ItemStack(diamondCanister), "PDP", "DGD", "PDP", 'P', BuildCraftTransport.pipeWaterproof, 'D', Items.diamond, 'G', goldCanister);
         CoreProxy.proxy.addCraftingRecipe(new ItemStack(fluidicCompressorBlock), "IFI", "PGP", "IMI", 'I', BuildCraftCore.ironGearItem, 'F', BuildCraftFactory.floodGateBlock, 'P', Blocks.piston, 'G', goldCanister, 'M', BuildCraftFactory.pumpBlock);
-        CoreProxy.proxy.addCraftingRecipe(new ItemStack(poweredShovel), " D ", " C ", "GSG", 'D', Items.diamond, 'C', ItemRedstoneChipset.Chipset.DIAMOND.getStack(), 'G', BuildCraftCore.goldGearItem, 'S', ironStick);
-        CoreProxy.proxy.addCraftingRecipe(new ItemStack(drill), "DDD", " C ", "GSG", 'D', Items.diamond, 'C', ItemRedstoneChipset.Chipset.DIAMOND.getStack(), 'G', BuildCraftCore.goldGearItem, 'S', ironStick);
-        CoreProxy.proxy.addCraftingRecipe(new ItemStack(chainsaw), "DD ", "DC ", "GSG", 'D', Items.diamond, 'C', ItemRedstoneChipset.Chipset.DIAMOND.getStack(), 'G', BuildCraftCore.goldGearItem, 'S', ironStick);
-        CoreProxy.proxy.addCraftingRecipe(new ItemStack(chainsaw), " DD", " CD", "GSG", 'D', Items.diamond, 'C', ItemRedstoneChipset.Chipset.DIAMOND.getStack(), 'G', BuildCraftCore.goldGearItem, 'S', ironStick);
-        CoreProxy.proxy.addCraftingRecipe(new ItemStack(megaHoe), "DD ", " C ", "GSG", 'D', Items.diamond, 'C', ItemRedstoneChipset.Chipset.DIAMOND.getStack(), 'G', BuildCraftCore.goldGearItem, 'S', ironStick);
-        CoreProxy.proxy.addCraftingRecipe(new ItemStack(megaHoe), " DD", " C ", "GSG", 'D', Items.diamond, 'C', ItemRedstoneChipset.Chipset.DIAMOND.getStack(), 'G', BuildCraftCore.goldGearItem, 'S', ironStick);
         CoreProxy.proxy.addCraftingRecipe(new ItemStack(chargingStationBlock), "I I", "WBW", "I I", 'I', Items.iron_ingot, 'W', BuildCraftTransport.pipePowerWood, 'B', Blocks.iron_block);
         CoreProxy.proxy.addCraftingRecipe(new ItemStack(powerCapsuleTier1), "IGI","IRI", "IGI", 'I', Items.iron_ingot, 'G', Items.gold_ingot, 'R', Blocks.redstone_block);
         CoreProxy.proxy.addCraftingRecipe(new ItemStack(powerCapsuleTier2), "GDG", "GPG", "GDG", 'G', Items.gold_ingot, 'D', Items.diamond, 'P', powerCapsuleTier1);
