@@ -57,56 +57,48 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 
     @Override
     public void updateEntity() {
-
         ItemStack itemstack = _inventory.getStackInSlot(0);
-        if (itemstack == null)
-            return;
-
-        ItemFluidContainer item = null;
-        Item itemInSlot = itemstack.getItem();
-        if (itemInSlot instanceof ItemCanister) {
-            item = (ItemCanister) itemstack.getItem();
-        }
-        if (item == null)
-            return;
-
-        int amount = 100;
-        if (fill) {
-            if (tank.isEmpty())
-                return;
-
-            if (tank.getFluid().amount < 100)
-                amount = tank.getFluid().amount;
-            if (energyStored < amount)
-                amount = (int) energyStored;
-            tank.drain(item.fill(itemstack, new FluidStack(tank.getFluid(), amount), true), true);
-            energyStored = energyStored - amount;
-
-            if (getProgress() == 16 && _inventory.getStackInSlot(1) == null) {
-                _inventory.setInventorySlotContents(1, itemstack);
-                _inventory.setInventorySlotContents(0, null);
+        if (itemstack != null) {
+            ItemFluidContainer item = null;
+            Item itemInSlot = itemstack.getItem();
+            if (itemInSlot instanceof ItemCanister) {
+                item = (ItemCanister) itemstack.getItem();
             }
-        } else {
-            if (tank.isFull())
-                return;
-
-            FluidStack fluid = Utils.getFluidStackFromItemStack(itemstack);
-            if (fluid == null)
-                return;
-
-            if (!tank.isEmpty()) {
-                if ((tank.getCapacity() - tank.getFluid().amount) < 1000) {
-                    amount = tank.getCapacity() - tank.getFluid().amount;
+            if (item != null) {
+                int amount = 100;
+                if (fill && !tank.isEmpty()) {
+                    if (tank.getFluid().amount < 100)
+                        amount = tank.getFluid().amount;
+                    if (energyStored >= amount) {
+                        tank.drain(item.fill(itemstack, new FluidStack(tank.getFluid(), amount), true), true);
+                        energyStored = energyStored - amount;
+                        FluidStack fluid = Utils.getFluidStackFromItemStack(itemstack);
+                        if (fluid != null) {
+                            if (getProgress() == 16 && _inventory.getStackInSlot(1) == null) {
+                                _inventory.setInventorySlotContents(1, itemstack);
+                                _inventory.setInventorySlotContents(0, null);
+                            }
+                        }
+                    }
+                } else {
+                    amount = 50;
+                    if (!fill && !tank.isFull() && Utils.getFluidStackFromItemStack(itemstack) != null) {
+                        if (!tank.isEmpty()) {
+                            if ((tank.getCapacity() - tank.getFluid().amount) < 1000) {
+                                amount = tank.getCapacity() - tank.getFluid().amount;
+                            }
+                        }
+                        if (amount > Utils.getFluidStackFromItemStack(itemstack).amount) {
+                            amount = Utils.getFluidStackFromItemStack(itemstack).amount;
+                        }
+                        tank.fill(item.drain(itemstack, amount, true), true);
+                        if (getProgress() == 16 && _inventory.getStackInSlot(1) == null) {
+                            itemstack.getTagCompound().removeTag("Fluid");
+                            _inventory.setInventorySlotContents(1, itemstack);
+                            _inventory.setInventorySlotContents(0, null);
+                        }
+                    }
                 }
-            }
-            if (amount > fluid.amount) {
-                amount = fluid.amount;
-            }
-            tank.fill(item.drain(itemstack, amount, true), true);
-            if (getProgress() == 16 && _inventory.getStackInSlot(1) == null) {
-                itemstack.getTagCompound().removeTag("Fluid");
-                _inventory.setInventorySlotContents(1, itemstack);
-                _inventory.setInventorySlotContents(0, null);
             }
         }
     }
@@ -179,10 +171,12 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 
     @Override
     public void openInventory() {
+        _inventory.openInventory();
     }
 
     @Override
     public void closeInventory() {
+        _inventory.openInventory();
     }
 
     @Override
@@ -282,10 +276,12 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
             return 0;
         FluidStack fluidstack = Utils.getFluidStackFromItemStack(itemstack);
         ItemCanister canister = (ItemCanister) itemstack.getItem();
-        if (fluidstack == null && !fill) {
-            return 16;
-        } else if (fill){
-            return 0;
+        if (fluidstack == null) {
+            if (fill) {
+                return 0;
+            } else {
+                return 0;
+            }
         }
         int capacity = canister.getCapacity(itemstack);
         if (fill)

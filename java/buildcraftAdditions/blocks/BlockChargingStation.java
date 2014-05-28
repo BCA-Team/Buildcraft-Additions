@@ -13,12 +13,15 @@ import buildcraftAdditions.core.BuildcraftAdditions;
 import buildcraftAdditions.core.Utils;
 import buildcraftAdditions.core.Variables;
 import buildcraftAdditions.entities.TileChargingStation;
+import buildcraftAdditions.entities.TileFluidicCompressor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -102,5 +105,23 @@ public class BlockChargingStation extends BlockContainer {
         textureLeft = par1IconRegister.registerIcon("bcadditions:charger_leftSide");
         textureRight = par1IconRegister.registerIcon("bcadditions:charger_rightSide");
     }
+
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta){
+        TileChargingStation station = (TileChargingStation) world.getTileEntity(x, y, z);
+        station.openInventory();
+            float f1 = 0.7F;
+            double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+            double d1 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+            double d2 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+            ItemStack stack = station.getStackInSlot(0);
+            if (stack != null) {
+                station.setInventorySlotContents(0, null);
+                EntityItem itemToDrop = new EntityItem(world, x + d, y + d1, z + d2, stack);
+                itemToDrop.delayBeforeCanPickup = 10;
+
+                world.spawnEntityInWorld(itemToDrop);
+            }
+        }
 
 }
