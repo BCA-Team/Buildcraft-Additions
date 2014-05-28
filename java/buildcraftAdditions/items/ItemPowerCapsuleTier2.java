@@ -29,8 +29,13 @@ public class ItemPowerCapsuleTier2 extends BatteryBase {
 	public int getCapacity(){
 		return 2000;
 	}
-	
-	@Override
+
+    @Override
+    public String getType() {
+        return "(Tier 2): ";
+    }
+
+    @Override
 	public int getDisplayDamage(ItemStack stack){
 		return (int) (getCapacity() - getEnergy(stack));
 	}

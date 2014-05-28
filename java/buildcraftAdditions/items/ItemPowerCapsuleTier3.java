@@ -29,8 +29,13 @@ public class ItemPowerCapsuleTier3 extends BatteryBase {
 	public int getCapacity(){
 		return 4000;
 	}
-	
-	@Override
+
+    @Override
+    public String getType() {
+        return "(Tier 3): ";
+    }
+
+    @Override
 	public int getDisplayDamage(ItemStack stack){
 		return (int) (getCapacity() - getEnergy(stack));
 	}

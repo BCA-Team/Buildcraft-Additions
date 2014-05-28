@@ -18,7 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class BatteryBase extends Item{
+public abstract class BatteryBase extends Item{
 	
 	public BatteryBase(){
 		this.maxStackSize = 1;
@@ -56,9 +56,9 @@ public class BatteryBase extends Item{
 		stack.stackTagCompound.setDouble("energy", energy);
 	}
 	
-	public int getCapacity(){
-		return 0;
-	}
+	public abstract int getCapacity();
+
+    public abstract String getType();
 	
 	@Override
 	public int getDisplayDamage(ItemStack stack){

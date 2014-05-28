@@ -148,39 +148,24 @@ public class ItemPoweredBase extends Item {
 			battery = (BatteryBase) batteryStack.getItem();
 			storageB1 = battery.getCapacity();
 			energyB1 = battery.getEnergy(batteryStack);
+            typeB1 = battery.getType();
 			}
 		batteryStack = inventory.getStackInSlot(1);
 		if (batteryStack != null){
 			battery = (BatteryBase) batteryStack.getItem();
 			storageB2 += battery.getCapacity();
 			energyB2 = battery.getEnergy(batteryStack);
+            typeB2 = battery.getType();
 			}
 		batteryStack = inventory.getStackInSlot(2);
 		if (batteryStack != null){
 			battery = (BatteryBase) batteryStack.getItem();
 			storageB3 = battery.getCapacity();
 			energyB3 = battery.getEnergy(batteryStack);
+            typeB3 = battery.getType();
 			}
 		this.setMaxDamage(storageB1 + storageB2 + storageB3);
 		this.setDamage(stack, (int) (storageB1 + storageB2 + storageB3 - energyB1 - energyB2 - energyB3));
-		if (storageB1 == 1000)
-			typeB1 ="(Tier 1): ";
-		if (storageB1 == 2000)
-			typeB1 = "(Tier 2): ";
-		if (storageB1 == 4000)
-			typeB1 = "(Tier 3): ";
-		if (storageB2 == 1000)
-			typeB2 ="(Tier 1): ";
-		if (storageB2 == 2000)
-			typeB2 = "(Tier 2): ";
-		if (storageB2 == 4000)
-			typeB2 = "(Tier 3): ";
-		if (storageB3 == 1000)
-			typeB1 ="(Tier 1): ";
-		if (storageB3 == 2000)
-			typeB1 = "(Tier 2): ";
-		if (storageB3 == 4000)
-			typeB3 = "(Tier 3): ";
 	}
 	
 	public void writeBateries(ItemStack stack, EntityPlayer player){

@@ -42,278 +42,280 @@ import buildcraftAdditions.items.ItemCanister;
 
 public class TileFluidicCompressor extends TileBuildCraft implements ISidedInventory, IFluidHandler, IGuiReturnHandler {
 
-	private final SimpleInventory _inventory = new SimpleInventory(3, "Canner", 1);
-	public final int maxLiquid = FluidContainerRegistry.BUCKET_VOLUME * 10;
-	@MjBattery(maxCapacity = 5000.0, maxReceivedPerCycle = 100.0)
-	public double energyStored = 0;
-	public Tank tank = new Tank("tank", maxLiquid, this);
-	private TankManager tankManager = new TankManager();
-	public @NetworkData
-	boolean fill;
+    private final SimpleInventory _inventory = new SimpleInventory(3, "Canner", 1);
+    public final int maxLiquid = FluidContainerRegistry.BUCKET_VOLUME * 10;
+    @MjBattery(maxCapacity = 800.0, maxReceivedPerCycle = 100.0)
+    public double energyStored = 0;
+    public Tank tank = new Tank("tank", maxLiquid, this);
+    private TankManager tankManager = new TankManager();
+    public @NetworkData
+    boolean fill;
 
-	public TileFluidicCompressor() {
-		tankManager.add(tank);
-	}
+    public TileFluidicCompressor() {
+        tankManager.add(tank);
+    }
 
-	@Override
-	public void updateEntity() {
-		ItemStack itemstack = _inventory.getStackInSlot(0);
-		if (itemstack != null) {
-			ItemFluidContainer item = null;
-			Item itemInSlot = itemstack.getItem();
-			if (itemInSlot instanceof ItemCanister) {
-				item = (ItemCanister) itemstack.getItem();
-			}
-			if (item != null) {
-				int amount = 100;
-				if (fill && !tank.isEmpty()) {
-					if (tank.getFluid().amount < 100)
-						amount = tank.getFluid().amount;
-					if (energyStored >= amount) {
-						tank.drain(item.fill(itemstack, new FluidStack(tank.getFluid(), amount), true), true);
-						energyStored = energyStored - amount;
-						FluidStack fluid = Utils.getFluidStackFromItemStack(itemstack);
-						if (fluid != null) {
-							if (getProgress() == 16 && _inventory.getStackInSlot(1) == null) {
-								_inventory.setInventorySlotContents(1, itemstack);
-								_inventory.setInventorySlotContents(0, null);
-							}
-						}
-					}
-				} else {
-					amount = 50;
-					if (!fill && !tank.isFull() && Utils.getFluidStackFromItemStack(itemstack) != null) {
-						if (!tank.isEmpty()) {
-							if ((tank.getCapacity() - tank.getFluid().amount) < 1000) {
-								amount = tank.getCapacity() - tank.getFluid().amount;
-							}
-						}
-						if (amount > Utils.getFluidStackFromItemStack(itemstack).amount) {
-							amount = Utils.getFluidStackFromItemStack(itemstack).amount;
-						}
-						tank.fill(item.drain(itemstack, amount, true), true);
-						if (getProgress() == 16 && _inventory.getStackInSlot(1) == null) {
-							itemstack.getTagCompound().removeTag("Fluid");
-							_inventory.setInventorySlotContents(1, itemstack);
-							_inventory.setInventorySlotContents(0, null);
-						}
-					}
-				}
-			}
-		}
-	}
+    @Override
+    public void updateEntity() {
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbtTagCompound) {
-		super.readFromNBT(nbtTagCompound);
-		NBTTagCompound p = (NBTTagCompound) nbtTagCompound.getTag("inventory");
-		_inventory.readFromNBT(p);
-		tankManager.readFromNBT(nbtTagCompound);
-		fill = nbtTagCompound.getBoolean("fill");
-	}
+        ItemStack itemstack = _inventory.getStackInSlot(0);
+        if (itemstack == null)
+            return;
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbtTagCompound) {
-		super.writeToNBT(nbtTagCompound);
-		NBTTagCompound inventoryTag = new NBTTagCompound();
-		_inventory.writeToNBT(inventoryTag);
-		nbtTagCompound.setTag("inventory", inventoryTag);
-		tankManager.writeToNBT(nbtTagCompound);
-		nbtTagCompound.setBoolean("fill", fill);
-	}
+        ItemFluidContainer item = null;
+        Item itemInSlot = itemstack.getItem();
+        if (itemInSlot instanceof ItemCanister) {
+            item = (ItemCanister) itemstack.getItem();
+        }
+        if (item == null)
+            return;
 
-	@Override
-	public int getSizeInventory() {
-		return _inventory.getSizeInventory();
-	}
+        int amount = 100;
+        if (fill) {
+            if (tank.isEmpty())
+                return;
 
-	@Override
-	public ItemStack getStackInSlot(int slotId) {
-		return _inventory.getStackInSlot(slotId);
-	}
+            if (tank.getFluid().amount < 100)
+                amount = tank.getFluid().amount;
+            if (energyStored < amount)
+                amount = (int) energyStored;
+            tank.drain(item.fill(itemstack, new FluidStack(tank.getFluid(), amount), true), true);
+            energyStored = energyStored - amount;
 
-	@Override
-	public ItemStack decrStackSize(int slotId, int count) {
-		return _inventory.decrStackSize(slotId, count);
-	}
+            if (getProgress() == 16 && _inventory.getStackInSlot(1) == null) {
+                _inventory.setInventorySlotContents(1, itemstack);
+                _inventory.setInventorySlotContents(0, null);
+            }
+        } else {
+            if (tank.isFull())
+                return;
 
-	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		return _inventory.getStackInSlotOnClosing(var1);
-	}
+            FluidStack fluid = Utils.getFluidStackFromItemStack(itemstack);
+            if (fluid == null)
+                return;
 
-	@Override
-	public void setInventorySlotContents(int slotId, ItemStack itemstack) {
-		_inventory.setInventorySlotContents(slotId, itemstack);
-	}
+            if (!tank.isEmpty()) {
+                if ((tank.getCapacity() - tank.getFluid().amount) < 1000) {
+                    amount = tank.getCapacity() - tank.getFluid().amount;
+                }
+            }
+            if (amount > fluid.amount) {
+                amount = fluid.amount;
+            }
+            tank.fill(item.drain(itemstack, amount, true), true);
+            if (getProgress() == 16 && _inventory.getStackInSlot(1) == null) {
+                itemstack.getTagCompound().removeTag("Fluid");
+                _inventory.setInventorySlotContents(1, itemstack);
+                _inventory.setInventorySlotContents(0, null);
+            }
+        }
+    }
 
-	@Override
-	public String getInventoryName() {
-		return _inventory.getInventoryName();
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound nbtTagCompound) {
+        super.readFromNBT(nbtTagCompound);
+        NBTTagCompound p = (NBTTagCompound) nbtTagCompound.getTag("inventory");
+        _inventory.readFromNBT(p);
+        tankManager.readFromNBT(nbtTagCompound);
+        fill = nbtTagCompound.getBoolean("fill");
+    }
 
-	@Override
-	public boolean hasCustomInventoryName() {
-		return _inventory.hasCustomInventoryName();
-	}
+    @Override
+    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+        super.writeToNBT(nbtTagCompound);
+        NBTTagCompound inventoryTag = new NBTTagCompound();
+        _inventory.writeToNBT(inventoryTag);
+        nbtTagCompound.setTag("inventory", inventoryTag);
+        tankManager.writeToNBT(nbtTagCompound);
+        nbtTagCompound.setBoolean("fill", fill);
+    }
 
-	@Override
-	public int getInventoryStackLimit() {
-		return _inventory.getInventoryStackLimit();
-	}
+    @Override
+    public int getSizeInventory() {
+        return _inventory.getSizeInventory();
+    }
 
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
-		return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this
-				&& entityPlayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D,
-						zCoord + 0.5D) <= 64.0D;
-	}
+    @Override
+    public ItemStack getStackInSlot(int slotId) {
+        return _inventory.getStackInSlot(slotId);
+    }
 
-	@Override
-	public void openInventory() {
-	}
+    @Override
+    public ItemStack decrStackSize(int slotId, int count) {
+        return _inventory.decrStackSize(slotId, count);
+    }
 
-	@Override
-	public void closeInventory() {
-	}
+    @Override
+    public ItemStack getStackInSlotOnClosing(int var1) {
+        return _inventory.getStackInSlotOnClosing(var1);
+    }
 
-	@Override
-	public boolean isItemValidForSlot(int slotid, ItemStack itemStack) {
-		if (itemStack == null)
-			return false;
-		Item item = itemStack.getItem();
-		if (slotid == 0) {
-			if (item instanceof ItemCanister) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public void setInventorySlotContents(int slotId, ItemStack itemstack) {
+        _inventory.setInventorySlotContents(slotId, itemstack);
+    }
 
-	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		return tank.fill(resource, doFill);
-	}
+    @Override
+    public String getInventoryName() {
+        return _inventory.getInventoryName();
+    }
 
-	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource,
-			boolean doDrain) {
-		return null;
-	}
+    @Override
+    public boolean hasCustomInventoryName() {
+        return _inventory.hasCustomInventoryName();
+    }
 
-	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		return tank.drain(maxDrain, doDrain);
-	}
+    @Override
+    public int getInventoryStackLimit() {
+        return _inventory.getInventoryStackLimit();
+    }
 
-	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		return tank.getFluidType() == fluid;
-	}
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this
+                && entityPlayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D,
+                zCoord + 0.5D) <= 64.0D;
+    }
 
-	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid) {
-		return true;
-	}
+    @Override
+    public void openInventory() {
+    }
 
-	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		return tankManager.getTankInfo(from);
-	}
+    @Override
+    public void closeInventory() {
+    }
 
-	public FluidStack getFluid() {
-		return tank.getFluid();
-	}
+    @Override
+    public boolean isItemValidForSlot(int slotid, ItemStack itemStack) {
+        if (itemStack == null)
+            return false;
+        Item item = itemStack.getItem();
+        return slotid == 0 && item instanceof ItemCanister;
+    }
 
-	public int getScaledLiquid(int i) {
-		return tank.getFluid() != null ? (int) (((float) this.tank.getFluid().amount / (float) (maxLiquid)) * i)
-				: 0;
-	}
+    @Override
+    public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+        return tank.fill(resource, doFill);
+    }
 
-	@Override
-	public PacketPayload getPacketPayload() {
-		PacketPayload payload = new PacketPayload(
-				new PacketPayload.StreamWriter() {
-					@Override
-					public void writeData(ByteBuf data) {
-						tankManager.writeData(data);
-						data.writeBoolean(fill);
-					}
-				});
-		return payload;
-	}
+    @Override
+    public FluidStack drain(ForgeDirection from, FluidStack resource,
+                            boolean doDrain) {
+        return null;
+    }
 
-	@Override
-	public void handleUpdatePacket(PacketUpdate packet) throws IOException {
-		ByteBuf stream = packet.payload.stream;
-		tankManager.readData(stream);
-		fill = stream.readBoolean();
-	}
+    @Override
+    public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+        return tank.drain(maxDrain, doDrain);
+    }
 
-	@Override
-	public void writeGuiData(ByteBuf data) {
-	}
+    @Override
+    public boolean canFill(ForgeDirection from, Fluid fluid) {
+        return tank.getFluidType() == fluid;
+    }
 
-	@Override
-	public void readGuiData(ByteBuf data, EntityPlayer player) {
-		fill = data.readBoolean();
-	}
+    @Override
+    public boolean canDrain(ForgeDirection from, Fluid fluid) {
+        return true;
+    }
 
-	public void sendModeUpdatePacket() {
-		try {
-			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-			DataOutputStream data = new DataOutputStream(bytes);
-			data.writeBoolean(fill);
-			PacketGuiReturn pkt = new PacketGuiReturn(this, bytes.toByteArray());
-			pkt.sendPacket();
-		} catch (Exception e) {
-		}
-	}
+    @Override
+    public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+        return tankManager.getTankInfo(from);
+    }
 
-	public int getProgress() {
-		ItemStack itemstack = _inventory.getStackInSlot(0);
-		if (itemstack != null) {
-			Item item = itemstack.getItem();
-			if (item instanceof ItemCanister) {
-				FluidStack fluidstack = Utils.getFluidStackFromItemStack(itemstack);
-				ItemCanister canister = (ItemCanister) itemstack.getItem();
-				if (fluidstack != null) {
-					int capacity = canister.getCapacity(itemstack);
-					if (fill)
-						return (fluidstack.amount * 16)/ capacity;
-					return ((capacity - fluidstack.amount) * 16) / capacity;
-				}
-			}
-			if (!fill) {
-				return 16;
-			}
-		}
-		return 0;
-	}
+    public FluidStack getFluid() {
+        return tank.getFluid();
+    }
 
-	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
-		return Utils.createSlotArray(0, 2);
-	}
+    public int getScaledLiquid(int i) {
+        return tank.getFluid() != null ? (int) (((float) this.tank.getFluid().amount / (float) (maxLiquid)) * i)
+                : 0;
+    }
 
-	@Override
-	public boolean canInsertItem(int slot, ItemStack stack, int side) {
-		return side != 0 && isItemValidForSlot(slot, stack);
-	}
+    @Override
+    public PacketPayload getPacketPayload() {
+        PacketPayload payload = new PacketPayload(
+                new PacketPayload.StreamWriter() {
+                    @Override
+                    public void writeData(ByteBuf data) {
+                        tankManager.writeData(data);
+                        data.writeBoolean(fill);
+                    }
+                });
+        return payload;
+    }
 
-	@Override
-	public boolean canExtractItem(int slot, ItemStack stack, int side) {
-		return (slot == 1);
-	}
+    @Override
+    public void handleUpdatePacket(PacketUpdate packet) throws IOException {
+        ByteBuf stream = packet.payload.stream;
+        tankManager.readData(stream);
+        fill = stream.readBoolean();
+    }
 
-	public double getEnergyStored() {
-		return energyStored;
-	}
+    @Override
+    public void writeGuiData(ByteBuf data) {
+    }
 
-	public int getFluidStored() {
-		if (tank.getFluid() != null) {
-			return tank.getFluid().amount;
-		}
-		return 0;
-	}
+    @Override
+    public void readGuiData(ByteBuf data, EntityPlayer player) {
+        fill = data.readBoolean();
+    }
+
+    public void sendModeUpdatePacket() {
+        try {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            DataOutputStream data = new DataOutputStream(bytes);
+            data.writeBoolean(fill);
+            PacketGuiReturn pkt = new PacketGuiReturn(this, bytes.toByteArray());
+            pkt.sendPacket();
+        } catch (Exception e) {
+        }
+    }
+
+    public int getProgress() {
+        ItemStack itemstack = _inventory.getStackInSlot(0);
+        if (itemstack == null)
+            return 0;
+        Item item = itemstack.getItem();
+        if (!(item instanceof ItemCanister))
+            return 0;
+        FluidStack fluidstack = Utils.getFluidStackFromItemStack(itemstack);
+        ItemCanister canister = (ItemCanister) itemstack.getItem();
+        if (fluidstack == null && !fill) {
+            return 16;
+        } else if (fill){
+            return 0;
+        }
+        int capacity = canister.getCapacity(itemstack);
+        if (fill)
+            return (fluidstack.amount * 16)/ capacity;
+        return ((capacity - fluidstack.amount) * 16) / capacity;
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int side) {
+        return Utils.createSlotArray(0, 2);
+    }
+
+    @Override
+    public boolean canInsertItem(int slot, ItemStack stack, int side) {
+        return side != 0 && isItemValidForSlot(slot, stack);
+    }
+
+    @Override
+    public boolean canExtractItem(int slot, ItemStack stack, int side) {
+        return (slot == 1);
+    }
+
+    public double getEnergyStored() {
+        return energyStored;
+    }
+
+    public int getFluidStored() {
+        if (tank.getFluid() != null) {
+            return tank.getFluid().amount;
+        }
+        return 0;
+    }
 }
