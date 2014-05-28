@@ -13,6 +13,7 @@ item.PowerCapsuleTier1.name=Kinetic Capsule Tier 1
 item.PowerCapsuleTier2.name=Kinetic Capsule Tier 2
 item.PowerCapsuleTier3.name=Kinetic Capsule Tier 3
 item.ironStick.name=Iron Stick
+item.toolCore.name=Tool Core
 
 gui.progress=Progress
 gui.fluid=Fluid
