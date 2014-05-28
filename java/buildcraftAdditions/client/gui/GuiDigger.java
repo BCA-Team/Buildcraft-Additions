@@ -18,7 +18,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import buildcraftAdditions.core.Utils;
-import buildcraftAdditions.items.ItemMegaDigger;
+import buildcraftAdditions.items.Tools.ItemMegaDigger;
 
 public class GuiDigger extends GuiContainer{
 	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/GUITool.png");

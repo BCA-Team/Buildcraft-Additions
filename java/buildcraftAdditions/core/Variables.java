@@ -17,5 +17,6 @@ public final class Variables {
 	public static final int GuiChainsaw = 73;
 	public static final int GuiDrill = 74;
 	public static final int GuiHoe = 75;
+    public static final int GuiKineticTool = 76;
 
 }

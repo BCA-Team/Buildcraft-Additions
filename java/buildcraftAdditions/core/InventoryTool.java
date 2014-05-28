@@ -9,7 +9,7 @@ package buildcraftAdditions.core;
  */
 
 import buildcraftAdditions.items.BatteryBase;
-import buildcraftAdditions.items.ItemPoweredBase;
+import buildcraftAdditions.items.Tools.ItemPoweredBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;

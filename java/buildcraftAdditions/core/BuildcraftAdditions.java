@@ -12,6 +12,7 @@ import buildcraft.*;
 import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraftAdditions.blocks.BlockEngine;
 import buildcraftAdditions.items.*;
+import buildcraftAdditions.items.Tools.*;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -59,6 +60,9 @@ public class BuildcraftAdditions {
     public static Item ironStick;
     public static Item toolCore;
     public static Item toolUpgradeHoe;
+    public static Item toolUpgradeDigger;
+    public static Item toolUpgradeDrill;
+    public static Item toolUpgradeChainsaw;
     public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 
     @Instance(value="bcadditions")
@@ -120,6 +124,15 @@ public class BuildcraftAdditions {
 
         toolUpgradeHoe = new ItemToolUpgradeHoe();
         CoreProxy.proxy.registerItem(toolUpgradeHoe);
+
+        toolUpgradeDigger = new ItemToolUpgradeDigger();
+        CoreProxy.proxy.registerItem(toolUpgradeDigger);
+
+        toolUpgradeDrill = new ItemToolUpgradeDrill();
+        CoreProxy.proxy.registerItem(toolUpgradeDrill);
+
+        toolUpgradeChainsaw = new ItemToolUpgradeChainsaw();
+        CoreProxy.proxy.registerItem(toolUpgradeChainsaw);
 
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
         BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(poweredShovel), Items.diamond, ironStick, toolCore);

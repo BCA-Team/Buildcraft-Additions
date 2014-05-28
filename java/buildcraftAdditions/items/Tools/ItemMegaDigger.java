@@ -1,4 +1,4 @@
-package buildcraftAdditions.items;
+package buildcraftAdditions.items.Tools;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -10,6 +10,8 @@ package buildcraftAdditions.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.core.Variables;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,25 +20,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import buildcraftAdditions.core.BuildcraftAdditions;
-import buildcraftAdditions.core.Variables;
 
-public class ItemMegaDrill extends ItemPoweredBase{
+public class ItemMegaDigger extends ItemPoweredBase {
     public IIcon icon;
 	
-	public ItemMegaDrill(int maxEnergy){
+	public ItemMegaDigger(){
 		this.maxStackSize = 1;
 		setCreativeTab(BuildcraftAdditions.bcadditions);
-		setUnlocalizedName("drill");
-		this.setMaxDamage(maxEnergy);
-		this.setHarvestLevel("pickaxe", 3);
+		setUnlocalizedName("poweredShovel");
+		this.setHarvestLevel("shovel", 3);
 	}
 	
 	@Override
 	public float getDigSpeed(ItemStack stack, Block block, int meta){
 		if (getEnergy(stack) >= block.getBlockHardness(world, x, y, z))
-			if(block.getHarvestTool(0) == "pickaxe" || block.getMaterial() == Material.iron || block.getMaterial() == Material.rock)
-				return 40;
+			if(block.getHarvestTool(0) == "shovel" || block.getMaterial() == Material.clay || block.getMaterial() == Material.grass || block.getMaterial() == Material.ground || block.getMaterial() == Material.snow || block.getMaterial() == Material.sand || block.getMaterial() == Material.craftedSnow)
+				return 10;
 		return 1;
 	}
 	
@@ -45,14 +44,14 @@ public class ItemMegaDrill extends ItemPoweredBase{
 		if (stack.getTagCompound() == null)
 			stack.setTagCompound(new NBTTagCompound());
 		if (player.isSneaking() && !world.isRemote)
-			player.openGui(BuildcraftAdditions.instance, Variables.GuiDrill, world, x, y, z);
+			player.openGui(BuildcraftAdditions.instance, Variables.GuiDigger, world, x, y, z);
 		return stack;
 	}
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IconRegister) {
-        icon = par1IconRegister.registerIcon("bcadditions:Drill");
+        icon = par1IconRegister.registerIcon("bcadditions:Digger");
     }
 
     @Override
@@ -60,5 +59,7 @@ public class ItemMegaDrill extends ItemPoweredBase{
     public IIcon getIconFromDamage(int damage) {
         return icon;
     }
-
+	
+	
+	
 }

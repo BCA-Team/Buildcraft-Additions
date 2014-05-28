@@ -1,8 +1,9 @@
-package buildcraftAdditions.core;
+package buildcraftAdditions.items.Tools;
 
 import buildcraft.BuildCraftCore;
 import buildcraft.api.recipes.IIntegrationRecipeManager;
 import buildcraft.silicon.ItemRedstoneChipset;
+import buildcraftAdditions.core.BuildcraftAdditions;
 import net.minecraft.item.ItemStack;
 
 /**

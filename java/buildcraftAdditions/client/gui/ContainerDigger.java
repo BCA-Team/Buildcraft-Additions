@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack;
 import buildcraft.core.gui.slots.SlotValidated;
 import buildcraftAdditions.core.InventoryTool;
 import buildcraftAdditions.items.BatteryBase;
-import buildcraftAdditions.items.ItemMegaDigger;
+import buildcraftAdditions.items.Tools.ItemMegaDigger;
 
 public class ContainerDigger extends Container{
 	

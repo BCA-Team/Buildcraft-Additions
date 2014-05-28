@@ -1,4 +1,4 @@
-package buildcraftAdditions.items;
+package buildcraftAdditions.items.Tools;
 
 /**
  * Copyright (c) 2014, AEnterprise

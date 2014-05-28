@@ -14,6 +14,10 @@ item.PowerCapsuleTier2.name=Kinetic Capsule Tier 2
 item.PowerCapsuleTier3.name=Kinetic Capsule Tier 3
 item.ironStick.name=Iron Stick
 item.toolCore.name=Tool Core
+item.toolUpgradeDrill.name=Drill Head
+item.toolUpgradeDigger.name=Excavation Attachment
+item.toolUpgradeChainsaw.name=SawBlade
+item.toolUpgradeHoe.name=Tiller
 
 gui.progress=Progress
 gui.fluid=Fluid

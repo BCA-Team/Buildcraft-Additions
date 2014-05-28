@@ -11,7 +11,7 @@ package buildcraftAdditions.client.gui;
 import buildcraft.core.gui.slots.SlotValidated;
 import buildcraftAdditions.core.InventoryTool;
 import buildcraftAdditions.items.BatteryBase;
-import buildcraftAdditions.items.ItemMegaHoe;
+import buildcraftAdditions.items.Tools.ItemMegaHoe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

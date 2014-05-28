@@ -11,7 +11,7 @@ package buildcraftAdditions.client.gui;
 import org.lwjgl.opengl.GL11;
 
 import buildcraftAdditions.core.Utils;
-import buildcraftAdditions.items.ItemMegaChainsaw;
+import buildcraftAdditions.items.Tools.ItemMegaChainsaw;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,4 +1,4 @@
-package buildcraftAdditions.items;
+package buildcraftAdditions.items.Tools;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -12,7 +12,7 @@ public class ItemToolUpgradeHoe extends ToolUpgrade {
 
     public ItemToolUpgradeHoe(){
         super();
-        this.setUnlocalizedName("hoeUpgrade");
+        this.setUnlocalizedName("toolUpgradeHoe");
     }
 
     @Override

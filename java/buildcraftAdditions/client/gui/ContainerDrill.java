@@ -10,7 +10,7 @@ package buildcraftAdditions.client.gui;
 
 import buildcraft.core.gui.slots.SlotValidated;
 import buildcraftAdditions.items.BatteryBase;
-import buildcraftAdditions.items.ItemMegaDrill;
+import buildcraftAdditions.items.Tools.ItemMegaDrill;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

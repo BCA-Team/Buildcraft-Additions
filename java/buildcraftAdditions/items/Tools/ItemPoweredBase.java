@@ -1,4 +1,4 @@
-package buildcraftAdditions.items;
+package buildcraftAdditions.items.Tools;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -11,6 +11,7 @@ package buildcraftAdditions.items;
 import java.util.List;
 
 import buildcraftAdditions.core.InventoryTool;
+import buildcraftAdditions.items.BatteryBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -22,7 +23,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemPoweredBase extends Item {
-	
+
 	public int x, y, z;
 	public World world;
 	private int storageB1, storageB2, storageB3;
@@ -72,7 +73,7 @@ public class ItemPoweredBase extends Item {
 	public int getCapacity(ItemStack stack){
 		return storageB1 + storageB2 + storageB3;
 	}
-	
+
 	@Override
 	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player){
 		this.x = x;

@@ -16,7 +16,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import buildcraft.core.gui.slots.SlotValidated;
 import buildcraftAdditions.items.BatteryBase;
-import buildcraftAdditions.items.ItemMegaChainsaw;
+import buildcraftAdditions.items.Tools.ItemMegaChainsaw;
 
 public class ContainerChainsaw extends Container{
 	
