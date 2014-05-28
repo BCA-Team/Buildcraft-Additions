@@ -58,6 +58,7 @@ public class BuildcraftAdditions {
     public static Item powerCapsuleTier3;
     public static Item ironStick;
     public static Item toolCore;
+    public static Item toolUpgradeHoe;
     public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 
     @Instance(value="bcadditions")
@@ -116,6 +117,9 @@ public class BuildcraftAdditions {
 
         toolCore = new ItemToolCore();
         CoreProxy.proxy.registerItem(toolCore);
+
+        toolUpgradeHoe = new ItemToolUpgradeHoe();
+        CoreProxy.proxy.registerItem(toolUpgradeHoe);
 
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
         BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(poweredShovel), Items.diamond, ironStick, toolCore);
