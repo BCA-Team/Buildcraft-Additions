@@ -63,6 +63,7 @@ public class BuildcraftAdditions {
     public static Item toolUpgradeDigger;
     public static Item toolUpgradeDrill;
     public static Item toolUpgradeChainsaw;
+    public static Item kineticTool;
     public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 
     @Instance(value="bcadditions")
@@ -134,12 +135,16 @@ public class BuildcraftAdditions {
         toolUpgradeChainsaw = new ItemToolUpgradeChainsaw();
         CoreProxy.proxy.registerItem(toolUpgradeChainsaw);
 
+        kineticTool = new ItemKineticTool();
+        CoreProxy.proxy.registerItem(kineticTool);
+
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
         BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(poweredShovel), Items.diamond, ironStick, toolCore);
         BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(drill), new ItemStack (Items.diamond, 3), ironStick, toolCore);
         BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(chainsaw), new ItemStack(Items.diamond, 3), ironStick, toolCore);
         BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(megaHoe), new ItemStack(Items.diamond, 2), ironStick, toolCore);
         BuildcraftRecipes.integrationTable.addRecipe(new ToolCoreRecepie());
+        BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepie());
     }
 
     @Mod.EventHandler

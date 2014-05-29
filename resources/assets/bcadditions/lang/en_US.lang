@@ -16,7 +16,7 @@ item.ironStick.name=Iron Stick
 item.toolCore.name=Tool Core
 item.toolUpgradeDrill.name=Drill Head
 item.toolUpgradeDigger.name=Excavation Attachment
-item.toolUpgradeChainsaw.name=SawBlade
+item.toolUpgradeChainsaw.name=Saw Blade
 item.toolUpgradeHoe.name=Tiller
 
 gui.progress=Progress

@@ -1,6 +1,8 @@
 package buildcraftAdditions.items.Tools;
 
 import buildcraftAdditions.core.BuildcraftAdditions;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,6 +10,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -20,7 +24,7 @@ public class ItemKineticTool extends ItemPoweredBase {
     public boolean chainsaw, digger, drill, hoe;
 
     public ItemKineticTool(){
-        this.setUnlocalizedName("Kinetic Multi-Tool");
+        this.setUnlocalizedName("kineticMultiTool");
         this.setCreativeTab(BuildcraftAdditions.bcadditions);
         this.setMaxStackSize(1);
         chainsaw = false;
@@ -29,7 +33,8 @@ public class ItemKineticTool extends ItemPoweredBase {
         hoe = false;
     }
 
-    public boolean isUpgradeInstalled(String upgrade){
+    public boolean isUpgradeInstalled(ItemStack stack, String upgrade){
+        readUpgrades(stack);
         if (upgrade.equals("Chainsaw"))
             return chainsaw;
         if (upgrade.equals("Digger"))
@@ -64,7 +69,7 @@ public class ItemKineticTool extends ItemPoweredBase {
 
     public void installUpgrade(String upgrade, ItemStack stack){
         readUpgrades(stack);
-        if (!isUpgradeInstalled(upgrade)){
+        if (!isUpgradeInstalled(stack, upgrade)){
             if (upgrade.equals("Drill"))
                 drill = true;
             if (upgrade.equals("Chainsaw"))
@@ -108,5 +113,25 @@ public class ItemKineticTool extends ItemPoweredBase {
         return tilted;
     }
 
-
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
+        readBateries(stack, player);
+        readUpgrades(stack);
+        list.add(Integer.toString((int) getEnergy(stack)) + "/" + Integer.toString(getCapacity(stack)) + " MJ");
+        if (storageB1>0)
+            list.add("   Battery 1 " + typeB1 + Integer.toString((int) energyB1) + "/" + Integer.toString(storageB1) + " MJ");
+        if (storageB2>0)
+            list.add("   Battery 2 " + typeB2 + Integer.toString((int) energyB2) + "/" + Integer.toString(storageB2) + " MJ");
+        if (storageB3>0)
+            list.add("   Battery 3 " + typeB3 + Integer.toString((int) energyB3) + "/" + Integer.toString(storageB3) + " MJ");
+        if (chainsaw)
+            list.add("Saw Blade installed");
+        if (digger)
+            list.add("Excavation Attachment installed");
+        if (drill)
+            list.add("Drill Head installed");
+        if (hoe)
+            list.add("Tiller installed");
+    }
 }

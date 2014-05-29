@@ -26,8 +26,8 @@ public class ItemPoweredBase extends Item {
 
 	public int x, y, z;
 	public World world;
-	private int storageB1, storageB2, storageB3;
-	private double energyB1, energyB2, energyB3;
+	public int storageB1, storageB2, storageB3;
+	public double energyB1, energyB2, energyB3;
 	public String typeB1, typeB2, typeB3;
 	EntityPlayer player;
 	

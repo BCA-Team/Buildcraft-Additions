@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
  */
 
 public class UpgradeRecepie implements IIntegrationRecipeManager.IIntegrationRecipe {
+    public ItemStack stack;
 
     @Override
     public double getEnergyCost() {
@@ -20,17 +21,32 @@ public class UpgradeRecepie implements IIntegrationRecipeManager.IIntegrationRec
 
     @Override
     public boolean isValidInputA(ItemStack inputA) {
+        stack=inputA;
         return inputA != null && inputA.getItem() instanceof ItemKineticTool;
     }
 
     @Override
     public boolean isValidInputB(ItemStack inputB) {
-        return false;
+        if (stack == null)
+            return false;
+        if (!(stack.getItem() instanceof ItemKineticTool))
+            return false;
+        if (inputB == null)
+            return false;
+        ItemKineticTool tool = (ItemKineticTool) stack.getItem();
+        ToolUpgrade upgrade = (ToolUpgrade) inputB.getItem();
+        return !tool.isUpgradeInstalled(stack, upgrade.getType());
     }
 
     @Override
     public ItemStack getOutputForInputs(ItemStack inputA, ItemStack inputB, ItemStack[] components) {
-        return null;
+        ItemStack outputStack = new ItemStack(new ItemKineticTool(), 1);
+        outputStack.stackTagCompound = inputA.copy().stackTagCompound;
+        ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
+        ToolUpgrade upgrade = (ToolUpgrade) inputB.getItem();
+        output.installUpgrade(upgrade.getType(), outputStack);
+        output.writeUpgrades(outputStack);
+        return outputStack;
     }
 
     @Override
