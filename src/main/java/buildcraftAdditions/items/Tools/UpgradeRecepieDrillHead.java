@@ -11,8 +11,7 @@ import net.minecraft.item.ItemStack;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-public class UpgradeRecepie implements IIntegrationRecipeManager.IIntegrationRecipe {
-    public ItemStack stack;
+public class UpgradeRecepieDrillHead implements IIntegrationRecipeManager.IIntegrationRecipe {
 
     @Override
     public double getEnergyCost() {
@@ -21,21 +20,16 @@ public class UpgradeRecepie implements IIntegrationRecipeManager.IIntegrationRec
 
     @Override
     public boolean isValidInputA(ItemStack inputA) {
-        stack=inputA;
-        return inputA != null && inputA.getItem() instanceof ItemKineticTool;
+        if (inputA != null && inputA.getItem() instanceof ItemKineticTool){
+            ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
+            return !tool.isUpgradeInstalled(inputA, "Drill");
+        }
+        return false;
     }
 
     @Override
     public boolean isValidInputB(ItemStack inputB) {
-        if (stack == null)
-            return false;
-        if (!(stack.getItem() instanceof ItemKineticTool))
-            return false;
-        if (inputB == null)
-            return false;
-        ItemKineticTool tool = (ItemKineticTool) stack.getItem();
-        ToolUpgrade upgrade = (ToolUpgrade) inputB.getItem();
-        return !tool.isUpgradeInstalled(stack, upgrade.getType());
+        return inputB != null && inputB.getItem() instanceof ItemToolUpgradeDrill;
     }
 
     @Override
@@ -43,8 +37,7 @@ public class UpgradeRecepie implements IIntegrationRecipeManager.IIntegrationRec
         ItemStack outputStack = new ItemStack(new ItemKineticTool(), 1);
         outputStack.stackTagCompound = inputA.copy().stackTagCompound;
         ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
-        ToolUpgrade upgrade = (ToolUpgrade) inputB.getItem();
-        output.installUpgrade(upgrade.getType(), outputStack);
+        output.installUpgrade("Drill", outputStack);
         output.writeUpgrades(outputStack);
         return outputStack;
     }

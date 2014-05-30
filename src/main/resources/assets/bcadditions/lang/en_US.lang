@@ -18,6 +18,7 @@ item.toolUpgradeDrill.name=Drill Head
 item.toolUpgradeDigger.name=Excavation Attachment
 item.toolUpgradeChainsaw.name=Saw Blade
 item.toolUpgradeHoe.name=Tiller
+item.kineticMultiTool.name=Kintetic Multi-Tool
 
 gui.progress=Progress
 gui.fluid=Fluid

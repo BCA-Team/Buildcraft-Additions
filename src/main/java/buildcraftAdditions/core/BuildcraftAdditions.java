@@ -144,7 +144,10 @@ public class BuildcraftAdditions {
         BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(chainsaw), new ItemStack(Items.diamond, 3), ironStick, toolCore);
         BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(megaHoe), new ItemStack(Items.diamond, 2), ironStick, toolCore);
         BuildcraftRecipes.integrationTable.addRecipe(new ToolCoreRecepie());
-        BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepie());
+        BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieDrillHead());
+        BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieExcavationAttachment());
+        BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieSawBlade());
+        BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieTiller());
     }
 
     @Mod.EventHandler
