@@ -57,7 +57,6 @@ public class ItemPoweredBase extends Item {
 		}
 		if (energyB3 > energy){
 			energyB3 -= energy;
-			energy = 0;
 		}
 		writeBateries(stack, player);
 		readBateries(stack, player);
@@ -65,12 +64,12 @@ public class ItemPoweredBase extends Item {
 	}
 	
 	
-	public double getEnergy(ItemStack stack){
+	public double getEnergy(){
 		return energyB1 + energyB2 + energyB3;
 	}
 	
 	
-	public int getCapacity(ItemStack stack){
+	public int getCapacity(){
 		return storageB1 + storageB2 + storageB3;
 	}
 
@@ -97,14 +96,7 @@ public class ItemPoweredBase extends Item {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
 		readBateries(stack, player);
-		list.add(Integer.toString((int) getEnergy(stack)) + "/" + Integer.toString(getCapacity(stack)) + " MJ");
-		if (storageB1>0)
-			list.add("   Battery 1 " + typeB1 + Integer.toString((int) energyB1) + "/" + Integer.toString(storageB1) + " MJ");
-		if (storageB2>0)
-			list.add("   Battery 2 " + typeB2 + Integer.toString((int) energyB2) + "/" + Integer.toString(storageB2) + " MJ");
-		if (storageB3>0)
-			list.add("   Battery 3 " + typeB3 + Integer.toString((int) energyB3) + "/" + Integer.toString(storageB3) + " MJ");
-		
+		list.add("I'M BROKEN, PLEASE RIGHT CLICK ME TO FIX ME");
 	}
 
 	

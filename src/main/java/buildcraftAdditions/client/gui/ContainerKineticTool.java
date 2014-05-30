@@ -15,20 +15,18 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import buildcraft.core.gui.slots.SlotValidated;
-import buildcraftAdditions.core.InventoryTool;
 import buildcraftAdditions.items.BatteryBase;
-import buildcraftAdditions.items.Tools.ItemMegaDigger;
+import buildcraftAdditions.items.Tools.ItemKineticTool;
 
-public class ContainerDigger extends Container{
+public class ContainerKineticTool extends Container{
 	
 	IInventory playerIInventory;
-	ItemMegaDigger digger;
-	InventoryTool diggerInventory;
+	ItemKineticTool tool;
 	ItemStack stack;
 	EntityPlayer player;
 
-	public ContainerDigger(InventoryPlayer inventory, ItemMegaDigger digger, IInventory toolInventory, ItemStack stack, EntityPlayer player) {
-		this.digger = digger;
+	public ContainerKineticTool(InventoryPlayer inventory, ItemKineticTool tool, IInventory toolInventory, ItemStack stack, EntityPlayer player) {
+		this.tool = tool;
 		this.playerIInventory = inventory;
 		this.stack = stack;
 		this.player = player;
@@ -54,7 +52,6 @@ public class ContainerDigger extends Container{
 	
 	@Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex){
-		
 		
         ItemStack stack = null;
 		Slot slot = (Slot) this.inventorySlots.get(slotIndex);
@@ -173,7 +170,7 @@ public class ContainerDigger extends Container{
 	
 	@Override
 	public void onContainerClosed(EntityPlayer player){
-		digger.readBateries(stack, player);
+		tool.readBateries(stack, player);
 	}
 
 }

@@ -102,7 +102,7 @@ public class BuildcraftAdditions {
         drill = new ItemMegaDrill(6000);
         CoreProxy.proxy.registerItem(drill);
 
-        chainsaw = new ItemMegaChainsaw(6000);
+        chainsaw = new ItemMegaChainsaw();
         CoreProxy.proxy.registerItem(chainsaw);
 
         megaHoe = new ItemMegaHoe(6000);
@@ -139,10 +139,7 @@ public class BuildcraftAdditions {
         CoreProxy.proxy.registerItem(kineticTool);
 
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
-        BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(poweredShovel), Items.diamond, ironStick, toolCore);
-        BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(drill), new ItemStack (Items.diamond, 3), ironStick, toolCore);
-        BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(chainsaw), new ItemStack(Items.diamond, 3), ironStick, toolCore);
-        BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(megaHoe), new ItemStack(Items.diamond, 2), ironStick, toolCore);
+        BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(kineticTool), new ItemStack(Items.diamond, 3), ironStick, toolCore);
         BuildcraftRecipes.integrationTable.addRecipe(new ToolCoreRecepie());
         BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieDrillHead());
         BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieExcavationAttachment());

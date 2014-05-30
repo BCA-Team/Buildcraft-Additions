@@ -34,8 +34,7 @@ public class UpgradeRecepieDrillHead implements IIntegrationRecipeManager.IInteg
 
     @Override
     public ItemStack getOutputForInputs(ItemStack inputA, ItemStack inputB, ItemStack[] components) {
-        ItemStack outputStack = new ItemStack(new ItemKineticTool(), 1);
-        outputStack.stackTagCompound = inputA.copy().stackTagCompound;
+        ItemStack outputStack = inputA.copy();
         ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
         output.installUpgrade("Drill", outputStack);
         output.writeUpgrades(outputStack);

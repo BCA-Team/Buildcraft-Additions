@@ -8,8 +8,10 @@ package buildcraftAdditions.client.gui;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import org.lwjgl.opengl.GL11;
+
 import buildcraftAdditions.core.Utils;
-import buildcraftAdditions.items.Tools.ItemMegaHoe;
+import buildcraftAdditions.items.Tools.ItemKineticTool;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,18 +19,17 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
-public class GuiHoe extends GuiContainer {
+public class GuiKineticTool extends GuiContainer{
 	
 	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/GUITool.png");
-	ItemMegaHoe hoe;
+	ItemKineticTool Tool;
 	ItemStack stack;
 	EntityPlayer player;
 
-	public GuiHoe(InventoryPlayer inventoryplayer, ItemMegaHoe hoe, IInventory inventory, ItemStack stack, EntityPlayer player) {
-		super(new ContainerHoe(inventoryplayer, hoe, inventory, stack, player));
-		this.hoe = hoe;
+	public GuiKineticTool(InventoryPlayer inventoryplayer, ItemKineticTool Tool, IInventory inventory, ItemStack stack, EntityPlayer player) {
+		super(new ContainerKineticTool(inventoryplayer, Tool, inventory, stack, player));
+		this.Tool = Tool;
 		this.stack = stack;
 		this.player = player;
 	}
@@ -36,9 +37,9 @@ public class GuiHoe extends GuiContainer {
 	@Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         super.drawGuiContainerForegroundLayer(par1, par2);
-        String title = Utils.localize("item.megaHoe.name");
+        String title = Utils.localize("item.kineticMultiTool.name");
         fontRendererObj.drawString(Utils.localize(title), (xSize - fontRendererObj.getStringWidth(title)) / 2, 6, 0x404040);
-        fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 110) + 2, 0x404040);
+        fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize-110) + 2, 0x404040);
     }
 
 	@Override
@@ -53,8 +54,8 @@ public class GuiHoe extends GuiContainer {
 	}
 	
 	@Override
-    public void onGuiClosed() {
-        hoe.readBateries(stack, player);
-    }
+	public void onGuiClosed(){
+		Tool.readBateries(stack, player);
+	}
 
 }

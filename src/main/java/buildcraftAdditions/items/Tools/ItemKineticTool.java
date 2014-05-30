@@ -1,6 +1,7 @@
 package buildcraftAdditions.items.Tools;
 
 import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.core.Variables;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -31,6 +32,15 @@ public class ItemKineticTool extends ItemPoweredBase {
         digger = false;
         drill = false;
         hoe = false;
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player){
+        if (stack.getTagCompound() == null)
+            stack.setTagCompound(new NBTTagCompound());
+        if (player.isSneaking() && !world.isRemote)
+            player.openGui(BuildcraftAdditions.instance, Variables.GuiKineticTool, world, x, y, z);
+        return stack;
     }
 
     public boolean isUpgradeInstalled(ItemStack stack, String upgrade){
@@ -86,24 +96,32 @@ public class ItemKineticTool extends ItemPoweredBase {
     @Override
     public float getDigSpeed(ItemStack stack, Block block, int meta) {
         readUpgrades(stack);
-        if (getEnergy(stack) >= block.getBlockHardness(world, x, y, z)) {
-            if (chainsaw && (block.getHarvestTool(0) == "axe" || block.getMaterial() == Material.leaves || block.getMaterial() == Material.wood || block.getMaterial() == Material.vine))
+        if (getEnergy() >= block.getBlockHardness(world, x, y, z)) {
+            if (chainsaw && (block.getHarvestTool(0) == "axe" || block.getMaterial() == Material.leaves || block.getMaterial() == Material.wood || block.getMaterial() == Material.vine)) {
+                this.setHarvestLevel("axe", 3);
                 return 30;
-            if (digger && (block.getHarvestTool(0) == "shovel" || block.getMaterial() == Material.clay || block.getMaterial() == Material.grass || block.getMaterial() == Material.ground || block.getMaterial() == Material.snow || block.getMaterial() == Material.sand || block.getMaterial() == Material.craftedSnow))
-                    return 10;
-            if(drill && (block.getHarvestTool(0) == "pickaxe" || block.getMaterial() == Material.iron || block.getMaterial() == Material.rock))
-                    return 40;
+            }
+            if (digger && (block.getHarvestTool(0) == "shovel" || block.getMaterial() == Material.clay || block.getMaterial() == Material.grass || block.getMaterial() == Material.ground || block.getMaterial() == Material.snow || block.getMaterial() == Material.sand || block.getMaterial() == Material.craftedSnow)) {
+                this.setHarvestLevel("shovel", 3);
+                return 10;
+            }
+            if(drill && (block.getHarvestTool(0) == "pickaxe" || block.getMaterial() == Material.iron || block.getMaterial() == Material.rock)) {
+                this.setHarvestLevel("pickaxe", 3);
+                return 40;
+            }
         }
             return 1;
     }
 
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int geenIdee, float hitX, float hitY, float hitZ){
+        readUpgrades(stack);
+        if (!hoe)
+            return false;
         boolean tilted = false;
-        if (hoe)
         for (int i = x-1; i <= x+1; i++){
             for (int j = z-1; j <= z+1; j++){
-                if ((world.getBlock(i, y, j) == Blocks.dirt || world.getBlock(i, y, j) == Blocks.grass) && getEnergy(stack) >=5) {
+                if ((world.getBlock(i, y, j) == Blocks.dirt || world.getBlock(i, y, j) == Blocks.grass) && getEnergy() >=5) {
                     world.setBlock(i, y, j, Blocks.farmland);
                     decreaseEnergy(stack, 5, player);
                     tilted = true;
@@ -118,13 +136,7 @@ public class ItemKineticTool extends ItemPoweredBase {
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
         readBateries(stack, player);
         readUpgrades(stack);
-        list.add(Integer.toString((int) getEnergy(stack)) + "/" + Integer.toString(getCapacity(stack)) + " MJ");
-        if (storageB1>0)
-            list.add("   Battery 1 " + typeB1 + Integer.toString((int) energyB1) + "/" + Integer.toString(storageB1) + " MJ");
-        if (storageB2>0)
-            list.add("   Battery 2 " + typeB2 + Integer.toString((int) energyB2) + "/" + Integer.toString(storageB2) + " MJ");
-        if (storageB3>0)
-            list.add("   Battery 3 " + typeB3 + Integer.toString((int) energyB3) + "/" + Integer.toString(storageB3) + " MJ");
+        list.add(Integer.toString((int) getEnergy()) + "/" + Integer.toString(getCapacity()) + " MJ");
         if (chainsaw)
             list.add("Saw Blade installed");
         if (digger)
