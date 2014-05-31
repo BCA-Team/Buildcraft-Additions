@@ -20,6 +20,9 @@ item.toolUpgradeChainsaw.name=Saw Blade
 item.toolUpgradeHoe.name=Tiller
 item.kineticMultiTool.name=Kintetic Multi-Tool
 
+tooltip.installed=Installed
+tooltip.deactivated=Deactivated
+
 gui.progress=Progress
 gui.fluid=Fluid
 gui.noFluid=Empty
