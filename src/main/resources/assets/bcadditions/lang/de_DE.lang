@@ -1,13 +1,33 @@
 tile.blockFluidicCompressor.name=Flüssigkeitskompressor
+tile.blockChargingStation.name=Ladestation
 
 item.ironCanister.name=Eisenkanister
 item.goldCanister.name=Goldkanister
 item.diamondCanister.name=Diamantkanister
 item.mjMeter.name=MJ-Meter
+item.poweredShovel.name=Kinetisches Grabegerät
+item.drill.name=Kinetischer Bohrer
+item.chainsaw.name=Kinetische Kettensäge
+item.megaHoe.name=Kinetische Hacke
+item.PowerCapsuleTier1.name=Kinetische Kapsel - Stufe 1
+item.PowerCapsuleTier2.name=Kinetische Kapsel - Stufe 2
+item.PowerCapsuleTier3.name=Kinetische Kapsel - Stufe 3
+item.ironStick.name=Eisenstange
+item.toolCore.name=Werkzeugkern
+item.toolUpgradeDrill.name=Bohrkopf
+item.toolUpgradeDigger.name=Ausgrabungsaufsatz
+item.toolUpgradeChainsaw.name=Sägeblatt
+item.toolUpgradeHoe.name=Ackerbauaufsatz
+item.kineticMultiTool.name=Kintetisches Multi-Tool
+
+tooltip.installed=Installiert
+tooltip.deactivated=Deaktiviert
 
 gui.progress=Fortschritt
 gui.fluid=Flüssigk.
 gui.noFluid=Leer
 gui.fluidStored=Flüssigkeitsmenge
+gui.energyInTool=Gespeicherte Energie
+gui.maxEnergy=Max Energie
 
 itemGroup.BuildcraftAdditions=Buildcraft Additions
