@@ -8,7 +8,10 @@ package buildcraftAdditions.client.gui;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import buildcraftAdditions.networking.MessageToolUpgrades;
+import buildcraftAdditions.networking.PacketHandeler;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.entity.player.EntityPlayerMP;
 import org.lwjgl.opengl.GL11;
 
 import buildcraftAdditions.core.Utils;
@@ -56,7 +59,6 @@ public class GuiKineticTool extends GuiContainer{
             } else {
                 tool.chainsawEnabled = true;
             }
-        tool.sendModeUpdatePacket();
     }
 	
 	@Override
@@ -81,6 +83,8 @@ public class GuiKineticTool extends GuiContainer{
 	@Override
 	public void onGuiClosed(){
 		tool.readBateries(stack, player);
+        PacketHandeler.instance.sendToServer(new MessageToolUpgrades(tool));
+        tool.writeUpgrades(stack);
 	}
 
 }

@@ -13,6 +13,7 @@ import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraftAdditions.blocks.BlockEngine;
 import buildcraftAdditions.items.*;
 import buildcraftAdditions.items.Tools.*;
+import buildcraftAdditions.networking.PacketHandeler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -83,6 +84,8 @@ public class BuildcraftAdditions {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+
+        PacketHandeler.init();
 
         ironCanister = new ItemCanister("ironCanister", 1000);
         CoreProxy.proxy.registerItem(ironCanister);

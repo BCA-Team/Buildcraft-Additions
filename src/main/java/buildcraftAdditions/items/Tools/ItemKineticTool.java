@@ -5,6 +5,8 @@ import buildcraft.core.network.PacketGuiReturn;
 import buildcraftAdditions.core.BuildcraftAdditions;
 import buildcraftAdditions.core.Utils;
 import buildcraftAdditions.core.Variables;
+import buildcraftAdditions.networking.MessageToolUpgrades;
+import buildcraftAdditions.networking.PacketHandeler;
 import com.sun.net.httpserver.Filter;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,6 +22,7 @@ import net.minecraft.world.World;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -30,6 +33,7 @@ import java.util.List;
  */
 public class ItemKineticTool extends ItemPoweredBase {
     public boolean chainsaw, digger, drill, hoe, chainsawEnabled, diggerEnabled, drillEnabled, hoeEnabled;
+    public long identificatie;
 
     public ItemKineticTool(){
         this.setUnlocalizedName("kineticMultiTool");
@@ -49,8 +53,13 @@ public class ItemKineticTool extends ItemPoweredBase {
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player){
         if (stack.getTagCompound() == null)
             stack.setTagCompound(new NBTTagCompound());
-        if (player.isSneaking() && !world.isRemote)
-            player.openGui(BuildcraftAdditions.instance, Variables.GuiKineticTool, world, x, y, z);
+        if (player.isSneaking()) {
+            Random random = new Random();
+            identificatie = random.nextLong();
+            stack.stackTagCompound.setLong("identificatie", identificatie);
+            if (!world.isRemote)
+                player.openGui(BuildcraftAdditions.instance, Variables.GuiKineticTool, world, x, y, z);
+        }
         readUpgrades(stack);
         readBateries(stack, player);
         showDurabilityBar(stack);
@@ -158,15 +167,15 @@ public class ItemKineticTool extends ItemPoweredBase {
         readUpgrades(stack);
         if (getEnergy() >= block.getBlockHardness(world, x, y, z)) {
             if (chainsaw && (block.getHarvestTool(0) == "axe" || block.getMaterial() == Material.leaves || block.getMaterial() == Material.wood || block.getMaterial() == Material.vine)) {
-                this.setHarvestLevel("axe", 3);
+                stack.getItem().setHarvestLevel("axe", 3);
                 return 30;
             }
             if (digger && (block.getHarvestTool(0) == "shovel" || block.getMaterial() == Material.clay || block.getMaterial() == Material.grass || block.getMaterial() == Material.ground || block.getMaterial() == Material.snow || block.getMaterial() == Material.sand || block.getMaterial() == Material.craftedSnow)) {
-                this.setHarvestLevel("shovel", 3);
+                stack.getItem().setHarvestLevel("shovel", 3);
                 return 10;
             }
             if(drill && (block.getHarvestTool(0) == "pickaxe" || block.getMaterial() == Material.iron || block.getMaterial() == Material.rock)) {
-                this.setHarvestLevel("pickaxe", 3);
+                stack.getItem().setHarvestLevel("pickaxe", 3);
                 return 40;
             }
         }
@@ -223,7 +232,7 @@ public class ItemKineticTool extends ItemPoweredBase {
             }
     }
 
-    public void setPlayer (EntityPlayer player){
+    public void setPlayer(EntityPlayer player) {
         this.player = player;
     }
 }

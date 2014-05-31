@@ -157,8 +157,8 @@ public class ItemPoweredBase extends Item {
 			energyB3 = battery.getEnergy(batteryStack);
             typeB3 = battery.getType();
 			}
-		this.setMaxDamage(storageB1 + storageB2 + storageB3);
-		this.setDamage(stack, (int) (storageB1 + storageB2 + storageB3 - energyB1 - energyB2 - energyB3));
+		stack.getItem().setMaxDamage(storageB1 + storageB2 + storageB3);
+        stack.getItem().setDamage(stack, (int) (storageB1 + storageB2 + storageB3 - energyB1 - energyB2 - energyB3));
 	}
 	
 	public void writeBateries(ItemStack stack, EntityPlayer player){
