@@ -1,13 +1,33 @@
 tile.blockFluidicCompressor.name=流体压缩机
+tile.blockChargingStation.name=充能台
 
 item.ironCanister.name=铁罐
 item.goldCanister.name=金罐
 item.diamondCanister.name=钻石罐
 item.mjMeter.name=MJ仪
+item.poweredShovel.name=动力铲
+item.drill.name=动力钻
+item.chainsaw.name=动力链锯
+item.megaHoe.name=动力锄
+item.PowerCapsuleTier1.name=动力胶囊I
+item.PowerCapsuleTier2.name=动力胶囊II
+item.PowerCapsuleTier3.name=动力胶囊III
+item.ironStick.name=铁棍
+item.toolCore.name=工具核心
+item.toolUpgradeDrill.name=钻头
+item.toolUpgradeDigger.name=铲头
+item.toolUpgradeChainsaw.name=锯片
+item.toolUpgradeHoe.name=锄尖
+item.kineticMultiTool.name=动力万能工具
+
+tooltip.installed=已安装
+tooltip.deactivated=已关闭
 
 gui.progress=进度
 gui.fluid=流体
 gui.noFluid=空
 gui.fluidStored=流体量
+gui.energyInTool=已储能量
+gui.maxEnergy=最大能量
 
 itemGroup.BuildcraftAdditions=建筑|附件
