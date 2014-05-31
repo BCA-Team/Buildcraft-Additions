@@ -32,7 +32,7 @@ import java.util.Random;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class ItemKineticTool extends ItemPoweredBase {
-    public boolean chainsaw, digger, drill, hoe, chainsawEnabled, diggerEnabled, drillEnabled, hoeEnabled;
+    public boolean chainsaw, digger, drill, hoe;
     public long identificatie;
 
     public ItemKineticTool(){
@@ -43,10 +43,6 @@ public class ItemKineticTool extends ItemPoweredBase {
         digger = false;
         drill = false;
         hoe = false;
-        chainsawEnabled = false;
-        diggerEnabled = false;
-        drillEnabled = false;
-        hoeEnabled = false;
     }
 
     @Override
@@ -86,19 +82,11 @@ public class ItemKineticTool extends ItemPoweredBase {
             stack.stackTagCompound.setBoolean("digger", false);
             stack.stackTagCompound.setBoolean("drill", false);
             stack.stackTagCompound.setBoolean("hoe", false);
-            stack.stackTagCompound.setBoolean("chainsawEnabled", false);
-            stack.stackTagCompound.setBoolean("diggerEnabled", false);
-            stack.stackTagCompound.setBoolean("drillEnabled", false);
-            stack.stackTagCompound.setBoolean("hoeEnabled", false);
         }
         chainsaw = stack.stackTagCompound.getBoolean("chainsaw");
         digger = stack.stackTagCompound.getBoolean("digger");
         drill = stack.stackTagCompound.getBoolean("drill");
         hoe = stack.stackTagCompound.getBoolean("hoe");
-        chainsawEnabled = stack.stackTagCompound.getBoolean("chainsawEnabled");
-        diggerEnabled = stack.stackTagCompound.getBoolean("diggerEnabled");
-        drillEnabled = stack.stackTagCompound.getBoolean("drillEnabled");
-        hoeEnabled = stack.stackTagCompound.getBoolean("hoeEnabled");
     }
 
     public void writeUpgrades (ItemStack stack){
@@ -106,61 +94,22 @@ public class ItemKineticTool extends ItemPoweredBase {
         stack.stackTagCompound.setBoolean("digger", digger);
         stack.stackTagCompound.setBoolean("drill", drill);
         stack.stackTagCompound.setBoolean("hoe", hoe);
-        stack.stackTagCompound.setBoolean("chainsawEnabled", chainsawEnabled);
-        stack.stackTagCompound.setBoolean("diggerEnabled", diggerEnabled);
-        stack.stackTagCompound.setBoolean("drillEnabled", drillEnabled);
-        stack.stackTagCompound.setBoolean("hoeEnabled", hoeEnabled);
     }
 
     public void installUpgrade(String upgrade, ItemStack stack){
         readUpgrades(stack);
         if (!isUpgradeInstalled(stack, upgrade)){
-            if (upgrade.equals("Drill")) {
+            if (upgrade.equals("Drill"))
                 drill = true;
-                drillEnabled = true;
-            }
-            if (upgrade.equals("Chainsaw")) {
+            if (upgrade.equals("Chainsaw"))
                 chainsaw = true;
-                chainsawEnabled = true;
-            }
-            if (upgrade.equals("Digger")) {
+            if (upgrade.equals("Digger"))
                 digger = true;
-                diggerEnabled = true;
-            }
-            if (upgrade.equals("Hoe")) {
+            if (upgrade.equals("Hoe"))
                 hoe = true;
-                hoeEnabled = true;
-            }
         }
         writeUpgrades(stack);
     }
-
-    public void dissableUpgrade(String upgrade, ItemStack stack){
-        readUpgrades(stack);
-        if (upgrade.equals("Drill"))
-            drillEnabled = false;
-        if (upgrade.equals("Chainsaw"))
-            chainsawEnabled = false;
-        if (upgrade.equals("Digger"))
-            diggerEnabled = false;
-        if (upgrade.equals("Hoe"))
-            hoeEnabled = false;
-        writeUpgrades(stack);
-    }
-
-    public void enableUpgrade(String upgrade, ItemStack stack){
-        readUpgrades(stack);
-        if (upgrade.equals("Drill"))
-            drillEnabled = true;
-        if (upgrade.equals("Chainsaw"))
-            chainsawEnabled = true;
-        if (upgrade.equals("Digger"))
-            diggerEnabled = true;
-        if (upgrade.equals("Hoe"))
-            hoeEnabled = true;
-        writeUpgrades(stack);
-    }
-
 
     @Override
     public float getDigSpeed(ItemStack stack, Block block, int meta) {
@@ -207,29 +156,13 @@ public class ItemKineticTool extends ItemPoweredBase {
         readUpgrades(stack);
         list.add(Integer.toString((int) getEnergy()) + "/" + Integer.toString(getCapacity()) + " MJ");
         if (chainsaw)
-            if (chainsawEnabled) {
                 list.add(Utils.localize("item.toolUpgradeChainsaw.name") + " " + Utils.localize("tooltip.installed"));
-            } else {
-                list.add(Utils.localize("item.toolUpgradeChainsaw.name") + " " + Utils.localize("tooltip.deactivated"));
-            }
         if (digger)
-            if (diggerEnabled) {
                 list.add(Utils.localize("item.toolUpgradeDigger.name") + " " + Utils.localize("tooltip.installed"));
-            } else {
-                list.add(Utils.localize("item.toolUpgradeDigger.name") + " " + Utils.localize("tooltip.deactivated"));
-            }
         if (drill)
-            if (drillEnabled) {
                 list.add(Utils.localize("item.toolUpgradeDrill.name") + " " + Utils.localize("tooltip.installed"));
-            } else {
-                list.add(Utils.localize("item.toolUpgradeDrill.name") + " " + Utils.localize("tooltip.deactivated"));
-            }
         if (hoe)
-            if (hoeEnabled) {
                 list.add(Utils.localize("item.toolUpgradeHoe.name") + " " + Utils.localize("tooltip.installed"));
-            } else {
-                list.add(Utils.localize("item.toolUpgradeHoe.name") + " " + Utils.localize("tooltip.deactivated"));
-            }
     }
 
     public void setPlayer(EntityPlayer player) {
