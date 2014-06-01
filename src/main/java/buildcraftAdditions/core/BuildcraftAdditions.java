@@ -59,6 +59,9 @@ public class BuildcraftAdditions {
     public static Item powerCapsuleTier2;
     public static Item powerCapsuleTier3;
     public static Item ironStick;
+    public static Item goldStick;
+    public static Item diamondStick;
+    public static Item emeraldStick;
     public static Item toolCore;
     public static Item toolUpgradeHoe;
     public static Item toolUpgradeDigger;
@@ -123,6 +126,15 @@ public class BuildcraftAdditions {
         ironStick = new ItemIronStick();
         CoreProxy.proxy.registerItem(ironStick);
 
+        goldStick = new ItemGoldStick();
+        CoreProxy.proxy.registerItem(goldStick);
+
+        diamondStick = new ItemDiamondStick();
+        CoreProxy.proxy.registerItem(diamondStick);
+
+        emeraldStick = new ItemEmeraldStick();
+        CoreProxy.proxy.registerItem(emeraldStick);
+
         toolCore = new ItemToolCore();
         CoreProxy.proxy.registerItem(toolCore);
 
@@ -142,12 +154,17 @@ public class BuildcraftAdditions {
         CoreProxy.proxy.registerItem(kineticTool);
 
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
+        BuildcraftRecipes.assemblyTable.addRecipe(2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
+        BuildcraftRecipes.assemblyTable.addRecipe(3000, new ItemStack(diamondStick), new ItemStack(Items.diamond, 2));
         BuildcraftRecipes.assemblyTable.addRecipe(8000, new ItemStack(kineticTool), new ItemStack(Items.diamond, 3), ironStick, toolCore);
         BuildcraftRecipes.integrationTable.addRecipe(new ToolCoreRecepie());
         BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieDrillHead());
         BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieExcavationAttachment());
         BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieSawBlade());
         BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieTiller());
+        BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieGoldStick());
+        BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieDiamondStick());
+        BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieEmeraldStick());
     }
 
     @Mod.EventHandler

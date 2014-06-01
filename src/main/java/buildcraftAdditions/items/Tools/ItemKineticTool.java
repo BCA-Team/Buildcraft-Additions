@@ -24,7 +24,7 @@ import java.util.List;
  */
 
 public class ItemKineticTool extends ItemPoweredBase {
-    public boolean chainsaw, digger, drill, hoe, goldRod, diamondRod, emeraldRod;
+    public boolean chainsaw, digger, drill, hoe, goldStick, diamondStick, emeraldStick;
     public int upgradesAllowed;
 
     public ItemKineticTool(){
@@ -36,9 +36,9 @@ public class ItemKineticTool extends ItemPoweredBase {
         drill = false;
         hoe = false;
         upgradesAllowed = 1;
-        goldRod = false;
-        diamondRod = false;
-        emeraldRod = false;
+        goldStick = false;
+        diamondStick = false;
+        emeraldStick = false;
     }
 
     @Override
@@ -55,26 +55,26 @@ public class ItemKineticTool extends ItemPoweredBase {
         return stack;
     }
 
-    public boolean isRodInstalled (ItemStack stack, String rod){
+    public boolean isStickInstalled (ItemStack stack, String Stick){
         readUpgrades(stack);
-        if (rod.equals("goldRod"))
-            return goldRod;
-        if (rod.equals("diamondRod"))
-            return diamondRod;
-        if (rod.equals("emeraldRod"))
-            return emeraldRod;
+        if (Stick.equals("goldStick"))
+            return goldStick;
+        if (Stick.equals("diamondStick"))
+            return diamondStick;
+        if (Stick.equals("emeraldStick"))
+            return emeraldStick;
         return false;
     }
 
-    public void installRod(ItemStack stack, String rod){
+    public void installStick(ItemStack stack, String Stick){
         readUpgrades(stack);
-        if (!isRodInstalled(stack, rod)){
-            if (rod.equals("goldRod"))
-                goldRod = true;
-            if (rod.equals("diamondRod"))
-                diamondRod = true;
-            if (rod.equals("emeraldRod"))
-                emeraldRod = true;
+        if (!isStickInstalled(stack, Stick)){
+            if (Stick.equals("goldStick"))
+                goldStick = true;
+            if (Stick.equals("diamondStick"))
+                diamondStick = true;
+            if (Stick.equals("emeraldStick"))
+                emeraldStick = true;
         }
         upgradesAllowed++;
         writeUpgrades(stack);
@@ -101,18 +101,18 @@ public class ItemKineticTool extends ItemPoweredBase {
             stack.stackTagCompound.setBoolean("drill", false);
             stack.stackTagCompound.setBoolean("hoe", false);
             stack.stackTagCompound.setInteger("upgradesAllowed", 1);
-            stack.stackTagCompound.setBoolean("goldRod", false);
-            stack.stackTagCompound.setBoolean("diamondRod", false);
-            stack.stackTagCompound.setBoolean("emeraldRod", false);
+            stack.stackTagCompound.setBoolean("goldStick", false);
+            stack.stackTagCompound.setBoolean("diamondStick", false);
+            stack.stackTagCompound.setBoolean("emeraldStick", false);
         }
         chainsaw = stack.stackTagCompound.getBoolean("chainsaw");
         digger = stack.stackTagCompound.getBoolean("digger");
         drill = stack.stackTagCompound.getBoolean("drill");
         hoe = stack.stackTagCompound.getBoolean("hoe");
         upgradesAllowed = stack.stackTagCompound.getInteger("upgradesAllowed");
-        goldRod = stack.stackTagCompound.getBoolean("goldRod");
-        diamondRod = stack.stackTagCompound.getBoolean("diamondRod");
-        emeraldRod = stack.stackTagCompound.getBoolean("emeraldRod");
+        goldStick = stack.stackTagCompound.getBoolean("goldStick");
+        diamondStick = stack.stackTagCompound.getBoolean("diamondStick");
+        emeraldStick = stack.stackTagCompound.getBoolean("emeraldStick");
     }
 
     public void writeUpgrades (ItemStack stack){
@@ -121,9 +121,9 @@ public class ItemKineticTool extends ItemPoweredBase {
         stack.stackTagCompound.setBoolean("drill", drill);
         stack.stackTagCompound.setBoolean("hoe", hoe);
         stack.stackTagCompound.setInteger("upgradesAllowed", upgradesAllowed);
-        stack.stackTagCompound.setBoolean("goldRod", goldRod);
-        stack.stackTagCompound.setBoolean("diamondRod", diamondRod);
-        stack.stackTagCompound.setBoolean("emeraldRod", emeraldRod);
+        stack.stackTagCompound.setBoolean("goldStick", goldStick);
+        stack.stackTagCompound.setBoolean("diamondStick", diamondStick);
+        stack.stackTagCompound.setBoolean("emeraldStick", emeraldStick);
     }
 
     public boolean canInstallUpgrade(ItemStack stack){

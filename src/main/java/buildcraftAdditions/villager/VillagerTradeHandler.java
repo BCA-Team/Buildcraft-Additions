@@ -31,6 +31,9 @@ public class VillagerTradeHandler implements IVillageTradeHandler {
         recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2), null, new ItemStack(BuildcraftAdditions.powerCapsuleTier1, 1)));
         recipeList.add(new MerchantRecipe(new ItemStack(BuildcraftAdditions.powerCapsuleTier1, 1), new ItemStack(Items.emerald, 3), new ItemStack(BuildcraftAdditions.powerCapsuleTier2, 1)));
         recipeList.add(new MerchantRecipe(new ItemStack(BuildcraftAdditions.powerCapsuleTier2, 1), new ItemStack(Items.emerald, 10), new ItemStack(BuildcraftAdditions.powerCapsuleTier3, 1)));
+
+        //emerald stick
+        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 15), null, new ItemStack(BuildcraftAdditions.emeraldStick, 1)));
     }
 
 }
