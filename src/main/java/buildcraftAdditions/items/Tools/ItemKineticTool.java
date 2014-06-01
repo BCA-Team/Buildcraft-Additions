@@ -1,16 +1,10 @@
 package buildcraftAdditions.items.Tools;
 
-import buildcraft.core.network.IGuiReturnHandler;
-import buildcraft.core.network.PacketGuiReturn;
 import buildcraftAdditions.core.BuildcraftAdditions;
 import buildcraftAdditions.core.Utils;
 import buildcraftAdditions.core.Variables;
-import buildcraftAdditions.networking.MessageToolUpgrades;
-import buildcraftAdditions.networking.PacketHandeler;
-import com.sun.net.httpserver.Filter;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,10 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Copyright (c) 2014, AEnterprise
