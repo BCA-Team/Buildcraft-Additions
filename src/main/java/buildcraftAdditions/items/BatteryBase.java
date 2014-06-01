@@ -61,7 +61,7 @@ public abstract class BatteryBase extends Item{
     public abstract String getType();
 	
 	@Override
-	public int getDisplayDamage(ItemStack stack){
+	public int getDamage(ItemStack stack){
 		return (int) (getCapacity() - getEnergy(stack));
 	}
 	

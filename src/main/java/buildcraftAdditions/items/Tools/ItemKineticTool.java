@@ -128,7 +128,7 @@ public class ItemKineticTool extends ItemPoweredBase {
 
     public boolean canInstallUpgrade(ItemStack stack){
         readUpgrades(stack);
-        return upgradesAllowed != 0;
+        return upgradesAllowed >= 0;
     }
 
     public void installUpgrade(String upgrade, ItemStack stack){
