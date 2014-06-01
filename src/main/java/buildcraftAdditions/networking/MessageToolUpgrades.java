@@ -30,7 +30,6 @@ public class MessageToolUpgrades implements IMessage, IMessageHandler<MessageToo
         this.digger = tool.digger;
         this.drill = tool.drill;
         this.hoe = tool.hoe;
-        this.identificatie = tool.identificatie;
 
     }
 
@@ -44,7 +43,6 @@ public class MessageToolUpgrades implements IMessage, IMessageHandler<MessageToo
         this.diggerEnabled = buffer.readBoolean();
         this.drillEnabled = buffer.readBoolean();
         this.hoeEnabled = buffer.readBoolean();
-        this.identificatie = buffer.readLong();
     }
 
     @Override
@@ -53,7 +51,6 @@ public class MessageToolUpgrades implements IMessage, IMessageHandler<MessageToo
         buffer.writeBoolean(digger);
         buffer.writeBoolean(drill);
         buffer.writeBoolean(hoe);
-        buffer.writeLong(identificatie);
     }
 
     @Override

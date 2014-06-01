@@ -21,7 +21,7 @@ public class UpgradeRecepieExcavationAttachment implements IIntegrationRecipeMan
     public boolean isValidInputA(ItemStack inputA) {
         if (inputA != null && inputA.getItem() instanceof ItemKineticTool){
             ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
-            return !tool.isUpgradeInstalled(inputA, "Digger");
+            return tool.canInstallUpgrade(inputA) && !tool.isUpgradeInstalled(inputA, "Digger");
         }
         return false;
     }

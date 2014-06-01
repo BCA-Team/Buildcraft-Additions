@@ -37,7 +37,7 @@ minecraft {
  
 dependencies {
  
-    compile 'com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev'  // adds buildcraft to the dev env
+    compile 'com.mod-buildcraft:buildcraft:6.0.16:dev'  // adds buildcraft to the dev env
  
 }
  

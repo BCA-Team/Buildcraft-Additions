@@ -21,7 +21,7 @@ public class UpgradeRecepieSawBlade implements IIntegrationRecipeManager.IIntegr
     public boolean isValidInputA(ItemStack inputA) {
         if (inputA != null && inputA.getItem() instanceof ItemKineticTool){
             ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
-            return !tool.isUpgradeInstalled(inputA, "Chainsaw");
+            return tool.canInstallUpgrade(inputA) && !tool.isUpgradeInstalled(inputA, "Chainsaw");
         }
         return false;
     }

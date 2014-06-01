@@ -21,7 +21,7 @@ public class UpgradeRecepieTiller implements IIntegrationRecipeManager.IIntegrat
     public boolean isValidInputA(ItemStack inputA) {
         if (inputA != null && inputA.getItem() instanceof ItemKineticTool){
             ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
-            return !tool.isUpgradeInstalled(inputA, "Hoe");
+            return tool.canInstallUpgrade(inputA) && !tool.isUpgradeInstalled(inputA, "Hoe");
         }
         return false;
     }

@@ -31,9 +31,10 @@ import java.util.Random;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+
 public class ItemKineticTool extends ItemPoweredBase {
-    public boolean chainsaw, digger, drill, hoe;
-    public long identificatie;
+    public boolean chainsaw, digger, drill, hoe, goldRod, diamondRod, emeraldRod;
+    public int upgradesAllowed;
 
     public ItemKineticTool(){
         this.setUnlocalizedName("kineticMultiTool");
@@ -43,6 +44,10 @@ public class ItemKineticTool extends ItemPoweredBase {
         digger = false;
         drill = false;
         hoe = false;
+        upgradesAllowed = 1;
+        goldRod = false;
+        diamondRod = false;
+        emeraldRod = false;
     }
 
     @Override
@@ -50,9 +55,6 @@ public class ItemKineticTool extends ItemPoweredBase {
         if (stack.getTagCompound() == null)
             stack.setTagCompound(new NBTTagCompound());
         if (player.isSneaking()) {
-            Random random = new Random();
-            identificatie = random.nextLong();
-            stack.stackTagCompound.setLong("identificatie", identificatie);
             if (!world.isRemote)
                 player.openGui(BuildcraftAdditions.instance, Variables.GuiKineticTool, world, x, y, z);
         }
@@ -60,6 +62,31 @@ public class ItemKineticTool extends ItemPoweredBase {
         readBateries(stack, player);
         showDurabilityBar(stack);
         return stack;
+    }
+
+    public boolean isRodInstalled (ItemStack stack, String rod){
+        readUpgrades(stack);
+        if (rod.equals("goldRod"))
+            return goldRod;
+        if (rod.equals("diamondRod"))
+            return diamondRod;
+        if (rod.equals("emeraldRod"))
+            return emeraldRod;
+        return false;
+    }
+
+    public void installRod(ItemStack stack, String rod){
+        readUpgrades(stack);
+        if (!isRodInstalled(stack, rod)){
+            if (rod.equals("goldRod"))
+                goldRod = true;
+            if (rod.equals("diamondRod"))
+                diamondRod = true;
+            if (rod.equals("emeraldRod"))
+                emeraldRod = true;
+        }
+        upgradesAllowed++;
+        writeUpgrades(stack);
     }
 
     public boolean isUpgradeInstalled(ItemStack stack, String upgrade){
@@ -76,17 +103,25 @@ public class ItemKineticTool extends ItemPoweredBase {
     }
 
     public void readUpgrades (ItemStack stack){
-        if (stack.stackTagCompound == null) {
+        if (stack.stackTagCompound == null || !stack.stackTagCompound.hasKey("chainsaw")) {
             stack.stackTagCompound = new NBTTagCompound();
             stack.stackTagCompound.setBoolean("chainsaw", false);
             stack.stackTagCompound.setBoolean("digger", false);
             stack.stackTagCompound.setBoolean("drill", false);
             stack.stackTagCompound.setBoolean("hoe", false);
+            stack.stackTagCompound.setInteger("upgradesAllowed", 1);
+            stack.stackTagCompound.setBoolean("goldRod", false);
+            stack.stackTagCompound.setBoolean("diamondRod", false);
+            stack.stackTagCompound.setBoolean("emeraldRod", false);
         }
         chainsaw = stack.stackTagCompound.getBoolean("chainsaw");
         digger = stack.stackTagCompound.getBoolean("digger");
         drill = stack.stackTagCompound.getBoolean("drill");
         hoe = stack.stackTagCompound.getBoolean("hoe");
+        upgradesAllowed = stack.stackTagCompound.getInteger("upgradesAllowed");
+        goldRod = stack.stackTagCompound.getBoolean("goldRod");
+        diamondRod = stack.stackTagCompound.getBoolean("diamondRod");
+        emeraldRod = stack.stackTagCompound.getBoolean("emeraldRod");
     }
 
     public void writeUpgrades (ItemStack stack){
@@ -94,6 +129,15 @@ public class ItemKineticTool extends ItemPoweredBase {
         stack.stackTagCompound.setBoolean("digger", digger);
         stack.stackTagCompound.setBoolean("drill", drill);
         stack.stackTagCompound.setBoolean("hoe", hoe);
+        stack.stackTagCompound.setInteger("upgradesAllowed", upgradesAllowed);
+        stack.stackTagCompound.setBoolean("goldRod", goldRod);
+        stack.stackTagCompound.setBoolean("diamondRod", diamondRod);
+        stack.stackTagCompound.setBoolean("emeraldRod", emeraldRod);
+    }
+
+    public boolean canInstallUpgrade(ItemStack stack){
+        readUpgrades(stack);
+        return upgradesAllowed != 0;
     }
 
     public void installUpgrade(String upgrade, ItemStack stack){
@@ -107,6 +151,7 @@ public class ItemKineticTool extends ItemPoweredBase {
                 digger = true;
             if (upgrade.equals("Hoe"))
                 hoe = true;
+            upgradesAllowed--;
         }
         writeUpgrades(stack);
     }

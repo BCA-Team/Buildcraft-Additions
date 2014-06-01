@@ -2,6 +2,7 @@ package buildcraftAdditions.items.Tools;
 
 import buildcraft.api.recipes.IIntegrationRecipeManager;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -22,7 +23,7 @@ public class UpgradeRecepieDrillHead implements IIntegrationRecipeManager.IInteg
     public boolean isValidInputA(ItemStack inputA) {
         if (inputA != null && inputA.getItem() instanceof ItemKineticTool){
             ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
-            return !tool.isUpgradeInstalled(inputA, "Drill");
+            return tool.canInstallUpgrade(inputA) && !tool.isUpgradeInstalled(inputA, "Drill");
         }
         return false;
     }
