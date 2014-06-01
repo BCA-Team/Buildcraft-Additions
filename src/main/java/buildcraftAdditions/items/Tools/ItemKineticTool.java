@@ -31,6 +31,7 @@ public class ItemKineticTool extends ItemPoweredBase {
         this.setUnlocalizedName("kineticMultiTool");
         this.setCreativeTab(BuildcraftAdditions.bcadditions);
         this.setMaxStackSize(1);
+        this.setFull3D();
         chainsaw = false;
         digger = false;
         drill = false;
@@ -39,6 +40,11 @@ public class ItemKineticTool extends ItemPoweredBase {
         goldStick = false;
         diamondStick = false;
         emeraldStick = false;
+    }
+
+    @Override
+    public boolean isItemTool(ItemStack stack){
+        return true;
     }
 
     @Override
@@ -128,7 +134,7 @@ public class ItemKineticTool extends ItemPoweredBase {
 
     public boolean canInstallUpgrade(ItemStack stack){
         readUpgrades(stack);
-        return upgradesAllowed >= 0;
+        return upgradesAllowed > 0;
     }
 
     public void installUpgrade(String upgrade, ItemStack stack){
@@ -199,6 +205,7 @@ public class ItemKineticTool extends ItemPoweredBase {
                 list.add(Utils.localize("item.toolUpgradeDrill.name") + " " + Utils.localize("tooltip.installed"));
         if (hoe)
                 list.add(Utils.localize("item.toolUpgradeHoe.name") + " " + Utils.localize("tooltip.installed"));
+        list.add("Upgrades possible: " + upgradesAllowed);
     }
 
     public void setPlayer(EntityPlayer player) {

@@ -23,7 +23,7 @@ public class UpgradeRecepieDiamondStick implements IIntegrationRecipeManager.IIn
     public boolean isValidInputA(ItemStack inputA) {
         if (inputA != null && inputA.getItem() instanceof ItemKineticTool){
             ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
-            return !tool.isStickInstalled(inputA, "diamondStick");
+            return !tool.isStickInstalled(inputA, "diamondStick") && tool.isStickInstalled(inputA, "goldStick");
         }
         return false;
     }

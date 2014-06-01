@@ -33,6 +33,11 @@ public class ItemPoweredBase extends Item {
 	
 	public ItemPoweredBase(){
 	}
+
+    @Override
+    public boolean isItemTool(ItemStack stack){
+        return true;
+    }
 	
 	public void decreaseEnergy(ItemStack stack, double energy, EntityPlayer player){
 		if (energyB1 - energy <= 0){

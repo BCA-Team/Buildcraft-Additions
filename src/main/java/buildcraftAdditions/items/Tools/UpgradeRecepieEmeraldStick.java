@@ -2,7 +2,6 @@ package buildcraftAdditions.items.Tools;
 
 import buildcraft.api.recipes.IIntegrationRecipeManager;
 import buildcraft.silicon.ItemRedstoneChipset;
-import buildcraftAdditions.items.ItemDiamondStick;
 import buildcraftAdditions.items.ItemEmeraldStick;
 import net.minecraft.item.ItemStack;
 
@@ -24,7 +23,7 @@ public class UpgradeRecepieEmeraldStick implements IIntegrationRecipeManager.IIn
     public boolean isValidInputA(ItemStack inputA) {
         if (inputA != null && inputA.getItem() instanceof ItemKineticTool){
             ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
-            return !tool.isStickInstalled(inputA, "emeraldStick");
+            return !tool.isStickInstalled(inputA, "emeraldStick") && tool.isStickInstalled(inputA, "diamondStick");
         }
         return false;
     }
