@@ -19,7 +19,7 @@ import buildcraftAdditions.items.BatteryBase;
 
 public class TileChargingStation extends TileBuildCraft implements IInventory {
 	
-	@MjBattery(maxCapacity=1000, maxReceivedPerCycle = 40)
+	@MjBattery(maxCapacity=10000, maxReceivedPerCycle = 100)
 	double energy = 0;
 	private final SimpleInventory inventory = new SimpleInventory(1, "ChargingStation", 1);
 	
@@ -29,7 +29,7 @@ public class TileChargingStation extends TileBuildCraft implements IInventory {
 	
 	@Override
 	public void updateEntity() {
-		int charge = 40;
+		int charge = 100;
 		ItemStack stack = inventory.getStackInSlot(0);
 		if (stack==null)
 			return;

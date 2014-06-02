@@ -32,14 +32,12 @@ public abstract class BatteryBase extends Item{
 		if (energyStored < 0)
 			energyStored=0;
 		stack.stackTagCompound.setDouble("energy", Math.floor(energyStored));
-		this.setDamage(stack, (int) (getCapacity() - energyStored));
 	}
 	
 	public void increaseEnergy(ItemStack stack, double energy){
 		double energyStored = getEnergy(stack);
 		energyStored +=energy;
 		stack.stackTagCompound.setDouble("energy", Math.round(energyStored));
-		this.setDamage(stack, (int) (getCapacity() - energyStored));
 	}
 	
 	public double getEnergy(ItemStack stack){
@@ -60,10 +58,7 @@ public abstract class BatteryBase extends Item{
 
     public abstract String getType();
 	
-	@Override
-	public int getDamage(ItemStack stack){
-		return (int) (getCapacity() - getEnergy(stack));
-	}
+
 	
 	@Override
 	@SideOnly(Side.CLIENT)

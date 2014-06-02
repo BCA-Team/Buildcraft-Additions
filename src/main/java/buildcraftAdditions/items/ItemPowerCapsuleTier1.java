@@ -22,7 +22,7 @@ public class ItemPowerCapsuleTier1 extends BatteryBase {
 		this.maxStackSize = 1;
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		this.setUnlocalizedName("PowerCapsuleTier1");
-		this.setMaxDamage(1000);
+		this.setMaxDamage(3000);
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class ItemPowerCapsuleTier1 extends BatteryBase {
     }
 
     @Override
-	public int getDisplayDamage(ItemStack stack){
+	public int getDamage(ItemStack stack){
 		return (int) (getCapacity() - getEnergy(stack));
 	}
 
