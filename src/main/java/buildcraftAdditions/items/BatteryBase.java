@@ -25,7 +25,8 @@ public abstract class BatteryBase extends Item{
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		this.setUnlocalizedName("batteryBase");
 	}
-	
+
+
 	public void decreaseEnergy(ItemStack stack, double energy){
 		double energyStored = getEnergy(stack);
 		energyStored -= energy;
@@ -57,8 +58,21 @@ public abstract class BatteryBase extends Item{
 	public abstract int getCapacity();
 
     public abstract String getType();
-	
 
+    @Override
+    public boolean isDamageable(){
+        return true;
+    }
+
+    @Override
+    public boolean showDurabilityBar(ItemStack stack){
+        return true;
+    }
+
+    @Override
+    public double getDurabilityForDisplay(ItemStack stack){
+        return getCapacity()/getEnergy(stack);
+    }
 	
 	@Override
 	@SideOnly(Side.CLIENT)
