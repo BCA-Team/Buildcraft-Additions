@@ -72,7 +72,7 @@ public class GuiChargingStation extends GuiBuildCraft{
 
 			@Override
 			public String getTooltip() {
-				return String.format("%.1f", chargingStation.getProgress()*6.25)+"%";
+				return String.format("%.1f", chargingStation.getProgress()*100)+"%";
 			}
 		}
 
