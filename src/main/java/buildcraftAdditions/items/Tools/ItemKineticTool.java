@@ -7,10 +7,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -26,6 +28,8 @@ import java.util.List;
 public class ItemKineticTool extends ItemPoweredBase {
     public boolean chainsaw, digger, drill, hoe, goldStick, diamondStick, emeraldStick;
     public int upgradesAllowed;
+    public IIcon icon, iconAlt, overlayChainsaw, overlayDigger, overlayDrill, overlayHoe;
+    public String lastUsedMode;
 
     public ItemKineticTool(){
         this.setUnlocalizedName("kineticMultiTool");
@@ -40,6 +44,7 @@ public class ItemKineticTool extends ItemPoweredBase {
         goldStick = false;
         diamondStick = false;
         emeraldStick = false;
+        lastUsedMode = "nothing";
     }
 
     @Override
@@ -110,6 +115,7 @@ public class ItemKineticTool extends ItemPoweredBase {
             stack.stackTagCompound.setBoolean("goldStick", false);
             stack.stackTagCompound.setBoolean("diamondStick", false);
             stack.stackTagCompound.setBoolean("emeraldStick", false);
+            stack.stackTagCompound.setString("lastUsedMode", "nothing");
         }
         chainsaw = stack.stackTagCompound.getBoolean("chainsaw");
         digger = stack.stackTagCompound.getBoolean("digger");
@@ -119,6 +125,7 @@ public class ItemKineticTool extends ItemPoweredBase {
         goldStick = stack.stackTagCompound.getBoolean("goldStick");
         diamondStick = stack.stackTagCompound.getBoolean("diamondStick");
         emeraldStick = stack.stackTagCompound.getBoolean("emeraldStick");
+        lastUsedMode = stack.stackTagCompound.getString("lastUsedMode");
     }
 
     public void writeUpgrades (ItemStack stack){
@@ -130,6 +137,7 @@ public class ItemKineticTool extends ItemPoweredBase {
         stack.stackTagCompound.setBoolean("goldStick", goldStick);
         stack.stackTagCompound.setBoolean("diamondStick", diamondStick);
         stack.stackTagCompound.setBoolean("emeraldStick", emeraldStick);
+        stack.stackTagCompound.setString("lastUsedMode", lastUsedMode);
     }
 
     public boolean canInstallUpgrade(ItemStack stack){
@@ -159,14 +167,17 @@ public class ItemKineticTool extends ItemPoweredBase {
         if (getEnergy() >= block.getBlockHardness(world, x, y, z)) {
             if (chainsaw && (block.getHarvestTool(0) == "axe" || block.getMaterial() == Material.leaves || block.getMaterial() == Material.wood || block.getMaterial() == Material.vine)) {
                 stack.getItem().setHarvestLevel("axe", 3);
+                lastUsedMode="axe";
                 return 30;
             }
             if (digger && (block.getHarvestTool(0) == "shovel" || block.getMaterial() == Material.clay || block.getMaterial() == Material.grass || block.getMaterial() == Material.ground || block.getMaterial() == Material.snow || block.getMaterial() == Material.sand || block.getMaterial() == Material.craftedSnow)) {
                 stack.getItem().setHarvestLevel("shovel", 3);
+                lastUsedMode="shovel";
                 return 10;
             }
             if(drill && (block.getHarvestTool(0) == "pickaxe" || block.getMaterial() == Material.iron || block.getMaterial() == Material.rock)) {
                 stack.getItem().setHarvestLevel("pickaxe", 3);
+                lastUsedMode="pickaxe";
                 return 40;
             }
         }
@@ -195,6 +206,7 @@ public class ItemKineticTool extends ItemPoweredBase {
                 if ((world.getBlock(i, y, j) == Blocks.dirt || world.getBlock(i, y, j) == Blocks.grass) && getEnergy() >=5) {
                     world.setBlock(i, y, j, Blocks.farmland);
                     decreaseEnergy(stack, 5, player);
+                    lastUsedMode="hoe";
                     tilted = true;
                 }
             }
@@ -221,5 +233,22 @@ public class ItemKineticTool extends ItemPoweredBase {
 
     public void setPlayer(EntityPlayer player) {
         this.player = player;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister par1IconRegister) {
+        overlayChainsaw = par1IconRegister.registerIcon("bcadditions:bit_chainsaw");
+        overlayDigger = par1IconRegister.registerIcon("bcadditions:bit_digger");
+        overlayDrill = par1IconRegister.registerIcon("bcadditions:bit_drill");
+        overlayHoe = par1IconRegister.registerIcon("bcadditions:bit_hoe");
+        icon = par1IconRegister.registerIcon("bcadditions:base_tool");
+        iconAlt = par1IconRegister.registerIcon("bcadditions:base_tool_alt");
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamage(int damage) {
+        return icon;
     }
 }

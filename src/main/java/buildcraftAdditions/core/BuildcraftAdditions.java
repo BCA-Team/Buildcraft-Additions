@@ -67,7 +67,7 @@ public class BuildcraftAdditions {
     public static Item toolUpgradeDigger;
     public static Item toolUpgradeDrill;
     public static Item toolUpgradeChainsaw;
-    public static Item kineticTool;
+    public static ItemKineticTool kineticTool;
     public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 
     @Instance(value="bcadditions")
