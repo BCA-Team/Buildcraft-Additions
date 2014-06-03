@@ -174,6 +174,17 @@ public class ItemKineticTool extends ItemPoweredBase {
     }
 
     @Override
+    public boolean showDurabilityBar(ItemStack stack){
+        return true;
+    }
+
+    @Override
+    public double getDurabilityForDisplay(ItemStack stack) {
+        readUpgrades(stack);
+        return (getCapacity() - getEnergy()) / getCapacity();
+    }
+
+    @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int geenIdee, float hitX, float hitY, float hitZ){
         readUpgrades(stack);
         if (!hoe)

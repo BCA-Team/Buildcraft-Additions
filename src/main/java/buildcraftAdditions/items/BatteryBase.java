@@ -60,18 +60,13 @@ public abstract class BatteryBase extends Item{
     public abstract String getType();
 
     @Override
-    public boolean isDamageable(){
-        return true;
-    }
-
-    @Override
     public boolean showDurabilityBar(ItemStack stack){
         return true;
     }
 
     @Override
     public double getDurabilityForDisplay(ItemStack stack){
-        return getCapacity()/getEnergy(stack);
+        return (getCapacity() - getEnergy(stack))/getCapacity();
     }
 	
 	@Override
