@@ -30,6 +30,8 @@ public class ItemKineticTool extends ItemPoweredBase {
     public boolean chainsaw, digger, drill, hoe, goldStick, diamondStick, emeraldStick;
     public int upgradesAllowed;
     public IIcon icon, iconAlt, overlayChainsaw, overlayDigger, overlayDrill, overlayHoe;
+    String lastMode;
+    public IIcon iconChainsaw, iconDigger, iconDrill, iconHoe;
 
     public ItemKineticTool(){
         this.setUnlocalizedName("kineticMultiTool");
@@ -44,6 +46,7 @@ public class ItemKineticTool extends ItemPoweredBase {
         goldStick = false;
         diamondStick = false;
         emeraldStick = false;
+        lastMode = "nothing";
     }
 
     @Override
@@ -129,6 +132,7 @@ public class ItemKineticTool extends ItemPoweredBase {
         goldStick = stack.stackTagCompound.getBoolean("goldStick");
         diamondStick = stack.stackTagCompound.getBoolean("diamondStick");
         emeraldStick = stack.stackTagCompound.getBoolean("emeraldStick");
+        lastMode = stack.stackTagCompound.getString("lastUsedMode");
     }
 
     public void writeUpgrades (ItemStack stack){
@@ -145,6 +149,7 @@ public class ItemKineticTool extends ItemPoweredBase {
 
     public void setLastUsedMode(ItemStack stack, String string){
         stack.stackTagCompound.setString("lastUsedMode", string);
+        lastMode = string;
     }
 
     public boolean canInstallUpgrade(ItemStack stack){
@@ -252,11 +257,24 @@ public class ItemKineticTool extends ItemPoweredBase {
         overlayHoe = par1IconRegister.registerIcon("bcadditions:bit_hoe");
         icon = par1IconRegister.registerIcon("bcadditions:base_tool");
         iconAlt = par1IconRegister.registerIcon("bcadditions:base_tool_alt");
+        iconChainsaw = par1IconRegister.registerIcon("bcadditions:");
+        iconDigger = par1IconRegister.registerIcon("bcadditions:");
+        iconDrill = par1IconRegister.registerIcon("bcadditions:");
+        iconHoe = par1IconRegister.registerIcon("bcadditions:");
+
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIconFromDamage(int damage) {
+        if (lastMode.equals("pickaxe"))
+            return iconDrill;
+        if (lastMode.equals("axe"))
+            return iconChainsaw;
+        if (lastMode.equals("shovel"))
+            return iconDigger;
+        if (lastMode.equals("hoe"))
+            return iconHoe;
         return icon;
     }
 }

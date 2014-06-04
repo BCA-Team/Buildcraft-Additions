@@ -9,7 +9,6 @@ package buildcraftAdditions.proxy;
  */
 
 import buildcraftAdditions.client.render.CanisterItemRender;
-import buildcraftAdditions.client.render.KineticToolItemRender;
 import buildcraftAdditions.core.BuildcraftAdditions;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -21,6 +20,5 @@ public class ClientProxy extends CommonProxy {
     	MinecraftForgeClient.registerItemRenderer(BuildcraftAdditions.ironCanister, new CanisterItemRender(BuildcraftAdditions.ironCanister));
     	MinecraftForgeClient.registerItemRenderer(BuildcraftAdditions.goldCanister, new CanisterItemRender(BuildcraftAdditions.goldCanister));
     	MinecraftForgeClient.registerItemRenderer(BuildcraftAdditions.diamondCanister, new CanisterItemRender(BuildcraftAdditions.diamondCanister));
-        MinecraftForgeClient.registerItemRenderer(BuildcraftAdditions.kineticTool, new KineticToolItemRender(BuildcraftAdditions.kineticTool));
     }
 }
