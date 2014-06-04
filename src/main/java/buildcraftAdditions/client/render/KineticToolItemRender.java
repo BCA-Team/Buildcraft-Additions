@@ -44,7 +44,7 @@ public class KineticToolItemRender implements IItemRenderer {
         IIcon overlayDigger = tool.overlayDigger;
         IIcon overlayDrill = tool.overlayDrill;
         IIcon overlayHoe = tool.overlayHoe;
-        IIcon cannister = tool.getIconFromDamage(0);
+        IIcon toolIcon = tool.getIconFromDamage(0);
 
         GL11.glPushMatrix();
         if (type.equals(ItemRenderType.EQUIPPED)) {
@@ -63,22 +63,25 @@ public class KineticToolItemRender implements IItemRenderer {
             GL11.glRotated(180.0D, 0.0D, 0.0D, 1.0D);
         }
 
-        if (tool.lastUsedMode.equals("axe")){
+        String lastUsedMode ="";
+        if (item.stackTagCompound != null && item.stackTagCompound.hasKey("lastUsedMode"))
+            lastUsedMode = item.stackTagCompound.getString("lastUsedMode");
+        if (lastUsedMode.equals("axe")){
             Minecraft.getMinecraft().renderEngine.bindTexture(ITEM_TEXTURE);
             renderMask(overlayChainsaw, overlayChainsaw, type);
         }
 
-        //if (tool.lastUsedMode.equals("shovel")){
+        if (lastUsedMode.equals("shovel")){
             Minecraft.getMinecraft().renderEngine.bindTexture(ITEM_TEXTURE);
             renderMask(overlayDigger, overlayDigger, type);
-        //}
+        }
 
-        if (tool.lastUsedMode.equals("pickaxe")){
+        if (lastUsedMode.equals("pickaxe")){
             Minecraft.getMinecraft().renderEngine.bindTexture(ITEM_TEXTURE);
             renderMask(overlayDrill, overlayDrill, type);
         }
 
-        if (tool.lastUsedMode.equals("hoe")){
+        if (lastUsedMode.equals("hoe")){
             Minecraft.getMinecraft().renderEngine.bindTexture(ITEM_TEXTURE);
             renderMask(overlayHoe, overlayHoe, type);
         }
@@ -86,9 +89,9 @@ public class KineticToolItemRender implements IItemRenderer {
         Minecraft.getMinecraft().renderEngine.bindTexture(ITEM_TEXTURE);
 
         if (!type.equals(ItemRenderType.INVENTORY))
-            ItemRenderer.renderItemIn2D(Tessellator.instance, cannister.getMinU(), cannister.getMaxV(), cannister.getMaxU(), cannister.getMinV(), cannister.getIconWidth(), cannister.getIconHeight(), 0.0625F);
+            ItemRenderer.renderItemIn2D(Tessellator.instance, toolIcon.getMinU(), toolIcon.getMaxV(), toolIcon.getMaxU(), toolIcon.getMinV(), toolIcon.getIconWidth(), toolIcon.getIconHeight(), 0.0625F);
         else
-            renderIcon(cannister, 0.0D);
+            renderIcon(toolIcon, 0.0D);
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glPopMatrix();
@@ -140,11 +143,13 @@ public class KineticToolItemRender implements IItemRenderer {
             preRenderWorldIcon(subIcon, -0.0635D);
         tessellator.draw();
 
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glDepthMask(true);
+
         GL11.glDepthFunc(GL11.GL_LEQUAL);
         GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDepthMask(true);
+
     }
 
     private void preRenderInvIcon(IIcon icon, double z) {

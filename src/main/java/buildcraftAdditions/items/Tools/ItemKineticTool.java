@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -29,7 +30,6 @@ public class ItemKineticTool extends ItemPoweredBase {
     public boolean chainsaw, digger, drill, hoe, goldStick, diamondStick, emeraldStick;
     public int upgradesAllowed;
     public IIcon icon, iconAlt, overlayChainsaw, overlayDigger, overlayDrill, overlayHoe;
-    public String lastUsedMode;
 
     public ItemKineticTool(){
         this.setUnlocalizedName("kineticMultiTool");
@@ -44,7 +44,11 @@ public class ItemKineticTool extends ItemPoweredBase {
         goldStick = false;
         diamondStick = false;
         emeraldStick = false;
-        lastUsedMode = "nothing";
+    }
+
+    @Override
+    public void onUpdate(ItemStack stack, World world, Entity entity, int geenIdee, boolean isMap){
+        stack.getItemDamage();
     }
 
     @Override
@@ -125,7 +129,6 @@ public class ItemKineticTool extends ItemPoweredBase {
         goldStick = stack.stackTagCompound.getBoolean("goldStick");
         diamondStick = stack.stackTagCompound.getBoolean("diamondStick");
         emeraldStick = stack.stackTagCompound.getBoolean("emeraldStick");
-        lastUsedMode = stack.stackTagCompound.getString("lastUsedMode");
     }
 
     public void writeUpgrades (ItemStack stack){
@@ -137,7 +140,11 @@ public class ItemKineticTool extends ItemPoweredBase {
         stack.stackTagCompound.setBoolean("goldStick", goldStick);
         stack.stackTagCompound.setBoolean("diamondStick", diamondStick);
         stack.stackTagCompound.setBoolean("emeraldStick", emeraldStick);
-        stack.stackTagCompound.setString("lastUsedMode", lastUsedMode);
+
+    }
+
+    public void setLastUsedMode(ItemStack stack, String string){
+        stack.stackTagCompound.setString("lastUsedMode", string);
     }
 
     public boolean canInstallUpgrade(ItemStack stack){
@@ -165,19 +172,19 @@ public class ItemKineticTool extends ItemPoweredBase {
     public float getDigSpeed(ItemStack stack, Block block, int meta) {
         readUpgrades(stack);
         if (getEnergy() >= block.getBlockHardness(world, x, y, z)) {
-            if (chainsaw && (block.getHarvestTool(0) == "axe" || block.getMaterial() == Material.leaves || block.getMaterial() == Material.wood || block.getMaterial() == Material.vine)) {
+            if (chainsaw && (block.getHarvestTool(3).equals("axe") || block.getMaterial() == Material.leaves || block.getMaterial() == Material.wood || block.getMaterial() == Material.vine)) {
                 stack.getItem().setHarvestLevel("axe", 3);
-                lastUsedMode="axe";
+                setLastUsedMode(stack, "axe");
                 return 30;
             }
-            if (digger && (block.getHarvestTool(0) == "shovel" || block.getMaterial() == Material.clay || block.getMaterial() == Material.grass || block.getMaterial() == Material.ground || block.getMaterial() == Material.snow || block.getMaterial() == Material.sand || block.getMaterial() == Material.craftedSnow)) {
+            if (digger && (block.getHarvestTool(3).equals("shovel") || block.getMaterial() == Material.clay || block.getMaterial() == Material.grass || block.getMaterial() == Material.ground || block.getMaterial() == Material.snow || block.getMaterial() == Material.sand || block.getMaterial() == Material.craftedSnow)) {
                 stack.getItem().setHarvestLevel("shovel", 3);
-                lastUsedMode="shovel";
+                setLastUsedMode(stack,"shovel");
                 return 10;
             }
-            if(drill && (block.getHarvestTool(0) == "pickaxe" || block.getMaterial() == Material.iron || block.getMaterial() == Material.rock)) {
+            if(drill && (block.getHarvestTool(3).equals("pickaxe") || block.getHarvestTool(0) == null || block.getMaterial() == Material.iron || block.getMaterial() == Material.rock)) {
                 stack.getItem().setHarvestLevel("pickaxe", 3);
-                lastUsedMode="pickaxe";
+                setLastUsedMode(stack, "pickaxe");
                 return 40;
             }
         }
@@ -206,7 +213,7 @@ public class ItemKineticTool extends ItemPoweredBase {
                 if ((world.getBlock(i, y, j) == Blocks.dirt || world.getBlock(i, y, j) == Blocks.grass) && getEnergy() >=5) {
                     world.setBlock(i, y, j, Blocks.farmland);
                     decreaseEnergy(stack, 5, player);
-                    lastUsedMode="hoe";
+                    setLastUsedMode(stack,"hoe");
                     tilted = true;
                 }
             }
