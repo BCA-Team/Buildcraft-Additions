@@ -21,7 +21,7 @@ public class ItemIronStick extends Item {
     public ItemIronStick(){
         super();
         this.setCreativeTab(BuildcraftAdditions.bcadditions);
-        this.setUnlocalizedName("ironStick");
+        this.setUnlocalizedName("stickIron");
     }
 
     @Override

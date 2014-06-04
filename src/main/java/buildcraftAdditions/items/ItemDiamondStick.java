@@ -20,7 +20,7 @@ public class ItemDiamondStick extends Item {
     public ItemDiamondStick(){
         super();
         this.setCreativeTab(BuildcraftAdditions.bcadditions);
-        this.setUnlocalizedName("diamondStick");
+        this.setUnlocalizedName("stickDiamond");
     }
 
     @Override

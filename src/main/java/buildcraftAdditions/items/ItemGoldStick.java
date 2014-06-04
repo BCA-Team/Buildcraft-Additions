@@ -20,7 +20,7 @@ public class ItemGoldStick extends Item {
     public ItemGoldStick(){
         super();
         this.setCreativeTab(BuildcraftAdditions.bcadditions);
-        this.setUnlocalizedName("goldStick");
+        this.setUnlocalizedName("stickGold");
     }
 
     @Override

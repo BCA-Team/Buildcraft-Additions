@@ -20,7 +20,7 @@ public class ItemEmeraldStick extends Item {
     public ItemEmeraldStick(){
         super();
         this.setCreativeTab(BuildcraftAdditions.bcadditions);
-        this.setUnlocalizedName("emeraldStick");
+        this.setUnlocalizedName("stickEmerald");
     }
 
     @Override
