@@ -257,10 +257,10 @@ public class ItemKineticTool extends ItemPoweredBase {
         overlayHoe = par1IconRegister.registerIcon("bcadditions:bit_hoe");
         icon = par1IconRegister.registerIcon("bcadditions:base_tool");
         iconAlt = par1IconRegister.registerIcon("bcadditions:base_tool_alt");
-        iconChainsaw = par1IconRegister.registerIcon("bcadditions:");
-        iconDigger = par1IconRegister.registerIcon("bcadditions:");
-        iconDrill = par1IconRegister.registerIcon("bcadditions:");
-        iconHoe = par1IconRegister.registerIcon("bcadditions:");
+        iconChainsaw = par1IconRegister.registerIcon("bcadditions:chainsaw");
+        iconDigger = par1IconRegister.registerIcon("bcadditions:digger");
+        iconDrill = par1IconRegister.registerIcon("bcadditions:drill");
+        iconHoe = par1IconRegister.registerIcon("bcadditions:hoe");
 
     }
 
