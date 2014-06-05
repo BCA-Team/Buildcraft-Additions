@@ -177,18 +177,21 @@ public class ItemKineticTool extends ItemPoweredBase {
     public float getDigSpeed(ItemStack stack, Block block, int meta) {
         readUpgrades(stack);
         readBateries(stack, player);
+        String harvestTool = "nothing";
+        if (block.getHarvestTool(0) != null)
+            harvestTool = block.getHarvestTool(0);
         if (getEnergy() >= block.getBlockHardness(world, x, y, z)) {
-            if(drill && (block.getHarvestTool(0) == null ||(block.getHarvestTool(0).equals("pickaxe")) || block.getMaterial() == Material.iron || block.getMaterial() == Material.rock)) {
+            if(drill && (harvestTool.equals("pickaxe") || block.getMaterial() == Material.iron || block.getMaterial() == Material.rock)) {
                 stack.getItem().setHarvestLevel("pickaxe", 3);
                 setLastUsedMode(stack, "pickaxe");
                 return 40;
             }
-            if (chainsaw && (block.getHarvestTool(0).equals("axe") || block.getMaterial() == Material.leaves || block.getMaterial() == Material.wood || block.getMaterial() == Material.vine)) {
+            if (chainsaw && (harvestTool.equals("axe") || block.getMaterial() == Material.leaves || block.getMaterial() == Material.wood || block.getMaterial() == Material.vine)) {
                 stack.getItem().setHarvestLevel("axe", 3);
                 setLastUsedMode(stack, "axe");
                 return 30;
             }
-            if (digger && (block.getHarvestTool(0).equals("shovel") || block.getMaterial() == Material.clay || block.getMaterial() == Material.grass || block.getMaterial() == Material.ground || block.getMaterial() == Material.snow || block.getMaterial() == Material.sand || block.getMaterial() == Material.craftedSnow)) {
+            if (digger && (harvestTool.equals("shovel") || block.getMaterial() == Material.clay || block.getMaterial() == Material.grass || block.getMaterial() == Material.ground || block.getMaterial() == Material.snow || block.getMaterial() == Material.sand || block.getMaterial() == Material.craftedSnow)) {
                 stack.getItem().setHarvestLevel("shovel", 3);
                 setLastUsedMode(stack,"shovel");
                 return 10;
