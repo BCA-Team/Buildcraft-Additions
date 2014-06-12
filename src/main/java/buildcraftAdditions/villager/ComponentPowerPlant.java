@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Random;
 
-import buildcraft.BuildCraftBuilders;
 import buildcraft.api.blueprints.BlueprintDeployer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
@@ -27,7 +26,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 	public static final ResourceLocation redstoneEngine = new ResourceLocation("bcadditions", "blueprints/Redstone-Engine-df2e537ac33b4d684e783cd4b41653bc872d638e1f0c1afecada2a30e670aa39.bpt");
 	public static final ResourceLocation stirlingEngine = new ResourceLocation("bcadditions", "blueprints/Stirling-Engine-6a8295b667031a4687a626ecb7c6bef997dc7e62c19f9e0941c64b33198f87d4.bpt");
-	
+
 	private int averageGroundLevel = -1;
 	
 	public ComponentPowerPlant(){}
@@ -79,13 +78,11 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
         int i = this.boundingBox.minX;
         int j = this.boundingBox.minY;
         int k = this.boundingBox.minZ;
-        BlueprintDeployer.instance.deployBlueprintFromFileStream(world, i, j-3, k, ForgeDirection.getOrientation(this.getMetadataWithOffset(BuildCraftBuilders.builderBlock, 0)), data);
+        BlueprintDeployer.instance.deployBlueprintFromFileStream(world, i, j-3, k, ForgeDirection.EAST, data);
         } catch (Throwable e){
         	e.printStackTrace();
         }
-        
-        
-        	
+
         spawnVillagers(world, sbb, 0, 0, 0, 2);
         return true;
     }

@@ -8,6 +8,7 @@ package buildcraftAdditions.entities;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import buildcraftAdditions.Inventories.CustomInventory;
 import io.netty.buffer.ByteBuf;
 
 import java.io.ByteArrayOutputStream;
@@ -31,7 +32,6 @@ import buildcraft.api.mj.MjBattery;
 import buildcraft.core.TileBuildCraft;
 import buildcraft.core.fluids.Tank;
 import buildcraft.core.fluids.TankManager;
-import buildcraft.core.inventory.SimpleInventory;
 import buildcraft.core.network.IGuiReturnHandler;
 import buildcraft.core.network.PacketGuiReturn;
 import buildcraft.core.network.PacketPayload;
@@ -42,7 +42,7 @@ import buildcraftAdditions.items.ItemCanister;
 
 public class TileFluidicCompressor extends TileBuildCraft implements ISidedInventory, IFluidHandler, IGuiReturnHandler {
 
-    private final SimpleInventory _inventory = new SimpleInventory(3, "Canner", 1);
+    private final CustomInventory inventory = new CustomInventory("FluidicCompressor", 2, 1);
     public final int maxLiquid = FluidContainerRegistry.BUCKET_VOLUME * 10;
     @MjBattery(maxCapacity = 800.0, maxReceivedPerCycle = 100.0)
     public double energyStored = 0;
@@ -57,7 +57,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 
     @Override
     public void updateEntity() {
-        ItemStack itemstack = _inventory.getStackInSlot(0);
+        ItemStack itemstack = inventory.getStackInSlot(0);
         if (itemstack != null) {
             ItemFluidContainer item = null;
             Item itemInSlot = itemstack.getItem();
@@ -74,9 +74,15 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
                         energyStored = energyStored - amount;
                         FluidStack fluid = Utils.getFluidStackFromItemStack(itemstack);
                         if (fluid != null) {
-                            if (getProgress() == 16 && _inventory.getStackInSlot(1) == null) {
-                                _inventory.setInventorySlotContents(1, itemstack);
-                                _inventory.setInventorySlotContents(0, null);
+                            if (getProgress() == 16){
+                                if (inventory.getStackInSlot(1) == null) {
+                                    inventory.setInventorySlotContents(1, itemstack);
+                                    inventory.setInventorySlotContents(0, null);
+                                }
+                                if (inventory.getStackInSlot(1).getItem() == inventory.getStackInSlot(0).getItem() && inventory.getStackInSlot(1).stackSize < 4){
+                                    inventory.getStackInSlot(1).stackSize++;
+                                    inventory.setInventorySlotContents(0, null);
+                                }
                             }
                         }
                     }
@@ -92,10 +98,16 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
                             amount = Utils.getFluidStackFromItemStack(itemstack).amount;
                         }
                         tank.fill(item.drain(itemstack, amount, true), true);
-                        if (getProgress() == 16 && _inventory.getStackInSlot(1) == null) {
+                        if (getProgress() == 16){
                             itemstack.getTagCompound().removeTag("Fluid");
-                            _inventory.setInventorySlotContents(1, itemstack);
-                            _inventory.setInventorySlotContents(0, null);
+                            if (inventory.getStackInSlot(1) == null) {
+                                inventory.setInventorySlotContents(1, itemstack);
+                                inventory.setInventorySlotContents(0, null);
+                            }
+                            if (inventory.getStackInSlot(1).getItem() == inventory.getStackInSlot(0).getItem() && inventory.getStackInSlot(1).stackSize < 4){
+                                inventory.getStackInSlot(1).stackSize++;
+                                inventory.setInventorySlotContents(0, null);
+                            }
                         }
                     }
                 }
@@ -107,7 +119,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
         super.readFromNBT(nbtTagCompound);
         NBTTagCompound p = (NBTTagCompound) nbtTagCompound.getTag("inventory");
-        _inventory.readFromNBT(p);
+        inventory.readNBT(p);
         tankManager.readFromNBT(nbtTagCompound);
         fill = nbtTagCompound.getBoolean("fill");
     }
@@ -116,7 +128,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
         NBTTagCompound inventoryTag = new NBTTagCompound();
-        _inventory.writeToNBT(inventoryTag);
+        inventory.writeNBT(inventoryTag);
         nbtTagCompound.setTag("inventory", inventoryTag);
         tankManager.writeToNBT(nbtTagCompound);
         nbtTagCompound.setBoolean("fill", fill);
@@ -124,42 +136,42 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 
     @Override
     public int getSizeInventory() {
-        return _inventory.getSizeInventory();
+        return inventory.getSizeInventory();
     }
 
     @Override
     public ItemStack getStackInSlot(int slotId) {
-        return _inventory.getStackInSlot(slotId);
+        return inventory.getStackInSlot(slotId);
     }
 
     @Override
     public ItemStack decrStackSize(int slotId, int count) {
-        return _inventory.decrStackSize(slotId, count);
+        return inventory.decrStackSize(slotId, count);
     }
 
     @Override
     public ItemStack getStackInSlotOnClosing(int var1) {
-        return _inventory.getStackInSlotOnClosing(var1);
+        return inventory.getStackInSlotOnClosing(var1);
     }
 
     @Override
     public void setInventorySlotContents(int slotId, ItemStack itemstack) {
-        _inventory.setInventorySlotContents(slotId, itemstack);
+        inventory.setInventorySlotContents(slotId, itemstack);
     }
 
     @Override
     public String getInventoryName() {
-        return _inventory.getInventoryName();
+        return inventory.getInventoryName();
     }
 
     @Override
     public boolean hasCustomInventoryName() {
-        return _inventory.hasCustomInventoryName();
+        return inventory.hasCustomInventoryName();
     }
 
     @Override
     public int getInventoryStackLimit() {
-        return _inventory.getInventoryStackLimit();
+        return inventory.getInventoryStackLimit();
     }
 
     @Override
@@ -171,12 +183,12 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 
     @Override
     public void openInventory() {
-        _inventory.openInventory();
+        inventory.openInventory();
     }
 
     @Override
     public void closeInventory() {
-        _inventory.openInventory();
+        inventory.openInventory();
     }
 
     @Override
@@ -268,7 +280,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
     }
 
     public int getProgress() {
-        ItemStack itemstack = _inventory.getStackInSlot(0);
+        ItemStack itemstack = inventory.getStackInSlot(0);
         if (itemstack == null)
             return 0;
         Item item = itemstack.getItem();
