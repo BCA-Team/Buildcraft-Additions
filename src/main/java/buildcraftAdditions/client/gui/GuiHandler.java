@@ -32,8 +32,11 @@ public class GuiHandler implements IGuiHandler {
 		case Variables.GuiChargingStation:
 			if (tile instanceof TileChargingStation)
 				return new GuiChargingStation(player.inventory, (TileChargingStation) tile);
-		case Variables.GuiKineticTool: ItemKineticTool tool = (ItemKineticTool) player.getCurrentEquippedItem().getItem();
-			return new GuiKineticTool(player.inventory, tool, tool.getInventory(player), player.getCurrentEquippedItem(), player);
+		case Variables.GuiKineticTool:
+            if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof  ItemKineticTool) {
+                ItemKineticTool tool = (ItemKineticTool) player.getCurrentEquippedItem().getItem();
+                return new GuiKineticTool(player.inventory, tool, tool.getInventory(player), player.getCurrentEquippedItem(), player);
+            }
 			}
 		return null;	
 		}
@@ -51,8 +54,11 @@ public class GuiHandler implements IGuiHandler {
 		case Variables.GuiChargingStation:
 			if (tile instanceof TileChargingStation)
 				return new ContainerChargingStation(player.inventory, (TileChargingStation) tile);
-            case Variables.GuiKineticTool: ItemKineticTool tool = (ItemKineticTool) player.getCurrentEquippedItem().getItem();
-                return new ContainerKineticTool(player.inventory, tool, tool.getInventory(player), player.getCurrentEquippedItem(), player);
+            case Variables.GuiKineticTool:
+                if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof  ItemKineticTool) {
+                    ItemKineticTool tool = (ItemKineticTool) player.getCurrentEquippedItem().getItem();
+                    return new ContainerKineticTool(player.inventory, tool, tool.getInventory(player), player.getCurrentEquippedItem(), player);
+                }
 		}
 		return null;
 	}
