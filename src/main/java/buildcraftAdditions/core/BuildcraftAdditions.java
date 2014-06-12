@@ -14,7 +14,7 @@ import buildcraftAdditions.blocks.BlockEngine;
 import buildcraftAdditions.items.*;
 import buildcraftAdditions.items.Tools.*;
 import buildcraftAdditions.networking.PacketHandeler;
-import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -175,6 +175,8 @@ public class BuildcraftAdditions {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent evt) {
+
+        FMLCommonHandler.instance().bus().register(new EventListener());
 
         GameRegistry.addRecipe(new ItemStack(ironCanister, 4), "PIP", "IGI", "PIP", 'P', BuildCraftTransport.pipeWaterproof, 'I', Items.iron_ingot, 'G', Blocks.glass_pane);
         GameRegistry.addRecipe(new ItemStack(goldCanister), "PGP", "GIG", "PGP", 'P', BuildCraftTransport.pipeWaterproof, 'G', Items.gold_ingot, 'I', ironCanister);
