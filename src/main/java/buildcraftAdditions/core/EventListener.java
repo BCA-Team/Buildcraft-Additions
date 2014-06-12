@@ -15,11 +15,13 @@ public class EventListener  {
 
     @SubscribeEvent
     public void playerLogin (PlayerLoggedInEvent event){
-        if (VersionCheckThread.newerVersionAvailable && event != null){
-            event.player.addChatComponentMessage(new ChatComponentText("There is a newer version of Buildcraft Additions available (" + VersionCheckThread.newerVersionNumber + ") Please consider updating"));
+
+        if (VersionCheck.newerVersionAvailable && event != null){
+            event.player.addChatComponentMessage(new ChatComponentText("There is a newer version of Buildcraft Additions available (" + VersionCheck.newerVersionNumber + ") Please consider updating"));
             event.player.addChatComponentMessage(new ChatComponentText("Changelog: "));
-            for (String line: VersionCheckThread.changelog){
-                event.player.addChatComponentMessage(new ChatComponentText(line));
+            for (int t = 0; t < VersionCheck.numLines; t++){
+
+                event.player.addChatComponentMessage(new ChatComponentText("- " + VersionCheck.changelog[t]));
             }
         }
     }

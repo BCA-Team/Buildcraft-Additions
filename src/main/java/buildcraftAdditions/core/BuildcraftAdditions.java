@@ -215,6 +215,7 @@ public class BuildcraftAdditions {
 
     @Mod.EventHandler
     public void initialize(FMLPreInitializationEvent evt) {
+        VersionCheck.start();
         fluidicCompressorBlock = new BlockFluidicCompressor();
         CoreProxy.proxy.registerBlock(fluidicCompressorBlock.setBlockName("blockFluidicCompressor").setCreativeTab(bcadditions));
 
