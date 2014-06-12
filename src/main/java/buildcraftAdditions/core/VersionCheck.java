@@ -1,5 +1,9 @@
 package buildcraftAdditions.core;
 
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import net.minecraft.nbt.NBTTagCompound;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -45,10 +49,27 @@ public class VersionCheck {
                     }
                     changelog = new String[10];
                     changelogList.toArray(changelog);
+                    pingVersionChecker();
                 }
 
             } catch (Throwable e) {
                 e.printStackTrace();
+            }
+        }
+        public void pingVersionChecker(){
+            if (Loader.isModLoaded("VersionChecker")){
+                NBTTagCompound tag = new NBTTagCompound();
+                tag.setString("modDisplayName", "Buildcraft Additions");
+                tag.setString("oldVersion", currentVersion);
+                tag.setString("newVersion", newerVersionNumber);
+                tag.setString("updateUrl", "http://buildcraftadditions.wordpress.com/downloads/");
+                tag.setBoolean("isDirectLink", false);
+                StringBuilder builder = new StringBuilder();
+                for (int t = 0; t < numLines; t++){
+                    builder.append(changelog[t]).append("/n");
+                }
+                tag.setString("changeLog", builder.toString());
+                FMLInterModComms.sendRuntimeMessage("bcadditions", "VersionChecker", "addUpdate", tag);
             }
         }
     }
