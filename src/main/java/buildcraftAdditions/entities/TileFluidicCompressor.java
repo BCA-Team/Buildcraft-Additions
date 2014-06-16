@@ -79,7 +79,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
                                     inventory.setInventorySlotContents(1, itemstack);
                                     inventory.setInventorySlotContents(0, null);
                                 }
-                                if (inventory.getStackInSlot(1).getItem() == inventory.getStackInSlot(0).getItem() && inventory.getStackInSlot(1).stackSize < 4){
+                                else if (inventory.getStackInSlot(1).getItem() == inventory.getStackInSlot(0).getItem() && inventory.getStackInSlot(1).stackSize < 4){
                                     inventory.getStackInSlot(1).stackSize++;
                                     inventory.setInventorySlotContents(0, null);
                                 }
@@ -104,7 +104,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
                                 inventory.setInventorySlotContents(1, itemstack);
                                 inventory.setInventorySlotContents(0, null);
                             }
-                            if (inventory.getStackInSlot(1).getItem() == inventory.getStackInSlot(0).getItem() && inventory.getStackInSlot(1).stackSize < 4){
+                            else if (inventory.getStackInSlot(1).getItem() == inventory.getStackInSlot(0).getItem() && inventory.getStackInSlot(1).stackSize < 4){
                                 inventory.getStackInSlot(1).stackSize++;
                                 inventory.setInventorySlotContents(0, null);
                             }
