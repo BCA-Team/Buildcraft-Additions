@@ -1,0 +1,36 @@
+tile.blockFluidicCompressor.name=Compressor Fluídico
+tile.blockChargingStation.name=Estação de Carregamento
+
+item.ironCanister.name=Lata de Ferro
+item.goldCanister.name=Lata de Ouro
+item.diamondCanister.name=Lata de Diamante
+item.mjMeter.name=Medidor de MJ
+item.poweredShovel.name=Escavadora Cinética
+item.drill.name=Broca Cinética
+item.chainsaw.name=Motoserra Cinética
+item.megaHoe.name=Enxada Cinética
+item.PowerCapsuleTier1.name=Capsula Cinética Nível 1
+item.PowerCapsuleTier2.name=Capsula Cinética Nível 2
+item.PowerCapsuleTier3.name=Capsula Cinética Nível 3
+item.stickIron.name=Graveto de Ferro
+item.stickGold.name=Graveto de Ouro
+item.stickDiamond.name=Graveto de Diamante
+item.stickEmerald.name=Graveto de Esmeralda
+item.toolCore.name=Núcleo de Ferramentas
+item.toolUpgradeDrill.name=Cabeça da Broca
+item.toolUpgradeDigger.name=Acessório de Escavação
+item.toolUpgradeChainsaw.name=Lâmina de Serra
+item.toolUpgradeHoe.name=Lavrador
+item.kineticMultiTool.name=Multi-Ferramenta Cinética
+
+tooltip.installed=Instalado
+tooltip.deactivated=Desativado
+
+gui.progress=Progresso
+gui.fluid=Fluido
+gui.noFluid=Vazio
+gui.fluidStored=Quantidade de Fluido
+gui.energyInTool=Energia Armazenada
+gui.maxEnergy=Energia Máxima
+
+itemGroup.BuildcraftAdditions=Buildcraft Additions
