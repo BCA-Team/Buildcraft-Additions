@@ -9,7 +9,7 @@ package buildcraftAdditions.proxy;
  */
 
 import buildcraftAdditions.client.render.CanisterItemRender;
-import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.BuildcraftAdditions;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 

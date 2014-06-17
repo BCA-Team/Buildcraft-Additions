@@ -1,6 +1,6 @@
 package buildcraftAdditions.items.Tools;
 
-import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.BuildcraftAdditions;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;

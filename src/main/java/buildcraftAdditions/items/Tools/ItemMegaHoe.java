@@ -15,7 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.BuildcraftAdditions;
 
 public class ItemMegaHoe extends ItemPoweredBase{
     public IIcon icon;

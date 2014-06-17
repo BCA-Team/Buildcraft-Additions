@@ -3,7 +3,7 @@ package buildcraftAdditions.items.Tools;
 import buildcraft.BuildCraftCore;
 import buildcraft.api.recipes.IIntegrationRecipeManager;
 import buildcraft.silicon.ItemRedstoneChipset;
-import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.BuildcraftAdditions;
 import net.minecraft.item.ItemStack;
 
 /**

@@ -8,7 +8,7 @@ package buildcraftAdditions.items;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.BuildcraftAdditions;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;

@@ -1,4 +1,4 @@
-package buildcraftAdditions.core;
+package buildcraftAdditions;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -11,6 +11,9 @@ package buildcraftAdditions.core;
 import buildcraft.*;
 import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraftAdditions.blocks.BlockEngine;
+import buildcraftAdditions.core.EventListener;
+import buildcraftAdditions.core.Logger;
+import buildcraftAdditions.core.VersionCheck;
 import buildcraftAdditions.items.*;
 import buildcraftAdditions.items.Tools.*;
 import buildcraftAdditions.networking.PacketHandeler;
@@ -42,8 +45,10 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 
-@Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", dependencies = "required-after:BuildCraft|Energy@{6.0.15}")
+@Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", dependencies = "required-after:BuildCraft|Energy@{6.0.16}")
 public class BuildcraftAdditions {
 
     public static ItemCanister ironCanister;
@@ -72,6 +77,9 @@ public class BuildcraftAdditions {
     public static ItemKineticTool kineticTool;
     public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 
+    public static boolean shouldCheckForUpdates = true;
+    public static boolean shouldPrintChangelog = true;
+
     @Instance(value="bcadditions")
     public static BuildcraftAdditions instance;
 
@@ -89,6 +97,21 @@ public class BuildcraftAdditions {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+
+        Logger.initiallize();
+
+        Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+        config.load();
+
+        config.addCustomCategoryComment("Updates", "Section about updates");
+        Property shouldDoUpdateCheck = config.get("Updates", "shouldCheckForUpdates", true);
+        shouldCheckForUpdates = shouldDoUpdateCheck.getBoolean(true);
+
+        Property shouldPrintOutChangelog = config.get("Updates", "shouldPrintOutChangelog", true);
+        shouldPrintChangelog = shouldPrintOutChangelog.getBoolean(true);
+
+
+        config.save();
 
         PacketHandeler.init();
 
@@ -197,6 +220,7 @@ public class BuildcraftAdditions {
                 MapGenStructureIO.func_143031_a(ComponentPowerPlant.class, "bcadditions:powerplant");
             }
             catch (Throwable e){
+                e.printStackTrace();
             }
         }
 

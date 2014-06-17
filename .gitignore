@@ -4,3 +4,6 @@ build/
 
 # intelij
 *.iml
+
+build.bat
+update.bat

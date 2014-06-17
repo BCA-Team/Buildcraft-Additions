@@ -10,7 +10,7 @@ package buildcraftAdditions.items.Tools;
 
 import buildcraft.api.mj.IBatteryObject;
 import buildcraft.api.mj.MjAPI;
-import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.BuildcraftAdditions;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;

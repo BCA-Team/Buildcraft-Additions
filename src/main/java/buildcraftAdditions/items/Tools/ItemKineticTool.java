@@ -1,6 +1,6 @@
 package buildcraftAdditions.items.Tools;
 
-import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.core.Utils;
 import buildcraftAdditions.core.Variables;
 import cpw.mods.fml.relauncher.Side;

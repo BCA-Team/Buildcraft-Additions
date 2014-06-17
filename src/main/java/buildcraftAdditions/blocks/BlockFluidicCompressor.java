@@ -9,7 +9,7 @@ package buildcraftAdditions.blocks;
  */
 
 import buildcraft.core.IItemPipe;
-import buildcraftAdditions.core.BuildcraftAdditions;
+import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.core.Utils;
 import buildcraftAdditions.core.Variables;
 import buildcraftAdditions.entities.TileFluidicCompressor;
