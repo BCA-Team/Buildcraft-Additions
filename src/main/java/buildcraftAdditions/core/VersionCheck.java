@@ -1,5 +1,6 @@
 package buildcraftAdditions.core;
 
+import buildcraftAdditions.BuildcraftAdditions;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import net.minecraft.nbt.NBTTagCompound;

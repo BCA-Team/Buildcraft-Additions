@@ -77,8 +77,7 @@ public class BuildcraftAdditions {
     public static ItemKineticTool kineticTool;
     public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 
-    public static boolean shouldCheckForUpdates = true;
-    public static boolean shouldPrintChangelog = true;
+    public static boolean shouldPrintChangelog;
 
     @Instance(value="bcadditions")
     public static BuildcraftAdditions instance;
@@ -104,13 +103,15 @@ public class BuildcraftAdditions {
         config.load();
 
         config.addCustomCategoryComment("Updates", "Section about updates");
+
         Property shouldDoUpdateCheck = config.get("Updates", "shouldCheckForUpdates", true);
-        shouldCheckForUpdates = shouldDoUpdateCheck.getBoolean(true);
+        if (shouldDoUpdateCheck.getBoolean(true))
+            VersionCheck.start();
 
-        Property shouldPrintOutChangelog = config.get("Updates", "shouldPrintOutChangelog", true);
-        shouldPrintChangelog = shouldPrintOutChangelog.getBoolean(true);
+        Property shouldPrintOutChangelog = config.get("Updates", "shouldPrintOutChangelog", false);
+        shouldPrintChangelog = shouldPrintOutChangelog.getBoolean(false);
 
-
+        if (config.hasChanged())
         config.save();
 
         PacketHandeler.init();
@@ -239,7 +240,6 @@ public class BuildcraftAdditions {
 
     @Mod.EventHandler
     public void initialize(FMLPreInitializationEvent evt) {
-        VersionCheck.start();
         fluidicCompressorBlock = new BlockFluidicCompressor();
         CoreProxy.proxy.registerBlock(fluidicCompressorBlock.setBlockName("blockFluidicCompressor").setCreativeTab(bcadditions));
 

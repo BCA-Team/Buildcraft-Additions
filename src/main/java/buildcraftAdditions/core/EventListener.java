@@ -1,5 +1,6 @@
 package buildcraftAdditions.core;
 
+import buildcraftAdditions.BuildcraftAdditions;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraft.util.ChatComponentText;
@@ -18,6 +19,8 @@ public class EventListener  {
 
         if (VersionCheck.newerVersionAvailable && event != null){
             event.player.addChatComponentMessage(new ChatComponentText("There is a newer version of Buildcraft Additions available (" + VersionCheck.newerVersionNumber + ") Please consider updating"));
+            if (!BuildcraftAdditions.shouldPrintChangelog)
+                return;
             event.player.addChatComponentMessage(new ChatComponentText("Changelog: "));
             for (int t = 0; t < VersionCheck.numLines; t++){
 
