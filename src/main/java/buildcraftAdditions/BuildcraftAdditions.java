@@ -11,9 +11,9 @@ package buildcraftAdditions;
 import buildcraft.*;
 import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraftAdditions.blocks.BlockEngine;
+import buildcraftAdditions.core.Configuration;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
-import buildcraftAdditions.core.VersionCheck;
 import buildcraftAdditions.items.*;
 import buildcraftAdditions.items.Tools.*;
 import buildcraftAdditions.networking.PacketHandeler;
@@ -45,8 +45,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
 @Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", dependencies = "required-after:BuildCraft|Energy@{6.0.16}")
 public class BuildcraftAdditions {
@@ -77,8 +75,6 @@ public class BuildcraftAdditions {
     public static ItemKineticTool kineticTool;
     public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 
-    public static boolean shouldPrintChangelog;
-
     @Instance(value="bcadditions")
     public static BuildcraftAdditions instance;
 
@@ -98,22 +94,7 @@ public class BuildcraftAdditions {
     public void preInit(FMLPreInitializationEvent event) {
 
         Logger.initiallize();
-
-        Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-        config.load();
-
-        config.addCustomCategoryComment("Updates", "Section about updates");
-
-        Property shouldDoUpdateCheck = config.get("Updates", "shouldCheckForUpdates", true);
-        if (shouldDoUpdateCheck.getBoolean(true))
-            VersionCheck.start();
-
-        Property shouldPrintOutChangelog = config.get("Updates", "shouldPrintOutChangelog", false);
-        shouldPrintChangelog = shouldPrintOutChangelog.getBoolean(false);
-
-        if (config.hasChanged())
-        config.save();
-
+        Configuration.readConfig(event);
         PacketHandeler.init();
 
         ironCanister = new ItemCanister("ironCanister", 1000);
