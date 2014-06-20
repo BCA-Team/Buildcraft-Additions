@@ -33,4 +33,10 @@ gui.fluidStored=Количество жидкости
 gui.energyInTool=Хранится энергии
 gui.maxEnergy=Макс. энергии
 
+trigger.canisterRequested=Запрошена канистра
+trigger.hasEmptyCanister=Есть пустая канистра
+trigger.hasFullCanister=Есть полная канистра
+trigger.doneCharging=Зарядка завершена
+trigger.readyToCharge=Готово к подзарядке
+
 itemGroup.BuildcraftAdditions=Buildcraft: Дополнения
