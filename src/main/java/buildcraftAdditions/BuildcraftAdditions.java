@@ -18,9 +18,7 @@ import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.items.*;
 import buildcraftAdditions.items.Tools.*;
 import buildcraftAdditions.networking.PacketHandeler;
-import buildcraftAdditions.triggers.TriggerCanisterRequested;
-import buildcraftAdditions.triggers.TriggerHasEmptyCanister;
-import buildcraftAdditions.triggers.TriggerHasFullCanister;
+import buildcraftAdditions.triggers.*;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
@@ -83,6 +81,8 @@ public class BuildcraftAdditions {
     public static BCTrigger triggerCanAcceptCanister = new TriggerCanisterRequested();
     public static BCTrigger triggerHasEmptyCanister = new TriggerHasEmptyCanister();
     public static BCTrigger triggerhasFullCanister = new TriggerHasFullCanister();
+    public static BCTrigger triggerDoneCharging = new TriggerDoneCharging();
+    public static BCTrigger triggerReadyToCharge = new TriggerReadyToCharge();
 
     public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 

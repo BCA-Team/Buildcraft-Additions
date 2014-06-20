@@ -8,6 +8,9 @@ package buildcraftAdditions.entities;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import buildcraft.api.gates.IOverrideDefaultTriggers;
+import buildcraft.api.gates.ITrigger;
+import buildcraftAdditions.BuildcraftAdditions;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -17,7 +20,9 @@ import buildcraft.core.TileBuildCraft;
 import buildcraft.core.inventory.SimpleInventory;
 import buildcraftAdditions.items.BatteryBase;
 
-public class TileChargingStation extends TileBuildCraft implements IInventory {
+import java.util.LinkedList;
+
+public class TileChargingStation extends TileBuildCraft implements IInventory, IOverrideDefaultTriggers {
 	
 	@MjBattery(maxCapacity=10000, maxReceivedPerCycle = 100)
 	double energy = 0;
@@ -138,4 +143,11 @@ public class TileChargingStation extends TileBuildCraft implements IInventory {
 		return 0;
 	}
 
+    @Override
+    public LinkedList<ITrigger> getTriggers() {
+        LinkedList<ITrigger> list = new LinkedList<ITrigger>();
+        list.add(BuildcraftAdditions.triggerDoneCharging);
+        list.add(BuildcraftAdditions.triggerReadyToCharge);
+        return list;
+    }
 }

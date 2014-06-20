@@ -36,5 +36,7 @@ gui.maxEnergy=Max Energy
 trigger.canisterRequested=Canister requested
 trigger.hasEmptyCanister=Has Empty Canister
 trigger.hasFullCanister=Has Full Canister
+trigger.doneCharging=Done Charging
+trigger.readyToCharge=Ready To Charge
 
 itemGroup.BuildcraftAdditions=Buildcraft Additions
