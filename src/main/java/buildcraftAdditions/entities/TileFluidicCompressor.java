@@ -8,12 +8,16 @@ package buildcraftAdditions.entities;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import buildcraft.api.gates.IOverrideDefaultTriggers;
+import buildcraft.api.gates.ITrigger;
+import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.Inventories.CustomInventory;
 import io.netty.buffer.ByteBuf;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -40,7 +44,7 @@ import buildcraftAdditions.core.Utils;
 import buildcraftAdditions.items.ItemCanister;
 
 
-public class TileFluidicCompressor extends TileBuildCraft implements ISidedInventory, IFluidHandler, IGuiReturnHandler {
+public class TileFluidicCompressor extends TileBuildCraft implements ISidedInventory, IFluidHandler, IGuiReturnHandler, IOverrideDefaultTriggers {
 
     private final CustomInventory inventory = new CustomInventory("FluidicCompressor", 2, 1);
     public final int maxLiquid = FluidContainerRegistry.BUCKET_VOLUME * 10;
@@ -325,5 +329,14 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
             return tank.getFluid().amount;
         }
         return 0;
+    }
+
+    @Override
+    public LinkedList<ITrigger> getTriggers() {
+        LinkedList<ITrigger> list = new LinkedList<ITrigger>();
+        list.add(BuildcraftAdditions.triggerCanAcceptCanister);
+        list.add(BuildcraftAdditions.triggerHasEmptyCanister);
+        list.add(BuildcraftAdditions.triggerhasFullCanister);
+        return list;
     }
 }

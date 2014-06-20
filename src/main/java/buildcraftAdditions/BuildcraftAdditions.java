@@ -10,6 +10,7 @@ package buildcraftAdditions;
 
 import buildcraft.*;
 import buildcraft.api.recipes.BuildcraftRecipes;
+import buildcraft.core.triggers.BCTrigger;
 import buildcraftAdditions.blocks.BlockEngine;
 import buildcraftAdditions.core.Configuration;
 import buildcraftAdditions.core.EventListener;
@@ -17,6 +18,9 @@ import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.items.*;
 import buildcraftAdditions.items.Tools.*;
 import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.triggers.TriggerCanisterRequested;
+import buildcraftAdditions.triggers.TriggerHasEmptyCanister;
+import buildcraftAdditions.triggers.TriggerHasFullCanister;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
@@ -52,9 +56,11 @@ public class BuildcraftAdditions {
     public static ItemCanister ironCanister;
     public static ItemCanister goldCanister;
     public static ItemCanister diamondCanister;
+
     public static BlockFluidicCompressor fluidicCompressorBlock;
     public static BlockChargingStation chargingStationBlock;
     public static BlockEngine engineBlock;
+
     public static Item mjMeter;
     public static Item poweredShovel;
     public static Item drill;
@@ -73,6 +79,11 @@ public class BuildcraftAdditions {
     public static Item toolUpgradeDrill;
     public static Item toolUpgradeChainsaw;
     public static ItemKineticTool kineticTool;
+
+    public static BCTrigger triggerCanAcceptCanister = new TriggerCanisterRequested();
+    public static BCTrigger triggerHasEmptyCanister = new TriggerHasEmptyCanister();
+    public static BCTrigger triggerhasFullCanister = new TriggerHasFullCanister();
+
     public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 
     @Instance(value="bcadditions")

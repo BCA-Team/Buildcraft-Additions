@@ -33,4 +33,8 @@ gui.fluidStored=Amount of Fluid
 gui.energyInTool=Energy Stored
 gui.maxEnergy=Max Energy
 
+trigger.canisterRequested=Canister requested
+trigger.hasEmptyCanister=Has Empty Canister
+trigger.hasFullCanister=Has Full Canister
+
 itemGroup.BuildcraftAdditions=Buildcraft Additions
