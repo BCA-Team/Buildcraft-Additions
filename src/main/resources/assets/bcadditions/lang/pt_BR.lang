@@ -33,4 +33,10 @@ gui.fluidStored=Quantidade de Fluido
 gui.energyInTool=Energia Armazenada
 gui.maxEnergy=Energia Máxima
 
+trigger.canisterRequested=Lata Solicitada
+trigger.hasEmptyCanister=Has Lata Vazia
+trigger.hasFullCanister=Has Lata Cheia
+trigger.doneCharging=Carregado
+trigger.readyToCharge=Pronto para carregar
+
 itemGroup.BuildcraftAdditions=Buildcraft Additions
