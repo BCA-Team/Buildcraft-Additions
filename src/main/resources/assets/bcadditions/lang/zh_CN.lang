@@ -33,4 +33,10 @@ gui.fluidStored=流体量
 gui.energyInTool=已储能量
 gui.maxEnergy=最大能量
 
+trigger.canisterRequested=无罐子触发
+trigger.hasEmptyCanister=空罐触发
+trigger.hasFullCanister=满罐触发
+trigger.doneCharging=充能完毕触发
+trigger.readyToCharge=预备充能触发
+
 itemGroup.BuildcraftAdditions=建筑|附件
