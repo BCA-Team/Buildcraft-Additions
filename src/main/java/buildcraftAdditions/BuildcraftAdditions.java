@@ -228,7 +228,7 @@ public class BuildcraftAdditions {
         proxy.registerRenderers();
         GameRegistry.registerTileEntity(TileFluidicCompressor.class, "TileFluidicCompressor");
         GameRegistry.registerTileEntity(TileChargingStation.class, "TileChargingStation");
-        GameRegistry.registerTileEntity(TileHeatedFurnace.class, "TileHeatedFurnace");
+        //GameRegistry.registerTileEntity(TileHeatedFurnace.class, "TileHeatedFurnace");
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
     }
@@ -243,9 +243,9 @@ public class BuildcraftAdditions {
         chargingStationBlock.setBlockName("blockChargingStation").setCreativeTab(bcadditions);
         GameRegistry.registerBlock(chargingStationBlock, "blockChargingStation");
 
-        heatedFurnaceBlock = new BlockHeatedFurnace();
-        heatedFurnaceBlock.setBlockName("blockHeatedFurnace").setCreativeTab(bcadditions);
-        GameRegistry.registerBlock(heatedFurnaceBlock, "blockHeatedFurnace");
+        //heatedFurnaceBlock = new BlockHeatedFurnace();
+        //heatedFurnaceBlock.setBlockName("blockHeatedFurnace").setCreativeTab(bcadditions);
+        //GameRegistry.registerBlock(heatedFurnaceBlock, "blockHeatedFurnace");
 
         //engineBlock = new BlockEngine();
         //CoreProxy.proxy.registerBlock(engineBlock.setBlockName("blockEngine").setCreativeTab(bcadditions));
