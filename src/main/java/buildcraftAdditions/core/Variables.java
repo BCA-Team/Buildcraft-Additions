@@ -14,5 +14,6 @@ public final class Variables {
 	public static final int GuiFluidicCompressor = 70;
 	public static final int GuiChargingStation = 71;
     public static final int GuiKineticTool = 72;
+    public static final int GuiHeatedFurnace = 73;
 
 }

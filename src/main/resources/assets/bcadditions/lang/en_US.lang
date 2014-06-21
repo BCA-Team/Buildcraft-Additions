@@ -1,5 +1,6 @@
 tile.blockFluidicCompressor.name=Fluidic Compressor
 tile.blockChargingStation.name=Charging Station
+tile.blockHeatedFurnace.name = Heated Furnace
 
 item.ironCanister.name=Iron Canister
 item.goldCanister.name=Gold Canister

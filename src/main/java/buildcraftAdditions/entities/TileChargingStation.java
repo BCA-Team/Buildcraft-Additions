@@ -29,7 +29,6 @@ public class TileChargingStation extends TileBuildCraft implements IInventory, I
 	private final SimpleInventory inventory = new SimpleInventory(1, "ChargingStation", 1);
 	
 	public TileChargingStation(){
-		
 	}
 	
 	@Override

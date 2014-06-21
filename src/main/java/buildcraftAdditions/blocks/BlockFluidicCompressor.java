@@ -91,10 +91,10 @@ public class BlockFluidicCompressor extends BlockContainer {
                 compressor.setInventorySlotContents(t, null);
                 EntityItem itemToDrop = new EntityItem(world, x + d, y + d1, z + d2, stack);
                 itemToDrop.delayBeforeCanPickup = 10;
-
                 world.spawnEntityInWorld(itemToDrop);
             }
         }
+        compressor.closeInventory();
     }
 	
 	@Override
