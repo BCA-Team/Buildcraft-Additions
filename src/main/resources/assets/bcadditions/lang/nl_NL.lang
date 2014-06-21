@@ -33,4 +33,10 @@ gui.fluidStored=Hoeveelheid Vloestof
 gui.energyInTool=Opgelagen Energy
 gui.maxEnergy=Maximale Energie
 
+trigger.canisterRequested=Capsule gevraagd
+trigger.hasEmptyCanister=Heeft lege capsule
+trigger.hasFullCanister=Heeft volle capsule
+trigger.doneCharging=Opgeladen
+trigger.readyToCharge=Klaar om op te laden
+
 itemGroup.BuildcraftAdditions=Buildcraft Uitbreidingen
