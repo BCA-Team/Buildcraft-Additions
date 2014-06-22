@@ -7,6 +7,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -17,30 +18,74 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
     private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64);
-    private int ticksToCook;
+    public int progress;
+    public boolean isCooking;
+    public TileCoilBase[] coils;
 
     public TileHeatedFurnace(){
-        ticksToCook = 100;
+        progress = 0;
+        isCooking = false;
+        coils = new TileCoilBase[6];
     }
 
     @Override
     public void updateEntity(){
-        if (inventory.getStackInSlot(0) != null) {
-            if (ticksToCook == 0) {
+        if (canCook()) {
+            isCooking = true;
+            if (progress == 100) {
                 ItemStack inputStack = getStackInSlot(0);
                 ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inputStack);
-                if (inventory.getStackInSlot(1) == null){
-                    inventory.setInventorySlotContents(1, result.copy());
+                if (getStackInSlot(1) == null){
+                    setInventorySlotContents(1, result.copy());
                 } else{
-                    inventory.getStackInSlot(1).stackSize += result.stackSize;
+                    getStackInSlot(1).stackSize += result.stackSize;
                 }
-                inventory.getStackInSlot(0).stackSize--;
-                ticksToCook = 100;
+                getStackInSlot(0).stackSize--;
+                if (getStackInSlot(0).stackSize == 0)
+                    setInventorySlotContents(0, null);
+                progress = 0;
+            } else {
+                progress++;
             }
-            ticksToCook--;
+        } else {
+            isCooking = false;
+            progress = 0;
         }
     }
 
+    public boolean canCook(){
+        ItemStack stack0 = getStackInSlot(0);
+        ItemStack stack1 = getStackInSlot(1);
+        if (stack0 == null)
+            return false;
+        ItemStack result = getResult(stack0);
+        return stack1 == null || (result.getItem() == stack1.getItem() && result.stackSize + stack1.stackSize <= result.getMaxStackSize());
+    }
+
+    public ItemStack getResult(ItemStack stack){
+        return FurnaceRecipes.smelting().getSmeltingResult(stack);
+    }
+
+    public void updateCoils(){
+        TileEntity entity = worldObj.getTileEntity(xCoord - 1, yCoord, zCoord);
+        if (entity != null && entity instanceof TileCoilBase)
+            coils[0] = (TileCoilBase) entity;
+        entity = worldObj.getTileEntity(xCoord + 1, yCoord, zCoord);
+        if (entity != null && entity instanceof TileCoilBase)
+            coils[1] = (TileCoilBase) entity;
+        entity = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
+        if (entity != null && entity instanceof TileCoilBase)
+            coils[2] = (TileCoilBase) entity;
+        entity = worldObj.getTileEntity(xCoord, yCoord + 1, zCoord);
+        if (entity != null && entity instanceof TileCoilBase)
+            coils[3] = (TileCoilBase) entity;
+        entity = worldObj.getTileEntity(xCoord, yCoord, zCoord - 1);
+        if (entity != null && entity instanceof TileCoilBase)
+            coils[4] = (TileCoilBase) entity;
+        entity = worldObj.getTileEntity(xCoord, yCoord, zCoord + 1);
+        if (entity != null && entity instanceof TileCoilBase)
+            coils[5] = (TileCoilBase) entity;
+    }
 
     @Override
     public void writeToNBT(NBTTagCompound tag){
@@ -48,12 +93,17 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
         NBTTagCompound inventoryTag = new NBTTagCompound();
         inventory.writeNBT(inventoryTag);
         tag.setTag("Inventory", inventoryTag);
+        tag.setInteger("progress", progress);
+        tag.setBoolean("isCooking", isCooking);
+
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tag){
         super.readFromNBT(tag);
         inventory.readNBT(tag.getCompoundTag("Inventory"));
+        progress = tag.getInteger("progress");
+        isCooking = tag.getBoolean("isCooking");
     }
 
     @Override
@@ -113,6 +163,6 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
-        return FurnaceRecipes.smelting().getSmeltingResult(stack) != null;
+        return getResult(stack) != null;
     }
 }

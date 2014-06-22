@@ -4,6 +4,7 @@ import buildcraft.core.IItemPipe;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.core.Variables;
 import buildcraftAdditions.entities.TileHeatedFurnace;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,5 +48,14 @@ public class BlockHeatedFurnace extends BlockContainer {
             entityplayer.openGui(BuildcraftAdditions.instance, Variables.GuiHeatedFurnace, world, x, y, z);
 
         return true;
+    }
+
+    @Override
+    public void onNeighborBlockChange(World world, int x, int y, int z, Block block){
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if (tile instanceof TileHeatedFurnace){
+            TileHeatedFurnace furnace = (TileHeatedFurnace) tile;
+            furnace.updateCoils();
+        }
     }
 }
