@@ -11,11 +11,11 @@ package buildcraftAdditions;
 import buildcraft.*;
 import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraft.core.triggers.BCTrigger;
-import buildcraftAdditions.blocks.BlockEngine;
-import buildcraftAdditions.blocks.BlockHeatedFurnace;
+import buildcraftAdditions.blocks.*;
 import buildcraftAdditions.core.Configuration;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
+import buildcraftAdditions.entities.TileBasicCoil;
 import buildcraftAdditions.entities.TileHeatedFurnace;
 import buildcraftAdditions.items.*;
 import buildcraftAdditions.items.Tools.*;
@@ -31,8 +31,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import buildcraft.core.proxy.CoreProxy;
-import buildcraftAdditions.blocks.BlockChargingStation;
-import buildcraftAdditions.blocks.BlockFluidicCompressor;
 import buildcraftAdditions.client.gui.GuiHandler;
 import buildcraftAdditions.entities.TileChargingStation;
 import buildcraftAdditions.entities.TileFluidicCompressor;
@@ -61,6 +59,7 @@ public class BuildcraftAdditions {
     public static BlockChargingStation chargingStationBlock;
     public static BlockEngine engineBlock;
     public static BlockHeatedFurnace heatedFurnaceBlock;
+    public static BlockBasicCoil basicCoilBlock;
 
     public static Item mjMeter;
     public static Item poweredShovel;
@@ -229,6 +228,7 @@ public class BuildcraftAdditions {
         GameRegistry.registerTileEntity(TileFluidicCompressor.class, "TileFluidicCompressor");
         GameRegistry.registerTileEntity(TileChargingStation.class, "TileChargingStation");
         GameRegistry.registerTileEntity(TileHeatedFurnace.class, "TileHeatedFurnace");
+        GameRegistry.registerTileEntity(TileBasicCoil.class, "TileBasicCoil");
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
     }
@@ -246,6 +246,10 @@ public class BuildcraftAdditions {
         heatedFurnaceBlock = new BlockHeatedFurnace();
         heatedFurnaceBlock.setBlockName("blockHeatedFurnace").setCreativeTab(bcadditions);
         GameRegistry.registerBlock(heatedFurnaceBlock, "blockHeatedFurnace");
+
+        basicCoilBlock = new BlockBasicCoil();
+        basicCoilBlock.setBlockName("blockBasicCoil").setCreativeTab(bcadditions);
+        GameRegistry.registerBlock(basicCoilBlock, "blockBasicCoil");
 
         //engineBlock = new BlockEngine();
         //CoreProxy.proxy.registerBlock(engineBlock.setBlockName("blockEngine").setCreativeTab(bcadditions));

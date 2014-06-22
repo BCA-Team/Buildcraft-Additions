@@ -10,6 +10,6 @@ package buildcraftAdditions.entities;
 public class TileBasicCoil extends TileCoilBase {
 
     public TileBasicCoil(){
-
+        heat = 50;
     }
 }

@@ -10,4 +10,19 @@ import net.minecraft.tileentity.TileEntity;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class TileCoilBase extends TileEntity {
+    public boolean shouldHeat;
+    public int heat;
+
+    public void startHeating(){
+        shouldHeat = true;
+    }
+
+    public void stopHeating(){
+        shouldHeat = false;
+    }
+
+    public int getHeat(){
+        return heat;
+    }
+
 }
