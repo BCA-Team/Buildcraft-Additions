@@ -15,7 +15,7 @@ public class TileBasicCoil extends TileCoilBase {
     }
     @Override
     public void updateEntity(){
-        if (shouldHeat && increment < 20)
+        if (shouldHeat && increment < 16)
             increment++;
         if (!shouldHeat && increment > 0)
             increment--;

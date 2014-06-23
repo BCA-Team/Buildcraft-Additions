@@ -14,6 +14,17 @@ public abstract class BlockCoilBase extends BlockContainer {
 
     public BlockCoilBase() {
         super(Material.iron);
+        this.setBlockBounds(2F/10F, 0, 2F/10F, 8F/10F, 1, 8F/10F);
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
     }
 
 }

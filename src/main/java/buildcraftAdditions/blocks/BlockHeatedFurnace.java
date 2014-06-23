@@ -58,4 +58,13 @@ public class BlockHeatedFurnace extends BlockContainer {
             furnace.updateCoils();
         }
     }
+
+    @Override
+    public void onPostBlockPlaced(World world, int x, int y, int z, int meta){
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if (tile instanceof TileHeatedFurnace){
+            TileHeatedFurnace furnace = (TileHeatedFurnace) tile;
+            furnace.updateCoils();
+        }
+    }
 }
