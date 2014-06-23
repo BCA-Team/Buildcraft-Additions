@@ -31,6 +31,10 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
 
     @Override
     public void updateEntity(){
+        if (shouldUpdateCoils){
+            updateCoils();
+            shouldUpdateCoils = false;
+        }
         if (canCook()) {
             isCooking = true;
             for (TileCoilBase coil: coils){
@@ -123,6 +127,7 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
         NBTTagCompound p = (NBTTagCompound) nbtTagCompound.getTag("inventory");
         inventory.readFromNBT(p);
         progress = nbtTagCompound.getInteger("progress");
+        shouldUpdateCoils = true;
     }
 
     @Override

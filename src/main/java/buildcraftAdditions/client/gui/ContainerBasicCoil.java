@@ -3,7 +3,7 @@ package buildcraftAdditions.client.gui;
 import buildcraft.core.gui.BuildCraftContainer;
 import buildcraft.core.gui.slots.SlotOutput;
 import buildcraft.core.gui.slots.SlotValidated;
-import buildcraftAdditions.entities.TileHeatedFurnace;
+import buildcraftAdditions.entities.TileBasicCoil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -15,15 +15,14 @@ import net.minecraft.inventory.Slot;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ContainerHeatedFurnace extends BuildCraftContainer {
-    public TileHeatedFurnace furnace;
+public class ContainerBasicCoil extends BuildCraftContainer {
+    public TileBasicCoil coil;
 
-    public ContainerHeatedFurnace(IInventory inventory, TileHeatedFurnace furnace){
-        super(furnace.getSizeInventory());
-        this.furnace = furnace;
+    public ContainerBasicCoil(IInventory inventory, TileBasicCoil coil){
+        super(coil.getSizeInventory());
+        this.coil = coil;
 
-        this.addSlot(new SlotValidated(furnace, 0, 56, 34));
-        this.addSlot(new SlotOutput(furnace, 1, 116, 34));
+        this.addSlot(new SlotValidated(coil, 0, 78, 43));
 
         for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
         {
@@ -47,6 +46,6 @@ public class ContainerHeatedFurnace extends BuildCraftContainer {
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
-        furnace.sendNetworkUpdate();
+        coil.sendNetworkUpdate();
     }
 }
