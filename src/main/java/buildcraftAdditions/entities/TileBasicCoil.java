@@ -8,8 +8,21 @@ package buildcraftAdditions.entities;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileBasicCoil extends TileCoilBase {
+    public int increment;
 
     public TileBasicCoil(){
-        heat = 50;
+
+    }
+    @Override
+    public void updateEntity(){
+        if (shouldHeat && increment < 20)
+            increment++;
+        if (!shouldHeat && increment > 0)
+            increment--;
+    }
+
+    @Override
+    public int getIncrement() {
+        return increment;
     }
 }

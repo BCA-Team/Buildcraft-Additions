@@ -11,7 +11,6 @@ import net.minecraft.tileentity.TileEntity;
  */
 public abstract class TileCoilBase extends TileEntity {
     public boolean shouldHeat;
-    public int heat;
 
     public void startHeating(){
         shouldHeat = true;
@@ -21,8 +20,6 @@ public abstract class TileCoilBase extends TileEntity {
         shouldHeat = false;
     }
 
-    public int getHeat(){
-        return heat;
-    }
+    public abstract int getIncrement();
 
 }

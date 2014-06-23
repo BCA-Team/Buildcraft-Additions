@@ -32,7 +32,11 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
     public void updateEntity(){
         if (canCook()) {
             isCooking = true;
-            if (progress >= 10000) {
+            for (TileCoilBase coil: coils){
+                if(coil != null)
+                    coil.startHeating();
+            }
+            if (progress >= 6000) {
                 ItemStack inputStack = getStackInSlot(0);
                 ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inputStack);
                 if (getStackInSlot(1) == null){
@@ -46,12 +50,17 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
                 progress = 0;
             } else {
                 for (TileCoilBase coil: coils)
-                    if(coil != null)
-                        progress += coil.getHeat();
+                    if(coil != null) {
+                        progress += coil.getIncrement();
+                    }
             }
         } else {
             isCooking = false;
             progress = 0;
+            for (TileCoilBase coil: coils){
+                if(coil != null)
+                    coil.stopHeating();
+            }
         }
     }
 
@@ -115,8 +124,6 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
         tag.setTag("Inventory", inventoryTag);
         tag.setInteger("progress", progress);
         tag.setBoolean("isCooking", isCooking);
-        for (int t=0; t < 6; t++)
-            tag.setTag("coil" + t, writeCoilToNBT(coils[t]));
     }
 
     @Override
@@ -125,27 +132,7 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
         inventory.readNBT(tag.getCompoundTag("Inventory"));
         progress = tag.getInteger("progress");
         isCooking = tag.getBoolean("isCooking");
-        for (int t=0; t < 6; t++)
-            coils[t] = readCoilFromNBT(tag.getCompoundTag("coil" + t));
-    }
-
-    public NBTTagCompound writeCoilToNBT(TileCoilBase coil){
-        NBTTagCompound tag = new NBTTagCompound();
-        if (coil == null){
-            tag.setBoolean("validCoil", false);
-        } else{
-            tag.setBoolean("validCoil", true);
-            tag.setInteger("x", coil.xCoord);
-            tag.setInteger("y", coil.yCoord);
-            tag.setInteger("z", coil.zCoord);
-        }
-        return tag;
-    }
-
-    public TileCoilBase readCoilFromNBT(NBTTagCompound tag){
-        if (!tag.getBoolean("validCoil"))
-            return null;
-        return (TileCoilBase) worldObj.getTileEntity(tag.getInteger("x"), tag.getInteger("y"), tag.getInteger("z"));
+        updateCoils();
     }
 
     @Override
