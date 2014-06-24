@@ -11,6 +11,7 @@ import buildcraft.core.TileBuildCraft;
  */
 public abstract class TileCoilBase extends TileBuildCraft {
     public boolean shouldHeat;
+    public boolean burning;
 
     public void startHeating(){
         shouldHeat = true;
@@ -21,5 +22,9 @@ public abstract class TileCoilBase extends TileBuildCraft {
     }
 
     public abstract int getIncrement();
+
+    public boolean isBurning(){
+        return burning;
+    }
 
 }

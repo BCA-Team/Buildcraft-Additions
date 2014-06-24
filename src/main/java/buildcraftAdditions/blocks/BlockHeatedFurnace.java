@@ -120,7 +120,7 @@ public class BlockHeatedFurnace extends BlockContainer {
 
         if (side == meta && meta > 1) {
             TileHeatedFurnace furnace = (TileHeatedFurnace) access.getTileEntity(x, y, z);
-            if (furnace != null && furnace.isCooking) {
+            if (furnace.isCooking) {
                 return frontActivated;
             }
             return front;

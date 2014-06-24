@@ -1,6 +1,7 @@
 package buildcraftAdditions.client.gui;
 
 import buildcraft.core.gui.GuiBuildCraft;
+import buildcraftAdditions.core.Utils;
 import buildcraftAdditions.entities.TileBasicCoil;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -14,13 +15,26 @@ import net.minecraft.util.ResourceLocation;
  */
 public class GuiBasicCoil extends GuiBuildCraft {
     public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/BasicCoilGui.png");
+    TileBasicCoil coil;
 
     public GuiBasicCoil(InventoryPlayer inventoryplayer, TileBasicCoil coil) {
         super(new ContainerBasicCoil(inventoryplayer, coil), coil, texture);
+        this.coil = coil;
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
         super.drawGuiContainerBackgroundLayer(f, x, y);
+        int j = (width - xSize) / 2;
+        int k = (height - ySize) / 2;
+        drawTexturedModalRect(j + 79, k + 26, 176, 0, 16, coil.getBurnIconHeight());
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+        super.drawGuiContainerForegroundLayer(par1, par2);
+        String title = Utils.localize("tile.blockHeatedFurnace.name");
+        fontRendererObj.drawString(Utils.localize(title), getCenteredOffset(title), 6, 0x404040);
+        fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 96) + 2, 0x404040);
     }
 }

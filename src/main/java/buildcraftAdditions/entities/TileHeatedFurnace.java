@@ -37,13 +37,18 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
         }
         if (canCook()) {
             if (!isCooking) {
-                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                for (TileCoilBase coil : coils) {
+                    if (coil != null) {
+                        coil.startHeating();
+                        if (coil.isBurning()) {
+                            isCooking = true;
+                            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                        }
+                    }
+                }
             }
-            isCooking = true;
-            for (TileCoilBase coil : coils) {
-                if (coil != null)
-                    coil.startHeating();
-            }
+            if (progress > 0)
+                isCooking = true;
             if (progress >= 6000) {
                 ItemStack inputStack = getStackInSlot(0);
                 ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inputStack);
@@ -63,8 +68,8 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
                     }
             }
         } else {
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             isCooking = false;
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             progress = 0;
             for (TileCoilBase coil : coils) {
                 if (coil != null)
@@ -123,6 +128,7 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
         } else {
             coils[5] = null;
         }
+        isCooking = false;
     }
 
     @Override

@@ -1,10 +1,10 @@
 package buildcraftAdditions.entities;
 
 import buildcraft.core.inventory.SimpleInventory;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityFurnace;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -16,16 +16,36 @@ import net.minecraft.item.ItemStack;
 public class TileBasicCoil extends TileCoilBase implements IInventory {
     public int increment;
     private final SimpleInventory inventory = new SimpleInventory(1, "BasicCoil", 64);
+    public int burnTime, fullBurnTime;
 
     public TileBasicCoil(){
-
+        burnTime = 0;
+        fullBurnTime = 0;
+        shouldHeat = false;
+        burning = false;
     }
     @Override
     public void updateEntity(){
-        if (shouldHeat && increment < 16)
+        if (burnTime == 0){
+            burning = false;
+            if (shouldHeat)
+                burn();
+        }
+        if (burning)
+            burnTime--;
+        if (burning && increment < 16)
             increment++;
-        if (!shouldHeat && increment > 0)
+        if (!burning && increment > 0)
             increment--;
+    }
+
+    public void burn(){
+        if (getStackInSlot(0) != null){
+            burnTime = getBurnTime(getStackInSlot(0));
+            fullBurnTime = burnTime;
+            decrStackSize(0, 1);
+            burning = true;
+        }
     }
 
     @Override
@@ -90,6 +110,16 @@ public class TileBasicCoil extends TileCoilBase implements IInventory {
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
-        return GameRegistry.getFuelValue(stack) != 0;
+        return getBurnTime(stack) != 0;
+    }
+
+    public int getBurnTime(ItemStack stack){
+        return TileEntityFurnace.getItemBurnTime(stack) * 5;
+    }
+
+    public int getBurnIconHeight(){
+        if (fullBurnTime ==0)
+            return 0;
+        return (burnTime *16) / fullBurnTime;
     }
 }
