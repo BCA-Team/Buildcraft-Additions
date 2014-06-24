@@ -95,6 +95,7 @@ public class BlockFluidicCompressor extends BlockContainer {
             }
         }
         compressor.closeInventory();
+        super.breakBlock(world, x, y, z, block, meta);
     }
 	
 	@Override

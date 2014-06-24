@@ -2,14 +2,24 @@ package buildcraftAdditions.blocks;
 
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.core.Utils;
 import buildcraftAdditions.core.Variables;
 import buildcraftAdditions.entities.TileHeatedFurnace;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -19,11 +29,14 @@ import net.minecraft.world.World;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockHeatedFurnace extends BlockContainer {
+    public IIcon front, back, sides, top, bottom, frontActivated;
+    public boolean isActivated;
 
     public BlockHeatedFurnace() {
         super(Material.iron);
         setHardness(5F);
         setResistance(10F);
+        isActivated = false;
     }
 
     @Override
@@ -67,4 +80,96 @@ public class BlockHeatedFurnace extends BlockContainer {
             furnace.updateCoils();
         }
     }
+
+    @Override
+    public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack stack) {
+        super.onBlockPlacedBy(world, i, j, k, entityliving, stack);
+
+        ForgeDirection orientation = Utils.get2dOrientation(entityliving);
+        world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(), 1);
+
+    }
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta){
+        TileHeatedFurnace heatedFurnace = (TileHeatedFurnace) world.getTileEntity(x, y, z);
+        heatedFurnace.openInventory();
+        for (int t = 0; t < 2; t++){
+            float f1 = 0.7F;
+            double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+            double d1 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+            double d2 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+            ItemStack stack = heatedFurnace.getStackInSlot(t);
+            if (stack != null) {
+                heatedFurnace.setInventorySlotContents(t, null);
+                EntityItem itemToDrop = new EntityItem(world, x + d, y + d1, z + d2, stack);
+                itemToDrop.delayBeforeCanPickup = 10;
+                world.spawnEntityInWorld(itemToDrop);
+            }
+        }
+        heatedFurnace.closeInventory();
+        super.breakBlock(world, x, y, z, block, meta);
+
+    }
+
+
+    @Override
+    public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side){
+        int meta = access.getBlockMetadata(x, y, z);
+        if (meta == 0 && side == 3)
+            return front;
+
+        if (side == meta && meta > 1) {
+            TileHeatedFurnace furnace = (TileHeatedFurnace) access.getTileEntity(x, y, z);
+            if (furnace != null && furnace.isCooking) {
+                return frontActivated;
+            }
+            return front;
+        }
+
+        switch (side) {
+            case 0:
+                return bottom;
+            case 1:
+                return top;
+            case 5:
+                return back;
+            default:
+                return sides;
+        }
+    }
+
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        // If no metadata is set, then this is an icon.
+        if (meta == 0 && side == 3)
+            return front;
+
+        if (side == meta && meta > 1)
+            return front;
+
+        switch (side) {
+            case 0:
+                return bottom;
+            case 1:
+                return top;
+            case 5:
+                return back;
+            default:
+                return sides;
+        }
+    }
+
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
+        front = par1IconRegister.registerIcon("bcadditions:furnaceFront");
+        frontActivated = par1IconRegister.registerIcon("bcadditions:furnaceFront_on");
+        top = par1IconRegister.registerIcon("bcadditions:furnaceTop");
+        back = par1IconRegister.registerIcon("bcadditions:furnaceBack");
+        bottom = par1IconRegister.registerIcon("bcadditions:furnaceBottom");
+        sides = par1IconRegister.registerIcon("bcadditions:furnaceSide");
+    }
+
+
 }

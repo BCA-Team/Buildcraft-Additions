@@ -30,23 +30,26 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
     }
 
     @Override
-    public void updateEntity(){
-        if (shouldUpdateCoils){
+    public void updateEntity() {
+        if (shouldUpdateCoils) {
             updateCoils();
             shouldUpdateCoils = false;
         }
         if (canCook()) {
+            if (!isCooking) {
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            }
             isCooking = true;
-            for (TileCoilBase coil: coils){
-                if(coil != null)
+            for (TileCoilBase coil : coils) {
+                if (coil != null)
                     coil.startHeating();
             }
             if (progress >= 6000) {
                 ItemStack inputStack = getStackInSlot(0);
                 ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inputStack);
-                if (getStackInSlot(1) == null){
+                if (getStackInSlot(1) == null) {
                     setInventorySlotContents(1, result.copy());
-                } else{
+                } else {
                     getStackInSlot(1).stackSize += result.stackSize;
                 }
                 getStackInSlot(0).stackSize--;
@@ -54,16 +57,17 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
                     setInventorySlotContents(0, null);
                 progress = 0;
             } else {
-                for (TileCoilBase coil: coils)
-                    if(coil != null) {
+                for (TileCoilBase coil : coils)
+                    if (coil != null) {
                         progress += coil.getIncrement();
                     }
             }
         } else {
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             isCooking = false;
             progress = 0;
-            for (TileCoilBase coil: coils){
-                if(coil != null)
+            for (TileCoilBase coil : coils) {
+                if (coil != null)
                     coil.stopHeating();
             }
         }
@@ -198,4 +202,5 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
         return getResult(stack) != null;
     }
+
 }
