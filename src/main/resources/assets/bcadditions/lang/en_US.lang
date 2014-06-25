@@ -1,7 +1,7 @@
 tile.blockFluidicCompressor.name=Fluidic Compressor
 tile.blockChargingStation.name=Charging Station
 tile.blockHeatedFurnace.name=Heated Furnace
-tile.blockCoilBasic.name=Basic Coil
+tile.blockBasicCoil.name=Basic Coil
 
 item.ironCanister.name=Iron Canister
 item.goldCanister.name=Gold Canister

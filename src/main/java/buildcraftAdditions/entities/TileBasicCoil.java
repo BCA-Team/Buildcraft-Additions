@@ -4,6 +4,7 @@ import buildcraft.core.inventory.SimpleInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 
 /**
@@ -46,6 +47,31 @@ public class TileBasicCoil extends TileCoilBase implements IInventory {
             decrStackSize(0, 1);
             burning = true;
         }
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tag){
+        super.writeToNBT(tag);
+        NBTTagCompound inventoryTag = new NBTTagCompound();
+        inventory.writeToNBT(inventoryTag);
+        tag.setTag("inventory", inventoryTag);
+        tag.setInteger("burnTime", burnTime);
+        tag.setInteger("fullBurnTime", fullBurnTime);
+        tag.setInteger("increment", increment);
+        tag.setBoolean("shouldHeat", shouldHeat);
+        tag.setBoolean("burning", burning);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound tag){
+        super.readFromNBT(tag);
+        NBTTagCompound inventoryTag = tag.getCompoundTag("inventory");
+        inventory.readFromNBT(inventoryTag);
+        burnTime = tag.getInteger("burnTime");
+        fullBurnTime = tag.getInteger("fullBurnTime");
+        increment = tag.getInteger("increment");
+        shouldHeat = tag.getBoolean("shouldHeat");
+        burning = tag.getBoolean("burning");
     }
 
     @Override

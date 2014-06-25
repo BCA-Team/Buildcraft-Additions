@@ -22,7 +22,7 @@ public class ContainerBasicCoil extends BuildCraftContainer {
         super(coil.getSizeInventory());
         this.coil = coil;
 
-        this.addSlot(new SlotValidated(coil, 0, 78, 43));
+        this.addSlot(new Slot(coil, 0, 78, 43));
 
         for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
         {

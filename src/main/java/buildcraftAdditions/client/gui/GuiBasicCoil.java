@@ -27,6 +27,7 @@ public class GuiBasicCoil extends GuiBuildCraft {
         super.drawGuiContainerBackgroundLayer(f, x, y);
         int j = (width - xSize) / 2;
         int k = (height - ySize) / 2;
+        coil.sendNetworkUpdate();
         drawTexturedModalRect(j + 79, k + 26, 176, 0, 16, coil.getBurnIconHeight());
     }
 

@@ -92,7 +92,6 @@ public class BlockHeatedFurnace extends BlockContainer {
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta){
         TileHeatedFurnace heatedFurnace = (TileHeatedFurnace) world.getTileEntity(x, y, z);
-        heatedFurnace.openInventory();
         for (int t = 0; t < 2; t++){
             float f1 = 0.7F;
             double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
@@ -106,7 +105,6 @@ public class BlockHeatedFurnace extends BlockContainer {
                 world.spawnEntityInWorld(itemToDrop);
             }
         }
-        heatedFurnace.closeInventory();
         super.breakBlock(world, x, y, z, block, meta);
 
     }
