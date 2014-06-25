@@ -1,5 +1,6 @@
 package buildcraftAdditions.entities;
 
+import buildcraft.api.core.NetworkData;
 import buildcraft.core.TileBuildCraft;
 import buildcraft.core.inventory.SimpleInventory;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -18,9 +20,12 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
     private final SimpleInventory inventory = new SimpleInventory(2, "HeatedFurnace", 64);
+    @NetworkData
     public int progress;
+    @NetworkData
     public boolean isCooking;
     public TileCoilBase[] coils;
+    @NetworkData
     public boolean shouldUpdateCoils;
 
     public TileHeatedFurnace(){
@@ -42,14 +47,14 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
                         coil.startHeating();
                         if (coil.isBurning()) {
                             isCooking = true;
-                            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                            doBlockUpdate();
                         }
                     }
                 }
             }
             if (progress > 0)
                 isCooking = true;
-            if (progress >= 6000) {
+            if (progress >= 6500) {
                 ItemStack inputStack = getStackInSlot(0);
                 ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inputStack);
                 if (getStackInSlot(1) == null) {
@@ -69,13 +74,18 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
             }
         } else {
             isCooking = false;
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            doBlockUpdate();
             progress = 0;
             for (TileCoilBase coil : coils) {
                 if (coil != null)
                     coil.stopHeating();
             }
         }
+    }
+
+    public void doBlockUpdate(){
+        sendNetworkUpdate();
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
     public boolean canCook(){
@@ -92,6 +102,7 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
     }
 
     public void updateCoils(){
+        //for (int dir: ForgeDirection.VALID_DIRECTIONS)
         TileEntity entity = worldObj.getTileEntity(xCoord - 1, yCoord, zCoord);
         if (entity instanceof TileCoilBase) {
             coils[0] = (TileCoilBase) entity;
@@ -134,11 +145,13 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
         super.readFromNBT(nbtTagCompound);
-        NBTTagCompound p = (NBTTagCompound) nbtTagCompound.getTag("inventory");
-        inventory.readFromNBT(p);
+        NBTTagCompound inventoryTag = nbtTagCompound.getCompoundTag("inventory");
+        inventory.readFromNBT(inventoryTag);
         progress = nbtTagCompound.getInteger("progress");
         isCooking = nbtTagCompound.getBoolean("isCooking");
         shouldUpdateCoils = true;
+        doBlockUpdate();
+
     }
 
     @Override
@@ -211,4 +224,7 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
         return getResult(stack) != null;
     }
 
+    public int getScaledProgress() {
+        return (progress * 23)/6500 + 1;
+    }
 }

@@ -27,14 +27,13 @@ public class GuiBasicCoil extends GuiBuildCraft {
         super.drawGuiContainerBackgroundLayer(f, x, y);
         int j = (width - xSize) / 2;
         int k = (height - ySize) / 2;
-        coil.sendNetworkUpdate();
-        drawTexturedModalRect(j + 79, k + 26, 176, 0, 16, coil.getBurnIconHeight());
+        drawTexturedModalRect(j + 79, k + 28 + (16-coil.getBurnIconHeight()), 176, 16-coil.getBurnIconHeight(), 16, coil.getBurnIconHeight());
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         super.drawGuiContainerForegroundLayer(par1, par2);
-        String title = Utils.localize("tile.blockHeatedFurnace.name");
+        String title = Utils.localize("tile.blockBasicCoil.name");
         fontRendererObj.drawString(Utils.localize(title), getCenteredOffset(title), 6, 0x404040);
         fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 96) + 2, 0x404040);
     }

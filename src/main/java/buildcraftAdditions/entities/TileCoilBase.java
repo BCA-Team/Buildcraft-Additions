@@ -1,5 +1,6 @@
 package buildcraftAdditions.entities;
 
+import buildcraft.api.core.NetworkData;
 import buildcraft.core.TileBuildCraft;
 
 /**
@@ -10,8 +11,8 @@ import buildcraft.core.TileBuildCraft;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class TileCoilBase extends TileBuildCraft {
-    public boolean shouldHeat;
-    public boolean burning;
+    @NetworkData
+    public boolean shouldHeat, burning;
 
     public void startHeating(){
         shouldHeat = true;

@@ -1,5 +1,6 @@
 package buildcraftAdditions.entities;
 
+import buildcraft.api.core.NetworkData;
 import buildcraft.core.inventory.SimpleInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -15,8 +16,11 @@ import net.minecraft.tileentity.TileEntityFurnace;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileBasicCoil extends TileCoilBase implements IInventory {
+    @NetworkData
     public int increment;
+    @NetworkData
     private final SimpleInventory inventory = new SimpleInventory(1, "BasicCoil", 64);
+    @NetworkData
     public int burnTime, fullBurnTime;
 
     public TileBasicCoil(){
