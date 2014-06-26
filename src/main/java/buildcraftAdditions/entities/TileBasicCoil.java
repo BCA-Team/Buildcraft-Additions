@@ -56,7 +56,7 @@ public class TileBasicCoil extends TileCoilBase implements IInventory {
     @Override
     public void writeToNBT(NBTTagCompound tag){
         super.writeToNBT(tag);
-        inventory.writeToNBT(nbtTagCompound);
+        inventory.writeToNBT(tag);
         tag.setInteger("burnTime", burnTime);
         tag.setInteger("fullBurnTime", fullBurnTime);
         tag.setInteger("increment", increment);
@@ -67,7 +67,7 @@ public class TileBasicCoil extends TileCoilBase implements IInventory {
     @Override
     public void readFromNBT(NBTTagCompound tag){
         super.readFromNBT(tag);
-        inventory.readFromNBT(nbtTagCompound);
+        inventory.readFromNBT(tag);
         burnTime = tag.getInteger("burnTime");
         fullBurnTime = tag.getInteger("fullBurnTime");
         increment = tag.getInteger("increment");
