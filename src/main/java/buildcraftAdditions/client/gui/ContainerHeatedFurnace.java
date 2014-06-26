@@ -22,7 +22,7 @@ public class ContainerHeatedFurnace extends BuildCraftContainer {
         super(furnace.getSizeInventory());
         this.furnace = furnace;
 
-        this.addSlot(new SlotValidated(furnace, 0, 56, 34));
+        this.addSlot(new Slot(furnace, 0, 56, 34));
         this.addSlot(new SlotOutput(furnace, 1, 116, 34));
 
         for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)

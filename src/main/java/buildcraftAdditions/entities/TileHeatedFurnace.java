@@ -2,7 +2,7 @@ package buildcraftAdditions.entities;
 
 import buildcraft.api.core.NetworkData;
 import buildcraft.core.TileBuildCraft;
-import buildcraft.core.inventory.SimpleInventory;
+import buildcraftAdditions.Inventories.CustomInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
-    private final SimpleInventory inventory = new SimpleInventory(2, "HeatedFurnace", 64);
+    private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64);
     @NetworkData
     public int progress;
     @NetworkData
@@ -70,16 +70,21 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
                 for (TileCoilBase coil : coils)
                     if (coil != null) {
                         progress += coil.getIncrement();
+
                     }
             }
         } else {
-            isCooking = false;
-            doBlockUpdate();
-            progress = 0;
-            for (TileCoilBase coil : coils) {
-                if (coil != null)
-                    coil.stopHeating();
-            }
+            stop();
+        }
+    }
+
+    public void stop(){
+        isCooking = false;
+        doBlockUpdate();
+        progress = 0;
+        for (TileCoilBase coil : coils) {
+            if (coil != null)
+                coil.stopHeating();
         }
     }
 
@@ -145,11 +150,12 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
         super.readFromNBT(nbtTagCompound);
-        NBTTagCompound inventoryTag = nbtTagCompound.getCompoundTag("inventory");
-        inventory.readFromNBT(inventoryTag);
+        NBTTagCompound p = (NBTTagCompound) nbtTagCompound.getTag("inventory");
+        inventory.readNBT(p);
         progress = nbtTagCompound.getInteger("progress");
         isCooking = nbtTagCompound.getBoolean("isCooking");
         shouldUpdateCoils = true;
+        sendNetworkUpdate();
         doBlockUpdate();
 
     }
@@ -157,9 +163,10 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
+        sendNetworkUpdate();
         NBTTagCompound inventoryTag = new NBTTagCompound();
-        inventory.writeToNBT(inventoryTag);
-        nbtTagCompound.setTag("inventory", inventoryTag);
+        inventory.writeNBT(inventoryTag);
+        nbtTagCompound.setTag("inventoryTag", inventoryTag);
         nbtTagCompound.setInteger("progress", progress);
         nbtTagCompound.setBoolean("isCooking", isCooking);
     }
