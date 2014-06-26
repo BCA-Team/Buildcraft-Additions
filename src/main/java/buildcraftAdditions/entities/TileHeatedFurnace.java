@@ -150,8 +150,7 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
         super.readFromNBT(nbtTagCompound);
-        NBTTagCompound p = (NBTTagCompound) nbtTagCompound.getTag("inventory");
-        inventory.readNBT(p);
+        inventory.readNBT(nbtTagCompound);
         progress = nbtTagCompound.getInteger("progress");
         isCooking = nbtTagCompound.getBoolean("isCooking");
         shouldUpdateCoils = true;
@@ -164,8 +163,7 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
         sendNetworkUpdate();
-        NBTTagCompound inventoryTag = new NBTTagCompound();
-        inventory.writeNBT(inventoryTag);
+        inventory.writeNBT(nbtTagCompound);
         nbtTagCompound.setTag("inventoryTag", inventoryTag);
         nbtTagCompound.setInteger("progress", progress);
         nbtTagCompound.setBoolean("isCooking", isCooking);
