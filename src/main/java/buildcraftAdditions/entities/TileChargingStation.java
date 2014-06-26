@@ -51,17 +51,14 @@ public class TileChargingStation extends TileBuildCraft implements IInventory, I
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
-		NBTTagCompound p = (NBTTagCompound) nbtTagCompound.getTag("inventory");
-		inventory.readFromNBT(p);
+		inventory.readFromNBT(nbtTagCompound);
 		energy = nbtTagCompound.getDouble("energy");
 	}
 	
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
-		NBTTagCompound inventoryTag = new NBTTagCompound();
-		inventory.writeToNBT(inventoryTag);
-		nbtTagCompound.setTag("inventory", inventoryTag);
+		inventory.writeToNBT(nbtTagCompound);
 		nbtTagCompound.setDouble("energy", energy);
 	}
 	

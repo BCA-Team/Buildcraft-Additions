@@ -122,8 +122,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
         super.readFromNBT(nbtTagCompound);
-        NBTTagCompound p = (NBTTagCompound) nbtTagCompound.getTag("inventory");
-        inventory.readNBT(p);
+        inventory.readNBT(nbtTagCompound);
         tankManager.readFromNBT(nbtTagCompound);
         fill = nbtTagCompound.getBoolean("fill");
     }
@@ -131,9 +130,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
-        NBTTagCompound inventoryTag = new NBTTagCompound();
-        inventory.writeNBT(inventoryTag);
-        nbtTagCompound.setTag("inventory", inventoryTag);
+        inventory.writeNBT(nbtTagCompound);
         tankManager.writeToNBT(nbtTagCompound);
         nbtTagCompound.setBoolean("fill", fill);
     }

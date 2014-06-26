@@ -219,9 +219,7 @@ public class TileAmplifiedEngine extends TileEngine implements IInventory {
     @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
-        NBTTagCompound p = (NBTTagCompound) data.getTag("inventory");
-        inventory.readFromNBT(p);
-
+        inventory.readFromNBT(data);
         burnTime = data.getInteger("burnTime");
         penaltyCooling = data.getInteger("penaltyCooling");
 
@@ -230,10 +228,7 @@ public class TileAmplifiedEngine extends TileEngine implements IInventory {
     @Override
     public void writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
-        NBTTagCompound inventoryTag = new NBTTagCompound();
-        inventory.writeToNBT(inventoryTag);
-        data.setTag("inventory", inventoryTag);
-
+        inventory.writeToNBT(data);
         data.setInteger("burnTime", burnTime);
         data.setInteger("penaltyCooling", penaltyCooling);
 
