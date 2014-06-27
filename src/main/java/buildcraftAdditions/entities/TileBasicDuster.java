@@ -19,7 +19,7 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 public class TileBasicDuster extends TileBase implements IInventory {
     public int progress;
-    public static CustomInventory inventory = new CustomInventory("Duster", 1, 1);
+    public CustomInventory inventory = new CustomInventory("Duster", 1, 1, this);
 
     public TileBasicDuster(){
     }
@@ -132,17 +132,17 @@ public class TileBasicDuster extends TileBase implements IInventory {
 
     @Override
     public void openInventory() {
-
+        inventory.openInventory();
     }
 
     @Override
     public void closeInventory() {
-
+        inventory.closeInventory();
     }
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
-        return true;
+        return false;
     }
 
     @Override

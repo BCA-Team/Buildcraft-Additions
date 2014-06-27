@@ -19,7 +19,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
-    private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64);
+    private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64, this);
     @NetworkData
     public int progress;
     @NetworkData

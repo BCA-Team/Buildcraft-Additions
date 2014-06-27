@@ -46,7 +46,7 @@ import buildcraftAdditions.items.ItemCanister;
 
 public class TileFluidicCompressor extends TileBuildCraft implements ISidedInventory, IFluidHandler, IGuiReturnHandler, IOverrideDefaultTriggers {
 
-    private final CustomInventory inventory = new CustomInventory("FluidicCompressor", 2, 1);
+    private final CustomInventory inventory = new CustomInventory("FluidicCompressor", 2, 1, this);
     public final int maxLiquid = FluidContainerRegistry.BUCKET_VOLUME * 10;
     @MjBattery(maxCapacity = 800.0, maxReceivedPerCycle = 100.0)
     public double energyStored = 0;

@@ -25,6 +25,8 @@ item.toolUpgradeDigger.name=Excavation Attachment
 item.toolUpgradeChainsaw.name=Saw Blade
 item.toolUpgradeHoe.name=Tiller
 item.kineticMultiTool.name=Kinetic Multi-Tool
+item.dustGold.name=Gold Dust
+item.dustIron.name=Iron Dust
 
 tooltip.installed=Installed
 tooltip.deactivated=Deactivated
