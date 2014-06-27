@@ -18,6 +18,7 @@ import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.core.Variables;
 import buildcraftAdditions.entities.*;
 import buildcraftAdditions.items.*;
+import buildcraftAdditions.items.Dusts.GoldDust;
 import buildcraftAdditions.items.Dusts.IronDust;
 import buildcraftAdditions.items.Tools.*;
 import buildcraftAdditions.networking.PacketHandeler;
@@ -80,6 +81,7 @@ public class BuildcraftAdditions {
     public static Item toolUpgradeDrill;
     public static Item toolUpgradeChainsaw;
     public static Item ironDust;
+    public static Item goldDust;
 
     public static ItemKineticTool kineticTool;
 
@@ -180,6 +182,10 @@ public class BuildcraftAdditions {
         GameRegistry.registerItem(ironDust, "ironDust");
         OreDictionary.registerOre("dustIron", ironDust);
 
+        goldDust = new GoldDust();
+        GameRegistry.registerItem(goldDust, "goldDust");
+        OreDictionary.registerOre("dustGold", goldDust);
+
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
         BuildcraftRecipes.assemblyTable.addRecipe(2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
         BuildcraftRecipes.assemblyTable.addRecipe(3000, new ItemStack(diamondStick), new ItemStack(Items.diamond, 2));
@@ -197,7 +203,10 @@ public class BuildcraftAdditions {
         BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieDiamondStick());
         BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieEmeraldStick());
 
-        Variables.addMetals();
+        Variables.addMetal("Redstone");
+        Variables.addMetal("Coal");
+        Variables.addMetal("Lapis");
+
     }
 
     @Mod.EventHandler

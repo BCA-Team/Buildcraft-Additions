@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -35,5 +36,40 @@ public class ContainerBasicDuster extends Container {
         return true;
     }
 
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex)
+    {
+        ItemStack newItemStack = null;
+        Slot slot = (Slot) inventorySlots.get(slotIndex);
+
+        if (slot != null && slot.getHasStack())
+        {
+            ItemStack itemStack = slot.getStack();
+            newItemStack = itemStack.copy();
+
+            if (slotIndex <1)
+            {
+                if (!this.mergeItemStack(itemStack, 1, inventorySlots.size(), false))
+                {
+                    return null;
+                }
+            }
+            else if (!this.mergeItemStack(itemStack, 0, 1, false))
+            {
+                return null;
+            }
+
+            if (itemStack.stackSize == 0)
+            {
+                slot.putStack(null);
+            }
+            else
+            {
+                slot.onSlotChanged();
+            }
+        }
+
+        return newItemStack;
+    }
 
 }
