@@ -15,9 +15,9 @@ import buildcraftAdditions.blocks.*;
 import buildcraftAdditions.core.Configuration;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
-import buildcraftAdditions.entities.TileBasicCoil;
-import buildcraftAdditions.entities.TileHeatedFurnace;
+import buildcraftAdditions.entities.*;
 import buildcraftAdditions.items.*;
+import buildcraftAdditions.items.Dusts.IronDust;
 import buildcraftAdditions.items.Tools.*;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.triggers.*;
@@ -32,8 +32,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import buildcraft.core.proxy.CoreProxy;
 import buildcraftAdditions.client.gui.GuiHandler;
-import buildcraftAdditions.entities.TileChargingStation;
-import buildcraftAdditions.entities.TileFluidicCompressor;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
@@ -47,6 +45,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", dependencies = "required-after:BuildCraft|Energy@{6.0.16}")
 public class BuildcraftAdditions {
@@ -60,6 +59,7 @@ public class BuildcraftAdditions {
     public static BlockEngine engineBlock;
     public static BlockHeatedFurnace heatedFurnaceBlock;
     public static BlockBasicCoil basicCoilBlock;
+    public static BlockBasicDuster basicDusterBlock;
 
     public static Item mjMeter;
     public static Item poweredShovel;
@@ -78,6 +78,8 @@ public class BuildcraftAdditions {
     public static Item toolUpgradeDigger;
     public static Item toolUpgradeDrill;
     public static Item toolUpgradeChainsaw;
+    public static Item ironDust;
+
     public static ItemKineticTool kineticTool;
 
     public static BCTrigger triggerCanAcceptCanister = new TriggerCanisterRequested();
@@ -173,6 +175,10 @@ public class BuildcraftAdditions {
         kineticTool = new ItemKineticTool();
         CoreProxy.proxy.registerItem(kineticTool);
 
+        ironDust = new IronDust();
+        GameRegistry.registerItem(ironDust, "ironDust");
+        OreDictionary.registerOre("dustIron", ironDust);
+
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
         BuildcraftRecipes.assemblyTable.addRecipe(2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
         BuildcraftRecipes.assemblyTable.addRecipe(3000, new ItemStack(diamondStick), new ItemStack(Items.diamond, 2));
@@ -229,6 +235,7 @@ public class BuildcraftAdditions {
         GameRegistry.registerTileEntity(TileChargingStation.class, "TileChargingStation");
         GameRegistry.registerTileEntity(TileHeatedFurnace.class, "TileHeatedFurnace");
         GameRegistry.registerTileEntity(TileBasicCoil.class, "TileBasicCoil");
+        GameRegistry.registerTileEntity(TileBasicDuster.class, "TileBasicDuster");
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
     }
@@ -248,8 +255,14 @@ public class BuildcraftAdditions {
         GameRegistry.registerBlock(heatedFurnaceBlock, "blockHeatedFurnace");
 
         basicCoilBlock = new BlockBasicCoil();
-        basicCoilBlock.setBlockName("blockBasicCoil").setCreativeTab(bcadditions);
-        GameRegistry.registerBlock(basicCoilBlock, "blockBasicCoil");
+        basicCoilBlock.setBlockName("blockCoilBasic").setCreativeTab(bcadditions);
+        GameRegistry.registerBlock(basicCoilBlock, "blockCoilBasic");
+
+        basicDusterBlock = new BlockBasicDuster();
+        basicDusterBlock.setBlockName("blockDusterBasic").setCreativeTab(bcadditions);
+        GameRegistry.registerBlock(basicDusterBlock, "blockDusterBasic");
+
+
 
         //engineBlock = new BlockEngine();
         //CoreProxy.proxy.registerBlock(engineBlock.setBlockName("blockEngine").setCreativeTab(bcadditions));

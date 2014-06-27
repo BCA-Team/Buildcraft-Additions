@@ -9,10 +9,7 @@ package buildcraftAdditions.client.gui;
  */
 
 import buildcraftAdditions.core.Variables;
-import buildcraftAdditions.entities.TileBasicCoil;
-import buildcraftAdditions.entities.TileChargingStation;
-import buildcraftAdditions.entities.TileFluidicCompressor;
-import buildcraftAdditions.entities.TileHeatedFurnace;
+import buildcraftAdditions.entities.*;
 import buildcraftAdditions.items.Tools.*;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,6 +42,9 @@ public class GuiHandler implements IGuiHandler {
             case Variables.GuiBasicCoil:
                 if (tile instanceof TileBasicCoil)
                     return new GuiBasicCoil(player.inventory, (TileBasicCoil) tile);
+            case Variables.GuiBasicDuster:
+                if (tile instanceof TileBasicDuster)
+                    return new GuiBasicDuster(player.inventory,(TileBasicDuster) tile);
         }
         return null;
     }
@@ -73,6 +73,9 @@ public class GuiHandler implements IGuiHandler {
             case Variables.GuiBasicCoil:
                 if (tile instanceof TileBasicCoil)
                     return new ContainerBasicCoil(player.inventory, (TileBasicCoil) tile);
+            case Variables.GuiBasicDuster:
+                if (tile instanceof TileBasicDuster)
+                    return new ContainerBasicDuster(player.inventory, (TileBasicDuster) tile);
         }
         return null;
     }
