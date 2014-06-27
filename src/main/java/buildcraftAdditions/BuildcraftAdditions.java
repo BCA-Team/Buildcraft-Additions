@@ -207,6 +207,9 @@ public class BuildcraftAdditions {
         Variables.addMetal("Coal");
         Variables.addMetal("Lapis");
 
+        GameRegistry.addSmelting(ironDust, new ItemStack(Items.iron_ingot), 0);
+        GameRegistry.addSmelting(goldDust, new ItemStack(Items.gold_ingot), 0);
+
     }
 
     @Mod.EventHandler
