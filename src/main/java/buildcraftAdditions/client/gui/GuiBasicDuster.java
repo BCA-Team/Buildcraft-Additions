@@ -1,5 +1,6 @@
 package buildcraftAdditions.client.gui;
 
+import buildcraftAdditions.core.Utils;
 import buildcraftAdditions.entities.TileBasicDuster;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -15,7 +16,7 @@ import org.lwjgl.opengl.GL11;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class GuiBasicDuster extends GuiContainer {
-    public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/BasicCoilGui.png");
+    public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/BasicDusterGui.png");
     public TileBasicDuster duster;
 
 
@@ -32,5 +33,13 @@ public class GuiBasicDuster extends GuiContainer {
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+        super.drawGuiContainerForegroundLayer(par1, par2);
+        String title = Utils.localize("tile.blockDusterBasic.name");
+        fontRendererObj.drawString(Utils.localize(title), (xSize - fontRendererObj.getStringWidth(title)) / 2, 6, 0x404040);
+        fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 96) + 2, 0x404040);
     }
 }
