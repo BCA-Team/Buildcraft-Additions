@@ -4,7 +4,6 @@ import buildcraft.core.IItemPipe;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.core.Variables;
 import buildcraftAdditions.entities.TileBasicDuster;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +17,7 @@ import net.minecraft.world.World;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockBasicDuster extends BlockContainer {
+public class BlockBasicDuster extends BlockBase {
 
     public BlockBasicDuster() {
         super(Material.iron);

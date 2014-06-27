@@ -5,7 +5,6 @@ import buildcraftAdditions.core.Variables;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
@@ -17,7 +16,7 @@ import net.minecraftforge.oredict.OreDictionary;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileBasicDuster extends TileBase implements IInventory {
+public class TileBasicDuster extends TileBase {
     public int progress;
     public CustomInventory inventory = new CustomInventory("Duster", 1, 1, this);
 
