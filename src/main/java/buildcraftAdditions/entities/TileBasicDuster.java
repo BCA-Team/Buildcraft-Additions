@@ -2,6 +2,7 @@ package buildcraftAdditions.entities;
 
 import buildcraftAdditions.Inventories.CustomInventory;
 import buildcraftAdditions.core.Variables;
+import buildcraftAdditions.entities.Bases.TileBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

@@ -2,6 +2,7 @@ package buildcraftAdditions.entities;
 
 import buildcraft.api.core.NetworkData;
 import buildcraft.core.inventory.SimpleInventory;
+import buildcraftAdditions.entities.Bases.TileCoilBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

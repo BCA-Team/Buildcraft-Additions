@@ -1,6 +1,6 @@
 package buildcraftAdditions.blocks;
 
-import buildcraftAdditions.entities.TileBase;
+import buildcraftAdditions.entities.Bases.TileBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -23,22 +23,22 @@ public abstract class BlockBase extends BlockContainer {
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta){
-        TileBase tile = (TileBase) world.getTileEntity(x, y, z);
-        tile.openInventory();
+        TileBase entity = (TileBase) world.getTileEntity(x, y, z);
+        entity.openInventory();
         float f1 = 0.7F;
-        for (int t = 0; t < tile.getSizeInventory(); t++){
+        for (int t = 0; t < entity.getSizeInventory(); t++){
             double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
             double d1 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
             double d2 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-            ItemStack stack = tile.getStackInSlot(t);
+            ItemStack stack = entity.getStackInSlot(t);
             if (stack != null) {
-                tile.setInventorySlotContents(t, null);
+                entity.setInventorySlotContents(t, null);
                 EntityItem itemToDrop = new EntityItem(world, x + d, y + d1, z + d2, stack);
                 itemToDrop.delayBeforeCanPickup = 10;
                 world.spawnEntityInWorld(itemToDrop);
             }
         }
-        tile.closeInventory();
+        entity.closeInventory();
         super.breakBlock(world, x, y, z, block, meta);
     }
 }
