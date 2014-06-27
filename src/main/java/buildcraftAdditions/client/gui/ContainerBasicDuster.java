@@ -35,9 +35,5 @@ public class ContainerBasicDuster extends Container {
         return true;
     }
 
-    @Override
-    public void detectAndSendChanges() {
-        super.detectAndSendChanges();
-        duster.markDirty();
-    }
+
 }

@@ -1,18 +1,13 @@
 package buildcraftAdditions.entities;
 
 import buildcraftAdditions.Inventories.CustomInventory;
-import buildcraftAdditions.networking.MessageTileBasicDuster;
-import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.core.Variables;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.Packet;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -24,16 +19,10 @@ import java.util.List;
 public class TileBasicDuster extends TileBase implements IInventory {
     public int progress;
     private static CustomInventory inventory = new CustomInventory("Duster", 1, 1);
-    public ArrayList<String> metals;
 
     public TileBasicDuster(){
-        metals = new ArrayList<String>();
-        addMetals();
     }
 
-    public void addMetals(){
-        metals.add("Iron");
-    }
 
     public void makeProgress(){
         progress++;
@@ -44,41 +33,35 @@ public class TileBasicDuster extends TileBase implements IInventory {
     }
 
     public void dust(){
+        if (worldObj.isRemote)
+            return;
         String metal = getStackInSlot(0).getUnlocalizedName();
-        metal = metal;
         metal  = metal.replaceAll("tile.ore", "");
-        if (metals.contains(metal)) {
+        if (Variables.metals.contains(metal)) {
             metal = "dust" + metal;
-            ItemStack outputStack = OreDictionary.getOres(metal).get(0);
+            ItemStack outputStack = new ItemStack(OreDictionary.getOres(metal).get(0).getItem(), 2);
+            setInventorySlotContents(0, null);
             float f1 = 0.7F;
             double d = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
             double d1 = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
             double d2 = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-            EntityItem itemToDrop = new EntityItem(worldObj, xCoord + d, yCoord + d1, zCoord + d2, outputStack);
+            EntityItem itemToDrop = new EntityItem(worldObj, xCoord + d, yCoord + 2 + d1, zCoord + d2, outputStack);
             itemToDrop.delayBeforeCanPickup = 10;
             worldObj.spawnEntityInWorld(itemToDrop);
         }
     }
 
-    @Override
-    public Packet getDescriptionPacket(){
-        return PacketHandeler.instance.getPacketFrom(new MessageTileBasicDuster(this));
-    }
-
-    @Override
-    public void updateEntity() {
-
-
-    }
 
     @Override
     public void readFromNBT(NBTTagCompound tag){
-
+        super.readFromNBT(tag);
+        inventory.readNBT(tag);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag){
-
+        super.writeToNBT(tag);
+        inventory.writeNBT(tag);
     }
 
     @Override
@@ -141,5 +124,10 @@ public class TileBasicDuster extends TileBase implements IInventory {
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
         return true;
+    }
+
+    @Override
+    public void updateEntity() {
+
     }
 }

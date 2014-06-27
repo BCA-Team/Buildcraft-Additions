@@ -11,8 +11,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.io.IOException;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -156,15 +154,12 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
         progress = nbtTagCompound.getInteger("progress");
         isCooking = nbtTagCompound.getBoolean("isCooking");
         shouldUpdateCoils = true;
-        sendNetworkUpdate();
-        doBlockUpdate();
 
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
-        sendNetworkUpdate();
         inventory.writeNBT(nbtTagCompound);
         nbtTagCompound.setInteger("progress", progress);
         nbtTagCompound.setBoolean("isCooking", isCooking);

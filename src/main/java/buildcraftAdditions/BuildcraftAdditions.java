@@ -15,6 +15,7 @@ import buildcraftAdditions.blocks.*;
 import buildcraftAdditions.core.Configuration;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
+import buildcraftAdditions.core.Variables;
 import buildcraftAdditions.entities.*;
 import buildcraftAdditions.items.*;
 import buildcraftAdditions.items.Dusts.IronDust;
@@ -195,6 +196,8 @@ public class BuildcraftAdditions {
         BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieGoldStick());
         BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieDiamondStick());
         BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieEmeraldStick());
+
+        Variables.addMetals();
     }
 
     @Mod.EventHandler

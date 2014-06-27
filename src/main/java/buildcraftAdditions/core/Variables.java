@@ -1,5 +1,7 @@
 package buildcraftAdditions.core;
 
+import java.util.ArrayList;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -8,7 +10,7 @@ package buildcraftAdditions.core;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-public final class Variables {
+public class Variables {
 	
 	//GUI ID's
 	public static final int GuiFluidicCompressor = 70;
@@ -17,5 +19,10 @@ public final class Variables {
     public static final int GuiHeatedFurnace = 73;
     public static final int GuiBasicCoil = 74;
     public static final int GuiBasicDuster = 75;
+    public static ArrayList<String> metals;
 
+    public static void addMetals(){
+        metals = new ArrayList<String>();
+        metals.add("Iron");
+    }
 }
