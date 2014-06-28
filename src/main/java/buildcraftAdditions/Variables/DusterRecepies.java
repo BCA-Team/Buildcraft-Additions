@@ -1,4 +1,4 @@
-package Variables;
+package buildcraftAdditions.Variables;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

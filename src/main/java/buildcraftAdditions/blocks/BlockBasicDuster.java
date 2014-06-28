@@ -2,7 +2,7 @@ package buildcraftAdditions.blocks;
 
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.BuildcraftAdditions;
-import Variables.Variables;
+import buildcraftAdditions.Variables.Variables;
 import buildcraftAdditions.entities.TileBasicDuster;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;

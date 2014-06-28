@@ -1,6 +1,6 @@
 package buildcraftAdditions.entities.Bases;
 
-import Variables.DusterRecepies;
+import buildcraftAdditions.Variables.DusterRecepies;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 

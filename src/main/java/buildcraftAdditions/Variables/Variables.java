@@ -1,6 +1,4 @@
-package Variables;
-
-import java.util.ArrayList;
+package buildcraftAdditions.Variables;
 
 /**
  * Copyright (c) 2014, AEnterprise

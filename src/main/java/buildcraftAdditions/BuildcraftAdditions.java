@@ -8,7 +8,7 @@ package buildcraftAdditions;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import Variables.DusterRecepies;
+import buildcraftAdditions.Variables.DusterRecepies;
 import buildcraft.*;
 import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraft.core.triggers.BCTrigger;
