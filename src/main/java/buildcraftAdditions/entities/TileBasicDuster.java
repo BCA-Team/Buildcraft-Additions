@@ -1,14 +1,10 @@
 package buildcraftAdditions.entities;
 
 import buildcraftAdditions.Inventories.CustomInventory;
-import buildcraftAdditions.core.Variables;
-import buildcraftAdditions.entities.Bases.TileBase;
-import net.minecraft.entity.item.EntityItem;
+import buildcraftAdditions.entities.Bases.TileBaseDuster;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -17,58 +13,14 @@ import net.minecraftforge.oredict.OreDictionary;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileBasicDuster extends TileBase {
-    public int progress;
+public class TileBasicDuster extends TileBaseDuster {
     public CustomInventory inventory = new CustomInventory("Duster", 1, 1, this);
 
     public TileBasicDuster(){
     }
 
 
-    public void makeProgress(){
-        if (getStackInSlot(0) != null && getDust(getStackInSlot(0)).isEmpty()) {
-            progress++;
-            if (progress == 5) {
-                dust();
-                progress = 0;
-            }
-        } else {
-            progress = 0;
-        }
-    }
 
-    public void dust(){
-        if (worldObj.isRemote)
-            return;
-        String metal = getDust(getStackInSlot(0));
-        ItemStack outputStack;
-        if (metal.equals("dustRedstone")){
-            outputStack = new ItemStack(OreDictionary.getOres(metal).get(0).getItem(), 6);
-        } else if(metal.equals("dustCoal")) {
-            outputStack = new ItemStack(Items.coal, 6);
-        } else if(metal.equals("dustLapis")) {
-            outputStack = new ItemStack(Items.dye, 6, 4);
-        } else {
-            outputStack = new ItemStack(OreDictionary.getOres(metal).get(0).getItem(), 2);
-        }
-        setInventorySlotContents(0, null);
-        float f1 = 0.7F;
-        double d = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-        double d1 = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-        double d2 = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-        EntityItem itemToDrop = new EntityItem(worldObj, xCoord + d, yCoord + d1, zCoord + d2, outputStack);
-        itemToDrop.delayBeforeCanPickup = 10;
-        worldObj.spawnEntityInWorld(itemToDrop);
-    }
-
-    public String getDust(ItemStack stack){
-        String metal = stack.getItem().getUnlocalizedName();
-        String toReturn  ="";
-        metal  = metal.replaceAll("tile.ore", "");
-        if (Variables.metals.contains(metal))
-            toReturn = "dust" + metal;
-        return toReturn;
-    }
 
 
     @Override

@@ -1,4 +1,4 @@
-package buildcraftAdditions.core;
+package Variables;
 
 import java.util.ArrayList;
 
@@ -19,9 +19,4 @@ public class Variables {
     public static final int GuiHeatedFurnace = 73;
     public static final int GuiBasicCoil = 74;
     public static final int GuiBasicDuster = 75;
-    public static ArrayList<String> metals = new ArrayList<String>();
-
-    public static void addMetal(String metal){
-        metals.add(metal);
-    }
 }

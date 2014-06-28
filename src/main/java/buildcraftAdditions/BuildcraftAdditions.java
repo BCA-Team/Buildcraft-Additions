@@ -8,6 +8,7 @@ package buildcraftAdditions;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import Variables.DusterRecepies;
 import buildcraft.*;
 import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraft.core.triggers.BCTrigger;
@@ -15,7 +16,6 @@ import buildcraftAdditions.blocks.*;
 import buildcraftAdditions.core.Configuration;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
-import buildcraftAdditions.core.Variables;
 import buildcraftAdditions.entities.*;
 import buildcraftAdditions.items.*;
 import buildcraftAdditions.items.Dusts.GoldDust;
@@ -48,6 +48,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.ArrayList;
 
 @Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", dependencies = "required-after:BuildCraft|Energy@{6.0.16}")
 public class BuildcraftAdditions {
@@ -178,14 +180,6 @@ public class BuildcraftAdditions {
         kineticTool = new ItemKineticTool();
         CoreProxy.proxy.registerItem(kineticTool);
 
-        ironDust = new IronDust();
-        GameRegistry.registerItem(ironDust, "ironDust");
-        OreDictionary.registerOre("dustIron", ironDust);
-
-        goldDust = new GoldDust();
-        GameRegistry.registerItem(goldDust, "goldDust");
-        OreDictionary.registerOre("dustGold", goldDust);
-
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
         BuildcraftRecipes.assemblyTable.addRecipe(2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
         BuildcraftRecipes.assemblyTable.addRecipe(3000, new ItemStack(diamondStick), new ItemStack(Items.diamond, 2));
@@ -203,13 +197,9 @@ public class BuildcraftAdditions {
         BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieDiamondStick());
         BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieEmeraldStick());
 
-        Variables.addMetal("Redstone");
-        Variables.addMetal("Coal");
-        Variables.addMetal("Lapis");
-
-        GameRegistry.addSmelting(ironDust, new ItemStack(Items.iron_ingot), 0);
-        GameRegistry.addSmelting(goldDust, new ItemStack(Items.gold_ingot), 0);
-
+        DusterRecepies.addDusterRecepie(new ItemStack(Blocks.redstone_ore), new ItemStack(Items.redstone, 6));
+        DusterRecepies.addDusterRecepie(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, 6));
+        DusterRecepies.addDusterRecepie(new ItemStack(Blocks.lapis_ore), new ItemStack(Items.dye, 6, 4));
     }
 
     @Mod.EventHandler
@@ -253,6 +243,35 @@ public class BuildcraftAdditions {
         GameRegistry.registerTileEntity(TileBasicDuster.class, "TileBasicDuster");
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+
+        ArrayList<ItemStack> list;
+        ItemStack dust = null;
+        list = OreDictionary.getOres("dustIron");
+        if (!list.isEmpty())
+            dust = list.get(0);
+        if (dust == null){
+            ironDust = new IronDust();
+            GameRegistry.registerItem(ironDust, "ironDust");
+            OreDictionary.registerOre("dustIron", ironDust);
+            GameRegistry.addSmelting(ironDust, new ItemStack(Items.iron_ingot), 0);
+            dust = new ItemStack(ironDust);
+        }
+        dust.stackSize = 2;
+        DusterRecepies.addDusterRecepie(new ItemStack(Blocks.iron_ore), dust);
+
+        dust = null;
+        list = OreDictionary.getOres("dustGold");
+        if (!list.isEmpty())
+            dust = list.get(0);
+        if (dust == null) {
+            goldDust = new GoldDust();
+            GameRegistry.registerItem(goldDust, "goldDust");
+            OreDictionary.registerOre("dustGold", goldDust);
+            GameRegistry.addSmelting(goldDust, new ItemStack(Items.gold_ingot), 0);
+            dust = new ItemStack(goldDust);
+        }
+        dust.stackSize = 2;
+        DusterRecepies.addDusterRecepie(new ItemStack(Blocks.gold_ore), dust);
     }
 
     @Mod.EventHandler

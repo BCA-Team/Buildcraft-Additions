@@ -1,7 +1,6 @@
 package buildcraftAdditions.items.Dusts;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.core.Variables;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -23,7 +22,6 @@ public class BaseDust extends Item {
         this.setCreativeTab(BuildcraftAdditions.bcadditions);
         this.setUnlocalizedName("dust" + metal);
         this.metal = metal;
-        Variables.addMetal(metal);
     }
 
     @Override

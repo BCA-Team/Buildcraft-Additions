@@ -2,7 +2,7 @@ package buildcraftAdditions.items.Tools;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.core.Utils;
-import buildcraftAdditions.core.Variables;
+import Variables.Variables;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
