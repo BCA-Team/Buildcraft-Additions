@@ -1,7 +1,7 @@
 package buildcraftAdditions.core;
 
 
-import java.util.logging.Level;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -12,18 +12,14 @@ import java.util.logging.Level;
  */
 public class Logger {
 
-    public static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger("Buildcraft Additions");
+    public static final org.apache.logging.log4j.Logger logger = LogManager.getLogger("Buildcraft Additions");
 
-    public static void initiallize(){
+    public static void initiallize() {
         logger.info("Buildcraft Additions logger initialized");
-    }
+        }
 
-    public static void info(String message){
-        logger.log(Level.INFO, message);
-    }
+    public static void info(String message) { logger.info(message); }
 
-    public static void error(String message){
-        logger.log(Level.SEVERE, message);
-    }
+    public static void error(String message) { logger.error(message); }
 
 }
