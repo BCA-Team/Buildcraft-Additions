@@ -271,6 +271,7 @@ public class BuildcraftAdditions {
         for (ItemStack stack : list)
             DusterRecepies.addDusterRecepie(stack, dust);
         list = OreDictionary.getOres("ingot" + metal);
+        dust.stackSize = 1;
         for (ItemStack stack : list)
             DusterRecepies.addDusterRecepie(stack, dust);
     }
