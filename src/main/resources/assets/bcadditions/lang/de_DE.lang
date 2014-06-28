@@ -1,5 +1,8 @@
 tile.blockFluidicCompressor.name=Flüssigkeitskompressor
 tile.blockChargingStation.name=Ladestation
+tile.blockHeatedFurnace.name=Beiheizter Ofen
+tile.blockCoilBasic.name=Einfache Spule
+tile.blockDusterBasic.name=Einfacher Pulverisierer
 
 item.ironCanister.name=Eisenkanister
 item.goldCanister.name=Goldkanister
@@ -22,6 +25,12 @@ item.toolUpgradeDigger.name=Ausgrabungsaufsatz
 item.toolUpgradeChainsaw.name=Sägeblatt
 item.toolUpgradeHoe.name=Ackerbauaufsatz
 item.kineticMultiTool.name=Kintetisches Multi-Tool
+item.dustGold.name=Pulverisiertes Gold
+item.dustIron.name=Pulverisiertes Eisen
+item.dustCopper=Pulverisiertes Kupfer
+item.dustLead=Pulverisiertes Blei
+item.dustNickel=Pulverisiertes Nickel
+item.dustPlatinum=Pulverisiertes Platin
 
 tooltip.installed=Installiert
 tooltip.deactivated=Deaktiviert
