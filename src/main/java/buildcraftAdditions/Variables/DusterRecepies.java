@@ -22,7 +22,7 @@ public class DusterRecepies {
     }
 
     public static ItemStack getOutput(ItemStack input){
-        if (dusterInput.contains(input.getItem()))
+         if (dusterInput.contains(input.getItem()))
             return dusterOutput.get(dusterInput.indexOf(input.getItem()));
         return null;
     }

@@ -1,5 +1,46 @@
 package buildcraftAdditions;
 
+import buildcraft.BuildCraftCore;
+import buildcraft.BuildCraftFactory;
+import buildcraft.BuildCraftTransport;
+import buildcraft.api.recipes.BuildcraftRecipes;
+import buildcraft.core.proxy.CoreProxy;
+import buildcraft.core.triggers.BCTrigger;
+import buildcraftAdditions.Variables.DusterRecepies;
+import buildcraftAdditions.blocks.*;
+import buildcraftAdditions.client.gui.GuiHandler;
+import buildcraftAdditions.core.Configuration;
+import buildcraftAdditions.core.EventListener;
+import buildcraftAdditions.core.Logger;
+import buildcraftAdditions.entities.*;
+import buildcraftAdditions.items.*;
+import buildcraftAdditions.items.Tools.*;
+import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.proxy.CommonProxy;
+import buildcraftAdditions.triggers.*;
+import buildcraftAdditions.villager.ComponentPowerPlant;
+import buildcraftAdditions.villager.PowerPlantCreationHandeler;
+import buildcraftAdditions.villager.VillagerTradeHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.relauncher.Side;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
+import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.ArrayList;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -8,48 +49,7 @@ package buildcraftAdditions;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import buildcraftAdditions.Variables.DusterRecepies;
-import buildcraft.*;
-import buildcraft.api.recipes.BuildcraftRecipes;
-import buildcraft.core.triggers.BCTrigger;
-import buildcraftAdditions.blocks.*;
-import buildcraftAdditions.core.Configuration;
-import buildcraftAdditions.core.EventListener;
-import buildcraftAdditions.core.Logger;
-import buildcraftAdditions.entities.*;
-import buildcraftAdditions.items.*;
-import buildcraftAdditions.items.Dusts.GoldDust;
-import buildcraftAdditions.items.Dusts.IronDust;
-import buildcraftAdditions.items.Tools.*;
-import buildcraftAdditions.networking.PacketHandeler;
-import buildcraftAdditions.triggers.*;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
-import buildcraft.core.proxy.CoreProxy;
-import buildcraftAdditions.client.gui.GuiHandler;
-import buildcraftAdditions.proxy.CommonProxy;
-import buildcraftAdditions.villager.ComponentPowerPlant;
-import buildcraftAdditions.villager.PowerPlantCreationHandeler;
-import buildcraftAdditions.villager.VillagerTradeHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.relauncher.Side;
-import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.ArrayList;
 
 @Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", dependencies = "required-after:BuildCraft|Energy@{6.0.16}")
 public class BuildcraftAdditions {
@@ -82,8 +82,7 @@ public class BuildcraftAdditions {
     public static Item toolUpgradeDigger;
     public static Item toolUpgradeDrill;
     public static Item toolUpgradeChainsaw;
-    public static Item ironDust;
-    public static Item goldDust;
+    public static Item itemDust;
 
     public static ItemKineticTool kineticTool;
 
@@ -95,7 +94,7 @@ public class BuildcraftAdditions {
 
     public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 
-    @Instance(value="bcadditions")
+    @Mod.Instance(value="bcadditions")
     public static BuildcraftAdditions instance;
 
     @SidedProxy(clientSide="buildcraftAdditions.proxy.ClientProxy", serverSide="buildcraftAdditions.proxy.CommonProxy")
@@ -110,7 +109,7 @@ public class BuildcraftAdditions {
 
     };
 
-    @EventHandler
+    @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
 
         Logger.initiallize();
@@ -216,7 +215,7 @@ public class BuildcraftAdditions {
         GameRegistry.addRecipe(new ItemStack(powerCapsuleTier2), "GDG", "GPG", "GDG", 'G', Items.gold_ingot, 'D', Items.diamond, 'P', powerCapsuleTier1);
         GameRegistry.addRecipe(new ItemStack(powerCapsuleTier3), "DED", "DPD", "DED", 'D', Items.diamond, 'E', Items.emerald, 'P', powerCapsuleTier2);
 
-        if (evt.getSide()==Side.CLIENT){
+        if (evt.getSide()== Side.CLIENT){
             VillagerRegistry.instance().registerVillagerId(457);
             VillagerRegistry.instance().registerVillagerSkin(457, texture);
             VillagerRegistry.instance().registerVillageTradeHandler(457, new VillagerTradeHandler());
@@ -232,7 +231,7 @@ public class BuildcraftAdditions {
 
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void load(FMLInitializationEvent event) {
 
         proxy.registerRenderers();
@@ -244,35 +243,39 @@ public class BuildcraftAdditions {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
+        addDusts("Iron");
+        addDusts("Gold");
+        addDusts("Copper");
+        addDusts("Lead");
+        addDusts("Nickel");
+        addDusts("Platinum");
+        addDusts("Silver");
+        addDusts("Tin");
+    }
+
+    public void addDusts(String metal){
         ArrayList<ItemStack> list;
         ItemStack dust = null;
-        list = OreDictionary.getOres("dustIron");
-        if (!list.isEmpty())
-            dust = list.get(0);
-        if (dust == null){
-            ironDust = new IronDust();
-            GameRegistry.registerItem(ironDust, "ironDust");
-            OreDictionary.registerOre("dustIron", ironDust);
-            GameRegistry.addSmelting(ironDust, new ItemStack(Items.iron_ingot), 0);
-            dust = new ItemStack(ironDust);
-        }
+        list = OreDictionary.getOres("ingot" + metal);
+        if (list.isEmpty())
+            return;
+        list = OreDictionary.getOres("ore" + metal);
+        if (list.isEmpty())
+            return;
+        itemDust = new ItemDust(metal);
+        GameRegistry.registerItem(itemDust, "dust" + metal);
+        OreDictionary.registerOre("dust" + metal, itemDust);
+        GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metal).get(0), 0);
+        dust = new ItemStack(itemDust);
         dust.stackSize = 2;
-        DusterRecepies.addDusterRecepie(new ItemStack(Blocks.iron_ore), dust);
-
-        dust = null;
-        list = OreDictionary.getOres("dustGold");
-        if (!list.isEmpty())
-            dust = list.get(0);
-        if (dust == null) {
-            goldDust = new GoldDust();
-            GameRegistry.registerItem(goldDust, "goldDust");
-            OreDictionary.registerOre("dustGold", goldDust);
-            GameRegistry.addSmelting(goldDust, new ItemStack(Items.gold_ingot), 0);
-            dust = new ItemStack(goldDust);
-        }
-        dust.stackSize = 2;
-        DusterRecepies.addDusterRecepie(new ItemStack(Blocks.gold_ore), dust);
+        for (ItemStack stack : list)
+            DusterRecepies.addDusterRecepie(stack, dust);
+        list = OreDictionary.getOres("ingot" + metal);
+        for (ItemStack stack : list)
+            DusterRecepies.addDusterRecepie(stack, dust);
     }
+
+
 
     @Mod.EventHandler
     public void initialize(FMLPreInitializationEvent evt) {

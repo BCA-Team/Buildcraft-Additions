@@ -1,4 +1,4 @@
-package buildcraftAdditions.items.Dusts;
+package buildcraftAdditions.items;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import cpw.mods.fml.relauncher.Side;
@@ -14,14 +14,15 @@ import net.minecraft.util.IIcon;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BaseDust extends Item {
+public class ItemDust extends Item {
     public IIcon icon;
     public String metal;
 
-    public BaseDust (String metal){
+    public ItemDust(String metal){
         this.setCreativeTab(BuildcraftAdditions.bcadditions);
         this.setUnlocalizedName("dust" + metal);
         this.metal = metal;
+        this.setHasSubtypes(true);
     }
 
     @Override
