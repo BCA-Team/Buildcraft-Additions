@@ -19,11 +19,11 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 
-public class ItemPoweredBase extends Item {
+public class ItemPoweredBase extends ItemSword {
 
 	public int x, y, z;
 	public World world;
@@ -33,6 +33,7 @@ public class ItemPoweredBase extends Item {
 	EntityPlayer player;
 	
 	public ItemPoweredBase(){
+        super(ToolMaterial.EMERALD);
 	}
 
     @Override

@@ -11,12 +11,6 @@ package buildcraftAdditions.items.Tools;
 public class ItemToolUpgradeChainsaw extends ToolUpgrade {
 
     public ItemToolUpgradeChainsaw(){
-        super();
-        this.setUnlocalizedName("toolUpgradeChainsaw");
-    }
-
-    @Override
-    public String getType() {
-        return "Chainsaw";
+        super("Chainsaw");
     }
 }

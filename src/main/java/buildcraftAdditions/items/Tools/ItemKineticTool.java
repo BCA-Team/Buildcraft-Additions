@@ -8,7 +8,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -34,6 +33,7 @@ public class ItemKineticTool extends ItemPoweredBase {
     public IIcon iconChainsaw, iconDigger, iconDrill, iconHoe;
 
     public ItemKineticTool(){
+        super();
         this.setUnlocalizedName("kineticMultiTool");
         this.setCreativeTab(BuildcraftAdditions.bcadditions);
         this.setMaxStackSize(1);
@@ -47,11 +47,6 @@ public class ItemKineticTool extends ItemPoweredBase {
         diamondStick = false;
         emeraldStick = false;
         lastMode = "nothing";
-    }
-
-    @Override
-    public void onUpdate(ItemStack stack, World world, Entity entity, int geenIdee, boolean isMap){
-        stack.getItemDamage();
     }
 
     @Override
@@ -81,6 +76,7 @@ public class ItemKineticTool extends ItemPoweredBase {
             return diamondStick;
         if (Stick.equals("emeraldStick"))
             return emeraldStick;
+
         return false;
     }
 
@@ -159,7 +155,7 @@ public class ItemKineticTool extends ItemPoweredBase {
 
     public void installUpgrade(String upgrade, ItemStack stack){
         readUpgrades(stack);
-        if (!isUpgradeInstalled(stack, upgrade)){
+        if (!isUpgradeInstalled(stack, upgrade)) {
             if (upgrade.equals("Drill"))
                 drill = true;
             if (upgrade.equals("Chainsaw"))
@@ -197,7 +193,7 @@ public class ItemKineticTool extends ItemPoweredBase {
                 return 10;
             }
         }
-            return 1;
+        return 1;
     }
 
     @Override
@@ -237,13 +233,13 @@ public class ItemKineticTool extends ItemPoweredBase {
         readUpgrades(stack);
         list.add(Integer.toString((int) getEnergy()) + "/" + Integer.toString(getCapacity()) + " MJ");
         if (chainsaw)
-                list.add(Utils.localize("item.toolUpgradeChainsaw.name") + " " + Utils.localize("tooltip.installed"));
+            list.add(Utils.localize("item.toolUpgradeChainsaw.name") + " " + Utils.localize("tooltip.installed"));
         if (digger)
-                list.add(Utils.localize("item.toolUpgradeDigger.name") + " " + Utils.localize("tooltip.installed"));
+            list.add(Utils.localize("item.toolUpgradeDigger.name") + " " + Utils.localize("tooltip.installed"));
         if (drill)
-                list.add(Utils.localize("item.toolUpgradeDrill.name") + " " + Utils.localize("tooltip.installed"));
+            list.add(Utils.localize("item.toolUpgradeDrill.name") + " " + Utils.localize("tooltip.installed"));
         if (hoe)
-                list.add(Utils.localize("item.toolUpgradeHoe.name") + " " + Utils.localize("tooltip.installed"));
+            list.add(Utils.localize("item.toolUpgradeHoe.name") + " " + Utils.localize("tooltip.installed"));
         list.add("Upgrades possible: " + upgradesAllowed);
     }
 
@@ -264,7 +260,6 @@ public class ItemKineticTool extends ItemPoweredBase {
         iconDigger = par1IconRegister.registerIcon("bcadditions:Digger");
         iconDrill = par1IconRegister.registerIcon("bcadditions:Drill");
         iconHoe = par1IconRegister.registerIcon("bcadditions:Hoe");
-
     }
 
     @Override

@@ -22,7 +22,6 @@ public class ItemDust extends Item {
         this.setCreativeTab(BuildcraftAdditions.bcadditions);
         this.setUnlocalizedName("dust" + metal);
         this.metal = metal;
-        this.setHasSubtypes(true);
     }
 
     @Override

@@ -16,14 +16,19 @@ import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 
 public abstract class ToolUpgrade extends Item {
+    public String type;
     public IIcon icon;
 
-    public ToolUpgrade(){
+    public ToolUpgrade(String upgrade){
         this.setMaxStackSize(16);
         this.setCreativeTab(BuildcraftAdditions.bcadditions);
+        this.setUnlocalizedName("toolUpgrade" + upgrade);
+        this.type = upgrade;
     }
 
-    public abstract String getType();
+    public String getType(){
+        return type;
+    }
 
     @Override
     @SideOnly(Side.CLIENT)

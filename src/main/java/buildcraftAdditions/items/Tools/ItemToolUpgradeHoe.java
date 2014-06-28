@@ -11,12 +11,6 @@ package buildcraftAdditions.items.Tools;
 public class ItemToolUpgradeHoe extends ToolUpgrade {
 
     public ItemToolUpgradeHoe(){
-        super();
-        this.setUnlocalizedName("toolUpgradeHoe");
-    }
-
-    @Override
-    public String getType() {
-        return "Hoe";
+        super("Hoe");
     }
 }

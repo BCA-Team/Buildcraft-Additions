@@ -11,12 +11,6 @@ package buildcraftAdditions.items.Tools;
 public class ItemToolUpgradeDrill extends ToolUpgrade {
 
     public ItemToolUpgradeDrill(){
-        super();
-        this.setUnlocalizedName("toolUpgradeDrill");
-    }
-
-    @Override
-    public String getType() {
-        return "Drill";
+        super("Drill");
     }
 }
