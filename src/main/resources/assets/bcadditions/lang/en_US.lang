@@ -27,6 +27,10 @@ item.toolUpgradeHoe.name=Tiller
 item.kineticMultiTool.name=Kinetic Multi-Tool
 item.dustGold.name=Gold Dust
 item.dustIron.name=Iron Dust
+item.dustCopper=Copper Dust
+item.dustLead=Lead Dust
+item.dustNickel=Nickel Dust
+item.dustPlatinum=Platinum Dust
 
 tooltip.installed=Installed
 tooltip.deactivated=Deactivated
