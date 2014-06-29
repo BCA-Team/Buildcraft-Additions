@@ -18,7 +18,7 @@ public class DusterRecepies {
 
     public static void addDusterRecepie(ItemStack input, ItemStack output){
         dusterInput.add(input.getItem());
-        dusterOutput.add(output);
+        dusterOutput.add(output.copy());
     }
 
     public static ItemStack getOutput(ItemStack input){
