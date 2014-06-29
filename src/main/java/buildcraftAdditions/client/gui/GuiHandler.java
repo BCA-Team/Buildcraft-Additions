@@ -42,9 +42,6 @@ public class GuiHandler implements IGuiHandler {
             case Variables.GuiBasicCoil:
                 if (tile instanceof TileBasicCoil)
                     return new GuiBasicCoil(player.inventory, (TileBasicCoil) tile);
-            case Variables.GuiBasicDuster:
-                if (tile instanceof TileBasicDuster)
-                    return new GuiBasicDuster(player.inventory,(TileBasicDuster) tile);
         }
         return null;
     }
@@ -73,9 +70,6 @@ public class GuiHandler implements IGuiHandler {
             case Variables.GuiBasicCoil:
                 if (tile instanceof TileBasicCoil)
                     return new ContainerBasicCoil(player.inventory, (TileBasicCoil) tile);
-            case Variables.GuiBasicDuster:
-                if (tile instanceof TileBasicDuster)
-                    return new ContainerBasicDuster(player.inventory, (TileBasicDuster) tile);
         }
         return null;
     }

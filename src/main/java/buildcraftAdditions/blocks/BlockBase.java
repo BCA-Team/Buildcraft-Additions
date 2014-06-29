@@ -25,20 +25,27 @@ public abstract class BlockBase extends BlockContainer {
     public void breakBlock(World world, int x, int y, int z, Block block, int meta){
         TileBase entity = (TileBase) world.getTileEntity(x, y, z);
         entity.openInventory();
-        float f1 = 0.7F;
+
         for (int t = 0; t < entity.getSizeInventory(); t++){
-            double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-            double d1 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-            double d2 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+
             ItemStack stack = entity.getStackInSlot(t);
             if (stack != null) {
                 entity.setInventorySlotContents(t, null);
-                EntityItem itemToDrop = new EntityItem(world, x + d, y + d1, z + d2, stack);
-                itemToDrop.delayBeforeCanPickup = 10;
-                world.spawnEntityInWorld(itemToDrop);
+                dropStack(world, x, y, z, stack);
             }
         }
         entity.closeInventory();
         super.breakBlock(world, x, y, z, block, meta);
+    }
+
+    public static void dropStack(World world, int x, int y, int z, ItemStack stack){
+        float f1 = 0.7F;
+        double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+        double d1 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+        double d2 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+        EntityItem itemToDrop = new EntityItem(world, x + d, y + d1, z + d2, stack);
+        itemToDrop.delayBeforeCanPickup = 10;
+        world.spawnEntityInWorld(itemToDrop);
+
     }
 }

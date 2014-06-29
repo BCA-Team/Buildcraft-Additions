@@ -27,16 +27,17 @@ public abstract class TileBaseDuster extends TileBase {
     }
 
     public void dust(){
-        if (worldObj.isRemote)
+        if (!worldObj.isRemote)
             return;
         float f1 = 0.7F;
         double d = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
         double d1 = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
         double d2 = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
         EntityItem itemToDrop = new EntityItem(worldObj, xCoord + d, yCoord + d1, zCoord + d2, getDust(getStackInSlot(0)));
-        setInventorySlotContents(0, null);
         itemToDrop.delayBeforeCanPickup = 10;
         worldObj.spawnEntityInWorld(itemToDrop);
+        setInventorySlotContents(0, null);
+        markDirty();
     }
 
     public ItemStack getDust(ItemStack stack){

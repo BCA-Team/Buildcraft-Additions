@@ -1,12 +1,11 @@
 package buildcraftAdditions.blocks;
 
 import buildcraft.core.IItemPipe;
-import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.Variables.Variables;
 import buildcraftAdditions.entities.TileBasicDuster;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -31,21 +30,31 @@ public class BlockBasicDuster extends BlockBase {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
-        super.onBlockActivated(world, x, y, z, entityplayer, par6, par7, par8, par9);
-
-        // Drop through if the player is sneaking
-        if (entityplayer.isSneaking())
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+        super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
+        if (player.isSneaking())
             return false;
-
-        if (entityplayer.getCurrentEquippedItem() != null) {
-            if (entityplayer.getCurrentEquippedItem().getItem() instanceof IItemPipe)
+        if (player.getCurrentEquippedItem() != null) {
+            if (player.getCurrentEquippedItem().getItem() instanceof IItemPipe)
                 return false;
         }
-
-        if (!world.isRemote)
-            entityplayer.openGui(BuildcraftAdditions.instance, Variables.GuiBasicDuster, world, x, y, z);
-
+        TileBasicDuster duster = (TileBasicDuster) world.getTileEntity(x, y, z);
+        if (!world.isRemote) {
+            if (duster != null && duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
+                ItemStack stack = player.getCurrentEquippedItem().copy();
+                stack.stackSize = 1;
+                duster.setInventorySlotContents(0, stack);
+                player.getCurrentEquippedItem().stackSize--;
+                if (player.getCurrentEquippedItem().stackSize <= 0)
+                    player.setCurrentItemOrArmor(0, null);
+            } else {
+                if (duster.getStackInSlot(0) != null){
+                    dropStack(world, x, y, z, duster.getStackInSlot(0));
+                    duster.setInventorySlotContents(0, null);
+                }
+            }
+        }
+        duster.markDirty();
         return true;
     }
 
