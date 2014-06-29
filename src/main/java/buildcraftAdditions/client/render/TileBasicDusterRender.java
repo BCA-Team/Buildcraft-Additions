@@ -26,9 +26,9 @@ public class TileBasicDusterRender extends TileEntitySpecialRenderer {
         ItemStack stack = duster.getStackInSlot(0);
         EntityItem item;
         if (stack != null) {
-            item = new EntityItem(Minecraft.getMinecraft().theWorld, 0, 1, 0, stack);
+            item = new EntityItem(Minecraft.getMinecraft().theWorld, 0, 0, 0, stack);
             item.hoverStart = 0;
-            RenderManager.instance.renderEntityWithPosYaw(item, 0.5, 1, 0.5, 0, 0);
+            RenderManager.instance.renderEntityWithPosYaw(item, 0.5, 1.05, 0.5, 0, 0);
         }
         GL11.glPopMatrix();
     }

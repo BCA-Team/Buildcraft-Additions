@@ -16,7 +16,6 @@ public abstract class TileBaseDuster extends TileBase {
     public int progress;
 
     public void makeProgress(){
-        setInventorySlotContents(0, new ItemStack(Blocks.gold_ore));
         if (getStackInSlot(0) != null && getDust(getStackInSlot(0)) != null) {
             progress++;
             if (progress == 5) {
