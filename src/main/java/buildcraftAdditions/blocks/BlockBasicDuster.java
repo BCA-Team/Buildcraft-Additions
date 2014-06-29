@@ -66,4 +66,9 @@ public class BlockBasicDuster extends BlockBase {
                 ((TileBasicDuster) tileEntity).makeProgress();
         }
     }
+
+    @Override
+    public boolean isOpaqueCube(){
+        return false;
+    }
 }
