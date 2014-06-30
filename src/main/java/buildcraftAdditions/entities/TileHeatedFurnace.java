@@ -96,7 +96,7 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
     public boolean canCook(){
         ItemStack stack0 = getStackInSlot(0);
         ItemStack stack1 = getStackInSlot(1);
-        if (stack0 == null)
+        if (stack0 == null || getResult(stack0) == null)
             return false;
         ItemStack result = getResult(stack0);
         return stack1 == null || (result.getItem() == stack1.getItem() && result.stackSize + stack1.stackSize <= result.getMaxStackSize());

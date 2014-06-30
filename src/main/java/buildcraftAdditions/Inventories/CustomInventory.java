@@ -96,13 +96,17 @@ public class CustomInventory implements IInventory {
     @Override
     public void setInventorySlotContents(int slot, ItemStack stack) {
         itemStacks[slot] = stack;
+        if (stack != null && stack.stackSize > getInventoryStackLimit()) {
+            stack.stackSize = getInventoryStackLimit();
+        }
+        markDirty();
     }
 
     @Override
     public String getInventoryName() {
-       if (name != null)
-           return name;
-       return null;
+        if (name != null)
+            return name;
+        return null;
     }
 
     @Override
