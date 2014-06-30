@@ -1,9 +1,20 @@
-# gradle
+# Folders
 .gradle/
 build/
+.idea/
+bin/
+eclipse/
 
-# intelij
+# Files
 *.iml
+*.bat
+*.blend
+*.class
+*.classpath
+*.ipr
+*.iws
+*.mtl
+*.xcf
 
 build.bat
 update.bat
