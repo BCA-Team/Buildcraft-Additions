@@ -2,7 +2,6 @@ package buildcraftAdditions.entities.Bases;
 
 import buildcraftAdditions.Variables.DusterRecepies;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -28,17 +27,17 @@ public abstract class TileBaseDuster extends TileBase {
     }
 
     public void dust(){
-        if (!worldObj.isRemote)
-            return;
+
         float f1 = 0.7F;
         double d = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
         double d1 = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
         double d2 = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
         EntityItem itemToDrop = new EntityItem(worldObj, xCoord + d, yCoord + d1, zCoord + d2, getDust(getStackInSlot(0)));
         itemToDrop.delayBeforeCanPickup = 10;
-        worldObj.spawnEntityInWorld(itemToDrop);
         setInventorySlotContents(0, null);
-        markDirty();
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        if (!worldObj.isRemote)
+            worldObj.spawnEntityInWorld(itemToDrop);
     }
 
     public ItemStack getDust(ItemStack stack){

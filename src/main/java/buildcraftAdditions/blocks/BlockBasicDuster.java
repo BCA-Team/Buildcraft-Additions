@@ -39,7 +39,6 @@ public class BlockBasicDuster extends BlockBase {
                 return false;
         }
         TileBasicDuster duster = (TileBasicDuster) world.getTileEntity(x, y, z);
-        if (!world.isRemote) {
             if (duster != null && duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
                 ItemStack stack = player.getCurrentEquippedItem().copy();
                 stack.stackSize = 1;
@@ -49,12 +48,12 @@ public class BlockBasicDuster extends BlockBase {
                     player.setCurrentItemOrArmor(0, null);
             } else {
                 if (duster.getStackInSlot(0) != null){
+                    if (!world.isRemote)
                     dropStack(world, x, y, z, duster.getStackInSlot(0));
                     duster.setInventorySlotContents(0, null);
-                }
             }
         }
-        duster.markDirty();
+        world.markBlockForUpdate(x, y, z);
         return true;
     }
 
