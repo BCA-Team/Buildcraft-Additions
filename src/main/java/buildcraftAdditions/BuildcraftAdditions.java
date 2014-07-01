@@ -37,6 +37,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
@@ -64,6 +65,7 @@ public class BuildcraftAdditions {
     public static BlockHeatedFurnace heatedFurnaceBlock;
     public static BlockBasicCoil basicCoilBlock;
     public static BlockBasicDuster basicDusterBlock;
+    public static BlockSemiAutomaticDuster semiAutomaticDusterBlock;
 
     public static Item mjMeter;
     public static Item poweredShovel;
@@ -205,6 +207,7 @@ public class BuildcraftAdditions {
     public void init(FMLInitializationEvent evt) {
 
         FMLCommonHandler.instance().bus().register(new EventListener());
+        MinecraftForge.EVENT_BUS.register(new EventListener());
 
         GameRegistry.addRecipe(new ItemStack(ironCanister, 4), "PIP", "IGI", "PIP", 'P', BuildCraftTransport.pipeWaterproof, 'I', Items.iron_ingot, 'G', Blocks.glass_pane);
         GameRegistry.addRecipe(new ItemStack(goldCanister), "PGP", "GIG", "PGP", 'P', BuildCraftTransport.pipeWaterproof, 'G', Items.gold_ingot, 'I', ironCanister);
@@ -296,7 +299,9 @@ public class BuildcraftAdditions {
         basicDusterBlock.setBlockName("blockDusterBasic").setCreativeTab(bcadditions);
         GameRegistry.registerBlock(basicDusterBlock, "blockDusterBasic");
 
-
+        semiAutomaticDusterBlock = new BlockSemiAutomaticDuster();
+        semiAutomaticDusterBlock.setBlockName("blockDusterSemiAutomatic").setCreativeTab(bcadditions);
+        GameRegistry.registerBlock(semiAutomaticDusterBlock, "blockDusterSemiAutomatic");
 
         //engineBlock = new BlockEngine();
         //CoreProxy.proxy.registerBlock(engineBlock.setBlockName("blockEngine").setCreativeTab(bcadditions));

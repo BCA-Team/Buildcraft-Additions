@@ -4,6 +4,7 @@ import buildcraftAdditions.interfaces.IEurekaBlock;
 import buildcraftAdditions.utils.Eureka;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -27,17 +28,17 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
     }
 
     @Override
-    public boolean canBePlacedDown(EntityPlayer player, String key) {
-        return Eureka.isUnlocked(player, key);
+    public boolean isAllowed() {
+        return false;
     }
 
     @Override
     public ItemStack[] getComponents() {
-        return new ItemStack[0];
+        return new ItemStack[]{new ItemStack(Items.gold_ingot, 5)};
     }
 
     @Override
     public String message() {
-        return "";
+        return "IT WORKS";
     }
 }

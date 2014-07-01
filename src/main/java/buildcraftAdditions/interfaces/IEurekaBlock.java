@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
  */
 public interface IEurekaBlock {
 
-    boolean canBePlacedDown(EntityPlayer player, String key);
+    boolean isAllowed();
 
     ItemStack[] getComponents();
 
