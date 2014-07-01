@@ -1,7 +1,3 @@
-package buildcraftAdditions.interfaces;
-
-import net.minecraft.item.ItemStack;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -9,11 +5,7 @@ import net.minecraft.item.ItemStack;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public interface IEurekaBlock {
+@API(owner = "bcadditions", apiVersion = "1.0", provides = "bcadditionsAPI")
+package buildcraftAdditions.api;
 
-    boolean isAllowed();
-
-    ItemStack[] getComponents();
-
-    String getMessage();
-}
+import cpw.mods.fml.common.API;

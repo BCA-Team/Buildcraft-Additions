@@ -1,6 +1,6 @@
 package buildcraftAdditions.entities.Bases;
 
-import buildcraftAdditions.interfaces.IEurekaTileEntity;
+import buildcraftAdditions.api.IEurekaTileEntity;
 import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.DusterRecepies;
 import net.minecraft.entity.item.EntityItem;

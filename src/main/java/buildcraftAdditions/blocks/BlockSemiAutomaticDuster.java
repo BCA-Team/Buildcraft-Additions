@@ -1,6 +1,6 @@
 package buildcraftAdditions.blocks;
 
-import buildcraftAdditions.interfaces.IEurekaBlock;
+import buildcraftAdditions.api.IEurekaBlock;
 import buildcraftAdditions.utils.Utils;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;

@@ -1,4 +1,4 @@
-package buildcraftAdditions.interfaces;
+package buildcraftAdditions.api;
 
 import net.minecraft.entity.player.EntityPlayer;
 
