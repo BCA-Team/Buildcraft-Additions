@@ -61,8 +61,9 @@ public class EventListener  {
                     if (!world.isRemote)
                     world.spawnEntityInWorld(itemToDrop);
                 }
-                if (world.isRemote)
+                if (!world.isRemote)
                 world.setBlock(event.x, event.y, event.z, Blocks.air);
+                world.markBlockForUpdate(event.x, event.y, event.z);
             }
         }
     }
