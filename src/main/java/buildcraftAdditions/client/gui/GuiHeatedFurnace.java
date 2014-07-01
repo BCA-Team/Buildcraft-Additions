@@ -1,7 +1,7 @@
 package buildcraftAdditions.client.gui;
 
 import buildcraft.core.gui.GuiBuildCraft;
-import buildcraftAdditions.core.Utils;
+import buildcraftAdditions.Utils.Utils;
 import buildcraftAdditions.entities.TileHeatedFurnace;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;

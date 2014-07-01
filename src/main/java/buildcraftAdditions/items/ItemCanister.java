@@ -9,7 +9,7 @@ package buildcraftAdditions.items;
  */
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.core.Utils;
+import buildcraftAdditions.Utils.Utils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;

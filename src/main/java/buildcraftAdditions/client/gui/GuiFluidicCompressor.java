@@ -12,7 +12,7 @@ import buildcraft.BuildCraftCore;
 import buildcraft.core.CoreIconProvider;
 import buildcraft.core.gui.GuiBuildCraft;
 import buildcraft.core.render.RenderUtils;
-import buildcraftAdditions.core.Utils;
+import buildcraftAdditions.Utils.Utils;
 import buildcraftAdditions.entities.TileFluidicCompressor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;

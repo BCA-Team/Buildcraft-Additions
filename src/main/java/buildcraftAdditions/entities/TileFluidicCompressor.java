@@ -40,7 +40,7 @@ import buildcraft.core.network.IGuiReturnHandler;
 import buildcraft.core.network.PacketGuiReturn;
 import buildcraft.core.network.PacketPayload;
 import buildcraft.core.network.PacketUpdate;
-import buildcraftAdditions.core.Utils;
+import buildcraftAdditions.Utils.Utils;
 import buildcraftAdditions.items.ItemCanister;
 
 

@@ -19,13 +19,14 @@ public class Variables {
 
     //EUREKA NBT names
     public static final String DustT1Progress = "dusterTier1Progress";
-    public static final String DustT2UnLocked = "dusterTier2Unlocked";
-    public static final String DustT2Progress1 = "dusterTier2ProgressPart1";
+    public static final String DustT1Finished = "dusterTier1Finished";
+    public static final String DustT2Progress1 = "dusterTier2Progress1";
+    public static final String DustT2Finished1 = "dusterTier2Finished1";
     public static final String DustT2Progress2 = "dusterTier2ProgressPart2";
-    public static final String DustT3Unlocked = "dusterTier3Unlocked";
+    public static final String DustT2Finished2 = "dusterTier2Finished2";
 
     public static final String CoilT1Progress = "coilTier1Progress";
-    public static final String CoilT2Unlocked = "coilTier2Unlocked";
+    public static final String CoilT1Finished = "coilTier1Finished";
     public static final String CoilT2Progress = "coilTier2Progress";
-    public static final String CoilT3Unlocked = "coilTier3Unlocked";
+    public static final String CoilT2Finished = "coilTier2Finished";
 }

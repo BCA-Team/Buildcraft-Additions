@@ -8,12 +8,9 @@ package buildcraftAdditions.client.gui;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import buildcraftAdditions.networking.MessageToolUpgrades;
-import buildcraftAdditions.networking.PacketHandeler;
-import net.minecraft.client.gui.GuiButton;
 import org.lwjgl.opengl.GL11;
 
-import buildcraftAdditions.core.Utils;
+import buildcraftAdditions.Utils.Utils;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;

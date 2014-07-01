@@ -10,7 +10,7 @@ package buildcraftAdditions.blocks;
 
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.core.Utils;
+import buildcraftAdditions.Utils.Utils;
 import buildcraftAdditions.Variables.Variables;
 import buildcraftAdditions.entities.TileChargingStation;
 import cpw.mods.fml.relauncher.Side;
@@ -73,7 +73,6 @@ public class BlockChargingStation extends BlockContainer {
 
 		ForgeDirection orientation = Utils.get2dOrientation(entityliving);
 		world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(), 1);
-        return;
 	}
 
     @Override

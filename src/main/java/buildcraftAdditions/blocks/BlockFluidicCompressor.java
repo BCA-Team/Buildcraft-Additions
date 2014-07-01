@@ -10,7 +10,7 @@ package buildcraftAdditions.blocks;
 
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.core.Utils;
+import buildcraftAdditions.Utils.Utils;
 import buildcraftAdditions.Variables.Variables;
 import buildcraftAdditions.entities.TileFluidicCompressor;
 import cpw.mods.fml.relauncher.Side;

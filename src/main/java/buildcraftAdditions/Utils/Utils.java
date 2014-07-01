@@ -1,4 +1,4 @@
-package buildcraftAdditions.core;
+package buildcraftAdditions.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise

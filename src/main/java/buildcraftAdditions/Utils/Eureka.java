@@ -3,6 +3,7 @@ package buildcraftAdditions.Utils;
 import buildcraftAdditions.Variables.Variables;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -19,14 +20,15 @@ public class Eureka {
         }
         NBTTagCompound tag = getTag(player);
         initKey(tag, Variables.DustT1Progress, 0);
-        initKey(tag, Variables.DustT2UnLocked, false);
+        initKey(tag, Variables.DustT1Finished, false);
         initKey(tag, Variables.DustT2Progress1, 0);
+        initKey(tag, Variables.DustT2Finished1, false);
         initKey(tag, Variables.DustT2Progress2, 0);
-        initKey(tag, Variables.DustT3Unlocked, false);
+        initKey(tag, Variables.DustT2Finished2, false);
         initKey(tag, Variables.CoilT1Progress, 0);
-        initKey(tag, Variables.CoilT2Unlocked, false);
+        initKey(tag, Variables.CoilT1Finished, false);
         initKey(tag, Variables.CoilT2Progress, 0);
-        initKey(tag, Variables.CoilT3Unlocked, false);
+        initKey(tag, Variables.CoilT2Finished, false);
 
     }
 
@@ -50,6 +52,13 @@ public class Eureka {
         if (progress < 100){
             setKey(tag, key, progress + 1);
         }
+        if (progress == 100){
+            key = key.replaceAll("Progress", "Finished");
+            setKey(tag, key, true);
+            String message = Utils.localize("eureka." + key);
+            player.addChatMessage(new ChatComponentText(Utils.localize("Eureka")));
+            player.addChatComponentMessage(new ChatComponentText(message));
+        }
     }
 
     private static void initKey(NBTTagCompound tag, String key, int integer){
@@ -63,11 +72,11 @@ public class Eureka {
     }
 
     private static void setKey(NBTTagCompound tag, String key, int integer){
-            tag.setInteger(key, integer);
+        tag.setInteger(key, integer);
     }
 
     private static void setKey(NBTTagCompound tag, String key, boolean bool){
-            tag.setBoolean(key, bool);
+        tag.setBoolean(key, bool);
 
     }
 }
