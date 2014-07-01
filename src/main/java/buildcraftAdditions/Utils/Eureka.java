@@ -54,10 +54,12 @@ public class Eureka {
         }
         if (progress == 100){
             key = key.replaceAll("Progress", "Finished");
-            setKey(tag, key, true);
-            String message = Utils.localize("eureka." + key);
-            player.addChatMessage(new ChatComponentText(Utils.localize("Eureka")));
-            player.addChatComponentMessage(new ChatComponentText(message));
+            if (!isUnlocked(player, key)) {
+                setKey(tag, key, true);
+                String message = Utils.localize("eureka." + key);
+                player.addChatMessage(new ChatComponentText(Utils.localize("Eureka")));
+                player.addChatComponentMessage(new ChatComponentText(message));
+            }
         }
     }
 
