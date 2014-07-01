@@ -18,12 +18,12 @@ public class DusterRecepies {
 
     public static void addDusterRecepie(ItemStack input, ItemStack output){
         dusterInput.add(input.getItem());
-        dusterOutput.add(output.copy());
+        dusterOutput.add(output);
     }
 
     public static ItemStack getOutput(ItemStack input){
          if (dusterInput.contains(input.getItem()))
-            return dusterOutput.get(dusterInput.indexOf(input.getItem()));
+            return dusterOutput.get(dusterInput.indexOf(input.getItem())).copy();
         return null;
     }
 }

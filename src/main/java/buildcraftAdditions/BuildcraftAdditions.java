@@ -255,7 +255,6 @@ public class BuildcraftAdditions {
 
     public void addDusts(String metal){
         ArrayList<ItemStack> list;
-        ItemStack dust = null;
         list = OreDictionary.getOres("ingot" + metal);
         if (list.isEmpty())
             return;
@@ -266,14 +265,11 @@ public class BuildcraftAdditions {
         GameRegistry.registerItem(itemDust, "dust" + metal);
         OreDictionary.registerOre("dust" + metal, itemDust);
         GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metal).get(0), 0);
-        dust = new ItemStack(itemDust);
-        dust.stackSize = 2;
         for (ItemStack stack : list)
-            DusterRecepies.addDusterRecepie(stack, dust);
+            DusterRecepies.addDusterRecepie(stack, new ItemStack(itemDust, 2));
         list = OreDictionary.getOres("ingot" + metal);
-        dust.stackSize = 1;
         for (ItemStack stack : list)
-            DusterRecepies.addDusterRecepie(stack, dust);
+            DusterRecepies.addDusterRecepie(stack, new ItemStack(itemDust, 1));
     }
 
 

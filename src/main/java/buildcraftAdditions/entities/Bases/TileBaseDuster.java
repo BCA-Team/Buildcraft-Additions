@@ -22,26 +22,23 @@ public abstract class TileBaseDuster extends TileBase {
             progress++;
             if (progress == 5) {
                 dust();
-                Eureka.makeProgress(player, Variables.DustT1Progress);
                 progress = 0;
+                Eureka.makeProgress(player, Variables.DustT1Progress);
             }
-        } else {
-            progress = 0;
         }
     }
 
     public void dust(){
-
         float f1 = 0.7F;
         double d = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
         double d1 = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
         double d2 = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
         EntityItem itemToDrop = new EntityItem(worldObj, xCoord + d, yCoord + d1, zCoord + d2, getDust(getStackInSlot(0)));
         itemToDrop.delayBeforeCanPickup = 10;
-        setInventorySlotContents(0, null);
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         if (!worldObj.isRemote)
             worldObj.spawnEntityInWorld(itemToDrop);
+        setInventorySlotContents(0, null);
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
     public ItemStack getDust(ItemStack stack){
