@@ -2,6 +2,7 @@ package buildcraftAdditions.blocks;
 
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.entities.TileBasicDuster;
+import buildcraftAdditions.utils.Utils;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -49,7 +50,7 @@ public class BlockBasicDuster extends BlockBase {
             } else {
                 if (duster.getStackInSlot(0) != null){
                     if (!world.isRemote)
-                    dropStack(world, x, y, z, duster.getStackInSlot(0));
+                        Utils.dropItemstack(world, x, y, z, duster.getStackInSlot(0));
                     duster.setInventorySlotContents(0, null);
             }
         }

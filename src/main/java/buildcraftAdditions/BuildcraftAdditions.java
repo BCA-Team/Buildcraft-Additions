@@ -206,8 +206,8 @@ public class BuildcraftAdditions {
     @Mod.EventHandler
     public void init(FMLInitializationEvent evt) {
 
-        FMLCommonHandler.instance().bus().register(new EventListener());
-        MinecraftForge.EVENT_BUS.register(new EventListener());
+        FMLCommonHandler.instance().bus().register(new EventListener.FML());
+        MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
 
         GameRegistry.addRecipe(new ItemStack(ironCanister, 4), "PIP", "IGI", "PIP", 'P', BuildCraftTransport.pipeWaterproof, 'I', Items.iron_ingot, 'G', Blocks.glass_pane);
         GameRegistry.addRecipe(new ItemStack(goldCanister), "PGP", "GIG", "PGP", 'P', BuildCraftTransport.pipeWaterproof, 'G', Items.gold_ingot, 'I', ironCanister);

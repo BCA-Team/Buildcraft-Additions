@@ -24,56 +24,60 @@ import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
  */
 public class EventListener  {
 
-    @SubscribeEvent
-    public void playerLogin (PlayerLoggedInEvent event){
-        //version check stuff
-        if (VersionCheck.newerVersionAvailable && event != null){
-            event.player.addChatComponentMessage(new ChatComponentText("There is a newer version of Buildcraft Additions available (" + VersionCheck.newerVersionNumber + ") Please consider updating"));
-            if (!Configuration.shouldPrintChangelog)
+    public static class FML {
+        @SubscribeEvent
+        public void playerLogin (PlayerLoggedInEvent event){
+            //version check stuff
+            if (VersionCheck.newerVersionAvailable && event != null){
+                event.player.addChatComponentMessage(new ChatComponentText("There is a newer version of Buildcraft Additions available (" + VersionCheck.newerVersionNumber + ") Please consider updating"));
+                if (!Configuration.shouldPrintChangelog)
+                    return;
+                event.player.addChatComponentMessage(new ChatComponentText("Changelog: "));
+                for (int t = 0; t < VersionCheck.numLines; t++){
+
+                    event.player.addChatComponentMessage(new ChatComponentText("- " + VersionCheck.changelog[t]));
+                }
+            }
+            //initialize player knowledge if needed
+            Eureka.init(event.player);
+
+        }
+    }
+
+    public static class Forge{
+        @SubscribeEvent
+        public void onPlyerUsesBlock(PlayerInteractEvent event){
+            if (event == null)
                 return;
-            event.player.addChatComponentMessage(new ChatComponentText("Changelog: "));
-            for (int t = 0; t < VersionCheck.numLines; t++){
-
-                event.player.addChatComponentMessage(new ChatComponentText("- " + VersionCheck.changelog[t]));
+            Block block = event.world.getBlock(event.x, event.y, event.z);
+            if (block instanceof IEurekaBlock){
+                IEurekaBlock eurekaBlock = (IEurekaBlock) block;
+                if (!eurekaBlock.isAllowed()){
+                    World world = event.world;
+                    ItemStack[] stackArray = eurekaBlock.getComponents();
+                    for (ItemStack stack : stackArray)
+                        Utils.dropItemstack(world, event.x, event.y, event.z, stack);
+                    if (!world.isRemote)
+                        world.setBlock(event.x, event.y, event.z, Blocks.air);
+                    world.markBlockForUpdate(event.x, event.y, event.z);
+                    if (world.isRemote)
+                        event.entityPlayer.addChatComponentMessage(new ChatComponentText(((IEurekaBlock) block).getMessage()));
+                }
             }
         }
-        //initialize player knowledge if needed
-        Eureka.init(event.player);
 
-    }
-
-    @SubscribeEvent
-    public void onPlyerUsesBlock(PlayerInteractEvent event){
-        if (event == null)
-            return;
-        Block block = event.world.getBlock(event.x, event.y, event.z);
-        if (block instanceof IEurekaBlock){
-            IEurekaBlock eurekaBlock = (IEurekaBlock) block;
-            if (!eurekaBlock.isAllowed()){
-                World world = event.world;
-                ItemStack[] stackArray = eurekaBlock.getComponents();
-                for (ItemStack stack : stackArray)
-                    Utils.dropItemstack(world, event.x, event.y, event.z, stack);
-                if (!world.isRemote)
-                    world.setBlock(event.x, event.y, event.z, Blocks.air);
-                world.markBlockForUpdate(event.x, event.y, event.z);
-                if (world.isRemote)
-                    event.entityPlayer.addChatComponentMessage(new ChatComponentText(((IEurekaBlock) block).getMessage()));
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void onItemUse(PlayerUseItemEvent event){
-        if (event== null)
-            return;
-        Item item = event.item.getItem();
-        if (item instanceof IEurekaItem){
-            IEurekaItem eurekaItem = (IEurekaItem) item;
-            if (!eurekaItem.isAllowed()) {
-                event.setCanceled(true);
-                if (event.entityPlayer != null)
-                    event.entityPlayer.addChatComponentMessage(new ChatComponentText(eurekaItem.getMessage()));
+        @SubscribeEvent
+        public void onItemUse(PlayerUseItemEvent event){
+            if (event== null)
+                return;
+            Item item = event.item.getItem();
+            if (item instanceof IEurekaItem){
+                IEurekaItem eurekaItem = (IEurekaItem) item;
+                if (!eurekaItem.isAllowed()) {
+                    event.setCanceled(true);
+                    if (event.entityPlayer != null)
+                        event.entityPlayer.addChatComponentMessage(new ChatComponentText(eurekaItem.getMessage()));
+                }
             }
         }
     }
