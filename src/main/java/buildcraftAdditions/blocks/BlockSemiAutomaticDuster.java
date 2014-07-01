@@ -1,9 +1,8 @@
 package buildcraftAdditions.blocks;
 
 import buildcraftAdditions.interfaces.IEurekaBlock;
-import buildcraftAdditions.utils.Eureka;
+import buildcraftAdditions.utils.Utils;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -38,7 +37,7 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
     }
 
     @Override
-    public String message() {
-        return "IT WORKS";
+    public String getMessage() {
+        return Utils.localize("Eureka.missingKnowledge");
     }
 }

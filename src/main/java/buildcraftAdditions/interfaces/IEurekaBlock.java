@@ -1,6 +1,5 @@
 package buildcraftAdditions.interfaces;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -16,5 +15,5 @@ public interface IEurekaBlock {
 
     ItemStack[] getComponents();
 
-    String message();
+    String getMessage();
 }

@@ -1,6 +1,5 @@
 package buildcraftAdditions.core;
 
-import buildcraftAdditions.blocks.BlockBase;
 import buildcraftAdditions.interfaces.IEurekaBlock;
 import buildcraftAdditions.utils.Eureka;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -12,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BlockEvent;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -64,6 +62,8 @@ public class EventListener  {
                 if (!world.isRemote)
                 world.setBlock(event.x, event.y, event.z, Blocks.air);
                 world.markBlockForUpdate(event.x, event.y, event.z);
+                if (world.isRemote)
+                event.entityPlayer.addChatComponentMessage(new ChatComponentText(((IEurekaBlock) block).getMessage()));
             }
         }
     }
