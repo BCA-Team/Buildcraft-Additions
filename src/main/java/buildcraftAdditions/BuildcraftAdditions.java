@@ -6,7 +6,7 @@ import buildcraft.BuildCraftTransport;
 import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraft.core.proxy.CoreProxy;
 import buildcraft.core.triggers.BCTrigger;
-import buildcraftAdditions.Utils.DusterRecepies;
+import buildcraftAdditions.utils.DusterRecepies;
 import buildcraftAdditions.blocks.*;
 import buildcraftAdditions.client.gui.GuiHandler;
 import buildcraftAdditions.core.Configuration;

@@ -4,7 +4,7 @@ import buildcraft.api.gates.ITileTrigger;
 import buildcraft.api.gates.ITrigger;
 import buildcraft.api.gates.ITriggerParameter;
 import buildcraft.core.triggers.BCTrigger;
-import buildcraftAdditions.Utils.Utils;
+import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.entities.TileFluidicCompressor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -8,7 +8,7 @@ import buildcraft.core.IItemPipe;
 import buildcraft.core.inventory.SimpleInventory;
 import buildcraft.energy.TileEngine;
 import buildcraftAdditions.client.gui.ContainerAmplifiedEngine;
-import buildcraftAdditions.Utils.Utils;
+import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.items.ItemCanister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;

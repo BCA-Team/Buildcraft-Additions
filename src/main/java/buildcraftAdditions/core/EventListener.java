@@ -1,6 +1,6 @@
 package buildcraftAdditions.core;
 
-import buildcraftAdditions.Utils.Eureka;
+import buildcraftAdditions.utils.Eureka;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraft.util.ChatComponentText;

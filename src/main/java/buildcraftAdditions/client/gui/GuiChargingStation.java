@@ -16,7 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import buildcraft.BuildCraftCore;
 import buildcraft.core.CoreIconProvider;
 import buildcraft.core.gui.GuiBuildCraft;
-import buildcraftAdditions.Utils.Utils;
+import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.entities.TileChargingStation;
 
 public class GuiChargingStation extends GuiBuildCraft{

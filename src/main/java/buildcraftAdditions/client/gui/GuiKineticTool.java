@@ -10,7 +10,7 @@ package buildcraftAdditions.client.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import buildcraftAdditions.Utils.Utils;
+import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;

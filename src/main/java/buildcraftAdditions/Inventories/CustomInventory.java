@@ -1,4 +1,4 @@
-package buildcraftAdditions.Inventories;
+package buildcraftAdditions.inventories;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

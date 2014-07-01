@@ -1,8 +1,8 @@
 package buildcraftAdditions.entities.Bases;
 
-import buildcraftAdditions.Utils.Eureka;
-import buildcraftAdditions.Utils.DusterRecepies;
-import buildcraftAdditions.Variables.Variables;
+import buildcraftAdditions.interfaces.IEurekaTileEntity;
+import buildcraftAdditions.utils.Eureka;
+import buildcraftAdditions.utils.DusterRecepies;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -14,8 +14,9 @@ import net.minecraft.item.ItemStack;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileBaseDuster extends TileBase {
+public abstract class TileBaseDuster extends TileBase implements IEurekaTileEntity{
     public int progress;
+    public String progressKey;
 
     public void makeProgress(EntityPlayer player){
         if (getStackInSlot(0) != null && getDust(getStackInSlot(0)) != null) {
@@ -23,7 +24,7 @@ public abstract class TileBaseDuster extends TileBase {
             if (progress == 5) {
                 dust();
                 progress = 0;
-                Eureka.makeProgress(player, Variables.DustT1Progress);
+                makeProgress(player, progressKey);
             }
         }
     }
@@ -43,5 +44,10 @@ public abstract class TileBaseDuster extends TileBase {
 
     public ItemStack getDust(ItemStack stack){
         return DusterRecepies.getOutput(stack);
+    }
+
+    @Override
+    public void makeProgress(EntityPlayer player, String key) {
+        Eureka.makeProgress(player, key);
     }
 }

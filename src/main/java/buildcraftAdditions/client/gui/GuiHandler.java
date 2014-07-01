@@ -8,7 +8,7 @@ package buildcraftAdditions.client.gui;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import buildcraftAdditions.Variables.Variables;
+import buildcraftAdditions.variables.Variables;
 import buildcraftAdditions.entities.*;
 import buildcraftAdditions.items.Tools.*;
 import cpw.mods.fml.common.network.IGuiHandler;

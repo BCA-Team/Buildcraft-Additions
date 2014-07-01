@@ -1,6 +1,6 @@
 package buildcraftAdditions.blocks;
 
-import buildcraftAdditions.Variables.Variables;
+import buildcraftAdditions.variables.Variables;
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.entities.TileBasicCoil;

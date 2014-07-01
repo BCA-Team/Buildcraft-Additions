@@ -10,8 +10,8 @@ package buildcraftAdditions.blocks;
 
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.Utils.Utils;
-import buildcraftAdditions.Variables.Variables;
+import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.variables.Variables;
 import buildcraftAdditions.entities.TileChargingStation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

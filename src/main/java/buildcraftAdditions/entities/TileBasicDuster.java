@@ -1,6 +1,6 @@
 package buildcraftAdditions.entities;
 
-import buildcraftAdditions.Inventories.CustomInventory;
+import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.entities.Bases.TileBaseDuster;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -18,10 +18,6 @@ public class TileBasicDuster extends TileBaseDuster {
 
     public TileBasicDuster(){
     }
-
-
-
-
 
     @Override
     public void readFromNBT(NBTTagCompound tag){

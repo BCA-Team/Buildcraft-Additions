@@ -1,6 +1,6 @@
-package buildcraftAdditions.Utils;
+package buildcraftAdditions.utils;
 
-import buildcraftAdditions.Variables.Variables;
+import buildcraftAdditions.variables.Variables;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;

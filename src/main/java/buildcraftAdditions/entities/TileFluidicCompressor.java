@@ -11,7 +11,7 @@ package buildcraftAdditions.entities;
 import buildcraft.api.gates.IOverrideDefaultTriggers;
 import buildcraft.api.gates.ITrigger;
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.Inventories.CustomInventory;
+import buildcraftAdditions.inventories.CustomInventory;
 import io.netty.buffer.ByteBuf;
 
 import java.io.ByteArrayOutputStream;
@@ -40,7 +40,7 @@ import buildcraft.core.network.IGuiReturnHandler;
 import buildcraft.core.network.PacketGuiReturn;
 import buildcraft.core.network.PacketPayload;
 import buildcraft.core.network.PacketUpdate;
-import buildcraftAdditions.Utils.Utils;
+import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.items.ItemCanister;
 
 
