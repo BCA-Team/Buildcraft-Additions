@@ -1,7 +1,7 @@
 package buildcraftAdditions.entities.Bases;
 
 import buildcraftAdditions.Utils.Eureka;
-import buildcraftAdditions.Variables.DusterRecepies;
+import buildcraftAdditions.Utils.DusterRecepies;
 import buildcraftAdditions.Variables.Variables;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
