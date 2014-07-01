@@ -12,7 +12,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -93,16 +92,10 @@ public class BlockHeatedFurnace extends BlockContainer {
     public void breakBlock(World world, int x, int y, int z, Block block, int meta){
         TileHeatedFurnace heatedFurnace = (TileHeatedFurnace) world.getTileEntity(x, y, z);
         for (int t = 0; t < 2; t++){
-            float f1 = 0.7F;
-            double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-            double d1 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-            double d2 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
             ItemStack stack = heatedFurnace.getStackInSlot(t);
             if (stack != null) {
                 heatedFurnace.setInventorySlotContents(t, null);
-                EntityItem itemToDrop = new EntityItem(world, x + d, y + d1, z + d2, stack);
-                itemToDrop.delayBeforeCanPickup = 10;
-                world.spawnEntityInWorld(itemToDrop);
+                Utils.dropItemstack(world, x, y, z, stack);
             }
         }
         super.breakBlock(world, x, y, z, block, meta);

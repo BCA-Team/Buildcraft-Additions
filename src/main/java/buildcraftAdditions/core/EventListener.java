@@ -1,16 +1,19 @@
 package buildcraftAdditions.core;
 
 import buildcraftAdditions.api.IEurekaBlock;
+import buildcraftAdditions.api.IEurekaItem;
 import buildcraftAdditions.utils.Eureka;
+import buildcraftAdditions.utils.Utils;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraft.block.Block;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -40,7 +43,7 @@ public class EventListener  {
     }
 
     @SubscribeEvent
-    public void onBlockPlacedDown(PlayerInteractEvent event){
+    public void onPlyerUsesBlock(PlayerInteractEvent event){
         if (event == null)
             return;
         Block block = event.world.getBlock(event.x, event.y, event.z);
@@ -49,21 +52,28 @@ public class EventListener  {
             if (!eurekaBlock.isAllowed()){
                 World world = event.world;
                 ItemStack[] stackArray = eurekaBlock.getComponents();
-                float f1 = 0.7F;
-                double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-                double d1 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-                double d2 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-                for (ItemStack stack : stackArray) {
-                    EntityItem itemToDrop = new EntityItem(world, event.x + d, event.y + d1, event.z + d2, stack);
-                    itemToDrop.delayBeforeCanPickup = 10;
-                    if (!world.isRemote)
-                    world.spawnEntityInWorld(itemToDrop);
-                }
+                for (ItemStack stack : stackArray)
+                    Utils.dropItemstack(world, event.x, event.y, event.z, stack);
                 if (!world.isRemote)
-                world.setBlock(event.x, event.y, event.z, Blocks.air);
+                    world.setBlock(event.x, event.y, event.z, Blocks.air);
                 world.markBlockForUpdate(event.x, event.y, event.z);
                 if (world.isRemote)
-                event.entityPlayer.addChatComponentMessage(new ChatComponentText(((IEurekaBlock) block).getMessage()));
+                    event.entityPlayer.addChatComponentMessage(new ChatComponentText(((IEurekaBlock) block).getMessage()));
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onItemUse(PlayerUseItemEvent event){
+        if (event== null)
+            return;
+        Item item = event.item.getItem();
+        if (item instanceof IEurekaItem){
+            IEurekaItem eurekaItem = (IEurekaItem) item;
+            if (!eurekaItem.isAllowed()) {
+                event.setCanceled(true);
+                if (event.entityPlayer != null)
+                    event.entityPlayer.addChatComponentMessage(new ChatComponentText(eurekaItem.getMessage()));
             }
         }
     }

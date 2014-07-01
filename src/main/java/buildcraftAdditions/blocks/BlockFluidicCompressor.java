@@ -20,7 +20,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -82,16 +81,10 @@ public class BlockFluidicCompressor extends BlockContainer {
         TileFluidicCompressor compressor = (TileFluidicCompressor) world.getTileEntity(x, y, z);
         compressor.openInventory();
         for (int t = 0; t < 2; t++){
-            float f1 = 0.7F;
-            double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-            double d1 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-            double d2 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
             ItemStack stack = compressor.getStackInSlot(t);
             if (stack != null) {
                 compressor.setInventorySlotContents(t, null);
-                EntityItem itemToDrop = new EntityItem(world, x + d, y + d1, z + d2, stack);
-                itemToDrop.delayBeforeCanPickup = 10;
-                world.spawnEntityInWorld(itemToDrop);
+                Utils.dropItemstack(world, x, y, z, stack);
             }
         }
         compressor.closeInventory();

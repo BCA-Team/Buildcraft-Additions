@@ -1,10 +1,10 @@
 package buildcraftAdditions.blocks;
 
 import buildcraftAdditions.entities.Bases.TileBase;
+import buildcraftAdditions.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -32,22 +32,11 @@ public abstract class BlockBase extends BlockContainer {
                 ItemStack stack = entity.getStackInSlot(t);
                 if (stack != null) {
                     entity.setInventorySlotContents(t, null);
-                    dropStack(world, x, y, z, stack);
+                    Utils.dropItemstack(world, x, y, z, stack);
                 }
             }
             entity.closeInventory();
         }
         super.breakBlock(world, x, y, z, block, meta);
-    }
-
-    public static void dropStack(World world, int x, int y, int z, ItemStack stack){
-        float f1 = 0.7F;
-        double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-        double d1 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-        double d2 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-        EntityItem itemToDrop = new EntityItem(world, x + d, y + d1, z + d2, stack);
-        itemToDrop.delayBeforeCanPickup = 10;
-        world.spawnEntityInWorld(itemToDrop);
-
     }
 }
