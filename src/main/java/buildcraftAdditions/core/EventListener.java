@@ -1,5 +1,6 @@
 package buildcraftAdditions.core;
 
+import buildcraftAdditions.Utils.Eureka;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraft.util.ChatComponentText;
@@ -15,7 +16,7 @@ public class EventListener  {
 
     @SubscribeEvent
     public void playerLogin (PlayerLoggedInEvent event){
-
+        //version check stuff
         if (VersionCheck.newerVersionAvailable && event != null){
             event.player.addChatComponentMessage(new ChatComponentText("There is a newer version of Buildcraft Additions available (" + VersionCheck.newerVersionNumber + ") Please consider updating"));
             if (!Configuration.shouldPrintChangelog)
@@ -26,5 +27,8 @@ public class EventListener  {
                 event.player.addChatComponentMessage(new ChatComponentText("- " + VersionCheck.changelog[t]));
             }
         }
+        //initialize player knowledge if needed
+        Eureka.init(event.player);
+
     }
 }

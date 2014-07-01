@@ -1,7 +1,10 @@
 package buildcraftAdditions.entities.Bases;
 
+import buildcraftAdditions.Utils.Eureka;
 import buildcraftAdditions.Variables.DusterRecepies;
+import buildcraftAdditions.Variables.Variables;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -14,11 +17,12 @@ import net.minecraft.item.ItemStack;
 public abstract class TileBaseDuster extends TileBase {
     public int progress;
 
-    public void makeProgress(){
+    public void makeProgress(EntityPlayer player){
         if (getStackInSlot(0) != null && getDust(getStackInSlot(0)) != null) {
             progress++;
             if (progress == 5) {
                 dust();
+                Eureka.makeProgress(player, Variables.DustT1Progress);
                 progress = 0;
             }
         } else {

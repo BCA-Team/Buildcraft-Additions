@@ -16,4 +16,16 @@ public class Variables {
     public static final int GuiKineticTool = 72;
     public static final int GuiHeatedFurnace = 73;
     public static final int GuiBasicCoil = 74;
+
+    //EUREKA NBT names
+    public static final String DustT1Progress = "dusterTier1Progress";
+    public static final String DustT2UnLocked = "dusterTier2Unlocked";
+    public static final String DustT2Progress1 = "dusterTier2ProgressPart1";
+    public static final String DustT2Progress2 = "dusterTier2ProgressPart2";
+    public static final String DustT3Unlocked = "dusterTier3Unlocked";
+
+    public static final String CoilT1Progress = "coilTier1Progress";
+    public static final String CoilT2Unlocked = "coilTier2Unlocked";
+    public static final String CoilT2Progress = "coilTier2Progress";
+    public static final String CoilT3Unlocked = "coilTier3Unlocked";
 }

@@ -62,7 +62,7 @@ public class BlockBasicDuster extends BlockBase {
         if (entity instanceof EntityPlayer) {
             TileEntity tileEntity = world.getTileEntity(x, y, z);
             if (tileEntity instanceof TileBasicDuster)
-                ((TileBasicDuster) tileEntity).makeProgress();
+                ((TileBasicDuster) tileEntity).makeProgress((EntityPlayer) entity);
         }
     }
 
