@@ -7,6 +7,7 @@ import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraft.core.proxy.CoreProxy;
 import buildcraft.core.triggers.BCTrigger;
 import buildcraftAdditions.api.DusterRecepies;
+import buildcraftAdditions.api.EurekaRegistry;
 import buildcraftAdditions.blocks.*;
 import buildcraftAdditions.client.gui.GuiHandler;
 import buildcraftAdditions.core.Configuration;
@@ -18,6 +19,7 @@ import buildcraftAdditions.items.Tools.*;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.triggers.*;
+import buildcraftAdditions.variables.Variables;
 import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
 import buildcraftAdditions.villager.VillagerTradeHandler;
@@ -254,6 +256,12 @@ public class BuildcraftAdditions {
         addDusts("Platinum");
         addDusts("Silver");
         addDusts("Tin");
+
+        EurekaRegistry.registerKey(Variables.DustT1Key);
+        EurekaRegistry.registerKey(Variables.DustT2Key1);
+        EurekaRegistry.registerKey(Variables.DustT2Key2);
+        EurekaRegistry.registerKey(Variables.CoilT1Key);
+        EurekaRegistry.registerKey(Variables.CoilT2Key);
     }
 
     public void addDusts(String metal){
