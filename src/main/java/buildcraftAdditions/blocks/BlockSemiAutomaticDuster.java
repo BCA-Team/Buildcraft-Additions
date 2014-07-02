@@ -38,6 +38,6 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
 
     @Override
     public String getMessage() {
-        return Utils.localize("Eureka.missingKnowledge");
+        return Utils.localize("eureka.missingKnowledge");
     }
 }
