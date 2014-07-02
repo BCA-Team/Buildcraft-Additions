@@ -1,0 +1,55 @@
+tile.blockFluidicCompressor.name=Flüssigkeitskompressor
+tile.blockChargingStation.name=Ladestation
+tile.blockHeatedFurnace.name=Beiheizter Ofen
+tile.blockCoilBasic.name=Einfache Spule
+tile.blockDusterBasic.name=Einfacher Pulverisierer
+
+item.ironCanister.name=Eisenkanister
+item.goldCanister.name=Goldkanister
+item.diamondCanister.name=Diamantkanister
+item.mjMeter.name=MJ-Meter
+item.poweredShovel.name=Kinetisches Grabegerät
+item.drill.name=Kinetischer Bohrer
+item.chainsaw.name=Kinetische Kettensäge
+item.megaHoe.name=Kinetische Hacke
+item.PowerCapsuleTier1.name=Kinetische Kapsel - Stufe 1
+item.PowerCapsuleTier2.name=Kinetische Kapsel - Stufe 2
+item.PowerCapsuleTier3.name=Kinetische Kapsel - Stufe 3
+item.stickIron.name=Eisenstange
+item.stickGold.name=Goldstange
+item.stickDiamond.name=Diamantstange
+item.stickEmerald.name=Smaragdstange
+item.toolCore.name=Werkzeugkern
+item.toolUpgradeDrill.name=Bohrkopf
+item.toolUpgradeDigger.name=Ausgrabungsaufsatz
+item.toolUpgradeChainsaw.name=Sägeblatt
+item.toolUpgradeHoe.name=Ackerbauaufsatz
+item.kineticMultiTool.name=Kintetisches Multi-Tool
+item.dustGold.name=Pulverisiertes Gold
+item.dustIron.name=Pulverisiertes Eisen
+item.dustCopper=Pulverisiertes Kupfer
+item.dustLead=Pulverisiertes Blei
+item.dustNickel=Pulverisiertes Nickel
+item.dustPlatinum=Pulverisiertes Platin
+
+tooltip.installed=Installiert
+tooltip.deactivated=Deaktiviert
+
+gui.progress=Fortschritt
+gui.fluid=Flüssigk.
+gui.noFluid=Leer
+gui.fluidStored=Flüssigkeitsmenge
+gui.energyInTool=Gespeicherte Energie
+gui.maxEnergy=Max Energie
+
+trigger.canisterRequested=Kanister bestellt
+trigger.hasEmptyCanister=Hat leeren Kanister
+trigger.hasFullCanister=Hat vollen Kanister
+trigger.doneCharging=Laden beendet
+trigger.readyToCharge=Bereit zum Laden
+
+itemGroup.BuildcraftAdditions=Buildcraft Additions
+
+Eureka=EUREKA!
+eureka.dusterTier1Finished=Während du deine Erze verarbeitest bemerkst du plötzlich, dass es effektivere Wege gibt sie zu verarbeiten.
+eureka.missingKnowledge=Du weißt (noch) nicht wie diese Machine funktioniert. Du hast es versucht, aber aufgrund deiner Unfähigkeit hast du sie zerstört.
