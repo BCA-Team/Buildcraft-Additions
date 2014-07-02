@@ -1,4 +1,4 @@
-package buildcraftAdditions.utils;
+package buildcraftAdditions.api;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

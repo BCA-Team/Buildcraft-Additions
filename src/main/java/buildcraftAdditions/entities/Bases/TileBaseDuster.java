@@ -2,7 +2,7 @@ package buildcraftAdditions.entities.Bases;
 
 import buildcraftAdditions.api.IEurekaTileEntity;
 import buildcraftAdditions.utils.Eureka;
-import buildcraftAdditions.utils.DusterRecepies;
+import buildcraftAdditions.api.DusterRecepies;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
