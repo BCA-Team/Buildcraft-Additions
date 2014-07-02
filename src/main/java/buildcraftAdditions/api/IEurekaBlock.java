@@ -1,5 +1,6 @@
 package buildcraftAdditions.api;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -14,7 +15,7 @@ public interface IEurekaBlock {
     /**
      * Used to check if the player can use this or not, call the eureka system here for the check or do your own check
      */
-    boolean isAllowed();
+    boolean isAllowed(EntityPlayer player);
 
     /**
      * Use this to specify what items get droped when a 'dumb' player tries to use it

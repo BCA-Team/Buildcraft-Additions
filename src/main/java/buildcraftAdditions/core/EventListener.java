@@ -46,22 +46,24 @@ public class EventListener  {
 
     public static class Forge{
         @SubscribeEvent
-        public void onPlyerUsesBlock(PlayerInteractEvent event){
+        public void onPlyerUsesBlock(PlayerInteractEvent event) {
             if (event == null)
                 return;
             Block block = event.world.getBlock(event.x, event.y, event.z);
-            if (block instanceof IEurekaBlock){
+            if (block instanceof IEurekaBlock) {
                 IEurekaBlock eurekaBlock = (IEurekaBlock) block;
-                if (!eurekaBlock.isAllowed()){
-                    World world = event.world;
-                    ItemStack[] stackArray = eurekaBlock.getComponents();
-                    for (ItemStack stack : stackArray)
-                        Utils.dropItemstack(world, event.x, event.y, event.z, stack);
-                    if (!world.isRemote)
-                        world.setBlock(event.x, event.y, event.z, Blocks.air);
-                    world.markBlockForUpdate(event.x, event.y, event.z);
-                    if (world.isRemote)
+                World world = event.world;
+                if (!world.isRemote) {
+                    if (!eurekaBlock.isAllowed(event.entityPlayer)) {
+                        ItemStack[] stackArray = eurekaBlock.getComponents();
+                        for (ItemStack stack : stackArray)
+                            Utils.dropItemstack(world, event.x, event.y, event.z, stack);
+                        if (!world.isRemote)
+                            world.setBlock(event.x, event.y, event.z, Blocks.air);
+                        world.markBlockForUpdate(event.x, event.y, event.z);
                         event.entityPlayer.addChatComponentMessage(new ChatComponentText(((IEurekaBlock) block).getMessage()));
+
+                    }
                 }
             }
         }
@@ -73,7 +75,7 @@ public class EventListener  {
             Item item = event.item.getItem();
             if (item instanceof IEurekaItem){
                 IEurekaItem eurekaItem = (IEurekaItem) item;
-                if (!eurekaItem.isAllowed()) {
+                if (!eurekaItem.isAllowed(event.entityPlayer)) {
                     event.setCanceled(true);
                     if (event.entityPlayer != null)
                         event.entityPlayer.addChatComponentMessage(new ChatComponentText(eurekaItem.getMessage()));

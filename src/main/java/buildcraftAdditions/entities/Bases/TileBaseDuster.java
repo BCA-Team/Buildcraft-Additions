@@ -3,6 +3,7 @@ package buildcraftAdditions.entities.Bases;
 import buildcraftAdditions.api.IEurekaTileEntity;
 import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.api.DusterRecepies;
+import buildcraftAdditions.variables.Variables;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,6 @@ import net.minecraft.item.ItemStack;
  */
 public abstract class TileBaseDuster extends TileBase implements IEurekaTileEntity{
     public int progress;
-    public String progressKey;
 
     public void makeProgress(EntityPlayer player){
         if (getStackInSlot(0) != null && getDust(getStackInSlot(0)) != null) {
@@ -24,7 +24,7 @@ public abstract class TileBaseDuster extends TileBase implements IEurekaTileEnti
             if (progress == 5) {
                 dust();
                 progress = 0;
-                makeProgress(player, progressKey);
+                makeProgress(player, Variables.DustT1Key);
             }
         }
     }

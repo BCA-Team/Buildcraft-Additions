@@ -1,8 +1,11 @@
 package buildcraftAdditions.blocks;
 
 import buildcraftAdditions.api.IEurekaBlock;
+import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.variables.Variables;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -27,8 +30,8 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
     }
 
     @Override
-    public boolean isAllowed() {
-        return false;
+    public boolean isAllowed(EntityPlayer player) {
+        return Eureka.isUnlocked(player, Variables.DustT1Key);
     }
 
     @Override

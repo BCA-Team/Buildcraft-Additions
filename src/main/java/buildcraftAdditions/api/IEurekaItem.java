@@ -1,5 +1,7 @@
 package buildcraftAdditions.api;
 
+import net.minecraft.entity.player.EntityPlayer;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -9,7 +11,7 @@ package buildcraftAdditions.api;
  */
 public interface IEurekaItem {
 
-    boolean isAllowed();
+    boolean isAllowed(EntityPlayer player);
 
     String getMessage();
 }
