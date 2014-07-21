@@ -10,7 +10,6 @@ import buildcraftAdditions.api.DusterRecepies;
 import buildcraftAdditions.api.EurekaRegistry;
 import buildcraftAdditions.blocks.*;
 import buildcraftAdditions.client.gui.GuiHandler;
-import buildcraftAdditions.core.Configuration;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.entities.*;
@@ -19,6 +18,7 @@ import buildcraftAdditions.items.Tools.*;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.triggers.*;
+import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.variables.Variables;
 import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
@@ -54,7 +54,7 @@ import java.util.ArrayList;
 
 
 
-@Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", dependencies = "required-after:BuildCraft|Energy@{6.0.16}")
+@Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "required-after:BuildCraft|Energy@{6.0.16}")
 public class BuildcraftAdditions {
 
     public static ItemCanister ironCanister;
@@ -117,7 +117,7 @@ public class BuildcraftAdditions {
     public void preInit(FMLPreInitializationEvent event) {
 
         Logger.initiallize();
-        Configuration.readConfig(event);
+        ConfigurationHandeler.init(event.getSuggestedConfigurationFile());
         PacketHandeler.init();
 
         ironCanister = new ItemCanister("ironCanister", 1000);

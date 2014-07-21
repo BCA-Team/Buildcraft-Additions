@@ -31,13 +31,13 @@ archivesBaseName = "BuildcraftAdditions-1.7.2"
  
 minecraft {
     version = "${config.version.mc}-${config.version.forge}"
-    assetDir = "eclipse/assets"
+    runDir = "eclipse"
     replace "@MODVERSION@", config.version.mod
 }
  
 dependencies {
  
-    compile 'com.mod-buildcraft:buildcraft:6.0.16:dev'  // adds buildcraft to the dev env
+    compile 'com.mod-buildcraft:buildcraft:6.0.17:dev'  // adds buildcraft to the dev env
  
 }
  

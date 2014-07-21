@@ -10,7 +10,7 @@ package buildcraftAdditions.items.Tools;
 
 import java.util.List;
 
-import buildcraftAdditions.core.Configuration;
+import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.core.InventoryTool;
 import buildcraftAdditions.items.BatteryBase;
 import cpw.mods.fml.relauncher.Side;
@@ -92,7 +92,7 @@ public class ItemPoweredBase extends ItemSword {
 	
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entity){
-		decreaseEnergy(stack, (block.getBlockHardness(world, x, y, z) * (Configuration.powerDifficultyModifiers[world.difficultySetting.getDifficultyId()]) * Configuration.basePowerModifier), player);
+		decreaseEnergy(stack, (block.getBlockHardness(world, x, y, z) * (ConfigurationHandeler.powerDifficultyModifiers[world.difficultySetting.getDifficultyId()]) * ConfigurationHandeler.basePowerModifier), player);
 		return true;
 	}
 	
