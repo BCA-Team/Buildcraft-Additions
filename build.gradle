@@ -40,6 +40,22 @@ dependencies {
     compile 'com.mod-buildcraft:buildcraft:6.0.17:dev'  // adds buildcraft to the dev env
  
 }
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+    api {
+        java {
+            srcDir 'src/main/java/buildcraftAdditions/api'
+        }
+    }
+}
  
 processResources
 {
@@ -60,3 +76,10 @@ processResources
         exclude 'mcmod.info'
     }
 }
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'dev'
+}
+
+assemble.dependsOn deobfJar
