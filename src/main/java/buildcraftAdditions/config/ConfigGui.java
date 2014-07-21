@@ -18,7 +18,7 @@ import java.util.List;
 public class ConfigGui extends GuiConfig {
 
     public ConfigGui(GuiScreen parentScreen) {
-        super(parentScreen, getList(), "buildcraftadditions", false, false, GuiConfig.getAbridgedConfigPath(ConfigurationHandeler.configFile.toString()));
+        super(parentScreen, getList(), "bcadditions", false, false, GuiConfig.getAbridgedConfigPath(ConfigurationHandeler.configFile.toString()));
     }
 
     public static List<IConfigElement> getList() {
