@@ -1,7 +1,6 @@
 package buildcraftAdditions.utils;
 
 import buildcraftAdditions.api.EurekaRegistry;
-import buildcraftAdditions.variables.Variables;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
@@ -46,9 +45,8 @@ public class Eureka {
             setKey(tag, key + "Progress", progress + 1);
         }
         if (progress == 100){
-            key = key + "Finished";
             if (!isUnlocked(player, key)) {
-                setKey(tag, key, true);
+                setKey(tag, key + "Finished", true);
                 String message = Utils.localize("eureka." + key);
                 player.addChatMessage(new ChatComponentText(Utils.localize("Eureka")));
                 player.addChatComponentMessage(new ChatComponentText(message));
