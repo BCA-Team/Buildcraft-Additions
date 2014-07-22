@@ -1,11 +1,11 @@
 package buildcraftAdditions.entities;
 
-import buildcraftAdditions.api.IEurekaTileEntity;
-import buildcraftAdditions.entities.Bases.TileBase;
+import buildcraftAdditions.entities.Bases.TileBaseDuster;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.utils.Eureka;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -14,8 +14,12 @@ import net.minecraft.item.ItemStack;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileSemiAutomaticDuster extends TileBase implements IEurekaTileEntity {
+public class TileSemiAutomaticDuster extends TileBaseDuster {
     private CustomInventory inventory = new CustomInventory("semiAutomaticDuster", 1, 1, this);
+
+    public TileSemiAutomaticDuster(){
+
+    }
 
     @Override
     public void makeProgress(EntityPlayer player, String key) {
@@ -48,28 +52,32 @@ public class TileSemiAutomaticDuster extends TileBase implements IEurekaTileEnti
     }
 
     @Override
-    public void setInventorySlotContents(int var1, ItemStack var2) {
-
+    public void setInventorySlotContents(int slot, ItemStack stack) {
+        inventory.setInventorySlotContents(slot, stack);
+        markDirty();
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
     @Override
     public String getInventoryName() {
-        return null;
+        return inventory.getInventoryName();
     }
 
     @Override
     public boolean hasCustomInventoryName() {
-        return false;
+        return inventory.hasCustomInventoryName();
     }
 
     @Override
     public int getInventoryStackLimit() {
-        return 0;
+        return inventory.getInventoryStackLimit();
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer var1) {
-        return false;
+    public boolean isUseableByPlayer(EntityPlayer player) {
+       return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this
+                && player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D,
+                zCoord + 0.5D) <= 64.0D;
     }
 
     @Override
@@ -83,7 +91,19 @@ public class TileSemiAutomaticDuster extends TileBase implements IEurekaTileEnti
     }
 
     @Override
-    public boolean isItemValidForSlot(int var1, ItemStack var2) {
-        return false;
+    public boolean isItemValidForSlot(int slot, ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
+        inventory.readNBT(tag);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
+        inventory.writeNBT(tag);
     }
 }

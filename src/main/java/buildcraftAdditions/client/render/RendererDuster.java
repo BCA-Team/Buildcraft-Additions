@@ -1,6 +1,6 @@
 package buildcraftAdditions.client.render;
 
-import buildcraftAdditions.entities.TileBasicDuster;
+import buildcraftAdditions.entities.Bases.TileBaseDuster;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -16,13 +16,13 @@ import org.lwjgl.opengl.GL11;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileBasicDusterRender extends TileEntitySpecialRenderer {
+public class RendererDuster extends TileEntitySpecialRenderer {
 
     @Override
     public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {
         GL11.glPushMatrix();
         GL11.glTranslated(x, y, z);
-        TileBasicDuster duster = (TileBasicDuster) entity;
+        TileBaseDuster duster = (TileBaseDuster) entity;
         ItemStack stack = duster.getStackInSlot(0);
         EntityItem item;
         if (stack != null) {

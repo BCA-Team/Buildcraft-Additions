@@ -245,6 +245,7 @@ public class BuildcraftAdditions {
         GameRegistry.registerTileEntity(TileHeatedFurnace.class, "TileHeatedFurnace");
         GameRegistry.registerTileEntity(TileBasicCoil.class, "TileBasicCoil");
         GameRegistry.registerTileEntity(TileBasicDuster.class, "TileBasicDuster");
+        GameRegistry.registerTileEntity(TileSemiAutomaticDuster.class, "TileSemiAutomaticDuster");
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 

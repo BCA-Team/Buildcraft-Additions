@@ -1,6 +1,7 @@
 package buildcraftAdditions.blocks;
 
 import buildcraft.core.IItemPipe;
+import buildcraftAdditions.entities.Bases.TileBaseDuster;
 import buildcraftAdditions.entities.TileBasicDuster;
 import buildcraftAdditions.utils.Utils;
 import net.minecraft.block.material.Material;
@@ -39,7 +40,7 @@ public class BlockBasicDuster extends BlockBase {
             if (player.getCurrentEquippedItem().getItem() instanceof IItemPipe)
                 return false;
         }
-        TileBasicDuster duster = (TileBasicDuster) world.getTileEntity(x, y, z);
+        TileBaseDuster duster = (TileBaseDuster) world.getTileEntity(x, y, z);
             if (duster != null && duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
                 ItemStack stack = player.getCurrentEquippedItem().copy();
                 stack.stackSize = 1;

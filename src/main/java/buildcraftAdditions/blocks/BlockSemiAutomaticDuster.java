@@ -1,6 +1,9 @@
 package buildcraftAdditions.blocks;
 
+import buildcraft.core.IItemPipe;
 import buildcraftAdditions.api.IEurekaBlock;
+import buildcraftAdditions.entities.Bases.TileBaseDuster;
+import buildcraftAdditions.entities.TileSemiAutomaticDuster;
 import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
@@ -25,8 +28,41 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
     }
 
     @Override
-    public TileEntity createNewTileEntity(World var1, int var2) {
-        return null;
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+        super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
+        if (player.isSneaking())
+            return false;
+        if (player.getCurrentEquippedItem() != null) {
+            if (player.getCurrentEquippedItem().getItem() instanceof IItemPipe)
+                return false;
+        }
+        TileBaseDuster duster = (TileBaseDuster) world.getTileEntity(x, y, z);
+        if (duster != null && duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
+            ItemStack stack = player.getCurrentEquippedItem().copy();
+            stack.stackSize = 1;
+            duster.setInventorySlotContents(0, stack);
+            player.getCurrentEquippedItem().stackSize--;
+            if (player.getCurrentEquippedItem().stackSize <= 0)
+                player.setCurrentItemOrArmor(0, null);
+        } else {
+            if (duster.getStackInSlot(0) != null){
+                if (!world.isRemote)
+                    Utils.dropItemstack(world, x, y, z, duster.getStackInSlot(0));
+                duster.setInventorySlotContents(0, null);
+            }
+        }
+        world.markBlockForUpdate(x, y, z);
+        return true;
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World world, int var2) {
+        return new TileSemiAutomaticDuster();
     }
 
     @Override
