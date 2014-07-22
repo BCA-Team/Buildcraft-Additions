@@ -242,9 +242,9 @@ public class BuildcraftAdditions {
         proxy.registerRenderers();
         GameRegistry.registerTileEntity(TileFluidicCompressor.class, "TileFluidicCompressor");
         GameRegistry.registerTileEntity(TileChargingStation.class, "TileChargingStation");
-        //GameRegistry.registerTileEntity(TileHeatedFurnace.class, "TileHeatedFurnace");
-        //GameRegistry.registerTileEntity(TileBasicCoil.class, "TileBasicCoil");
-        //GameRegistry.registerTileEntity(TileBasicDuster.class, "TileBasicDuster");
+        GameRegistry.registerTileEntity(TileHeatedFurnace.class, "TileHeatedFurnace");
+        GameRegistry.registerTileEntity(TileBasicCoil.class, "TileBasicCoil");
+        GameRegistry.registerTileEntity(TileBasicDuster.class, "TileBasicDuster");
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
@@ -295,21 +295,21 @@ public class BuildcraftAdditions {
         chargingStationBlock.setBlockName("blockChargingStation").setCreativeTab(bcadditions);
         GameRegistry.registerBlock(chargingStationBlock, "blockChargingStation");
 
-        //heatedFurnaceBlock = new BlockHeatedFurnace();
-        //heatedFurnaceBlock.setBlockName("blockHeatedFurnace").setCreativeTab(bcadditions);
-        //GameRegistry.registerBlock(heatedFurnaceBlock, "blockHeatedFurnace");
+        heatedFurnaceBlock = new BlockHeatedFurnace();
+        heatedFurnaceBlock.setBlockName("blockHeatedFurnace").setCreativeTab(bcadditions);
+        GameRegistry.registerBlock(heatedFurnaceBlock, "blockHeatedFurnace");
 
-        //basicCoilBlock = new BlockBasicCoil();
-        //basicCoilBlock.setBlockName("blockCoilBasic").setCreativeTab(bcadditions);
-        //GameRegistry.registerBlock(basicCoilBlock, "blockCoilBasic");
+        basicCoilBlock = new BlockBasicCoil();
+        basicCoilBlock.setBlockName("blockCoilBasic").setCreativeTab(bcadditions);
+        GameRegistry.registerBlock(basicCoilBlock, "blockCoilBasic");
 
-        //basicDusterBlock = new BlockBasicDuster();
-        //basicDusterBlock.setBlockName("blockDusterBasic").setCreativeTab(bcadditions);
-        //GameRegistry.registerBlock(basicDusterBlock, "blockDusterBasic");
+        basicDusterBlock = new BlockBasicDuster();
+        basicDusterBlock.setBlockName("blockDusterBasic").setCreativeTab(bcadditions);
+        GameRegistry.registerBlock(basicDusterBlock, "blockDusterBasic");
 
-        //semiAutomaticDusterBlock = new BlockSemiAutomaticDuster();
-        //semiAutomaticDusterBlock.setBlockName("blockDusterSemiAutomatic").setCreativeTab(bcadditions);
-        //GameRegistry.registerBlock(semiAutomaticDusterBlock, "blockDusterSemiAutomatic");
+        semiAutomaticDusterBlock = new BlockSemiAutomaticDuster();
+        semiAutomaticDusterBlock.setBlockName("blockDusterSemiAutomatic").setCreativeTab(bcadditions);
+        GameRegistry.registerBlock(semiAutomaticDusterBlock, "blockDusterSemiAutomatic");
 
         //engineBlock = new BlockEngine();
         //CoreProxy.proxy.registerBlock(engineBlock.setBlockName("blockEngine").setCreativeTab(bcadditions));
