@@ -2,6 +2,8 @@ package buildcraftAdditions.entities;
 
 import buildcraftAdditions.entities.Bases.TileBaseDuster;
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.networking.MessageSemiAutomaticDuster;
+import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.utils.Eureka;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -51,10 +53,12 @@ public class TileSemiAutomaticDuster extends TileBaseDuster {
         return inventory.getStackInSlotOnClosing(slot);
     }
 
+
     @Override
     public void setInventorySlotContents(int slot, ItemStack stack) {
         inventory.setInventorySlotContents(slot, stack);
-        markDirty();
+        if (!worldObj.isRemote)
+        PacketHandeler.instance.sendToAll(new MessageSemiAutomaticDuster(xCoord, yCoord, zCoord, stack));
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 

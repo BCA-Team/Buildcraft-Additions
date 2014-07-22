@@ -16,6 +16,6 @@ public class PacketHandeler {
     public static final SimpleNetworkWrapper instance = NetworkRegistry.INSTANCE.newSimpleChannel("bcadditions");
 
     public static void init(){
-        instance.registerMessage(MessageToolUpgrades.class, MessageToolUpgrades.class, 0, Side.SERVER);
+        instance.registerMessage(MessageSemiAutomaticDuster.class, MessageSemiAutomaticDuster.class, 0, Side.CLIENT);
     }
 }
