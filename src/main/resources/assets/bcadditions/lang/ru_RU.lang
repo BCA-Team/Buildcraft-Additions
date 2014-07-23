@@ -1,5 +1,9 @@
 tile.blockFluidicCompressor.name=Жидкостный компрессор
 tile.blockChargingStation.name=Зарядная станция
+tile.blockHeatedFurnace.name=Нагревательная печь
+tile.blockCoilBasic.name=Основная катушка
+tile.blockDusterBasic.name=Основной распылитель
+tile.blockDusterSemiAutomatic.name=Полуавтоматический распылитель
 
 item.ironCanister.name=Железная канистра
 item.goldCanister.name=Золотая канистра
@@ -22,6 +26,12 @@ item.toolUpgradeDigger.name=Головка копалки
 item.toolUpgradeChainsaw.name=Лезвие пилы
 item.toolUpgradeHoe.name=Рукоятка
 item.kineticMultiTool.name=Кинетический мультиинструмент
+item.dustGold.name=Золотая пыль
+item.dustIron.name=Железная пыль
+item.dustCopper.name=Медная пыль
+item.dustLead.name=Свинцовая пыль
+item.dustNickel.name=Никелевая пыль
+item.dustPlatinum.name=Платиновая пыль
 
 tooltip.installed=Установлено
 tooltip.deactivated=Деактивировано
@@ -40,3 +50,7 @@ trigger.doneCharging=Зарядка завершена
 trigger.readyToCharge=Готово к подзарядке
 
 itemGroup.BuildcraftAdditions=Buildcraft: Дополнения
+
+Eureka=ЭВРИКА!
+eureka.dusterTier1Finished=Во время обработки Ваших руд, Вы вдруг понимаете, что есть более эффективные способы для их обработки.
+eureka.missingKnowledge=Вы не знаете как работает этот механизм (ещё). Вы попытались использовать её, но из-за Вашего непрофессионализма, она сломалась.
