@@ -1,9 +1,13 @@
 package buildcraftAdditions.utils;
 
 import buildcraftAdditions.api.EurekaRegistry;
+import buildcraftAdditions.api.IEurekaBlock;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.world.World;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -68,5 +72,17 @@ public class Eureka {
     private static void setKey(NBTTagCompound tag, String key, boolean bool){
         tag.setBoolean(key, bool);
 
+    }
+
+    public static void eurekaBlockEvent(World world, IEurekaBlock block, int x, int y, int z, EntityPlayer player){
+        if (!world.isRemote && !block.isAllowed(player)){
+            ItemStack[] stackArray = block.getComponents();
+            for (ItemStack stack : stackArray)
+                Utils.dropItemstack(world, x, y, z, stack);
+            if (!world.isRemote)
+                world.setBlock(x, y, z, Blocks.air);
+            world.markBlockForUpdate(x, y, z);
+            player.addChatComponentMessage(new ChatComponentText(((IEurekaBlock) block).getMessage()));
+        }
     }
 }

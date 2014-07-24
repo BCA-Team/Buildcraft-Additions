@@ -3,8 +3,6 @@ package buildcraftAdditions.entities.Bases;
 import buildcraftAdditions.api.IEurekaTileEntity;
 import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.api.DusterRecepies;
-import buildcraftAdditions.variables.Variables;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -17,6 +15,11 @@ import net.minecraft.item.ItemStack;
  */
 public abstract class TileBaseDuster extends TileBase implements IEurekaTileEntity{
     public int progress;
+    private String key;
+
+    public TileBaseDuster(String key){
+        this.key = key;
+    }
 
     public void makeProgress(EntityPlayer player){
         if (getStackInSlot(0) != null && getDust(getStackInSlot(0)) != null) {
@@ -24,23 +27,12 @@ public abstract class TileBaseDuster extends TileBase implements IEurekaTileEnti
             if (progress == 5) {
                 dust();
                 progress = 0;
-                makeProgress(player, Variables.DustT1Key);
+                makeProgress(player, key);
             }
         }
     }
 
-    public void dust(){
-        float f1 = 0.7F;
-        double d = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-        double d1 = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-        double d2 = (worldObj.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-        EntityItem itemToDrop = new EntityItem(worldObj, xCoord + d, yCoord + d1, zCoord + d2, getDust(getStackInSlot(0)));
-        itemToDrop.delayBeforeCanPickup = 10;
-        if (!worldObj.isRemote)
-            worldObj.spawnEntityInWorld(itemToDrop);
-        setInventorySlotContents(0, null);
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-    }
+    public abstract void dust();
 
     public ItemStack getDust(ItemStack stack){
         return DusterRecepies.getOutput(stack);

@@ -53,6 +53,8 @@ public class MessageSemiAutomaticDuster implements IMessage, IMessageHandler<Mes
     @Override
     public IMessage onMessage(MessageSemiAutomaticDuster message, MessageContext ctx) {
         TileSemiAutomaticDuster duster = (TileSemiAutomaticDuster) FMLClientHandler.instance().getWorldClient().getTileEntity(message.x, message.y, message.z);
+        if (duster == null)
+            return null;
         if (message.id != 0) {
             duster.setInventorySlotContents(0, new ItemStack(Item.getItemById(message.id)));
         } else{

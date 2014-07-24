@@ -5,9 +5,14 @@ import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageSemiAutomaticDuster;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.utils.Eureka;
+import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.variables.Variables;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -20,7 +25,53 @@ public class TileSemiAutomaticDuster extends TileBaseDuster {
     private CustomInventory inventory = new CustomInventory("semiAutomaticDuster", 1, 1, this);
 
     public TileSemiAutomaticDuster(){
+        super (Variables.DustT2Key1);
+    }
 
+    @Override
+    public void dust() {
+        //first try to put it intro an inventory
+        ItemStack output = getDust(getStackInSlot(0));
+        for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS){
+            int x = xCoord + direction.offsetX;
+            int y = yCoord + direction.offsetY;
+            int z = zCoord + direction.offsetZ;
+            TileEntity entity = worldObj.getTileEntity(x, y, z);
+            if (entity != null && entity instanceof IInventory){
+               IInventory outputInventory = (IInventory) entity;
+                for (int slot = 0; slot < outputInventory.getSizeInventory(); slot ++) {
+                    int stackLimit = outputInventory.getInventoryStackLimit();
+                    if (output != null &&
+                            (outputInventory.getStackInSlot(slot) == null || outputInventory.getStackInSlot(slot).getItem() == output.getItem())) {
+                        ItemStack stack = outputInventory.getStackInSlot(slot);
+                        int toMove = 0;
+                        if (stack == null) {
+                            toMove = stackLimit - 1;
+                            stack = new ItemStack(output.getItem(), 0);
+                        } else {
+                            toMove = stackLimit - stack.stackSize;
+                        }
+                        if (toMove > output.stackSize)
+                            toMove = output.stackSize;
+                        stack.stackSize += toMove;
+                        output.stackSize -= toMove;
+                        outputInventory.setInventorySlotContents(slot, stack);
+                        outputInventory.markDirty();
+                        if (output.stackSize == 0)
+                            output = null;
+                    }
+                }
+
+            }
+        }
+        //try to put it intro a pipe
+
+        //drop it on the ground
+        if (output != null)
+        Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, output);
+
+        setInventorySlotContents(0, null);
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
     @Override

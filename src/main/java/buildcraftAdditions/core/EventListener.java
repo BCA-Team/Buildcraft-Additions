@@ -4,16 +4,12 @@ import buildcraftAdditions.api.IEurekaBlock;
 import buildcraftAdditions.api.IEurekaItem;
 import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.utils.Eureka;
-import buildcraftAdditions.utils.Utils;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 
@@ -56,24 +52,10 @@ public class EventListener  {
     public static class Forge{
         @SubscribeEvent
         public void onPlyerUsesBlock(PlayerInteractEvent event) {
-            if (event == null)
-                return;
-            Block block = event.world.getBlock(event.x, event.y, event.z);
-            if (block instanceof IEurekaBlock) {
-                IEurekaBlock eurekaBlock = (IEurekaBlock) block;
-                World world = event.world;
-                if (!world.isRemote) {
-                    if (!eurekaBlock.isAllowed(event.entityPlayer)) {
-                        ItemStack[] stackArray = eurekaBlock.getComponents();
-                        for (ItemStack stack : stackArray)
-                            Utils.dropItemstack(world, event.x, event.y, event.z, stack);
-                        if (!world.isRemote)
-                            world.setBlock(event.x, event.y, event.z, Blocks.air);
-                        world.markBlockForUpdate(event.x, event.y, event.z);
-                        event.entityPlayer.addChatComponentMessage(new ChatComponentText(((IEurekaBlock) block).getMessage()));
-
-                    }
-                }
+            if (event != null) {
+                Block block = event.world.getBlock(event.x, event.y, event.z);
+                if (block instanceof  IEurekaBlock)
+                Eureka.eurekaBlockEvent(event.world, (IEurekaBlock) block, event.x, event.y, event.z, event.entityPlayer);
             }
         }
 

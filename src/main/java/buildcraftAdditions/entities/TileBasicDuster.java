@@ -2,6 +2,8 @@ package buildcraftAdditions.entities;
 
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.entities.Bases.TileBaseDuster;
+import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.variables.Variables;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,6 +19,7 @@ public class TileBasicDuster extends TileBaseDuster {
     public CustomInventory inventory = new CustomInventory("Duster", 1, 1, this);
 
     public TileBasicDuster(){
+        super(Variables.DustT1Key);
     }
 
     @Override
@@ -97,5 +100,12 @@ public class TileBasicDuster extends TileBaseDuster {
     @Override
     public void updateEntity() {
 
+    }
+
+    @Override
+    public void dust() {
+        Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, getDust(getStackInSlot(0)));
+        setInventorySlotContents(0, null);
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 }

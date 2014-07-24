@@ -8,6 +8,7 @@ import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -78,5 +79,14 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
     @Override
     public String getMessage() {
         return Utils.localize("eureka.missingKnowledge");
+    }
+
+    @Override
+    public void onFallenUpon(World world, int x, int y, int z, Entity entity, float hit){
+        if (entity instanceof EntityPlayer) {
+            TileEntity tileEntity = world.getTileEntity(x, y, z);
+            if (tileEntity instanceof TileSemiAutomaticDuster)
+                ((TileSemiAutomaticDuster) tileEntity).makeProgress((EntityPlayer) entity);
+        }
     }
 }
