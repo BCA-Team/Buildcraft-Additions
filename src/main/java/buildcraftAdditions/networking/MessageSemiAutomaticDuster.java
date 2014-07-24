@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageSemiAutomaticDuster implements IMessage, IMessageHandler<MessageSemiAutomaticDuster, IMessage> {
-    public int x, y, z, id;
+    public int x, y, z, id, meta;
 
     public MessageSemiAutomaticDuster(){
 
@@ -29,6 +29,7 @@ public class MessageSemiAutomaticDuster implements IMessage, IMessageHandler<Mes
         this.z = z;
         if (stack != null) {
             this.id = Item.getIdFromItem(stack.getItem());
+            this.meta = stack.getItemDamage();
         } else {
             this.id = 0;
         }
@@ -40,6 +41,7 @@ public class MessageSemiAutomaticDuster implements IMessage, IMessageHandler<Mes
         this.y = buf.readInt();
         this.z = buf.readInt();
         this.id = buf.readInt();
+        this.meta = buf.readInt();
     }
 
     @Override
@@ -48,6 +50,7 @@ public class MessageSemiAutomaticDuster implements IMessage, IMessageHandler<Mes
         buf.writeInt(this.y);
         buf.writeInt(this.z);
         buf.writeInt(this.id);
+        buf.writeInt(this.meta);
     }
 
     @Override
@@ -56,7 +59,7 @@ public class MessageSemiAutomaticDuster implements IMessage, IMessageHandler<Mes
         if (duster == null)
             return null;
         if (message.id != 0) {
-            duster.setInventorySlotContents(0, new ItemStack(Item.getItemById(message.id)));
+            duster.setInventorySlotContents(0, new ItemStack(Item.getItemById(message.id), message.meta));
         } else{
             duster.setInventorySlotContents(0, null);
         }
