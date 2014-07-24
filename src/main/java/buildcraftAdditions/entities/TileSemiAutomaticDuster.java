@@ -1,5 +1,6 @@
 package buildcraftAdditions.entities;
 
+import buildcraft.api.transport.IPipeTile;
 import buildcraftAdditions.entities.Bases.TileBaseDuster;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageSemiAutomaticDuster;
@@ -30,8 +31,25 @@ public class TileSemiAutomaticDuster extends TileBaseDuster {
 
     @Override
     public void dust() {
-        //first try to put it intro an inventory
         ItemStack output = getDust(getStackInSlot(0));
+
+        //first try to put it intro a pipe
+        for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS){
+            int x = xCoord + direction.offsetX;
+            int y = yCoord + direction.offsetY;
+            int z = zCoord + direction.offsetZ;
+            TileEntity entity = worldObj.getTileEntity(x, y, z);
+            if (entity instanceof IPipeTile){
+                IPipeTile pipe = (IPipeTile) entity;
+                if (output != null && pipe.isPipeConnected(direction.getOpposite()) && pipe.getPipeType() == IPipeTile.PipeType.ITEM){
+                    int leftOver = pipe.injectItem(output.copy(), true, direction.getOpposite());
+                    output.stackSize -= leftOver;
+                    if (output.stackSize == 0)
+                        output = null;
+                }
+            }
+        }
+        //try to put it intro an inventory
         for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS){
             int x = xCoord + direction.offsetX;
             int y = yCoord + direction.offsetY;
@@ -44,7 +62,7 @@ public class TileSemiAutomaticDuster extends TileBaseDuster {
                     if (output != null &&
                             (outputInventory.getStackInSlot(slot) == null || outputInventory.getStackInSlot(slot).getItem() == output.getItem())) {
                         ItemStack stack = outputInventory.getStackInSlot(slot);
-                        int toMove = 0;
+                        int toMove;
                         if (stack == null) {
                             toMove = stackLimit - 1;
                             stack = new ItemStack(output.getItem(), 0);
@@ -64,7 +82,6 @@ public class TileSemiAutomaticDuster extends TileBaseDuster {
 
             }
         }
-        //try to put it intro a pipe
 
         //drop it on the ground
         if (output != null)
