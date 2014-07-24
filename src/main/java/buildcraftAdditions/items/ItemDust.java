@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 /**
@@ -25,9 +26,28 @@ public class ItemDust extends Item {
     }
 
     @Override
+    public int getColorFromItemStack(ItemStack stack, int meta) {
+        if (this.metal == "Gold")
+            return Integer.parseInt("F8DF17", 16);
+        if (this.metal == "Copper")
+            return  Integer.parseInt("BF5E1F", 16);
+        if (this.metal == "Nickel")
+            return Integer.parseInt("BAB0A4", 16);
+        if (this.metal == "Silver")
+            return Integer.parseInt("B3B3B3", 16);
+        if (this.metal == "Tin")
+            return Integer.parseInt("F2F2F2", 16);
+        if (this.metal == "Platinum")
+            return Integer.parseInt("ABCDEF", 16);
+        if (this.metal == "Lead")
+            return Integer.parseInt("808096", 16);
+        return Integer.parseInt("D2CEC9", 16);
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IconRegister) {
-        icon = par1IconRegister.registerIcon("bcadditions:" + metal);
+        icon = par1IconRegister.registerIcon("bcadditions:dust");
     }
 
     @Override

@@ -32,6 +32,9 @@ item.dustCopper.name=Copper Dust
 item.dustLead.name=Lead Dust
 item.dustNickel.name=Nickel Dust
 item.dustPlatinum.name=Platinum Dust
+item.dustTin.name=Tin Dust
+item.dustSilver.name=Silver Dust
+
 
 tooltip.installed=Installed
 tooltip.deactivated=Deactivated
