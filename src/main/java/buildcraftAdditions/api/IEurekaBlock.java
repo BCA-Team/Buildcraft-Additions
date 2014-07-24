@@ -18,12 +18,12 @@ public interface IEurekaBlock {
     boolean isAllowed(EntityPlayer player);
 
     /**
-     * Use this to specify what items get droped when a 'dumb' player tries to use it
+     * Use this to specify what items get dropped when a 'dumb' player tries to use it
      */
     ItemStack[] getComponents();
 
     /**
-     * The message 'dumb' players get when there machine falls appart
+     * The message 'dumb' players get when there machine falls apart
      */
     String getMessage();
 }

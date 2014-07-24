@@ -13,9 +13,9 @@ public class EurekaRegistry {
     private static ArrayList<String> eurekaRegistry = new ArrayList<String>(50);
 
     /**
-     * Register your keys here for the eureka system
+     * Register your keys here for the EUREKA system
      * @param key the key you want to register
-     * @return true if successfull, false if key is already occupied
+     * @return true if successful, false if key is already occupied
      */
     public static boolean registerKey(String key){
         if (!eurekaRegistry.contains(key)){
@@ -25,6 +25,9 @@ public class EurekaRegistry {
         return false;
     }
 
+    /**
+     * @return a clone of the list containing all EUREKA keys
+     */
     public static ArrayList<String> getKeys(){
         return (ArrayList) eurekaRegistry.clone();
     }
