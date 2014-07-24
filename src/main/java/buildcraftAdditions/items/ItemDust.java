@@ -22,6 +22,7 @@ public class ItemDust extends Item {
 
     public ItemDust(int color){
         setCreativeTab(BuildcraftAdditions.bcadditions);
+        this.color = color;
     }
 
     @Override
