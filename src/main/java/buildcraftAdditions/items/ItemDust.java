@@ -16,32 +16,17 @@ import net.minecraft.util.IIcon;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class ItemDust extends Item {
-    public IIcon icon;
-    public String metal;
 
-    public ItemDust(String metal){
-        this.setCreativeTab(BuildcraftAdditions.bcadditions);
-        this.setUnlocalizedName("dust" + metal);
-        this.metal = metal;
+    public IIcon icon;
+    public int color;
+
+    public ItemDust(int color){
+        setCreativeTab(BuildcraftAdditions.bcadditions);
     }
 
     @Override
     public int getColorFromItemStack(ItemStack stack, int meta) {
-        if (this.metal == "Gold")
-            return Integer.parseInt("F8DF17", 16);
-        if (this.metal == "Copper")
-            return  Integer.parseInt("BF5E1F", 16);
-        if (this.metal == "Nickel")
-            return Integer.parseInt("BAB0A4", 16);
-        if (this.metal == "Silver")
-            return Integer.parseInt("B3B3B3", 16);
-        if (this.metal == "Tin")
-            return Integer.parseInt("F2F2F2", 16);
-        if (this.metal == "Platinum")
-            return Integer.parseInt("ABCDEF", 16);
-        if (this.metal == "Lead")
-            return Integer.parseInt("808096", 16);
-        return Integer.parseInt("D2CEC9", 16);
+        return color;
     }
 
     @Override
