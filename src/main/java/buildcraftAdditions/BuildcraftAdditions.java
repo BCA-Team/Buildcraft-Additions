@@ -273,7 +273,7 @@ public class BuildcraftAdditions {
         list = OreDictionary.getOres("ore" + metalName);
         if (list.isEmpty())
             return;
-        itemDust = new ItemDust(color).setUnlocalizedName("");
+        itemDust = new ItemDust(color).setUnlocalizedName("dust" + metalName);
         GameRegistry.registerItem(itemDust, "dust" + metalName);
         OreDictionary.registerOre("dust" + metalName, itemDust);
         GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metalName).get(0), 0);
