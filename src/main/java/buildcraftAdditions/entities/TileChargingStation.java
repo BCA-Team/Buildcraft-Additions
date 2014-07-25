@@ -11,6 +11,7 @@ package buildcraftAdditions.entities;
 import buildcraft.api.gates.IOverrideDefaultTriggers;
 import buildcraft.api.gates.ITrigger;
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.api.IKineticCapsule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import buildcraft.api.mj.MjBattery;
 import buildcraft.core.TileBuildCraft;
 import buildcraft.core.inventory.SimpleInventory;
-import buildcraftAdditions.items.BatteryBase;
 
 import java.util.LinkedList;
 
@@ -37,9 +37,9 @@ public class TileChargingStation extends TileBuildCraft implements IInventory, I
 		ItemStack stack = inventory.getStackInSlot(0);
 		if (stack==null)
 			return;
-		if (!(stack.getItem() instanceof BatteryBase))
+		if (!(stack.getItem() instanceof IKineticCapsule))
 			return;
-		BatteryBase battery = (BatteryBase) stack.getItem();
+        IKineticCapsule battery = (IKineticCapsule) stack.getItem();
 		if (battery.getEnergy(stack) + charge > battery.getCapacity())
 			charge = battery.getCapacity() - (int) battery.getEnergy(stack);
 		if (energy < charge)
@@ -107,15 +107,15 @@ public class TileChargingStation extends TileBuildCraft implements IInventory, I
 		
 	}
 	@Override
-	public boolean isItemValidForSlot(int var1, ItemStack stack) {
-		return stack.getItem() instanceof BatteryBase;
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+		return stack.getItem() instanceof IKineticCapsule;
 	}
 
 	public double getProgress() {
 		ItemStack stack = inventory.getStackInSlot(0);
 		if (stack != null)
-			if (stack.getItem() instanceof BatteryBase){
-				BatteryBase battery = (BatteryBase) stack.getItem();
+			if (stack.getItem() instanceof IKineticCapsule){
+                IKineticCapsule battery = (IKineticCapsule) stack.getItem();
 				return battery.getEnergy(stack) / battery.getCapacity();
 			}
 		return 0;
@@ -124,7 +124,7 @@ public class TileChargingStation extends TileBuildCraft implements IInventory, I
 	public int getToolEnergy() {
 		ItemStack stack = inventory.getStackInSlot(0);
 		if (stack != null)
-			if (stack.getItem() instanceof BatteryBase)
+			if (stack.getItem() instanceof IKineticCapsule)
 				return (int) stack.stackTagCompound.getDouble("energy");
 		return 0;
 	}
@@ -132,8 +132,8 @@ public class TileChargingStation extends TileBuildCraft implements IInventory, I
 	public int getToolMaxEnergy(){
 		ItemStack stack = inventory.getStackInSlot(0);
 		if (stack != null)
-			if (stack.getItem() instanceof BatteryBase) {
-				BatteryBase battery = (BatteryBase) stack.getItem();
+			if (stack.getItem() instanceof IKineticCapsule) {
+                IKineticCapsule battery = (IKineticCapsule) stack.getItem();
 				return battery.getCapacity();
 			}
 		return 0;

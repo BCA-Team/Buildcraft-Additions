@@ -10,9 +10,9 @@ package buildcraftAdditions.items.Tools;
 
 import java.util.List;
 
+import buildcraftAdditions.api.IKineticCapsule;
 import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.core.InventoryTool;
-import buildcraftAdditions.items.BatteryBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -29,7 +29,6 @@ public class ItemPoweredBase extends ItemSword {
 	public World world;
 	public int storageB1, storageB2, storageB3;
 	public double energyB1, energyB2, energyB3;
-	public String typeB1, typeB2, typeB3;
 	EntityPlayer player;
 	
 	public ItemPoweredBase(){
@@ -133,7 +132,7 @@ public class ItemPoweredBase extends ItemSword {
 	public void readBateries(ItemStack stack, EntityPlayer player){
 		IInventory inventory = getInventory(player, stack);
 		inventory.openInventory();
-		BatteryBase battery = null;
+		IKineticCapsule battery = null;
 		ItemStack batteryStack = inventory.getStackInSlot(0);
 		storageB1 = 0;
 		storageB2 = 0;
@@ -141,28 +140,22 @@ public class ItemPoweredBase extends ItemSword {
 		energyB1 = 0;
 		energyB2 = 0;
 		energyB3 = 0;
-		typeB1 ="";
-		typeB2="";
-		typeB3="";
 		if (batteryStack != null){
-			battery = (BatteryBase) batteryStack.getItem();
+			battery = (IKineticCapsule) batteryStack.getItem();
 			storageB1 = battery.getCapacity();
 			energyB1 = battery.getEnergy(batteryStack);
-            typeB1 = battery.getType();
 			}
 		batteryStack = inventory.getStackInSlot(1);
 		if (batteryStack != null){
-			battery = (BatteryBase) batteryStack.getItem();
+			battery = (IKineticCapsule) batteryStack.getItem();
 			storageB2 += battery.getCapacity();
 			energyB2 = battery.getEnergy(batteryStack);
-            typeB2 = battery.getType();
 			}
 		batteryStack = inventory.getStackInSlot(2);
 		if (batteryStack != null){
-			battery = (BatteryBase) batteryStack.getItem();
+			battery = (IKineticCapsule) batteryStack.getItem();
 			storageB3 = battery.getCapacity();
 			energyB3 = battery.getEnergy(batteryStack);
-            typeB3 = battery.getType();
 			}
 		stack.getItem().setMaxDamage(storageB1 + storageB2 + storageB3);
         stack.getItem().setDamage(stack, (int) (storageB1 + storageB2 + storageB3 - energyB1 - energyB2 - energyB3));
@@ -171,20 +164,20 @@ public class ItemPoweredBase extends ItemSword {
 	public void writeBateries(ItemStack stack, EntityPlayer player){
 		IInventory inventory = getInventory(player, stack);
 		inventory.openInventory();
-		BatteryBase battery = null;
+		IKineticCapsule battery = null;
 		ItemStack batteryStack = inventory.getStackInSlot(0);
 		if (batteryStack != null){
-			battery = (BatteryBase) batteryStack.getItem();
+			battery = (IKineticCapsule) batteryStack.getItem();
 			battery.setEnergy(batteryStack, energyB1); 
 			}
 		batteryStack = inventory.getStackInSlot(1);
 		if (batteryStack != null){
-			battery = (BatteryBase) batteryStack.getItem();
+			battery = (IKineticCapsule) batteryStack.getItem();
 			battery.setEnergy(batteryStack, energyB2);
 			}
 		batteryStack = inventory.getStackInSlot(2);
 		if (batteryStack != null){
-			battery = (BatteryBase) batteryStack.getItem();
+			battery = (IKineticCapsule) batteryStack.getItem();
 			battery.setEnergy(batteryStack, energyB3);
 			}
 		}
