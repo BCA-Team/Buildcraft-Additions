@@ -249,14 +249,14 @@ public class BuildcraftAdditions {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
-        addDusts("Iron");
-        addDusts("Gold");
-        addDusts("Copper");
-        addDusts("Lead");
-        addDusts("Nickel");
-        addDusts("Platinum");
-        addDusts("Silver");
-        addDusts("Tin");
+        addDusts("Iron", Integer.parseInt("D2CEC9", 16));
+        addDusts("Gold", Integer.parseInt("F8DF17", 16));
+        addDusts("Copper", Integer.parseInt("BF5E1F", 16));
+        addDusts("Lead", Integer.parseInt("808096", 16));
+        addDusts("Nickel", Integer.parseInt("BAB0A4", 16));
+        addDusts("Platinum", Integer.parseInt("ABCDEF", 16));
+        addDusts("Silver", Integer.parseInt("B3B3B3", 16));
+        addDusts("Tin", Integer.parseInt("F2F2F2", 16));
 
         EurekaRegistry.registerKey(Variables.DustT1Key);
         EurekaRegistry.registerKey(Variables.DustT2Key1);
@@ -265,21 +265,21 @@ public class BuildcraftAdditions {
         EurekaRegistry.registerKey(Variables.CoilT2Key);
     }
 
-    public void addDusts(String metal){
+    public void addDusts(String metalName, int color){
         ArrayList<ItemStack> list;
-        list = OreDictionary.getOres("ingot" + metal);
+        list = OreDictionary.getOres("ingot" + metalName);
         if (list.isEmpty())
             return;
-        list = OreDictionary.getOres("ore" + metal);
+        list = OreDictionary.getOres("ore" + metalName);
         if (list.isEmpty())
             return;
-        itemDust = new ItemDust(metal);
-        GameRegistry.registerItem(itemDust, "dust" + metal);
-        OreDictionary.registerOre("dust" + metal, itemDust);
-        GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metal).get(0), 0);
+        itemDust = new ItemDust(color).setUnlocalizedName("dust" + metalName);
+        GameRegistry.registerItem(itemDust, "dust" + metalName);
+        OreDictionary.registerOre("dust" + metalName, itemDust);
+        GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metalName).get(0), 0);
         for (ItemStack stack : list)
             DusterRecepies.addDusterRecepie(stack, new ItemStack(itemDust, 2));
-        list = OreDictionary.getOres("ingot" + metal);
+        list = OreDictionary.getOres("ingot" + metalName);
         for (ItemStack stack : list)
             DusterRecepies.addDusterRecepie(stack, new ItemStack(itemDust, 1));
     }
