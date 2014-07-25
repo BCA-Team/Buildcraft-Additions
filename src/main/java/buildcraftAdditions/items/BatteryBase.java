@@ -10,6 +10,7 @@ package buildcraftAdditions.items;
 
 import java.util.List;
 
+import buildcraftAdditions.api.IKineticCapsule;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import buildcraftAdditions.BuildcraftAdditions;
@@ -18,7 +19,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public abstract class BatteryBase extends Item{
+public abstract class BatteryBase extends Item implements IKineticCapsule{
 	
 	public BatteryBase(){
 		this.maxStackSize = 1;
@@ -26,7 +27,7 @@ public abstract class BatteryBase extends Item{
 		this.setUnlocalizedName("batteryBase");
 	}
 
-
+    @Override
 	public void decreaseEnergy(ItemStack stack, double energy){
 		double energyStored = getEnergy(stack);
 		energyStored -= energy;
@@ -34,13 +35,15 @@ public abstract class BatteryBase extends Item{
 			energyStored=0;
 		stack.stackTagCompound.setDouble("energy", Math.floor(energyStored));
 	}
-	
+
+    @Override
 	public void increaseEnergy(ItemStack stack, double energy){
 		double energyStored = getEnergy(stack);
 		energyStored +=energy;
 		stack.stackTagCompound.setDouble("energy", Math.round(energyStored));
 	}
-	
+
+    @Override
 	public double getEnergy(ItemStack stack){
 		if (stack.stackTagCompound == null){
 			stack.stackTagCompound = new NBTTagCompound();
@@ -48,14 +51,13 @@ public abstract class BatteryBase extends Item{
 		}
 		return stack.stackTagCompound.getDouble("energy");
 	}
-	
+
+    @Override
 	public void setEnergy (ItemStack stack, double energy){
 		if (stack.stackTagCompound == null)
 			stack.stackTagCompound = new NBTTagCompound();
 		stack.stackTagCompound.setDouble("energy", energy);
 	}
-	
-	public abstract int getCapacity();
 
     public abstract String getType();
 
