@@ -75,6 +75,8 @@ public class Eureka {
     }
 
     public static void eurekaBlockEvent(World world, IEurekaBlock block, int x, int y, int z, EntityPlayer player){
+        if (block == null)
+            return;
         if (!world.isRemote && !block.isAllowed(player)){
             ItemStack[] stackArray = block.getComponents();
             for (ItemStack stack : stackArray)
