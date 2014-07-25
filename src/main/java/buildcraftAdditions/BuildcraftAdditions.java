@@ -258,11 +258,11 @@ public class BuildcraftAdditions {
         addDusts("Silver", Integer.parseInt("B3B3B3", 16));
         addDusts("Tin", Integer.parseInt("F2F2F2", 16));
 
-        EurekaRegistry.registerKey(Variables.DustT1Key);
-        EurekaRegistry.registerKey(Variables.DustT2Key1);
-        EurekaRegistry.registerKey(Variables.DustT2Key2);
-        EurekaRegistry.registerKey(Variables.CoilT1Key);
-        EurekaRegistry.registerKey(Variables.CoilT2Key);
+        EurekaRegistry.registerKey(Variables.DustT1Key, 100, 1);
+        EurekaRegistry.registerKey(Variables.DustT2Key1, 100, 1);
+        EurekaRegistry.registerKey(Variables.DustT2Key2, 100, 1);
+        EurekaRegistry.registerKey(Variables.CoilT1Key, 100, 1);
+        EurekaRegistry.registerKey(Variables.CoilT2Key, 100, 1);
     }
 
     public void addDusts(String metalName, int color){

@@ -45,13 +45,13 @@ public class Eureka {
             return;
         int progress = getProgress(player, key);
         NBTTagCompound tag = getTag(player);
-        if (progress < 100){
-            setKey(tag, key + "Progress", progress + 1);
+        if (progress < EurekaRegistry.getMaxValue(key)){
+            setKey(tag, key + "Progress", progress + EurekaRegistry.getIncrement(key));
         }
         if (progress == 100){
             if (!isUnlocked(player, key)) {
                 setKey(tag, key + "Finished", true);
-                String message = Utils.localize("eureka." + key);
+                String message = Utils.localize("eureka." + key + "Finished");
                 player.addChatMessage(new ChatComponentText(Utils.localize("Eureka")));
                 player.addChatComponentMessage(new ChatComponentText(message));
             }

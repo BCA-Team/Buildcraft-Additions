@@ -90,8 +90,10 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
     public void onFallenUpon(World world, int x, int y, int z, Entity entity, float hit){
         if (entity instanceof EntityPlayer) {
             TileEntity tileEntity = world.getTileEntity(x, y, z);
-            if (tileEntity instanceof TileSemiAutomaticDuster)
+            if (tileEntity instanceof TileSemiAutomaticDuster) {
+                Eureka.eurekaBlockEvent(world, (IEurekaBlock) world.getBlock(x, y, z), x, y, z, (EntityPlayer) entity);
                 ((TileSemiAutomaticDuster) tileEntity).makeProgress((EntityPlayer) entity);
+            }
         }
     }
 

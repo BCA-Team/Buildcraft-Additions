@@ -10,16 +10,22 @@ import java.util.ArrayList;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class EurekaRegistry {
-    private static ArrayList<String> eurekaRegistry = new ArrayList<String>(50);
+    private static ArrayList<String> keys = new ArrayList<String>(50);
+    private static ArrayList<String> maxValues = new ArrayList<String>(50);
+    private static ArrayList<String> increments = new ArrayList<String>(50);
 
     /**
      * Register your keys here for the EUREKA system
-     * @param key the key you want to register
+     * @param key the key you want to regigistry
+     * @param max the value the progress should reach before finishing
+     * @param increment the steps in wich the progress should increase
      * @return true if successful, false if key is already occupied
      */
-    public static boolean registerKey(String key){
-        if (!eurekaRegistry.contains(key)){
-            eurekaRegistry.add(key);
+    public static boolean registerKey(String key, int max, int increment){
+        if (!keys.contains(key)){
+            keys.add(key);
+            maxValues.add(Integer.toString(max));
+            increments.add(Integer.toString(increment));
             return true;
         }
         return false;
@@ -29,6 +35,18 @@ public class EurekaRegistry {
      * @return a clone of the list containing all EUREKA keys
      */
     public static ArrayList<String> getKeys(){
-        return (ArrayList) eurekaRegistry.clone();
+        return (ArrayList) keys.clone();
+    }
+
+    public static int getMaxValue(String key){
+        if (!keys.contains(key))
+            return 0;
+        return Integer.parseInt(maxValues.get(keys.indexOf(key)));
+    }
+
+    public static int getIncrement(String key){
+        if (!keys.contains(key))
+            return 0;
+        return Integer.parseInt(increments.get(keys.indexOf(key)));
     }
 }
