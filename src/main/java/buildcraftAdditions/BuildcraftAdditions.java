@@ -68,6 +68,7 @@ public class BuildcraftAdditions {
     public static BlockBasicCoil basicCoilBlock;
     public static BlockBasicDuster basicDusterBlock;
     public static BlockSemiAutomaticDuster semiAutomaticDusterBlock;
+    public static BlockMechanicalDuster mechanicalDusterBlock;
 
     public static Item mjMeter;
     public static Item poweredShovel;
@@ -246,6 +247,7 @@ public class BuildcraftAdditions {
         GameRegistry.registerTileEntity(TileBasicCoil.class, "TileBasicCoil");
         GameRegistry.registerTileEntity(TileBasicDuster.class, "TileBasicDuster");
         GameRegistry.registerTileEntity(TileSemiAutomaticDuster.class, "TileSemiAutomaticDuster");
+        GameRegistry.registerTileEntity(TileMechanicalDuster.class, "TileMechanicalDuster");
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
@@ -311,6 +313,10 @@ public class BuildcraftAdditions {
         semiAutomaticDusterBlock = new BlockSemiAutomaticDuster();
         semiAutomaticDusterBlock.setBlockName("blockDusterSemiAutomatic").setCreativeTab(bcadditions);
         GameRegistry.registerBlock(semiAutomaticDusterBlock, "blockDusterSemiAutomatic");
+
+        mechanicalDusterBlock = new BlockMechanicalDuster();
+        mechanicalDusterBlock.setBlockName("blockDusterMechanical").setCreativeTab(bcadditions);
+        GameRegistry.registerBlock(mechanicalDusterBlock, "blockDusterMechanical");
 
         //engineBlock = new BlockEngine();
         //CoreProxy.proxy.registerBlock(engineBlock.setBlockName("blockEngine").setCreativeTab(bcadditions));

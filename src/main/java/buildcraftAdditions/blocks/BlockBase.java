@@ -19,6 +19,8 @@ public abstract class BlockBase extends BlockContainer {
 
     public BlockBase(Material material) {
         super(material);
+        setHardness(5F);
+        setResistance(10F);
     }
 
     @Override
