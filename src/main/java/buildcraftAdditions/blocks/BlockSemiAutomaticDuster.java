@@ -8,12 +8,16 @@ import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -23,6 +27,7 @@ import net.minecraft.world.World;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock {
+    public IIcon front, sides, top, bottom;
 
     public BlockSemiAutomaticDuster() {
         super(Material.iron);
@@ -88,5 +93,40 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
             if (tileEntity instanceof TileSemiAutomaticDuster)
                 ((TileSemiAutomaticDuster) tileEntity).makeProgress((EntityPlayer) entity);
         }
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack stack) {
+        super.onBlockPlacedBy(world, i, j, k, entityliving, stack);
+
+        ForgeDirection orientation = Utils.get2dOrientation(entityliving);
+        world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(), 1);
+
+    }
+
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        // If no metadata is set, then this is an icon.
+        if (meta == 0 && side == 3)
+            return front;
+
+        if (side == meta && meta > 1)
+            return front;
+
+        switch (side) {
+            case 0:
+                return bottom;
+            case 1:
+                return top;
+        }
+        return sides;
+    }
+
+    @Override
+    public void registerBlockIcons(IIconRegister register) {
+        front = register.registerIcon("bcadditions:dusterSemiAutomaticFront");
+        sides = register.registerIcon("bcadditions:dusterSemiAutomaticSides");
+        top = register.registerIcon("bcadditions:dusterSemiAutomaticTop");
+        bottom = register.registerIcon("bcadditions:dusterSemiAutomaticBottom");
     }
 }

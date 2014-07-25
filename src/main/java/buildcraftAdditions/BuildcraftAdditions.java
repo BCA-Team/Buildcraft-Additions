@@ -245,7 +245,7 @@ public class BuildcraftAdditions {
         GameRegistry.registerTileEntity(TileHeatedFurnace.class, "TileHeatedFurnace");
         GameRegistry.registerTileEntity(TileBasicCoil.class, "TileBasicCoil");
         GameRegistry.registerTileEntity(TileBasicDuster.class, "TileBasicDuster");
-        //GameRegistry.registerTileEntity(TileSemiAutomaticDuster.class, "TileSemiAutomaticDuster");
+        GameRegistry.registerTileEntity(TileSemiAutomaticDuster.class, "TileSemiAutomaticDuster");
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
@@ -308,9 +308,9 @@ public class BuildcraftAdditions {
         basicDusterBlock.setBlockName("blockDusterBasic").setCreativeTab(bcadditions);
         GameRegistry.registerBlock(basicDusterBlock, "blockDusterBasic");
 
-        //semiAutomaticDusterBlock = new BlockSemiAutomaticDuster();
-        //semiAutomaticDusterBlock.setBlockName("blockDusterSemiAutomatic").setCreativeTab(bcadditions);
-        //GameRegistry.registerBlock(semiAutomaticDusterBlock, "blockDusterSemiAutomatic");
+        semiAutomaticDusterBlock = new BlockSemiAutomaticDuster();
+        semiAutomaticDusterBlock.setBlockName("blockDusterSemiAutomatic").setCreativeTab(bcadditions);
+        GameRegistry.registerBlock(semiAutomaticDusterBlock, "blockDusterSemiAutomatic");
 
         //engineBlock = new BlockEngine();
         //CoreProxy.proxy.registerBlock(engineBlock.setBlockName("blockEngine").setCreativeTab(bcadditions));
