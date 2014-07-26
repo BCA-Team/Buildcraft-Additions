@@ -7,6 +7,7 @@ import buildcraftAdditions.networking.MessageMechanicDuster;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,7 +23,7 @@ public class TileMechanicalDuster extends TileBaseDuster {
     private CustomInventory inventory = new CustomInventory("mechanicalDuster", 1, 1, this);
     @MjBattery
     double energy;
-    public int progress;
+    public int progress, progressStage, oldProgressStage;
 
     public TileMechanicalDuster() {
         super(Variables.DustT2Key2);
@@ -31,16 +32,33 @@ public class TileMechanicalDuster extends TileBaseDuster {
 
     @Override
     public void updateEntity() {
-        if (energy >= 4 && getStackInSlot(0) != null && getDust(getStackInSlot(0)) != null){
-            progress++;
-            energy -= 4;
-            if (progress >= 100) {
-                dust();
+        if (energy >= 4){
+            if (getStackInSlot(0) != null && getDust(getStackInSlot(0)) != null){
+                progress++;
+                energy -= 4;
+                oldProgressStage = progressStage;
+                if (progress > 25)
+                    progressStage = 1;
+                if (progress > 50)
+                    progressStage = 2;
+                if (progress > 75)
+                    progressStage = 3;
+                if (progress >= 100) {
+                    dust();
+                    progress = 0;
+                    progressStage = 0;
+                }
+
+
+            } else {
                 progress = 0;
+                progressStage = 0;
             }
         }
-
-
+        if (oldProgressStage != progressStage) {
+            TargetPoint point = new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30);
+            PacketHandeler.instance.sendToAllAround(new MessageMechanicDuster(xCoord, yCoord, zCoord, progressStage, getStackInSlot(0)),point);
+        }
     }
 
     @Override
@@ -124,7 +142,7 @@ public class TileMechanicalDuster extends TileBaseDuster {
         Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, getDust(getStackInSlot(0)));
         setInventorySlotContents(0, null);
         if (!worldObj.isRemote)
-            PacketHandeler.instance.sendToAll(new MessageMechanicDuster(xCoord, yCoord, zCoord));
+            PacketHandeler.instance.sendToAllAround(new MessageMechanicDuster(xCoord, yCoord, zCoord, progressStage, getStackInSlot(0)),new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 }

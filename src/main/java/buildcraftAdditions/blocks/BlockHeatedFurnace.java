@@ -138,16 +138,15 @@ public class BlockHeatedFurnace extends BlockContainer {
         if (side == meta && meta > 1)
             return front;
 
-        switch (side) {
-            case 0:
-                return bottom;
-            case 1:
-                return top;
-            case 5:
-                return back;
-            default:
-                return sides;
-        }
+        if (side ==  ForgeDirection.getOrientation(meta).getOpposite().ordinal())
+
+            switch (side) {
+                case 0:
+                    return bottom;
+                case 1:
+                    return top;
+            }
+        return sides;
     }
 
 

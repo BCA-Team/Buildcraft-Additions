@@ -7,11 +7,18 @@ import buildcraftAdditions.entities.TileMechanicalDuster;
 import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -21,6 +28,8 @@ import net.minecraft.world.World;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockMechanicalDuster extends BlockBase implements IEurekaBlock {
+    public IIcon front, sides, bottom;
+    public IIcon top[] = new IIcon[4];
 
     public BlockMechanicalDuster() {
         super(Material.iron);
@@ -77,5 +86,68 @@ public class BlockMechanicalDuster extends BlockBase implements IEurekaBlock {
         }
         world.markBlockForUpdate(x, y, z);
         return true;
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack stack) {
+        super.onBlockPlacedBy(world, i, j, k, entityliving, stack);
+
+        ForgeDirection orientation = Utils.get2dOrientation(entityliving);
+        world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(), 1);
+
+    }
+
+    @Override
+    public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side){
+        int meta = access.getBlockMetadata(x, y, z);
+        if (meta == 0 && side == 3)
+            return front;
+
+        if (side == meta && meta > 1) {
+            return front;
+        }
+
+        if (side == 1){
+            TileMechanicalDuster duster = (TileMechanicalDuster) access.getTileEntity(x, y, z);
+            return top[duster.progressStage];
+        }
+
+        switch (side) {
+            case 0:
+                return bottom;
+            default:
+                return sides;
+        }
+    }
+
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        // If no metadata is set, then this is an icon.
+        if (meta == 0 && side == 3)
+            return front;
+
+        if (side == meta && meta > 1)
+            return front;
+
+
+            switch (side) {
+                case 0:
+                    return bottom;
+                case 1:
+                    return top[0];
+            }
+        return sides;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
+        front = par1IconRegister.registerIcon("bcadditions:dusterMechanicalFront");
+        sides = par1IconRegister.registerIcon("bcadditions:dusterMechanicalSides");
+        bottom = par1IconRegister.registerIcon("bcadditions:dusterMechanicalBottom");
+        top[0] = par1IconRegister.registerIcon("bcadditions:dusterMechanicalTop0");
+        top[1] = par1IconRegister.registerIcon("bcadditions:dusterMechanicalTop1");
+        top[2] = par1IconRegister.registerIcon("bcadditions:dusterMechanicalTop2");
+        top[3] = par1IconRegister.registerIcon("bcadditions:dusterMechanicalTop3");
     }
 }
