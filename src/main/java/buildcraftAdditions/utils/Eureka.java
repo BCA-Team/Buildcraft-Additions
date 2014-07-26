@@ -33,10 +33,12 @@ public class Eureka {
     }
 
     public static int getProgress(EntityPlayer player, String key){
+        initKey(getTag(player), key);
         return getTag(player).getInteger(key + "Progress");
     }
 
     public static boolean isUnlocked(EntityPlayer player, String key){
+        initKey(getTag(player), key);
         return getTag(player).getBoolean(key + "Finished");
     }
 
@@ -84,7 +86,7 @@ public class Eureka {
             if (!world.isRemote)
                 world.setBlock(x, y, z, Blocks.air);
             world.markBlockForUpdate(x, y, z);
-            player.addChatComponentMessage(new ChatComponentText(((IEurekaBlock) block).getMessage()));
+            player.addChatComponentMessage(new ChatComponentText((block).getMessage()));
         }
     }
 }
