@@ -251,6 +251,12 @@ public class BuildcraftAdditions {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
+        itemDust = new ItemDust(Integer.parseInt("13ECFC", 16)).setUnlocalizedName("dustDiamond");
+        GameRegistry.registerItem(itemDust, "dustDiamond");
+        OreDictionary.registerOre("dustDiamond", itemDust);
+        DusterRecepies.addDusterRecepie(new ItemStack(Blocks.diamond_ore), new ItemStack(itemDust, 2));
+        DusterRecepies.addDusterRecepie(new ItemStack(Items.diamond), new ItemStack(itemDust, 1));
+
         addDusts("Iron", Integer.parseInt("D2CEC9", 16));
         addDusts("Gold", Integer.parseInt("F8DF17", 16));
         addDusts("Copper", Integer.parseInt("BF5E1F", 16));
