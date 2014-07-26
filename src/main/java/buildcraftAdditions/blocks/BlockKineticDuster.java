@@ -1,6 +1,7 @@
 package buildcraftAdditions.blocks;
 
 import buildcraftAdditions.api.IEurekaBlock;
+import buildcraftAdditions.entities.TileKineticDuster;
 import buildcraftAdditions.utils.Utils;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,6 +39,6 @@ public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
 
     @Override
     public TileEntity createNewTileEntity(World world, int getal) {
-        return null;
+        return new TileKineticDuster();
     }
 }

@@ -85,6 +85,7 @@ public class Eureka {
                 Utils.dropItemstack(world, x, y, z, stack);
             if (!world.isRemote)
                 world.setBlock(x, y, z, Blocks.air);
+            world.removeTileEntity(x, y, z);
             world.markBlockForUpdate(x, y, z);
             player.addChatComponentMessage(new ChatComponentText((block).getMessage()));
         }

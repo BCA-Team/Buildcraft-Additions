@@ -35,6 +35,7 @@ item.dustNickel.name=Nickel Dust
 item.dustPlatinum.name=Platinum Dust
 item.dustTin.name=Tin Dust
 item.dustSilver.name=Silver Dust
+item.dustDiamond.name=Diamond Dust
 
 
 tooltip.installed=Installed
