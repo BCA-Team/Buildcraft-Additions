@@ -69,8 +69,8 @@ public class BlockBasicCoil extends BlockCoilBase {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister) {
-        sides = par1IconRegister.registerIcon("bcadditions:furnaceCoil");
-        top = par1IconRegister.registerIcon("bcadditions:furnaceCoil_top");
-        bottom = par1IconRegister.registerIcon("bcadditions:furnaceCoil_bottom");
+        sides = par1IconRegister.registerIcon("bcadditions:coilBasicSides");
+        top = par1IconRegister.registerIcon("bcadditions:coilBasicTop");
+        bottom = par1IconRegister.registerIcon("bcadditions:coilBasicBottom");
     }
 }
