@@ -1,8 +1,11 @@
 tile.blockFluidicCompressor.name=Flüssigkeitskompressor
 tile.blockChargingStation.name=Ladestation
-tile.blockHeatedFurnace.name=Beiheizter Ofen
+tile.blockHeatedFurnace.name=Beheizter Ofen
 tile.blockCoilBasic.name=Einfache Spule
 tile.blockDusterBasic.name=Einfacher Pulverisierer
+tile.blockDusterSemiAutomatic.name=Halbautomatischer Pulverisierer
+tile.blockDusterMechanical.name=Mechanischer Pulverisierer
+tile.blockDusterKinetic.name=Kinetischer Pulverisierer
 
 item.ironCanister.name=Eisenkanister
 item.goldCanister.name=Goldkanister
@@ -25,12 +28,16 @@ item.toolUpgradeDigger.name=Ausgrabungsaufsatz
 item.toolUpgradeChainsaw.name=Sägeblatt
 item.toolUpgradeHoe.name=Ackerbauaufsatz
 item.kineticMultiTool.name=Kintetisches Multi-Tool
-item.dustGold.name=Pulverisiertes Gold
-item.dustIron.name=Pulverisiertes Eisen
-item.dustCopper=Pulverisiertes Kupfer
-item.dustLead=Pulverisiertes Blei
-item.dustNickel=Pulverisiertes Nickel
-item.dustPlatinum=Pulverisiertes Platin
+item.dustGold.name=Goldstaub
+item.dustIron.name=Eisenstaub
+item.dustCopper=Kupferstaub
+item.dustLead=Bleistaub
+item.dustNickel=Nickelstaub
+item.dustPlatinum=Platinstaub
+item.dustTin.name=Zinnstaub
+item.dustSilver.name=Silberstaub
+item.dustDiamond.name=Diamantstaub
+
 
 tooltip.installed=Installiert
 tooltip.deactivated=Deaktiviert
@@ -50,6 +57,8 @@ trigger.readyToCharge=Bereit zum Laden
 
 itemGroup.BuildcraftAdditions=Buildcraft Additions
 
-Eureka=EUREKA!
-eureka.dusterTier1Finished=Während du deine Erze verarbeitest bemerkst du plötzlich, dass es effektivere Wege gibt sie zu verarbeiten.
+Eureka=HEUREKA!
+eureka.dusterTier1Finished=Während du deine Erze verarbeitest, bemerkst du plötzlich, dass es effektivere Wege gibt, sie zu verarbeiten.
+eureka.dusterTier2-1Finished=Nachdem du zum Export von Verarbeitetem in Inventare fähig bist, versuchst du nun, das Verarbeiten selbst zu automatisieren.
+eureka.dusterTier2-2Finished=Dass du dich um deine Maschinen kaum noch kümmern musst, gefällt dir. Nun möchtest du auch Input/Output vollenden. Du entscheidest dich, dein Wissen in eine neue Maschine zu stecken. Vielleicht etwas mit Lasern?
 eureka.missingKnowledge=Du weißt (noch) nicht wie diese Machine funktioniert. Du hast es versucht, aber aufgrund deiner Unfähigkeit hast du sie zerstört.
