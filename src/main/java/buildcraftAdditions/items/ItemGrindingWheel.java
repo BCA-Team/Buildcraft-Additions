@@ -2,7 +2,6 @@ package buildcraftAdditions.items;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 /**
@@ -24,7 +23,7 @@ public class ItemGrindingWheel extends Item {
 	}
 
 	@Override
-	public IIcon getIcon(ItemStack stack, int pass) {
+	public IIcon getIconFromDamage(int damage) {
 		return icon;
 	}
 }

@@ -1,7 +1,6 @@
 package buildcraftAdditions.config;
 
 import buildcraftAdditions.core.VersionCheck;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
@@ -15,7 +14,7 @@ import java.io.File;
  */
 public class ConfigurationHandeler {
     public static Configuration configFile;
-    public static boolean shouldPrintChangelog;
+    public static boolean shouldPrintChangelog, shouldRegisterDusts;
     public static int[] powerDifficultyModifiers = new int[4];
     public static int basePowerModifier;
 
@@ -36,6 +35,10 @@ public class ConfigurationHandeler {
         powerDifficultyModifiers[2] = configFile.get("Power Usage", "NormalDifficultyModifier", 3).getInt();
         powerDifficultyModifiers[3] = configFile.get("Power Usage", "HardDifficultyModifier", 4).getInt();
         basePowerModifier = configFile.get("Power Usage", "BaseModifier", 10).getInt();
+
+	    configFile.addCustomCategoryComment("Misc", "Stuff that didn't fit in any other category");
+
+	    shouldRegisterDusts = configFile.get("Misc", "shouldRegisterDusts", true).setRequiresMcRestart(true).getBoolean();
 
         if (configFile.hasChanged())
             configFile.save();
