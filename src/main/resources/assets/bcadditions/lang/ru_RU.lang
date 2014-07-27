@@ -37,6 +37,7 @@ item.dustPlatinum.name=Платиновая пыль
 item.dustTin.name=Оловянная пыль
 item.dustSilver.name=Серебряная пыль
 item.dustDiamond.name=Алмазная пыль
+item.grindingWheel.name=Измельчающее колесо
 
 tooltip.installed=Установлено
 tooltip.deactivated=Деактивировано
