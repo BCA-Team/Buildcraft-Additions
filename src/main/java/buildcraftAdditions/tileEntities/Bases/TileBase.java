@@ -1,4 +1,4 @@
-package buildcraftAdditions.entities.Bases;
+package buildcraftAdditions.tileEntities.Bases;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;

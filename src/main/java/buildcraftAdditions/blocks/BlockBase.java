@@ -1,6 +1,6 @@
 package buildcraftAdditions.blocks;
 
-import buildcraftAdditions.entities.Bases.TileBase;
+import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

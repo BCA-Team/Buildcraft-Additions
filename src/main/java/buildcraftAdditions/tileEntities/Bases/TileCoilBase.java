@@ -1,4 +1,4 @@
-package buildcraftAdditions.entities.Bases;
+package buildcraftAdditions.tileEntities.Bases;
 
 import buildcraft.api.core.NetworkData;
 import buildcraft.core.TileBuildCraft;

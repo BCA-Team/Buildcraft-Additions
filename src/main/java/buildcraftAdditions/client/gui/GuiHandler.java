@@ -8,9 +8,12 @@ package buildcraftAdditions.client.gui;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import buildcraftAdditions.items.Tools.ItemKineticTool;
+import buildcraftAdditions.tileEntities.TileBasicCoil;
+import buildcraftAdditions.tileEntities.TileChargingStation;
+import buildcraftAdditions.tileEntities.TileFluidicCompressor;
+import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import buildcraftAdditions.variables.Variables;
-import buildcraftAdditions.entities.*;
-import buildcraftAdditions.items.Tools.*;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

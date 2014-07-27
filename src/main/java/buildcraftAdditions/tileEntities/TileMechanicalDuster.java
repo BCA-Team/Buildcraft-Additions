@@ -1,10 +1,10 @@
-package buildcraftAdditions.entities;
+package buildcraftAdditions.tileEntities;
 
 import buildcraft.api.mj.MjBattery;
-import buildcraftAdditions.entities.Bases.TileBaseDuster;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageMechanicDuster;
 import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;

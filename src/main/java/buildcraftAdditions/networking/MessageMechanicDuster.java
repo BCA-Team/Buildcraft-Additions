@@ -1,6 +1,6 @@
 package buildcraftAdditions.networking;
 
-import buildcraftAdditions.entities.TileMechanicalDuster;
+import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;

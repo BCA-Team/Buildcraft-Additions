@@ -10,7 +10,7 @@ package buildcraftAdditions.blocks;
 
 import buildcraft.core.IItemPipe;
 import buildcraft.energy.TileEngine;
-import buildcraftAdditions.entities.TileAmplifiedEngine;
+import buildcraftAdditions.tileEntities.TileAmplifiedEngine;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

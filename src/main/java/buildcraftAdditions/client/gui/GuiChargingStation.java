@@ -8,16 +8,16 @@ package buildcraftAdditions.client.gui;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import buildcraft.BuildCraftCore;
+import buildcraft.core.CoreIconProvider;
+import buildcraft.core.gui.GuiBuildCraft;
+import buildcraftAdditions.tileEntities.TileChargingStation;
+import buildcraftAdditions.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
-import buildcraft.BuildCraftCore;
-import buildcraft.core.CoreIconProvider;
-import buildcraft.core.gui.GuiBuildCraft;
-import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.entities.TileChargingStation;
 
 public class GuiChargingStation extends GuiBuildCraft{
 	

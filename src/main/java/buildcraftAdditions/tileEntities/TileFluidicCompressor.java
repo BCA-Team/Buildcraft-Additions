@@ -1,4 +1,4 @@
-package buildcraftAdditions.entities;
+package buildcraftAdditions.tileEntities;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -8,17 +8,22 @@ package buildcraftAdditions.entities;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import buildcraft.api.core.NetworkData;
 import buildcraft.api.gates.IOverrideDefaultTriggers;
 import buildcraft.api.gates.ITrigger;
+import buildcraft.api.mj.MjBattery;
+import buildcraft.core.TileBuildCraft;
+import buildcraft.core.fluids.Tank;
+import buildcraft.core.fluids.TankManager;
+import buildcraft.core.network.IGuiReturnHandler;
+import buildcraft.core.network.PacketGuiReturn;
+import buildcraft.core.network.PacketPayload;
+import buildcraft.core.network.PacketUpdate;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.items.ItemCanister;
+import buildcraftAdditions.utils.Utils;
 import io.netty.buffer.ByteBuf;
-
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.LinkedList;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -31,17 +36,11 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.ItemFluidContainer;
-import buildcraft.api.core.NetworkData;
-import buildcraft.api.mj.MjBattery;
-import buildcraft.core.TileBuildCraft;
-import buildcraft.core.fluids.Tank;
-import buildcraft.core.fluids.TankManager;
-import buildcraft.core.network.IGuiReturnHandler;
-import buildcraft.core.network.PacketGuiReturn;
-import buildcraft.core.network.PacketPayload;
-import buildcraft.core.network.PacketUpdate;
-import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.items.ItemCanister;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.LinkedList;
 
 
 public class TileFluidicCompressor extends TileBuildCraft implements ISidedInventory, IFluidHandler, IGuiReturnHandler, IOverrideDefaultTriggers {

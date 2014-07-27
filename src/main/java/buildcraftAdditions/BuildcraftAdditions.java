@@ -8,17 +8,60 @@ import buildcraft.core.proxy.CoreProxy;
 import buildcraft.core.triggers.BCTrigger;
 import buildcraftAdditions.api.DusterRecepies;
 import buildcraftAdditions.api.EurekaRegistry;
-import buildcraftAdditions.blocks.*;
+import buildcraftAdditions.blocks.BlockBasicCoil;
+import buildcraftAdditions.blocks.BlockBasicDuster;
+import buildcraftAdditions.blocks.BlockChargingStation;
+import buildcraftAdditions.blocks.BlockFluidicCompressor;
+import buildcraftAdditions.blocks.BlockHeatedFurnace;
+import buildcraftAdditions.blocks.BlockKineticDuster;
+import buildcraftAdditions.blocks.BlockMechanicalDuster;
+import buildcraftAdditions.blocks.BlockSemiAutomaticDuster;
 import buildcraftAdditions.client.gui.GuiHandler;
+import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
-import buildcraftAdditions.entities.*;
-import buildcraftAdditions.items.*;
-import buildcraftAdditions.items.Tools.*;
+import buildcraftAdditions.items.ItemCanister;
+import buildcraftAdditions.items.ItemDiamondStick;
+import buildcraftAdditions.items.ItemDust;
+import buildcraftAdditions.items.ItemEmeraldStick;
+import buildcraftAdditions.items.ItemGoldStick;
+import buildcraftAdditions.items.ItemIronStick;
+import buildcraftAdditions.items.ItemPowerCapsuleTier1;
+import buildcraftAdditions.items.ItemPowerCapsuleTier2;
+import buildcraftAdditions.items.ItemPowerCapsuleTier3;
+import buildcraftAdditions.items.Tools.ItemKineticTool;
+import buildcraftAdditions.items.Tools.ItemMegaChainsaw;
+import buildcraftAdditions.items.Tools.ItemMegaDigger;
+import buildcraftAdditions.items.Tools.ItemMegaDrill;
+import buildcraftAdditions.items.Tools.ItemMegaHoe;
+import buildcraftAdditions.items.Tools.ItemToolCore;
+import buildcraftAdditions.items.Tools.ItemToolUpgradeChainsaw;
+import buildcraftAdditions.items.Tools.ItemToolUpgradeDigger;
+import buildcraftAdditions.items.Tools.ItemToolUpgradeDrill;
+import buildcraftAdditions.items.Tools.ItemToolUpgradeHoe;
+import buildcraftAdditions.items.Tools.ToolCoreRecepie;
+import buildcraftAdditions.items.Tools.UpgradeRecepieDiamondStick;
+import buildcraftAdditions.items.Tools.UpgradeRecepieDrillHead;
+import buildcraftAdditions.items.Tools.UpgradeRecepieEmeraldStick;
+import buildcraftAdditions.items.Tools.UpgradeRecepieExcavationAttachment;
+import buildcraftAdditions.items.Tools.UpgradeRecepieGoldStick;
+import buildcraftAdditions.items.Tools.UpgradeRecepieSawBlade;
+import buildcraftAdditions.items.Tools.UpgradeRecepieTiller;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
-import buildcraftAdditions.triggers.*;
-import buildcraftAdditions.config.ConfigurationHandeler;
+import buildcraftAdditions.tileEntities.TileBasicCoil;
+import buildcraftAdditions.tileEntities.TileBasicDuster;
+import buildcraftAdditions.tileEntities.TileChargingStation;
+import buildcraftAdditions.tileEntities.TileFluidicCompressor;
+import buildcraftAdditions.tileEntities.TileHeatedFurnace;
+import buildcraftAdditions.tileEntities.TileKineticDuster;
+import buildcraftAdditions.tileEntities.TileMechanicalDuster;
+import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
+import buildcraftAdditions.triggers.TriggerCanisterRequested;
+import buildcraftAdditions.triggers.TriggerDoneCharging;
+import buildcraftAdditions.triggers.TriggerHasEmptyCanister;
+import buildcraftAdditions.triggers.TriggerHasFullCanister;
+import buildcraftAdditions.triggers.TriggerReadyToCharge;
 import buildcraftAdditions.variables.Variables;
 import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
@@ -54,7 +97,7 @@ import java.util.ArrayList;
 
 
 
-@Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "required-after:BuildCraft|Energy@{6.0.16}")
+@Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "required-after:BuildCraft|Energy@{6.0.17}")
 public class BuildcraftAdditions {
 
     public static ItemCanister ironCanister;
@@ -63,7 +106,6 @@ public class BuildcraftAdditions {
 
     public static BlockFluidicCompressor fluidicCompressorBlock;
     public static BlockChargingStation chargingStationBlock;
-    public static BlockEngine engineBlock;
     public static BlockHeatedFurnace heatedFurnaceBlock;
     public static BlockBasicCoil basicCoilBlock;
     public static BlockBasicDuster basicDusterBlock;
@@ -71,7 +113,6 @@ public class BuildcraftAdditions {
     public static BlockMechanicalDuster mechanicalDusterBlock;
     public static BlockKineticDuster kineticDusterBlock;
 
-    public static Item mjMeter;
     public static Item poweredShovel;
     public static Item drill;
     public static Item chainsaw;
@@ -130,9 +171,6 @@ public class BuildcraftAdditions {
 
         diamondCanister = new ItemCanister("diamondCanister", 16000);
         CoreProxy.proxy.registerItem(diamondCanister);
-
-        //mjMeter = new ItemMjMeter();
-        //CoreProxy.proxy.registerItem(mjMeter);
 
         poweredShovel = new ItemMegaDigger();
         CoreProxy.proxy.registerItem(poweredShovel);
@@ -329,9 +367,6 @@ public class BuildcraftAdditions {
         kineticDusterBlock = new BlockKineticDuster();
         kineticDusterBlock.setBlockName("blockDusterKinetic").setCreativeTab(bcadditions);
         GameRegistry.registerBlock(kineticDusterBlock, "blockDusterKinetic");
-
-        //engineBlock = new BlockEngine();
-        //CoreProxy.proxy.registerBlock(engineBlock.setBlockName("blockEngine").setCreativeTab(bcadditions));
     }
 
 }

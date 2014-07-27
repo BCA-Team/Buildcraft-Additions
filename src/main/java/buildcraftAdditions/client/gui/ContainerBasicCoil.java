@@ -1,7 +1,7 @@
 package buildcraftAdditions.client.gui;
 
 import buildcraft.core.gui.BuildCraftContainer;
-import buildcraftAdditions.entities.TileBasicCoil;
+import buildcraftAdditions.tileEntities.TileBasicCoil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

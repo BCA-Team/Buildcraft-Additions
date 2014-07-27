@@ -1,9 +1,9 @@
 package buildcraftAdditions.blocks;
 
-import buildcraftAdditions.variables.Variables;
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.entities.TileBasicCoil;
+import buildcraftAdditions.tileEntities.TileBasicCoil;
+import buildcraftAdditions.variables.Variables;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;

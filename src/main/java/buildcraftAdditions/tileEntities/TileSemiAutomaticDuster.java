@@ -1,10 +1,10 @@
-package buildcraftAdditions.entities;
+package buildcraftAdditions.tileEntities;
 
 import buildcraft.api.transport.IPipeTile;
-import buildcraftAdditions.entities.Bases.TileBaseDuster;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageSemiAutomaticDuster;
 import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;

@@ -2,11 +2,12 @@ package buildcraftAdditions.client.gui;
 
 import buildcraft.core.gui.BuildCraftContainer;
 import buildcraft.core.gui.slots.SlotOutput;
-import buildcraft.core.gui.slots.SlotValidated;
-import buildcraftAdditions.entities.TileHeatedFurnace;
+import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+
+;
 
 /**
  * Copyright (c) 2014, AEnterprise

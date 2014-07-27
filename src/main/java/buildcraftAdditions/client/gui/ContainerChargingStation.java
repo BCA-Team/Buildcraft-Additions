@@ -8,13 +8,13 @@ package buildcraftAdditions.client.gui;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import buildcraft.core.gui.BuildCraftContainer;
+import buildcraft.core.gui.slots.SlotValidated;
+import buildcraftAdditions.tileEntities.TileChargingStation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import buildcraft.core.gui.BuildCraftContainer;
-import buildcraft.core.gui.slots.SlotValidated;
-import buildcraftAdditions.entities.TileChargingStation;
 
 public class ContainerChargingStation extends BuildCraftContainer{
 	IInventory playerIInventory;

@@ -1,7 +1,7 @@
 package buildcraftAdditions.blocks;
 
 import buildcraftAdditions.api.IEurekaBlock;
-import buildcraftAdditions.entities.TileKineticDuster;
+import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.utils.Utils;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,6 +1,6 @@
 package buildcraftAdditions.client.render;
 
-import buildcraftAdditions.entities.Bases.TileBaseDuster;
+import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

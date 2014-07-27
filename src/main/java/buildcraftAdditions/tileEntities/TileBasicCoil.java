@@ -1,13 +1,15 @@
-package buildcraftAdditions.entities;
+package buildcraftAdditions.tileEntities;
 
 import buildcraft.api.core.NetworkData;
 import buildcraft.core.inventory.SimpleInventory;
-import buildcraftAdditions.entities.Bases.TileCoilBase;
+import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
+
+;
 
 /**
  * Copyright (c) 2014, AEnterprise

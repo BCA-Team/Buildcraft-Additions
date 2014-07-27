@@ -9,7 +9,7 @@ package buildcraftAdditions.client.gui;
  */
 
 import buildcraft.core.gui.BuildCraftContainer;
-import buildcraftAdditions.entities.TileAmplifiedEngine;
+import buildcraftAdditions.tileEntities.TileAmplifiedEngine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;

@@ -57,7 +57,7 @@ public class ItemCanister extends ItemFluidContainer {
 		else if (fStack == null && buckets > 1)
 			list.add("Can hold " + buckets + " buckets of fluid");
 		else
-			list.add("Currently stores " + Integer.toString(fStack.amount)+ " mB of " + fStack.getFluid().getLocalizedName());
+			list.add("Currently stores " + Integer.toString(fStack.amount)+ " mB of " + fStack.getFluid().getLocalizedName(fStack));
 	}
 
 	@Override

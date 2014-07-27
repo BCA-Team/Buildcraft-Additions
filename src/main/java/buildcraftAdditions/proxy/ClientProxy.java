@@ -8,12 +8,12 @@ package buildcraftAdditions.proxy;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import buildcraftAdditions.client.render.CanisterItemRender;
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.client.render.CanisterItemRender;
 import buildcraftAdditions.client.render.RendererDuster;
-import buildcraftAdditions.entities.TileBasicDuster;
-import buildcraftAdditions.entities.TileMechanicalDuster;
-import buildcraftAdditions.entities.TileSemiAutomaticDuster;
+import buildcraftAdditions.tileEntities.TileBasicDuster;
+import buildcraftAdditions.tileEntities.TileMechanicalDuster;
+import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import net.minecraftforge.client.MinecraftForgeClient;
 

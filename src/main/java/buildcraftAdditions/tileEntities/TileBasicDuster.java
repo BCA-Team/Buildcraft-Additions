@@ -1,7 +1,7 @@
-package buildcraftAdditions.entities;
+package buildcraftAdditions.tileEntities;
 
 import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.entities.Bases.TileBaseDuster;
+import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
 import net.minecraft.entity.player.EntityPlayer;

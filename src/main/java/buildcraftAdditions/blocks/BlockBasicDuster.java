@@ -1,8 +1,8 @@
 package buildcraftAdditions.blocks;
 
 import buildcraft.core.IItemPipe;
-import buildcraftAdditions.entities.Bases.TileBaseDuster;
-import buildcraftAdditions.entities.TileBasicDuster;
+import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
+import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.utils.Utils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;

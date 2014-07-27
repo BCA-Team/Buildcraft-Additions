@@ -1,4 +1,4 @@
-package buildcraftAdditions.entities.Bases;
+package buildcraftAdditions.tileEntities.Bases;
 
 import buildcraftAdditions.api.IEurekaTileEntity;
 import buildcraftAdditions.utils.Eureka;

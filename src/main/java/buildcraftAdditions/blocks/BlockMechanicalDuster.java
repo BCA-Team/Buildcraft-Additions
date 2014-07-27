@@ -3,7 +3,7 @@ package buildcraftAdditions.blocks;
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.IEurekaBlock;
-import buildcraftAdditions.entities.TileMechanicalDuster;
+import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;

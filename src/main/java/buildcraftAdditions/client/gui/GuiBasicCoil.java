@@ -1,8 +1,8 @@
 package buildcraftAdditions.client.gui;
 
 import buildcraft.core.gui.GuiBuildCraft;
+import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.entities.TileBasicCoil;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 

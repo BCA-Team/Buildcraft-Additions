@@ -1,4 +1,4 @@
-package buildcraftAdditions.entities;
+package buildcraftAdditions.tileEntities;
 
 /**
  * Copyright (c) 2014, AEnterprise

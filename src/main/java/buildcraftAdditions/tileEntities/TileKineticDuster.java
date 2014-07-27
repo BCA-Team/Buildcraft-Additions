@@ -1,9 +1,8 @@
-package buildcraftAdditions.entities;
+package buildcraftAdditions.tileEntities;
 
 import buildcraft.api.power.ILaserTarget;
-import buildcraftAdditions.entities.Bases.TileBase;
-import buildcraftAdditions.entities.Bases.TileBaseDuster;
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 

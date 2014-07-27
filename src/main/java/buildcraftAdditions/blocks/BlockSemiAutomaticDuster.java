@@ -2,8 +2,8 @@ package buildcraftAdditions.blocks;
 
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.api.IEurekaBlock;
-import buildcraftAdditions.entities.Bases.TileBaseDuster;
-import buildcraftAdditions.entities.TileSemiAutomaticDuster;
+import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
+import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
 import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
