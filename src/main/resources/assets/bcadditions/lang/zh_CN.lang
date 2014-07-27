@@ -1,5 +1,12 @@
 tile.blockFluidicCompressor.name=流体压缩机
 tile.blockChargingStation.name=充能台
+tile.blockHeatedFurnace.name=热力炉
+tile.blockCoilBasic.name=基础线圈
+tile.blockDusterBasic.name=基础打粉机
+tile.blockDusterSemiAutomatic.name=半自动打粉机
+tile.blockDusterMechanical.name=机械打粉机
+tile.blockDusterKinetic.name=动力打粉机
+
 
 item.ironCanister.name=铁罐
 item.goldCanister.name=金罐
@@ -22,6 +29,15 @@ item.toolUpgradeDigger.name=铲头
 item.toolUpgradeChainsaw.name=锯片
 item.toolUpgradeHoe.name=锄尖
 item.kineticMultiTool.name=动力万能工具
+item.dustGold.name=金粉
+item.dustIron.name=铁粉
+item.dustCopper.name=铜粉
+item.dustLead.name=铅粉
+item.dustNickel.name=镍粉
+item.dustPlatinum.name=铂粉
+item.dustTin.name=锡粉
+item.dustSilver.name=银粉
+item.dustDiamond.name=钻石粉
 
 tooltip.installed=已安装
 tooltip.deactivated=已关闭
@@ -40,3 +56,9 @@ trigger.doneCharging=充能完毕触发
 trigger.readyToCharge=预备充能触发
 
 itemGroup.BuildcraftAdditions=建筑|附件
+
+Eureka=有了!(阿基米德附体:Eureka!)
+eureka.dusterTier1Finished=在加工矿石过程中, 你突然觉察到了一些更有效率的工艺技术.
+eureka.dusterTier2-1Finished=将输出产物放入物品栏令你不胜其烦,你决定尝试研究使之自动化的方法.
+eureka.dusterTier2-2Finished=你希望不必轮换使用不同机器, 你还希望实现自动输入输出, 于是你倾其所学, 研究出一台新的设备, 好像是台带激光的新玩意儿!
+eureka.missingKnowledge=你还搞不明白机器的工作原理. 你尝试使用它, 但它却因为你经验不足胡乱操作而崩溃掉了.
