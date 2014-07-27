@@ -5,6 +5,7 @@ tile.blockCoilBasic.name=Basic Coil
 tile.blockDusterBasic.name=Basic Duster
 tile.blockDusterSemiAutomatic.name=Semi-Automatic Duster
 tile.blockDusterMechanical.name=Mechanical Duster
+tile.blockDusterKinetic.name=Kinetic Duster
 
 item.ironCanister.name=Iron Canister
 item.goldCanister.name=Gold Canister
