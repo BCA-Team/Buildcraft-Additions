@@ -6,7 +6,6 @@ import buildcraftAdditions.networking.MessageMechanicDuster;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.variables.Variables;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -27,7 +26,7 @@ public class TileMechanicalDuster extends TileBaseDuster {
 	public EntityPlayer player;
 
     public TileMechanicalDuster() {
-        super(Variables.DustT2Key2);
+        super("dusterTier2-2");
     }
 
 
@@ -47,7 +46,7 @@ public class TileMechanicalDuster extends TileBaseDuster {
                 if (progress >= 100) {
                     dust();
 	                if (player != null)
-		                makeProgress(player);
+		                makeProgress(player, "dusterTier2-2");
                     progress = 0;
                     progressStage = 0;
                 }

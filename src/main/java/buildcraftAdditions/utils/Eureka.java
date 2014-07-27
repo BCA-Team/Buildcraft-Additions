@@ -50,7 +50,7 @@ public class Eureka {
         if (progress < EurekaRegistry.getMaxValue(key)){
             setKey(tag, key + "Progress", progress + EurekaRegistry.getIncrement(key));
         }
-        if (progress == 100){
+        if (progress >= EurekaRegistry.getMaxValue(key)){
             if (!isUnlocked(player, key)) {
                 setKey(tag, key + "Finished", true);
                 String message = Utils.localize("eureka." + key + "Finished");
