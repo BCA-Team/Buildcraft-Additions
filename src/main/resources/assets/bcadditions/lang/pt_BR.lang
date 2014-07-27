@@ -1,5 +1,11 @@
 tile.blockFluidicCompressor.name=Compressor Fluídico
 tile.blockChargingStation.name=Estação de Carregamento
+tile.blockHeatedFurnace.name=Fornalha Aquecida
+tile.blockCoilBasic.name=Bobina Básica
+tile.blockDusterBasic.name=Pulverizador Básico
+tile.blockDusterSemiAutomatic.name=Pulverizador Semiautomático
+tile.blockDusterMechanical.name=Pulverizador Mecânico
+tile.blockDusterKinetic.name=Pulverizador Cinético
 
 item.ironCanister.name=Lata de Ferro
 item.goldCanister.name=Lata de Ouro
@@ -22,6 +28,16 @@ item.toolUpgradeDigger.name=Acessório de Escavação
 item.toolUpgradeChainsaw.name=Lâmina de Serra
 item.toolUpgradeHoe.name=Lavrador
 item.kineticMultiTool.name=Multi-Ferramenta Cinética
+item.dustGold.name=Poeira de Ouro
+item.dustIron.name=Poeira de Ferro
+item.dustCopper.name=Poeira de Cobre
+item.dustLead.name=Poeira de Chumbo
+item.dustNickel.name=Poeira de Níquel
+item.dustPlatinum.name=Poeira de Platina
+item.dustTin.name=Poeira de Estanho
+item.dustSilver.name=Poeira de Prata
+item.dustDiamond.name=Poeira de Diamante
+item.grindingWheel.name=Rebolo Abrasivo
 
 tooltip.installed=Instalado
 tooltip.deactivated=Desativado
@@ -40,3 +56,9 @@ trigger.doneCharging=Carregado
 trigger.readyToCharge=Pronto para carregar
 
 itemGroup.BuildcraftAdditions=Buildcraft Additions
+
+Eureka=EUREKA!
+eureka.dusterTier1Finished=Enquanto processava seus minérios, de repente você percebe que há formas mais eficientes para processá-los.
+eureka.dusterTier2-1Finished=Depois de ser capaz de exportar os itens para inventários, você decide tentar automatizar o processamento em si.
+eureka.dusterTier2-2Finished=Você gosta que não tem mais que pular na máquina, mas também quer a entrada e saída de itens automatizada. Você decide combinar seu conhecimento em uma nova máquina. Talvez algo com lasers?
+eureka.missingKnowledge=Você não tem idéia de como esta máquina funciona (por enquanto). Você tenta usá-la, mas devido à sua incompetência, ela se desfaz.
