@@ -25,6 +25,7 @@ import buildcraftAdditions.items.ItemDiamondStick;
 import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.items.ItemEmeraldStick;
 import buildcraftAdditions.items.ItemGoldStick;
+import buildcraftAdditions.items.ItemGrindingWheel;
 import buildcraftAdditions.items.ItemIronStick;
 import buildcraftAdditions.items.ItemPowerCapsuleTier1;
 import buildcraftAdditions.items.ItemPowerCapsuleTier2;
@@ -130,6 +131,7 @@ public class BuildcraftAdditions {
     public static Item toolUpgradeDrill;
     public static Item toolUpgradeChainsaw;
     public static Item itemDust;
+	public static Item itemGrindingWheel;
 
     public static ItemKineticTool kineticTool;
 
@@ -222,6 +224,10 @@ public class BuildcraftAdditions {
 
         kineticTool = new ItemKineticTool();
         CoreProxy.proxy.registerItem(kineticTool);
+
+	    itemGrindingWheel = new ItemGrindingWheel();
+	    itemGrindingWheel.setCreativeTab(bcadditions).setUnlocalizedName("grindingWheel");
+	    GameRegistry.registerItem(itemGrindingWheel, "grindingWheel");
 
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
         BuildcraftRecipes.assemblyTable.addRecipe(2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));

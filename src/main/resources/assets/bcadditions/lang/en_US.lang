@@ -37,6 +37,7 @@ item.dustPlatinum.name=Platinum Dust
 item.dustTin.name=Tin Dust
 item.dustSilver.name=Silver Dust
 item.dustDiamond.name=Diamond Dust
+item.grindingWheel.name=Grinding Wheel
 
 tooltip.installed=Installed
 tooltip.deactivated=Deactivated
