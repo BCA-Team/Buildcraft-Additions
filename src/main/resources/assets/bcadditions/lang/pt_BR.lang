@@ -37,7 +37,7 @@ item.dustPlatinum.name=Poeira de Platina
 item.dustTin.name=Poeira de Estanho
 item.dustSilver.name=Poeira de Prata
 item.dustDiamond.name=Poeira de Diamante
-
+item.grindingWheel.name=Rebolo Abrasivo
 
 tooltip.installed=Instalado
 tooltip.deactivated=Desativado
