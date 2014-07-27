@@ -37,7 +37,7 @@ item.dustPlatinum=Platinstaub
 item.dustTin.name=Zinnstaub
 item.dustSilver.name=Silberstaub
 item.dustDiamond.name=Diamantstaub
-
+item.grindingWheel.name=Schleifscheibe
 
 tooltip.installed=Installiert
 tooltip.deactivated=Deaktiviert
