@@ -24,7 +24,7 @@ public abstract class TileBaseDuster extends TileBase implements IEurekaTileEnti
     public void makeProgress(EntityPlayer player){
         if (getStackInSlot(0) != null && getDust(getStackInSlot(0)) != null) {
             progress++;
-            if (progress == 5) {
+            if (progress == 8) {
                 dust();
                 progress = 0;
                 makeProgress(player, key);

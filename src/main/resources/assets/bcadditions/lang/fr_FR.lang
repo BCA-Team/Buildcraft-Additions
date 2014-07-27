@@ -1,0 +1,64 @@
+tile.blockFluidicCompressor.name=compresseur à Liquide
+tile.blockChargingStation.name=Station de Chargement
+tile.blockHeatedFurnace.name=Four chauffé
+tile.blockCoilBasic.name=Bobine de Base
+tile.blockDusterBasic.name=Poudreur de Base
+tile.blockDusterSemiAutomatic.name=Poudreur Semi-Automatique
+tile.blockDusterMechanical.name=Poudreur Mécanique
+tile.blockDusterKinetic.name=Poudreur Cinétique
+
+item.ironCanister.name=Cartouche de fer
+item.goldCanister.name=Cartouche d'Or
+item.diamondCanister.name=Cartouche de Diamant
+item.mjMeter.name=MJ Meter
+item.poweredShovel.name=Creuseur Cinétique
+item.drill.name=Forreur Cinétique
+item.chainsaw.name=Tronçonneuse Cinétique
+item.megaHoe.name=Houe Cinétique
+item.PowerCapsuleTier1.name=Capsule Cinétique Tier 1
+item.PowerCapsuleTier2.name=Capsule Cinétique Tier 2
+item.PowerCapsuleTier3.name=Capsule Cinétique Tier 3
+item.stickIron.name=Baton de Fer
+item.stickGold.name=Baton d'Or
+item.stickDiamond.name=Baton de Diamant
+item.stickEmerald.name=Baton d'Emeraude
+item.toolCore.name=Outil Noyau
+item.toolUpgradeDrill.name=Tête de Forreuse
+item.toolUpgradeDigger.name=Fixatio d'Excavation
+item.toolUpgradeChainsaw.name=Lame de Scie
+item.toolUpgradeHoe.name=Laboureur
+item.kineticMultiTool.name=Multi-Outil Cinétique
+item.dustGold.name=Poudre d'Or
+item.dustIron.name=Poudre d'Iron
+item.dustCopper.name=Poudre de Cuivre
+item.dustLead.name=Poudre de Plomb
+item.dustNickel.name=Poudre de Nickel
+item.dustPlatinum.name=Poudre de Platinium
+item.dustTin.name=Poudre d'Etain
+item.dustSilver.name=Poudre d'Argent
+item.dustDiamond.name=Poudre de Diamant
+item.grindingWheel.name=Roue d'Ecrassement
+
+tooltip.installed=Installé
+tooltip.deactivated=Désactivé
+
+gui.progress=Progrès
+gui.fluid=Fluid
+gui.noFluid=Vide
+gui.fluidStored=Niveau de liquide
+gui.energyInTool=Energie Stockée
+gui.maxEnergy=Energie Maximum
+
+trigger.canisterRequested=Cartouche Demandée
+trigger.hasEmptyCanister=à une Cartouche vide
+trigger.hasFullCanister=à une Cartouche Remplie
+trigger.doneCharging=Chargement Terminé
+trigger.readyToCharge=Prêt à Charger
+
+itemGroup.BuildcraftAdditions=Buildcraft Additions
+
+Eureka=EUREKA!
+eureka.dusterTier1Finished=En traitant vos minerais, vous vous rendez compte qu'il existe des manières plus efficasse de le faire.
+eureka.dusterTier2-1Finished=Après avoir la possibilité d'ejecter dans des inventaires vous decidez d'essayer d'automatiser le traitement lui même.
+eureka.dusterTier2-2Finished=Vous aimez le fait de ne pas devoir sauter sur la machine, mais vous desirez aussi pouvoir éjecter dans un inventaire. Vous décidez de combiner les deux savoir en une nouvelle machine. Peut être quelque chose avec des lasers ?
+eureka.missingKnowledge=Vous ne savez pas encore comment marche cette machine. Vous essayez de l'utiliser, mais à cause de votre incompétence, elle tombe en morceaux.
