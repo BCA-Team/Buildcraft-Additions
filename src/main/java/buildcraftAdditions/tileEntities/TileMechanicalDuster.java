@@ -24,6 +24,7 @@ public class TileMechanicalDuster extends TileBaseDuster {
     @MjBattery
     double energy;
     public int progress, progressStage, oldProgressStage;
+	public EntityPlayer player;
 
     public TileMechanicalDuster() {
         super(Variables.DustT2Key2);
@@ -45,6 +46,8 @@ public class TileMechanicalDuster extends TileBaseDuster {
                     progressStage = 3;
                 if (progress >= 100) {
                     dust();
+	                if (player != null)
+		                makeProgress(player);
                     progress = 0;
                     progressStage = 0;
                 }

@@ -11,7 +11,9 @@ package buildcraftAdditions.proxy;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.client.render.CanisterItemRender;
 import buildcraftAdditions.client.render.RendererDuster;
+import buildcraftAdditions.client.render.RendererDusterKinetic;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
+import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -28,5 +30,6 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileBasicDuster.class, new RendererDuster());
         ClientRegistry.bindTileEntitySpecialRenderer(TileSemiAutomaticDuster.class, new RendererDuster());
         ClientRegistry.bindTileEntitySpecialRenderer(TileMechanicalDuster.class, new RendererDuster());
+	    ClientRegistry.bindTileEntitySpecialRenderer(TileKineticDuster.class, new RendererDusterKinetic());
     }
 }

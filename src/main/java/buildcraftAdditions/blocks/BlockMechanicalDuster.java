@@ -70,7 +70,8 @@ public class BlockMechanicalDuster extends BlockBase implements IEurekaBlock {
                 return false;
         }
         TileMechanicalDuster duster = (TileMechanicalDuster) world.getTileEntity(x, y, z);
-        if (duster != null && duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
+	    duster.player = player;
+        if (duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
             ItemStack stack = player.getCurrentEquippedItem().copy();
             stack.stackSize = 1;
             duster.setInventorySlotContents(0, stack);
