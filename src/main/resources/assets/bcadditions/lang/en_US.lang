@@ -38,7 +38,6 @@ item.dustTin.name=Tin Dust
 item.dustSilver.name=Silver Dust
 item.dustDiamond.name=Diamond Dust
 
-
 tooltip.installed=Installed
 tooltip.deactivated=Deactivated
 
@@ -59,6 +58,6 @@ itemGroup.BuildcraftAdditions=Buildcraft Additions
 
 Eureka=EUREKA!
 eureka.dusterTier1Finished=While processing your ores, you suddenly realize there are more efficient ways to process them.
-eureka.dusterTier2-1Finished=After being able to output to inventories you deside to try to see if you can automate the processing itself instead.
-eureka.dusterTier2-2Finished=You like that you don't have to jump on the machine, but also want the auto-input/output. You deside to combine your knowledge intro a new machine. Maybe something with lasers?
+eureka.dusterTier2-1Finished=After being able to output to inventories you decide to try to see if you can automate the processing itself instead.
+eureka.dusterTier2-2Finished=You like that you don't have to jump on the machine, but also want the auto-input/output. You decide to combine your knowledge intro a new machine. Maybe something with lasers?
 eureka.missingKnowledge=You have no idea how this machine works (yet). You try to use it, but due to your incompetence, it falls apart.
