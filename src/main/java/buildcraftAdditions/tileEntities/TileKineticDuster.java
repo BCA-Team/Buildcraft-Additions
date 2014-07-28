@@ -11,6 +11,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -203,4 +204,18 @@ public class TileKineticDuster extends TileBaseDuster implements ILaserTarget {
 	    setInventorySlotContents(0, null);
 	    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
+
+	@Override
+	public void readFromNBT(NBTTagCompound tag){
+		super.readFromNBT(tag);
+		inventory.readNBT(tag);
+		tag.setInteger("progress", progress);
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound tag){
+		super.writeToNBT(tag);
+		inventory.writeNBT(tag);
+		progress = tag.getInteger("progress");
+	}
 }

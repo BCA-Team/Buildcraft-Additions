@@ -1,5 +1,7 @@
 package buildcraftAdditions.blocks;
 
+import buildcraft.BuildCraftCore;
+import buildcraft.BuildCraftTransport;
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.api.IEurekaBlock;
 import buildcraftAdditions.tileEntities.TileKineticDuster;
@@ -12,6 +14,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -40,7 +43,7 @@ public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
 
     @Override
     public ItemStack[] getComponents() {
-        return new ItemStack[0];
+        return new ItemStack[]{new ItemStack(Blocks.glass, 3), new ItemStack(BuildCraftTransport.pipeItemsGold, 2), new ItemStack(BuildCraftCore.goldGearItem, 2), new ItemStack(BuildCraftCore.diamondGearItem)};
     }
 
     @Override

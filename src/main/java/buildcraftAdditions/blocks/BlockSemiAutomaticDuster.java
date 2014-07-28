@@ -1,5 +1,7 @@
 package buildcraftAdditions.blocks;
 
+import buildcraft.BuildCraftCore;
+import buildcraft.BuildCraftTransport;
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.api.IEurekaBlock;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
@@ -12,6 +14,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -78,7 +81,7 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
 
     @Override
     public ItemStack[] getComponents() {
-        return new ItemStack[]{new ItemStack(Items.gold_ingot, 5)};
+        return new ItemStack[]{new ItemStack(BuildCraftCore.ironGearItem, 2), new ItemStack(Items.gold_ingot), new ItemStack(BuildCraftTransport.pipeItemsGold, 2), new ItemStack(Blocks.stone, 3)};
     }
 
     @Override

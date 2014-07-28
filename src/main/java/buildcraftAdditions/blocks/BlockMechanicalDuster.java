@@ -1,5 +1,6 @@
 package buildcraftAdditions.blocks;
 
+import buildcraft.BuildCraftCore;
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.IEurekaBlock;
@@ -13,6 +14,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -42,7 +45,7 @@ public class BlockMechanicalDuster extends BlockBase implements IEurekaBlock {
 
     @Override
     public ItemStack[] getComponents() {
-        return new ItemStack[]{new ItemStack(BuildcraftAdditions.itemDust, 5)};
+        return new ItemStack[]{new ItemStack(BuildCraftCore.ironGearItem, 2), new ItemStack(Items.gold_ingot, 1), new ItemStack(BuildcraftAdditions.itemGrindingWheel, 1), new ItemStack(Blocks.stone, 5)};
     }
 
     @Override
