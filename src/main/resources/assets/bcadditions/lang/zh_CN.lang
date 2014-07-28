@@ -38,6 +38,7 @@ item.dustPlatinum.name=铂粉
 item.dustTin.name=锡粉
 item.dustSilver.name=银粉
 item.dustDiamond.name=钻石粉
+item.grindingWheel.name=砂轮
 
 tooltip.installed=已安装
 tooltip.deactivated=已关闭
