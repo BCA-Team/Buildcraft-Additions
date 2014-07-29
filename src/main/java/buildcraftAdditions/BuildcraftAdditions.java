@@ -71,6 +71,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -251,6 +252,25 @@ public class BuildcraftAdditions {
         DusterRecepies.addDusterRecepie(new ItemStack(Blocks.lapis_ore), new ItemStack(Items.dye, 6, 4));
     }
 
+	@Mod.EventHandler
+	public void doneLoading (FMLLoadCompleteEvent event){
+		itemDust = new ItemDust(Integer.parseInt("13ECFC", 16)).setUnlocalizedName("dustDiamond");
+		GameRegistry.registerItem(itemDust, "dustDiamond");
+		OreDictionary.registerOre("dustDiamond", itemDust);
+		DusterRecepies.addDusterRecepie(new ItemStack(Blocks.diamond_ore), new ItemStack(itemDust, 2));
+		DusterRecepies.addDusterRecepie(new ItemStack(Items.diamond), new ItemStack(itemDust, 1));
+
+		addDusts("Iron", Integer.parseInt("D2CEC9", 16));
+		addDusts("Gold", Integer.parseInt("F8DF17", 16));
+		addDusts("Copper", Integer.parseInt("BF5E1F", 16));
+		addDusts("Lead", Integer.parseInt("808096", 16));
+		addDusts("Nickel", Integer.parseInt("BAB0A4", 16));
+		addDusts("Platinum", Integer.parseInt("ABCDEF", 16));
+		addDusts("Silver", Integer.parseInt("B3B3B3", 16));
+		addDusts("Tin", Integer.parseInt("F2F2F2", 16));
+
+	}
+
     @Mod.EventHandler
     public void init(FMLInitializationEvent evt) {
 
@@ -302,26 +322,12 @@ public class BuildcraftAdditions {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
-        itemDust = new ItemDust(Integer.parseInt("13ECFC", 16)).setUnlocalizedName("dustDiamond");
-        GameRegistry.registerItem(itemDust, "dustDiamond");
-        OreDictionary.registerOre("dustDiamond", itemDust);
-        DusterRecepies.addDusterRecepie(new ItemStack(Blocks.diamond_ore), new ItemStack(itemDust, 2));
-        DusterRecepies.addDusterRecepie(new ItemStack(Items.diamond), new ItemStack(itemDust, 1));
 
-        addDusts("Iron", Integer.parseInt("D2CEC9", 16));
-        addDusts("Gold", Integer.parseInt("F8DF17", 16));
-        addDusts("Copper", Integer.parseInt("BF5E1F", 16));
-        addDusts("Lead", Integer.parseInt("808096", 16));
-        addDusts("Nickel", Integer.parseInt("BAB0A4", 16));
-        addDusts("Platinum", Integer.parseInt("ABCDEF", 16));
-        addDusts("Silver", Integer.parseInt("B3B3B3", 16));
-        addDusts("Tin", Integer.parseInt("F2F2F2", 16));
-
-        EurekaRegistry.registerKey(Variables.DustT1Key, 60, 1);
-        EurekaRegistry.registerKey(Variables.DustT2Key1, 60, 1);
-        EurekaRegistry.registerKey(Variables.DustT2Key2, 60, 1);
+        EurekaRegistry.registerKey(Variables.DustT1Key, 20, 1);
+        EurekaRegistry.registerKey(Variables.DustT2Key1, 40, 1);
+        EurekaRegistry.registerKey(Variables.DustT2Key2, 20, 1);
         EurekaRegistry.registerKey(Variables.CoilT1Key, 60, 1);
-        EurekaRegistry.registerKey("dusterTier2-2", 60, 1);
+        EurekaRegistry.registerKey("dusterTier2-2", 20, 1);
     }
 
     public void addDusts(String metalName, int color){

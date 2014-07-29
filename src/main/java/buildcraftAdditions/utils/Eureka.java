@@ -29,6 +29,9 @@ public class Eureka {
     }
 
     private static NBTTagCompound getTag (EntityPlayer player){
+	    if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)){
+		    player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound());
+	    }
         return (NBTTagCompound) player.getEntityData().getTag(EntityPlayer.PERSISTED_NBT_TAG);
     }
 

@@ -13,8 +13,8 @@ import java.util.ArrayList;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class DusterRecepies {
-    public static ArrayList<Item> dusterInput = new ArrayList<Item>(20);
-    public static ArrayList<ItemStack> dusterOutput = new ArrayList<ItemStack>(20);
+    public static ArrayList<Item> dusterInput = new ArrayList<Item>(200);
+    public static ArrayList<ItemStack> dusterOutput = new ArrayList<ItemStack>(200);
 
     public static void addDusterRecepie(ItemStack input, ItemStack output){
         dusterInput.add(input.getItem());
