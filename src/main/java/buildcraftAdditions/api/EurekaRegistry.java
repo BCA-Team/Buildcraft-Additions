@@ -1,5 +1,7 @@
 package buildcraftAdditions.api;
 
+import net.minecraft.item.ItemStack;
+
 import java.util.ArrayList;
 
 /**
@@ -10,9 +12,10 @@ import java.util.ArrayList;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class EurekaRegistry {
-    private static ArrayList<String> keys = new ArrayList<String>(50);
-    private static ArrayList<String> maxValues = new ArrayList<String>(50);
-    private static ArrayList<String> increments = new ArrayList<String>(50);
+    private static ArrayList<String> keys = new ArrayList<String>(10);
+    private static ArrayList<String> maxValues = new ArrayList<String>(10);
+    private static ArrayList<String> increments = new ArrayList<String>(10);
+	private static ArrayList<ItemStack> displayStack = new ArrayList<ItemStack>(10);
 
     /**
      * Register your keys here for the EUREKA system
@@ -21,11 +24,12 @@ public class EurekaRegistry {
      * @param increment the steps in wich the progress should increase
      * @return true if successful, false if key is already occupied
      */
-    public static boolean registerKey(String key, int max, int increment){
+    public static boolean registerKey(String key, int max, int increment, ItemStack stack){
         if (!keys.contains(key)){
             keys.add(key);
             maxValues.add(Integer.toString(max));
             increments.add(Integer.toString(increment));
+	        displayStack.add(stack);
             return true;
         }
         return false;
@@ -49,4 +53,10 @@ public class EurekaRegistry {
             return 0;
         return Integer.parseInt(increments.get(keys.indexOf(key)));
     }
+
+	public static ItemStack getDisplayStack(String key){
+		if (!keys.contains(key))
+			return null;
+		return displayStack.get(keys.indexOf(key));
+	}
 }

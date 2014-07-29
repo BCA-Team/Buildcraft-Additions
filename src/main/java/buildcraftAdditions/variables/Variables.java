@@ -16,6 +16,7 @@ public class Variables {
     public static final int GuiKineticTool = 72;
     public static final int GuiHeatedFurnace = 73;
     public static final int GuiBasicCoil = 74;
+	public static final int GuiEngineeringDiary = 75;
 
     //EUREKA NBT names
     public static final String DustT1Key = "dusterTier1";

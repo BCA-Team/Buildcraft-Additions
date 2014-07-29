@@ -24,6 +24,7 @@ import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemDiamondStick;
 import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.items.ItemEmeraldStick;
+import buildcraftAdditions.items.ItemEngineeringDiary;
 import buildcraftAdditions.items.ItemGoldStick;
 import buildcraftAdditions.items.ItemGrindingWheel;
 import buildcraftAdditions.items.ItemIronStick;
@@ -133,6 +134,7 @@ public class BuildcraftAdditions {
     public static Item toolUpgradeChainsaw;
     public static Item itemDust;
 	public static Item itemGrindingWheel;
+	public static Item engineeringDiary;
 
     public static ItemKineticTool kineticTool;
 
@@ -230,6 +232,10 @@ public class BuildcraftAdditions {
 	    itemGrindingWheel.setCreativeTab(bcadditions).setUnlocalizedName("grindingWheel");
 	    GameRegistry.registerItem(itemGrindingWheel, "grindingWheel");
 
+	    engineeringDiary = new ItemEngineeringDiary();
+	    engineeringDiary.setCreativeTab(bcadditions).setUnlocalizedName("engineeringDiary");
+	    GameRegistry.registerItem(engineeringDiary, "engineeringDiary");
+
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
         BuildcraftRecipes.assemblyTable.addRecipe(2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
         BuildcraftRecipes.assemblyTable.addRecipe(3000, new ItemStack(diamondStick), new ItemStack(Items.diamond, 2));
@@ -323,11 +329,10 @@ public class BuildcraftAdditions {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
 
-        EurekaRegistry.registerKey(Variables.DustT1Key, 20, 1);
-        EurekaRegistry.registerKey(Variables.DustT2Key1, 40, 1);
-        EurekaRegistry.registerKey(Variables.DustT2Key2, 20, 1);
-        EurekaRegistry.registerKey(Variables.CoilT1Key, 60, 1);
-        EurekaRegistry.registerKey("dusterTier2-2", 20, 1);
+        EurekaRegistry.registerKey(Variables.DustT1Key, 20, 1, new ItemStack(semiAutomaticDusterBlock));
+        EurekaRegistry.registerKey(Variables.DustT2Key1, 40, 1, new ItemStack(mechanicalDusterBlock));
+        EurekaRegistry.registerKey(Variables.DustT2Key2, 20, 1, new ItemStack(kineticDusterBlock));
+        //EurekaRegistry.registerKey(Variables.CoilT1Key, 60, 1);
     }
 
     public void addDusts(String metalName, int color){
