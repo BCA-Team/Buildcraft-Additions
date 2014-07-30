@@ -1,5 +1,6 @@
 package buildcraftAdditions.core;
 
+import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.IEurekaBlock;
 import buildcraftAdditions.api.IEurekaItem;
 import buildcraftAdditions.config.ConfigurationHandeler;
@@ -9,6 +10,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
@@ -39,6 +41,17 @@ public class EventListener  {
             }
             //initialize player knowledge if needed
             Eureka.init(event.player);
+	        //give engineering diary
+	        if (!event.player.getEntityData().hasKey("bookRecieved")){
+		        for (int slot = 0; slot < event.player.inventory.getSizeInventory(); slot++){
+			        if (event.player.inventory.getStackInSlot(slot) == null){
+				        event.player.inventory.setInventorySlotContents(slot, new ItemStack(BuildcraftAdditions.engineeringDiary));
+				        event.player.getEntityData().setBoolean("bookRecieved", true);
+				        return;
+			        }
+
+		        }
+	        }
 
         }
 
