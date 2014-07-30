@@ -19,7 +19,8 @@ import org.lwjgl.opengl.GL11;
 public class GuiEngineeringDiary extends GuiContainer {
 	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/EngineeringDiary.png");
 	public EntityPlayer player;
-	public int screen, startX[], lineLimit[];
+	public int screen, startX[], lineLimit[], page;
+	public boolean hasNextPage, hasPrevPage;
 
 	public GuiEngineeringDiary(EntityPlayer player) {
 		super(new ContainerEngineeringDiary(player));
@@ -27,6 +28,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 		screen = -1;
 		startX = new int[20];
 		lineLimit = new int[20];
+		page = 0;
 
 		startX[0] = 90;
 		startX[1] = 90;
@@ -96,9 +98,14 @@ public class GuiEngineeringDiary extends GuiContainer {
 		fontRendererObj.drawString(output, startX[line], line*7 + line + 6, 0xF8DF17);
 		output = "";
 		line = 5;
-		String description = Utils.localize("engineeringDiary." + key + ".description");
+
+		String description = Utils.localize("engineeringDiary." + key + ".description.page" + page);
 		String[] descriptionWords = description.split(" ", 0);
+		hasNextPage = !(Utils.localize("engineeringDiary." + key + ".description.page" + page + 1).equals("engineeringDiary." + key + ".description.page" + Integer.toString(page + 1)));
+		hasPrevPage = page > 0;
 		for (String word: descriptionWords){
+			if (line == 20)
+				return;
 			if (output.length() + word.length() > lineLimit[line]){
 				fontRendererObj.drawString(output, startX[line], line*7 + line + 6, 0xFFFFFF);
 				output = "";

@@ -65,4 +65,5 @@ eureka.dusterTier2-2Finished=You like that you don't have to jump on the machine
 eureka.missingKnowledge=You have no idea how this machine works (yet). You try to use it, but due to your incompetence, it falls apart.
 
 engineeringDiary.mainScreen.title=Engineering Diary
-engineeringDiary.mainScreen.description=This is a test description to test the splitting and spreading of the text for the Engineering Diary. Extra text for testing longer pieces of text so i can fill this gui and make sure it behaves and looks good.
+engineeringDiary.mainScreen.description.page0=This is a test description to test the splitting and spreading of the text for the Engineering Diary. Extra text for testing longer pieces of text so i can fill this gui and make sure it behaves and looks good.
+engineeringDiary.mainScreen.description.page1=page2
