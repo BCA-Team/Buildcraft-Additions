@@ -101,7 +101,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 
 		String description = Utils.localize("engineeringDiary." + key + ".description.page" + page);
 		String[] descriptionWords = description.split(" ", 0);
-		hasNextPage = !(Utils.localize("engineeringDiary." + key + ".description.page" + page + 1).equals("engineeringDiary." + key + ".description.page" + Integer.toString(page + 1)));
+		hasNextPage = !(Utils.localize("engineeringDiary." + key + ".description.page" + (page + 1)).equals("engineeringDiary." + key.toString() + ".description.page" + Integer.toString(page + 1)));
 		hasPrevPage = page > 0;
 		for (String word: descriptionWords){
 			if (line == 20)
@@ -116,6 +116,18 @@ public class GuiEngineeringDiary extends GuiContainer {
 		fontRendererObj.drawString(output, startX[line], line*7 + line + 6, 0xFFFFFF);
 	}
 
+
+	@Override
+	protected void mouseMovedOrUp(int mouseX, int mouseY, int status) {
+		super.mouseMovedOrUp(mouseX, mouseY, status);
+		int x = (width - xSize) / 2;
+		int y = (height - ySize) / 2;
+		if (hasNextPage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y)
+			page++;
+		if (hasPrevPage && mouseX > 34 + x && mouseX < 59 + x && mouseY > 13 + y && mouseY < 28 + y)
+			page--;
+	}
+
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float var1, int mouseX, int mouseY) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -125,14 +137,16 @@ public class GuiEngineeringDiary extends GuiContainer {
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 30, 0, xSize, ySize);
+		if (hasNextPage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y)
+			drawTexturedModalRect(x + 143, y + 149, 82, 180, 16, 16);
+		if (hasPrevPage && mouseX > 44 + x && mouseX < 60 + x && mouseY > 13 + y && mouseY < 28 + y)
+			drawTexturedModalRect(x + 44, y + 13, 66, 180, 16, 16);
 		int teller = 1;
 		for (String key : EurekaRegistry.getKeys()){
-			drawTexturedModalRect(x + 7, y - 6 + teller + (15 * teller), 98, 180, 22, 15);
+			//drawTexturedModalRect(x + 7, y - 6 + teller + (15 * teller), 98, 180, 22, 15);
 			RenderItem item = new RenderItem();
 			item.renderItemIntoGUI(fontRendererObj, mc.getTextureManager(), EurekaRegistry.getDisplayStack(key), x + 11, y - 7 + teller + (15 * teller));
 			teller++;
-
-
 		}
 	}
 }
