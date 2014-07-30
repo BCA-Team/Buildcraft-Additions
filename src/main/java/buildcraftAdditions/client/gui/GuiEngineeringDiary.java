@@ -1,6 +1,7 @@
 package buildcraftAdditions.client.gui;
 
 import buildcraftAdditions.api.EurekaRegistry;
+import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -30,10 +31,10 @@ public class GuiEngineeringDiary extends GuiContainer {
 		lineLimit = new int[20];
 		page = 0;
 
-		startX[0] = 90;
-		startX[1] = 90;
-		startX[2] = 90;
-		startX[3] = 90;
+		startX[0] = 85;
+		startX[1] = 85;
+		startX[2] = 85;
+		startX[3] = 85;
 		startX[4] = 50;
 		startX[5] = 45;
 		startX[6] = 40;
@@ -51,12 +52,12 @@ public class GuiEngineeringDiary extends GuiContainer {
 		startX[18] = 25;
 		startX[19] = 25;
 
-		lineLimit[0] = 11;
-		lineLimit[1] = 11;
-		lineLimit[2] = 11;
-		lineLimit[3] = 11;
-		lineLimit[4] = 20;
-		lineLimit[5] = 20;
+		lineLimit[0] = 13;
+		lineLimit[1] = 13;
+		lineLimit[2] = 13;
+		lineLimit[3] = 13;
+		lineLimit[4] = 13;
+		lineLimit[5] = 13;
 		lineLimit[6] = 22;
 		lineLimit[7] = 22;
 		lineLimit[8] = 24;
@@ -126,6 +127,9 @@ public class GuiEngineeringDiary extends GuiContainer {
 			page++;
 		if (hasPrevPage && mouseX > 34 + x && mouseX < 59 + x && mouseY > 13 + y && mouseY < 28 + y)
 			page--;
+		if (mouseX > x + 7 && mouseX < x +  31 &&  (mouseY - y) / 25 < EurekaRegistry.getKeys().size()) {
+			screen = (mouseY - y) / 25;
+		}
 	}
 
 	@Override
@@ -137,16 +141,34 @@ public class GuiEngineeringDiary extends GuiContainer {
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 30, 0, xSize, ySize);
+		if (hasNextPage)
+			drawTexturedModalRect(x + 143, y + 149, 82, 196, 16, 16);
+		if (hasPrevPage)
+			drawTexturedModalRect(x + 44, y + 13, 66, 196, 16, 16);
 		if (hasNextPage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y)
 			drawTexturedModalRect(x + 143, y + 149, 82, 180, 16, 16);
 		if (hasPrevPage && mouseX > 44 + x && mouseX < 60 + x && mouseY > 13 + y && mouseY < 28 + y)
 			drawTexturedModalRect(x + 44, y + 13, 66, 180, 16, 16);
-		int teller = 1;
-		for (String key : EurekaRegistry.getKeys()){
-			//drawTexturedModalRect(x + 7, y - 6 + teller + (15 * teller), 98, 180, 22, 15);
-			RenderItem item = new RenderItem();
-			item.renderItemIntoGUI(fontRendererObj, mc.getTextureManager(), EurekaRegistry.getDisplayStack(key), x + 11, y - 7 + teller + (15 * teller));
+		RenderItem item = new RenderItem();
+		int teller = 0;
+		for (String key: EurekaRegistry.getKeys()) {
+			if (teller == screen){
+				drawTexturedModalRect(x + 7, y + (24 * teller + 5), 124, 180, 24, 24);
+			} else {
+				drawTexturedModalRect(x + 7, y + (24 * teller + 5), 98, 180, 24, 24);
+			}
 			teller++;
 		}
+		if (screen != -1) {
+			drawTexturedModalRect(x + 95, y + 38, 148, 180, 60, 7);
+			String key = EurekaRegistry.getKeys().get(screen);
+			drawTexturedModalRect(x + 96, y + 39, 148, 187, Eureka.getProgress(player, key) * 58 / EurekaRegistry.getMaxValue(key), 7);
+		}
+		teller=0;
+		for (String key: EurekaRegistry.getKeys()){
+			item.renderItemIntoGUI(fontRendererObj, mc.getTextureManager(), EurekaRegistry.getDisplayStack(key), x + 12, y + 24 * teller + 9);
+			teller++;
+		}
+
 	}
 }
