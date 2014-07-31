@@ -20,7 +20,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiEngineeringDiary extends GuiContainer {
 	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/EngineeringDiary.png");
 	public EntityPlayer player;
-	public int screen, startX[], lineLimit[], page;
+	public int screen, startX[], lineLimit[], page, line;
 	public boolean hasNextPage, hasPrevPage;
 
 	public GuiEngineeringDiary(EntityPlayer player) {
@@ -54,10 +54,10 @@ public class GuiEngineeringDiary extends GuiContainer {
 
 		lineLimit[0] = 13;
 		lineLimit[1] = 13;
-		lineLimit[2] = 13;
-		lineLimit[3] = 13;
-		lineLimit[4] = 13;
-		lineLimit[5] = 13;
+		lineLimit[2] = 16;
+		lineLimit[3] = 16;
+		lineLimit[4] = 17;
+		lineLimit[5] = 18;
 		lineLimit[6] = 21;
 		lineLimit[7] = 21;
 		lineLimit[8] = 23;
@@ -79,46 +79,60 @@ public class GuiEngineeringDiary extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		String key;
-		String output = "";
-		int line = 0;
+		line = 0;
 		if (screen == -1){
 			key = "mainScreen";
 		} else {
 			key = EurekaRegistry.getKeys().get(screen);
 		}
 		String title = Utils.localize("engineeringDiary." + key + ".title");
-		String[] titleWords = title.split(" ", 0);
-		for (String word: titleWords){
-			if (output.length() + word.length() > lineLimit[line]){
-				fontRendererObj.drawString(output, startX[line], line*7 + line + 6, Integer.parseInt("F8DF17", 16));
-				output = "";
-				line++;
-			}
-			output = output + word + " ";
-		}
-		fontRendererObj.drawString(output, startX[line], line*7 + line + 6, 0xF8DF17);
-		output = "";
+		writeText(title, 0xF8DF17);
 		line = 5;
 		String description;
 		if (page == 0){
 			description = Utils.localize("engineeringDiary." + key + ".description");
+			if (screen != -1) {
+				writeText(Utils.localize("engineeringDiary.requiredResearch"), 0xFF0000);
+
+				writeText(Utils.localize("engineeringDiary." + key + ".requiredResearch"), 0x0000FF);
+				line++;
+				writeText(Utils.localize("engineeringDiary.progress") + " " + Eureka.getProgress(player, key) + " / " + EurekaRegistry.getMaxValue(key), 0xFFFF00);
+				line++;
+				if (!Eureka.isUnlocked(player, key)) {
+					writeText(Utils.localize("engineeringDiary." + key + ".howToMakeProgress"), 0xFF6600);
+				} else {
+					writeText(Utils.localize("engineeringDiary.unlocked"), 0xFF6600);
+				}
+
+				line++;
+			}
 		} else {
-			description = Utils.localize("engineeringDiary." + key + ".description.page" + page);
+			description = Utils.localize("engineeringDiary." + key + ".page" + page);
 		}
-		String[] descriptionWords = description.split(" ", 0);
-		hasNextPage = !(Utils.localize("engineeringDiary." + key + ".description.page" + (page + 1)).equals("engineeringDiary." + key.toString() + ".description.page" + Integer.toString(page + 1)));
+		hasNextPage = !(Utils.localize("engineeringDiary." + key + ".page" + (page + 1)).equals("engineeringDiary." + key.toString() + ".page" + Integer.toString(page + 1)));
 		hasPrevPage = page > 0;
-		for (String word: descriptionWords){
+		writeText(description, 0xFFFFFF);
+	}
+
+	public void drawTextAtLine(String text, int line, int color){
+		fontRendererObj.drawString(text, startX[line], line*8 + 6, color);
+	}
+
+	public void writeText(String text, int color){
+		String[] words = text.split(" ", 0);
+		String output = "";
+		for (String word: words){
 			if (line == 20)
 				return;
 			if (output.length() + word.length() > lineLimit[line]){
-				fontRendererObj.drawString(output, startX[line], line*7 + line + 6, 0xFFFFFF);
+				drawTextAtLine(output, line, color);
 				output = "";
 				line++;
 			}
 			output = output + word + " ";
 		}
-		fontRendererObj.drawString(output, startX[line], line*7 + line + 6, 0xFFFFFF);
+		drawTextAtLine(output, line, color);
+		line++;
 	}
 
 
@@ -133,6 +147,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 			page--;
 		if (mouseX > x + 7 && mouseX < x +  31 &&  (mouseY - y) / 25 < EurekaRegistry.getKeys().size()) {
 			screen = (mouseY - y) / 25;
+			page = 0;
 		}
 	}
 

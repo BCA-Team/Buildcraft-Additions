@@ -66,6 +66,26 @@ eureka.missingKnowledge=You have no idea how this machine works (yet). You try t
 
 engineeringDiary.mainScreen.title=Engineering Diary
 engineeringDiary.mainScreen.description=This is a test description to test the splitting and spreading of the text for the Engineering Diary. Extra text for testing longer pieces of text so i can fill this gui and make sure it behaves and looks good.
+
 engineeringDiary.dusterTier1.title=Semi Automatic Duster
 engineeringDiary.dusterTier1.description=Semi-Automatic duster description comes here
-engineeringDiary.dusterTier1.description.page1=Semi-automatic story comes here
+engineeringDiary.dusterTier1.page1=Semi-automatic story comes here
+engineeringDiary.dusterTier1.requiredResearch=None
+engineeringDiary.dusterTier1.howToMakeProgress=Process items in the basic duster
+
+engineeringDiary.dusterTier2-1.title=Mechanical Duster
+engineeringDiary.dusterTier2-1.description=Mechanical description
+engineeringDiary.dusterTier2-1.page1=Mechanical duster info
+engineeringDiary.dusterTier2-1.requiredResearch=Semi-automatic Duster
+engineeringDiary.dusterTier2-1.howToMakeProgress=Process items in the Semi-automatic Duster
+
+engineeringDiary.dusterTier2-2.title=Kinetic Duster
+engineeringDiary.dusterTier2-2.description=Kinetic Duster description
+engineeringDiary.dusterTier2-2.page1=Kinetic Duster info page 1
+engineeringDiary.dusterTier2-2.page2=Kinetic Duster info page 2
+engineeringDiary.dusterTier2-2.requiredResearch=Mechanical Duster
+engineeringDiary.dusterTier2-2.howToMakeProgress=Process items in the Mechanical Duster
+
+engineeringDiary.requiredResearch=Required research:
+engineeringDiary.progress=Progress:
+engineeringDiary.unlocked=UNLOCKED
