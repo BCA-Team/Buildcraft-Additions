@@ -62,3 +62,47 @@ eureka.dusterTier1Finished=Enquanto processava seus minérios, de repente você 
 eureka.dusterTier2-1Finished=Depois de ser capaz de exportar os itens para inventários, você decide tentar automatizar o processamento em si.
 eureka.dusterTier2-2Finished=Você gosta que não tem mais que pular na máquina, mas também quer a entrada e saída de itens automatizada. Você decide combinar seu conhecimento em uma nova máquina. Talvez algo com lasers?
 eureka.missingKnowledge=Você não tem idéia de como esta máquina funciona (por enquanto). Você tenta usá-la, mas devido à sua incompetência, ela se desfaz.
+
+engineeringDiary.mainScreen.title=Engineering Diary
+engineeringDiary.mainScreen.description=Este livro é um Diário de seu progresso de descoberta de itens e blocos através do Sistema Eureka. Como um Engenheiro, testes e experimentos são requeridos antes de criar uma máquina,
+engineeringDiary.mainScreen.page1=ter o momento Eureka que precede novas criações. Divirta-se!
+
+engineeringDiary.dusterTier0.title=Pulverizador Básico
+engineeringDiary.dusterTier0.description=Você pode usar esta simples máquina para duplicar seus minérios
+engineeringDiary.dusterTier0.page1=Você não é um saudosista, mas de vez em quando a saudade bate em todo mundo. Você se lembra dos velhos tempos, quando todos tinham todo o minério que precisavam, só gastando para fazer grandes engenhocas de Redstone
+engineeringDiary.dusterTier0.page2=ou ferrovias tão grandes que cobriam continentes inteiros. Bons tempos. Mas tudo mudou depois da chegada dos Engenheiros. Todas as suas complexas ferramentas e máquinas requerem grandes quantidades de minério,
+engineeringDiary.dusterTier0.page3=tanto que de vez em quando a terra secava. Você começa a se perguntar se é possível aumentar a produção de minério, e você termina criando o Pulverizador Básico, uma simples máquina criada utilizando Pedras e Gosma de Slime, com
+engineeringDiary.dusterTier0.page4=partes raspantes no topo. Funciona colocando o minério em cima e pulando nele, algo que você não está feliz por ter que fazer, mas o dobro de minério é o dobro de minério. Você se pergunta como pode melhorar esta máquina...
+engineeringDiary.dusterTier0.requiredResearch=Nenhuma
+engineeringDiary.dusterTier0.howToMakeProgress=
+
+engineeringDiary.dusterTier1.title=Pulverizador Semiautomático
+engineeringDiary.dusterTier1.description=Este Pulverizador melhorado pode interagir com inventários
+engineeringDiary.dusterTier1.page1=Seu primeiro Pulverizador foi um enorme avanço no meio de processamento de minérios. Nunca antes foi tão fácil conseguir mais minérios. Entretanto, todos concordaram que colocar o minério manualmente e pular
+engineeringDiary.dusterTier1.page2=em cima dele é um pouco rústico, então você decide focar em fazer a máquina melhor, começando com interação com inventários. Enquanto experimenta, você descobre que Tubos tem um certo efeito,
+engineeringDiary.dusterTier1.page3=mas as Engrenagens de Pedra são muito brutas para o Ouro, então você as aprimora para Engrenagens de Ferro. Finalmente, você faz o Pulverizador Semiautomático.. Este Pulverizador ainda
+engineeringDiary.dusterTier1.page4=requer que você pule nele, mas ao menos os minérios podem ser introduzidos atráves de Funis e Tubos,enquanto que os produtos finais aparentam se ejetar sozinhos. Agora é hora de trabalhar no problema dos pulos.
+engineeringDiary.dusterTier1.requiredResearch=Pulverizador Básico
+engineeringDiary.dusterTier1.howToMakeProgress=Processar itens no Pulverizador Básico
+
+engineeringDiary.requiredResearch=Pesquisa requerida:
+engineeringDiary.progress=Progresso:
+engineeringDiary.unlocked=DESBLOQUEADO
+
+engineeringDiary.dusterTier2-1.title=Pulverizador Mecânico
+engineeringDiary.dusterTier2-1.description=Esta máquina de duplicar minérios pode receber energia
+engineeringDiary.dusterTier2-1.page1=Após a sua descoberta inicial de automatização, você tenta fazer a máquina triturar o minério para você, sem sucesso. Você decide dar um passo pra trás e utilizar o Pulverizador Básico como base para os seus experimentos (de novo),
+engineeringDiary.dusterTier2-1.page2=e você acaba criando o Rebolo Abrasivo, um item que pode ser a chave para automatizar esta máquina. E acaba sendo, visto que depois que você aprimora as Engrenagens de Pedra para Engrenagens de Ferro novamente,
+engineeringDiary.dusterTier2-1.page3=ela parece aceitar energia para duplicar os minérios. Você finalmente fez o Pulverizador Mecânico! Contudo esta máquina é outro experimento incompleto, visto que ela não tem a capacidade de gerenciar inventários
+engineeringDiary.dusterTier2-2.page4=que o Pulverizador Semiautomático tinha. Você precisa fazer melhor.
+engineeringDiary.dusterTier2-1.requiredResearch=Pulverizador Semiautomático
+engineeringDiary.dusterTier2-1.howToMakeProgress=Processar itens no Pulverizador Semiautomático
+
+engineeringDiary.dusterTier2-2.title=Pulverizador Cinético
+engineeringDiary.dusterTier2-2.description=O Pulverizador Final (also known as Dustinator 9000)
+engineeringDiary.dusterTier2-2.page1=Depois de muitas versões falhas de Pulverizadores, você decide que simplesmente não dá para mistoriar o poder triturador do Pulverizador Mecânico e as capacidades de gerenciamento de inventário do Pulverizador Semiautomático,
+engineeringDiary.dusterTier2-2.page2=enão você decide tentar algo diferente para duplicar seus minérios: Lasers. A sua precisão definitivamente vai ajudar em não quebrar a tubulação interna do Pulverizador, o que acontecia toda vez quando ele era atingido por um Motor.
+engineeringDiary.dusterTier2-2.page3=Felizmente funciona, mas dessa vez você tem que involver alguns materias de alta qualidade, incluindo uma Engrenagem de Diamante. Nasce o Pulverizador Cinético. A precisão dos Lasers mantém o circuito interno de Ouro,
+engineeringDiary.dusterTier2-2.page4=o que permite a máquina receber energia externa (através dos Lasers) e gerenciar o próprio inventário. Isso é tudo para esta máquina.
+engineeringDiary.dusterTier2-2.requiredResearch=Pulverizador Mecânico
+engineeringDiary.dusterTier2-2.howToMakeProgress=Processar itens no Pulverizador Mecânico

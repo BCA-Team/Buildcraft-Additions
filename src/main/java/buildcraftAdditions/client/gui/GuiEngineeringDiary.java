@@ -61,8 +61,8 @@ public class GuiEngineeringDiary extends GuiContainer {
 		lineLimit[6] = 18;
 		lineLimit[7] = 21;
 		lineLimit[8] = 21;
-		lineLimit[9] = 23;
-		lineLimit[10] = 23;
+		lineLimit[9] = 22;
+		lineLimit[10] = 22;
 		lineLimit[11] = 21;
 		lineLimit[12] = 19;
 		lineLimit[13] = 19;
