@@ -328,7 +328,7 @@ public class BuildcraftAdditions {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
-
+	    EurekaRegistry.registerKey(Variables.DustT0Key, 1, 1, new ItemStack(basicDusterBlock));
         EurekaRegistry.registerKey(Variables.DustT1Key, 20, 1, new ItemStack(semiAutomaticDusterBlock));
         EurekaRegistry.registerKey(Variables.DustT2Key1, 40, 1, new ItemStack(mechanicalDusterBlock));
         EurekaRegistry.registerKey(Variables.DustT2Key2, 20, 1, new ItemStack(kineticDusterBlock));

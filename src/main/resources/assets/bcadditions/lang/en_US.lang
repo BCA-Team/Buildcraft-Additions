@@ -65,24 +65,41 @@ eureka.dusterTier2-2Finished=You like that you don't have to jump on the machine
 eureka.missingKnowledge=You have no idea how this machine works (yet). You try to use it, but due to your incompetence, it falls apart.
 
 engineeringDiary.mainScreen.title=Engineering Diary
-engineeringDiary.mainScreen.description=This is a test description to test the splitting and spreading of the text for the Engineering Diary. Extra text for testing longer pieces of text so i can fill this gui and make sure it behaves and looks good.
+engineeringDiary.mainScreen.description=This book is a Diary of your progress with discovering items and blocks through the Eureka system. As an Engineer, testing and experimentation is required before creating a machine,
+engineeringDiary.mainScreen.page1=and you’ll need to make and use simple machines in order to have the Eureka moment that leads to new creations. Have fun!
+
+engineeringDiary.dusterTier0.title=Basic Duster
+engineeringDiary.dusterTier0.description=You can use this simple machine to double your ores.
+engineeringDiary.dusterTier0.page1=You’re not a nostalgic, but sometimes it just gets to everyone. You remember the good ol’ days, where one had all the Ore they ever wanted, only ever using it to build large redstone contraptions or railroads so big
+engineeringDiary.dusterTier0.page2=they covered entire continents. Good times. After the arrival of Engineers though, everything changed. All of their complex tools and machines required large amounts of Ore, so much it sometimes dried the land.
+engineeringDiary.dusterTier0.page3=You start to wonder if you could somehow increase your Ore output, and you come up with the Basic Duster, a simple machine created using Stone and Slimeballs, with grindy-bits on top.
+engineeringDiary.dusterTier0.page4=It works by placing ore on the top and jumping on it, something you’re not so keen about doing, but double ore is double ore. You wonder how you could improve this machine...
+engineeringDiary.dusterTier0.requiredResearch=None
+engineeringDiary.dusterTier0.howToMakeProgress=
+
 
 engineeringDiary.dusterTier1.title=Semi Automatic Duster
-engineeringDiary.dusterTier1.description=Semi-Automatic duster description comes here
-engineeringDiary.dusterTier1.page1=Semi-automatic story comes here
-engineeringDiary.dusterTier1.requiredResearch=None
+engineeringDiary.dusterTier1.description=This improved Duster can interact with inventories
+engineeringDiary.dusterTier1.page1=Your first Duster was a breaktrough on the Ore processing scene. Never before was getting more ore so easy. However everyone agreed that manually placing and jumping on the Ore was a bit rustic, so you decide
+engineeringDiary.dusterTier1.page2=to focus on making the machine better, starting with inventory connections. Experimenting with Pipes seems to have an effect, but the Stone Gears are just too crude for the Gold, so you upgrade them to Iron Gears
+engineeringDiary.dusterTier1.page3=Finally, you have the Semi-Automatic Duster. This Duster still requires you to jump on it, but at least the Ores can be input from Hoppers and Pipes, while the output appears to move out on its own. Now its time to work on that jumping issue.
+engineeringDiary.dusterTier1.requiredResearch=Basic Duster
 engineeringDiary.dusterTier1.howToMakeProgress=Process items in the basic duster
 
 engineeringDiary.dusterTier2-1.title=Mechanical Duster
-engineeringDiary.dusterTier2-1.description=Mechanical description
-engineeringDiary.dusterTier2-1.page1=Mechanical duster info
+engineeringDiary.dusterTier2-1.description=This ore-doubling machine can receive power
+engineeringDiary.dusterTier2-1.page1=After your initial automation discovery, you try to make the machine grind the ore for you, without success. You decide to take a step back and use the Basic Duster as base for your experiments again,
+engineeringDiary.dusterTier2-1.page2=and you end up creating the Grinding Wheel, an item that could be the key to automating this machine. And it proves very effective once you upgrade the Stone Gears to Iron, it seems to accept power to double the ores.
+engineeringDiary.dusterTier2-1.page3=You finally made the Mechanical Duster! However this machine is another incomplete experiment, since it doesn’t have the inventory managing capabilities of the Semi-Automatic Duster. You need to step it up.
 engineeringDiary.dusterTier2-1.requiredResearch=Semi-automatic Duster
 engineeringDiary.dusterTier2-1.howToMakeProgress=Process items in the Semi-automatic Duster
 
 engineeringDiary.dusterTier2-2.title=Kinetic Duster
-engineeringDiary.dusterTier2-2.description=Kinetic Duster description
-engineeringDiary.dusterTier2-2.page1=Kinetic Duster info page 1
-engineeringDiary.dusterTier2-2.page2=Kinetic Duster info page 2
+engineeringDiary.dusterTier2-2.description=The Ultimate Duster (also known as Dustinator 9000)
+engineeringDiary.dusterTier2-2.page1=After many failed Duster versions, you decide you simply can’t mix the Grinding power of the Mechanical Duster and the inventory managing capabilities of the Semi-Automatic Duster, so you decide to step it up
+engineeringDiary.dusterTier2-2.page2=and try another method of doubling the Ore: Lasers. Their precision surely will help in not breaking the internal piping like it happened every time it was hit by an Engine. Fortunately it works,
+engineeringDiary.dusterTier2-2.page3=but this time you have to involve some high-tier materials, including a Diamond Gear. The Kinetic Duster is born. The precision of the Lasers keeps the internal gold circuit intact,
+engineeringDiary.dusterTier2-2.page4=which allows the machine to receive external power (through Lasers) and manage its own inventory. You’re done here.
 engineeringDiary.dusterTier2-2.requiredResearch=Mechanical Duster
 engineeringDiary.dusterTier2-2.howToMakeProgress=Process items in the Mechanical Duster
 

@@ -58,19 +58,19 @@ public class GuiEngineeringDiary extends GuiContainer {
 		lineLimit[3] = 16;
 		lineLimit[4] = 17;
 		lineLimit[5] = 18;
-		lineLimit[6] = 21;
+		lineLimit[6] = 18;
 		lineLimit[7] = 21;
-		lineLimit[8] = 23;
+		lineLimit[8] = 21;
 		lineLimit[9] = 23;
 		lineLimit[10] = 23;
 		lineLimit[11] = 21;
-		lineLimit[12] = 21;
-		lineLimit[13] = 20;
+		lineLimit[12] = 19;
+		lineLimit[13] = 19;
 		lineLimit[14] = 18;
-		lineLimit[15] = 16;
+		lineLimit[15] = 17;
 		lineLimit[16] = 14;
 		lineLimit[17] = 14;
-		lineLimit[18] = 12;
+		lineLimit[18] = 13;
 		lineLimit[19] = 12;
 
 	}
@@ -164,7 +164,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 			drawTexturedModalRect(x + 143, y + 149, 82, 196, 16, 16);
 		if (hasPrevPage)
 			drawTexturedModalRect(x + 44, y + 13, 66, 196, 16, 16);
-		if (hasNextPage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y)
+		if (hasNextPage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (screen == -1 || Eureka.isUnlocked(player, EurekaRegistry.getKeys().get(screen))))
 			drawTexturedModalRect(x + 143, y + 149, 82, 180, 16, 16);
 		if (hasPrevPage && mouseX > 44 + x && mouseX < 60 + x && mouseY > 13 + y && mouseY < 28 + y)
 			drawTexturedModalRect(x + 44, y + 13, 66, 180, 16, 16);

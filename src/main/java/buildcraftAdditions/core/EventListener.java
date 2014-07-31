@@ -5,6 +5,7 @@ import buildcraftAdditions.api.IEurekaBlock;
 import buildcraftAdditions.api.IEurekaItem;
 import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.utils.Eureka;
+import buildcraftAdditions.variables.Variables;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -41,6 +42,10 @@ public class EventListener  {
             }
             //initialize player knowledge if needed
             Eureka.init(event.player);
+
+	        //unlock basic duster
+	        Eureka.makeProgress(event.player, Variables.DustT0Key);
+
 	        //give engineering diary
 	        if (!event.player.getEntityData().hasKey("bookRecieved")){
 		        for (int slot = 0; slot < event.player.inventory.getSizeInventory(); slot++){

@@ -19,6 +19,7 @@ public class Variables {
 	public static final int GuiEngineeringDiary = 75;
 
     //EUREKA NBT names
+	public static final String DustT0Key = "dusterTier0";
     public static final String DustT1Key = "dusterTier1";
     public static final String DustT2Key1 = "dusterTier2-1";
     public static final String DustT2Key2 = "dusterTier2-2";
