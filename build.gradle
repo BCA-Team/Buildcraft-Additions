@@ -50,11 +50,6 @@ sourceSets {
             srcDir 'src/main/resources'
         }
     }
-    api {
-        java {
-            srcDir 'src/main/java/buildcraftAdditions/api'
-        }
-    }
 }
  
 processResources

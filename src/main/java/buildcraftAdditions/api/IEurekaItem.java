@@ -1,6 +1,7 @@
 package buildcraftAdditions.api;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -14,4 +15,6 @@ public interface IEurekaItem {
     boolean isAllowed(EntityPlayer player);
 
     String getMessage();
+
+	ItemStack[] getComponents();
 }

@@ -1,6 +1,8 @@
 package buildcraftAdditions.items.Tools;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.api.IEurekaItem;
+import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
 import cpw.mods.fml.relauncher.Side;
@@ -10,6 +12,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
@@ -25,7 +28,7 @@ import java.util.List;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-public class ItemKineticTool extends ItemPoweredBase {
+public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem{
     public boolean chainsaw, digger, drill, hoe, goldStick, diamondStick, emeraldStick;
     public int upgradesAllowed;
     public IIcon icon, iconAlt, overlayChainsaw, overlayDigger, overlayDrill, overlayHoe;
@@ -275,4 +278,19 @@ public class ItemKineticTool extends ItemPoweredBase {
             return iconHoe;
         return icon;
     }
+
+	@Override
+	public boolean isAllowed(EntityPlayer player) {
+		return Eureka.isUnlocked(player, Variables.KineticToolKey);
+	}
+
+	@Override
+	public String getMessage() {
+		return Utils.localize("eureka.missingKnowledgeKineticTool");
+	}
+
+	@Override
+	public ItemStack[] getComponents() {
+		return new ItemStack[]{new ItemStack(Items.diamond, 3), new ItemStack(BuildcraftAdditions.ironStick), new ItemStack(BuildcraftAdditions.toolCore)};
+	}
 }

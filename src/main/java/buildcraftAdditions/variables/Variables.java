@@ -23,6 +23,7 @@ public class Variables {
     public static final String DustT1Key = "dusterTier1";
     public static final String DustT2Key1 = "dusterTier2-1";
     public static final String DustT2Key2 = "dusterTier2-2";
+	public static final String KineticToolKey = "kineticTool";
 
     public static final String CoilT1Key = "coilTier1";
     public static final String CoilT2Key = "coilTier2";

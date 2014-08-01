@@ -51,7 +51,8 @@ public class Eureka {
         int progress = getProgress(player, key);
         NBTTagCompound tag = getTag(player);
         if (progress < EurekaRegistry.getMaxValue(key)){
-            setKey(tag, key + "Progress", progress + EurekaRegistry.getIncrement(key));
+	        progress += EurekaRegistry.getIncrement(key);
+            setKey(tag, key + "Progress", progress);
         }
         if (progress >= EurekaRegistry.getMaxValue(key)){
             if (!isUnlocked(player, key)) {

@@ -256,6 +256,7 @@ public class BuildcraftAdditions {
         DusterRecepies.addDusterRecepie(new ItemStack(Blocks.redstone_ore), new ItemStack(Items.redstone, 6));
         DusterRecepies.addDusterRecepie(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, 6));
         DusterRecepies.addDusterRecepie(new ItemStack(Blocks.lapis_ore), new ItemStack(Items.dye, 6, 4));
+	    DusterRecepies.addDusterRecepie(new ItemStack(Blocks.quartz_ore), new ItemStack(Items.quartz, 2));
     }
 
 	@Mod.EventHandler
@@ -332,6 +333,7 @@ public class BuildcraftAdditions {
         EurekaRegistry.registerKey(Variables.DustT1Key, 20, 1, new ItemStack(semiAutomaticDusterBlock));
         EurekaRegistry.registerKey(Variables.DustT2Key1, 40, 1, new ItemStack(mechanicalDusterBlock));
         EurekaRegistry.registerKey(Variables.DustT2Key2, 20, 1, new ItemStack(kineticDusterBlock));
+	    EurekaRegistry.registerKey(Variables.KineticToolKey, 10, 1, new ItemStack(kineticTool));
         //EurekaRegistry.registerKey(Variables.CoilT1Key, 60, 1);
     }
 

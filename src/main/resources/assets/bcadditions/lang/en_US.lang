@@ -59,10 +59,13 @@ trigger.readyToCharge=Ready To Charge
 itemGroup.BuildcraftAdditions=Buildcraft Additions
 
 Eureka=EUREKA!
+eureka.dusterTier0Finished=You start planning all your feature builds but realize you'll need a ton of resouces. You also start thinking of a way to make that easier.
 eureka.dusterTier1Finished=While processing your ores, you suddenly realize there are more efficient ways to process them.
 eureka.dusterTier2-1Finished=After being able to output to inventories you decide to try to see if you can automate the processing itself instead.
 eureka.dusterTier2-2Finished=You like that you don't have to jump on the machine, but also want the auto-input/output. You decide to combine your knowledge intro a new machine. Maybe something with lasers?
+eureka.kineticToolFinished=While making yet another tool to replace your old one you think of a way to make a tool that won't break
 eureka.missingKnowledge=You have no idea how this machine works (yet). You try to use it, but due to your incompetence, it falls apart.
+eureka.missingKnowledgeKineticTool=You have no idea how this tool works (yet). You try to use it, but due to your incompetence, it falls apart.
 
 engineeringDiary.mainScreen.title=Engineering Diary
 engineeringDiary.mainScreen.description=This book is a Diary of your progress with discovering items and blocks through the Eureka system. As an Engineer, testing and experimentation is required before creating a machine,
@@ -102,6 +105,24 @@ engineeringDiary.dusterTier2-2.page3=but this time you have to involve some high
 engineeringDiary.dusterTier2-2.page4=which allows the machine to receive external power (through Lasers) and manage its own inventory. You’re done here.
 engineeringDiary.dusterTier2-2.requiredResearch=Mechanical Duster
 engineeringDiary.dusterTier2-2.howToMakeProgress=Process items in the Mechanical Duster
+
+engineeringDiary.kineticTool.title=Kinetic Multi-Tool
+engineeringDiary.kineticTool.description=One tool for all
+engineeringDiary.kineticTool.page1=Tools are a fundamental part of our world, you hate the fact that they keep breaking. Machines never seem to break, and you start to wonder why. After a while, you realise why: Redstone and Power.
+engineeringDiary.kineticTool.page2=While tools also recieve a sort of Power (the one that comes from your arm), machines recieve a special, Redstone-tuned power, and that seems to be what makes them last indefinetely.
+engineeringDiary.kineticTool.page3=You decide the best way to make Unbreakable tools is to craft them with the highest quality, Redstone-tuned materials. The core of your tool consists of a Gold Gear (for the best speed) combined
+engineeringDiary.kineticTool.page4=with a Diamond Chipset (for the long-lasting, Redstone-tune effect) in the integration table. After using Lasers to perfectly combine those items, you decide that their precision will be key in this process,
+engineeringDiary.kineticTool.page5=so to hold the tool head together, you make an Iron Stick by putting iron in the assembly table. Then its just a matter of combining everything with some Diamonds, since that makes the hardest tools (assembly table)
+engineeringDiary.kineticTool.page6=You finally have your handle, and you’re certain this can hold any tool, and no matter how many times used it’ll never break. However you still need to provide it with power, and for that you create the Kinetic Capsules.
+engineeringDiary.kineticTool.page7=Now its time to upgrade your Kinetic Multi-Tool! For that you put 3 iron, 2 gold and a tool core in the assembly table to make tool heads. After assembeling your first upgrade, you decide
+engineeringDiary.kineticTool.page8=that the Integration Table is best to attach it to the tool. You now have an unbreakable, MJ powered tool. However the costs of this tool were too high for you to consider making another 3 of them.
+engineeringDiary.kineticTool.page9=You decide to tinker around with it and end up finding out how to put another upgrade on the Multi-Tool! You put 4 gold in the assembly table for a golden stick. However attaching this to the tool by itself would make
+engineeringDiary.kineticTool.page10=its Redstone-tune out of sync, so you decide to add a Quartz Chipset alongside it (integration table). The tool seems to know when to use each Upgrade, making it effectively a 2 in 1 tool! This still doesn’t cover all the possible upgrades,
+engineeringDiary.kineticTool.page11=so you assemble to craft a Diamond Stick (2 diamonds in assembly table). And you place it on the tool with a Gold Chipset (integration table). Though the tool now has 3 Upgrades, you wonder if its possible to add a fourth one.
+engineeringDiary.kineticTool.page12=There are no other natural materials that can be made into a Stick, but one day you come across a Powerplant, and inside it you’re surprised to find an Engineer Villager! It appears this Villager has experimented with ideas
+engineeringDiary.kineticTool.page13=very similar to yours in the past, and happens to be carrying some Emerald Sticks! You rush home and combine the Stick with a Diamond Chipset into your tool. Finally, you have all 4 Upgrades into your tool!
+engineeringDiary.kineticTool.requiredResearch=None
+engineeringDiary.kineticTool.howToMakeProgress=Craft tools
 
 engineeringDiary.requiredResearch=Required research:
 engineeringDiary.progress=Progress:
