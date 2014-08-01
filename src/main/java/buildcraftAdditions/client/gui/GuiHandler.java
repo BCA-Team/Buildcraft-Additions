@@ -14,7 +14,6 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import buildcraftAdditions.variables.Variables;
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -46,8 +45,6 @@ public class GuiHandler implements IGuiHandler {
             case Variables.GuiBasicCoil:
                 if (tile instanceof TileBasicCoil)
                     return new GuiBasicCoil(player.inventory, (TileBasicCoil) tile);
-	        case Variables.GuiEngineeringDiary:
-		        return new GuiEngineeringDiary(player);
         }
         return null;
     }
@@ -76,9 +73,6 @@ public class GuiHandler implements IGuiHandler {
             case Variables.GuiBasicCoil:
                 if (tile instanceof TileBasicCoil)
                     return new ContainerBasicCoil(player.inventory, (TileBasicCoil) tile);
-	        case Variables.GuiEngineeringDiary:
-		        FMLClientHandler.instance().getClientPlayerEntity().getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG));
-		        return new ContainerEngineeringDiary(player);
         }
         return null;
     }

@@ -3,13 +3,13 @@ package buildcraftAdditions.blocks;
 import buildcraft.BuildCraftCore;
 import buildcraft.BuildCraftTransport;
 import buildcraft.core.IItemPipe;
-import buildcraftAdditions.api.IEurekaBlock;
 import buildcraftAdditions.tileEntities.TileKineticDuster;
-import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import eureka.core.EurekaKnowledge;
+import eureka.interfaces.IEurekaBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,7 +38,7 @@ public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
 
     @Override
     public boolean isAllowed(EntityPlayer player) {
-        return Eureka.isUnlocked(player, Variables.DustT2Key2);
+        return EurekaKnowledge.isUnlocked(player, Variables.DustT2Key2);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack stack) {
 		super.onBlockPlacedBy(world, i, j, k, entityliving, stack);
 		if (entityliving instanceof EntityPlayer)
-			Eureka.eurekaBlockEvent(world, this, i, j, k, (EntityPlayer) entityliving);
+			EurekaKnowledge.eurekaBlockEvent(world, this, i, j, k, (EntityPlayer) entityliving);
 
 		ForgeDirection orientation = Utils.get2dOrientation(entityliving);
 		world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(), 1);

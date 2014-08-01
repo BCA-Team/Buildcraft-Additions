@@ -5,7 +5,7 @@ import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageSemiAutomaticDuster;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
-import buildcraftAdditions.utils.Eureka;
+import eureka.core.EurekaKnowledge;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
 import net.minecraft.entity.player.EntityPlayer;
@@ -93,7 +93,7 @@ public class TileSemiAutomaticDuster extends TileBaseDuster {
 
     @Override
     public void makeProgress(EntityPlayer player, String key) {
-        Eureka.makeProgress(player, key);
+        EurekaKnowledge.makeProgress(player, key);
     }
 
     @Override

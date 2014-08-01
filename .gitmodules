@@ -1,0 +1,3 @@
+[submodule "Eureka"]
+	path = Eureka
+	url = https://github.com/AEnterprise/Eureka

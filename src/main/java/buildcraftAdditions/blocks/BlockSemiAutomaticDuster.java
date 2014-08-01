@@ -3,12 +3,12 @@ package buildcraftAdditions.blocks;
 import buildcraft.BuildCraftCore;
 import buildcraft.BuildCraftTransport;
 import buildcraft.core.IItemPipe;
-import buildcraftAdditions.api.IEurekaBlock;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
-import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
+import eureka.core.EurekaKnowledge;
+import eureka.interfaces.IEurekaBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -76,7 +76,7 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
 
     @Override
     public boolean isAllowed(EntityPlayer player) {
-        return Eureka.isUnlocked(player, Variables.DustT1Key);
+        return EurekaKnowledge.isUnlocked(player, Variables.DustT1Key);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
         if (entity instanceof EntityPlayer) {
             TileEntity tileEntity = world.getTileEntity(x, y, z);
             if (tileEntity instanceof TileSemiAutomaticDuster) {
-                Eureka.eurekaBlockEvent(world, (IEurekaBlock) world.getBlock(x, y, z), x, y, z, (EntityPlayer) entity);
+                EurekaKnowledge.eurekaBlockEvent(world, (IEurekaBlock) world.getBlock(x, y, z), x, y, z, (EntityPlayer) entity);
                 ((TileSemiAutomaticDuster) tileEntity).makeProgress((EntityPlayer) entity);
             }
         }

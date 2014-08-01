@@ -3,13 +3,13 @@ package buildcraftAdditions.blocks;
 import buildcraft.BuildCraftCore;
 import buildcraft.core.IItemPipe;
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.api.IEurekaBlock;
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
-import buildcraftAdditions.utils.Eureka;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import eureka.core.EurekaKnowledge;
+import eureka.interfaces.IEurekaBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -40,7 +40,7 @@ public class BlockMechanicalDuster extends BlockBase implements IEurekaBlock {
 
     @Override
     public boolean isAllowed(EntityPlayer player) {
-        return Eureka.isUnlocked(player, Variables.DustT2Key1);
+        return EurekaKnowledge.isUnlocked(player, Variables.DustT2Key1);
     }
 
     @Override

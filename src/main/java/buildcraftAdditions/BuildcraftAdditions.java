@@ -7,7 +7,6 @@ import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraft.core.proxy.CoreProxy;
 import buildcraft.core.triggers.BCTrigger;
 import buildcraftAdditions.api.DusterRecepies;
-import buildcraftAdditions.api.EurekaRegistry;
 import buildcraftAdditions.blocks.BlockBasicCoil;
 import buildcraftAdditions.blocks.BlockBasicDuster;
 import buildcraftAdditions.blocks.BlockChargingStation;
@@ -24,7 +23,6 @@ import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemDiamondStick;
 import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.items.ItemEmeraldStick;
-import buildcraftAdditions.items.ItemEngineeringDiary;
 import buildcraftAdditions.items.ItemGoldStick;
 import buildcraftAdditions.items.ItemGrindingWheel;
 import buildcraftAdditions.items.ItemIronStick;
@@ -78,6 +76,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
+import eureka.core.EurekaRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -100,7 +99,7 @@ import java.util.ArrayList;
 
 
 
-@Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "required-after:BuildCraft|Energy@{6.0.17}")
+@Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "required-after:BuildCraft|Energy@{6.0.17}", acceptedMinecraftVersions = "1.7.10")
 public class BuildcraftAdditions {
 
     public static ItemCanister ironCanister;
@@ -134,7 +133,6 @@ public class BuildcraftAdditions {
     public static Item toolUpgradeChainsaw;
     public static Item itemDust;
 	public static Item itemGrindingWheel;
-	public static Item engineeringDiary;
 
     public static ItemKineticTool kineticTool;
 
@@ -231,10 +229,6 @@ public class BuildcraftAdditions {
 	    itemGrindingWheel = new ItemGrindingWheel();
 	    itemGrindingWheel.setCreativeTab(bcadditions).setUnlocalizedName("grindingWheel");
 	    GameRegistry.registerItem(itemGrindingWheel, "grindingWheel");
-
-	    engineeringDiary = new ItemEngineeringDiary();
-	    engineeringDiary.setCreativeTab(bcadditions).setUnlocalizedName("engineeringDiary");
-	    GameRegistry.registerItem(engineeringDiary, "engineeringDiary");
 
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
         BuildcraftRecipes.assemblyTable.addRecipe(2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
