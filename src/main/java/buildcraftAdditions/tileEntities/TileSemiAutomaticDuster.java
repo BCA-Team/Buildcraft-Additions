@@ -60,7 +60,7 @@ public class TileSemiAutomaticDuster extends TileBaseDuster {
                 for (int slot = 0; slot < outputInventory.getSizeInventory(); slot ++) {
                     int stackLimit = outputInventory.getInventoryStackLimit();
                     if (output != null &&
-                            (outputInventory.getStackInSlot(slot) == null || outputInventory.getStackInSlot(slot).getItem() == output.getItem())) {
+                            (outputInventory.getStackInSlot(slot) == null || ItemStack.areItemStacksEqual(outputInventory.getStackInSlot(slot), output))) {
                         ItemStack stack = outputInventory.getStackInSlot(slot);
                         int toMove;
                         if (stack == null) {

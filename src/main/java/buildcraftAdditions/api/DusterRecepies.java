@@ -23,7 +23,6 @@ public class DusterRecepies {
 
     public static ItemStack getOutput(ItemStack input){
 	    int teller = 0;
-	    input.stackSize = 1;
 	    for (ItemStack stack: dusterInput){
 		    if (ItemStack.areItemStacksEqual(stack, input)){
 			    return dusterOutput.get(teller).copy();
