@@ -61,7 +61,7 @@ processResources
  
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
+        include '*.info'
                 
         // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
@@ -69,13 +69,19 @@ processResources
         
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+        exclude '**/*.info'
     }
 }
 
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'dev'
+}
+
+jar {
+    manifest {
+        attributes 'FMLCorePlugin': 'buildcraftadditions.preloader.BCALoadingPlugin'
+    }
 }
 
 assemble.dependsOn deobfJar
