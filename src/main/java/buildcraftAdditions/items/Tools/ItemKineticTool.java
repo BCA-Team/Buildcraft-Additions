@@ -281,7 +281,7 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
 
 	@Override
 	public boolean isAllowed(EntityPlayer player) {
-		return EurekaKnowledge.isUnlocked(player, Variables.KineticToolKey);
+		return EurekaKnowledge.isFinished(player, Variables.KineticToolKey);
 	}
 
 	@Override

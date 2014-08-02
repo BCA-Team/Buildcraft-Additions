@@ -40,7 +40,7 @@ public class BlockMechanicalDuster extends BlockBase implements IEurekaBlock {
 
     @Override
     public boolean isAllowed(EntityPlayer player) {
-        return EurekaKnowledge.isUnlocked(player, Variables.DustT2Key1);
+        return EurekaKnowledge.isFinished(player, Variables.DustT2Key1);
     }
 
     @Override

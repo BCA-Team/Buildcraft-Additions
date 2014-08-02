@@ -76,7 +76,7 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
 
     @Override
     public boolean isAllowed(EntityPlayer player) {
-        return EurekaKnowledge.isUnlocked(player, Variables.DustT1Key);
+        return EurekaKnowledge.isFinished(player, Variables.DustT1Key);
     }
 
     @Override
