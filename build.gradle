@@ -36,8 +36,9 @@ minecraft {
 }
  
 dependencies {
- 
+    compile project("Eureka")
     compile 'com.mod-buildcraft:buildcraft:6.0.17:dev'  // adds buildcraft to the dev env
+    
  
 }
 

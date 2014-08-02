@@ -1,0 +1,2 @@
+rootProject.name='Buildcraft Additions'
+include ":Eureka"
