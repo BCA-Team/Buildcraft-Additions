@@ -1,3 +1,12 @@
 [{
-
+    "repo": "http://www.mod-buildcraft.com/releases/BuildCraft/6.0.17",
+    "file": "buildcraft-6.0.17.jar",
+    "dev": "buildcraft-6.0.17-dev.jar",
+    "class": "buildcraft.BuildCraftCore"
+},
+{
+    "repo": "https://dl.dropboxusercontent.com/u/148704233/Eureka",
+    "file": "Eureka-1.7.10-1.0.jar",
+    "dev": "Eureka-1.7.10-1.0-dev.jar",
+    "class": "eureka.Eureka"
 }]

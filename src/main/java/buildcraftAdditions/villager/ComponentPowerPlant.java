@@ -2,16 +2,11 @@ package buildcraftAdditions.villager;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftadditions.wordpress.com/
+ * http://buildcraftAdditions.wordpress.com/
  * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
  * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
  */
-
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.util.List;
-import java.util.Random;
 
 import buildcraft.api.blueprints.BlueprintDeployer;
 import net.minecraft.client.Minecraft;
@@ -22,6 +17,11 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Random;
 
 public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 	public static final ResourceLocation redstoneEngine = new ResourceLocation("bcadditions", "blueprints/Redstone-Engine-df2e537ac33b4d684e783cd4b41653bc872d638e1f0c1afecada2a30e670aa39.bpt");

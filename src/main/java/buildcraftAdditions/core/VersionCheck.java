@@ -1,6 +1,5 @@
 package buildcraftAdditions.core;
 
-import buildcraftAdditions.BuildcraftAdditions;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,10 +11,10 @@ import java.util.ArrayList;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftadditions.wordpress.com/
+ * http://buildcraftAdditions.wordpress.com/
  * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
  * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
  */
 public class VersionCheck {
 
@@ -67,7 +66,7 @@ public class VersionCheck {
                 tag.setString("modDisplayName", "Buildcraft Additions");
                 tag.setString("oldVersion", currentVersion);
                 tag.setString("newVersion", newerVersionNumber);
-                tag.setString("updateUrl", "http://buildcraftadditions.wordpress.com/downloads/");
+                tag.setString("updateUrl", "http://buildcraftAdditions.wordpress.com/downloads/");
                 tag.setBoolean("isDirectLink", false);
                 StringBuilder builder = new StringBuilder();
                 for (int t = 0; t < numLines; t++){

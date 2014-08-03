@@ -11,10 +11,10 @@ import org.lwjgl.opengl.GL11;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftadditions.wordpress.com/
+ * http://buildcraftAdditions.wordpress.com/
  * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
  * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
  */
 public class RendererDusterKinetic extends TileEntitySpecialRenderer {
 

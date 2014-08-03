@@ -91,15 +91,15 @@ import java.util.ArrayList;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftadditions.wordpress.com/
+ * http://buildcraftAdditions.wordpress.com/
  * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
  * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
  */
 
 
 
-@Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "required-after:BuildCraft|Energy@{6.0.17}", acceptedMinecraftVersions = "1.7.10")
+@Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "required-after:BuildCraft|Energy", acceptedMinecraftVersions = "1.7.10")
 public class BuildcraftAdditions {
 
     public static ItemCanister ironCanister;

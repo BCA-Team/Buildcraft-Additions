@@ -1,6 +1,5 @@
 package buildcraftAdditions.items.Tools;
 
-import buildcraft.BuildCraftSilicon;
 import buildcraft.api.recipes.IIntegrationRecipeManager;
 import buildcraft.silicon.ItemRedstoneChipset;
 import buildcraftAdditions.items.ItemGoldStick;
@@ -8,10 +7,10 @@ import net.minecraft.item.ItemStack;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftadditions.wordpress.com/
+ * http://buildcraftAdditions.wordpress.com/
  * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
  * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
  */
 public class UpgradeRecepieGoldStick implements IIntegrationRecipeManager.IIntegrationRecipe {
 
