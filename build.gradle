@@ -80,7 +80,7 @@ task deobfJar(type: Jar) {
 
 jar {
     manifest {
-        attributes 'FMLCorePlugin': 'buildcraftAdditions.preloader.BCALoadingPlugin'
+        attributes (['FMLCorePlugin': 'buildcraftAdditions.preloader.BCALoadingPlugin', 'FMLCorePluginContainsFMLMod': 'true'])
     }
 }
 

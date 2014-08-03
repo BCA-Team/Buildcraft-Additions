@@ -99,7 +99,7 @@ import java.util.ArrayList;
 
 
 
-@Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "required-after:BuildCraft|Energy", acceptedMinecraftVersions = "1.7.10")
+@Mod(modid="bcadditions", name="Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "required-after:BuildCraft|Energy;required-after:eureka", acceptedMinecraftVersions = "1.7.10")
 public class BuildcraftAdditions {
 
     public static ItemCanister ironCanister;
