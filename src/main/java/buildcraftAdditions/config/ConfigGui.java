@@ -1,5 +1,6 @@
 package buildcraftAdditions.config;
 
+import buildcraftAdditions.utils.Utils;
 import cpw.mods.fml.client.config.GuiConfig;
 import cpw.mods.fml.client.config.IConfigElement;
 import net.minecraft.client.gui.GuiScreen;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ConfigGui extends GuiConfig {
 
     public ConfigGui(GuiScreen parentScreen) {
-        super(parentScreen, getList(), "bcadditions", false, false, GuiConfig.getAbridgedConfigPath(ConfigurationHandeler.configFile.toString()));
+        super(parentScreen, getList(), "bcadditions", false, false, Utils.localize("config.title"));
     }
 
     public static List<IConfigElement> getList() {

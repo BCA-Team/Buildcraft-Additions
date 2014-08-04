@@ -127,3 +127,28 @@ engineeringDiary.kineticTool.howToMakeProgress=Craft tools
 engineeringDiary.requiredResearch=Required research:
 engineeringDiary.progress=Progress:
 engineeringDiary.unlocked=UNLOCKED
+
+config.title=Buildcraft Additions Configuration
+
+updates=Updates
+updates.tooltip=Configure if BCA should check for updates or not
+shouldCheckForUpdates=Check for updates
+shouldCheckForUpdates.tooltip=True = check for updates, false = do not check for updates
+shouldPrintOutChangelog=Print out changelog
+shouldPrintOutChangelog.tooltip=If set to true true you will also see the changelog of the newer version
+
+BaseModifier=Base Modifier
+BaseModifier.tooltip=Base energy the tools use
+EasyDifficultyModifier=Easy Modifier
+EasyDifficultyModifier.tooltip=The energy consumption is multiplied with this on Easy
+HardDifficultyModifier=Hard Modifier
+HardDifficultyModifier.tooltip=The energy consumption is multiplied with this on Easy
+NormalDifficultyModifier=Normal Modifier
+NormalDifficultyModifier.tooltip=The energy consumption is multiplied with this on Normal
+PeacefullDifficultyModifier=Peacefull Modifier
+PeacefullDifficultyModifier.tooltip=The energy consumption is multiplied with this on Peacefull
+
+Misc=Misc
+shouldRegisterDusts=Register Dusts
+shouldRegisterDusts.tooltip=Set to false to prevent BCA from registering new dusts
+
