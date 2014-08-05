@@ -243,7 +243,7 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
             list.add(Utils.localize("item.toolUpgradeDrill.name") + " " + Utils.localize("tooltip.installed"));
         if (hoe)
             list.add(Utils.localize("item.toolUpgradeHoe.name") + " " + Utils.localize("tooltip.installed"));
-        list.add("Upgrades possible: " + upgradesAllowed);
+        list.add(Utils.localize("tooltip.upgradesPossible") + ": " + upgradesAllowed);
     }
 
     public void setPlayer(EntityPlayer player) {

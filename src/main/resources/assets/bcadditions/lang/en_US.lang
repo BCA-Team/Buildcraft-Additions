@@ -42,6 +42,7 @@ item.engineeringDiary.name=Engineering Diary
 
 tooltip.installed=Installed
 tooltip.deactivated=Deactivated
+tooltip.upgradesPossible=Upgrades Possible
 
 gui.progress=Progress
 gui.fluid=Fluid
