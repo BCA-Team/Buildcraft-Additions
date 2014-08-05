@@ -263,14 +263,20 @@ public class BuildcraftAdditions {
 		DusterRecepies.addDusterRecepie(new ItemStack(Blocks.diamond_ore), new ItemStack(itemDust, 2));
 		DusterRecepies.addDusterRecepie(new ItemStack(Items.diamond), new ItemStack(itemDust, 1));
 
-		addDusts("Iron", Integer.parseInt("D2CEC9", 16));
-		addDusts("Gold", Integer.parseInt("F8DF17", 16));
-		addDusts("Copper", Integer.parseInt("BF5E1F", 16));
-		addDusts("Lead", Integer.parseInt("808096", 16));
-		addDusts("Nickel", Integer.parseInt("BAB0A4", 16));
-		addDusts("Platinum", Integer.parseInt("ABCDEF", 16));
-		addDusts("Silver", Integer.parseInt("B3B3B3", 16));
-		addDusts("Tin", Integer.parseInt("F2F2F2", 16));
+		addDusts("Iron", 0xD2CEC9);
+		addDusts("Gold", 0xF8DF17);
+		addDusts("Copper", 0xBF5E1F);
+		addDusts("Lead", 0x808096);
+		addDusts("Nickel", 0xBAB0A4);
+		addDusts("Platinum", 0xABCDEF);
+		addDusts("Silver", 0xB3B3B3);
+		addDusts("Tin", 0xF2F2F2);
+
+		//TiC metals
+		addDusts("Aluminum", 0xEDEDED);
+		addDusts("Ardite", 0xF28900);
+		addDusts("Steel", 0x878787);
+		addDusts("Manyullyn", 0xAB7EE3);
 
 		if (Loader.isModLoaded("Railcraft"))
 			ModIntegration.railcraftIntegration();
