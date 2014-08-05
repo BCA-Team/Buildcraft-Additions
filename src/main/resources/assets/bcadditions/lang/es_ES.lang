@@ -1,12 +1,12 @@
 tile.blockFluidicCompressor.name=Compresor de líquidos
 tile.blockChargingStation.name=Estación de carga
-tile.blockHeatedFurnace.name=Horno térmico 
+tile.blockHeatedFurnace.name=Horno térmico
 tile.blockCoilBasic.name=Bobina basica
 tile.blockDusterBasic.name=Sacudidor básico
 tile.blockDusterSemiAutomatic.name=Sacudidor semi-automático
 tile.blockDusterMechanical.name=Sacudidor mecánico
 tile.blockDusterKinetic.name=Sacudidor cinético
-
+ 
 item.ironCanister.name=Lata de hierro
 item.goldCanister.name=Lata de oro
 item.diamondCanister.name=Lata de diamante
@@ -22,7 +22,7 @@ item.stickIron.name=Palo de hierro
 item.stickGold.name=Palo de oro
 item.stickDiamond.name=Palo de diamante
 item.stickEmerald.name=Palo de Esmeralda
-item.toolCore.name=Núcleo de la herramienta
+item.toolCore.name=Núcleo de herramienta
 item.toolUpgradeDrill.name=Cabeza del taladro
 item.toolUpgradeDigger.name=Accesorio de excavación
 item.toolUpgradeChainsaw.name=Sierra
@@ -39,25 +39,26 @@ item.dustSilver.name=Polvo de plata
 item.dustDiamond.name=Polvo de diamante
 item.grindingWheel.name=Rueda de moler
 item.engineeringDiary.name=Diario de Ingeniería
-
+ 
 tooltip.installed=Instalado
 tooltip.deactivated=Desactivado
-
+tooltip.upgradesPossible=Mejores disponibles
+ 
 gui.progress=Progreso
 gui.fluid=Líquido
 gui.noFluid=Vacío
 gui.fluidStored=Cantidad de líquido
 gui.energyInTool=Energia guardada
 gui.maxEnergy=Energia máxima
-
+ 
 trigger.canisterRequested=Lata requerida
 trigger.hasEmptyCanister=Tiene lata vacía
 trigger.hasFullCanister=Tiene lata llena
 trigger.doneCharging=Acabado de cargar
 trigger.readyToCharge=Preparado para cargar
-
+ 
 itemGroup.BuildcraftAdditions=Buildcraft Additions
-
+ 
 Eureka=EUREKA!
 eureka.dusterTier0Finished=Empiezas a planear todas tus próximas invenciones pero te das cuenta de que vas a necesitas un montón de recursos. También empiezas a pensar en una forma de hacer eso mas fácil.
 eureka.dusterTier1Finished=Mientras procesas tus minerales, de repente te das cuenta de que hay formas mas eficientes de procesarlos.
@@ -66,77 +67,79 @@ eureka.dusterTier2-2Finished=Te gusta no tener que saltar encima de la maquina, 
 eureka.kineticToolFinished=Mientras creas una nueva herramienta para sustituir la antigua, empiezas a pensar en una herramienta que no se romperá.
 eureka.missingKnowledge=No entiendes como funciona esta maquina (aún) . Intentas usarla, pero debido a tu incompetencia, se rompe en pedazos.
 eureka.missingKnowledgeKineticTool=No entiendes como funciona esta maquina (aún) . Intentas usarla, pero debido a tu incompetencia, se rompe en pedazos.
-
+ 
 engineeringDiary.mainScreen.title=Diario de Ingeniería
 engineeringDiary.mainScreen.description=Este libro es un Diario de tu progreso descubriendo objetos y bloques a través del sistema Eureka. Como un Ingeniero, la experimentación y el testeo es requerido antes de crear una máquina,
 engineeringDiary.mainScreen.page1=y necesitaras crear y usar maquinas simples para tener un momento Eureka, que te llevara a nuevas creaciones. Diviértete!
-
-engineeringDiary.dusterTier0.title=Sacudidor básico
+ 
+engineeringDiary.dusterTier0.title=Sacudidor Básico
 engineeringDiary.dusterTier0.description=Puedes usar esta máquina simple para doblar tus minerales.
 engineeringDiary.dusterTier0.page1=No eres nostálgico, pero a veces le llega a todo el mundo. Te acuerdas de los viejos tiempos, cuando uno tenía todos los minerales que siempre quería, solo para construir grandes contracciones de redstone o vías tan grandes
-engineeringDiary.dusterTier0.page2=que cubrían continentes enteros. Buenos tiempos. Aunque después de la llegada de los ingenieros, todo cambio. Todas sus complejas máquinas y herramientas requerían grandes cantidades de minerales, tanto, que a veces secaban la tierra.
-engineeringDiary.dusterTier0.page3=Empiezas a pensar como incrementar la producción de mineral, y creas el sacudidor básico, una maquina simple creada usando piedra y slimes, con piezas de moledora encima.
-engineeringDiary.dusterTier0.page4=Funciona poniendo mineral encima y saltando, algo con lo que no estas entusiasmado, pero mas minerales son mas minerales. Te preguntas como puedes mejorar esta máquina...
+engineeringDiary.dusterTier0.page2=que cubrían continentes enteros. Buenos tiempos. Aunque después de la llegada de los ingenieros, todo cambio. Todas sus complejas máquinas y herramientas requerían grandes cantidades de minerales, tanto, que a veces
+engineeringDiary.dusterTier0.page3=secaban la tierra. Empiezas a pensar como incrementar la producción de mineral, y creas el sacudidor básico, una maquina simple creada usando piedra y slimes, con piezas de moledora encima.
+engineeringDiary.dusterTier0.page4=Funciona poniendo mineral encima y saltando, algo con lo que no estas entusiasmado, pero más minerales son más minerales. Te preguntas como puedes mejorar esta máquina...
 engineeringDiary.dusterTier0.requiredResearch=Ninguno
 engineeringDiary.dusterTier0.howToMakeProgress=Planea futuras máquinas
-
-
-engineeringDiary.dusterTier1.title=Sacudidor semi automático
+ 
+ 
+engineeringDiary.dusterTier1.title=Sacudidor Semi Automático
 engineeringDiary.dusterTier1.description=Este sacudidor mejorado puede interactuar con inventarios.
-engineeringDiary.dusterTier1.page1=Tu primer sacudidor era una ruptura en la escena del procesamiento del mineral. Nunca antes a sido tan fácil a sido conseguir mas mineral. Todo el mundo entendió que saltar y poner manualmente el mineral era un poco rústico, a si que decides
-engineeringDiary.dusterTier1.page2=centrarte en hacer una máquina mejor, empezando con interactuar con inventarios. Experimentando con Tuberías parece tener un efecto, pero los engranajes de piedra son demasiado toscos para el oro, así que los actualizas a un engranaje de hierro.
-engineeringDiary.dusterTier1.page3=Finalmente, tienes el sacudidor semi-automático. Este sacudidor aun necesita que saltes encima, pero al menos los minerales pueden ser insertados por Tolvas y Tuberías, mientras la salida aparece moverse por si solo. Ahora es horade trabajar en ese problema de saltar.
+engineeringDiary.dusterTier1.page1=Tu primer sacudidor era una ruptura en la escena del procesamiento del mineral. Nunca antes a sido tan fácil conseguir mas mineral. Todo el mundo entendió que saltar y poner manualmente el mineral era un poco rústico, a si que decides
+engineeringDiary.dusterTier1.page2=centrarte en hacer una máquina mejor, empezando con interactuar con inventarios. Experimentando con Tuberías parece tener un efecto, pero los engranajes de piedra son demasiado toscos para el oro, así que los actualizas a un engranaje
+engineeringDiary.dusterTier1.page3=de hierro. Finalmente, tienes el sacudidor semi-automático. Este sacudidor aun necesita que saltes encima, pero al menos los minerales pueden ser insertados por Tolvas y Tuberías, mientras la salida aparece moverse por si solo.
+engineeringDiary.dusterTier1.page4= Ahora es hora de trabajar en ese problema de saltar.
 engineeringDiary.dusterTier1.requiredResearch=Sacudidor básico
 engineeringDiary.dusterTier1.howToMakeProgress=Procesa objetos en el sacudidor básico
-
-engineeringDiary.dusterTier2-1.title=Sacudidor mecánico
-engineeringDiary.dusterTier2-1.description=Esta máquina dobla minerales puede recibir energía
+ 
+engineeringDiary.dusterTier2-1.title=Sacudidor Mecánico
+engineeringDiary.dusterTier2-1.description=Usa energia para procesar.
 engineeringDiary.dusterTier2-1.page1=Después del descubrimiento inicial de la automatización, intentas crear una máquina que doble los minerales por ti, sin éxito. decides ir un paso atrás y usar el sacudidor básico como base para tus experimentos otra vez,
 engineeringDiary.dusterTier2-1.page2=y acabas creando la rueda moledora, un objeto que podría ser la llave a la automatización de esta máquina. y parece ser muy eficiente una vez mejorado el engranaje de piedra a hierro, parece que acepta energía para doblar los minerales.
 engineeringDiary.dusterTier2-1.page3=Finalmente has creado el Sacudidor mecánico! Aunque esta máquina es otro experimento incompleto, ya que no tiene las capacidades del inventario del sacudidor semi-automático. Tienes que mejorarla.
 engineeringDiary.dusterTier2-1.requiredResearch=Sacudidor semi-automático
 engineeringDiary.dusterTier2-1.howToMakeProgress=Procesa objetos en la sacudidora semi-automática
-
-engineeringDiary.dusterTier2-2.title=Sacudidor cinético
-engineeringDiary.dusterTier2-2.description=El sacudidor definitivo (también conocido como sacudeitor 9000)
+ 
+engineeringDiary.dusterTier2-2.title=Sacudidor Cinético
+engineeringDiary.dusterTier2-2.description=El sacudidor definitivo (también conocido como sacudineitor 9000)
 engineeringDiary.dusterTier2-2.page1=Después de muchas versiones fallidas de sacudidores, decides que simplemente no puedes juntar el poder de moler del sacudidor mecánico y las capacidades de inventario del sacudidor semi-automático, así que decides mejorarlo
 engineeringDiary.dusterTier2-2.page2=y probar otro metodo de doblaje de minerales: Lasers. su precisión seguro que ayudara en no romper las tuberías internas como pasaba cada vez que era golpeado por un motor. Afortunadamente funciona,
 engineeringDiary.dusterTier2-2.page3=pero esta vez tienes que involucrar algunos materials de gama alta, incluyendo un engranaje de diamante. El sacudidor cinético a nacido. La precision de los láseres mantiene el circuito de oro integrado intacto,
 engineeringDiary.dusterTier2-2.page4=que permite la máquina recibir energy externa (mediante lasers) y manejar su propio inventario. Ya as acabado aquí.
 engineeringDiary.dusterTier2-2.requiredResearch=Sacudidor mecánico
 engineeringDiary.dusterTier2-2.howToMakeProgress=Procesa objetos en el sacudidor mecánico
-
-engineeringDiary.kineticTool.title=Multi-herramienta cinética
+ 
+engineeringDiary.kineticTool.title=Multi Herramienta Cinética
 engineeringDiary.kineticTool.description=Una herramienta para todas
-engineeringDiary.kineticTool.page1=Las herramientas son una parte fundamental en nuestro mundo, odias que se sigan rompiendo. Las máquinas no parecen romperse nunca, y empiezas a pensar porque. After a while, you realise why: Redstone and Power.
-engineeringDiary.kineticTool.page2=While tools also recieve a sort of Power (the one that comes from your arm), machines recieve a special, Redstone-tuned power, and that seems to be what makes them last indefinetely.
-engineeringDiary.kineticTool.page3=You decide the best way to make Unbreakable tools is to craft them with the highest quality, Redstone-tuned materials. The core of your tool consists of a Gold Gear (for the best speed) combined
-engineeringDiary.kineticTool.page4=with a Diamond Chipset (for the long-lasting, Redstone-tune effect) in the integration table. After using Lasers to perfectly combine those items, you decide that their precision will be key in this process,
-engineeringDiary.kineticTool.page5=so to hold the tool head together, you make an Iron Stick by putting iron in the assembly table. Then its just a matter of combining everything with some Diamonds, since that makes the hardest tools (assembly table)
-engineeringDiary.kineticTool.page6=You finally have your handle, and you’re certain this can hold any tool, and no matter how many times used it’ll never break. However you still need to provide it with power, and for that you create the Kinetic Capsules.
-engineeringDiary.kineticTool.page7=Now its time to upgrade your Kinetic Multi-Tool! For that you put 3 iron, 2 gold and a tool core in the assembly table to make tool heads. After assembeling your first upgrade, you decide
-engineeringDiary.kineticTool.page8=that the Integration Table is best to attach it to the tool. You now have an unbreakable, MJ powered tool. However the costs of this tool were too high for you to consider making another 3 of them.
-engineeringDiary.kineticTool.page9=You decide to tinker around with it and end up finding out how to put another upgrade on the Multi-Tool! You put 4 gold in the assembly table for a golden stick. However attaching this to the tool by itself would make
-engineeringDiary.kineticTool.page10=its Redstone-tune out of sync, so you decide to add a Quartz Chipset alongside it (integration table). The tool seems to know when to use each Upgrade, making it effectively a 2 in 1 tool! This still doesn’t cover all the possible upgrades,
-engineeringDiary.kineticTool.page11=so you assemble to craft a Diamond Stick (2 diamonds in assembly table). And you place it on the tool with a Gold Chipset (integration table). Though the tool now has 3 Upgrades, you wonder if its possible to add a fourth one.
-engineeringDiary.kineticTool.page12=There are no other natural materials that can be made into a Stick, but one day you come across a Powerplant, and inside it you’re surprised to find an Engineer Villager! It appears this Villager has experimented with ideas
-engineeringDiary.kineticTool.page13=very similar to yours in the past, and happens to be carrying some Emerald Sticks! You rush home and combine the Stick with a Diamond Chipset into your tool. Finally, you have all 4 Upgrades into your tool!
-engineeringDiary.kineticTool.requiredResearch=None
-engineeringDiary.kineticTool.howToMakeProgress=Craft tools
-
+engineeringDiary.kineticTool.page1=Las herramientas son una parte fundamental en nuestro mundo, odias que se sigan rompiendo. Las máquinas no parecen romperse nunca, y empiezas a pensar porque. Después de un tiempo, te das cuenta del porque: Redstone y energía.
+engineeringDiary.kineticTool.page2=Mientras las herramientas también reciben una forma de energia (la que viene de tu brazo), máquinas reciben una especial, energia redstoniana, y eso parece hacer que duren para siempre.
+engineeringDiary.kineticTool.page3=Decides que la mejor forma de craftear estas herramientas es con materiales de gama alta,materiales redstonianos. El nucleo de tu herramienta consiste de un engranaje de oro (para la mayor velocidad) combinado
+engineeringDiary.kineticTool.page4=con un circuito de Diamante (para que dure el efecto de redstone) en la mesa de integraciónes. Después de usar lasers para perfectamente combinar esos obejetos, decides que su precision sera importante,
+engineeringDiary.kineticTool.page5=en el proceso, asi que para aguantar la cabeca de la herramienta, creas un palo de Hierro por poner hierro en la mesa de ensamblaje. entonces entonces es solo questión de juntar todo con Diamantes,
+engineeringDiary.kineticTool.page6= ya que eso hace las herramientas mas resistentes (mesa de ensamblaje). Finalmente ya tienes tu mango, y estas seguro de que puede aguantar cualquier herramienta, y da igual cuantas veces usada nunca se rompera.
+engineeringDiary.kineticTool.page7=Aunque, aún tienes que energizarlo, y para eso creas las Capsulas Cinéticas. Ahora es hora de mejorar tu Multi Herramienta! Para eso pones 3 de hierro, 2 de oro y un nucleo de herramienta en la mesa de ensablaje 
+engineeringDiary.kineticTool.page8=para crear cabeceras de herramienta. Después de crear tu primera mejora, decides que la mesa de integración es lo mejor para juntarlo todo. Ahora tienes una herramienta inrompible, MJ energizada. Aunque los costes para esta herramienta 
+engineeringDiary.kineticTool.page9=eran demasiado altos para considerar crear otras 3. Decides manosear con ello y encuentras una forma de añadir otra mejora a tu Multi Herramienta! pones 4 de oro en la mesa de ensamblaje para un palo de oro. 
+engineeringDiary.kineticTool.page10=Aúnque juntar esto a la herramienta por si solo no funcionaria, asi que decides añadir un circuito de quarzo con ello (mesa de integración). La herramienta parece enteder cuando usar cada mejora, haciendola una herramienta 
+engineeringDiary.kineticTool.page11=2 en 1! Esto aun no cubre todas tus posibles mejoras, asi que crafteas un palo de diamante (2 diamanes en la mesa de ensamblaje). Y lo juntas con la herramienta y un chip de oro (mesa de integración). 
+engineeringDiary.kineticTool.page12=Aunque la herramienta tenga 3 mejoras, te preguntas si puedes añadir una cuarta. No hay mas minerals naturales para crear un nuevo palo, pero un dia de encuentras una Planta de energia (aldea), y dentro te encuentras a un Ingeniero aldeano! 
+engineeringDiary.kineticTool.page13=Parece ser que este Aldeano a experimentado con ideas muy similares a las tuyas en el pasado, y aparenta llevar consigo unos Palos de Esmeralda! Vuelves corriendo a casay combinas el palo con un Chip de Diamante into your tool. Finally, you have all 4 Upgrades into your tool!
+engineeringDiary.kineticTool.page14=en tu herramienta. Finalmente, tienes las cuatro mejoras en tu herramienta!
+engineeringDiary.kineticTool.requiredResearch=Ninguno
+engineeringDiary.kineticTool.howToMakeProgress=Craftea herramientas
+ 
 engineeringDiary.requiredResearch=Required research:
 engineeringDiary.progress=Progreso:
 engineeringDiary.unlocked=DESBLOQUEADO
-
+ 
 config.title=Buildcraft Additions (BCA) configuración
-
+ 
 updates=Actualizaciones
 updates.tooltip=Configura si BCA debería mirar si hay actualizaciones o no
 shouldCheckForUpdates=Mirar si hay actualizaciones
 shouldCheckForUpdates.tooltip=“True" = Buscar actualizaciones, “false" = no buscar actualizaciones
 shouldPrintOutChangelog=Mostrar la lista de cambios
 shouldPrintOutChangelog.tooltip=Si puesto en “true" también veras la lista de cambios para la nueva versión
-
+ 
 BaseModifier=Modificador basico
 BaseModifier.tooltip=Energia basica que las herramientas usan
 EasyDifficultyModifier=Modificador facil
@@ -147,7 +150,7 @@ NormalDifficultyModifier=Modificador normal
 NormalDifficultyModifier.tooltip=La consumición de la energía es multiplicada con el modo normal puesto
 PeacefullDifficultyModifier=Modificador “peacefull"
 PeacefullDifficultyModifier.tooltip=La consumición de la energía es multiplicada con el modo “peacefull" puesto
-
+ 
 Misc=Misc
 shouldRegisterDusts=Registrar polvos
 shouldRegisterDusts.tooltip=poner en false para prevenir BCA de registrar nuevos polvos
