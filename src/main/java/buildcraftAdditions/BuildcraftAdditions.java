@@ -19,6 +19,7 @@ import buildcraftAdditions.client.gui.GuiHandler;
 import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
+import buildcraftAdditions.core.ModIntegration;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemDiamondStick;
 import buildcraftAdditions.items.ItemDust;
@@ -67,6 +68,7 @@ import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
 import buildcraftAdditions.villager.VillagerTradeHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -269,6 +271,9 @@ public class BuildcraftAdditions {
 		addDusts("Platinum", Integer.parseInt("ABCDEF", 16));
 		addDusts("Silver", Integer.parseInt("B3B3B3", 16));
 		addDusts("Tin", Integer.parseInt("F2F2F2", 16));
+
+		if (Loader.isModLoaded("Railcraft"))
+			ModIntegration.railcraftIntegration();
 
 	}
 
