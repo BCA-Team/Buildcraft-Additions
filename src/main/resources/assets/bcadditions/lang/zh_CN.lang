@@ -58,8 +58,94 @@ trigger.readyToCharge=预备充能触发
 
 itemGroup.BuildcraftAdditions=建筑|附件
 
-Eureka=有了!(阿基米德附体:Eureka!)
+Eureka=灵光一现!(阿基米德附体:Eureka!)
 eureka.dusterTier1Finished=在加工矿石过程中, 你突然觉察到了一些更有效率的工艺技术.
 eureka.dusterTier2-1Finished=将输出产物放入物品栏令你不胜其烦,你决定尝试研究使之自动化的方法.
 eureka.dusterTier2-2Finished=你希望不必轮换使用不同机器, 你还希望实现自动输入输出, 于是你倾其所学, 研究出一台新的设备, 好像是台带激光的新玩意儿!
 eureka.missingKnowledge=你还搞不明白机器的工作原理. 你尝试使用它, 但它却因为你经验不足胡乱操作而崩溃掉了.
+
+
+engineeringDiary.mainScreen.title=工程日志
+engineeringDiary.mainScreen.description=这本日志记录了你通过灵光一现系统研究物品方块的进度. 作为一名工程师, 在制造机器前需要进行测试与实验,
+engineeringDiary.mainScreen.page1=并且你也需要先制造和使用较简陋的机器来激发有关新发明的灵感. 希望你玩得开心哟!
+
+engineeringDiary.dusterTier0.title=基础打粉机
+engineeringDiary.dusterTier0.description=用这台简陋的设备翻倍你的矿物使用率
+engineeringDiary.dusterTier0.page1=你并非怀旧之人, 只是每个人难免有这样的时候: 回想起那些过去的黄金岁月, 那时候人们拥有数之不尽的矿物, 足以用来制造覆盖整片大陆的大型红石装置和铁路网络.
+engineeringDiary.dusterTier0.page2=那可真是一段黄金时代. 可是一切都在工程师到来后改变了. 他们那些复杂的工具和机械需要的矿物如此之多, 以至于有时候令这富饶大陆的矿脉也开始枯竭.
+engineeringDiary.dusterTier0.page3=你开始试图寻找某种增加矿石利用效率的方法, 就这样你制造出了这台基础打粉机, 一台用粘液球和石头做成的简陋设备, 顶上还装着磨盘.
+engineeringDiary.dusterTier0.page4=它是这样用的:将矿石置于其上, 然后在上面跳跃踩踏就好了. 你自然是不喜欢做这么傻帽的事情, 但这样毕竟能够将矿物使用率翻倍. 能不能对它做点改良呢?
+engineeringDiary.dusterTier0.requiredResearch=无
+engineeringDiary.dusterTier0.howToMakeProgress=规划未来建筑
+
+
+engineeringDiary.dusterTier1.title=半自动打粉机
+engineeringDiary.dusterTier1.description=能与物品栏互动的高级打粉机
+engineeringDiary.dusterTier1.page1=你制造出的第一台打粉机让矿物加工领域的风貌为之一变. 在此之前, 从未有过这样的方法, 能够如此简单地获得更多的矿物. 然后大家一致认为手动塞入矿物然后踩踏碾碎的方式实在有点乡土.
+engineeringDiary.dusterTier1.page2=你决心对机器进行改良, 让它拥有内置的物品栏. 加入管道似乎有用, 而石头齿轮应该换成铁质的, 这样加工黄金的时候不会太过粗糙.
+engineeringDiary.dusterTier1.page3=最终你研究出了这台半自动打粉机. 加工方式依然是跳跃踩踏, 但起码矿物能够通过管道和漏斗进行自动输入了. 输出的粉末还得靠自己拿出来. 现在到了解决跳跃加工的尴尬问题了.
+engineeringDiary.dusterTier1.requiredResearch=基础打粉机
+engineeringDiary.dusterTier1.howToMakeProgress=使用基础打粉机加工矿物
+
+engineeringDiary.dusterTier2-1.title=机械打粉机
+engineeringDiary.dusterTier2-1.description=这台矿率翻倍机能够接受能量输入
+engineeringDiary.dusterTier2-1.page1=你初次尝试改进机器的自动化, 让机器自动为你打粉, 却以失败告终. 于是你决定后退一小步, 以基础打粉机为基础再次进行研究, 
+engineeringDiary.dusterTier2-1.page2= 然后你便发明出了砂轮, 一种实现打粉机自动化的关键零部件. 当你用铁质齿轮代替石头齿轮  后, 发现它非常有用, 能够接受能量输入来加工矿物.
+engineeringDiary.dusterTier2-1.page3=于是你终于研究出这台机械打粉机! 然后这台设备仍然并非尽善尽美. 它并没有半自动打粉机那样的内置物品栏. 你需要再次改进它.
+engineeringDiary.dusterTier2-1.requiredResearch=半自动打粉机
+engineeringDiary.dusterTier2-1.howToMakeProgress=使用半自动打粉机加工矿物
+
+engineeringDiary.dusterTier2-2.title=动力打粉机
+engineeringDiary.dusterTier2-2.description=终极打粉机(亦名夺你命3000型打粉机)
+engineeringDiary.dusterTier2-2.page1=许多失败的打粉机设计尝试之后, 你发现将机械打粉机的砂轮加工和半自动打粉机的内置物品栏功能合二为一是不可能的事情.
+engineeringDiary.dusterTier2-2.page2=于是你决定尝试全新的加工方式: 激光. 他们精密的加工方式不会破坏内置的管道系统, 而机械打粉机那种加工方式则时时刻刻都在对管道系统造成损害.
+engineeringDiary.dusterTier2-2.page3=好在这个方案可以实现. 不过你需要使用更高级的材料: 钻石齿轮. 至此, 动力打粉机诞生了. 
+engineeringDiary.dusterTier2-2.page4=激光精密地与内置的黄金元器件交互, 让机器能够接受外部能量(通过激光), 并自动管理内置的物品栏. 你终于做到了.
+engineeringDiary.dusterTier2-2.requiredResearch=机械打粉机
+engineeringDiary.dusterTier2-2.howToMakeProgress=使用机械打分机加工矿物
+
+engineeringDiary.kineticTool.title=动力万能工具
+engineeringDiary.kineticTool.description=一柄在手天下我有
+engineeringDiary.kineticTool.page1=工具是我们世界相当基础的组成部分, 让你讨厌的是它们老会坏掉. 可机器就从来不会损坏, 你开始好奇其中的缘由. 经过一段时间的研究, 你认为你找到了原因所在: 红石和能量.
+engineeringDiary.kineticTool.page2=While tools also recieve a sort of Power (the one that comes from your arm), machines recieve a special, Redstone-tuned power, and that seems to be what makes them last indefinetely.
+engineeringDiary.kineticTool.page3=You decide the best way to make Unbreakable tools is to craft them with the highest quality, Redstone-tuned materials. The core of your tool consists of a Gold Gear (for the best speed) combined
+engineeringDiary.kineticTool.page4=with a Diamond Chipset (for the long-lasting, Redstone-tune effect) in the integration table. After using Lasers to perfectly combine those items, you decide that their precision will be key in this process,
+engineeringDiary.kineticTool.page5=so to hold the tool head together, you make an Iron Stick by putting iron in the assembly table. Then its just a matter of combining everything with some Diamonds, since that makes the hardest tools (assembly table)
+engineeringDiary.kineticTool.page6=You finally have your handle, and you’re certain this can hold any tool, and no matter how many times used it’ll never break. However you still need to provide it with power, and for that you create the Kinetic Capsules.
+engineeringDiary.kineticTool.page7=Now its time to upgrade your Kinetic Multi-Tool! For that you put 3 iron, 2 gold and a tool core in the assembly table to make tool heads. After assembeling your first upgrade, you decide
+engineeringDiary.kineticTool.page8=that the Integration Table is best to attach it to the tool. You now have an unbreakable, MJ powered tool. However the costs of this tool were too high for you to consider making another 3 of them.
+engineeringDiary.kineticTool.page9=You decide to tinker around with it and end up finding out how to put another upgrade on the Multi-Tool! You put 4 gold in the assembly table for a golden stick. However attaching this to the tool by itself would make
+engineeringDiary.kineticTool.page10=its Redstone-tune out of sync, so you decide to add a Quartz Chipset alongside it (integration table). The tool seems to know when to use each Upgrade, making it effectively a 2 in 1 tool! This still doesn’t cover all the possible upgrades,
+engineeringDiary.kineticTool.page11=so you assemble to craft a Diamond Stick (2 diamonds in assembly table). And you place it on the tool with a Gold Chipset (integration table). Though the tool now has 3 Upgrades, you wonder if its possible to add a fourth one.
+engineeringDiary.kineticTool.page12=There are no other natural materials that can be made into a Stick, but one day you come across a Powerplant, and inside it you’re surprised to find an Engineer Villager! It appears this Villager has experimented with ideas
+engineeringDiary.kineticTool.page13=very similar to yours in the past, and happens to be carrying some Emerald Sticks! You rush home and combine the Stick with a Diamond Chipset into your tool. Finally, you have all 4 Upgrades into your tool!
+engineeringDiary.kineticTool.requiredResearch=无
+engineeringDiary.kineticTool.howToMakeProgress=合成工具
+
+engineeringDiary.requiredResearch=前置研究:
+engineeringDiary.progress=进度:
+engineeringDiary.unlocked=解锁
+
+config.title=*建筑|附件*配置
+
+updates=更新
+updates.tooltip=配置*建筑|附件*是否检测版本更新
+shouldCheckForUpdates=检测更新
+shouldCheckForUpdates.tooltip=True = 检测更新, false = 不检测更新
+shouldPrintOutChangelog=显示更新日志
+shouldPrintOutChangelog.tooltip=如果设置为true true那么你同样能看到较新版本的更新日志
+
+BaseModifier=基础模式
+BaseModifier.tooltip=工具消耗默认能量
+EasyDifficultyModifier=简单模式
+EasyDifficultyModifier.tooltip=简单模式下它的能量消耗加倍
+HardDifficultyModifier=困难模式
+HardDifficultyModifier.tooltip=困难模式下它的能量消耗加倍
+NormalDifficultyModifier=普通模式
+NormalDifficultyModifier.tooltip=普通模式下它的能量消耗加倍
+PeacefullDifficultyModifier=和平模式
+PeacefullDifficultyModifier.tooltip=和平模式下它的能量消耗加倍
+
+Misc=杂项
+shouldRegisterDusts=注册粉末
+shouldRegisterDusts.tooltip=设为false则建筑|附件将不会注册新的粉末.
