@@ -58,7 +58,7 @@ trigger.doneCharging=Acabado de cargar
 trigger.readyToCharge=Preparado para cargar
  
 itemGroup.BuildcraftAdditions=Buildcraft Additions
- 
+
 Eureka=EUREKA!
 eureka.dusterTier0Finished=Empiezas a planear todas tus próximas invenciones pero te das cuenta de que vas a necesitas un montón de recursos. También empiezas a pensar en una forma de hacer eso mas fácil.
 eureka.dusterTier1Finished=Mientras procesas tus minerales, de repente te das cuenta de que hay formas mas eficientes de procesarlos.
@@ -86,8 +86,9 @@ engineeringDiary.dusterTier1.title=Sacudidor Semi Automático
 engineeringDiary.dusterTier1.description=Este sacudidor mejorado puede interactuar con inventarios.
 engineeringDiary.dusterTier1.page1=Tu primer sacudidor era una ruptura en la escena del procesamiento del mineral. Nunca antes a sido tan fácil conseguir mas mineral. Todo el mundo entendió que saltar y poner manualmente el mineral era un poco rústico, a si que decides
 engineeringDiary.dusterTier1.page2=centrarte en hacer una máquina mejor, empezando con interactuar con inventarios. Experimentando con Tuberías parece tener un efecto, pero los engranajes de piedra son demasiado toscos para el oro, así que los actualizas a un engranaje
-engineeringDiary.dusterTier1.page3=de hierro. Finalmente, tienes el sacudidor semi-automático. Este sacudidor aun necesita que saltes encima, pero al menos los minerales pueden ser insertados por Tolvas y Tuberías, mientras la salida aparece moverse por si solo.
+engineeringDiary.dusterTier1.page3=de hierro. Finalmente, tienes el sacudidor semi-automático. Este sacudidor aun necesita que saltes encima, pero al menos los minerales pueden ser insertados por Tolvas y Tuberías, mientras la salida parece salir solo.
 engineeringDiary.dusterTier1.page4= Ahora es hora de trabajar en ese problema de saltar.
+engineeringDiary.dusterTier1.page5=Recuerdas de que no puede interactuar directamente con cofres, solo con Tuberías y Tolvas.
 engineeringDiary.dusterTier1.requiredResearch=Sacudidor básico
 engineeringDiary.dusterTier1.howToMakeProgress=Procesa objetos en el sacudidor básico
  
@@ -127,7 +128,7 @@ engineeringDiary.kineticTool.page14=en tu herramienta. Finalmente, tienes las cu
 engineeringDiary.kineticTool.requiredResearch=Ninguno
 engineeringDiary.kineticTool.howToMakeProgress=Craftea herramientas
  
-engineeringDiary.requiredResearch=Required research:
+engineeringDiary.requiredResearch=Investigación necesaria:
 engineeringDiary.progress=Progreso:
 engineeringDiary.unlocked=DESBLOQUEADO
  
