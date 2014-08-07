@@ -2,6 +2,7 @@ package buildcraftAdditions.eureka;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.variables.Variables;
+import eureka.client.gui.EurekaChapter;
 import eureka.core.EurekaInformation;
 import net.minecraft.item.ItemStack;
 
@@ -36,5 +37,10 @@ public class KineticToolInformation extends EurekaInformation {
 	@Override
 	public String getCategory() {
 		return "BCA";
+	}
+
+	@Override
+	public Class<? extends EurekaChapter> getGuiClass() {
+		return KineticToolGui.class;
 	}
 }

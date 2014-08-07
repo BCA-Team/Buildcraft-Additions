@@ -338,6 +338,7 @@ public class BuildcraftAdditions {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
+	    EurekaRegistry.registerCategory("BCA", new ItemStack(diamondCanister));
 	    EurekaRegistry.registerKey(DusterBasicInformation.class);
         EurekaRegistry.registerKey(DusterSemiAutomaticInformation.class);
         EurekaRegistry.registerKey(DusterMechanicalInformation.class);
