@@ -20,6 +20,11 @@ import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.core.ModIntegration;
+import buildcraftAdditions.eureka.DusterBasicInformation;
+import buildcraftAdditions.eureka.DusterKineticInformation;
+import buildcraftAdditions.eureka.DusterMechanicalInformation;
+import buildcraftAdditions.eureka.DusterSemiAutomaticInformation;
+import buildcraftAdditions.eureka.KineticToolInformation;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemDiamondStick;
 import buildcraftAdditions.items.ItemDust;
@@ -63,7 +68,6 @@ import buildcraftAdditions.triggers.TriggerDoneCharging;
 import buildcraftAdditions.triggers.TriggerHasEmptyCanister;
 import buildcraftAdditions.triggers.TriggerHasFullCanister;
 import buildcraftAdditions.triggers.TriggerReadyToCharge;
-import buildcraftAdditions.variables.Variables;
 import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
 import buildcraftAdditions.villager.VillagerTradeHandler;
@@ -334,11 +338,11 @@ public class BuildcraftAdditions {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
-	    EurekaRegistry.registerKey(Variables.DustT0Key, 1, 1, new ItemStack(basicDusterBlock));
-        EurekaRegistry.registerKey(Variables.DustT1Key, 20, 1, new ItemStack(semiAutomaticDusterBlock));
-        EurekaRegistry.registerKey(Variables.DustT2Key1, 40, 1, new ItemStack(mechanicalDusterBlock));
-        EurekaRegistry.registerKey(Variables.DustT2Key2, 20, 1, new ItemStack(kineticDusterBlock));
-	    EurekaRegistry.registerKey(Variables.KineticToolKey, 10, 1, new ItemStack(kineticTool));
+	    EurekaRegistry.registerKey(DusterBasicInformation.class);
+        EurekaRegistry.registerKey(DusterSemiAutomaticInformation.class);
+        EurekaRegistry.registerKey(DusterMechanicalInformation.class);
+        EurekaRegistry.registerKey(DusterKineticInformation.class);
+	    EurekaRegistry.registerKey(KineticToolInformation.class);
         //EurekaRegistry.registerKey(Variables.CoilT1Key, 60, 1);
     }
 
