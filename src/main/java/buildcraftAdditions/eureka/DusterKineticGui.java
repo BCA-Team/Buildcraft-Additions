@@ -1,5 +1,6 @@
 package buildcraftAdditions.eureka;
 
+import buildcraftAdditions.utils.Utils;
 import eureka.client.gui.EurekaChapter;
 
 /**
@@ -12,7 +13,7 @@ import eureka.client.gui.EurekaChapter;
 public class DusterKineticGui extends EurekaChapter {
 	@Override
 	public String getText(int page) {
-		return null;
+		return eureka.core.Utils.localize("engineeringDiary.dusterTier2-2.page" + page);
 	}
 
 	@Override
@@ -22,6 +23,16 @@ public class DusterKineticGui extends EurekaChapter {
 
 	@Override
 	public boolean hasNextPage(int page) {
-		return false;
+		return !(eureka.core.Utils.localize("engineeringDiary.dusterTier2-2.page" + (page + 1)).equals("engineeringDiary.dusterTier2-2.page" + Integer.toString(page + 1)));
+	}
+
+	@Override
+	public String getRequiredResearch() {
+		return Utils.localize("engineeringDiary.dusterTier2-2.requiredResearch");
+	}
+
+	@Override
+	public String howToMakeProgress() {
+		return Utils.localize("engineeringDiary.dusterTier2-2.howToMakeProgress");
 	}
 }

@@ -1,5 +1,6 @@
 package buildcraftAdditions.eureka;
 
+import buildcraftAdditions.utils.Utils;
 import eureka.client.gui.EurekaChapter;
 
 /**
@@ -12,7 +13,7 @@ import eureka.client.gui.EurekaChapter;
 public class KineticToolGui extends EurekaChapter {
 	@Override
 	public String getText(int page) {
-		return null;
+		return Utils.localize("engineeringDiary.kineticTool.page" + page);
 	}
 
 	@Override
@@ -22,6 +23,16 @@ public class KineticToolGui extends EurekaChapter {
 
 	@Override
 	public boolean hasNextPage(int page) {
-		return false;
+		return !(Utils.localize("engineeringDiary.kineticTool.page" + (page + 1)).equals("engineeringDiary.kineticTool.page" + Integer.toString(page + 1)));
+	}
+
+	@Override
+	public String getRequiredResearch() {
+		return Utils.localize("engineeringDiary.kineticTool.requiredResearch");
+	}
+
+	@Override
+	public String howToMakeProgress() {
+		return Utils.localize("engineeringDiary.kineticTool.howToMakeProgress");
 	}
 }
