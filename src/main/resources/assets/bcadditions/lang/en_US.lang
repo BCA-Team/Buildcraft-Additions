@@ -69,7 +69,7 @@ eureka.missingKnowledge=You have no idea how this machine works (yet). You try t
 eureka.missingKnowledgeKineticTool=You have no idea how this tool works (yet). You try to use it, but due to your incompetence, it falls apart.
 
 engineeringDiary.BCA.title=Buildcraft Additions
-engineeringDiary.BCA.page0=Here you can find all researchable items and there progress
+engineeringDiary.BCA.page0=Here you can find all researchable items and their progress
 
 engineeringDiary.dusterTier0.title=Basic Duster
 engineeringDiary.dusterTier0.page0=You can use this simple machine to double your ores.
