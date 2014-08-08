@@ -40,7 +40,7 @@ public class DusterKineticInformation extends EurekaInformation {
 	}
 
 	@Override
-	public Class<? extends EurekaChapter> getGuiClass() {
-		return DusterKineticGui.class;
+	public EurekaChapter getGui() {
+		return new DusterKineticGui();
 	}
 }

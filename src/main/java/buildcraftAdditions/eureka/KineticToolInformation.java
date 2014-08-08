@@ -40,7 +40,7 @@ public class KineticToolInformation extends EurekaInformation {
 	}
 
 	@Override
-	public Class<? extends EurekaChapter> getGuiClass() {
-		return KineticToolGui.class;
+	public EurekaChapter getGui() {
+		return new KineticToolGui();
 	}
 }

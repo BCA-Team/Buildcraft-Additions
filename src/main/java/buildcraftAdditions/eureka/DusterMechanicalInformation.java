@@ -40,7 +40,7 @@ public class DusterMechanicalInformation extends EurekaInformation {
 	}
 
 	@Override
-	public Class<? extends EurekaChapter> getGuiClass() {
-		return DusterMechanicalGui.class;
+	public EurekaChapter getGui() {
+		return new DusterMechanicalGui();
 	}
 }
