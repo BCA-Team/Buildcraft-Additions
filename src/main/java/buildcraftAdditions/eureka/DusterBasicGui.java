@@ -22,6 +22,6 @@ public class DusterBasicGui extends EurekaChapter {
 
 	@Override
 	public boolean hasNextPage(int page) {
-		return false;
+		return true;
 	}
 }
