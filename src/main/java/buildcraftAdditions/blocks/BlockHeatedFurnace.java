@@ -102,7 +102,7 @@ public class BlockHeatedFurnace extends BlockContainer {
 
     }
 
-
+	@SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side){
         int meta = access.getBlockMetadata(x, y, z);
@@ -129,6 +129,7 @@ public class BlockHeatedFurnace extends BlockContainer {
         }
     }
 
+	@SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
         // If no metadata is set, then this is an icon.

@@ -8,6 +8,8 @@ package buildcraftAdditions.client.gui;
  * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import buildcraftAdditions.utils.Utils;
@@ -20,6 +22,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+@SideOnly(Side.CLIENT)
 public class GuiKineticTool extends GuiContainer{
 	
 	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/GUITool.png");

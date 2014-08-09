@@ -90,7 +90,8 @@ public class BlockFluidicCompressor extends BlockContainer {
         compressor.closeInventory();
         super.breakBlock(world, x, y, z, block, meta);
     }
-	
+
+	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int i, int j) {
 		// If no metadata is set, then this is an icon.

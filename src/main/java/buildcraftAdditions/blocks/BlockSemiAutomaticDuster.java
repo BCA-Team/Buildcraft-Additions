@@ -7,6 +7,8 @@ import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import eureka.core.EurekaKnowledge;
 import eureka.interfaces.IEurekaBlock;
 import net.minecraft.block.material.Material;
@@ -109,6 +111,7 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
 
     }
 
+	@SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
         // If no metadata is set, then this is an icon.
@@ -127,6 +130,7 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
         return sides;
     }
 
+	@SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister register) {
         front = register.registerIcon("bcadditions:dusterSemiAutomaticFront");

@@ -4,6 +4,8 @@ import buildcraft.core.IItemPipe;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.utils.Utils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -87,6 +89,7 @@ public class BlockBasicDuster extends BlockBase {
         return false;
     }
 
+	@SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
         // If no metadata is set, then this is an icon.
@@ -108,6 +111,7 @@ public class BlockBasicDuster extends BlockBase {
         return sides;
     }
 
+	@SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister register) {
         front = register.registerIcon("bcadditions:dusterFront");

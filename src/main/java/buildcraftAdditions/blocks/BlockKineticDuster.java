@@ -100,6 +100,7 @@ public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
 		return false;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side){
 		switch (side) {
@@ -112,6 +113,7 @@ public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
 		return sides[duster.progressStage];
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int side, int meta) {
 		// If no metadata is set, then this is an icon.

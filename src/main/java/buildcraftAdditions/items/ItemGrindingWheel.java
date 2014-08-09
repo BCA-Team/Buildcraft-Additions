@@ -1,5 +1,7 @@
 package buildcraftAdditions.items;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
@@ -17,11 +19,13 @@ public class ItemGrindingWheel extends Item {
 	public ItemGrindingWheel(){
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
 		icon = iconRegister.registerIcon("bcadditions:grindingWheel");
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamage(int damage) {
 		return icon;

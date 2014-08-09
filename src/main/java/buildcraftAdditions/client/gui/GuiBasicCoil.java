@@ -3,6 +3,8 @@ package buildcraftAdditions.client.gui;
 import buildcraft.core.gui.GuiBuildCraft;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.utils.Utils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -13,6 +15,7 @@ import net.minecraft.util.ResourceLocation;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
  */
+@SideOnly(Side.CLIENT)
 public class GuiBasicCoil extends GuiBuildCraft {
     public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/BasicCoilGui.png");
     TileBasicCoil coil;

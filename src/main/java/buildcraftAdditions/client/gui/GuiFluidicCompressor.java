@@ -14,6 +14,8 @@ import buildcraft.core.gui.GuiBuildCraft;
 import buildcraft.core.render.RenderUtils;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.utils.Utils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -23,6 +25,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
+@SideOnly(Side.CLIENT)
 public class GuiFluidicCompressor extends GuiBuildCraft {
 
     TileFluidicCompressor fluidicCompressor;

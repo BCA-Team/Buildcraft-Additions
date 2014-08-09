@@ -46,6 +46,7 @@ public class BlockBasicCoil extends BlockCoilBase {
         return true;
     }
 
+	@SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int i, int j) {
         // If no metadata is set, then this is an icon.
