@@ -173,8 +173,9 @@ public class TileKineticDuster extends TileBaseDuster implements ILaserTarget {
 			    IInventory outputInventory = (IInventory) entity;
 			    for (int slot = 0; slot < outputInventory.getSizeInventory(); slot ++) {
 				    int stackLimit = outputInventory.getInventoryStackLimit();
+				    ItemStack testStack = outputInventory.getStackInSlot(slot);
 				    if (output != null &&
-						    (outputInventory.getStackInSlot(slot) == null || ItemStack.areItemStacksEqual(outputInventory.getStackInSlot(slot), output))) {
+						    (testStack == null || (testStack.stackSize + output.stackSize <= testStack.getMaxStackSize() && testStack.getItem() == output.getItem() && testStack.getItemDamage() == output.getItemDamage()))) {
 					    ItemStack stack = outputInventory.getStackInSlot(slot);
 					    int toMove;
 					    if (stack == null) {
