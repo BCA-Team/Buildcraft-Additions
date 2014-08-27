@@ -28,7 +28,7 @@ public class UpgradeRecepieExcavationAttachment implements IIntegrationRecipeMan
 
     @Override
     public boolean isValidInputB(ItemStack inputB) {
-        return inputB != null && inputB.getItem() instanceof ItemToolUpgradeDigger;
+        return inputB != null && inputB.getItem() instanceof ToolUpgrade && ((ToolUpgrade) inputB.getItem()).getType() == "Digger";
     }
 
     @Override

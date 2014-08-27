@@ -28,7 +28,7 @@ public class UpgradeRecepieSawBlade implements IIntegrationRecipeManager.IIntegr
 
     @Override
     public boolean isValidInputB(ItemStack inputB) {
-        return inputB != null && inputB.getItem() instanceof ItemToolUpgradeChainsaw;
+        return inputB != null && inputB.getItem() instanceof ToolUpgrade && ((ToolUpgrade) inputB.getItem()).getType() == "Chainsaw";
     }
 
     @Override

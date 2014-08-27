@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 
-public abstract class ToolUpgrade extends Item {
+public class ToolUpgrade extends Item {
     public String type;
     public IIcon icon;
 

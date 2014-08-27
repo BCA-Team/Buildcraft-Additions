@@ -2,7 +2,7 @@ package buildcraftAdditions.items.Tools;
 
 import buildcraft.api.recipes.IIntegrationRecipeManager;
 import buildcraft.silicon.ItemRedstoneChipset;
-import buildcraftAdditions.items.ItemGoldStick;
+import buildcraftAdditions.items.ItemBase;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -30,7 +30,7 @@ public class UpgradeRecepieGoldStick implements IIntegrationRecipeManager.IInteg
 
     @Override
     public boolean isValidInputB(ItemStack inputB) {
-        return inputB != null && inputB.getItem() instanceof ItemGoldStick;
+        return inputB != null && inputB.getItem() instanceof ItemBase && inputB.getItem().getUnlocalizedName() == "stickGold";
     }
 
     @Override

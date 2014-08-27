@@ -29,7 +29,7 @@ public class UpgradeRecepieDrillHead implements IIntegrationRecipeManager.IInteg
 
     @Override
     public boolean isValidInputB(ItemStack inputB) {
-        return inputB != null && inputB.getItem() instanceof ItemToolUpgradeDrill;
+        return inputB != null && inputB.getItem() instanceof ToolUpgrade && ((ToolUpgrade)inputB.getItem()).getType() == "Drill";
     }
 
     @Override

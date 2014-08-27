@@ -25,13 +25,9 @@ import buildcraftAdditions.eureka.DusterKineticInformation;
 import buildcraftAdditions.eureka.DusterMechanicalInformation;
 import buildcraftAdditions.eureka.DusterSemiAutomaticInformation;
 import buildcraftAdditions.eureka.KineticToolInformation;
+import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
-import buildcraftAdditions.items.ItemDiamondStick;
 import buildcraftAdditions.items.ItemDust;
-import buildcraftAdditions.items.ItemEmeraldStick;
-import buildcraftAdditions.items.ItemGoldStick;
-import buildcraftAdditions.items.ItemGrindingWheel;
-import buildcraftAdditions.items.ItemIronStick;
 import buildcraftAdditions.items.ItemPowerCapsuleTier1;
 import buildcraftAdditions.items.ItemPowerCapsuleTier2;
 import buildcraftAdditions.items.ItemPowerCapsuleTier3;
@@ -40,12 +36,8 @@ import buildcraftAdditions.items.Tools.ItemMegaChainsaw;
 import buildcraftAdditions.items.Tools.ItemMegaDigger;
 import buildcraftAdditions.items.Tools.ItemMegaDrill;
 import buildcraftAdditions.items.Tools.ItemMegaHoe;
-import buildcraftAdditions.items.Tools.ItemToolCore;
-import buildcraftAdditions.items.Tools.ItemToolUpgradeChainsaw;
-import buildcraftAdditions.items.Tools.ItemToolUpgradeDigger;
-import buildcraftAdditions.items.Tools.ItemToolUpgradeDrill;
-import buildcraftAdditions.items.Tools.ItemToolUpgradeHoe;
 import buildcraftAdditions.items.Tools.ToolCoreRecepie;
+import buildcraftAdditions.items.Tools.ToolUpgrade;
 import buildcraftAdditions.items.Tools.UpgradeRecepieDiamondStick;
 import buildcraftAdditions.items.Tools.UpgradeRecepieDrillHead;
 import buildcraftAdditions.items.Tools.UpgradeRecepieEmeraldStick;
@@ -92,6 +84,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import java.util.ArrayList;
 
@@ -139,6 +132,8 @@ public class BuildcraftAdditions {
     public static Item toolUpgradeChainsaw;
     public static Item itemDust;
 	public static Item itemGrindingWheel;
+	public static Item itemIronWireUnhardened;
+	public static Item itemIronWire;
 
     public static ItemKineticTool kineticTool;
 
@@ -202,39 +197,44 @@ public class BuildcraftAdditions {
         powerCapsuleTier3 = new ItemPowerCapsuleTier3();
         CoreProxy.proxy.registerItem(powerCapsuleTier3);
 
-        ironStick = new ItemIronStick();
+        ironStick = new ItemBase("stickIron");
         CoreProxy.proxy.registerItem(ironStick);
 
-        goldStick = new ItemGoldStick();
+        goldStick = new ItemBase("stickGold");
         CoreProxy.proxy.registerItem(goldStick);
 
-        diamondStick = new ItemDiamondStick();
+        diamondStick = new ItemBase("stickDiamond");
         CoreProxy.proxy.registerItem(diamondStick);
 
-        emeraldStick = new ItemEmeraldStick();
+        emeraldStick = new ItemBase("stickEmerald");
         CoreProxy.proxy.registerItem(emeraldStick);
 
-        toolCore = new ItemToolCore();
+        toolCore = new ItemBase("toolCore");
         CoreProxy.proxy.registerItem(toolCore);
 
-        toolUpgradeHoe = new ItemToolUpgradeHoe();
+        toolUpgradeHoe = new ToolUpgrade("Hoe");
         CoreProxy.proxy.registerItem(toolUpgradeHoe);
 
-        toolUpgradeDigger = new ItemToolUpgradeDigger();
+        toolUpgradeDigger = new ToolUpgrade("Digger");
         CoreProxy.proxy.registerItem(toolUpgradeDigger);
 
-        toolUpgradeDrill = new ItemToolUpgradeDrill();
+        toolUpgradeDrill = new ToolUpgrade("Drill");
         CoreProxy.proxy.registerItem(toolUpgradeDrill);
 
-        toolUpgradeChainsaw = new ItemToolUpgradeChainsaw();
+        toolUpgradeChainsaw = new ToolUpgrade("Chainsaw");
         CoreProxy.proxy.registerItem(toolUpgradeChainsaw);
 
         kineticTool = new ItemKineticTool();
         CoreProxy.proxy.registerItem(kineticTool);
 
-	    itemGrindingWheel = new ItemGrindingWheel();
-	    itemGrindingWheel.setCreativeTab(bcadditions).setUnlocalizedName("grindingWheel");
+	    itemGrindingWheel = new ItemBase("grindingWheel");
 	    GameRegistry.registerItem(itemGrindingWheel, "grindingWheel");
+
+	    itemIronWireUnhardened = new ItemBase("wireIronUnhardened");
+	    GameRegistry.registerItem(itemIronWireUnhardened, "wireIronUnhardened");
+
+	    itemIronWire = new ItemBase("wireIron");
+	    GameRegistry.registerItem(itemIronWire, "wireIron");
 
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
         BuildcraftRecipes.assemblyTable.addRecipe(2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
@@ -306,6 +306,9 @@ public class BuildcraftAdditions {
 	    GameRegistry.addRecipe(new ItemStack(semiAutomaticDusterBlock), "GMG", "PLP", "SSS", 'G', BuildCraftCore.ironGearItem, 'M', Items.gold_ingot, 'P', BuildCraftTransport.pipeItemsGold, 'L', Items.slime_ball, 'S', Blocks.stone);
 	    GameRegistry.addRecipe(new ItemStack(kineticDusterBlock), "GGG", "P P", "IDI", 'G', Blocks.glass, 'P', BuildCraftTransport.pipeItemsGold, 'I', BuildCraftCore.goldGearItem, 'D', BuildCraftCore.diamondGearItem);
 	    GameRegistry.addRecipe(new ItemStack(itemGrindingWheel), "FFF", "FGF", "FFF", 'F', Items.flint, 'G', BuildCraftCore.stoneGearItem);
+	    GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(itemIronWireUnhardened, 2), "DDD",  'D', "dustIron"));
+	    GameRegistry.addSmelting(itemIronWireUnhardened, new ItemStack(itemIronWire, 2), 0.5f);
+	    GameRegistry.addRecipe(new ItemStack(basicCoilBlock), "WWW", "WIW", "WWW", 'W', itemIronWire, 'I', Items.iron_ingot);
 
         if (evt.getSide()== Side.CLIENT){
             VillagerRegistry.instance().registerVillagerId(457);

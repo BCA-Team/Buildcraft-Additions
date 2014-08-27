@@ -28,7 +28,7 @@ public class UpgradeRecepieTiller implements IIntegrationRecipeManager.IIntegrat
 
     @Override
     public boolean isValidInputB(ItemStack inputB) {
-        return inputB != null && inputB.getItem() instanceof ItemToolUpgradeHoe;
+        return inputB != null && inputB.getItem() instanceof ToolUpgrade && ((ToolUpgrade) inputB.getItem()).getType() == "Hoe";
     }
 
     @Override

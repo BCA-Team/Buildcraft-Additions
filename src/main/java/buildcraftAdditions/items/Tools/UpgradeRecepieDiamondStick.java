@@ -2,7 +2,7 @@ package buildcraftAdditions.items.Tools;
 
 import buildcraft.api.recipes.IIntegrationRecipeManager;
 import buildcraft.silicon.ItemRedstoneChipset;
-import buildcraftAdditions.items.ItemDiamondStick;
+import buildcraftAdditions.items.ItemBase;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -30,7 +30,7 @@ public class UpgradeRecepieDiamondStick implements IIntegrationRecipeManager.IIn
 
     @Override
     public boolean isValidInputB(ItemStack inputB) {
-        return inputB != null && inputB.getItem() instanceof ItemDiamondStick;
+        return inputB != null && inputB.getItem() instanceof ItemBase &&  inputB.getItem().getUnlocalizedName() == "stickDiamond";
     }
 
     @Override

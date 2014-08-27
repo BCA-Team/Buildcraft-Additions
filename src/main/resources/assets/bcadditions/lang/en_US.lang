@@ -39,6 +39,8 @@ item.dustSilver.name=Silver Dust
 item.dustDiamond.name=Diamond Dust
 item.grindingWheel.name=Grinding Wheel
 item.engineeringDiary.name=Engineering Diary
+item.wireIron.name=Iron Wire
+item.wireIronUnhardened.name=Iron Wire (Unhardened)
 
 tooltip.installed=Installed
 tooltip.deactivated=Deactivated
