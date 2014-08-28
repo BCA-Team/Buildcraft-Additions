@@ -6,7 +6,7 @@
 },
 {
     "repo": "https://dl.dropboxusercontent.com/u/148704233/Eureka",
-    "file": "Eureka-1.7.10-1.1.jar",
-    "dev": "Eureka-1.7.10-1.1-dev.jar",
+    "file": "Eureka-1.7.10-1.2.jar",
+    "dev": "Eureka-1.7.10-1.2-dev.jar",
     "class": "eureka.Eureka"
 }]
