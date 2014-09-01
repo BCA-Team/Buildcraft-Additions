@@ -1,12 +1,12 @@
 package buildcraftAdditions.items.Tools;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import eureka.core.EurekaKnowledge;
+import eureka.api.EurekaKnowledge;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import eureka.interfaces.IEurekaItem;
+import eureka.api.interfaces.IEurekaItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;

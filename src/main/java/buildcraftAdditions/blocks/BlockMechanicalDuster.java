@@ -8,8 +8,8 @@ import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import eureka.core.EurekaKnowledge;
-import eureka.interfaces.IEurekaBlock;
+import eureka.api.EurekaKnowledge;
+import eureka.api.interfaces.IEurekaBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -53,7 +53,12 @@ public class BlockMechanicalDuster extends BlockBase implements IEurekaBlock {
         return Utils.localize("eureka.missingKnowledge");
     }
 
-    @Override
+	@Override
+	public boolean breakOnInteraction() {
+		return true;
+	}
+
+	@Override
     public TileEntity createNewTileEntity(World world, int getal) {
         return new TileMechanicalDuster();
     }

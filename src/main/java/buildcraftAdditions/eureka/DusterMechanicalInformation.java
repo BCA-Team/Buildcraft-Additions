@@ -2,8 +2,8 @@ package buildcraftAdditions.eureka;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.variables.Variables;
-import eureka.client.gui.EurekaChapter;
-import eureka.core.EurekaInformation;
+import eureka.api.client.gui.EurekaChapter;
+import eureka.api.EurekaInformation;
 import net.minecraft.item.ItemStack;
 
 /**

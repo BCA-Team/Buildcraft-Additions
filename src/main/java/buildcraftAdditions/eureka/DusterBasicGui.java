@@ -1,7 +1,7 @@
 package buildcraftAdditions.eureka;
 
 import buildcraftAdditions.utils.Utils;
-import eureka.client.gui.EurekaChapter;
+import eureka.api.client.gui.EurekaChapter;
 
 /**
  * Copyright (c) 2014, AEnterprise

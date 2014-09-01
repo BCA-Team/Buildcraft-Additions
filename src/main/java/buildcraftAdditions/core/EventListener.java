@@ -6,7 +6,7 @@ import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import eureka.core.EurekaKnowledge;
+import eureka.api.EurekaKnowledge;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.event.entity.player.AchievementEvent;
 

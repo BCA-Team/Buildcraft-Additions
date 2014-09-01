@@ -5,7 +5,7 @@ import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageSemiAutomaticDuster;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
-import eureka.core.EurekaKnowledge;
+import eureka.api.EurekaKnowledge;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
 import net.minecraft.entity.player.EntityPlayer;

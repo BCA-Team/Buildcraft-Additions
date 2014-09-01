@@ -1,8 +1,8 @@
 package buildcraftAdditions.tileEntities.Bases;
 
 import buildcraftAdditions.api.DusterRecepies;
-import eureka.core.EurekaKnowledge;
-import eureka.interfaces.IEurekaTileEntity;
+import eureka.api.EurekaKnowledge;
+import eureka.api.interfaces.IEurekaTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
