@@ -39,6 +39,8 @@ item.dustSilver.name=银粉
 item.dustDiamond.name=钻石粉
 item.grindingWheel.name=砂轮
 item.engineeringDiary.name=工程日志
+item.wireIron.name=铁电缆
+item.wireIronUnhardened.name=铁电缆 (未硬化)
 
 tooltip.installed=已安装
 tooltip.deactivated=已关闭
