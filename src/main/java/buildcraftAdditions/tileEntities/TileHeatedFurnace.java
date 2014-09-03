@@ -4,8 +4,9 @@ import buildcraft.api.core.NetworkData;
 import buildcraft.core.TileBuildCraft;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
+import buildcraftAdditions.utils.Utils;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,7 +19,7 @@ import net.minecraft.tileentity.TileEntity;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
+public class TileHeatedFurnace extends TileBuildCraft implements ISidedInventory {
     private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64, this);
     @NetworkData
     public int progress;
@@ -222,10 +223,25 @@ public class TileHeatedFurnace extends TileBuildCraft implements IInventory {
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
-        return getResult(stack) != null;
+        return getResult(stack) != null && slot == 0;
     }
 
     public int getScaledProgress() {
         return (progress * 23)/6500 + 1;
     }
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int side) {
+		return Utils.createSlotArray(0, 2);
+	}
+
+	@Override
+	public boolean canInsertItem(int slot, ItemStack stack, int side) {
+		return slot == 0;
+	}
+
+	@Override
+	public boolean canExtractItem(int slot, ItemStack stack, int side) {
+		return slot == 1;
+	}
 }
