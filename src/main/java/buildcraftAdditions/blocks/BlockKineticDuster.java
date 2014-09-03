@@ -93,7 +93,7 @@ public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack stack) {
 		super.onBlockPlacedBy(world, i, j, k, entityliving, stack);
 		if (entityliving instanceof EntityPlayer)
-			EurekaKnowledge.eurekaBlockEvent(world, this, i, j, k, (EntityPlayer) entityliving);
+			EurekaKnowledge.eurekaBlockEvent(world, this, i, j, k, (EntityPlayer) entityliving, false);
 
 		ForgeDirection orientation = Utils.get2dOrientation(entityliving);
 		world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(), 1);
