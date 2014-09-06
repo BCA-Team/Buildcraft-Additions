@@ -301,9 +301,9 @@ public class BuildcraftAdditions {
         GameRegistry.addRecipe(new ItemStack(powerCapsuleTier1), "IGI","IRI", "IGI", 'I', Items.iron_ingot, 'G', Items.gold_ingot, 'R', Blocks.redstone_block);
         GameRegistry.addRecipe(new ItemStack(powerCapsuleTier2), "GDG", "GPG", "GDG", 'G', Items.gold_ingot, 'D', Items.diamond, 'P', powerCapsuleTier1);
         GameRegistry.addRecipe(new ItemStack(powerCapsuleTier3), "DED", "DPD", "DED", 'D', Items.diamond, 'E', Items.emerald, 'P', powerCapsuleTier2);
-	    GameRegistry.addRecipe(new ItemStack(basicDusterBlock), "GIG", "SLS", "SSS", 'G', BuildCraftCore.stoneGearItem, 'I', Items.iron_ingot, 'S', Blocks.stone, 'L', Items.slime_ball);
+	    GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(basicDusterBlock), "GIG", "SLS", "SSS", 'G', BuildCraftCore.stoneGearItem, 'I', Items.iron_ingot, 'S', Blocks.stone, 'L', "slimeball"));
 	    GameRegistry.addRecipe(new ItemStack(mechanicalDusterBlock), "GMG", "SFS", "SSS", 'G', BuildCraftCore.ironGearItem, 'M', Items.gold_ingot, 'F', itemGrindingWheel, 'S', Blocks.stone);
-	    GameRegistry.addRecipe(new ItemStack(semiAutomaticDusterBlock), "GMG", "PLP", "SSS", 'G', BuildCraftCore.ironGearItem, 'M', Items.gold_ingot, 'P', BuildCraftTransport.pipeItemsGold, 'L', Items.slime_ball, 'S', Blocks.stone);
+	    GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(semiAutomaticDusterBlock), "GMG", "PLP", "SSS", 'G', BuildCraftCore.ironGearItem, 'M', Items.gold_ingot, 'P', BuildCraftTransport.pipeItemsGold, 'L', "slimeball", 'S', Blocks.stone));
 	    GameRegistry.addRecipe(new ItemStack(kineticDusterBlock), "GGG", "P P", "IDI", 'G', Blocks.glass, 'P', BuildCraftTransport.pipeItemsGold, 'I', BuildCraftCore.goldGearItem, 'D', BuildCraftCore.diamondGearItem);
 	    GameRegistry.addRecipe(new ItemStack(itemGrindingWheel), "FFF", "FGF", "FFF", 'F', Items.flint, 'G', BuildCraftCore.stoneGearItem);
 	    GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(itemIronWireUnhardened, 2), "DDD",  'D', "dustIron"));

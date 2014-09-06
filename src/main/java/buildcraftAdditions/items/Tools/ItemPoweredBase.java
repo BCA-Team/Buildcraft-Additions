@@ -11,6 +11,7 @@ package buildcraftAdditions.items.Tools;
 import buildcraftAdditions.api.IKineticCapsule;
 import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.core.InventoryTool;
+import buildcraftAdditions.utils.Utils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -19,6 +20,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -87,8 +89,10 @@ public class ItemPoweredBase extends ItemSword {
 		this.world = player.worldObj;
 		this.player = player;
 		readBateries(stack, player);
-		if (getEnergy() <= world.getBlock(x, y, z).getBlockHardness(world, x, y, z))
+		if (getEnergy() <= world.getBlock(x, y, z).getBlockHardness(world, x, y, z)) {
+			player.addChatComponentMessage(new ChatComponentText(Utils.localize("kineticTool.outOfPower")));
 			return true;
+		}
 		return false;
 	}
 	

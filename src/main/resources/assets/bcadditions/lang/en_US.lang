@@ -154,3 +154,4 @@ Misc=Misc
 shouldRegisterDusts=Register Dusts
 shouldRegisterDusts.tooltip=Set to false to prevent BCA from registering new dusts
 
+kineticTool.outOfPower=OUT OF POWER, BLOCK BREAKING ABORTED

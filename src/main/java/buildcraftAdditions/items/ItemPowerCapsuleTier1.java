@@ -26,7 +26,7 @@ public class ItemPowerCapsuleTier1 extends BatteryBase {
 	
 	@Override
 	public int getCapacity(){
-        return 3000;
+        return 60000;
 	}
 
     @Override
