@@ -8,8 +8,6 @@ package buildcraftAdditions.items.Tools;
  * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import java.util.List;
-
 import buildcraftAdditions.api.IKineticCapsule;
 import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.core.InventoryTool;
@@ -22,6 +20,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class ItemPoweredBase extends ItemSword {
 
@@ -86,6 +86,9 @@ public class ItemPoweredBase extends ItemSword {
 		this.z = z;
 		this.world = player.worldObj;
 		this.player = player;
+		readBateries(stack, player);
+		if (getEnergy() <= world.getBlock(x, y, z).getBlockHardness(world, x, y, z))
+			return true;
 		return false;
 	}
 	
