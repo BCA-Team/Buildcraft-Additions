@@ -6,6 +6,8 @@ import eureka.api.client.gui.EurekaChapter;
 import eureka.api.EurekaInformation;
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -42,5 +44,10 @@ public class DusterBasicInformation extends EurekaInformation {
 	@Override
 	public EurekaChapter getGui() {
 		return new DusterBasicGui();
+	}
+
+	@Override
+	public ArrayList<String> getRequiredResearch() {
+		return null;
 	}
 }

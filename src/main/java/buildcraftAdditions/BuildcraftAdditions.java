@@ -343,12 +343,12 @@ public class BuildcraftAdditions {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
 	    EurekaRegistry.registerCategory("BCA", new ItemStack(kineticDusterBlock));
-	    EurekaRegistry.registerKey(new DusterBasicInformation());
-        EurekaRegistry.registerKey(new DusterSemiAutomaticInformation());
-        EurekaRegistry.registerKey(new DusterMechanicalInformation());
-        EurekaRegistry.registerKey(new DusterKineticInformation());
-	    EurekaRegistry.registerKey(new KineticToolInformation());
-        //EurekaRegistry.registerKey(Variables.CoilT1Key, 60, 1);
+	    EurekaRegistry.register(new DusterBasicInformation());
+        EurekaRegistry.register(new DusterSemiAutomaticInformation());
+        EurekaRegistry.register(new DusterMechanicalInformation());
+        EurekaRegistry.register(new DusterKineticInformation());
+	    EurekaRegistry.register(new KineticToolInformation());
+        //EurekaRegistry.register(Variables.CoilT1Key, 60, 1);
     }
 
     public void addDusts(String metalName, int color){
