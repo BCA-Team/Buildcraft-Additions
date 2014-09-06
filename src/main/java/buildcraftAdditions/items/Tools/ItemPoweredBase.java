@@ -99,7 +99,8 @@ public class ItemPoweredBase extends ItemSword {
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entity){
 		decreaseEnergy(stack, (block.getBlockHardness(world, x, y, z) * (ConfigurationHandeler.powerDifficultyModifiers[world.difficultySetting.getDifficultyId()]) * ConfigurationHandeler.basePowerModifier), player);
-		return true;
+
+		return false;
 	}
 	
 	
