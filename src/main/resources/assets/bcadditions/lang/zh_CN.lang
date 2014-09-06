@@ -153,3 +153,5 @@ PeacefullDifficultyModifier.tooltip=和平模式下它的能量将加倍消耗
 Misc=Misc
 shouldRegisterDusts=注册粉末
 shouldRegisterDusts.tooltip=设为false则"建筑|附件"将不会注册新的粉末.
+
+kineticTool.outOfPower=动力耗尽, 无法破坏方块
