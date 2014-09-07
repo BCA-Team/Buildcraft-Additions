@@ -67,10 +67,9 @@ eureka.dusterTier2-2Finished=Te gusta no tener que saltar encima de la maquina, 
 eureka.kineticToolFinished=Mientras creas una nueva herramienta para sustituir la antigua, empiezas a pensar en una herramienta que no se romperá.
 eureka.missingKnowledge=No entiendes como funciona esta maquina (aún) . Intentas usarla, pero debido a tu incompetencia, se rompe en pedazos.
 eureka.missingKnowledgeKineticTool=No entiendes como funciona esta maquina (aún) . Intentas usarla, pero debido a tu incompetencia, se rompe en pedazos.
- 
-engineeringDiary.mainScreen.title=Diario de Ingeniería
-engineeringDiary.mainScreen.description=Este libro es un Diario de tu progreso descubriendo objetos y bloques a través del sistema Eureka. Como un Ingeniero, la experimentación y el testeo es requerido antes de crear una máquina,
-engineeringDiary.mainScreen.page1=y necesitaras crear y usar maquinas simples para tener un momento Eureka, que te llevara a nuevas creaciones. Diviértete!
+
+engineeringDiary.BCA.title=Buildcraft Additions
+engineeringDiary.BCA.page0=Aquí podras encontrar todos los objetos investigables y su progreso.
  
 engineeringDiary.dusterTier0.title=Sacudidor Básico
 engineeringDiary.dusterTier0.description=Puedes usar esta máquina simple para doblar tus minerales.
@@ -155,3 +154,5 @@ PeacefullDifficultyModifier.tooltip=La consumición de la energía es multiplica
 Misc=Misc
 shouldRegisterDusts=Registrar polvos
 shouldRegisterDusts.tooltip=poner en false para prevenir BCA de registrar nuevos polvos
+
+kineticTool.outOfPower=SIN ENERGIA, DESHABILITADO EL PODER ROMPER BLOQUES
