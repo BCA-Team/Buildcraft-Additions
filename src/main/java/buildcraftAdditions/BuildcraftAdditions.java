@@ -20,11 +20,6 @@ import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.core.ModIntegration;
-import buildcraftAdditions.eureka.DusterBasicInformation;
-import buildcraftAdditions.eureka.DusterKineticInformation;
-import buildcraftAdditions.eureka.DusterMechanicalInformation;
-import buildcraftAdditions.eureka.DusterSemiAutomaticInformation;
-import buildcraftAdditions.eureka.KineticToolInformation;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemDust;
@@ -60,6 +55,7 @@ import buildcraftAdditions.triggers.TriggerDoneCharging;
 import buildcraftAdditions.triggers.TriggerHasEmptyCanister;
 import buildcraftAdditions.triggers.TriggerHasFullCanister;
 import buildcraftAdditions.triggers.TriggerReadyToCharge;
+import buildcraftAdditions.variables.Variables;
 import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
 import buildcraftAdditions.villager.VillagerTradeHandler;
@@ -74,6 +70,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
+import eureka.api.EurekaInfo;
 import eureka.api.EurekaRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -343,11 +340,11 @@ public class BuildcraftAdditions {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
 	    EurekaRegistry.registerCategory("BCA", new ItemStack(kineticDusterBlock));
-	    EurekaRegistry.register(new DusterBasicInformation());
-        EurekaRegistry.register(new DusterSemiAutomaticInformation());
-        EurekaRegistry.register(new DusterMechanicalInformation());
-        EurekaRegistry.register(new DusterKineticInformation());
-	    EurekaRegistry.register(new KineticToolInformation());
+	    EurekaRegistry.register(new EurekaInfo(Variables.DustT0Key, "BCA", 1, 1, new ItemStack(basicDusterBlock)));
+        EurekaRegistry.register(new EurekaInfo(Variables.DustT1Key, "BCA", 1, 20, new ItemStack(semiAutomaticDusterBlock)));
+        EurekaRegistry.register(new EurekaInfo(Variables.DustT2Key1, "BCA", 1, 40, new ItemStack(mechanicalDusterBlock)));
+        EurekaRegistry.register(new EurekaInfo(Variables.DustT2Key2, "BCA", 1, 20, new ItemStack(kineticDusterBlock)));
+	    EurekaRegistry.register(new EurekaInfo(Variables.KineticToolKey, "BCA", 1, 25, new ItemStack(kineticTool)));
         //EurekaRegistry.register(Variables.CoilT1Key, 60, 1);
     }
 
