@@ -1,5 +1,5 @@
 [{
-    "repo": "http://www.mod-buildcraft.com/releases/BuildCraft/6.0.17",
+    "repo": "http://www.mod-buildcraft.com/releases/BuildCraft/6.0.18",
     "file": "buildcraft-6.0.18.jar",
     "dev": "buildcraft-6.0.18-dev.jar",
     "class": "buildcraft.BuildCraftCore"
