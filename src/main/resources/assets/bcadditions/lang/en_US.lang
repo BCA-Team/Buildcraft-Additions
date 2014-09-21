@@ -6,6 +6,7 @@ tile.blockDusterBasic.name=Basic Duster
 tile.blockDusterSemiAutomatic.name=Semi-Automatic Duster
 tile.blockDusterMechanical.name=Mechanical Duster
 tile.blockDusterKinetic.name=Kinetic Duster
+tile.blockCoilLava.name=Lava Coil
 
 item.ironCanister.name=Iron Canister
 item.goldCanister.name=Gold Canister
@@ -41,6 +42,8 @@ item.grindingWheel.name=Grinding Wheel
 item.engineeringDiary.name=Engineering Diary
 item.wireIron.name=Iron Wire
 item.wireIronUnhardened.name=Iron Wire (Unhardened)
+item.wireGold.name=Gold Wire
+item.wireGoldUnhardened.name=Gold Wire (Unhardened)
 
 tooltip.installed=Installed
 tooltip.deactivated=Deactivated

@@ -3,6 +3,7 @@ package buildcraftAdditions.blocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
@@ -11,9 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraft.core.IItemPipe;
 
-import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.tileEntities.TileLavaCoil;
-import buildcraftAdditions.variables.Variables;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -39,7 +38,7 @@ public class BlockLavaCoil extends BlockCoilBase {
 		}
 
 		if (!world.isRemote)
-			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GuiLavaCoil, world, x, y, z);
+			entityplayer.addChatComponentMessage(new ChatComponentText("Lava Stored: " + ((TileLavaCoil) world.getTileEntity(x, y, z)).getLavaAmount() + "/3000 mb"));
 
 		return true;
 	}

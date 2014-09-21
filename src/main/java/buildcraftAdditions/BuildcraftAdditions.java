@@ -140,6 +140,8 @@ public class BuildcraftAdditions {
 	public static Item itemGrindingWheel;
 	public static Item itemIronWireUnhardened;
 	public static Item itemIronWire;
+	public static Item goldWireUnhardened;
+	public static Item goldWire;
 
     public static ItemKineticTool kineticTool;
 
@@ -242,6 +244,12 @@ public class BuildcraftAdditions {
 	    itemIronWire = new ItemBase("wireIron");
 	    GameRegistry.registerItem(itemIronWire, "wireIron");
 
+		goldWireUnhardened = new ItemBase("wireGoldUnhardened");
+		GameRegistry.registerItem(goldWireUnhardened, "wireGoldUnhardened");
+
+		goldWire = new ItemBase("wireGold");
+		GameRegistry.registerItem(goldWire, "wireGold");
+
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
         BuildcraftRecipes.assemblyTable.addRecipe(2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
         BuildcraftRecipes.assemblyTable.addRecipe(3000, new ItemStack(diamondStick), new ItemStack(Items.diamond, 2));
@@ -317,6 +325,9 @@ public class BuildcraftAdditions {
 	    GameRegistry.addSmelting(itemIronWireUnhardened, new ItemStack(itemIronWire, 2), 0.5f);
 	    GameRegistry.addRecipe(new ItemStack(basicCoilBlock), "WWW", "WIW", "WWW", 'W', itemIronWire, 'I', Items.iron_ingot);
 	    GameRegistry.addRecipe(new ItemStack(heatedFurnaceBlock), "III", "IFI", "III", 'I', Items.iron_ingot, 'F', Blocks.furnace);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(goldWireUnhardened, 2), "DDD", 'D', "dustGold"));
+		GameRegistry.addSmelting(goldWireUnhardened, new ItemStack(goldWire, 2), 0.5f);
+		GameRegistry.addRecipe(new ItemStack(lavaCoilBlock), "WWW", "WIW", "WWW", 'W', goldWire, 'I', Items.iron_ingot);
 
         if (evt.getSide()== Side.CLIENT){
             VillagerRegistry.instance().registerVillagerId(457);

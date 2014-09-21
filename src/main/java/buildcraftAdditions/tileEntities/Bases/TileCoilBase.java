@@ -30,6 +30,7 @@ public abstract class TileCoilBase extends TileBuildCraft {
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
 		shouldHeat = nbt.getBoolean("shouldHeat");
 		burning = nbt.getBoolean("burning");
 		increment = nbt.getInteger("increment");
@@ -39,6 +40,7 @@ public abstract class TileCoilBase extends TileBuildCraft {
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
 		nbt.setBoolean("shouldHeat", shouldHeat);
 		nbt.setBoolean("burning", burning);
 		nbt.setInteger("increment", increment);
