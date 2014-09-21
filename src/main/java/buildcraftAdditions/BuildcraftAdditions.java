@@ -39,6 +39,7 @@ import buildcraftAdditions.blocks.BlockBasicDuster;
 import buildcraftAdditions.blocks.BlockChargingStation;
 import buildcraftAdditions.blocks.BlockFluidicCompressor;
 import buildcraftAdditions.blocks.BlockHeatedFurnace;
+import buildcraftAdditions.blocks.BlockKineticCoil;
 import buildcraftAdditions.blocks.BlockKineticDuster;
 import buildcraftAdditions.blocks.BlockLavaCoil;
 import buildcraftAdditions.blocks.BlockMechanicalDuster;
@@ -75,6 +76,7 @@ import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
+import buildcraftAdditions.tileEntities.TileKineticCoil;
 import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.tileEntities.TileLavaCoil;
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
@@ -119,6 +121,7 @@ public class BuildcraftAdditions {
     public static BlockMechanicalDuster mechanicalDusterBlock;
     public static BlockKineticDuster kineticDusterBlock;
 	public static BlockLavaCoil lavaCoilBlock;
+	public static BlockKineticCoil kineticCoil;
 
     public static Item poweredShovel;
     public static Item drill;
@@ -142,6 +145,8 @@ public class BuildcraftAdditions {
 	public static Item itemIronWire;
 	public static Item goldWireUnhardened;
 	public static Item goldWire;
+	public static Item diamondWireUnhardened;
+	public static Item diamondWire;
 
     public static ItemKineticTool kineticTool;
 
@@ -250,6 +255,12 @@ public class BuildcraftAdditions {
 		goldWire = new ItemBase("wireGold");
 		GameRegistry.registerItem(goldWire, "wireGold");
 
+		diamondWireUnhardened = new ItemBase("wireDiamondUnhardened");
+		GameRegistry.registerItem(diamondWireUnhardened, "wireDiamondUnhardened");
+
+		diamondWire = new ItemBase("wireDiamond");
+		GameRegistry.registerItem(diamondWire, "wireDiamond");
+
         BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(ironStick), Items.iron_ingot);
         BuildcraftRecipes.assemblyTable.addRecipe(2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
         BuildcraftRecipes.assemblyTable.addRecipe(3000, new ItemStack(diamondStick), new ItemStack(Items.diamond, 2));
@@ -328,6 +339,9 @@ public class BuildcraftAdditions {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(goldWireUnhardened, 2), "DDD", 'D', "dustGold"));
 		GameRegistry.addSmelting(goldWireUnhardened, new ItemStack(goldWire, 2), 0.5f);
 		GameRegistry.addRecipe(new ItemStack(lavaCoilBlock), "WWW", "WIW", "WWW", 'W', goldWire, 'I', Items.iron_ingot);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(diamondWireUnhardened, 2), "DDD", 'D', "dustDiamond"));
+		GameRegistry.addSmelting(diamondWireUnhardened, new ItemStack(diamondWire, 2), 0.5f);
+		GameRegistry.addRecipe(new ItemStack(kineticCoil), "WWW", "WIW", "WWW", 'W', diamondWire, 'I', Items.iron_ingot);
 
         if (evt.getSide()== Side.CLIENT){
             VillagerRegistry.instance().registerVillagerId(457);
@@ -354,6 +368,7 @@ public class BuildcraftAdditions {
         GameRegistry.registerTileEntity(TileHeatedFurnace.class, "TileHeatedFurnace");
         GameRegistry.registerTileEntity(TileBasicCoil.class, "TileBasicCoil");
 		GameRegistry.registerTileEntity(TileLavaCoil.class, "TileCoilLava");
+		GameRegistry.registerTileEntity(TileKineticCoil.class, "TileCoilKinetic");
         GameRegistry.registerTileEntity(TileBasicDuster.class, "TileBasicDuster");
         GameRegistry.registerTileEntity(TileSemiAutomaticDuster.class, "TileSemiAutomaticDuster");
         GameRegistry.registerTileEntity(TileMechanicalDuster.class, "TileMechanicalDuster");
@@ -438,6 +453,10 @@ public class BuildcraftAdditions {
         kineticDusterBlock = new BlockKineticDuster();
         kineticDusterBlock.setBlockName("blockDusterKinetic").setCreativeTab(bcadditions);
         GameRegistry.registerBlock(kineticDusterBlock, "blockDusterKinetic");
+
+		kineticCoil = new BlockKineticCoil();
+		kineticCoil.setBlockName("blockCoilKinetic").setCreativeTab(bcadditions);
+		GameRegistry.registerBlock(kineticCoil, "blockCoilKinetic");
     }
 
 }
