@@ -1,13 +1,15 @@
 package buildcraftAdditions.tileEntities;
 
-import buildcraft.api.core.NetworkData;
-import buildcraft.core.inventory.SimpleInventory;
-import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
+
+import buildcraft.api.core.NetworkData;
+import buildcraft.core.inventory.SimpleInventory;
+
+import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 
 ;
 
@@ -20,11 +22,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
  */
 public class TileBasicCoil extends TileCoilBase implements IInventory {
     @NetworkData
-    public int increment;
-    @NetworkData
     private final SimpleInventory inventory = new SimpleInventory(1, "BasicCoil", 64);
-    @NetworkData
-    public int burnTime, fullBurnTime;
 
     public TileBasicCoil(){
         burnTime = 0;
@@ -60,27 +58,12 @@ public class TileBasicCoil extends TileCoilBase implements IInventory {
     public void writeToNBT(NBTTagCompound tag){
         super.writeToNBT(tag);
         inventory.writeToNBT(tag);
-        tag.setInteger("burnTime", burnTime);
-        tag.setInteger("fullBurnTime", fullBurnTime);
-        tag.setInteger("increment", increment);
-        tag.setBoolean("shouldHeat", shouldHeat);
-        tag.setBoolean("burning", burning);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tag){
         super.readFromNBT(tag);
         inventory.readFromNBT(tag);
-        burnTime = tag.getInteger("burnTime");
-        fullBurnTime = tag.getInteger("fullBurnTime");
-        increment = tag.getInteger("increment");
-        shouldHeat = tag.getBoolean("shouldHeat");
-        burning = tag.getBoolean("burning");
-    }
-
-    @Override
-    public int getIncrement() {
-        return increment;
     }
 
     @Override

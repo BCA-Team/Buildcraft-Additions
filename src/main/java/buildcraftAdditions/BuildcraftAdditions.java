@@ -1,11 +1,38 @@
 package buildcraftAdditions;
 
+import java.util.ArrayList;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.relauncher.Side;
+
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+
 import buildcraft.BuildCraftCore;
 import buildcraft.BuildCraftFactory;
 import buildcraft.BuildCraftTransport;
 import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraft.core.proxy.CoreProxy;
 import buildcraft.core.triggers.BCTrigger;
+
 import buildcraftAdditions.api.DusterRecepies;
 import buildcraftAdditions.blocks.BlockBasicCoil;
 import buildcraftAdditions.blocks.BlockBasicDuster;
@@ -13,6 +40,7 @@ import buildcraftAdditions.blocks.BlockChargingStation;
 import buildcraftAdditions.blocks.BlockFluidicCompressor;
 import buildcraftAdditions.blocks.BlockHeatedFurnace;
 import buildcraftAdditions.blocks.BlockKineticDuster;
+import buildcraftAdditions.blocks.BlockLavaCoil;
 import buildcraftAdditions.blocks.BlockMechanicalDuster;
 import buildcraftAdditions.blocks.BlockSemiAutomaticDuster;
 import buildcraftAdditions.client.gui.GuiHandler;
@@ -48,6 +76,7 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import buildcraftAdditions.tileEntities.TileKineticDuster;
+import buildcraftAdditions.tileEntities.TileLavaCoil;
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
 import buildcraftAdditions.triggers.TriggerCanisterRequested;
@@ -59,31 +88,10 @@ import buildcraftAdditions.variables.Variables;
 import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
 import buildcraftAdditions.villager.VillagerTradeHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.relauncher.Side;
+
+
 import eureka.api.EurekaInfo;
 import eureka.api.EurekaRegistry;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-
-import java.util.ArrayList;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -110,6 +118,7 @@ public class BuildcraftAdditions {
     public static BlockSemiAutomaticDuster semiAutomaticDusterBlock;
     public static BlockMechanicalDuster mechanicalDusterBlock;
     public static BlockKineticDuster kineticDusterBlock;
+	public static BlockLavaCoil lavaCoilBlock;
 
     public static Item poweredShovel;
     public static Item drill;
@@ -142,7 +151,7 @@ public class BuildcraftAdditions {
 
     public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 
-    @Mod.Instance(value="bcadditions")
+    @Mod.Instance("bcadditions")
     public static BuildcraftAdditions instance;
 
     @SidedProxy(clientSide="buildcraftAdditions.proxy.ClientProxy", serverSide="buildcraftAdditions.proxy.CommonProxy")
@@ -253,6 +262,7 @@ public class BuildcraftAdditions {
         DusterRecepies.addDusterRecepie(new ItemStack(Blocks.redstone_ore), new ItemStack(Items.redstone, 6));
         DusterRecepies.addDusterRecepie(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, 6));
         DusterRecepies.addDusterRecepie(new ItemStack(Blocks.lapis_ore), new ItemStack(Items.dye, 6, 4));
+        DusterRecepies.addDusterRecepie(new ItemStack(Blocks.lapis_ore), new ItemStack(Items.dye, 6, 4));
 	    DusterRecepies.addDusterRecepie(new ItemStack(Blocks.quartz_ore), new ItemStack(Items.quartz, 2));
     }
 
@@ -332,6 +342,7 @@ public class BuildcraftAdditions {
         GameRegistry.registerTileEntity(TileChargingStation.class, "TileChargingStation");
         GameRegistry.registerTileEntity(TileHeatedFurnace.class, "TileHeatedFurnace");
         GameRegistry.registerTileEntity(TileBasicCoil.class, "TileBasicCoil");
+		GameRegistry.registerTileEntity(TileLavaCoil.class, "TileCoilLava");
         GameRegistry.registerTileEntity(TileBasicDuster.class, "TileBasicDuster");
         GameRegistry.registerTileEntity(TileSemiAutomaticDuster.class, "TileSemiAutomaticDuster");
         GameRegistry.registerTileEntity(TileMechanicalDuster.class, "TileMechanicalDuster");
@@ -396,6 +407,10 @@ public class BuildcraftAdditions {
         basicCoilBlock = new BlockBasicCoil();
         basicCoilBlock.setBlockName("blockCoilBasic").setCreativeTab(bcadditions);
         GameRegistry.registerBlock(basicCoilBlock, "blockCoilBasic");
+
+		lavaCoilBlock = new BlockLavaCoil();
+		lavaCoilBlock.setBlockName("blockCoilLava").setCreativeTab(bcadditions);
+		GameRegistry.registerBlock(lavaCoilBlock, "blockCoilLava");
 
         basicDusterBlock = new BlockBasicDuster();
         basicDusterBlock.setBlockName("blockDusterBasic").setCreativeTab(bcadditions);
