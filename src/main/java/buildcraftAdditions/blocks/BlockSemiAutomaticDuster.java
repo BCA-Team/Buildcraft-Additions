@@ -5,30 +5,25 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraft.BuildCraftCore;
-import buildcraft.BuildCraftTransport;
 import buildcraft.core.IItemPipe;
 
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.variables.Variables;
 
 
-import eureka.api.EurekaKnowledge;
-import eureka.api.interfaces.IEurekaBlock;
+import eureka.api.events.BlockCheckEvent;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -37,7 +32,7 @@ import eureka.api.interfaces.IEurekaBlock;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock {
+public class BlockSemiAutomaticDuster extends BlockBase {
 	public IIcon front, sides, top, bottom;
 
 	public BlockSemiAutomaticDuster() {
@@ -83,31 +78,11 @@ public class BlockSemiAutomaticDuster extends BlockBase implements IEurekaBlock 
 	}
 
 	@Override
-	public boolean isAllowed(EntityPlayer player) {
-		return EurekaKnowledge.isFinished(player, Variables.DustT1Key);
-	}
-
-	@Override
-	public ItemStack[] getComponents() {
-		return new ItemStack[]{new ItemStack(BuildCraftCore.ironGearItem, 2), new ItemStack(Items.gold_ingot), new ItemStack(BuildCraftTransport.pipeItemsGold, 2), new ItemStack(Blocks.stone, 3)};
-	}
-
-	@Override
-	public String getMessage() {
-		return Utils.localize("eureka.missingKnowledge");
-	}
-
-	@Override
-	public boolean breakOnInteraction() {
-		return true;
-	}
-
-	@Override
 	public void onFallenUpon(World world, int x, int y, int z, Entity entity, float hit) {
 		if (entity instanceof EntityPlayer) {
 			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof TileSemiAutomaticDuster) {
-				EurekaKnowledge.eurekaBlockEvent(world, (IEurekaBlock) world.getBlock(x, y, z), x, y, z, (EntityPlayer) entity, false);
+				FMLCommonHandler.instance().bus().post(new BlockCheckEvent((EntityPlayer) entity, this, x, y, z));
 				((TileSemiAutomaticDuster) tileEntity).makeProgress((EntityPlayer) entity);
 			}
 		}

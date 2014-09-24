@@ -51,7 +51,7 @@ public class EventListener {
 		@SubscribeEvent
 		public void onCrafted(PlayerEvent.ItemCraftedEvent event) {
 			if (event.crafting.getItem().isItemTool(event.crafting))
-				EurekaKnowledge.makeProgress(event.player, Variables.KineticToolKey);
+				EurekaKnowledge.makeProgress(event.player, Variables.KineticToolKey, 1);
 		}
 	}
 
@@ -60,7 +60,7 @@ public class EventListener {
 		@SubscribeEvent
 		public void onGettingAchievement(AchievementEvent event) {
 			//unlock basic duster
-			EurekaKnowledge.makeProgress(event.entityPlayer, Variables.DustT0Key);
+			EurekaKnowledge.makeProgress(event.entityPlayer, Variables.DustT0Key, 1);
 		}
 	}
 }

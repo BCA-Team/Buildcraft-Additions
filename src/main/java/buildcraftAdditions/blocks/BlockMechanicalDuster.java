@@ -4,8 +4,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -17,17 +15,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraft.BuildCraftCore;
 import buildcraft.core.IItemPipe;
 
-import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.variables.Variables;
-
-
-import eureka.api.EurekaKnowledge;
-import eureka.api.interfaces.IEurekaBlock;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -36,32 +27,12 @@ import eureka.api.interfaces.IEurekaBlock;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockMechanicalDuster extends BlockBase implements IEurekaBlock {
+public class BlockMechanicalDuster extends BlockBase {
 	public IIcon front, sides, bottom;
 	public IIcon top[] = new IIcon[4];
 
 	public BlockMechanicalDuster() {
 		super(Material.iron);
-	}
-
-	@Override
-	public boolean isAllowed(EntityPlayer player) {
-		return EurekaKnowledge.isFinished(player, Variables.DustT2Key1);
-	}
-
-	@Override
-	public ItemStack[] getComponents() {
-		return new ItemStack[]{new ItemStack(BuildCraftCore.ironGearItem, 2), new ItemStack(Items.gold_ingot, 1), new ItemStack(BuildcraftAdditions.itemGrindingWheel, 1), new ItemStack(Blocks.stone, 5)};
-	}
-
-	@Override
-	public String getMessage() {
-		return Utils.localize("eureka.missingKnowledge");
-	}
-
-	@Override
-	public boolean breakOnInteraction() {
-		return true;
 	}
 
 	@Override

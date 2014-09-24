@@ -348,12 +348,27 @@ public class BuildcraftAdditions {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
 		EurekaRegistry.registerCategory("BCA", new ItemStack(kineticDusterBlock));
+
 		EurekaRegistry.register(new EurekaInfo(Variables.DustT0Key, "BCA", 1, 1, new ItemStack(basicDusterBlock)));
+		EurekaRegistry.registerDrops(Variables.DustT0Key, new ItemStack(BuildCraftCore.stoneGearItem, 2), new ItemStack(Items.iron_ingot), new ItemStack(Blocks.stone, 5), new ItemStack(Items.slime_ball));
+		EurekaRegistry.bindToKey(basicDusterBlock, Variables.DustT0Key);
+
 		EurekaRegistry.register(new EurekaInfo(Variables.DustT1Key, "BCA", 1, 20, new ItemStack(semiAutomaticDusterBlock)));
+		EurekaRegistry.registerDrops(Variables.DustT1Key, new ItemStack(BuildCraftCore.ironGearItem, 2), new ItemStack(Items.gold_ingot), new ItemStack(BuildCraftTransport.pipeItemsGold, 2), new ItemStack(Blocks.stone, 3));
+		EurekaRegistry.bindToKey(semiAutomaticDusterBlock, Variables.DustT1Key);
+
 		EurekaRegistry.register(new EurekaInfo(Variables.DustT2Key1, "BCA", 1, 40, new ItemStack(mechanicalDusterBlock)));
+		EurekaRegistry.registerDrops(Variables.DustT2Key1, new ItemStack(BuildCraftCore.ironGearItem, 2), new ItemStack(Items.gold_ingot, 1), new ItemStack(itemGrindingWheel, 1), new ItemStack(Blocks.stone, 5));
+		EurekaRegistry.bindToKey(mechanicalDusterBlock, Variables.DustT2Key1);
+
 		EurekaRegistry.register(new EurekaInfo(Variables.DustT2Key2, "BCA", 1, 20, new ItemStack(kineticDusterBlock)));
+		EurekaRegistry.registerDrops(Variables.DustT2Key2, new ItemStack(Blocks.glass, 3), new ItemStack(BuildCraftTransport.pipeItemsGold, 2), new ItemStack(BuildCraftCore.goldGearItem, 2), new ItemStack(BuildCraftCore.diamondGearItem));
+		EurekaRegistry.bindToKey(mechanicalDusterBlock, Variables.DustT2Key2);
+
 		EurekaRegistry.register(new EurekaInfo(Variables.KineticToolKey, "BCA", 1, 25, new ItemStack(kineticTool)));
-		//EurekaRegistry.register(Variables.CoilT1Key, 60, 1);
+		EurekaRegistry.registerDrops(Variables.KineticToolKey, new ItemStack(Items.diamond, 3), new ItemStack(ironStick), new ItemStack(toolCore));
+		EurekaRegistry.bindToKey(kineticTool, Variables.KineticToolKey);
+
 	}
 
 	public void addDusts(String metalName, int color) {

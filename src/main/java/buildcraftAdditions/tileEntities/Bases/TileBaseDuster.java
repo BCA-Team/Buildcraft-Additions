@@ -7,7 +7,6 @@ import buildcraftAdditions.api.DusterRecepies;
 
 
 import eureka.api.EurekaKnowledge;
-import eureka.api.interfaces.IEurekaTileEntity;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -16,7 +15,7 @@ import eureka.api.interfaces.IEurekaTileEntity;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileBaseDuster extends TileBase implements IEurekaTileEntity {
+public abstract class TileBaseDuster extends TileBase {
 	public int progress;
 	private String key;
 
@@ -41,8 +40,7 @@ public abstract class TileBaseDuster extends TileBase implements IEurekaTileEnti
 		return DusterRecepies.getOutput(stack);
 	}
 
-	@Override
 	public void makeProgress(EntityPlayer player, String key) {
-		EurekaKnowledge.makeProgress(player, key);
+		EurekaKnowledge.makeProgress(player, key, 1);
 	}
 }

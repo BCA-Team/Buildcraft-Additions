@@ -4,7 +4,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -16,17 +15,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraft.BuildCraftCore;
-import buildcraft.BuildCraftTransport;
 import buildcraft.core.IItemPipe;
 
 import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.variables.Variables;
-
-
-import eureka.api.EurekaKnowledge;
-import eureka.api.interfaces.IEurekaBlock;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -35,31 +27,11 @@ import eureka.api.interfaces.IEurekaBlock;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
+public class BlockKineticDuster extends BlockBase {
 	public IIcon bottom, sides[], top;
 
 	public BlockKineticDuster() {
 		super(Material.iron);
-	}
-
-	@Override
-	public boolean isAllowed(EntityPlayer player) {
-		return EurekaKnowledge.isFinished(player, Variables.DustT2Key2);
-	}
-
-	@Override
-	public ItemStack[] getComponents() {
-		return new ItemStack[]{new ItemStack(Blocks.glass, 3), new ItemStack(BuildCraftTransport.pipeItemsGold, 2), new ItemStack(BuildCraftCore.goldGearItem, 2), new ItemStack(BuildCraftCore.diamondGearItem)};
-	}
-
-	@Override
-	public String getMessage() {
-		return Utils.localize("eureka.missingKnowledge");
-	}
-
-	@Override
-	public boolean breakOnInteraction() {
-		return true;
 	}
 
 	@Override
@@ -98,9 +70,6 @@ public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
 	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack stack) {
 		super.onBlockPlacedBy(world, i, j, k, entityliving, stack);
-		if (entityliving instanceof EntityPlayer)
-			EurekaKnowledge.eurekaBlockEvent(world, this, i, j, k, (EntityPlayer) entityliving, false);
-
 		ForgeDirection orientation = Utils.get2dOrientation(entityliving);
 		world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(), 1);
 

@@ -7,7 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
@@ -20,10 +19,6 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.Variables;
 
-
-import eureka.api.EurekaKnowledge;
-import eureka.api.interfaces.IEurekaItem;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -32,7 +27,7 @@ import eureka.api.interfaces.IEurekaItem;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
+public class ItemKineticTool extends ItemPoweredBase {
 	public boolean chainsaw, digger, drill, hoe, goldStick, diamondStick, emeraldStick;
 	public int upgradesAllowed;
 	public IIcon icon, iconAlt, overlayChainsaw, overlayDigger, overlayDrill, overlayHoe;
@@ -278,20 +273,5 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
 		if (lastMode.equals("hoe"))
 			return iconHoe;
 		return icon;
-	}
-
-	@Override
-	public boolean isAllowed(EntityPlayer player) {
-		return EurekaKnowledge.isFinished(player, Variables.KineticToolKey);
-	}
-
-	@Override
-	public String getMessage() {
-		return Utils.localize("eureka.missingKnowledgeKineticTool");
-	}
-
-	@Override
-	public ItemStack[] getComponents() {
-		return new ItemStack[]{new ItemStack(Items.diamond, 3), new ItemStack(BuildcraftAdditions.ironStick), new ItemStack(BuildcraftAdditions.toolCore)};
 	}
 }

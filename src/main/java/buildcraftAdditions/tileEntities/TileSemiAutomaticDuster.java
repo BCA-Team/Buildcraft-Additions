@@ -99,7 +99,7 @@ public class TileSemiAutomaticDuster extends TileBaseDuster {
 
 	@Override
 	public void makeProgress(EntityPlayer player, String key) {
-		EurekaKnowledge.makeProgress(player, key);
+		EurekaKnowledge.makeProgress(player, key, 1);
 	}
 
 	@Override
