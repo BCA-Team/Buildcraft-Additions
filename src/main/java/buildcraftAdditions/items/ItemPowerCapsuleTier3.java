@@ -17,36 +17,36 @@ import cpw.mods.fml.relauncher.SideOnly;
 import buildcraftAdditions.BuildcraftAdditions;
 
 public class ItemPowerCapsuleTier3 extends BatteryBase {
-    IIcon icon;
-	
-	public ItemPowerCapsuleTier3(){
+	IIcon icon;
+
+	public ItemPowerCapsuleTier3() {
 		this.maxStackSize = 1;
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		this.setUnlocalizedName("PowerCapsuleTier3");
 		this.setMaxDamage(4000);
 	}
-	
+
 	@Override
-	public int getCapacity(){
+	public int getCapacity() {
 		return 240000;
 	}
 
-    @Override
-    public String getType() {
-        return "(Tier 3): ";
-    }
+	@Override
+	public String getType() {
+		return "(Tier 3): ";
+	}
 
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister) {
-        icon = par1IconRegister.registerIcon("bcadditions:T3_battery");
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister par1IconRegister) {
+		icon = par1IconRegister.registerIcon("bcadditions:T3_battery");
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int damage) {
-        return icon;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIconFromDamage(int damage) {
+		return icon;
+	}
 
 }

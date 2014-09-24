@@ -19,29 +19,29 @@ import buildcraftAdditions.BuildcraftAdditions;
  */
 public class ItemDust extends Item {
 
-    public IIcon icon;
-    public int color;
+	public IIcon icon;
+	public int color;
 
-    public ItemDust(int color){
-        setCreativeTab(BuildcraftAdditions.bcadditions);
-        this.color = color;
-    }
+	public ItemDust(int color) {
+		setCreativeTab(BuildcraftAdditions.bcadditions);
+		this.color = color;
+	}
 
-    @Override
-    public int getColorFromItemStack(ItemStack stack, int meta) {
-        return color;
-    }
+	@Override
+	public int getColorFromItemStack(ItemStack stack, int meta) {
+		return color;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister) {
-        icon = par1IconRegister.registerIcon("bcadditions:dust");
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister par1IconRegister) {
+		icon = par1IconRegister.registerIcon("bcadditions:dust");
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int damage) {
-        return icon;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIconFromDamage(int damage) {
+		return icon;
+	}
 
 }

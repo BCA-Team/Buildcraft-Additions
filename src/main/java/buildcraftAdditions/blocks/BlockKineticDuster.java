@@ -38,24 +38,24 @@ import eureka.api.interfaces.IEurekaBlock;
 public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
 	public IIcon bottom, sides[], top;
 
-    public BlockKineticDuster() {
-        super(Material.iron);
-    }
+	public BlockKineticDuster() {
+		super(Material.iron);
+	}
 
-    @Override
-    public boolean isAllowed(EntityPlayer player) {
-        return EurekaKnowledge.isFinished(player, Variables.DustT2Key2);
-    }
+	@Override
+	public boolean isAllowed(EntityPlayer player) {
+		return EurekaKnowledge.isFinished(player, Variables.DustT2Key2);
+	}
 
-    @Override
-    public ItemStack[] getComponents() {
-        return new ItemStack[]{new ItemStack(Blocks.glass, 3), new ItemStack(BuildCraftTransport.pipeItemsGold, 2), new ItemStack(BuildCraftCore.goldGearItem, 2), new ItemStack(BuildCraftCore.diamondGearItem)};
-    }
+	@Override
+	public ItemStack[] getComponents() {
+		return new ItemStack[]{new ItemStack(Blocks.glass, 3), new ItemStack(BuildCraftTransport.pipeItemsGold, 2), new ItemStack(BuildCraftCore.goldGearItem, 2), new ItemStack(BuildCraftCore.diamondGearItem)};
+	}
 
-    @Override
-    public String getMessage() {
-        return Utils.localize("eureka.missingKnowledge");
-    }
+	@Override
+	public String getMessage() {
+		return Utils.localize("eureka.missingKnowledge");
+	}
 
 	@Override
 	public boolean breakOnInteraction() {
@@ -63,9 +63,9 @@ public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
 	}
 
 	@Override
-    public TileEntity createNewTileEntity(World world, int getal) {
-        return new TileKineticDuster();
-    }
+	public TileEntity createNewTileEntity(World world, int getal) {
+		return new TileKineticDuster();
+	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
@@ -85,7 +85,7 @@ public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
 			if (player.getCurrentEquippedItem().stackSize <= 0)
 				player.setCurrentItemOrArmor(0, null);
 		} else {
-			if (duster.getStackInSlot(0) != null){
+			if (duster.getStackInSlot(0) != null) {
 				if (!world.isRemote)
 					Utils.dropItemstack(world, x, y, z, duster.getStackInSlot(0));
 				duster.setInventorySlotContents(0, null);
@@ -113,7 +113,7 @@ public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side){
+	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side) {
 		switch (side) {
 			case 0:
 				return bottom;
@@ -148,6 +148,6 @@ public class BlockKineticDuster extends BlockBase implements IEurekaBlock {
 		sides[2] = par1IconRegister.registerIcon("bcadditions:dusterKineticSide2");
 		sides[3] = par1IconRegister.registerIcon("bcadditions:dusterKineticSide3");
 		bottom = par1IconRegister.registerIcon("bcadditions:dusterKineticBottom");
-		top= par1IconRegister.registerIcon("bcadditions:dusterKineticTop");
+		top = par1IconRegister.registerIcon("bcadditions:dusterKineticTop");
 	}
 }

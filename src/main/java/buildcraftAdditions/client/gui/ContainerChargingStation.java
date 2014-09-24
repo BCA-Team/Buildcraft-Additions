@@ -18,7 +18,7 @@ import buildcraft.core.gui.slots.SlotValidated;
 
 import buildcraftAdditions.tileEntities.TileChargingStation;
 
-public class ContainerChargingStation extends BuildCraftContainer{
+public class ContainerChargingStation extends BuildCraftContainer {
 	IInventory playerIInventory;
 	TileChargingStation chargingStation;
 
@@ -26,27 +26,24 @@ public class ContainerChargingStation extends BuildCraftContainer{
 		super(tile.getSizeInventory());
 		playerIInventory = inventory;
 		chargingStation = tile;
-		
+
 		this.addSlotToContainer(new SlotValidated(tile, 0, 84, 28));
-		
-		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
-        {
-            for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex)
-            {
-                this.addSlotToContainer(new Slot(inventory, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 8 + inventoryColumnIndex * 18, 71 + inventoryRowIndex * 18));
-            }
-        }
-		for (int hotbbarIndex = 0; hotbbarIndex < 9; ++hotbbarIndex)
-        {
-            this.addSlotToContainer(new Slot(inventory, hotbbarIndex, 8 + hotbbarIndex * 18, 129));
-        }
+
+		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex) {
+			for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex) {
+				this.addSlotToContainer(new Slot(inventory, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 8 + inventoryColumnIndex * 18, 71 + inventoryRowIndex * 18));
+			}
+		}
+		for (int hotbbarIndex = 0; hotbbarIndex < 9; ++hotbbarIndex) {
+			this.addSlotToContainer(new Slot(inventory, hotbbarIndex, 8 + hotbbarIndex * 18, 129));
+		}
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
 		return chargingStation.isUseableByPlayer(var1);
 	}
-	
+
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();

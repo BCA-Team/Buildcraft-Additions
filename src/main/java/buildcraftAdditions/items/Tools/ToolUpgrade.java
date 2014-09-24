@@ -18,29 +18,29 @@ import cpw.mods.fml.relauncher.SideOnly;
 import buildcraftAdditions.BuildcraftAdditions;
 
 public class ToolUpgrade extends Item {
-    public String type;
-    public IIcon icon;
+	public String type;
+	public IIcon icon;
 
-    public ToolUpgrade(String upgrade){
-        this.setMaxStackSize(16);
-        this.setCreativeTab(BuildcraftAdditions.bcadditions);
-        this.setUnlocalizedName("toolUpgrade" + upgrade);
-        this.type = upgrade;
-    }
+	public ToolUpgrade(String upgrade) {
+		this.setMaxStackSize(16);
+		this.setCreativeTab(BuildcraftAdditions.bcadditions);
+		this.setUnlocalizedName("toolUpgrade" + upgrade);
+		this.type = upgrade;
+	}
 
-    public String getType(){
-        return type;
-    }
+	public String getType() {
+		return type;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister) {
-        icon = par1IconRegister.registerIcon("bcadditions:" + getType() +"Upgrade");
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister par1IconRegister) {
+		icon = par1IconRegister.registerIcon("bcadditions:" + getType() + "Upgrade");
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int damage) {
-        return icon;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIconFromDamage(int damage) {
+		return icon;
+	}
 }

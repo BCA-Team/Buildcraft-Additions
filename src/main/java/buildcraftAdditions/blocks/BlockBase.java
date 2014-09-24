@@ -18,28 +18,28 @@ import buildcraftAdditions.utils.Utils;
  */
 public abstract class BlockBase extends BlockContainer {
 
-    public BlockBase(Material material) {
-        super(material);
-        setHardness(5F);
-        setResistance(10F);
-    }
+	public BlockBase(Material material) {
+		super(material);
+		setHardness(5F);
+		setResistance(10F);
+	}
 
-    @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int meta){
-        TileBase entity = (TileBase) world.getTileEntity(x, y, z);
-        if (entity != null) {
-            entity.openInventory();
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+		TileBase entity = (TileBase) world.getTileEntity(x, y, z);
+		if (entity != null) {
+			entity.openInventory();
 
-            for (int t = 0; t < entity.getSizeInventory(); t++) {
+			for (int t = 0; t < entity.getSizeInventory(); t++) {
 
-                ItemStack stack = entity.getStackInSlot(t);
-                if (stack != null) {
-                    entity.setInventorySlotContents(t, null);
-                    Utils.dropItemstack(world, x, y, z, stack);
-                }
-            }
-            entity.closeInventory();
-        }
-        super.breakBlock(world, x, y, z, block, meta);
-    }
+				ItemStack stack = entity.getStackInSlot(t);
+				if (stack != null) {
+					entity.setInventorySlotContents(t, null);
+					Utils.dropItemstack(world, x, y, z, stack);
+				}
+			}
+			entity.closeInventory();
+		}
+		super.breakBlock(world, x, y, z, block, meta);
+	}
 }

@@ -16,45 +16,45 @@ import buildcraftAdditions.BuildcraftAdditions;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class ToolCoreRecepie implements IIntegrationRecipeManager.IIntegrationRecipe {
-    @Override
-    public double getEnergyCost() {
-        return 3000;
-    }
+	@Override
+	public double getEnergyCost() {
+		return 3000;
+	}
 
-    @Override
-    public boolean isValidInputA(ItemStack inputA) {
-        return inputA != null && inputA.getItem() == BuildCraftCore.goldGearItem;
-    }
+	@Override
+	public boolean isValidInputA(ItemStack inputA) {
+		return inputA != null && inputA.getItem() == BuildCraftCore.goldGearItem;
+	}
 
-    @Override
-    public boolean isValidInputB(ItemStack inputB) {
-        return inputB != null && inputB.getItem() == ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem();
-    }
+	@Override
+	public boolean isValidInputB(ItemStack inputB) {
+		return inputB != null && inputB.getItem() == ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem();
+	}
 
-    @Override
-    public ItemStack getOutputForInputs(ItemStack inputA, ItemStack inputB, ItemStack[] components) {
-        if (!isValidInputA(inputA)) {
-            return null;
-        }
+	@Override
+	public ItemStack getOutputForInputs(ItemStack inputA, ItemStack inputB, ItemStack[] components) {
+		if (!isValidInputA(inputA)) {
+			return null;
+		}
 
-        if (!isValidInputB(inputB)) {
-            return null;
-        }
-        return new ItemStack(BuildcraftAdditions.toolCore, 1);
-    }
+		if (!isValidInputB(inputB)) {
+			return null;
+		}
+		return new ItemStack(BuildcraftAdditions.toolCore, 1);
+	}
 
-    @Override
-    public ItemStack[] getComponents() {
-        return new ItemStack[0];
-    }
+	@Override
+	public ItemStack[] getComponents() {
+		return new ItemStack[0];
+	}
 
-    @Override
-    public ItemStack[] getExampleInputsA() {
-        return new ItemStack[0];
-    }
+	@Override
+	public ItemStack[] getExampleInputsA() {
+		return new ItemStack[0];
+	}
 
-    @Override
-    public ItemStack[] getExampleInputsB() {
-        return new ItemStack[0];
-    }
+	@Override
+	public ItemStack[] getExampleInputsB() {
+		return new ItemStack[0];
+	}
 }

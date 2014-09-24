@@ -25,8 +25,8 @@ import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.utils.Utils;
 
 @SideOnly(Side.CLIENT)
-public class GuiKineticTool extends GuiContainer{
-	
+public class GuiKineticTool extends GuiContainer {
+
 	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/GUITool.png");
 	ItemKineticTool tool;
 	ItemStack stack;
@@ -37,16 +37,16 @@ public class GuiKineticTool extends GuiContainer{
 		this.tool = Tool;
 		this.stack = stack;
 		this.player = player;
-        tool.setPlayer(player);
+		tool.setPlayer(player);
 	}
-	
+
 	@Override
-    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        super.drawGuiContainerForegroundLayer(par1, par2);
-        String title = Utils.localize("item.kineticMultiTool.name");
-        fontRendererObj.drawString(Utils.localize(title), (xSize - fontRendererObj.getStringWidth(title)) / 2, 6, 0x404040);
-        fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize-110) + 2, 0x404040);
-    }
+	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+		super.drawGuiContainerForegroundLayer(par1, par2);
+		String title = Utils.localize("item.kineticMultiTool.name");
+		fontRendererObj.drawString(Utils.localize(title), (xSize - fontRendererObj.getStringWidth(title)) / 2, 6, 0x404040);
+		fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 110) + 2, 0x404040);
+	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float var1, int mouseX, int mouseY) {
@@ -58,11 +58,11 @@ public class GuiKineticTool extends GuiContainer{
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 	}
-	
+
 	@Override
-	public void onGuiClosed(){
+	public void onGuiClosed() {
 		tool.readBateries(stack, player);
-        tool.writeUpgrades(stack);
+		tool.writeUpgrades(stack);
 	}
 
 }

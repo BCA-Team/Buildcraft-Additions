@@ -25,40 +25,40 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TriggerCanisterRequested extends BCTrigger implements ITileTrigger {
-    public IIcon icon;
+	public IIcon icon;
 
-    public TriggerCanisterRequested(){
-        super("bcadditions:CanisterRequested");
-    }
+	public TriggerCanisterRequested() {
+		super("bcadditions:CanisterRequested");
+	}
 
-    @Override
-    public boolean isTriggerActive(ForgeDirection side, TileEntity tile, ITriggerParameter parameter) {
-        if (tile instanceof TileFluidicCompressor){
-            TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) tile;
-            return fluidicCompressor.getStackInSlot(0) == null;
-        }
-        return false;
-    }
+	@Override
+	public boolean isTriggerActive(ForgeDirection side, TileEntity tile, ITriggerParameter parameter) {
+		if (tile instanceof TileFluidicCompressor) {
+			TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) tile;
+			return fluidicCompressor.getStackInSlot(0) == null;
+		}
+		return false;
+	}
 
-    @Override
-    public String getDescription(){
-        return Utils.localize("trigger.canisterRequested");
-    }
+	@Override
+	public String getDescription() {
+		return Utils.localize("trigger.canisterRequested");
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon() {
-        return icon;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon() {
+		return icon;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconregister) {
-        icon = iconregister.registerIcon("bcadditions:TriggerCanisterRequested");
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister iconregister) {
+		icon = iconregister.registerIcon("bcadditions:TriggerCanisterRequested");
+	}
 
-    @Override
-    public ITrigger rotateLeft() {
-        return this;
-    }
+	@Override
+	public ITrigger rotateLeft() {
+		return this;
+	}
 }

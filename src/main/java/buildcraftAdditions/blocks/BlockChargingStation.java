@@ -33,12 +33,12 @@ import buildcraftAdditions.variables.Variables;
 
 public class BlockChargingStation extends BlockContainer {
 
-    public IIcon textureFront;
-    public IIcon textureBack;
-    public IIcon textureLeft;
-    public IIcon textureRight;
-    public IIcon textureTop;
-    public IIcon textureBottom;
+	public IIcon textureFront;
+	public IIcon textureBack;
+	public IIcon textureLeft;
+	public IIcon textureRight;
+	public IIcon textureTop;
+	public IIcon textureBottom;
 
 	public BlockChargingStation() {
 		super(Material.iron);
@@ -50,7 +50,7 @@ public class BlockChargingStation extends BlockContainer {
 	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileChargingStation();
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
 		super.onBlockActivated(world, x, y, z, entityplayer, par6, par7, par8, par9);
@@ -62,14 +62,14 @@ public class BlockChargingStation extends BlockContainer {
 		if (entityplayer.getCurrentEquippedItem() != null) {
 			if (entityplayer.getCurrentEquippedItem().getItem() instanceof IItemPipe)
 				return false;
-        }
+		}
 
 		if (!world.isRemote)
 			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GuiChargingStation, world, x, y, z);
 
 		return true;
 	}
-	
+
 	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack stack) {
 		super.onBlockPlacedBy(world, i, j, k, entityliving, stack);
@@ -79,44 +79,45 @@ public class BlockChargingStation extends BlockContainer {
 	}
 
 	@SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getIcon(int i, int j) {
-        // If no metadata is set, then this is an icon.
-        if (j == 0 && i == 3)
-            return textureFront;
+	@Override
+	public IIcon getIcon(int i, int j) {
+		// If no metadata is set, then this is an icon.
+		if (j == 0 && i == 3)
+			return textureFront;
 
-        if (i == j && i > 1)
-            return textureFront;
+		if (i == j && i > 1)
+			return textureFront;
 
-        switch (i) {
-            case 0:
-                return textureBottom;
-            case 1:
-                return textureBottom;
-            default:
-                return textureBack;
-        }
-    }
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-        textureFront = par1IconRegister.registerIcon("bcadditions:charger_front");
-        textureTop = par1IconRegister.registerIcon("bcadditions:charger_top");
-        textureBack = par1IconRegister.registerIcon("bcadditions:charger_back");
-        textureBottom = par1IconRegister.registerIcon("bcadditions:charger_bottom");
-        textureLeft = par1IconRegister.registerIcon("bcadditions:charger_leftSide");
-        textureRight = par1IconRegister.registerIcon("bcadditions:charger_rightSide");
-    }
+		switch (i) {
+			case 0:
+				return textureBottom;
+			case 1:
+				return textureBottom;
+			default:
+				return textureBack;
+		}
+	}
 
-    @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int meta){
-        TileChargingStation station = (TileChargingStation) world.getTileEntity(x, y, z);
-        station.openInventory();
-            ItemStack stack = station.getStackInSlot(0);
-            if (stack != null) {
-                station.setInventorySlotContents(0, null);
-                Utils.dropItemstack(world, x, y, z, stack);
-            }
-        }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		textureFront = par1IconRegister.registerIcon("bcadditions:charger_front");
+		textureTop = par1IconRegister.registerIcon("bcadditions:charger_top");
+		textureBack = par1IconRegister.registerIcon("bcadditions:charger_back");
+		textureBottom = par1IconRegister.registerIcon("bcadditions:charger_bottom");
+		textureLeft = par1IconRegister.registerIcon("bcadditions:charger_leftSide");
+		textureRight = par1IconRegister.registerIcon("bcadditions:charger_rightSide");
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+		TileChargingStation station = (TileChargingStation) world.getTileEntity(x, y, z);
+		station.openInventory();
+		ItemStack stack = station.getStackInSlot(0);
+		if (stack != null) {
+			station.setInventorySlotContents(0, null);
+			Utils.dropItemstack(world, x, y, z, stack);
+		}
+	}
 
 }

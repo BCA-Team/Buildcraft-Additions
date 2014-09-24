@@ -22,45 +22,45 @@ import eureka.api.EurekaKnowledge;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class EventListener  {
+public class EventListener {
 
-    public static class FML {
+	public static class FML {
 
-        @SubscribeEvent
-        public void playerLogin (PlayerLoggedInEvent event){
-            //version check stuff
-            if (VersionCheck.newerVersionAvailable && event != null){
-                event.player.addChatComponentMessage(new ChatComponentText("There is a newer version of Buildcraft Additions available (" + VersionCheck.newerVersionNumber + ") Please consider updating"));
-                if (!ConfigurationHandeler.shouldPrintChangelog)
-                    return;
-                event.player.addChatComponentMessage(new ChatComponentText("Changelog: "));
-                for (int t = 0; t < VersionCheck.numLines; t++){
+		@SubscribeEvent
+		public void playerLogin(PlayerLoggedInEvent event) {
+			//version check stuff
+			if (VersionCheck.newerVersionAvailable && event != null) {
+				event.player.addChatComponentMessage(new ChatComponentText("There is a newer version of Buildcraft Additions available (" + VersionCheck.newerVersionNumber + ") Please consider updating"));
+				if (!ConfigurationHandeler.shouldPrintChangelog)
+					return;
+				event.player.addChatComponentMessage(new ChatComponentText("Changelog: "));
+				for (int t = 0; t < VersionCheck.numLines; t++) {
 
-                    event.player.addChatComponentMessage(new ChatComponentText("- " + VersionCheck.changelog[t]));
-                }
-            }
+					event.player.addChatComponentMessage(new ChatComponentText("- " + VersionCheck.changelog[t]));
+				}
+			}
 
-        }
+		}
 
-        @SubscribeEvent
-        public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event){
-            if (event.modID.equals("bcadditions"))
-                ConfigurationHandeler.readConfig();
-        }
+		@SubscribeEvent
+		public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+			if (event.modID.equals("bcadditions"))
+				ConfigurationHandeler.readConfig();
+		}
 
-	    @SubscribeEvent
-	    public void onCrafted(PlayerEvent.ItemCraftedEvent event){
-		    if (event.crafting.getItem().isItemTool(event.crafting))
-			    EurekaKnowledge.makeProgress(event.player, Variables.KineticToolKey);
-	    }
-    }
+		@SubscribeEvent
+		public void onCrafted(PlayerEvent.ItemCraftedEvent event) {
+			if (event.crafting.getItem().isItemTool(event.crafting))
+				EurekaKnowledge.makeProgress(event.player, Variables.KineticToolKey);
+		}
+	}
 
-    public static class Forge {
+	public static class Forge {
 
-	    @SubscribeEvent
-	    public void onGettingAchievement(AchievementEvent event){
-		    //unlock basic duster
-		    EurekaKnowledge.makeProgress(event.entityPlayer, Variables.DustT0Key);
-	    }
-    }
+		@SubscribeEvent
+		public void onGettingAchievement(AchievementEvent event) {
+			//unlock basic duster
+			EurekaKnowledge.makeProgress(event.entityPlayer, Variables.DustT0Key);
+		}
+	}
 }

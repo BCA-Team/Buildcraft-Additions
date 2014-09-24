@@ -38,15 +38,15 @@ public class ItemCanister extends ItemFluidContainer {
 		this.name = name;
 	}
 
-    public void setFluid(ItemStack stack, FluidStack fStack){
-        if (stack == null)
-            return;
-        if (!(stack.getItem() instanceof ItemCanister))
-            return;
-        ItemCanister canister = (ItemCanister) stack.getItem();
-        canister.drain(stack, canister.getFluid(stack).amount, true);
-        canister.fill(stack, fStack, true);
-    }
+	public void setFluid(ItemStack stack, FluidStack fStack) {
+		if (stack == null)
+			return;
+		if (!(stack.getItem() instanceof ItemCanister))
+			return;
+		ItemCanister canister = (ItemCanister) stack.getItem();
+		canister.drain(stack, canister.getFluid(stack).amount, true);
+		canister.fill(stack, fStack, true);
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -60,7 +60,7 @@ public class ItemCanister extends ItemFluidContainer {
 		else if (fStack == null && buckets > 1)
 			list.add("Can hold " + buckets + " buckets of fluid");
 		else
-			list.add("Currently stores " + Integer.toString(fStack.amount)+ " mB of " + fStack.getFluid().getLocalizedName(fStack));
+			list.add("Currently stores " + Integer.toString(fStack.amount) + " mB of " + fStack.getFluid().getLocalizedName(fStack));
 	}
 
 	@Override

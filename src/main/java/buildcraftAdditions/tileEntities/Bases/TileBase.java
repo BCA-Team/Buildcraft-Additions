@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
  */
 public abstract class TileBase extends TileEntity implements IInventory {
 
-    @Override
-    public abstract void updateEntity();
+	@Override
+	public abstract void updateEntity();
 
 }

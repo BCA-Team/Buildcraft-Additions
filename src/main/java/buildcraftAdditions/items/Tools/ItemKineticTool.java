@@ -36,10 +36,10 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
 	public boolean chainsaw, digger, drill, hoe, goldStick, diamondStick, emeraldStick;
 	public int upgradesAllowed;
 	public IIcon icon, iconAlt, overlayChainsaw, overlayDigger, overlayDrill, overlayHoe;
-	String lastMode;
 	public IIcon iconChainsaw, iconDigger, iconDrill, iconHoe;
+	String lastMode;
 
-	public ItemKineticTool(){
+	public ItemKineticTool() {
 		super();
 		this.setUnlocalizedName("kineticMultiTool");
 		this.setCreativeTab(BuildcraftAdditions.bcadditions);
@@ -57,12 +57,12 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
 	}
 
 	@Override
-	public boolean isItemTool(ItemStack stack){
+	public boolean isItemTool(ItemStack stack) {
 		return true;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player){
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (stack.getTagCompound() == null)
 			stack.setTagCompound(new NBTTagCompound());
 		if (player.isSneaking()) {
@@ -75,7 +75,7 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
 		return stack;
 	}
 
-	public boolean isStickInstalled (ItemStack stack, String Stick){
+	public boolean isStickInstalled(ItemStack stack, String Stick) {
 		readUpgrades(stack);
 		if (Stick.equals("goldStick"))
 			return goldStick;
@@ -87,9 +87,9 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
 		return false;
 	}
 
-	public void installStick(ItemStack stack, String Stick){
+	public void installStick(ItemStack stack, String Stick) {
 		readUpgrades(stack);
-		if (!isStickInstalled(stack, Stick)){
+		if (!isStickInstalled(stack, Stick)) {
 			if (Stick.equals("goldStick"))
 				goldStick = true;
 			if (Stick.equals("diamondStick"))
@@ -101,7 +101,7 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
 		writeUpgrades(stack);
 	}
 
-	public boolean isUpgradeInstalled(ItemStack stack, String upgrade){
+	public boolean isUpgradeInstalled(ItemStack stack, String upgrade) {
 		readUpgrades(stack);
 		if (upgrade.equals("Chainsaw"))
 			return chainsaw;
@@ -114,7 +114,7 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
 		return false;
 	}
 
-	public void readUpgrades (ItemStack stack){
+	public void readUpgrades(ItemStack stack) {
 		if (stack.stackTagCompound == null || !stack.stackTagCompound.hasKey("chainsaw")) {
 			stack.stackTagCompound = new NBTTagCompound();
 			stack.stackTagCompound.setBoolean("chainsaw", false);
@@ -138,7 +138,7 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
 		lastMode = stack.stackTagCompound.getString("lastUsedMode");
 	}
 
-	public void writeUpgrades (ItemStack stack){
+	public void writeUpgrades(ItemStack stack) {
 		stack.stackTagCompound.setBoolean("chainsaw", chainsaw);
 		stack.stackTagCompound.setBoolean("digger", digger);
 		stack.stackTagCompound.setBoolean("drill", drill);
@@ -150,17 +150,17 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
 
 	}
 
-	public void setLastUsedMode(ItemStack stack, String string){
+	public void setLastUsedMode(ItemStack stack, String string) {
 		stack.stackTagCompound.setString("lastUsedMode", string);
 		lastMode = string;
 	}
 
-	public boolean canInstallUpgrade(ItemStack stack){
+	public boolean canInstallUpgrade(ItemStack stack) {
 		readUpgrades(stack);
 		return upgradesAllowed > 0;
 	}
 
-	public void installUpgrade(String upgrade, ItemStack stack){
+	public void installUpgrade(String upgrade, ItemStack stack) {
 		readUpgrades(stack);
 		if (!isUpgradeInstalled(stack, upgrade)) {
 			if (upgrade.equals("Drill"))
@@ -182,7 +182,7 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
 		String harvestTool = "nothing";
 		if (block.getHarvestTool(0) != null)
 			harvestTool = block.getHarvestTool(0);
-		if(drill && (harvestTool.equals("pickaxe") || block.getMaterial() == Material.iron || block.getMaterial() == Material.rock)) {
+		if (drill && (harvestTool.equals("pickaxe") || block.getMaterial() == Material.iron || block.getMaterial() == Material.rock)) {
 			stack.getItem().setHarvestLevel("pickaxe", 3);
 			setLastUsedMode(stack, "pickaxe");
 			return 40;
@@ -194,14 +194,14 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
 		}
 		if (digger && (harvestTool.equals("shovel") || block.getMaterial() == Material.clay || block.getMaterial() == Material.grass || block.getMaterial() == Material.ground || block.getMaterial() == Material.snow || block.getMaterial() == Material.sand || block.getMaterial() == Material.craftedSnow)) {
 			stack.getItem().setHarvestLevel("shovel", 3);
-			setLastUsedMode(stack,"shovel");
+			setLastUsedMode(stack, "shovel");
 			return 10;
 		}
 		return 1;
 	}
 
 	@Override
-	public boolean showDurabilityBar(ItemStack stack){
+	public boolean showDurabilityBar(ItemStack stack) {
 		return true;
 	}
 
@@ -212,17 +212,17 @@ public class ItemKineticTool extends ItemPoweredBase implements IEurekaItem {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int geenIdee, float hitX, float hitY, float hitZ){
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int geenIdee, float hitX, float hitY, float hitZ) {
 		readUpgrades(stack);
 		if (!hoe)
 			return false;
 		boolean tilted = false;
-		for (int i = x-1; i <= x+1; i++){
-			for (int j = z-1; j <= z+1; j++){
-				if ((world.getBlock(i, y, j) == Blocks.dirt || world.getBlock(i, y, j) == Blocks.grass) && getEnergy() >=5) {
+		for (int i = x - 1; i <= x + 1; i++) {
+			for (int j = z - 1; j <= z + 1; j++) {
+				if ((world.getBlock(i, y, j) == Blocks.dirt || world.getBlock(i, y, j) == Blocks.grass) && getEnergy() >= 5) {
 					world.setBlock(i, y, j, Blocks.farmland);
 					decreaseEnergy(stack, 5, player);
-					setLastUsedMode(stack,"hoe");
+					setLastUsedMode(stack, "hoe");
 					tilted = true;
 				}
 			}

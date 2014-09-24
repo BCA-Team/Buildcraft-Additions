@@ -14,12 +14,14 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
 import buildcraft.core.gui.slots.SlotValidated;
+
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 
-public class ContainerKineticTool extends Container{
-	
+public class ContainerKineticTool extends Container {
+
 	IInventory playerIInventory;
 	ItemKineticTool tool;
 	ItemStack stack;
@@ -30,30 +32,27 @@ public class ContainerKineticTool extends Container{
 		this.playerIInventory = inventory;
 		this.stack = stack;
 		this.player = player;
-		
+
 		toolInventory.openInventory();
 		addSlotToContainer(new SlotValidated(toolInventory, 0, 60, 29));
 		addSlotToContainer(new SlotValidated(toolInventory, 1, 78, 29));
 		addSlotToContainer(new SlotValidated(toolInventory, 2, 96, 29));
-		
-		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
-        {
-            for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex)
-            {
-                this.addSlotToContainer(new Slot(inventory, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 8 + inventoryColumnIndex * 18, 71 + inventoryRowIndex * 18));
-            }
-        }
-		for (int hotbbarIndex = 0; hotbbarIndex < 9; ++hotbbarIndex)
-        {
-            this.addSlotToContainer(new Slot(inventory, hotbbarIndex, 8 + hotbbarIndex * 18, 129));
-        }
+
+		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex) {
+			for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex) {
+				this.addSlotToContainer(new Slot(inventory, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 8 + inventoryColumnIndex * 18, 71 + inventoryRowIndex * 18));
+			}
+		}
+		for (int hotbbarIndex = 0; hotbbarIndex < 9; ++hotbbarIndex) {
+			this.addSlotToContainer(new Slot(inventory, hotbbarIndex, 8 + hotbbarIndex * 18, 129));
+		}
 	}
 
-	
+
 	@Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex){
-		
-        ItemStack stack = null;
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
+
+		ItemStack stack = null;
 		Slot slot = (Slot) this.inventorySlots.get(slotIndex);
 
 		if (slot != null && slot.getHasStack()) {
@@ -64,15 +63,13 @@ public class ContainerKineticTool extends Container{
 				if (!this.mergeItemStack(itemstack1, 3, 39, true)) {
 					return null;
 				}
-			}
-			else if (!this.mergeItemStack(itemstack1, 0, 3, false)) {
+			} else if (!this.mergeItemStack(itemstack1, 0, 3, false)) {
 				return null;
 			}
 
 			if (itemstack1.stackSize == 0) {
 				slot.putStack(null);
-			}
-			else {
+			} else {
 				slot.onSlotChanged();
 			}
 
@@ -85,7 +82,7 @@ public class ContainerKineticTool extends Container{
 
 		return stack;
 	}
-	
+
 	@Override
 	public boolean mergeItemStack(ItemStack inputStack, int par2, int par3, boolean doMerge) {
 		if (!(inputStack.getItem() instanceof BatteryBase))
@@ -152,8 +149,7 @@ public class ContainerKineticTool extends Container{
 
 				if (doMerge) {
 					--k;
-				}
-				else {
+				} else {
 					++k;
 				}
 			}
@@ -167,9 +163,9 @@ public class ContainerKineticTool extends Container{
 	public boolean canInteractWith(EntityPlayer var1) {
 		return true;
 	}
-	
+
 	@Override
-	public void onContainerClosed(EntityPlayer player){
+	public void onContainerClosed(EntityPlayer player) {
 		tool.readBateries(stack, player);
 	}
 

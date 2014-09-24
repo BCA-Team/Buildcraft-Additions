@@ -21,16 +21,16 @@ import buildcraftAdditions.utils.Utils;
  */
 public class ConfigGui extends GuiConfig {
 
-    public ConfigGui(GuiScreen parentScreen) {
-        super(parentScreen, getList(), "bcadditions", false, false, Utils.localize("config.title"));
-    }
+	public ConfigGui(GuiScreen parentScreen) {
+		super(parentScreen, getList(), "bcadditions", false, false, Utils.localize("config.title"));
+	}
 
-    public static List<IConfigElement> getList() {
-        List list = new ArrayList<IConfigElement>();
-        list.add(new ConfigElement (ConfigurationHandeler.configFile.getCategory("updates")));
-        list.add(new ConfigElement (ConfigurationHandeler.configFile.getCategory("power usage")));
-	    list.add(new ConfigElement (ConfigurationHandeler.configFile.getCategory("misc")));
-        return list;
-    }
+	public static List<IConfigElement> getList() {
+		List list = new ArrayList<IConfigElement>();
+		list.add(new ConfigElement(ConfigurationHandeler.configFile.getCategory("updates")));
+		list.add(new ConfigElement(ConfigurationHandeler.configFile.getCategory("power usage")));
+		list.add(new ConfigElement(ConfigurationHandeler.configFile.getCategory("misc")));
+		return list;
+	}
 }
 

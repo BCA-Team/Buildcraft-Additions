@@ -18,45 +18,45 @@ import buildcraft.core.gui.BuildCraftContainer;
 import buildcraftAdditions.tileEntities.TileAmplifiedEngine;
 
 public class ContainerAmplifiedEngine extends BuildCraftContainer {
-    protected TileAmplifiedEngine engine;
+	protected TileAmplifiedEngine engine;
 
-    public ContainerAmplifiedEngine(InventoryPlayer inventoryplayer, TileAmplifiedEngine tileEngine) {
-        super(tileEngine.getSizeInventory());
-        engine = tileEngine;
-        addSlotToContainer(new Slot(tileEngine, 0, 80, 41));
-        addSlotToContainer(new Slot(tileEngine, 1, 100, 41));
-        for (int i = 0; i < 3; i++) {
-            for (int k = 0; k < 9; k++) {
-                addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
-            }
+	public ContainerAmplifiedEngine(InventoryPlayer inventoryplayer, TileAmplifiedEngine tileEngine) {
+		super(tileEngine.getSizeInventory());
+		engine = tileEngine;
+		addSlotToContainer(new Slot(tileEngine, 0, 80, 41));
+		addSlotToContainer(new Slot(tileEngine, 1, 100, 41));
+		for (int i = 0; i < 3; i++) {
+			for (int k = 0; k < 9; k++) {
+				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
+			}
 
-        }
+		}
 
-        for (int j = 0; j < 9; j++) {
-            addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
-        }
-    }
+		for (int j = 0; j < 9; j++) {
+			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
+		}
+	}
 
-    @Override
-    public void detectAndSendChanges() {
-        super.detectAndSendChanges();
+	@Override
+	public void detectAndSendChanges() {
+		super.detectAndSendChanges();
 
-        for (int i = 0; i < crafters.size(); i++) {
-            engine.sendGUINetworkData(this, (ICrafting) crafters.get(i));
-        }
-    }
+		for (int i = 0; i < crafters.size(); i++) {
+			engine.sendGUINetworkData(this, (ICrafting) crafters.get(i));
+		}
+	}
 
-    @Override
-    public void updateProgressBar(int i, int j) {
-        engine.getGUINetworkData(i, j);
-    }
+	@Override
+	public void updateProgressBar(int i, int j) {
+		engine.getGUINetworkData(i, j);
+	}
 
-    public boolean isUsableByPlayer(EntityPlayer entityplayer) {
-        return engine.isUseableByPlayer(entityplayer);
-    }
+	public boolean isUsableByPlayer(EntityPlayer entityplayer) {
+		return engine.isUseableByPlayer(entityplayer);
+	}
 
-    @Override
-    public boolean canInteractWith(EntityPlayer entityplayer) {
-        return engine.isUseableByPlayer(entityplayer);
-    }
+	@Override
+	public boolean canInteractWith(EntityPlayer entityplayer) {
+		return engine.isUseableByPlayer(entityplayer);
+	}
 }

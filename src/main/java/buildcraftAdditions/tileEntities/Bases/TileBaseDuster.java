@@ -17,32 +17,32 @@ import eureka.api.interfaces.IEurekaTileEntity;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class TileBaseDuster extends TileBase implements IEurekaTileEntity {
-    public int progress;
-    private String key;
+	public int progress;
+	private String key;
 
-    public TileBaseDuster(String key){
-        this.key = key;
-    }
+	public TileBaseDuster(String key) {
+		this.key = key;
+	}
 
-    public void makeProgress(EntityPlayer player){
-        if (getStackInSlot(0) != null && getDust(getStackInSlot(0)) != null) {
-            progress++;
-            if (progress == 8) {
-                dust();
-                progress = 0;
-                makeProgress(player, key);
-            }
-        }
-    }
+	public void makeProgress(EntityPlayer player) {
+		if (getStackInSlot(0) != null && getDust(getStackInSlot(0)) != null) {
+			progress++;
+			if (progress == 8) {
+				dust();
+				progress = 0;
+				makeProgress(player, key);
+			}
+		}
+	}
 
-    public abstract void dust();
+	public abstract void dust();
 
-    public ItemStack getDust(ItemStack stack){
-        return DusterRecepies.getOutput(stack);
-    }
+	public ItemStack getDust(ItemStack stack) {
+		return DusterRecepies.getOutput(stack);
+	}
 
-    @Override
-    public void makeProgress(EntityPlayer player, String key) {
-        EurekaKnowledge.makeProgress(player, key);
-    }
+	@Override
+	public void makeProgress(EntityPlayer player, String key) {
+		EurekaKnowledge.makeProgress(player, key);
+	}
 }

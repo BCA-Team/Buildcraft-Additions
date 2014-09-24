@@ -21,7 +21,7 @@ public class ItemBase extends Item {
 	public IIcon icon;
 	String name;
 
-	public ItemBase(String name){
+	public ItemBase(String name) {
 		super();
 		this.name = name;
 		this.setUnlocalizedName(name);

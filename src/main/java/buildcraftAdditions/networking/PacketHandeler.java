@@ -13,11 +13,11 @@ import cpw.mods.fml.relauncher.Side;
  */
 public class PacketHandeler {
 
-    public static final SimpleNetworkWrapper instance = NetworkRegistry.INSTANCE.newSimpleChannel("bcadditions");
+	public static final SimpleNetworkWrapper instance = NetworkRegistry.INSTANCE.newSimpleChannel("bcadditions");
 
-    public static void init(){
-        instance.registerMessage(MessageSemiAutomaticDuster.class, MessageSemiAutomaticDuster.class, 0, Side.CLIENT);
-        instance.registerMessage(MessageMechanicDuster.class, MessageMechanicDuster.class, 1, Side.CLIENT);
-	    instance.registerMessage(MessageDusterKinetic.class, MessageDusterKinetic.class, 2, Side.CLIENT);
-    }
+	public static void init() {
+		instance.registerMessage(MessageSemiAutomaticDuster.class, MessageSemiAutomaticDuster.class, 0, Side.CLIENT);
+		instance.registerMessage(MessageMechanicDuster.class, MessageMechanicDuster.class, 1, Side.CLIENT);
+		instance.registerMessage(MessageDusterKinetic.class, MessageDusterKinetic.class, 2, Side.CLIENT);
+	}
 }

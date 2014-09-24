@@ -17,19 +17,20 @@ import buildcraftAdditions.api.DusterRecepies;
  */
 public class ModIntegration {
 
-	public static void railcraftIntegration(){
+	public static void railcraftIntegration() {
 		addNuggets("Iron");
 		addNuggets("Gold");
 		addNuggets("Copper");
 		addNuggets("Tin");
 	}
-	public static void addNuggets(String metal){
+
+	public static void addNuggets(String metal) {
 		ArrayList<ItemStack> oreList = OreDictionary.getOres("orePoor" + metal);
 		ArrayList<ItemStack> nuggetList = OreDictionary.getOres("nugget" + metal);
 		if (oreList.isEmpty() || nuggetList.isEmpty())
 			return;
-		for (ItemStack poorOre: oreList){
-				DusterRecepies.addDusterRecepie(poorOre, new ItemStack(nuggetList.get(0).getItem(), 2, nuggetList.get(0).getItemDamage()));
+		for (ItemStack poorOre : oreList) {
+			DusterRecepies.addDusterRecepie(poorOre, new ItemStack(nuggetList.get(0).getItem(), 2, nuggetList.get(0).getItemDamage()));
 		}
 	}
 }

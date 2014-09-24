@@ -25,40 +25,40 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TriggerHasFullCanister extends BCTrigger implements ITileTrigger {
-    public IIcon icon;
+	public IIcon icon;
 
-    public TriggerHasFullCanister(){
-        super("bcadditions:TriggerHasFullCanister");
-    }
+	public TriggerHasFullCanister() {
+		super("bcadditions:TriggerHasFullCanister");
+	}
 
-    @Override
-    public boolean isTriggerActive(ForgeDirection side, TileEntity tile, ITriggerParameter parameter) {
-        if (tile instanceof TileFluidicCompressor){
-            TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) tile;
-            return (fluidicCompressor.getStackInSlot(1) != null && fluidicCompressor.getStackInSlot(1).stackTagCompound.hasKey("Fluid"));
-        }
-        return false;
-    }
+	@Override
+	public boolean isTriggerActive(ForgeDirection side, TileEntity tile, ITriggerParameter parameter) {
+		if (tile instanceof TileFluidicCompressor) {
+			TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) tile;
+			return (fluidicCompressor.getStackInSlot(1) != null && fluidicCompressor.getStackInSlot(1).stackTagCompound.hasKey("Fluid"));
+		}
+		return false;
+	}
 
-    @Override
-    public String getDescription(){
-        return Utils.localize("trigger.hasFullCanister");
-    }
+	@Override
+	public String getDescription() {
+		return Utils.localize("trigger.hasFullCanister");
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon() {
-        return icon;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon() {
+		return icon;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconregister) {
-        icon = iconregister.registerIcon("bcadditions:TriggerHasFullCanister");
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister iconregister) {
+		icon = iconregister.registerIcon("bcadditions:TriggerHasFullCanister");
+	}
 
-    @Override
-    public ITrigger rotateLeft() {
-        return this;
-    }
+	@Override
+	public ITrigger rotateLeft() {
+		return this;
+	}
 }

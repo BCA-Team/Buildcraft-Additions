@@ -19,16 +19,20 @@ import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
-	public int lava;
 	public static int lavaVar;
+	public int lava;
 
-	public TileLavaCoil(){
+	public TileLavaCoil() {
 		super();
 		burnTime = 0;
 		fullBurnTime = 0;
 		lava = 0;
 		shouldHeat = false;
 		burning = false;
+	}
+
+	public static int getLavaAmount() {
+		return lavaVar;
 	}
 
 	@Override
@@ -50,7 +54,7 @@ public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
 			burnTime--;
 		if (burnTime == 0)
 			burning = false;
-		if (!isBurning() && shouldHeat && lava >= 100){
+		if (!isBurning() && shouldHeat && lava >= 100) {
 			lava = lava - 100;
 			burnTime = 10000;
 			increment = 32;
@@ -64,7 +68,7 @@ public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
 		if (resource.getFluid().getID() == FluidRegistry.LAVA.getID()) {
 			int amount = 3000;
-			if (doFill){
+			if (doFill) {
 				if (resource.amount > 3000 - lava)
 					amount = 3000 - lava;
 				else if (resource.amount < 3000 - lava)
@@ -89,7 +93,7 @@ public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		if (doDrain){
+		if (doDrain) {
 			int amount = maxDrain;
 			if (maxDrain > lava)
 				amount = lava;
@@ -116,9 +120,5 @@ public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
 		return new FluidTankInfo[]{new FluidTankInfo(new FluidStack(FluidRegistry.LAVA, lava), 3000)};
-	}
-
-	public static int getLavaAmount(){
-		return lavaVar;
 	}
 }

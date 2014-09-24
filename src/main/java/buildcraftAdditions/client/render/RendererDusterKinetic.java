@@ -20,18 +20,18 @@ import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
  */
 public class RendererDusterKinetic extends TileEntitySpecialRenderer {
 
-    @Override
-    public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {
-        GL11.glPushMatrix();
-        GL11.glTranslated(x, y, z);
-        TileBaseDuster duster = (TileBaseDuster) entity;
-        ItemStack stack = duster.getStackInSlot(0);
-        EntityItem item;
-        if (stack != null) {
-            item = new EntityItem(Minecraft.getMinecraft().theWorld, 0, 0, 0, stack);
-            item.hoverStart = 0;
-            RenderManager.instance.renderEntityWithPosYaw(item, 0.5, 0.5, 0.5, 0, 0);
-        }
-        GL11.glPopMatrix();
-    }
+	@Override
+	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {
+		GL11.glPushMatrix();
+		GL11.glTranslated(x, y, z);
+		TileBaseDuster duster = (TileBaseDuster) entity;
+		ItemStack stack = duster.getStackInSlot(0);
+		EntityItem item;
+		if (stack != null) {
+			item = new EntityItem(Minecraft.getMinecraft().theWorld, 0, 0, 0, stack);
+			item.hoverStart = 0;
+			RenderManager.instance.renderEntityWithPosYaw(item, 0.5, 0.5, 0.5, 0, 0);
+		}
+		GL11.glPopMatrix();
+	}
 }

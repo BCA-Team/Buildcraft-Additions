@@ -21,58 +21,58 @@ import cpw.mods.fml.relauncher.SideOnly;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.IKineticCapsule;
 
-public abstract class BatteryBase extends Item implements IKineticCapsule{
-	
-	public BatteryBase(){
+public abstract class BatteryBase extends Item implements IKineticCapsule {
+
+	public BatteryBase() {
 		this.maxStackSize = 1;
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		this.setUnlocalizedName("batteryBase");
 	}
 
-    @Override
-	public void decreaseEnergy(ItemStack stack, double energy){
+	@Override
+	public void decreaseEnergy(ItemStack stack, double energy) {
 		double energyStored = getEnergy(stack);
 		energyStored -= energy;
 		if (energyStored < 0)
-			energyStored=0;
+			energyStored = 0;
 		stack.stackTagCompound.setDouble("energy", Math.floor(energyStored));
 	}
 
-    @Override
-	public void increaseEnergy(ItemStack stack, double energy){
+	@Override
+	public void increaseEnergy(ItemStack stack, double energy) {
 		double energyStored = getEnergy(stack);
-		energyStored +=energy;
+		energyStored += energy;
 		stack.stackTagCompound.setDouble("energy", Math.round(energyStored));
 	}
 
-    @Override
-	public double getEnergy(ItemStack stack){
-		if (stack.stackTagCompound == null){
+	@Override
+	public double getEnergy(ItemStack stack) {
+		if (stack.stackTagCompound == null) {
 			stack.stackTagCompound = new NBTTagCompound();
 			stack.stackTagCompound.setDouble("energy", 0);
 		}
 		return stack.stackTagCompound.getDouble("energy");
 	}
 
-    @Override
-	public void setEnergy (ItemStack stack, double energy){
+	@Override
+	public void setEnergy(ItemStack stack, double energy) {
 		if (stack.stackTagCompound == null)
 			stack.stackTagCompound = new NBTTagCompound();
 		stack.stackTagCompound.setDouble("energy", energy);
 	}
 
-    public abstract String getType();
+	public abstract String getType();
 
-    @Override
-    public boolean showDurabilityBar(ItemStack stack){
-        return true;
-    }
+	@Override
+	public boolean showDurabilityBar(ItemStack stack) {
+		return true;
+	}
 
-    @Override
-    public double getDurabilityForDisplay(ItemStack stack){
-        return (getCapacity() - getEnergy(stack))/getCapacity();
-    }
-	
+	@Override
+	public double getDurabilityForDisplay(ItemStack stack) {
+		return (getCapacity() - getEnergy(stack)) / getCapacity();
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {

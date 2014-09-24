@@ -26,40 +26,40 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TriggerDoneCharging extends BCTrigger implements ITileTrigger {
-    public IIcon icon;
+	public IIcon icon;
 
-    public TriggerDoneCharging(){
-        super("bcadditions:TriggerDoneCharging");
-    }
+	public TriggerDoneCharging() {
+		super("bcadditions:TriggerDoneCharging");
+	}
 
-    @Override
-    public boolean isTriggerActive(ForgeDirection side, TileEntity tile, ITriggerParameter parameter) {
-        if (tile instanceof TileChargingStation){
-            TileChargingStation chargingStation = (TileChargingStation) tile;
-            return chargingStation.getProgress() == 1;
-        }
-        return false;
-    }
+	@Override
+	public boolean isTriggerActive(ForgeDirection side, TileEntity tile, ITriggerParameter parameter) {
+		if (tile instanceof TileChargingStation) {
+			TileChargingStation chargingStation = (TileChargingStation) tile;
+			return chargingStation.getProgress() == 1;
+		}
+		return false;
+	}
 
-    @Override
-    public String getDescription(){
-        return Utils.localize("trigger.doneCharging");
-    }
+	@Override
+	public String getDescription() {
+		return Utils.localize("trigger.doneCharging");
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon() {
-        return icon;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon() {
+		return icon;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconregister) {
-        icon = iconregister.registerIcon("bcadditions:TriggerDoneCharging");
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister iconregister) {
+		icon = iconregister.registerIcon("bcadditions:TriggerDoneCharging");
+	}
 
-    @Override
-    public ITrigger rotateLeft() {
-        return this;
-    }
+	@Override
+	public ITrigger rotateLeft() {
+		return this;
+	}
 }

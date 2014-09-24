@@ -25,40 +25,40 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TriggerHasEmptyCanister extends BCTrigger implements ITileTrigger {
-    public IIcon icon;
+	public IIcon icon;
 
-    public TriggerHasEmptyCanister(){
-        super("bcadditions:TriggerHasEmptyCanister");
-    }
+	public TriggerHasEmptyCanister() {
+		super("bcadditions:TriggerHasEmptyCanister");
+	}
 
-    @Override
-    public boolean isTriggerActive(ForgeDirection side, TileEntity tile, ITriggerParameter parameter) {
-        if (tile instanceof TileFluidicCompressor){
-            TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) tile;
-            return (fluidicCompressor.getStackInSlot(1) != null && fluidicCompressor.getStackInSlot(1).stackTagCompound.hasKey("Fluid"));
-        }
-        return false;
-    }
+	@Override
+	public boolean isTriggerActive(ForgeDirection side, TileEntity tile, ITriggerParameter parameter) {
+		if (tile instanceof TileFluidicCompressor) {
+			TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) tile;
+			return (fluidicCompressor.getStackInSlot(1) != null && fluidicCompressor.getStackInSlot(1).stackTagCompound.hasKey("Fluid"));
+		}
+		return false;
+	}
 
-    @Override
-    public String getDescription(){
-        return Utils.localize("trigger.hasEmptyCanister");
-    }
+	@Override
+	public String getDescription() {
+		return Utils.localize("trigger.hasEmptyCanister");
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon() {
-        return icon;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon() {
+		return icon;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconregister) {
-        icon = iconregister.registerIcon("bcadditions:TriggerHasEmptyCanister");
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister iconregister) {
+		icon = iconregister.registerIcon("bcadditions:TriggerHasEmptyCanister");
+	}
 
-    @Override
-    public ITrigger rotateLeft() {
-        return this;
-    }
+	@Override
+	public ITrigger rotateLeft() {
+		return this;
+	}
 }

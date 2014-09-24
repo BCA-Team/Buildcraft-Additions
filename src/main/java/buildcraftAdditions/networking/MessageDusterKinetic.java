@@ -24,16 +24,16 @@ import io.netty.buffer.ByteBuf;
 public class MessageDusterKinetic implements IMessage, IMessageHandler<MessageDusterKinetic, IMessage> {
 	public int x, y, z, id, meta, progressStage;
 
-	public MessageDusterKinetic(){
+	public MessageDusterKinetic() {
 
 	}
 
-	public MessageDusterKinetic(int x, int y, int z, int progressStage, ItemStack stack){
+	public MessageDusterKinetic(int x, int y, int z, int progressStage, ItemStack stack) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		this.progressStage = progressStage;
-		if (stack == null){
+		if (stack == null) {
 			this.id = 0;
 		} else {
 			this.id = Item.getIdFromItem(stack.getItem());
@@ -64,11 +64,11 @@ public class MessageDusterKinetic implements IMessage, IMessageHandler<MessageDu
 	@Override
 	public IMessage onMessage(MessageDusterKinetic message, MessageContext ctx) {
 		TileEntity entity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
-		if (entity != null && entity instanceof TileKineticDuster){
+		if (entity != null && entity instanceof TileKineticDuster) {
 			TileKineticDuster duster = (TileKineticDuster) entity;
 			duster.progressStage = message.progressStage;
 			FMLClientHandler.instance().getClient().theWorld.markBlockForUpdate(message.x, message.y, message.z);
-			if (message.id == 0){
+			if (message.id == 0) {
 				duster.setInventorySlotContents(0, null);
 			} else {
 				duster.setInventorySlotContents(0, new ItemStack(Item.getItemById(message.id), 1, message.meta));

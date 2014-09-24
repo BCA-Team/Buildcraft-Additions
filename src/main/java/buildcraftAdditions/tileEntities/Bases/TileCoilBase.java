@@ -13,20 +13,20 @@ import buildcraft.core.TileBuildCraft;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class TileCoilBase extends TileBuildCraft {
-    @NetworkData
-    public boolean shouldHeat, burning;
+	@NetworkData
+	public boolean shouldHeat, burning;
 	@NetworkData
 	public int increment;
 	@NetworkData
 	public int burnTime, fullBurnTime;
 
-    public void startHeating(){
-        shouldHeat = true;
-    }
+	public void startHeating() {
+		shouldHeat = true;
+	}
 
-    public void stopHeating(){
-        shouldHeat = false;
-    }
+	public void stopHeating() {
+		shouldHeat = false;
+	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
@@ -48,12 +48,12 @@ public abstract class TileCoilBase extends TileBuildCraft {
 		nbt.setInteger("fullBurnTime", fullBurnTime);
 	}
 
-	public int getIncrement(){
+	public int getIncrement() {
 		return increment;
 	}
 
-    public boolean isBurning(){
-        return burning;
-    }
+	public boolean isBurning() {
+		return burning;
+	}
 
 }
