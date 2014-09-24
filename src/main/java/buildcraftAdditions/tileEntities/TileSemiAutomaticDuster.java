@@ -1,26 +1,31 @@
 package buildcraftAdditions.tileEntities;
 
-import buildcraft.api.transport.IPipeTile;
-import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.networking.MessageSemiAutomaticDuster;
-import buildcraftAdditions.networking.PacketHandeler;
-import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
-import eureka.api.EurekaKnowledge;
-import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.variables.Variables;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import buildcraft.api.transport.IPipeTile;
+
+import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.networking.MessageSemiAutomaticDuster;
+import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
+import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.variables.Variables;
+
+
+import eureka.api.EurekaKnowledge;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileSemiAutomaticDuster extends TileBaseDuster {
     private CustomInventory inventory = new CustomInventory("semiAutomaticDuster", 1, 1, this);

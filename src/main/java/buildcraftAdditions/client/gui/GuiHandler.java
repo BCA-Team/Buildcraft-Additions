@@ -2,11 +2,17 @@ package buildcraftAdditions.client.gui;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
+import cpw.mods.fml.common.network.IGuiHandler;
 
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
@@ -14,10 +20,6 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import buildcraftAdditions.variables.Variables;
-import cpw.mods.fml.common.network.IGuiHandler;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
 public class GuiHandler implements IGuiHandler {
 

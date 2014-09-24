@@ -1,12 +1,5 @@
 package buildcraftAdditions.blocks;
 
-import buildcraft.core.IItemPipe;
-import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.tileEntities.TileHeatedFurnace;
-import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.variables.Variables;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -18,14 +11,25 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import buildcraft.core.IItemPipe;
+
+import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.tileEntities.TileHeatedFurnace;
+import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.variables.Variables;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockHeatedFurnace extends BlockContainer {
     public IIcon front, back, sides, top, bottom, frontActivated;

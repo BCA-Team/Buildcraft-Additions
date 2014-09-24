@@ -2,19 +2,12 @@ package buildcraftAdditions.blocks;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import buildcraft.core.IItemPipe;
-import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.tileEntities.TileChargingStation;
-import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.variables.Variables;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -25,7 +18,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import buildcraft.core.IItemPipe;
+
+import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.tileEntities.TileChargingStation;
+import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.variables.Variables;
 
 public class BlockChargingStation extends BlockContainer {
 

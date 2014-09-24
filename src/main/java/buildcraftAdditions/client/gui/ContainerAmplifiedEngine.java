@@ -2,18 +2,20 @@ package buildcraftAdditions.client.gui;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import buildcraft.core.gui.BuildCraftContainer;
-import buildcraftAdditions.tileEntities.TileAmplifiedEngine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
+
+import buildcraft.core.gui.BuildCraftContainer;
+
+import buildcraftAdditions.tileEntities.TileAmplifiedEngine;
 
 public class ContainerAmplifiedEngine extends BuildCraftContainer {
     protected TileAmplifiedEngine engine;

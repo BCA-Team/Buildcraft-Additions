@@ -1,10 +1,5 @@
 package buildcraftAdditions.tileEntities;
 
-import buildcraft.api.core.NetworkData;
-import buildcraft.core.TileBuildCraft;
-import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
-import buildcraftAdditions.utils.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -12,12 +7,19 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
+import buildcraft.api.core.NetworkData;
+import buildcraft.core.TileBuildCraft;
+
+import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
+import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileHeatedFurnace extends TileBuildCraft implements ISidedInventory {
     private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64, this);

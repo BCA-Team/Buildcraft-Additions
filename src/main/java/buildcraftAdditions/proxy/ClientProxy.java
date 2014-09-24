@@ -2,11 +2,15 @@ package buildcraftAdditions.proxy;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+
+import cpw.mods.fml.client.registry.ClientRegistry;
+
+import net.minecraftforge.client.MinecraftForgeClient;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.client.render.CanisterItemRender;
@@ -16,8 +20,6 @@ import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import net.minecraftforge.client.MinecraftForgeClient;
 
 
 public class ClientProxy extends CommonProxy {

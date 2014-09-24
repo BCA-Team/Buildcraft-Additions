@@ -42,7 +42,7 @@ public class TileKineticCoil extends TileCoilBase implements ILaserTarget {
 
 	@Override
 	public void receiveLaserEnergy(double energy) {
-		buffer += energy * 50;
+		buffer += energy * 30;
 	}
 
 	@Override

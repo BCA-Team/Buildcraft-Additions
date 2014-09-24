@@ -2,24 +2,27 @@ package buildcraftAdditions.blocks;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import buildcraft.core.IItemPipe;
-import buildcraft.energy.TileEngine;
-import buildcraftAdditions.tileEntities.TileAmplifiedEngine;
+import java.util.List;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.List;
+import buildcraft.core.IItemPipe;
+import buildcraft.energy.TileEngine;
+
+import buildcraftAdditions.tileEntities.TileAmplifiedEngine;
 
 public class BlockEngine extends buildcraft.energy.BlockEngine {
 

@@ -56,10 +56,6 @@ import buildcraftAdditions.items.ItemPowerCapsuleTier1;
 import buildcraftAdditions.items.ItemPowerCapsuleTier2;
 import buildcraftAdditions.items.ItemPowerCapsuleTier3;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
-import buildcraftAdditions.items.Tools.ItemMegaChainsaw;
-import buildcraftAdditions.items.Tools.ItemMegaDigger;
-import buildcraftAdditions.items.Tools.ItemMegaDrill;
-import buildcraftAdditions.items.Tools.ItemMegaHoe;
 import buildcraftAdditions.items.Tools.ToolCoreRecepie;
 import buildcraftAdditions.items.Tools.ToolUpgrade;
 import buildcraftAdditions.items.Tools.UpgradeRecepieDiamondStick;
@@ -97,10 +93,10 @@ import eureka.api.EurekaRegistry;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
 
@@ -123,10 +119,6 @@ public class BuildcraftAdditions {
 	public static BlockLavaCoil lavaCoilBlock;
 	public static BlockKineticCoil kineticCoil;
 
-    public static Item poweredShovel;
-    public static Item drill;
-    public static Item chainsaw;
-    public static Item megaHoe;
     public static Item powerCapsuleTier1;
     public static Item powerCapsuleTier2;
     public static Item powerCapsuleTier3;
@@ -188,18 +180,6 @@ public class BuildcraftAdditions {
 
         diamondCanister = new ItemCanister("diamondCanister", 16000);
         CoreProxy.proxy.registerItem(diamondCanister);
-
-        poweredShovel = new ItemMegaDigger();
-        CoreProxy.proxy.registerItem(poweredShovel);
-
-        drill = new ItemMegaDrill(6000);
-        CoreProxy.proxy.registerItem(drill);
-
-        chainsaw = new ItemMegaChainsaw();
-        CoreProxy.proxy.registerItem(chainsaw);
-
-        megaHoe = new ItemMegaHoe(6000);
-        CoreProxy.proxy.registerItem(megaHoe);
 
         powerCapsuleTier1 = new ItemPowerCapsuleTier1();
         CoreProxy.proxy.registerItem(powerCapsuleTier1);

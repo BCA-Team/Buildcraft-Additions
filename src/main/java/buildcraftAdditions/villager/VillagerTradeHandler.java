@@ -2,21 +2,23 @@ package buildcraftAdditions.villager;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
 import java.util.Random;
 
-import buildcraftAdditions.BuildcraftAdditions;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
+
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
+
+import buildcraftAdditions.BuildcraftAdditions;
 
 public class VillagerTradeHandler implements IVillageTradeHandler {
 

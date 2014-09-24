@@ -1,21 +1,26 @@
 package buildcraftAdditions.core;
 
-import buildcraftAdditions.config.ConfigurationHandeler;
-import buildcraftAdditions.variables.Variables;
+import net.minecraft.util.ChatComponentText;
+
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import eureka.api.EurekaKnowledge;
-import net.minecraft.util.ChatComponentText;
+
 import net.minecraftforge.event.entity.player.AchievementEvent;
+
+import buildcraftAdditions.config.ConfigurationHandeler;
+import buildcraftAdditions.variables.Variables;
+
+
+import eureka.api.EurekaKnowledge;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class EventListener  {
 

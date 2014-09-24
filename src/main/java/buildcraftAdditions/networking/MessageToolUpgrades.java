@@ -1,21 +1,25 @@
 package buildcraftAdditions.networking;
 
-import buildcraftAdditions.items.Tools.ItemKineticTool;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.server.FMLServerHandler;
+
+import buildcraftAdditions.items.Tools.ItemKineticTool;
+
+
 import io.netty.buffer.ByteBuf;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageToolUpgrades implements IMessage, IMessageHandler<MessageToolUpgrades, IMessage> {
     public boolean chainsaw, digger, drill, hoe, chainsawEnabled, diggerEnabled, drillEnabled, hoeEnabled;

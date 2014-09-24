@@ -1,11 +1,5 @@
 package buildcraftAdditions.blocks;
 
-import buildcraft.core.IItemPipe;
-import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
-import buildcraftAdditions.tileEntities.TileBasicDuster;
-import buildcraftAdditions.utils.Utils;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -15,14 +9,24 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import buildcraft.core.IItemPipe;
+
+import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
+import buildcraftAdditions.tileEntities.TileBasicDuster;
+import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockBasicDuster extends BlockBase {
     public IIcon front, back, sides, top, bottom;
