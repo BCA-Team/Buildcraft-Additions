@@ -23,7 +23,7 @@ import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
 import buildcraftAdditions.utils.Utils;
 
 
-import eureka.api.events.BlockCheckEvent;
+import eureka.api.events.BlockPlacedEvent;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -82,8 +82,8 @@ public class BlockSemiAutomaticDuster extends BlockBase {
 		if (entity instanceof EntityPlayer) {
 			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof TileSemiAutomaticDuster) {
-				FMLCommonHandler.instance().bus().post(new BlockCheckEvent((EntityPlayer) entity, this, x, y, z));
-				((TileSemiAutomaticDuster) tileEntity).makeProgress((EntityPlayer) entity);
+				FMLCommonHandler.instance().bus().post(new BlockPlacedEvent(world, x, y, z, (EntityPlayer) entity, this, 0));
+						((TileSemiAutomaticDuster) tileEntity).makeProgress((EntityPlayer) entity);
 			}
 		}
 	}
