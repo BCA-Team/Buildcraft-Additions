@@ -34,12 +34,26 @@ minecraft {
     runDir = "eclipse"
     replace "@MODVERSION@", config.version.mod
 }
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "chickenbones"
+        url = "http://chickenbones.net/maven"
+    }
+    maven {
+        name "waila"
+        url "http://mobiusstrip.eu/maven"
+    }
+}
  
 dependencies {
     compile project("Eureka")
-    compile 'com.mod-buildcraft:buildcraft:6.0.18:dev'  // adds buildcraft to the dev env
-    
- 
+	compile "codechicken:CodeChickenLib:${config.version.mc}-${config.version.ccl}:dev"
+	compile "codechicken:CodeChickenCore:${config.version.mc}-${config.version.ccc}:dev"
+	compile "codechicken:NotEnoughItems:${config.version.mc}-${config.version.nei}:dev"
+	compile "mcp.mobius.waila:Waila:${config.version.waila}_${config.version.mc}"
+    compile "com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev"
 }
 
 sourceSets {
@@ -85,3 +99,13 @@ jar {
 }
 
 assemble.dependsOn deobfJar
+
+task copyMods(type: Copy, dependsOn: "extractUserDev") {
+    from { configurations.compile }
+    include "**/*Chicken*.jar", "**/*NotEnoughItems*.jar", "**/CodeChickenLib*"
+    into file("./eclipse/mods")
+    mustRunAfter "deobfBinJar"
+    mustRunAfter "repackMinecraft"
+}
+tasks.setupDevWorkspace.dependsOn copyMods
+tasks.setupDecompWorkspace.dependsOn copyMods
