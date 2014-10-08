@@ -47,7 +47,12 @@ public class DusterRecipes {
         return getDustingResult(input) != null;
     }
 
+    public HashMap<ItemStack, ItemStack> getDustingList() {
+        return dustingList;
+    }
+
     private boolean areItemStacksSameTypeCrafting(ItemStack stack1, ItemStack stack2) {
         return stack2.getItem() == stack1.getItem() && (stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack2.getItemDamage() == stack1.getItemDamage());
     }
+
 }
