@@ -4,6 +4,7 @@ build/
 .settings/
 .idea/
 bin/
+out/
 eclipse/
 
 # Files
