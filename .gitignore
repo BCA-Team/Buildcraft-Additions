@@ -9,6 +9,7 @@ eclipse/
 lib/
 
 # Files
+*.eml
 *.iml
 *.bat
 *.blend
