@@ -3,9 +3,6 @@ package buildcraftAdditions.items.Tools;
 import net.minecraft.item.ItemStack;
 
 import buildcraft.api.recipes.IIntegrationRecipeManager;
-import buildcraft.silicon.ItemRedstoneChipset;
-
-import buildcraftAdditions.items.ItemBase;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -14,7 +11,7 @@ import buildcraftAdditions.items.ItemBase;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class UpgradeRecepieEmeraldStick implements IIntegrationRecipeManager.IIntegrationRecipe {
+public class UpgradeRecipeSawBlade implements IIntegrationRecipeManager.IIntegrationRecipe {
 
 	@Override
 	public double getEnergyCost() {
@@ -25,28 +22,28 @@ public class UpgradeRecepieEmeraldStick implements IIntegrationRecipeManager.IIn
 	public boolean isValidInputA(ItemStack inputA) {
 		if (inputA != null && inputA.getItem() instanceof ItemKineticTool) {
 			ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
-			return !tool.isStickInstalled(inputA, "emeraldStick") && tool.isStickInstalled(inputA, "diamondStick");
+			return tool.canInstallUpgrade(inputA) && !tool.isUpgradeInstalled(inputA, "Chainsaw");
 		}
 		return false;
 	}
 
 	@Override
 	public boolean isValidInputB(ItemStack inputB) {
-		return inputB != null && inputB.getItem() instanceof ItemBase && inputB.getItem().getUnlocalizedName() == "stickDiamond";
+		return inputB != null && inputB.getItem() instanceof ToolUpgrade && ((ToolUpgrade) inputB.getItem()).getType() == "Chainsaw";
 	}
 
 	@Override
 	public ItemStack getOutputForInputs(ItemStack inputA, ItemStack inputB, ItemStack[] components) {
 		ItemStack outputStack = inputA.copy();
 		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
-		output.installStick(outputStack, "emeraldStick");
+		output.installUpgrade("Chainsaw", outputStack);
 		output.writeUpgrades(outputStack);
 		return outputStack;
 	}
 
 	@Override
 	public ItemStack[] getComponents() {
-		return new ItemStack[]{ItemRedstoneChipset.Chipset.DIAMOND.getStack()};
+		return new ItemStack[0];
 	}
 
 	@Override

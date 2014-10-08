@@ -1,5 +1,6 @@
 package buildcraftAdditions.tileEntities;
 
+import buildcraftAdditions.api.DusterRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -104,7 +105,7 @@ public class TileKineticDuster extends TileBaseDuster implements ILaserTarget {
 
 	@Override
 	public boolean requiresLaserEnergy() {
-		return getStackInSlot(0) != null && getDust(getStackInSlot(0)) != null;
+		return getStackInSlot(0) != null && DusterRecipes.dusting().hasDustingResult(getStackInSlot(0));
 	}
 
 	@Override
@@ -149,7 +150,7 @@ public class TileKineticDuster extends TileBaseDuster implements ILaserTarget {
 
 	@Override
 	public void dust() {
-		ItemStack output = getDust(getStackInSlot(0));
+		ItemStack output = DusterRecipes.dusting().getDustingResult(getStackInSlot(0));
 
 		//first try to put it intro a pipe
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {

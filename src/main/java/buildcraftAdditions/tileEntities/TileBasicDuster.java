@@ -1,5 +1,6 @@
 package buildcraftAdditions.tileEntities;
 
+import buildcraftAdditions.api.DusterRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -105,7 +106,7 @@ public class TileBasicDuster extends TileBaseDuster {
 
 	@Override
 	public void dust() {
-		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, getDust(getStackInSlot(0)));
+		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, DusterRecipes.dusting().getDustingResult(getStackInSlot(0)));
 		setInventorySlotContents(0, null);
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}

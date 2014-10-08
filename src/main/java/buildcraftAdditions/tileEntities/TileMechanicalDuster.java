@@ -1,5 +1,6 @@
 package buildcraftAdditions.tileEntities;
 
+import buildcraftAdditions.api.DusterRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -36,7 +37,7 @@ public class TileMechanicalDuster extends TileBaseDuster {
 	@Override
 	public void updateEntity() {
 		if (energy >= 4) {
-			if (getStackInSlot(0) != null && getDust(getStackInSlot(0)) != null) {
+			if (getStackInSlot(0) != null && DusterRecipes.dusting().hasDustingResult(getStackInSlot(0))) {
 				progress++;
 				energy -= 4;
 				oldProgressStage = progressStage;
@@ -144,7 +145,7 @@ public class TileMechanicalDuster extends TileBaseDuster {
 
 	@Override
 	public void dust() {
-		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, getDust(getStackInSlot(0)));
+		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, DusterRecipes.dusting().getDustingResult(getStackInSlot(0)));
 		setInventorySlotContents(0, null);
 		if (!worldObj.isRemote)
 			PacketHandeler.instance.sendToAllAround(new MessageMechanicDuster(xCoord, yCoord, zCoord, progressStage, getStackInSlot(0)), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
