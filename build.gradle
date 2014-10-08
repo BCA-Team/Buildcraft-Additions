@@ -103,9 +103,10 @@ assemble.dependsOn deobfJar
 task copyMods(type: Copy, dependsOn: "extractUserDev") {
     from { configurations.compile }
     include "**/*Chicken*.jar", "**/*NotEnoughItems*.jar", "**/CodeChickenLib*"
-    into file("./eclipse/mods")
+    into file("./././Minecraft/mods")
     mustRunAfter "deobfBinJar"
     mustRunAfter "repackMinecraft"
 }
 tasks.setupDevWorkspace.dependsOn copyMods
 tasks.setupDecompWorkspace.dependsOn copyMods
+tasks.ideaModule.dependsOn copyMods

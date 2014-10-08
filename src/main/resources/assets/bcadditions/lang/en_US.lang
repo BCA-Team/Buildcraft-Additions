@@ -134,6 +134,42 @@ engineeringDiary.kineticTool.page13=very similar to yours in the past, and happe
 engineeringDiary.kineticTool.requiredResearch=None
 engineeringDiary.kineticTool.howToMakeProgress=Craft tools
 
+engineeringDiary.heatedFurnace.title=Heated Furnace
+engineeringDiary.heatedFurnace.page0=A new furnace that can be powered in various ways.
+engineeringDiary.heatedFurnace.page1=Stone wasn’t cutting it anymore. You already had a myriad of Furnaces, but they were getting hard to manage. You just wanted something that could take more Coal at once, but what you got was something totally unexpected.
+engineeringDiary.heatedFurnace.page2=By surrounding a Furnace with Iron Ingots, you completely got rid of the fuel slot. Oops. @ @ However you were not to go down beaten and since you already know of the energy transmitting capabilities of Iron you’re convinced
+engineeringDiary.heatedFurnace.page3=you can make something to power this Furnace... You decide to place it in the world and see if you can think of something
+engineeringDiary.heatedFurnace.howToMakeProgress=Craft furnaces
+engineeringDiary.heatedFurnaceFinished=After placing all those furnaces you think of a way to make a better, more effective and faster furnace
+
+engineeringDiary.basicCoil.title=Basic Coil
+engineeringDiary.basicCoil.page0=This Coil can be used to power the Heated Furnace.
+engineeringDiary.basicCoil.page1=This was a tough one. It started when you acidentally left two pieces of Iron Dust next to some Lava. They were close enough for the Heat to affect them, but not close enough for it to completely melt them. The ‘thing’ was strangely
+engineeringDiary.basicCoil.page2=thin and when it was placed next to some Iron (while still somehwat hot), started to spin about, creating friction and heating (by a very small amount) the Iron Ingot. You realise this can be used for your new Furnace and
+engineeringDiary.basicCoil.page3=try to figure out how to improve the process. @ @ After a while, you find a way to refine the process. By using the Crafting Table to combine three pieces of Iron Dust together, you make two strips of Iron Wire
+engineeringDiary.basicCoil.page4=(still soft at this point), then proceed to place them on a Furnace to harden them. @ @ The last stage is the trickiest. You wrap 8 pieces of Wire (now harder, but still moldable) around an Iron Ingot, and end up with something
+engineeringDiary.basicCoil.page5=that resembles a tower, but in the size of a block. Because of the way the wires loop around the thing, you decide to name it the Coil. @ @ From there on its easy. You just need to find a way to heat the Coils, and what better
+engineeringDiary.basicCoil.page6=if not good ol’ Furnace fuel? The heat makes the wires spin, making contact with the Furnace and cooking anything inside it. A single Coil operates a Heated Furnace at 1/5th of the speed of a regular Furnace,
+engineeringDiary.basicCoil.page7=but in compensation the fuel lasts 5 times as much. Having all 6 sides of a Heated Furnace surrounded with Coils can make it cook faster than a regular Furnace.
+engineeringDiary.basicCoil.howToMakeProgress=Place a heated furnace
+engineeringDiary.basicCoilFinished=You already knew how to make the heated furnace but now that you actually placed it you come up with a way to actually heat it
+
+engineeringDiary.lavaCoil.title=Lava Coil
+engineeringDiary.lavaCoil.page0=This Coil can power the Heated Furnace with Lava.
+engineeringDiary.lavaCoil.page1=It was a logical step up. After your initial Coil discoveries with Iron, you decide to do the same with Gold, but you’re surprised to find out that Gold Wires are actually green. Weird. Not only that, but the Coils made from
+engineeringDiary.lavaCoil.page2=them simply don’t take Coal for power. You decide to place Lava in these. Its a long shot, but they’re just as green as Fluid Sealant, so why not? @ @ It works. You really thought it was just going to melt it, but nope.
+engineeringDiary.lavaCoil.page3=These Coils take the already hot fluid Lava and use it to make even more heat. Now we’re talking.
+engineeringDiary.lavaCoil.howToMakeProgress=Place Basic Coils
+engineeringDiary.lavaCoilFinished=You observe your basic coils and there heat generation and ask yourself if you can't use lava heating for a new type of coil
+
+engineeringDiary.kineticCoil.title=Kinetic Coil
+engineeringDiary.kineticCoil.page0=This Coil can power the Heated Furnace with Lasers.
+engineeringDiary.kineticCoil.page1=This time you were a bit conservative on using Diamonds to upgrade something, considering just how many you’d need, but then again you were curious about it. It was clear from the start where these would be
+engineeringDiary.kineticCoil.page2=It was clear from the start where these would be getting their source of power. @ @ Lasers. @ @ Diamonds are great conductors of energy after all and neither Coal nor Lava would ever generate enough heat to
+engineeringDiary.kineticCoil.page3=make Diamonds spin. After this one you’re never having a Furnace wall again.
+engineeringDiary.kineticCoil.howToMakeProgress=Place Lava Coils
+engineeringDiary.kineticCoilFinished=Those lava coils are great, but like with all things: there is always something better
+
 engineeringDiary.requiredResearch=Required research:
 engineeringDiary.progress=Progress:
 engineeringDiary.unlocked=UNLOCKED

@@ -14,6 +14,8 @@ public abstract class BlockCoilBase extends BlockContainer {
 
 	public BlockCoilBase() {
 		super(Material.iron);
+		setHardness(5F);
+		setResistance(10F);
 		this.setBlockBounds(2F / 10F, 0, 2F / 10F, 8F / 10F, 1, 8F / 10F);
 	}
 
