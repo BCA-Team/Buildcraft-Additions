@@ -1,6 +1,7 @@
 # Folders
 .gradle/
 build/
+.settings/
 .idea/
 bin/
 eclipse/
@@ -11,10 +12,9 @@ eclipse/
 *.blend
 *.class
 *.classpath
+*.project
 *.ipr
 *.iws
 *.mtl
 *.xcf
-
-build.bat
-update.bat
+*.bat
