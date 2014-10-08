@@ -2,11 +2,12 @@ package buildcraftAdditions.core;
 
 import java.util.ArrayList;
 
+import buildcraftAdditions.api.DusterRecipes;
 import net.minecraft.item.ItemStack;
 
 import net.minecraftforge.oredict.OreDictionary;
 
-import buildcraftAdditions.api.DusterRecepies;
+import buildcraftAdditions.api.DusterRecipes;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -30,7 +31,7 @@ public class ModIntegration {
 		if (oreList.isEmpty() || nuggetList.isEmpty())
 			return;
 		for (ItemStack poorOre : oreList) {
-			DusterRecepies.addDusterRecepie(poorOre, new ItemStack(nuggetList.get(0).getItem(), 2, nuggetList.get(0).getItemDamage()));
+			DusterRecipes.dusting().addDusterRecipe(poorOre, new ItemStack(nuggetList.get(0).getItem(), 2, nuggetList.get(0).getItemDamage()));
 		}
 	}
 }

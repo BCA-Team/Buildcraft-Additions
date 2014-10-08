@@ -2,7 +2,11 @@ package buildcraftAdditions.items.Tools;
 
 import net.minecraft.item.ItemStack;
 
+import buildcraft.BuildCraftCore;
 import buildcraft.api.recipes.IIntegrationRecipeManager;
+import buildcraft.silicon.ItemRedstoneChipset;
+
+import buildcraftAdditions.BuildcraftAdditions;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -11,34 +15,32 @@ import buildcraft.api.recipes.IIntegrationRecipeManager;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class UpgradeRecepieSawBlade implements IIntegrationRecipeManager.IIntegrationRecipe {
-
+public class ToolCoreRecipe implements IIntegrationRecipeManager.IIntegrationRecipe {
 	@Override
 	public double getEnergyCost() {
-		return 1000;
+		return 3000;
 	}
 
 	@Override
 	public boolean isValidInputA(ItemStack inputA) {
-		if (inputA != null && inputA.getItem() instanceof ItemKineticTool) {
-			ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
-			return tool.canInstallUpgrade(inputA) && !tool.isUpgradeInstalled(inputA, "Chainsaw");
-		}
-		return false;
+		return inputA != null && inputA.getItem() == BuildCraftCore.goldGearItem;
 	}
 
 	@Override
 	public boolean isValidInputB(ItemStack inputB) {
-		return inputB != null && inputB.getItem() instanceof ToolUpgrade && ((ToolUpgrade) inputB.getItem()).getType() == "Chainsaw";
+		return inputB != null && inputB.getItem() == ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem();
 	}
 
 	@Override
 	public ItemStack getOutputForInputs(ItemStack inputA, ItemStack inputB, ItemStack[] components) {
-		ItemStack outputStack = inputA.copy();
-		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
-		output.installUpgrade("Chainsaw", outputStack);
-		output.writeUpgrades(outputStack);
-		return outputStack;
+		if (!isValidInputA(inputA)) {
+			return null;
+		}
+
+		if (!isValidInputB(inputB)) {
+			return null;
+		}
+		return new ItemStack(BuildcraftAdditions.toolCore, 1);
 	}
 
 	@Override

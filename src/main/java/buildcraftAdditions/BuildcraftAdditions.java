@@ -33,7 +33,7 @@ import buildcraft.api.recipes.BuildcraftRecipes;
 import buildcraft.core.proxy.CoreProxy;
 import buildcraft.core.triggers.BCTrigger;
 
-import buildcraftAdditions.api.DusterRecepies;
+import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.blocks.BlockBasicCoil;
 import buildcraftAdditions.blocks.BlockBasicDuster;
 import buildcraftAdditions.blocks.BlockChargingStation;
@@ -56,15 +56,15 @@ import buildcraftAdditions.items.ItemPowerCapsuleTier1;
 import buildcraftAdditions.items.ItemPowerCapsuleTier2;
 import buildcraftAdditions.items.ItemPowerCapsuleTier3;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
-import buildcraftAdditions.items.Tools.ToolCoreRecepie;
+import buildcraftAdditions.items.Tools.ToolCoreRecipe;
 import buildcraftAdditions.items.Tools.ToolUpgrade;
-import buildcraftAdditions.items.Tools.UpgradeRecepieDiamondStick;
-import buildcraftAdditions.items.Tools.UpgradeRecepieDrillHead;
-import buildcraftAdditions.items.Tools.UpgradeRecepieEmeraldStick;
-import buildcraftAdditions.items.Tools.UpgradeRecepieExcavationAttachment;
-import buildcraftAdditions.items.Tools.UpgradeRecepieGoldStick;
-import buildcraftAdditions.items.Tools.UpgradeRecepieSawBlade;
-import buildcraftAdditions.items.Tools.UpgradeRecepieTiller;
+import buildcraftAdditions.items.Tools.UpgradeRecipeDiamondStick;
+import buildcraftAdditions.items.Tools.UpgradeRecipeDrillHead;
+import buildcraftAdditions.items.Tools.UpgradeRecipeEmeraldStick;
+import buildcraftAdditions.items.Tools.UpgradeRecipeExcavationAttachment;
+import buildcraftAdditions.items.Tools.UpgradeRecipeGoldStick;
+import buildcraftAdditions.items.Tools.UpgradeRecipeSawBlade;
+import buildcraftAdditions.items.Tools.UpgradeRecipeTiller;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
@@ -242,22 +242,22 @@ public class BuildcraftAdditions {
 		BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(toolUpgradeDrill), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
 		BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(toolUpgradeDigger), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
 		BuildcraftRecipes.assemblyTable.addRecipe(1000, new ItemStack(toolUpgradeHoe), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
-		BuildcraftRecipes.integrationTable.addRecipe(new ToolCoreRecepie());
-		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieDrillHead());
-		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieExcavationAttachment());
-		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieSawBlade());
-		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieTiller());
-		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieGoldStick());
-		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieDiamondStick());
-		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecepieEmeraldStick());
+		BuildcraftRecipes.integrationTable.addRecipe(new ToolCoreRecipe());
+		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecipeDrillHead());
+		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecipeExcavationAttachment());
+		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecipeSawBlade());
+		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecipeTiller());
+		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecipeGoldStick());
+		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecipeDiamondStick());
+		BuildcraftRecipes.integrationTable.addRecipe(new UpgradeRecipeEmeraldStick());
 
-		DusterRecepies.addDusterRecepie(new ItemStack(Blocks.redstone_ore), new ItemStack(Items.redstone, 6));
-		DusterRecepies.addDusterRecepie(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, 6));
-		DusterRecepies.addDusterRecepie(new ItemStack(Blocks.lapis_ore), new ItemStack(Items.dye, 6, 4));
-		DusterRecepies.addDusterRecepie(new ItemStack(Blocks.lapis_ore), new ItemStack(Items.dye, 6, 4));
-		DusterRecepies.addDusterRecepie(new ItemStack(Blocks.quartz_ore), new ItemStack(Items.quartz, 2));
-		DusterRecepies.addDusterRecepie(new ItemStack(Blocks.stone), new ItemStack(Blocks.gravel));
-		DusterRecepies.addDusterRecepie(new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.sand));
+		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.redstone_ore), new ItemStack(Items.redstone, 6));
+		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, 6));
+		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.lapis_ore), new ItemStack(Items.dye, 6, 4));
+		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.lapis_ore), new ItemStack(Items.dye, 6, 4));
+		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.quartz_ore), new ItemStack(Items.quartz, 2));
+		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.stone), new ItemStack(Blocks.gravel));
+		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.sand));
 	}
 
 	@Mod.EventHandler
@@ -265,8 +265,8 @@ public class BuildcraftAdditions {
 		itemDust = new ItemDust(Integer.parseInt("13ECFC", 16)).setUnlocalizedName("dustDiamond");
 		GameRegistry.registerItem(itemDust, "dustDiamond");
 		OreDictionary.registerOre("dustDiamond", itemDust);
-		DusterRecepies.addDusterRecepie(new ItemStack(Blocks.diamond_ore), new ItemStack(itemDust, 2));
-		DusterRecepies.addDusterRecepie(new ItemStack(Items.diamond), new ItemStack(itemDust, 1));
+		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(itemDust, 2));
+		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Items.diamond), new ItemStack(itemDust, 1));
 
 		addDusts("Iron", 0xD2CEC9);
 		addDusts("Gold", 0xF8DF17);
@@ -396,10 +396,10 @@ public class BuildcraftAdditions {
 			itemDust = stack.getItem();
 		}
 		for (ItemStack stack : list)
-			DusterRecepies.addDusterRecepie(stack, new ItemStack(itemDust, 2));
+			DusterRecipes.dusting().addDusterRecipe(stack, new ItemStack(itemDust, 2));
 		list = OreDictionary.getOres("ingot" + metalName);
 		for (ItemStack stack : list)
-			DusterRecepies.addDusterRecepie(stack, new ItemStack(itemDust, 1));
+			DusterRecipes.dusting().addDusterRecipe(stack, new ItemStack(itemDust, 1));
 	}
 
 

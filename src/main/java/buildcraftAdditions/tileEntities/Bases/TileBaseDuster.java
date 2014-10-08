@@ -3,7 +3,7 @@ package buildcraftAdditions.tileEntities.Bases;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-import buildcraftAdditions.api.DusterRecepies;
+import buildcraftAdditions.api.DusterRecipes;
 
 
 import eureka.api.EurekaKnowledge;
@@ -24,7 +24,7 @@ public abstract class TileBaseDuster extends TileBase {
 	}
 
 	public void makeProgress(EntityPlayer player) {
-		if (getStackInSlot(0) != null && getDust(getStackInSlot(0)) != null) {
+		if (getStackInSlot(0) != null && DusterRecipes.dusting().hasDustingResult(getStackInSlot(0))) {
 			progress++;
 			if (progress == 8) {
 				dust();
@@ -35,10 +35,6 @@ public abstract class TileBaseDuster extends TileBase {
 	}
 
 	public abstract void dust();
-
-	public ItemStack getDust(ItemStack stack) {
-		return DusterRecepies.getOutput(stack);
-	}
 
 	public void makeProgress(EntityPlayer player, String key) {
 		EurekaKnowledge.makeProgress(player, key, 1);

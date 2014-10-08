@@ -3,6 +3,9 @@ package buildcraftAdditions.items.Tools;
 import net.minecraft.item.ItemStack;
 
 import buildcraft.api.recipes.IIntegrationRecipeManager;
+import buildcraft.silicon.ItemRedstoneChipset;
+
+import buildcraftAdditions.items.ItemBase;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -11,8 +14,7 @@ import buildcraft.api.recipes.IIntegrationRecipeManager;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-
-public class UpgradeRecepieDrillHead implements IIntegrationRecipeManager.IIntegrationRecipe {
+public class UpgradeRecipeGoldStick implements IIntegrationRecipeManager.IIntegrationRecipe {
 
 	@Override
 	public double getEnergyCost() {
@@ -23,28 +25,28 @@ public class UpgradeRecepieDrillHead implements IIntegrationRecipeManager.IInteg
 	public boolean isValidInputA(ItemStack inputA) {
 		if (inputA != null && inputA.getItem() instanceof ItemKineticTool) {
 			ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
-			return tool.canInstallUpgrade(inputA) && !tool.isUpgradeInstalled(inputA, "Drill");
+			return !tool.isStickInstalled(inputA, "goldStick");
 		}
 		return false;
 	}
 
 	@Override
 	public boolean isValidInputB(ItemStack inputB) {
-		return inputB != null && inputB.getItem() instanceof ToolUpgrade && ((ToolUpgrade) inputB.getItem()).getType() == "Drill";
+		return inputB != null && inputB.getItem() instanceof ItemBase && inputB.getItem().getUnlocalizedName() == "stickGold";
 	}
 
 	@Override
 	public ItemStack getOutputForInputs(ItemStack inputA, ItemStack inputB, ItemStack[] components) {
 		ItemStack outputStack = inputA.copy();
 		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
-		output.installUpgrade("Drill", outputStack);
+		output.installStick(outputStack, "goldStick");
 		output.writeUpgrades(outputStack);
 		return outputStack;
 	}
 
 	@Override
 	public ItemStack[] getComponents() {
-		return new ItemStack[0];
+		return new ItemStack[]{ItemRedstoneChipset.Chipset.QUARTZ.getStack()};
 	}
 
 	@Override
