@@ -4,7 +4,9 @@ build/
 .settings/
 .idea/
 bin/
+out/
 eclipse/
+lib/
 
 # Files
 *.iml
