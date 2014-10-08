@@ -17,10 +17,9 @@ public class DusterRecipes {
 
     private static final DusterRecipes dusting = new DusterRecipes();
 
-    private HashMap<ItemStack, ItemStack> dustingList = new HashMap<ItemStack, ItemStack>();
+    private final HashMap<ItemStack, ItemStack> dustingList = new HashMap<ItemStack, ItemStack>();
 
     private DusterRecipes() {
-
     }
 
     public static DusterRecipes dusting() {
@@ -47,8 +46,9 @@ public class DusterRecipes {
         return getDustingResult(input) != null;
     }
 
+    @SuppressWarnings("unchecked")
     public HashMap<ItemStack, ItemStack> getDustingList() {
-        return dustingList;
+        return (HashMap<ItemStack, ItemStack>) dustingList.clone();
     }
 
     private boolean areItemStacksSameTypeCrafting(ItemStack stack1, ItemStack stack2) {
