@@ -1,10 +1,11 @@
 package buildcraftAdditions.api;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-
 import java.util.HashMap;
 import java.util.Map.Entry;
+
+import net.minecraft.item.ItemStack;
+
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -35,7 +36,7 @@ public class DusterRecipes {
         if (input != null) {
             for (Entry<ItemStack, ItemStack> entry : dusting.dustingList.entrySet()) {
                 if (areItemStacksSameTypeCrafting(input, entry.getKey())) {
-                    return entry.getValue();
+                    return entry.getValue().copy();
                 }
             }
         }
