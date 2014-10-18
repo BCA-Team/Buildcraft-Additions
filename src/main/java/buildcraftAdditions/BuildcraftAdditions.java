@@ -20,7 +20,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -137,6 +136,7 @@ public class BuildcraftAdditions {
 	public static Item goldWire;
 	public static Item diamondWireUnhardened;
 	public static Item diamondWire;
+	public static Item pipePart;
 	public static ItemKineticTool kineticTool;
 	public static BCTrigger triggerCanAcceptCanister = new TriggerCanisterRequested();
 	public static BCTrigger triggerHasEmptyCanister = new TriggerHasEmptyCanister();
@@ -316,17 +316,14 @@ public class BuildcraftAdditions {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(diamondWireUnhardened, 2), "DDD", 'D', "dustDiamond"));
 		GameRegistry.addSmelting(diamondWireUnhardened, new ItemStack(diamondWire, 2), 0.5f);
 		GameRegistry.addRecipe(new ItemStack(kineticCoil), "WWW", "WIW", "WWW", 'W', diamondWire, 'I', Items.iron_ingot);
-
-		if (evt.getSide() == Side.CLIENT) {
-			VillagerRegistry.instance().registerVillagerId(457);
-			VillagerRegistry.instance().registerVillagerSkin(457, texture);
-			VillagerRegistry.instance().registerVillageTradeHandler(457, new VillagerTradeHandler());
-			VillagerRegistry.instance().registerVillageCreationHandler(new PowerPlantCreationHandeler());
-			try {
-				MapGenStructureIO.func_143031_a(ComponentPowerPlant.class, "bcadditions:powerplant");
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}
+		VillagerRegistry.instance().registerVillagerId(457);
+		VillagerRegistry.instance().registerVillagerSkin(457, texture);
+		VillagerRegistry.instance().registerVillageTradeHandler(457, new VillagerTradeHandler());
+		VillagerRegistry.instance().registerVillageCreationHandler(new PowerPlantCreationHandeler());
+		try {
+			MapGenStructureIO.func_143031_a(ComponentPowerPlant.class, "bcadditions:powerplant");
+		} catch (Throwable e) {
+			e.printStackTrace();
 		}
 
 	}
