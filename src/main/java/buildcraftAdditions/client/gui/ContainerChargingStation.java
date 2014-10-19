@@ -10,24 +10,22 @@ package buildcraftAdditions.client.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
-import buildcraft.core.gui.BuildCraftContainer;
-import buildcraft.core.gui.slots.SlotValidated;
-
 import buildcraftAdditions.tileEntities.TileChargingStation;
 
-public class ContainerChargingStation extends BuildCraftContainer {
+public class ContainerChargingStation extends Container {
 	IInventory playerIInventory;
 	TileChargingStation chargingStation;
 
 	public ContainerChargingStation(InventoryPlayer inventory, TileChargingStation tile) {
-		super(tile.getSizeInventory());
+		super();
 		playerIInventory = inventory;
 		chargingStation = tile;
 
-		this.addSlotToContainer(new SlotValidated(tile, 0, 84, 28));
+		this.addSlotToContainer(new Slot(tile, 0, 84, 28));
 
 		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex) {
 			for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex) {
@@ -44,10 +42,5 @@ public class ContainerChargingStation extends BuildCraftContainer {
 		return chargingStation.isUseableByPlayer(var1);
 	}
 
-	@Override
-	public void detectAndSendChanges() {
-		super.detectAndSendChanges();
-		chargingStation.sendNetworkUpdate();
-	}
 
 }

@@ -1,10 +1,9 @@
 package buildcraftAdditions.client.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-
-import buildcraft.core.gui.BuildCraftContainer;
 
 import buildcraftAdditions.tileEntities.TileBasicCoil;
 
@@ -15,14 +14,14 @@ import buildcraftAdditions.tileEntities.TileBasicCoil;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ContainerBasicCoil extends BuildCraftContainer {
+public class ContainerBasicCoil extends Container {
 	public TileBasicCoil coil;
 
 	public ContainerBasicCoil(IInventory inventory, TileBasicCoil coil) {
-		super(coil.getSizeInventory());
+		super();
 		this.coil = coil;
 
-		this.addSlot(new Slot(coil, 0, 78, 43));
+		this.addSlotToContainer(new Slot(coil, 0, 78, 43));
 
 		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex) {
 			for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex) {
@@ -40,9 +39,4 @@ public class ContainerBasicCoil extends BuildCraftContainer {
 		return true;
 	}
 
-	@Override
-	public void detectAndSendChanges() {
-		super.detectAndSendChanges();
-		coil.sendNetworkUpdate();
-	}
 }

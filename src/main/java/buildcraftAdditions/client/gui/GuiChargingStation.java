@@ -8,49 +8,49 @@ package buildcraftAdditions.client.gui;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraft.BuildCraftCore;
-import buildcraft.core.CoreIconProvider;
-import buildcraft.core.gui.GuiBuildCraft;
-
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.utils.Utils;
 
 @SideOnly(Side.CLIENT)
-public class GuiChargingStation extends GuiBuildCraft {
+public class GuiChargingStation extends GuiContainer {
 
 	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/ChargingStation.png");
 	public ResourceLocation ITEM_TEXTURE = TextureMap.locationItemsTexture;
 	TileChargingStation chargingStation;
 
 	public GuiChargingStation(InventoryPlayer inventoryPlayer, TileChargingStation tile) {
-		super(new ContainerChargingStation(inventoryPlayer, tile), tile, texture);
+		super(new ContainerChargingStation(inventoryPlayer, tile));
 		chargingStation = tile;
 	}
 
-	@Override
+	/*@Override
 	protected void initLedgers(IInventory inventory) {
 		super.initLedgers(inventory);
 		ledgerManager.add(new ChargingStationLedger((TileChargingStation) tile));
-	}
+	}*/
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		super.drawGuiContainerForegroundLayer(par1, par2);
 		String title = Utils.localize("tile.blockChargingStation.name");
-		fontRendererObj.drawString(Utils.localize(title), getCenteredOffset(title), 6, 0x404040);
+		fontRendererObj.drawString(Utils.localize(title), 0, 6, 0x404040);
 		fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 110) + 2, 0x404040);
 	}
 
-	protected class ChargingStationLedger extends Ledger {
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+
+	}
+
+	/*protected class ChargingStationLedger extends Ledger {
 
 		TileChargingStation chargingStation;
 		int headerColour = 0xe1c92f;
@@ -94,5 +94,5 @@ public class GuiChargingStation extends GuiBuildCraft {
 		public String getTooltip() {
 			return String.format("%.1f", chargingStation.getProgress() * 100) + "%";
 		}
-	}
+	}*/
 }

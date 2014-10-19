@@ -8,11 +8,10 @@ package buildcraftAdditions.client.gui;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
@@ -21,16 +20,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.fluids.FluidStack;
 
-import buildcraft.BuildCraftCore;
-import buildcraft.core.CoreIconProvider;
-import buildcraft.core.gui.GuiBuildCraft;
-import buildcraft.core.render.RenderUtils;
-
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.utils.Utils;
 
 @SideOnly(Side.CLIENT)
-public class GuiFluidicCompressor extends GuiBuildCraft {
+public class GuiFluidicCompressor extends GuiContainer {
 
 	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/fluidicCompressorGUI.png");
 	public ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
@@ -38,7 +32,7 @@ public class GuiFluidicCompressor extends GuiBuildCraft {
 	TileFluidicCompressor fluidicCompressor;
 
 	public GuiFluidicCompressor(InventoryPlayer inventoryplayer, TileFluidicCompressor canner) {
-		super(new ContainerFluidicCompressor(inventoryplayer, canner), canner, texture);
+		super(new ContainerFluidicCompressor(inventoryplayer, canner));
 		this.fluidicCompressor = canner;
 	}
 
@@ -58,7 +52,6 @@ public class GuiFluidicCompressor extends GuiBuildCraft {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
-		super.drawGuiContainerBackgroundLayer(f, x, y);
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;
 		drawFluid(fluidicCompressor.getFluid(), fluidicCompressor.getScaledLiquid(52), j + 53, k + 16, 16, 52);
@@ -79,7 +72,7 @@ public class GuiFluidicCompressor extends GuiBuildCraft {
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		super.drawGuiContainerForegroundLayer(par1, par2);
 		String title = Utils.localize("tile.blockFluidicCompressor.name");
-		fontRendererObj.drawString(Utils.localize(title), getCenteredOffset(title), 6, 0x404040);
+		fontRendererObj.drawString(Utils.localize(title), 0, 6, 0x404040);
 		fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 96) + 2, 0x404040);
 	}
 
@@ -89,7 +82,7 @@ public class GuiFluidicCompressor extends GuiBuildCraft {
 		}
 		IIcon icon = fluid.getFluid().getIcon(fluid);
 		mc.renderEngine.bindTexture(BLOCK_TEXTURE);
-		RenderUtils.setGLColorFromInt(fluid.getFluid().getColor(fluid));
+		Utils.setGLColorFromInt(fluid.getFluid().getColor(fluid));
 		int fullX = width / 16;
 		int fullY = height / 16;
 		int lastX = width - fullX * 16;
@@ -124,7 +117,7 @@ public class GuiFluidicCompressor extends GuiBuildCraft {
 		tess.draw();
 	}
 
-	@Override
+	/*@Override
 	protected void initLedgers(IInventory inventory) {
 		super.initLedgers(inventory);
 		ledgerManager.add(new FluidicCompressorLedger((TileFluidicCompressor) tile));
@@ -175,6 +168,6 @@ public class GuiFluidicCompressor extends GuiBuildCraft {
 		public String getTooltip() {
 			return Integer.toString(canner.getProgress() * 100 / 16) + "%";
 		}
-	}
+	}*/
 
 }

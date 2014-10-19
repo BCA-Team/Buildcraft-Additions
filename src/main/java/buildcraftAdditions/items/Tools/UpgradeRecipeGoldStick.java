@@ -2,8 +2,9 @@ package buildcraftAdditions.items.Tools;
 
 import net.minecraft.item.ItemStack;
 
-import buildcraft.api.recipes.IIntegrationRecipeManager;
-import buildcraft.silicon.ItemRedstoneChipset;
+import buildcraft.api.recipes.CraftingResult;
+import buildcraft.api.recipes.IFlexibleCrafter;
+import buildcraft.api.recipes.IIntegrationRecipe;
 
 import buildcraftAdditions.items.ItemBase;
 
@@ -14,12 +15,7 @@ import buildcraftAdditions.items.ItemBase;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class UpgradeRecipeGoldStick implements IIntegrationRecipeManager.IIntegrationRecipe {
-
-	@Override
-	public double getEnergyCost() {
-		return 1000;
-	}
+public class UpgradeRecipeGoldStick implements IIntegrationRecipe {
 
 	@Override
 	public boolean isValidInputA(ItemStack inputA) {
@@ -49,13 +45,24 @@ public class UpgradeRecipeGoldStick implements IIntegrationRecipeManager.IIntegr
 		return new ItemStack[]{ItemRedstoneChipset.Chipset.QUARTZ.getStack()};
 	}
 
+
 	@Override
-	public ItemStack[] getExampleInputsA() {
-		return new ItemStack[0];
+	public boolean canBeCrafted(IFlexibleCrafter crafter) {
+		return false;
 	}
 
 	@Override
-	public ItemStack[] getExampleInputsB() {
-		return new ItemStack[0];
+	public CraftingResult<ItemStack> craft(IFlexibleCrafter crafter, boolean preview) {
+		return null;
+	}
+
+	@Override
+	public CraftingResult<ItemStack> canCraft(ItemStack expectedOutput) {
+		return null;
+	}
+
+	@Override
+	public String getId() {
+		return "upgradeRecipeGoldStick";
 	}
 }

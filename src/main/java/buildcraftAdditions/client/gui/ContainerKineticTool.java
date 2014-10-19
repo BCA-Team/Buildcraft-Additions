@@ -15,8 +15,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import buildcraft.core.gui.slots.SlotValidated;
-
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 
@@ -34,9 +32,9 @@ public class ContainerKineticTool extends Container {
 		this.player = player;
 
 		toolInventory.openInventory();
-		addSlotToContainer(new SlotValidated(toolInventory, 0, 60, 29));
-		addSlotToContainer(new SlotValidated(toolInventory, 1, 78, 29));
-		addSlotToContainer(new SlotValidated(toolInventory, 2, 96, 29));
+		addSlotToContainer(new Slot(toolInventory, 0, 60, 29));
+		addSlotToContainer(new Slot(toolInventory, 1, 78, 29));
+		addSlotToContainer(new Slot(toolInventory, 2, 96, 29));
 
 		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex) {
 			for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex) {

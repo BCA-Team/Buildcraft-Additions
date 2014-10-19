@@ -10,27 +10,24 @@ package buildcraftAdditions.client.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
-import buildcraft.core.gui.BuildCraftContainer;
-import buildcraft.core.gui.slots.SlotOutput;
-import buildcraft.core.gui.slots.SlotValidated;
-
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 
-public class ContainerFluidicCompressor extends BuildCraftContainer {
+public class ContainerFluidicCompressor extends Container {
 
 	IInventory playerIInventory;
 	TileFluidicCompressor fluidicCompressor;
 
 	public ContainerFluidicCompressor(InventoryPlayer inventory, TileFluidicCompressor tile) {
-		super(tile.getSizeInventory());
+		super();
 		playerIInventory = inventory;
 		fluidicCompressor = tile;
 
-		this.addSlotToContainer(new SlotValidated(tile, 0, 89, 31));
-		this.addSlotToContainer(new SlotOutput(tile, 1, 126, 35));
+		this.addSlotToContainer(new Slot(tile, 0, 89, 31));
+		this.addSlotToContainer(new Slot(tile, 1, 126, 35));
 
 		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex) {
 			for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex) {
@@ -45,12 +42,6 @@ public class ContainerFluidicCompressor extends BuildCraftContainer {
 	@Override
 	public boolean canInteractWith(EntityPlayer entityPlayer) {
 		return fluidicCompressor.isUseableByPlayer(entityPlayer);
-	}
-
-	@Override
-	public void detectAndSendChanges() {
-		super.detectAndSendChanges();
-		fluidicCompressor.sendNetworkUpdate();
 	}
 
 }

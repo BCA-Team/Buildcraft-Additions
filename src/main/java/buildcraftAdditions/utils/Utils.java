@@ -8,6 +8,8 @@ package buildcraftAdditions.utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -58,6 +60,13 @@ public class Utils {
 		itemToDrop.delayBeforeCanPickup = 10;
 		if (!world.isRemote)
 			world.spawnEntityInWorld(itemToDrop);
+	}
+
+	public static void setGLColorFromInt(int color) {
+		float red = (color >> 16 & 255) / 255.0F;
+		float green = (color >> 8 & 255) / 255.0F;
+		float blue = (color & 255) / 255.0F;
+		GL11.glColor4f(red, green, blue, 1.0F);
 	}
 
 }
