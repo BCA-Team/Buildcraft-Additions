@@ -1,6 +1,5 @@
 package buildcraftAdditions.tileEntities;
 
-import buildcraftAdditions.api.DusterRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -14,6 +13,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.power.ILaserTarget;
 import buildcraft.api.transport.IPipeTile;
 
+import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageDusterKinetic;
 import buildcraftAdditions.networking.PacketHandeler;
@@ -27,7 +27,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileKineticDuster extends TileBaseDuster implements ILaserTarget {
+public class TileKineticDuster extends TileBaseDuster implements ILaserTarget, IInventory {
 	public int progress, progressStage, oldProgressStage;
 	private CustomInventory inventory = new CustomInventory("KineticDuster", 1, 1, this);
 
@@ -109,19 +109,19 @@ public class TileKineticDuster extends TileBaseDuster implements ILaserTarget {
 	}
 
 	@Override
-	public void receiveLaserEnergy(double energy) {
+	public void receiveLaserEnergy(int energy) {
 		progress += energy;
 		oldProgressStage = progressStage;
-		if (progress > 2000) {
+		if (progress > 20000) {
 			progress = 0;
 			progressStage = 0;
 			dust();
 		}
-		if (progress > 500)
+		if (progress > 5000)
 			progressStage = 1;
-		if (progress > 1000)
+		if (progress > 10000)
 			progressStage = 2;
-		if (progress > 1500)
+		if (progress > 15000)
 			progressStage = 3;
 
 		if (progressStage != oldProgressStage)
@@ -134,17 +134,17 @@ public class TileKineticDuster extends TileBaseDuster implements ILaserTarget {
 	}
 
 	@Override
-	public int getXCoord() {
+	public double getXCoord() {
 		return xCoord;
 	}
 
 	@Override
-	public int getYCoord() {
+	public double getYCoord() {
 		return yCoord;
 	}
 
 	@Override
-	public int getZCoord() {
+	public double getZCoord() {
 		return zCoord;
 	}
 

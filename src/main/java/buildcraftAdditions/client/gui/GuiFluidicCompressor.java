@@ -20,8 +20,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.fluids.FluidStack;
 
+import buildcraftAdditions.networking.MessageFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.utils.Utils;
+
+
+import eureka.network.PacketHandler;
 
 @SideOnly(Side.CLIENT)
 public class GuiFluidicCompressor extends GuiContainer {
@@ -43,11 +47,12 @@ public class GuiFluidicCompressor extends GuiContainer {
 		int mY = mouseY - guiTop;
 		if (mX >= 20 && mX <= 39 && mY >= 25 && mY <= 41 && !fluidicCompressor.fill) {
 			fluidicCompressor.fill = true;
+			PacketHandler.instance.sendToAll(new MessageFluidicCompressor(true, fluidicCompressor));
 		}
 		if (mX >= 20 && mX <= 39 && mY >= 45 && mY <= 61 && fluidicCompressor.fill) {
 			fluidicCompressor.fill = false;
+			PacketHandler.instance.sendToAll(new MessageFluidicCompressor(false, fluidicCompressor));
 		}
-		fluidicCompressor.sendModeUpdatePacket();
 	}
 
 	@Override

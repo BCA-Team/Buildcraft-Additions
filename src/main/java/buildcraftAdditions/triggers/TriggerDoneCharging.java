@@ -1,6 +1,5 @@
 package buildcraftAdditions.triggers;
 
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -8,12 +7,10 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
-import buildcraft.api.gates.ITileTrigger;
+import buildcraft.api.gates.IGate;
+import buildcraft.api.gates.IStatementParameter;
 import buildcraft.api.gates.ITrigger;
 import buildcraft.api.gates.ITriggerParameter;
-import buildcraft.core.triggers.BCTrigger;
 
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.utils.Utils;
@@ -25,25 +22,24 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerDoneCharging extends BCTrigger implements ITileTrigger {
+public class TriggerDoneCharging implements ITrigger {
 	public IIcon icon;
 
-	public TriggerDoneCharging() {
-		super("bcadditions:TriggerDoneCharging");
-	}
-
-	@Override
-	public boolean isTriggerActive(ForgeDirection side, TileEntity tile, ITriggerParameter parameter) {
-		if (tile instanceof TileChargingStation) {
-			TileChargingStation chargingStation = (TileChargingStation) tile;
-			return chargingStation.getProgress() == 1;
-		}
-		return false;
-	}
+	public TriggerDoneCharging() {}
 
 	@Override
 	public String getDescription() {
 		return Utils.localize("trigger.doneCharging");
+	}
+
+	@Override
+	public IStatementParameter createParameter(int index) {
+		return null;
+	}
+
+	@Override
+	public String getUniqueTag() {
+		return "bcadditions:TriggerDoneCharging";
 	}
 
 	@Override
@@ -59,7 +55,27 @@ public class TriggerDoneCharging extends BCTrigger implements ITileTrigger {
 	}
 
 	@Override
+	public int maxParameters() {
+		return 0;
+	}
+
+	@Override
+	public int minParameters() {
+		return 0;
+	}
+
+	@Override
 	public ITrigger rotateLeft() {
 		return this;
+	}
+
+	@Override
+	public boolean isTriggerActive(IGate gate, ITriggerParameter[] parameters) {
+		TileEntity tile = gate.getPipe().getAdjacentTile(gate.getSide());
+		if (tile instanceof TileChargingStation) {
+			TileChargingStation chargingStation = (TileChargingStation) tile;
+			return chargingStation.getProgress() == 1;
+		}
+		return false;
 	}
 }

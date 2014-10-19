@@ -1,10 +1,11 @@
 package buildcraftAdditions.tileEntities;
 
-import buildcraftAdditions.api.DusterRecipes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;
@@ -17,7 +18,7 @@ import buildcraftAdditions.variables.Variables;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileBasicDuster extends TileBaseDuster {
+public class TileBasicDuster extends TileBaseDuster implements IInventory {
 	public CustomInventory inventory = new CustomInventory("Duster", 1, 1, this);
 
 	public TileBasicDuster() {

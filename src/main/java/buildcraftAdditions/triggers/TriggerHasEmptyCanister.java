@@ -7,12 +7,11 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
-import buildcraft.api.gates.ITileTrigger;
+import buildcraft.api.gates.IGate;
+import buildcraft.api.gates.IStatement;
+import buildcraft.api.gates.IStatementParameter;
 import buildcraft.api.gates.ITrigger;
 import buildcraft.api.gates.ITriggerParameter;
-import buildcraft.core.triggers.BCTrigger;
 
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.utils.Utils;
@@ -24,25 +23,29 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerHasEmptyCanister extends BCTrigger implements ITileTrigger {
+public class TriggerHasEmptyCanister implements ITrigger {
 	public IIcon icon;
 
-	public TriggerHasEmptyCanister() {
-		super("bcadditions:TriggerHasEmptyCanister");
-	}
-
-	@Override
-	public boolean isTriggerActive(ForgeDirection side, TileEntity tile, ITriggerParameter parameter) {
-		if (tile instanceof TileFluidicCompressor) {
-			TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) tile;
-			return (fluidicCompressor.getStackInSlot(1) != null && fluidicCompressor.getStackInSlot(1).stackTagCompound.hasKey("Fluid"));
-		}
-		return false;
-	}
+	public TriggerHasEmptyCanister() {}
 
 	@Override
 	public String getDescription() {
 		return Utils.localize("trigger.hasEmptyCanister");
+	}
+
+	@Override
+	public IStatementParameter createParameter(int index) {
+		return null;
+	}
+
+	@Override
+	public IStatement rotateLeft() {
+		return null;
+	}
+
+	@Override
+	public String getUniqueTag() {
+		return "bcadditions:TriggerHasEmptyCanister";
 	}
 
 	@Override
@@ -58,7 +61,22 @@ public class TriggerHasEmptyCanister extends BCTrigger implements ITileTrigger {
 	}
 
 	@Override
-	public ITrigger rotateLeft() {
-		return this;
+	public int maxParameters() {
+		return 0;
+	}
+
+	@Override
+	public int minParameters() {
+		return 0;
+	}
+
+	@Override
+	public boolean isTriggerActive(IGate gate, ITriggerParameter[] parameters) {
+		TileEntity tile = gate.getPipe().getAdjacentTile(gate.getSide());
+		if (tile instanceof TileFluidicCompressor) {
+			TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) tile;
+			return (fluidicCompressor.getStackInSlot(1) != null && fluidicCompressor.getStackInSlot(1).stackTagCompound.hasKey("Fluid"));
+		}
+		return false;
 	}
 }

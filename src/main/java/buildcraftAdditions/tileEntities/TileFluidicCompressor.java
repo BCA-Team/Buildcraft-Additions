@@ -8,9 +8,6 @@ package buildcraftAdditions.tileEntities;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.LinkedList;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,41 +24,26 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.ItemFluidContainer;
 
-import buildcraft.api.core.NetworkData;
 import buildcraft.api.gates.IOverrideDefaultTriggers;
 import buildcraft.api.gates.ITrigger;
-import buildcraft.api.mj.MjBattery;
-import buildcraft.core.TileBuildCraft;
-import buildcraft.core.fluids.Tank;
-import buildcraft.core.fluids.TankManager;
-import buildcraft.core.network.IGuiReturnHandler;
-import buildcraft.core.network.PacketGuiReturn;
-import buildcraft.core.network.PacketPayload;
-import buildcraft.core.network.PacketUpdate;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.items.ItemCanister;
+import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
+import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
 
 
-import io.netty.buffer.ByteBuf;
-
-
-public class TileFluidicCompressor extends TileBuildCraft implements ISidedInventory, IFluidHandler, IGuiReturnHandler, IOverrideDefaultTriggers {
+public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler, IOverrideDefaultTriggers {
 
 	public final int maxLiquid = FluidContainerRegistry.BUCKET_VOLUME * 10;
-	public Tank tank = new Tank("tank", maxLiquid, this);
+	public Tank tank = new Tank(maxLiquid, this);
 	private final CustomInventory inventory = new CustomInventory("FluidicCompressor", 2, 1, this);
-	@MjBattery(maxCapacity = 800.0, maxReceivedPerCycle = 100.0)
-	public double energyStored = 0;
-	public
-	@NetworkData
-	boolean fill;
-	private TankManager tankManager = new TankManager();
+	public boolean fill;
 
 	public TileFluidicCompressor() {
-		tankManager.add(tank);
+		super(800);
 	}
 
 	@Override
@@ -78,9 +60,9 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 				if (fill && !tank.isEmpty()) {
 					if (tank.getFluid().amount < 100)
 						amount = tank.getFluid().amount;
-					if (energyStored >= amount) {
+					if (energy >= amount) {
 						tank.drain(item.fill(itemstack, new FluidStack(tank.getFluid(), amount), true), true);
-						energyStored = energyStored - amount;
+						energy = energy - amount;
 						FluidStack fluid = Utils.getFluidStackFromItemStack(itemstack);
 						if (fluid != null) {
 							if (getProgress() == 16) {
@@ -126,7 +108,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
 		inventory.readNBT(nbtTagCompound);
-		tankManager.readFromNBT(nbtTagCompound);
+		tank.readFromNBT(nbtTagCompound);
 		fill = nbtTagCompound.getBoolean("fill");
 	}
 
@@ -134,7 +116,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
 		inventory.writeNBT(nbtTagCompound);
-		tankManager.writeToNBT(nbtTagCompound);
+		tank.writeToNBT(nbtTagCompound);
 		nbtTagCompound.setBoolean("fill", fill);
 	}
 
@@ -231,7 +213,7 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		return tankManager.getTankInfo(from);
+		return new FluidTankInfo[]{new FluidTankInfo(tank)};
 	}
 
 	public FluidStack getFluid() {
@@ -241,46 +223,6 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 	public int getScaledLiquid(int i) {
 		return tank.getFluid() != null ? (int) (((float) this.tank.getFluid().amount / (float) (maxLiquid)) * i)
 				: 0;
-	}
-
-	@Override
-	public PacketPayload getPacketPayload() {
-		PacketPayload payload = new PacketPayload(
-				new PacketPayload.StreamWriter() {
-					@Override
-					public void writeData(ByteBuf data) {
-						tankManager.writeData(data);
-						data.writeBoolean(fill);
-					}
-				});
-		return payload;
-	}
-
-	@Override
-	public void handleUpdatePacket(PacketUpdate packet) throws IOException {
-		ByteBuf stream = packet.payload.stream;
-		tankManager.readData(stream);
-		fill = stream.readBoolean();
-	}
-
-	@Override
-	public void writeGuiData(ByteBuf data) {
-	}
-
-	@Override
-	public void readGuiData(ByteBuf data, EntityPlayer player) {
-		fill = data.readBoolean();
-	}
-
-	public void sendModeUpdatePacket() {
-		try {
-			ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-			DataOutputStream data = new DataOutputStream(bytes);
-			data.writeBoolean(fill);
-			PacketGuiReturn pkt = new PacketGuiReturn(this, bytes.toByteArray());
-			pkt.sendPacket();
-		} catch (Exception e) {
-		}
 	}
 
 	public int getProgress() {
@@ -320,8 +262,8 @@ public class TileFluidicCompressor extends TileBuildCraft implements ISidedInven
 		return (slot == 1);
 	}
 
-	public double getEnergyStored() {
-		return energyStored;
+	public int getEnergyStored() {
+		return energy;
 	}
 
 	public int getFluidStored() {

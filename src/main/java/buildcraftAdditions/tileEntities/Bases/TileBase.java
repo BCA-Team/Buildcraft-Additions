@@ -1,6 +1,5 @@
 package buildcraftAdditions.tileEntities.Bases;
 
-import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -10,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileBase extends TileEntity implements IInventory {
+public abstract class TileBase extends TileEntity {
 
 	@Override
 	public abstract void updateEntity();

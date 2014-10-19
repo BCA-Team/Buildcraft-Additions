@@ -16,8 +16,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraft.core.IItemPipe;
-
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
 import buildcraftAdditions.utils.Utils;
@@ -44,10 +42,6 @@ public class BlockSemiAutomaticDuster extends BlockBase {
 		super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
 		if (player.isSneaking())
 			return false;
-		if (player.getCurrentEquippedItem() != null) {
-			if (player.getCurrentEquippedItem().getItem() instanceof IItemPipe)
-				return false;
-		}
 		TileBaseDuster duster = (TileBaseDuster) world.getTileEntity(x, y, z);
 		if (duster != null && duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
 			ItemStack stack = player.getCurrentEquippedItem().copy();

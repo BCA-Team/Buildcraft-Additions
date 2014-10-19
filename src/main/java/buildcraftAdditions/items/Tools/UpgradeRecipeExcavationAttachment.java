@@ -2,7 +2,9 @@ package buildcraftAdditions.items.Tools;
 
 import net.minecraft.item.ItemStack;
 
-import buildcraft.api.recipes.IIntegrationRecipeManager;
+import buildcraft.api.recipes.CraftingResult;
+import buildcraft.api.recipes.IFlexibleCrafter;
+import buildcraft.api.recipes.IIntegrationRecipe;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -11,9 +13,8 @@ import buildcraft.api.recipes.IIntegrationRecipeManager;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class UpgradeRecipeExcavationAttachment implements IIntegrationRecipeManager.IIntegrationRecipe {
+public class UpgradeRecipeExcavationAttachment implements IIntegrationRecipe {
 
-	@Override
 	public double getEnergyCost() {
 		return 1000;
 	}
@@ -32,7 +33,6 @@ public class UpgradeRecipeExcavationAttachment implements IIntegrationRecipeMana
 		return inputB != null && inputB.getItem() instanceof ToolUpgrade && ((ToolUpgrade) inputB.getItem()).getType() == "Digger";
 	}
 
-	@Override
 	public ItemStack getOutputForInputs(ItemStack inputA, ItemStack inputB, ItemStack[] components) {
 		ItemStack outputStack = inputA.copy();
 		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
@@ -42,17 +42,22 @@ public class UpgradeRecipeExcavationAttachment implements IIntegrationRecipeMana
 	}
 
 	@Override
-	public ItemStack[] getComponents() {
-		return new ItemStack[0];
+	public boolean canBeCrafted(IFlexibleCrafter crafter) {
+		return false;
 	}
 
 	@Override
-	public ItemStack[] getExampleInputsA() {
-		return new ItemStack[0];
+	public CraftingResult<ItemStack> craft(IFlexibleCrafter crafter, boolean preview) {
+		return null;
 	}
 
 	@Override
-	public ItemStack[] getExampleInputsB() {
-		return new ItemStack[0];
+	public CraftingResult<ItemStack> canCraft(ItemStack expectedOutput) {
+		return null;
+	}
+
+	@Override
+	public String getId() {
+		return null;
 	}
 }

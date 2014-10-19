@@ -1,14 +1,15 @@
 package buildcraftAdditions.tileEntities;
 
-import buildcraftAdditions.api.DusterRecipes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 
-import buildcraft.api.mj.MjBattery;
+import cofh.api.energy.IEnergyStorage;
 
+import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageMechanicDuster;
 import buildcraftAdditions.networking.PacketHandeler;
@@ -22,15 +23,14 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileMechanicalDuster extends TileBaseDuster {
-	public int progress, progressStage, oldProgressStage;
+public class TileMechanicalDuster extends TileBaseDuster implements IInventory, IEnergyStorage {
+	public int progress, progressStage, oldProgressStage, energy, maxEnergy;
 	public EntityPlayer player;
-	@MjBattery
-	double energy;
 	private CustomInventory inventory = new CustomInventory("mechanicalDuster", 1, 1, this);
 
 	public TileMechanicalDuster() {
 		super("dusterTier2-2");
+		maxEnergy = 2000;
 	}
 
 
@@ -134,6 +134,7 @@ public class TileMechanicalDuster extends TileBaseDuster {
 		super.writeToNBT(tag);
 		inventory.writeNBT(tag);
 		tag.setInteger("progress", progress);
+		tag.setInteger("energy", energy);
 	}
 
 	@Override
@@ -141,6 +142,7 @@ public class TileMechanicalDuster extends TileBaseDuster {
 		super.readFromNBT(tag);
 		inventory.readNBT(tag);
 		progress = tag.getInteger("progress");
+		energy = tag.getInteger("energy");
 	}
 
 	@Override
@@ -151,4 +153,30 @@ public class TileMechanicalDuster extends TileBaseDuster {
 			PacketHandeler.instance.sendToAllAround(new MessageMechanicDuster(xCoord, yCoord, zCoord, progressStage, getStackInSlot(0)), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
+
+	@Override
+	public int receiveEnergy(int maxReceive, boolean simulate) {
+		int energyRecieved = maxReceive;
+		if (energyRecieved > maxEnergy - energy)
+			energyRecieved = maxReceive - energy;
+		if (!simulate)
+			energy += energyRecieved;
+		return energyRecieved;
+	}
+
+	@Override
+	public int extractEnergy(int maxExtract, boolean simulate) {
+		return 0;
+	}
+
+	@Override
+	public int getEnergyStored() {
+		return energy;
+	}
+
+	@Override
+	public int getMaxEnergyStored() {
+		return maxEnergy;
+	}
 }
+

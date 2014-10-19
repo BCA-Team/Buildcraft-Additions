@@ -9,8 +9,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraft.core.IItemPipe;
-
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.variables.Variables;
@@ -37,11 +35,6 @@ public class BlockBasicCoil extends BlockCoilBase {
 		// Drop through if the player is sneaking
 		if (entityplayer.isSneaking())
 			return false;
-
-		if (entityplayer.getCurrentEquippedItem() != null) {
-			if (entityplayer.getCurrentEquippedItem().getItem() instanceof IItemPipe)
-				return false;
-		}
 
 		if (!world.isRemote)
 			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GuiBasicCoil, world, x, y, z);

@@ -1,7 +1,7 @@
 package buildcraftAdditions.tileEntities.Bases;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.inventory.IInventory;
 
 import buildcraftAdditions.api.DusterRecipes;
 
@@ -15,7 +15,7 @@ import eureka.api.EurekaKnowledge;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileBaseDuster extends TileBase {
+public abstract class TileBaseDuster extends TileBase implements IInventory {
 	public int progress;
 	private String key;
 

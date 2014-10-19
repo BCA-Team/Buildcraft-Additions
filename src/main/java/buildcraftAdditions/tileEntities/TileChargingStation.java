@@ -17,20 +17,18 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import buildcraft.api.gates.IOverrideDefaultTriggers;
 import buildcraft.api.gates.ITrigger;
-import buildcraft.api.mj.MjBattery;
-import buildcraft.core.TileBuildCraft;
-import buildcraft.core.inventory.SimpleInventory;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.IKineticCapsule;
+import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 
-public class TileChargingStation extends TileBuildCraft implements IInventory, IOverrideDefaultTriggers {
+public class TileChargingStation extends TileMachineBase implements IInventory, IOverrideDefaultTriggers {
 
-	private final SimpleInventory inventory = new SimpleInventory(1, "ChargingStation", 1);
-	@MjBattery(maxCapacity = 10000, maxReceivedPerCycle = 100)
-	double energy = 0;
+	private final CustomInventory inventory = new CustomInventory("ChargingStation",1 , 1, this);
 
 	public TileChargingStation() {
+		super (1000);
 	}
 
 	@Override
@@ -53,15 +51,13 @@ public class TileChargingStation extends TileBuildCraft implements IInventory, I
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
-		inventory.readFromNBT(nbtTagCompound);
-		energy = nbtTagCompound.getDouble("energy");
+		inventory.readNBT(nbtTagCompound);
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
-		inventory.writeToNBT(nbtTagCompound);
-		nbtTagCompound.setDouble("energy", energy);
+		inventory.writeNBT(nbtTagCompound);
 	}
 
 	@Override

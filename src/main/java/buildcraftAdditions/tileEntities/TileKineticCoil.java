@@ -41,8 +41,8 @@ public class TileKineticCoil extends TileCoilBase implements ILaserTarget {
 	}
 
 	@Override
-	public void receiveLaserEnergy(double energy) {
-		buffer += energy * 30;
+	public void receiveLaserEnergy(int energy) {
+		buffer += energy * 3;
 	}
 
 	@Override
@@ -51,17 +51,22 @@ public class TileKineticCoil extends TileCoilBase implements ILaserTarget {
 	}
 
 	@Override
-	public int getXCoord() {
+	public double getXCoord() {
 		return xCoord;
 	}
 
 	@Override
-	public int getYCoord() {
+	public double getYCoord() {
 		return yCoord;
 	}
 
 	@Override
-	public int getZCoord() {
+	public double getZCoord() {
 		return zCoord;
+	}
+
+	@Override
+	public void updateEntity() {
+
 	}
 }

@@ -17,8 +17,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraft.core.IItemPipe;
-
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import buildcraftAdditions.utils.Utils;
@@ -55,10 +53,6 @@ public class BlockHeatedFurnace extends BlockContainer {
 		if (entityplayer.isSneaking())
 			return false;
 
-		if (entityplayer.getCurrentEquippedItem() != null) {
-			if (entityplayer.getCurrentEquippedItem().getItem() instanceof IItemPipe)
-				return false;
-		}
 
 		if (!world.isRemote)
 			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GuiHeatedFurnace, world, x, y, z);

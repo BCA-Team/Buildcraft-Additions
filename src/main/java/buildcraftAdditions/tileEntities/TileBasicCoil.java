@@ -7,8 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 
 import buildcraft.api.core.NetworkData;
-import buildcraft.core.inventory.SimpleInventory;
 
+import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 
 
@@ -21,7 +21,7 @@ import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
  */
 public class TileBasicCoil extends TileCoilBase implements IInventory {
 	@NetworkData
-	private final SimpleInventory inventory = new SimpleInventory(1, "BasicCoil", 64);
+	private final CustomInventory inventory = new CustomInventory("BasicCoil", 1, 64, this);
 
 	public TileBasicCoil() {
 		burnTime = 0;
@@ -57,13 +57,13 @@ public class TileBasicCoil extends TileCoilBase implements IInventory {
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		inventory.writeToNBT(tag);
+		inventory.writeNBT(tag);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		inventory.readFromNBT(tag);
+		inventory.readNBT(tag);
 	}
 
 	@Override

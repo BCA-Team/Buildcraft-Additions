@@ -7,12 +7,10 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
-import buildcraft.api.gates.ITileTrigger;
+import buildcraft.api.gates.IGate;
+import buildcraft.api.gates.IStatementParameter;
 import buildcraft.api.gates.ITrigger;
 import buildcraft.api.gates.ITriggerParameter;
-import buildcraft.core.triggers.BCTrigger;
 
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.utils.Utils;
@@ -24,12 +22,10 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerReadyToCharge extends BCTrigger implements ITileTrigger {
+public class TriggerReadyToCharge implements ITrigger {
 	public IIcon icon;
 
-	public TriggerReadyToCharge() {
-		super("bcadditions:TriggerReadyToCharge");
-	}
+	public TriggerReadyToCharge() {}
 
 	@Override
 	public String getDescription() {
@@ -37,12 +33,13 @@ public class TriggerReadyToCharge extends BCTrigger implements ITileTrigger {
 	}
 
 	@Override
-	public boolean isTriggerActive(ForgeDirection side, TileEntity tile, ITriggerParameter parameter) {
-		if (tile instanceof TileChargingStation) {
-			TileChargingStation chargingStation = (TileChargingStation) tile;
-			return chargingStation.getStackInSlot(0) == null;
-		}
-		return false;
+	public IStatementParameter createParameter(int index) {
+		return null;
+	}
+
+	@Override
+	public String getUniqueTag() {
+		return "bcadditions:TriggerReadyToCharge";
 	}
 
 	@Override
@@ -58,7 +55,27 @@ public class TriggerReadyToCharge extends BCTrigger implements ITileTrigger {
 	}
 
 	@Override
+	public int maxParameters() {
+		return 0;
+	}
+
+	@Override
+	public int minParameters() {
+		return 0;
+	}
+
+	@Override
 	public ITrigger rotateLeft() {
 		return this;
+	}
+
+	@Override
+	public boolean isTriggerActive(IGate gate, ITriggerParameter[] parameters) {
+		TileEntity tile = gate.getPipe().getAdjacentTile(gate.getSide());
+		if (tile instanceof TileChargingStation) {
+			TileChargingStation chargingStation = (TileChargingStation) tile;
+			return chargingStation.getStackInSlot(0) == null;
+		}
+		return false;
 	}
 }

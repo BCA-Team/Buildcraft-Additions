@@ -3,10 +3,10 @@ package buildcraftAdditions.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -26,19 +26,19 @@ public abstract class BlockBase extends BlockContainer {
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		TileBase entity = (TileBase) world.getTileEntity(x, y, z);
-		if (entity != null) {
-			entity.openInventory();
+		IInventory inventory = (IInventory) world.getTileEntity(x, y, z);
+		if (inventory != null) {
+			inventory.openInventory();
 
-			for (int t = 0; t < entity.getSizeInventory(); t++) {
+			for (int t = 0; t < inventory.getSizeInventory(); t++) {
 
-				ItemStack stack = entity.getStackInSlot(t);
+				ItemStack stack = inventory.getStackInSlot(t);
 				if (stack != null) {
-					entity.setInventorySlotContents(t, null);
+					inventory.setInventorySlotContents(t, null);
 					Utils.dropItemstack(world, x, y, z, stack);
 				}
 			}
-			entity.closeInventory();
+			inventory.closeInventory();
 		}
 		super.breakBlock(world, x, y, z, block, meta);
 	}

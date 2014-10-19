@@ -8,6 +8,8 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import buildcraft.api.power.ILaserTargetBlock;
+
 import buildcraftAdditions.tileEntities.TileKineticCoil;
 
 /**
@@ -17,7 +19,7 @@ import buildcraftAdditions.tileEntities.TileKineticCoil;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockKineticCoil extends BlockCoilBase {
+public class BlockKineticCoil extends BlockCoilBase implements ILaserTargetBlock {
 	public IIcon sides, top, bottom;
 
 	@Override

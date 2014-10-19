@@ -15,8 +15,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraft.core.IItemPipe;
-
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import buildcraftAdditions.utils.Utils;
 
@@ -50,10 +48,6 @@ public class BlockMechanicalDuster extends BlockBase {
 		super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
 		if (player.isSneaking())
 			return false;
-		if (player.getCurrentEquippedItem() != null) {
-			if (player.getCurrentEquippedItem().getItem() instanceof IItemPipe)
-				return false;
-		}
 		TileMechanicalDuster duster = (TileMechanicalDuster) world.getTileEntity(x, y, z);
 		duster.player = player;
 		if (duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {

@@ -31,7 +31,6 @@ public class UpgradeRecipeGoldStick implements IIntegrationRecipe {
 		return inputB != null && inputB.getItem() instanceof ItemBase && inputB.getItem().getUnlocalizedName() == "stickGold";
 	}
 
-	@Override
 	public ItemStack getOutputForInputs(ItemStack inputA, ItemStack inputB, ItemStack[] components) {
 		ItemStack outputStack = inputA.copy();
 		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
@@ -39,12 +38,6 @@ public class UpgradeRecipeGoldStick implements IIntegrationRecipe {
 		output.writeUpgrades(outputStack);
 		return outputStack;
 	}
-
-	@Override
-	public ItemStack[] getComponents() {
-		return new ItemStack[]{ItemRedstoneChipset.Chipset.QUARTZ.getStack()};
-	}
-
 
 	@Override
 	public boolean canBeCrafted(IFlexibleCrafter crafter) {

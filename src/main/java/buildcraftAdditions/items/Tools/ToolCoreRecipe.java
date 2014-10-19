@@ -1,10 +1,15 @@
 package buildcraftAdditions.items.Tools;
 
+import java.util.ArrayList;
+
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import buildcraft.BuildCraftCore;
-import buildcraft.api.recipes.IIntegrationRecipeManager;
-import buildcraft.silicon.ItemRedstoneChipset;
+import cpw.mods.fml.common.registry.GameRegistry;
+
+import buildcraft.api.recipes.CraftingResult;
+import buildcraft.api.recipes.IFlexibleCrafter;
+import buildcraft.api.recipes.IIntegrationRecipe;
 
 import buildcraftAdditions.BuildcraftAdditions;
 
@@ -15,23 +20,21 @@ import buildcraftAdditions.BuildcraftAdditions;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ToolCoreRecipe implements IIntegrationRecipeManager.IIntegrationRecipe {
-	@Override
-	public double getEnergyCost() {
-		return 3000;
-	}
+public class ToolCoreRecipe implements IIntegrationRecipe {
+	private Item goldGearItem = GameRegistry.findItem("BuildCraft|Core", "goldGearItem");
 
 	@Override
 	public boolean isValidInputA(ItemStack inputA) {
-		return inputA != null && inputA.getItem() == BuildCraftCore.goldGearItem;
+		return inputA != null && inputA.getItem() == goldGearItem;
 	}
 
 	@Override
 	public boolean isValidInputB(ItemStack inputB) {
-		return inputB != null && inputB.getItem() == ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem();
+		//return inputB != null && inputB.getItem() == ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem();
+		return false;
 	}
 
-	@Override
+
 	public ItemStack getOutputForInputs(ItemStack inputA, ItemStack inputB, ItemStack[] components) {
 		if (!isValidInputA(inputA)) {
 			return null;
@@ -44,17 +47,29 @@ public class ToolCoreRecipe implements IIntegrationRecipeManager.IIntegrationRec
 	}
 
 	@Override
-	public ItemStack[] getComponents() {
-		return new ItemStack[0];
+	public boolean canBeCrafted(IFlexibleCrafter crafter) {
+		return crafter.getCraftingItemStack(0)!= null && crafter.getCraftingItemStack(0).getItem() == goldGearItem;
 	}
 
 	@Override
-	public ItemStack[] getExampleInputsA() {
-		return new ItemStack[0];
+	public CraftingResult<ItemStack> craft(IFlexibleCrafter crafter, boolean preview) {
+		CraftingResult<ItemStack> result = new CraftingResult<ItemStack>();
+		result.crafted = new ItemStack(BuildcraftAdditions.toolCore);
+		result.craftingTime = 100000;
+		result.energyCost = 30000;
+		ArrayList<ItemStack> used = new ArrayList<ItemStack>(2);
+		used.add(new ItemStack(goldGearItem));
+		result.usedItems = used;
+		return result;
 	}
 
 	@Override
-	public ItemStack[] getExampleInputsB() {
-		return new ItemStack[0];
+	public CraftingResult<ItemStack> canCraft(ItemStack expectedOutput) {
+		return null;
+	}
+
+	@Override
+	public String getId() {
+		return "toolcore";
 	}
 }

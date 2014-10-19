@@ -3,7 +3,6 @@ package buildcraftAdditions.tileEntities.Bases;
 import net.minecraft.nbt.NBTTagCompound;
 
 import buildcraft.api.core.NetworkData;
-import buildcraft.core.TileBuildCraft;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -12,7 +11,7 @@ import buildcraft.core.TileBuildCraft;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileCoilBase extends TileBuildCraft {
+public abstract class TileCoilBase extends TileBase {
 	@NetworkData
 	public boolean shouldHeat, burning;
 	@NetworkData

@@ -1,6 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -8,9 +9,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 import buildcraft.api.core.NetworkData;
-import buildcraft.core.TileBuildCraft;
 
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 import buildcraftAdditions.utils.Utils;
 
@@ -21,7 +22,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileHeatedFurnace extends TileBuildCraft implements ISidedInventory {
+public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInventory {
 	private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64, this);
 	@NetworkData
 	public int progress;
@@ -92,7 +93,6 @@ public class TileHeatedFurnace extends TileBuildCraft implements ISidedInventory
 	}
 
 	public void doBlockUpdate() {
-		sendNetworkUpdate();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 

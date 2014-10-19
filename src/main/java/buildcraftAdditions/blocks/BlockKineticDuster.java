@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraft.core.IItemPipe;
+import buildcraft.api.power.ILaserTargetBlock;
 
 import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.utils.Utils;
@@ -27,7 +27,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockKineticDuster extends BlockBase {
+public class BlockKineticDuster extends BlockBase implements ILaserTargetBlock {
 	public IIcon bottom, sides[], top;
 
 	public BlockKineticDuster() {
@@ -44,10 +44,6 @@ public class BlockKineticDuster extends BlockBase {
 		super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
 		if (player.isSneaking())
 			return false;
-		if (player.getCurrentEquippedItem() != null) {
-			if (player.getCurrentEquippedItem().getItem() instanceof IItemPipe)
-				return false;
-		}
 		TileKineticDuster duster = (TileKineticDuster) world.getTileEntity(x, y, z);
 		if (duster != null && duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
 			ItemStack stack = player.getCurrentEquippedItem().copy();

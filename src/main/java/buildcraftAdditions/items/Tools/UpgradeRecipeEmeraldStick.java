@@ -2,8 +2,9 @@ package buildcraftAdditions.items.Tools;
 
 import net.minecraft.item.ItemStack;
 
-import buildcraft.api.recipes.IIntegrationRecipeManager;
-import buildcraft.silicon.ItemRedstoneChipset;
+import buildcraft.api.recipes.CraftingResult;
+import buildcraft.api.recipes.IFlexibleCrafter;
+import buildcraft.api.recipes.IIntegrationRecipe;
 
 import buildcraftAdditions.items.ItemBase;
 
@@ -14,9 +15,8 @@ import buildcraftAdditions.items.ItemBase;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class UpgradeRecipeEmeraldStick implements IIntegrationRecipeManager.IIntegrationRecipe {
+public class UpgradeRecipeEmeraldStick implements IIntegrationRecipe {
 
-	@Override
 	public double getEnergyCost() {
 		return 1000;
 	}
@@ -35,7 +35,6 @@ public class UpgradeRecipeEmeraldStick implements IIntegrationRecipeManager.IInt
 		return inputB != null && inputB.getItem() instanceof ItemBase && inputB.getItem().getUnlocalizedName() == "stickDiamond";
 	}
 
-	@Override
 	public ItemStack getOutputForInputs(ItemStack inputA, ItemStack inputB, ItemStack[] components) {
 		ItemStack outputStack = inputA.copy();
 		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
@@ -45,17 +44,22 @@ public class UpgradeRecipeEmeraldStick implements IIntegrationRecipeManager.IInt
 	}
 
 	@Override
-	public ItemStack[] getComponents() {
-		return new ItemStack[]{ItemRedstoneChipset.Chipset.DIAMOND.getStack()};
+	public boolean canBeCrafted(IFlexibleCrafter crafter) {
+		return false;
 	}
 
 	@Override
-	public ItemStack[] getExampleInputsA() {
-		return new ItemStack[0];
+	public CraftingResult<ItemStack> craft(IFlexibleCrafter crafter, boolean preview) {
+		return null;
 	}
 
 	@Override
-	public ItemStack[] getExampleInputsB() {
-		return new ItemStack[0];
+	public CraftingResult<ItemStack> canCraft(ItemStack expectedOutput) {
+		return null;
+	}
+
+	@Override
+	public String getId() {
+		return null;
 	}
 }

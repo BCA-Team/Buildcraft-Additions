@@ -10,8 +10,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraft.core.IItemPipe;
-
 import buildcraftAdditions.tileEntities.TileLavaCoil;
 
 /**
@@ -32,10 +30,6 @@ public class BlockLavaCoil extends BlockCoilBase {
 		if (entityplayer.isSneaking())
 			return false;
 
-		if (entityplayer.getCurrentEquippedItem() != null) {
-			if (entityplayer.getCurrentEquippedItem().getItem() instanceof IItemPipe)
-				return false;
-		}
 
 		if (!world.isRemote)
 			entityplayer.addChatComponentMessage(new ChatComponentText("Lava Stored: " + ((TileLavaCoil) world.getTileEntity(x, y, z)).getLavaAmount() + "/3000 mb"));
