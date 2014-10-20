@@ -1,7 +1,6 @@
 package buildcraftAdditions.client.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
@@ -14,7 +13,7 @@ import buildcraftAdditions.tileEntities.TileBasicCoil;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ContainerBasicCoil extends Container {
+public class ContainerBasicCoil extends ContainerBase {
 	public TileBasicCoil coil;
 
 	public ContainerBasicCoil(IInventory inventory, TileBasicCoil coil) {

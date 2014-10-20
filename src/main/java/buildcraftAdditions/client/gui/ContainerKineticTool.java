@@ -10,7 +10,6 @@ package buildcraftAdditions.client.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -18,7 +17,7 @@ import net.minecraft.item.ItemStack;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 
-public class ContainerKineticTool extends Container {
+public class ContainerKineticTool extends ContainerBase {
 
 	IInventory playerIInventory;
 	ItemKineticTool tool;

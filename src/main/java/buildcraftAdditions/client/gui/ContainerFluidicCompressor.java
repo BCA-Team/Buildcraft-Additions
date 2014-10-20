@@ -10,13 +10,12 @@ package buildcraftAdditions.client.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 
-public class ContainerFluidicCompressor extends Container {
+public class ContainerFluidicCompressor extends ContainerBase {
 
 	IInventory playerIInventory;
 	TileFluidicCompressor fluidicCompressor;

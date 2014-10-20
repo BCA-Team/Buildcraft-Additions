@@ -1,13 +1,14 @@
 package buildcraftAdditions.networking;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.server.FMLServerHandler;
 
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 
 
+import eureka.core.Logger;
 import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -18,7 +19,10 @@ import io.netty.buffer.ByteBuf;
  */
 public class MessageFluidicCompressor implements IMessage, IMessageHandler<MessageFluidicCompressor, IMessage> {
 	public int x, y, z;
-	boolean fill;
+	public boolean fill;
+
+	public MessageFluidicCompressor() {
+	}
 
 	public MessageFluidicCompressor(boolean fill, TileFluidicCompressor compressor) {
 		this.fill = fill;
@@ -27,8 +31,7 @@ public class MessageFluidicCompressor implements IMessage, IMessageHandler<Messa
 		this.z = compressor.zCoord;
 	}
 
-	public MessageFluidicCompressor() {
-	}
+
 
 	@Override
 	public void fromBytes(ByteBuf buf) {
@@ -48,7 +51,8 @@ public class MessageFluidicCompressor implements IMessage, IMessageHandler<Messa
 
 	@Override
 	public IMessage onMessage(MessageFluidicCompressor message, MessageContext ctx) {
-		TileFluidicCompressor compressor = (TileFluidicCompressor) FMLServerHandler.instance().getServer().worldServerForDimension(0).getTileEntity(message.x, message.y, message.z);
+		Logger.info("test");
+		TileFluidicCompressor compressor = (TileFluidicCompressor) FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getTileEntity(message.x, message.y, message.z);
 		if (compressor != null)
 			compressor.fill = message.fill;
 		return null;

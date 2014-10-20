@@ -10,13 +10,12 @@ package buildcraftAdditions.client.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
 import buildcraftAdditions.tileEntities.TileChargingStation;
 
-public class ContainerChargingStation extends Container {
+public class ContainerChargingStation extends ContainerBase {
 	IInventory playerIInventory;
 	TileChargingStation chargingStation;
 

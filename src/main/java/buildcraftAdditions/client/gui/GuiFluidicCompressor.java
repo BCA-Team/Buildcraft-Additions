@@ -8,6 +8,9 @@ package buildcraftAdditions.client.gui;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -21,11 +24,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.fluids.FluidStack;
 
 import buildcraftAdditions.networking.MessageFluidicCompressor;
+import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.utils.Utils;
 
 
-import eureka.network.PacketHandler;
 
 @SideOnly(Side.CLIENT)
 public class GuiFluidicCompressor extends GuiContainer {
@@ -47,16 +50,19 @@ public class GuiFluidicCompressor extends GuiContainer {
 		int mY = mouseY - guiTop;
 		if (mX >= 20 && mX <= 39 && mY >= 25 && mY <= 41 && !fluidicCompressor.fill) {
 			fluidicCompressor.fill = true;
-			PacketHandler.instance.sendToAll(new MessageFluidicCompressor(true, fluidicCompressor));
+			PacketHandeler.instance.sendToAll(new MessageFluidicCompressor(true, fluidicCompressor));
 		}
 		if (mX >= 20 && mX <= 39 && mY >= 45 && mY <= 61 && fluidicCompressor.fill) {
 			fluidicCompressor.fill = false;
-			PacketHandler.instance.sendToAll(new MessageFluidicCompressor(false, fluidicCompressor));
+			PacketHandeler.instance.sendToAll(new MessageFluidicCompressor(false, fluidicCompressor));
 		}
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;
 		drawFluid(fluidicCompressor.getFluid(), fluidicCompressor.getScaledLiquid(52), j + 53, k + 16, 16, 52);

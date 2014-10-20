@@ -2,7 +2,9 @@ package buildcraftAdditions.tileEntities.Bases;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-import cofh.api.energy.IEnergyStorage;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import cofh.api.energy.IEnergyHandler;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -10,32 +12,12 @@ import cofh.api.energy.IEnergyStorage;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileMachineBase extends TileBase implements IEnergyStorage {
+public abstract class TileMachineBase extends TileBase implements IEnergyHandler {
 	protected int energy;
 	private int maxEnergy;
 
 	protected TileMachineBase(int maxEnergy) {
 		this.maxEnergy = maxEnergy;
-	}
-
-	@Override
-	public int receiveEnergy(int maxReceive, boolean simulate) {
-		int energyRecieved = maxReceive;
-		if (energyRecieved > maxEnergy - energy)
-			energyRecieved = maxReceive - energy;
-		if (!simulate)
-			energy += energyRecieved;
-		return energyRecieved;
-	}
-
-	@Override
-	public int extractEnergy(int maxExtract, boolean simulate) {
-		return 0;
-	}
-
-	@Override
-	public int getEnergyStored() {
-		return energy;
 	}
 
 	@Override
@@ -51,7 +33,32 @@ public abstract class TileMachineBase extends TileBase implements IEnergyStorage
 	}
 
 	@Override
-	public int getMaxEnergyStored() {
+	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
+		int energyRecieved = maxReceive;
+		if (energyRecieved > maxEnergy - energy)
+			energyRecieved = maxReceive - energy;
+		if (!simulate)
+			energy += energyRecieved;
+		return energyRecieved;
+	}
+
+	@Override
+	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
+		return 0;
+	}
+
+	@Override
+	public int getEnergyStored(ForgeDirection from) {
+		return energy;
+	}
+
+	@Override
+	public int getMaxEnergyStored(ForgeDirection from) {
 		return maxEnergy;
+	}
+
+	@Override
+	public boolean canConnectEnergy(ForgeDirection from) {
+		return true;
 	}
 }

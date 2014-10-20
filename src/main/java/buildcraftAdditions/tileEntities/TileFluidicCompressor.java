@@ -88,7 +88,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 							amount = Utils.getFluidStackFromItemStack(itemstack).amount;
 						}
 						tank.fill(item.drain(itemstack, amount, true), true);
-						if (getProgress() == 16) {
+						if (getProgress() >= 16) {
 							itemstack.getTagCompound().removeTag("Fluid");
 							if (inventory.getStackInSlot(1) == null) {
 								inventory.setInventorySlotContents(1, itemstack);
