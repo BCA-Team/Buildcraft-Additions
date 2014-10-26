@@ -8,9 +8,11 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import buildcraft.api.core.NetworkData;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.networking.MessageHeatedFurnaceProgress;
+import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 import buildcraftAdditions.utils.Utils;
@@ -24,13 +26,9 @@ import buildcraftAdditions.utils.Utils;
  */
 public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInventory {
 	private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64, this);
-	@NetworkData
 	public int progress;
-	@NetworkData
-	public boolean isCooking;
+	public boolean isCooking, shouldUpdateCoils, sync;
 	public TileCoilBase[] coils;
-	@NetworkData
-	public boolean shouldUpdateCoils;
 
 	public TileHeatedFurnace() {
 		progress = 0;
@@ -74,7 +72,8 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInv
 				for (TileCoilBase coil : coils)
 					if (coil != null) {
 						progress += coil.getIncrement();
-
+						if (sync)
+							PacketHandeler.instance.sendToAllAround(new MessageHeatedFurnaceProgress(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
 					}
 			}
 		} else {

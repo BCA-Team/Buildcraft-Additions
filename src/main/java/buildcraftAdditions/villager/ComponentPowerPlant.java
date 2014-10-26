@@ -56,9 +56,8 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 		fillWithMetadataBlocks(world, sbb, 0, -3, 0, 11, 3, 11, Blocks.stained_hardened_clay, 9, Blocks.stained_hardened_clay, 9, false);
 		fillWithMetadataBlocks(world, sbb, 0, 0, 0, 11, 0, 11, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
 		fillWithAir(world, sbb, 6, -2, 0, 6, -1, 0);
-		this.placeDoorAtCurrentPosition(world, sbb, random, 6, -2, 0, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		placeDoorAtCurrentPosition(world, sbb, random, 6, -2, 0, this.getMetadataWithOffset(Blocks.wooden_door, 1));
 		fillWithAir(world, sbb, 1, -2, 1, 10, 2, 10);
-
 
 		spawnVillagers(world, sbb, 0, 0, 0, 2);
 		return true;

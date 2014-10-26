@@ -16,6 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
+
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -30,24 +32,26 @@ import buildcraft.api.gates.ITrigger;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.items.ItemCanister;
+import buildcraftAdditions.networking.MessageFluidicCompressorC;
+import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
-
 
 public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler, IOverrideDefaultTriggers {
 
 	public final int maxLiquid = FluidContainerRegistry.BUCKET_VOLUME * 10;
 	public Tank tank = new Tank(maxLiquid, this);
 	private final CustomInventory inventory = new CustomInventory("FluidicCompressor", 2, 1, this);
-	public boolean fill;
+	public boolean fill, sync;
 
 	public TileFluidicCompressor() {
 		super(800);
 	}
-
 	@Override
 	public void updateEntity() {
+		if (worldObj.isRemote)
+			return;
 		ItemStack itemstack = inventory.getStackInSlot(0);
 		if (itemstack != null) {
 			ItemFluidContainer item = null;
@@ -61,7 +65,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 					if (tank.getFluid().amount < 100)
 						amount = tank.getFluid().amount;
 					if (energy >= amount) {
-						tank.drain(item.fill(itemstack, new FluidStack(tank.getFluid(), amount), true), true);
+						drain(ForgeDirection.UNKNOWN, item.fill(itemstack, new FluidStack(tank.getFluid(), amount), true), true);
 						energy = energy - amount;
 						FluidStack fluid = Utils.getFluidStackFromItemStack(itemstack);
 						if (fluid != null) {
@@ -87,7 +91,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 						if (amount > Utils.getFluidStackFromItemStack(itemstack).amount) {
 							amount = Utils.getFluidStackFromItemStack(itemstack).amount;
 						}
-						tank.fill(item.drain(itemstack, amount, true), true);
+						fill(ForgeDirection.UNKNOWN, item.drain(itemstack, amount, true), true);
 						if (getProgress() >= 16) {
 							itemstack.getTagCompound().removeTag("Fluid");
 							if (inventory.getStackInSlot(1) == null) {
@@ -187,18 +191,23 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		return tank.fill(resource, doFill);
+		int amount = tank.fill(resource, doFill);
+		if (sync)
+			PacketHandeler.instance.sendToAllAround(new MessageFluidicCompressorC(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
+		return amount;
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource,
-							boolean doDrain) {
+	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
 		return null;
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		return tank.drain(maxDrain, doDrain);
+		FluidStack fluid = tank.drain(maxDrain, doDrain);
+		if (sync)
+			PacketHandeler.instance.sendToAllAround(new MessageFluidicCompressorC(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
+		return  fluid;
 	}
 
 	@Override

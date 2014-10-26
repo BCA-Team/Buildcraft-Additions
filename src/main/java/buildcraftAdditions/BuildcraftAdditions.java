@@ -53,8 +53,6 @@ import buildcraftAdditions.items.ItemPowerCapsuleTier3;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ToolCoreRecipe;
 import buildcraftAdditions.items.Tools.ToolUpgrade;
-import buildcraftAdditions.items.Tools.UpgradeRecipeDrillHead;
-import buildcraftAdditions.items.Tools.UpgradeRecipeExcavationAttachment;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
@@ -91,7 +89,7 @@ import eureka.api.EurekaRegistry;
  */
 
 
-@Mod(modid = "bcadditions", name = "Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "required-after:BuildCraft|Energy;required-after:eureka", acceptedMinecraftVersions = "1.7.10")
+@Mod(modid = "bcadditions", name = "Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "after:BuildCraft|Energy;required-after:eureka", acceptedMinecraftVersions = "1.7.10")
 public class BuildcraftAdditions {
 
 	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
@@ -226,22 +224,7 @@ public class BuildcraftAdditions {
 		diamondWire = new ItemBase("wireDiamond");
 		GameRegistry.registerItem(diamondWire, "wireDiamond");
 
-		BuildcraftRecipeRegistry.assemblyTable.addRecipe("ironStick", 1000, new ItemStack(ironStick), Items.iron_ingot);
-		BuildcraftRecipeRegistry.assemblyTable.addRecipe("goldStick", 2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
-		BuildcraftRecipeRegistry.assemblyTable.addRecipe("diamondStick", 3000, new ItemStack(diamondStick), new ItemStack(Items.diamond, 2));
-		BuildcraftRecipeRegistry.assemblyTable.addRecipe("kineticTool", 8000, new ItemStack(kineticTool), new ItemStack(Items.diamond, 3), ironStick, toolCore);
-		BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeChainsaw", 1000, new ItemStack(toolUpgradeChainsaw), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
-		BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeDrill", 1000, new ItemStack(toolUpgradeDrill), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
-		BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeDigger", 1000, new ItemStack(toolUpgradeDigger), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
-		BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeHoe", 1000, new ItemStack(toolUpgradeHoe), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
-		BuildcraftRecipeRegistry.integrationTable.addRecipe(new ToolCoreRecipe());
-		BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeDrillHead());
-		BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeExcavationAttachment());
-		//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeSawBlade());
-		//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeTiller());
-		//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeGoldStick());
-		//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeDiamondStick());
-		//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeEmeraldStick());
+
 
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.redstone_ore), new ItemStack(Items.redstone, 6));
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, 2));
@@ -253,6 +236,27 @@ public class BuildcraftAdditions {
 
 	@Mod.EventHandler
 	public void doneLoading(FMLLoadCompleteEvent event) {
+
+		if (Loader.isModLoaded("BuildCraft|Transport")) {
+
+			BuildcraftRecipeRegistry.assemblyTable.addRecipe("ironStick", 1000, new ItemStack(ironStick), Items.iron_ingot);
+			BuildcraftRecipeRegistry.assemblyTable.addRecipe("goldStick", 2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
+			BuildcraftRecipeRegistry.assemblyTable.addRecipe("diamondStick", 3000, new ItemStack(diamondStick), new ItemStack(Items.diamond, 2));
+			BuildcraftRecipeRegistry.assemblyTable.addRecipe("kineticTool", 8000, new ItemStack(kineticTool), new ItemStack(Items.diamond, 3), ironStick, toolCore);
+			BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeChainsaw", 1000, new ItemStack(toolUpgradeChainsaw), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
+			BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeDrill", 1000, new ItemStack(toolUpgradeDrill), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
+			BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeDigger", 1000, new ItemStack(toolUpgradeDigger), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
+			BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeHoe", 1000, new ItemStack(toolUpgradeHoe), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
+			BuildcraftRecipeRegistry.integrationTable.addRecipe(new ToolCoreRecipe());
+			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeDrillHead());
+			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeExcavationAttachment());
+			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeSawBlade());
+			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeTiller());
+			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeGoldStick());
+			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeDiamondStick());
+			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeEmeraldStick());
+		}
+
 		itemDust = new ItemDust(Integer.parseInt("13ECFC", 16)).setUnlocalizedName("dustDiamond");
 		GameRegistry.registerItem(itemDust, "dustDiamond");
 		OreDictionary.registerOre("dustDiamond", itemDust);
@@ -351,7 +355,7 @@ public class BuildcraftAdditions {
 		EurekaRegistry.registerDrops(Variables.DustT2Key1, new ItemStack(BCItems.IRON_GEAR, 2), new ItemStack(Items.gold_ingot, 1), new ItemStack(itemGrindingWheel, 1), new ItemStack(Blocks.stone, 5));
 		EurekaRegistry.bindToKey(mechanicalDusterBlock, Variables.DustT2Key1);
 
-		EurekaRegistry.register(new EurekaInfo(Variables.DustT2Key2, "BCA", 20, new ItemStack(kineticDusterBlock), Variables.DustT2Key2));
+		EurekaRegistry.register(new EurekaInfo(Variables.DustT2Key2, "BCA", 20, new ItemStack(kineticDusterBlock), Variables.DustT2Key1));
 		EurekaRegistry.registerDrops(Variables.DustT2Key2, new ItemStack(Blocks.glass, 3), new ItemStack(BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(BCItems.GOLD_GEAR, 2), new ItemStack(BCItems.DIAMOND_GEAR));
 		EurekaRegistry.bindToKey(kineticDusterBlock, Variables.DustT2Key2);
 

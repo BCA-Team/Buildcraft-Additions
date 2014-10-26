@@ -1,5 +1,8 @@
 package buildcraftAdditions.client.gui;
 
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -29,6 +32,9 @@ public class GuiBasicCoil extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;
 		drawTexturedModalRect(j + 79, k + 28 + (16 - coil.getBurnIconHeight()), 176, 16 - coil.getBurnIconHeight(), 16, coil.getBurnIconHeight());
@@ -38,7 +44,7 @@ public class GuiBasicCoil extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		super.drawGuiContainerForegroundLayer(par1, par2);
 		String title = Utils.localize("tile.blockCoilBasic.name");
-		fontRendererObj.drawString(Utils.localize(title), 0, 6, 0x404040);
+		fontRendererObj.drawString(title, 5, 6, 0x404040);
 		fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 96) + 2, 0x404040);
 	}
 }

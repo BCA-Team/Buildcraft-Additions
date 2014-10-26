@@ -7,7 +7,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 
-import cofh.api.energy.IEnergyStorage;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import cofh.api.energy.IEnergyHandler;
 
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.inventories.CustomInventory;
@@ -23,7 +25,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileMechanicalDuster extends TileBaseDuster implements IInventory, IEnergyStorage {
+public class TileMechanicalDuster extends TileBaseDuster implements IInventory, IEnergyHandler {
 	public int progress, progressStage, oldProgressStage, energy, maxEnergy;
 	public EntityPlayer player;
 	private CustomInventory inventory = new CustomInventory("mechanicalDuster", 1, 1, this);
@@ -155,7 +157,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IInventory, 
 	}
 
 	@Override
-	public int receiveEnergy(int maxReceive, boolean simulate) {
+	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
 		int energyRecieved = maxReceive;
 		if (energyRecieved > maxEnergy - energy)
 			energyRecieved = maxReceive - energy;
@@ -165,18 +167,23 @@ public class TileMechanicalDuster extends TileBaseDuster implements IInventory, 
 	}
 
 	@Override
-	public int extractEnergy(int maxExtract, boolean simulate) {
+	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
 		return 0;
 	}
 
 	@Override
-	public int getEnergyStored() {
+	public int getEnergyStored(ForgeDirection from) {
 		return energy;
 	}
 
 	@Override
-	public int getMaxEnergyStored() {
+	public int getMaxEnergyStored(ForgeDirection from) {
 		return maxEnergy;
+	}
+
+	@Override
+	public boolean canConnectEnergy(ForgeDirection from) {
+		return true;
 	}
 }
 

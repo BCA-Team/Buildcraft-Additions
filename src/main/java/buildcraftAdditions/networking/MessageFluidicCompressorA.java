@@ -1,6 +1,5 @@
 package buildcraftAdditions.networking;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -8,7 +7,6 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 
 
-import eureka.core.Logger;
 import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -17,14 +15,14 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class MessageFluidicCompressor implements IMessage, IMessageHandler<MessageFluidicCompressor, IMessage> {
+public class MessageFluidicCompressorA implements IMessage, IMessageHandler<MessageFluidicCompressorA, IMessage> {
 	public int x, y, z;
 	public boolean fill;
 
-	public MessageFluidicCompressor() {
+	public MessageFluidicCompressorA() {
 	}
 
-	public MessageFluidicCompressor(boolean fill, TileFluidicCompressor compressor) {
+	public MessageFluidicCompressorA(boolean fill, TileFluidicCompressor compressor) {
 		this.fill = fill;
 		this.x = compressor.xCoord;
 		this.y = compressor.yCoord;
@@ -50,11 +48,11 @@ public class MessageFluidicCompressor implements IMessage, IMessageHandler<Messa
 	}
 
 	@Override
-	public IMessage onMessage(MessageFluidicCompressor message, MessageContext ctx) {
-		Logger.info("test");
-		TileFluidicCompressor compressor = (TileFluidicCompressor) FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getTileEntity(message.x, message.y, message.z);
+	public IMessage onMessage(MessageFluidicCompressorA message, MessageContext ctx) {
+		TileFluidicCompressor compressor = (TileFluidicCompressor) ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
 		if (compressor != null)
 			compressor.fill = message.fill;
 		return null;
 	}
+
 }

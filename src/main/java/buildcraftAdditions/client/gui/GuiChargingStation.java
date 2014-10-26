@@ -8,6 +8,9 @@ package buildcraftAdditions.client.gui;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -41,13 +44,15 @@ public class GuiChargingStation extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		super.drawGuiContainerForegroundLayer(par1, par2);
 		String title = Utils.localize("tile.blockChargingStation.name");
-		fontRendererObj.drawString(Utils.localize(title), 0, 6, 0x404040);
+		fontRendererObj.drawString(title, 5, 6, 0x404040);
 		fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 110) + 2, 0x404040);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
-
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 	}
 
 	/*protected class ChargingStationLedger extends Ledger {

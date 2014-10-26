@@ -1,10 +1,8 @@
 package buildcraftAdditions.client.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-
 
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 
@@ -15,11 +13,12 @@ import buildcraftAdditions.tileEntities.TileHeatedFurnace;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ContainerHeatedFurnace extends Container {
+public class ContainerHeatedFurnace extends ContainerBase {
 	public TileHeatedFurnace furnace;
 
 	public ContainerHeatedFurnace(IInventory inventory, TileHeatedFurnace furnace) {
 		super();
+		furnace.sync = true;
 		this.furnace = furnace;
 
 		this.addSlotToContainer(new Slot(furnace, 0, 56, 34));
@@ -41,4 +40,9 @@ public class ContainerHeatedFurnace extends Container {
 		return true;
 	}
 
+	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+		furnace.sync = false;
+	}
 }

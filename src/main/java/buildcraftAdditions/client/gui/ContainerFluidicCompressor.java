@@ -13,6 +13,10 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
+
+import buildcraftAdditions.networking.MessageFluidicCompressorC;
+import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 
 public class ContainerFluidicCompressor extends ContainerBase {
@@ -24,6 +28,8 @@ public class ContainerFluidicCompressor extends ContainerBase {
 		super();
 		playerIInventory = inventory;
 		fluidicCompressor = tile;
+		fluidicCompressor.sync = true;
+		PacketHandeler.instance.sendToAllAround(new MessageFluidicCompressorC(fluidicCompressor), new NetworkRegistry.TargetPoint(fluidicCompressor.getWorldObj().provider.dimensionId, fluidicCompressor.xCoord, fluidicCompressor.yCoord, fluidicCompressor.zCoord, 5));
 
 		this.addSlotToContainer(new Slot(tile, 0, 89, 31));
 		this.addSlotToContainer(new Slot(tile, 1, 126, 35));
@@ -36,6 +42,12 @@ public class ContainerFluidicCompressor extends ContainerBase {
 		for (int hotbbarIndex = 0; hotbbarIndex < 9; ++hotbbarIndex) {
 			this.addSlotToContainer(new Slot(inventory, hotbbarIndex, 8 + hotbbarIndex * 18, 142));
 		}
+	}
+
+	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+		fluidicCompressor.sync = false;
 	}
 
 	@Override

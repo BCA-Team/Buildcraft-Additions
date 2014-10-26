@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.fluids.FluidStack;
 
-import buildcraftAdditions.networking.MessageFluidicCompressor;
+import buildcraftAdditions.networking.MessageFluidicCompressorA;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.utils.Utils;
@@ -50,12 +50,13 @@ public class GuiFluidicCompressor extends GuiContainer {
 		int mY = mouseY - guiTop;
 		if (mX >= 20 && mX <= 39 && mY >= 25 && mY <= 41 && !fluidicCompressor.fill) {
 			fluidicCompressor.fill = true;
-			PacketHandeler.instance.sendToAll(new MessageFluidicCompressor(true, fluidicCompressor));
+			PacketHandeler.instance.sendToServer(new MessageFluidicCompressorA(true, fluidicCompressor));
 		}
 		if (mX >= 20 && mX <= 39 && mY >= 45 && mY <= 61 && fluidicCompressor.fill) {
 			fluidicCompressor.fill = false;
-			PacketHandeler.instance.sendToAll(new MessageFluidicCompressor(false, fluidicCompressor));
+			PacketHandeler.instance.sendToServer(new MessageFluidicCompressorA(false, fluidicCompressor));
 		}
+
 	}
 
 	@Override
@@ -83,7 +84,7 @@ public class GuiFluidicCompressor extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		super.drawGuiContainerForegroundLayer(par1, par2);
 		String title = Utils.localize("tile.blockFluidicCompressor.name");
-		fontRendererObj.drawString(Utils.localize(title), 0, 6, 0x404040);
+		fontRendererObj.drawString(title, 5, 6, 0x404040);
 		fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 96) + 2, 0x404040);
 	}
 

@@ -19,6 +19,9 @@ public class PacketHandeler {
 		instance.registerMessage(MessageSemiAutomaticDuster.class, MessageSemiAutomaticDuster.class, 0, Side.CLIENT);
 		instance.registerMessage(MessageMechanicDuster.class, MessageMechanicDuster.class, 1, Side.CLIENT);
 		instance.registerMessage(MessageDusterKinetic.class, MessageDusterKinetic.class, 2, Side.CLIENT);
-		instance.registerMessage(MessageFluidicCompressor.class, MessageFluidicCompressor.class, 3, Side.SERVER);
+		instance.registerMessage(MessageCoilStatus.class, MessageCoilStatus.class, 3, Side.CLIENT);
+		instance.registerMessage(MessageHeatedFurnaceProgress.class, MessageHeatedFurnaceProgress.class, 4, Side.CLIENT);
+		instance.registerMessage(MessageFluidicCompressorA.class, MessageFluidicCompressorA.class, 5, Side.SERVER);
+		instance.registerMessage(MessageFluidicCompressorC.class, MessageFluidicCompressorC.class, 6, Side.CLIENT);
 	}
 }

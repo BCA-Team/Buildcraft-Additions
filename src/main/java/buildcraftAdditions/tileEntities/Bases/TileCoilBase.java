@@ -2,7 +2,10 @@ package buildcraftAdditions.tileEntities.Bases;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-import buildcraft.api.core.NetworkData;
+import cpw.mods.fml.common.network.NetworkRegistry;
+
+import buildcraftAdditions.networking.MessageCoilStatus;
+import buildcraftAdditions.networking.PacketHandeler;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -12,19 +15,18 @@ import buildcraft.api.core.NetworkData;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class TileCoilBase extends TileBase {
-	@NetworkData
 	public boolean shouldHeat, burning;
-	@NetworkData
 	public int increment;
-	@NetworkData
 	public int burnTime, fullBurnTime;
 
 	public void startHeating() {
 		shouldHeat = true;
+		PacketHandeler.instance.sendToAllAround(new MessageCoilStatus(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
 	}
 
 	public void stopHeating() {
 		shouldHeat = false;
+		PacketHandeler.instance.sendToAllAround(new MessageCoilStatus(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
 	}
 
 	@Override
