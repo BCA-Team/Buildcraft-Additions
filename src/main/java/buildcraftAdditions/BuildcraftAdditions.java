@@ -53,6 +53,13 @@ import buildcraftAdditions.items.ItemPowerCapsuleTier3;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ToolCoreRecipe;
 import buildcraftAdditions.items.Tools.ToolUpgrade;
+import buildcraftAdditions.items.Tools.UpgradeRecipeDiamondStick;
+import buildcraftAdditions.items.Tools.UpgradeRecipeDrillHead;
+import buildcraftAdditions.items.Tools.UpgradeRecipeEmeraldStick;
+import buildcraftAdditions.items.Tools.UpgradeRecipeExcavationAttachment;
+import buildcraftAdditions.items.Tools.UpgradeRecipeGoldStick;
+import buildcraftAdditions.items.Tools.UpgradeRecipeSawBlade;
+import buildcraftAdditions.items.Tools.UpgradeRecipeTiller;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
@@ -248,13 +255,13 @@ public class BuildcraftAdditions {
 			BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeDigger", 1000, new ItemStack(toolUpgradeDigger), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
 			BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeHoe", 1000, new ItemStack(toolUpgradeHoe), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
 			BuildcraftRecipeRegistry.integrationTable.addRecipe(new ToolCoreRecipe());
-			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeDrillHead());
-			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeExcavationAttachment());
-			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeSawBlade());
-			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeTiller());
-			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeGoldStick());
-			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeDiamondStick());
-			//BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeEmeraldStick());
+			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeDrillHead());
+			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeExcavationAttachment());
+			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeSawBlade());
+			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeTiller());
+			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeGoldStick());
+			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeDiamondStick());
+			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeEmeraldStick());
 		}
 
 		itemDust = new ItemDust(Integer.parseInt("13ECFC", 16)).setUnlocalizedName("dustDiamond");

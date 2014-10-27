@@ -3,10 +3,10 @@ package buildcraftAdditions.items.Tools;
 import net.minecraft.item.ItemStack;
 
 import buildcraft.api.recipes.CraftingResult;
-import buildcraft.api.recipes.IFlexibleCrafter;
-import buildcraft.api.recipes.IIntegrationRecipe;
+import buildcraft.silicon.TileIntegrationTable;
+import buildcraft.transport.recipes.IntegrationTableRecipe;
 
-import buildcraftAdditions.items.ItemBase;
+import buildcraftAdditions.BuildcraftAdditions;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -15,10 +15,10 @@ import buildcraftAdditions.items.ItemBase;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class UpgradeRecipeDiamondStick implements IIntegrationRecipe {
+public class UpgradeRecipeDiamondStick extends IntegrationTableRecipe {
 
-	public double getEnergyCost() {
-		return 1000;
+	public UpgradeRecipeDiamondStick() {
+		setContents("diamondStick", BuildcraftAdditions.kineticTool, 10000, 600);
 	}
 
 	@Override
@@ -32,34 +32,17 @@ public class UpgradeRecipeDiamondStick implements IIntegrationRecipe {
 
 	@Override
 	public boolean isValidInputB(ItemStack inputB) {
-		return inputB != null && inputB.getItem() instanceof ItemBase && inputB.getItem().getUnlocalizedName() == "stickDiamond";
+		return inputB != null && inputB.getItem() == BuildcraftAdditions.diamondStick;
 	}
 
-	public ItemStack getOutputForInputs(ItemStack inputA, ItemStack inputB, ItemStack[] components) {
+	@Override
+	public CraftingResult<ItemStack> craft(TileIntegrationTable crafter, boolean preview, ItemStack inputA, ItemStack inputB) {
+		CraftingResult<ItemStack> result =  super.craft(crafter, preview, inputA, inputB);
 		ItemStack outputStack = inputA.copy();
 		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
 		output.installStick(outputStack, "diamondStick");
 		output.writeUpgrades(outputStack);
-		return outputStack;
-	}
-
-	@Override
-	public boolean canBeCrafted(IFlexibleCrafter crafter) {
-		return false;
-	}
-
-	@Override
-	public CraftingResult<ItemStack> craft(IFlexibleCrafter crafter, boolean preview) {
-		return null;
-	}
-
-	@Override
-	public CraftingResult<ItemStack> canCraft(ItemStack expectedOutput) {
-		return null;
-	}
-
-	@Override
-	public String getId() {
-		return null;
+		result.crafted = outputStack;
+		return result;
 	}
 }

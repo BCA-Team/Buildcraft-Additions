@@ -3,8 +3,10 @@ package buildcraftAdditions.items.Tools;
 import net.minecraft.item.ItemStack;
 
 import buildcraft.api.recipes.CraftingResult;
-import buildcraft.api.recipes.IFlexibleCrafter;
-import buildcraft.api.recipes.IIntegrationRecipe;
+import buildcraft.silicon.TileIntegrationTable;
+import buildcraft.transport.recipes.IntegrationTableRecipe;
+
+import buildcraftAdditions.BuildcraftAdditions;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -13,10 +15,10 @@ import buildcraft.api.recipes.IIntegrationRecipe;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class UpgradeRecipeTiller implements IIntegrationRecipe {
+public class UpgradeRecipeTiller extends IntegrationTableRecipe {
 
-	public double getEnergyCost() {
-		return 1000;
+	public UpgradeRecipeTiller() {
+		setContents("tiller", BuildcraftAdditions.kineticTool, 10000, 600);
 	}
 
 	public boolean isValidInputA(ItemStack inputA) {
@@ -31,31 +33,15 @@ public class UpgradeRecipeTiller implements IIntegrationRecipe {
 		return inputB != null && inputB.getItem() instanceof ToolUpgrade && ((ToolUpgrade) inputB.getItem()).getType() == "Hoe";
 	}
 
-	public ItemStack getOutputForInputs(ItemStack inputA, ItemStack inputB, ItemStack[] components) {
+	@Override
+	public CraftingResult<ItemStack> craft(TileIntegrationTable crafter, boolean preview, ItemStack inputA, ItemStack inputB) {
+		CraftingResult<ItemStack> result = super.craft(crafter, preview, inputA, inputB);
 		ItemStack outputStack = inputA.copy();
 		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
+		output.readUpgrades(outputStack);
 		output.installUpgrade("Hoe", outputStack);
 		output.writeUpgrades(outputStack);
-		return outputStack;
-	}
-
-	@Override
-	public boolean canBeCrafted(IFlexibleCrafter crafter) {
-		return false;
-	}
-
-	@Override
-	public CraftingResult<ItemStack> craft(IFlexibleCrafter crafter, boolean preview) {
-		return null;
-	}
-
-	@Override
-	public CraftingResult<ItemStack> canCraft(ItemStack expectedOutput) {
-		return null;
-	}
-
-	@Override
-	public String getId() {
-		return null;
+		result.crafted = outputStack;
+		return result;
 	}
 }

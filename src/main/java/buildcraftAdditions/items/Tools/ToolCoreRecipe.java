@@ -3,7 +3,9 @@ package buildcraftAdditions.items.Tools;
 import net.minecraft.item.ItemStack;
 
 import buildcraft.BuildCraftCore;
+import buildcraft.api.recipes.CraftingResult;
 import buildcraft.silicon.ItemRedstoneChipset;
+import buildcraft.silicon.TileIntegrationTable;
 import buildcraft.transport.recipes.IntegrationTableRecipe;
 
 import buildcraftAdditions.BuildcraftAdditions;
@@ -19,6 +21,11 @@ public class ToolCoreRecipe extends IntegrationTableRecipe {
 
 	public ToolCoreRecipe(){
 		setContents("toolCore", BuildcraftAdditions.toolCore, 30000, 100000, BuildCraftCore.goldGearItem, ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem());
+	}
+
+	@Override
+	public CraftingResult<ItemStack> craft(TileIntegrationTable crafter, boolean preview, ItemStack inputA, ItemStack inputB) {
+		return super.craft(crafter, preview, inputA, inputB);
 	}
 
 	@Override

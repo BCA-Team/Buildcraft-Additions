@@ -1,12 +1,12 @@
 package buildcraftAdditions.items.Tools;
 
-import java.util.ArrayList;
-
 import net.minecraft.item.ItemStack;
 
 import buildcraft.api.recipes.CraftingResult;
-import buildcraft.api.recipes.IFlexibleCrafter;
-import buildcraft.api.recipes.IIntegrationRecipe;
+import buildcraft.silicon.TileIntegrationTable;
+import buildcraft.transport.recipes.IntegrationTableRecipe;
+
+import buildcraftAdditions.BuildcraftAdditions;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -16,53 +16,35 @@ import buildcraft.api.recipes.IIntegrationRecipe;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-public class UpgradeRecipeDrillHead implements IIntegrationRecipe {
-	private ItemStack inputA, inputB;
+public class UpgradeRecipeDrillHead extends IntegrationTableRecipe {
+
+	public UpgradeRecipeDrillHead(){
+		setContents("upgradeDrillHead", BuildcraftAdditions.kineticTool, 10000, 600);
+	}
+
 	@Override
 	public boolean isValidInputA(ItemStack inputA) {
 		if (inputA != null && inputA.getItem() instanceof ItemKineticTool) {
 			ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
-			this.inputA = inputA;
 			return tool.canInstallUpgrade(inputA) && !tool.isUpgradeInstalled(inputA, "Drill");
 		}
 		return false;
 	}
 
 	@Override
-	public boolean isValidInputB(ItemStack inputB) {
-		this.inputB = inputB;
-		return inputB != null && inputB.getItem() instanceof ToolUpgrade && ((ToolUpgrade) inputB.getItem()).getType() == "Drill";
-	}
-
-
-	@Override
-	public boolean canBeCrafted(IFlexibleCrafter crafter) {
-		return false;
-	}
-
-	@Override
-	public CraftingResult<ItemStack> craft(IFlexibleCrafter crafter, boolean preview) {
-		CraftingResult<ItemStack> result = new CraftingResult<ItemStack>();
-		result.energyCost = 1000;
-		result.craftingTime = 1000;
+	public CraftingResult<ItemStack> craft(TileIntegrationTable crafter, boolean preview, ItemStack inputA, ItemStack inputB) {
+		CraftingResult<ItemStack> result = super.craft(crafter, preview, inputA, inputB);
 		ItemStack outputStack = inputA.copy();
 		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
+		output.readUpgrades(outputStack);
 		output.installUpgrade("Drill", outputStack);
 		output.writeUpgrades(outputStack);
 		result.crafted = outputStack;
-		ArrayList<ItemStack> used = new ArrayList<ItemStack>(2);
-		used.add(inputA);
-		used.add(inputB);
 		return result;
 	}
 
 	@Override
-	public CraftingResult<ItemStack> canCraft(ItemStack expectedOutput) {
-		return null;
-	}
-
-	@Override
-	public String getId() {
-		return "upgradeDrillHead";
+	public boolean isValidInputB(ItemStack inputB) {
+		return inputB != null && inputB.getItem() instanceof ToolUpgrade && ((ToolUpgrade) inputB.getItem()).getType() == "Drill";
 	}
 }
