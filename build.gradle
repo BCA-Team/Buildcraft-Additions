@@ -57,7 +57,7 @@ dependencies {
 	compile "codechicken:CodeChickenCore:${config.version.mc}-${config.version.ccc}:dev"
 	compile "codechicken:NotEnoughItems:${config.version.mc}-${config.version.nei}:dev"
 	compile "mcp.mobius.waila:Waila:${config.version.waila}_${config.version.mc}"
-    	compile "com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev"
+    	//compile "com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev"
 }
  
 processResources
