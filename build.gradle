@@ -42,8 +42,12 @@ repositories {
         url = "http://chickenbones.net/maven"
     }
     maven {
-        name "waila"
-        url "http://mobiusstrip.eu/maven"
+        name = "waila"
+        url = "http://mobiusstrip.eu/maven"
+    }
+    maven {
+	name = "buildcraft"
+	url = "http://mod-buildcraft.com"
     }
 }
  
@@ -54,17 +58,6 @@ dependencies {
 	compile "codechicken:NotEnoughItems:${config.version.mc}-${config.version.nei}:dev"
 	compile "mcp.mobius.waila:Waila:${config.version.waila}_${config.version.mc}"
     	compile "com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev"
-}
-
-sourceSets {
-    main {
-        java {
-            srcDir 'src/main/java'
-        }
-        resources {
-            srcDir 'src/main/resources'
-        }
-    }
 }
  
 processResources

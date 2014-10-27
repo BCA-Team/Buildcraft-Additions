@@ -29,6 +29,8 @@ import buildcraft.api.gates.ITrigger;
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 
 import buildcraftAdditions.api.DusterRecipes;
+import buildcraftAdditions.blocks.BlockBCKinesisPipeWood;
+import buildcraftAdditions.blocks.BlockBCKinisisPipeCobble;
 import buildcraftAdditions.blocks.BlockBasicCoil;
 import buildcraftAdditions.blocks.BlockBasicDuster;
 import buildcraftAdditions.blocks.BlockChargingStation;
@@ -113,6 +115,9 @@ public class BuildcraftAdditions {
 	public static BlockKineticDuster kineticDusterBlock;
 	public static BlockLavaCoil lavaCoilBlock;
 	public static BlockKineticCoil kineticCoil;
+	public static BlockBCKinesisPipeWood kinesisPipeWood;
+	public static BlockBCKinisisPipeCobble kinisisPipeCobble;
+
 	public static Item powerCapsuleTier1;
 	public static Item powerCapsuleTier2;
 	public static Item powerCapsuleTier3;
@@ -133,7 +138,6 @@ public class BuildcraftAdditions {
 	public static Item goldWire;
 	public static Item diamondWireUnhardened;
 	public static Item diamondWire;
-	public static Item pipePart;
 	public static ItemKineticTool kineticTool;
 	public static ITrigger triggerCanAcceptCanister = new TriggerCanisterRequested();
 	public static ITrigger triggerHasEmptyCanister = new TriggerHasEmptyCanister();
@@ -231,7 +235,11 @@ public class BuildcraftAdditions {
 		diamondWire = new ItemBase("wireDiamond");
 		GameRegistry.registerItem(diamondWire, "wireDiamond");
 
+		kinesisPipeWood = new BlockBCKinesisPipeWood();
+		GameRegistry.registerBlock(kinesisPipeWood, "kinesisPipeWood");
 
+		kinisisPipeCobble = new BlockBCKinisisPipeCobble();
+		GameRegistry.registerBlock(kinisisPipeCobble, "kinesisPipeCobble");
 
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.redstone_ore), new ItemStack(Items.redstone, 6));
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, 2));
@@ -328,7 +336,6 @@ public class BuildcraftAdditions {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Mod.EventHandler

@@ -12,16 +12,15 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 
+import buildcraftAdditions.BuildcraftAdditions;
+
 public class ComponentPowerPlant extends StructureVillagePieces.House1 {
-	public static final ResourceLocation redstoneEngine = new ResourceLocation("bcadditions", "blueprints/Redstone-Engine-df2e537ac33b4d684e783cd4b41653bc872d638e1f0c1afecada2a30e670aa39.bpt");
-	public static final ResourceLocation stirlingEngine = new ResourceLocation("bcadditions", "blueprints/Stirling-Engine-6a8295b667031a4687a626ecb7c6bef997dc7e62c19f9e0941c64b33198f87d4.bpt");
 
 	private int averageGroundLevel = -1;
 
@@ -52,12 +51,45 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 			this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.maxY + 5, 0);
 		}
 
-		fillWithAir(world, sbb, 0, -3, 0, 11, -3, 11);
-		fillWithMetadataBlocks(world, sbb, 0, -3, 0, 11, 3, 11, Blocks.stained_hardened_clay, 9, Blocks.stained_hardened_clay, 9, false);
-		fillWithMetadataBlocks(world, sbb, 0, 0, 0, 11, 0, 11, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
-		fillWithAir(world, sbb, 6, -2, 0, 6, -1, 0);
-		placeDoorAtCurrentPosition(world, sbb, random, 6, -2, 0, this.getMetadataWithOffset(Blocks.wooden_door, 1));
-		fillWithAir(world, sbb, 1, -2, 1, 10, 2, 10);
+		fillWithAir(world, sbb, 0, -3, 0, 10, -3, 10);
+		fillWithMetadataBlocks(world, sbb, 0, -3, 0, 10, 3, 10, Blocks.stained_hardened_clay, 9, Blocks.stained_hardened_clay, 9, false);
+		fillWithMetadataBlocks(world, sbb, 0, 0, 0, 10, 0, 10, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
+		fillWithAir(world, sbb, 5, -2, 0, 5, -1, 0);
+		placeDoorAtCurrentPosition(world, sbb, random, 5, -2, 0, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		fillWithAir(world, sbb, 1, -2, 1, 9, 2, 9);
+
+		fillWithMetadataBlocks(world, sbb, 3, 4, 3, 7, 7, 7, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
+		fillWithMetadataBlocks(world, sbb, 4, 4, 3, 6, 6, 3, Blocks.stained_hardened_clay, 1, Blocks.stained_hardened_clay, 1, false);
+		fillWithMetadataBlocks(world, sbb, 4, 4, 7, 6, 6, 7, Blocks.stained_hardened_clay, 1, Blocks.stained_hardened_clay, 1, false);
+		fillWithMetadataBlocks(world, sbb, 3, 4, 4, 3, 6, 6, Blocks.stained_hardened_clay, 1, Blocks.stained_hardened_clay, 1, false);
+		fillWithMetadataBlocks(world, sbb, 7, 4, 4, 7, 6, 6, Blocks.stained_hardened_clay, 1, Blocks.stained_hardened_clay, 1, false);
+		fillWithMetadataBlocks(world, sbb, 4, 7, 4, 6, 7, 6, Blocks.stained_hardened_clay, 1, Blocks.stained_hardened_clay, 1, false);
+		fillWithAir(world, sbb, 4, 3, 4, 6, 6, 6);
+
+		placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 0, 1, sbb);
+		placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 0, 9, sbb);
+		placeBlockAtCurrentPosition(world, Blocks.torch, 0, 9, 0, 1, sbb);
+		placeBlockAtCurrentPosition(world, Blocks.torch, 0, 9, 0, 9, sbb);
+		placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 0, 5, sbb);
+		placeBlockAtCurrentPosition(world, Blocks.torch, 0, 9, 0, 5, sbb);
+		placeBlockAtCurrentPosition(world, Blocks.torch, 0, 5, 0, 1, sbb);
+		placeBlockAtCurrentPosition(world, Blocks.torch, 0, 5, 0, 9, sbb);
+
+		fillWithBlocks(world, sbb, 1, -2, 1, 1, -2, 9, Blocks.redstone_wire, Blocks.redstone_wire, false);
+		fillWithBlocks(world, sbb, 1, -2, 9, 9, -2, 9, Blocks.redstone_wire, Blocks.redstone_wire, false);
+		fillWithBlocks(world, sbb, 9, -2, 1, 9, -2, 9, Blocks.redstone_wire, Blocks.redstone_wire, false);
+		placeBlockAtCurrentPosition(world, Blocks.lever, 0, 1, -2, 1, sbb);
+
+		fillWithMetadataBlocks(world, sbb, 8, -2, 1, 8, -2, 7, Blocks.unpowered_repeater, 0, Blocks.unpowered_repeater, 0, false);
+		fillWithMetadataBlocks(world, sbb, 2, -2, 2, 2, -2, 7, Blocks.unpowered_repeater, 2, Blocks.unpowered_repeater, 2, false);
+		fillWithMetadataBlocks(world, sbb, 4, -2, 8 , 6, -2, 8, Blocks.unpowered_repeater, 1, Blocks.unpowered_repeater, 1, false);
+
+		fillWithBlocks(world, sbb, 7, -1, 1, 7, -1, 7, BuildcraftAdditions.kinesisPipeWood, BuildcraftAdditions.kinesisPipeWood, false);
+		fillWithBlocks(world, sbb, 7, 0, 1, 7, 0, 7, BuildcraftAdditions.kinisisPipeCobble, BuildcraftAdditions.kinisisPipeCobble, false);
+		fillWithBlocks(world, sbb, 3, -1, 2, 3, -1, 7, BuildcraftAdditions.kinesisPipeWood, BuildcraftAdditions.kinesisPipeWood, false);
+		fillWithBlocks(world, sbb, 3, 0, 2, 3, 0, 7, BuildcraftAdditions.kinisisPipeCobble, BuildcraftAdditions.kinisisPipeCobble, false);
+		fillWithBlocks(world, sbb, 4, -1, 7, 6, -1, 7, BuildcraftAdditions.kinesisPipeWood, BuildcraftAdditions.kinesisPipeWood, false);
+		fillWithBlocks(world, sbb, 4, 0, 7, 6, 0, 7, BuildcraftAdditions.kinisisPipeCobble, BuildcraftAdditions.kinisisPipeCobble, false);
 
 		spawnVillagers(world, sbb, 0, 0, 0, 2);
 		return true;
