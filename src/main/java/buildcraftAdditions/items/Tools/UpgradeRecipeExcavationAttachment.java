@@ -6,7 +6,7 @@ import buildcraft.api.recipes.CraftingResult;
 import buildcraft.silicon.TileIntegrationTable;
 import buildcraft.transport.recipes.IntegrationTableRecipe;
 
-import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.variables.ItemsAndBlocks;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -18,7 +18,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 public class UpgradeRecipeExcavationAttachment extends IntegrationTableRecipe {
 
 	public UpgradeRecipeExcavationAttachment () {
-		setContents("excavationAttachment", BuildcraftAdditions.kineticTool, 10000, 600);
+		setContents("excavationAttachment", ItemsAndBlocks.kineticTool, 10000, 600);
 	}
 
 	@Override

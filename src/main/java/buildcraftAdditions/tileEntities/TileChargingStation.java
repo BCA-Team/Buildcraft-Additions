@@ -18,10 +18,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import buildcraft.api.gates.IOverrideDefaultTriggers;
 import buildcraft.api.gates.ITrigger;
 
-import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.IKineticCapsule;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
+import buildcraftAdditions.variables.TrigersAndActions;
 
 public class TileChargingStation extends TileMachineBase implements IInventory, IOverrideDefaultTriggers {
 
@@ -151,8 +151,8 @@ public class TileChargingStation extends TileMachineBase implements IInventory, 
 	@Override
 	public LinkedList<ITrigger> getTriggers() {
 		LinkedList<ITrigger> list = new LinkedList<ITrigger>();
-		list.add(BuildcraftAdditions.triggerDoneCharging);
-		list.add(BuildcraftAdditions.triggerReadyToCharge);
+		list.add(TrigersAndActions.triggerDoneCharging);
+		list.add(TrigersAndActions.triggerReadyToCharge);
 		return list;
 	}
 }

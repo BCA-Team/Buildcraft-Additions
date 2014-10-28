@@ -29,7 +29,6 @@ import net.minecraftforge.fluids.ItemFluidContainer;
 import buildcraft.api.gates.IOverrideDefaultTriggers;
 import buildcraft.api.gates.ITrigger;
 
-import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.networking.MessageFluidicCompressorC;
@@ -37,6 +36,7 @@ import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.variables.TrigersAndActions;
 
 public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler, IOverrideDefaultTriggers {
 
@@ -285,9 +285,9 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	@Override
 	public LinkedList<ITrigger> getTriggers() {
 		LinkedList<ITrigger> list = new LinkedList<ITrigger>();
-		list.add(BuildcraftAdditions.triggerCanAcceptCanister);
-		list.add(BuildcraftAdditions.triggerHasEmptyCanister);
-		list.add(BuildcraftAdditions.triggerhasFullCanister);
+		list.add(TrigersAndActions.triggerCanAcceptCanister);
+		list.add(TrigersAndActions.triggerHasEmptyCanister);
+		list.add(TrigersAndActions.triggerhasFullCanister);
 		return list;
 	}
 }

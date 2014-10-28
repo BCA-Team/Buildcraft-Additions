@@ -13,7 +13,6 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 
 import net.minecraftforge.client.MinecraftForgeClient;
 
-import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.client.render.CanisterItemRender;
 import buildcraftAdditions.client.render.RendererDuster;
 import buildcraftAdditions.client.render.RendererDusterKinetic;
@@ -21,15 +20,15 @@ import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
-
+import buildcraftAdditions.variables.ItemsAndBlocks;
 
 public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenderers() {
-		MinecraftForgeClient.registerItemRenderer(BuildcraftAdditions.ironCanister, new CanisterItemRender(BuildcraftAdditions.ironCanister));
-		MinecraftForgeClient.registerItemRenderer(BuildcraftAdditions.goldCanister, new CanisterItemRender(BuildcraftAdditions.goldCanister));
-		MinecraftForgeClient.registerItemRenderer(BuildcraftAdditions.diamondCanister, new CanisterItemRender(BuildcraftAdditions.diamondCanister));
+		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.ironCanister, new CanisterItemRender(ItemsAndBlocks.ironCanister));
+		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.goldCanister, new CanisterItemRender(ItemsAndBlocks.goldCanister));
+		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.diamondCanister, new CanisterItemRender(ItemsAndBlocks.diamondCanister));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileBasicDuster.class, new RendererDuster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileSemiAutomaticDuster.class, new RendererDuster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileMechanicalDuster.class, new RendererDuster());

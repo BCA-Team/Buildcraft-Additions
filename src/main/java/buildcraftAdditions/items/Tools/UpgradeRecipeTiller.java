@@ -6,7 +6,7 @@ import buildcraft.api.recipes.CraftingResult;
 import buildcraft.silicon.TileIntegrationTable;
 import buildcraft.transport.recipes.IntegrationTableRecipe;
 
-import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.variables.ItemsAndBlocks;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -18,7 +18,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 public class UpgradeRecipeTiller extends IntegrationTableRecipe {
 
 	public UpgradeRecipeTiller() {
-		setContents("tiller", BuildcraftAdditions.kineticTool, 10000, 600);
+		setContents("tiller", ItemsAndBlocks.kineticTool, 10000, 600);
 	}
 
 	public boolean isValidInputA(ItemStack inputA) {

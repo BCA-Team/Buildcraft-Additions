@@ -6,7 +6,7 @@ import buildcraft.api.recipes.CraftingResult;
 import buildcraft.silicon.TileIntegrationTable;
 import buildcraft.transport.recipes.IntegrationTableRecipe;
 
-import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.variables.ItemsAndBlocks;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -18,7 +18,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 public class UpgradeRecipeEmeraldStick extends IntegrationTableRecipe {
 
 	public UpgradeRecipeEmeraldStick() {
-		setContents("emeraldStick", BuildcraftAdditions.kineticTool, 10000, 60);
+		setContents("emeraldStick", ItemsAndBlocks.kineticTool, 10000, 60);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class UpgradeRecipeEmeraldStick extends IntegrationTableRecipe {
 
 	@Override
 	public boolean isValidInputB(ItemStack inputB) {
-		return inputB != null && inputB.getItem() == BuildcraftAdditions.emeraldStick;
+		return inputB != null && inputB.getItem() == ItemsAndBlocks.emeraldStick;
 	}
 
 	@Override

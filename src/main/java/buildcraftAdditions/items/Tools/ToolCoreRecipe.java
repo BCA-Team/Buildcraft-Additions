@@ -8,7 +8,7 @@ import buildcraft.silicon.ItemRedstoneChipset;
 import buildcraft.silicon.TileIntegrationTable;
 import buildcraft.transport.recipes.IntegrationTableRecipe;
 
-import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.variables.ItemsAndBlocks;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -20,7 +20,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 public class ToolCoreRecipe extends IntegrationTableRecipe {
 
 	public ToolCoreRecipe(){
-		setContents("toolCore", BuildcraftAdditions.toolCore, 30000, 100000, BuildCraftCore.goldGearItem, ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem());
+		setContents("toolCore", ItemsAndBlocks.toolCore, 30000, 100000, BuildCraftCore.goldGearItem, ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem());
 	}
 
 	@Override

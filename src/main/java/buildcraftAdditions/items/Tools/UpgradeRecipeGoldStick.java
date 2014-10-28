@@ -6,7 +6,7 @@ import buildcraft.api.recipes.CraftingResult;
 import buildcraft.silicon.TileIntegrationTable;
 import buildcraft.transport.recipes.IntegrationTableRecipe;
 
-import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.variables.ItemsAndBlocks;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -18,7 +18,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 public class UpgradeRecipeGoldStick extends IntegrationTableRecipe {
 
 	public UpgradeRecipeGoldStick() {
-		setContents("goldStick", BuildcraftAdditions.kineticTool, 10000, 600);
+		setContents("goldStick", ItemsAndBlocks.kineticTool, 10000, 600);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class UpgradeRecipeGoldStick extends IntegrationTableRecipe {
 
 	@Override
 	public boolean isValidInputB(ItemStack inputB) {
-		return inputB != null && inputB.getItem() == BuildcraftAdditions.goldStick;
+		return inputB != null && inputB.getItem() == ItemsAndBlocks.goldStick;
 	}
 
 	@Override
