@@ -9,6 +9,7 @@ package buildcraftAdditions.proxy;
  */
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -33,5 +34,11 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileSemiAutomaticDuster.class, new RendererDuster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileMechanicalDuster.class, new RendererDuster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileKineticDuster.class, new RendererDusterKinetic());
+	}
+
+	@Override
+	public void addPowerplant() {
+		super.addPowerplant();
+		VillagerRegistry.instance().registerVillagerSkin(457, texture);
 	}
 }

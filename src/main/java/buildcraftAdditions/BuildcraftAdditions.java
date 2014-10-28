@@ -7,8 +7,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
@@ -19,7 +17,6 @@ import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -81,9 +78,6 @@ import buildcraftAdditions.triggers.TriggerHasFullCanister;
 import buildcraftAdditions.triggers.TriggerReadyToCharge;
 import buildcraftAdditions.utils.BCItems;
 import buildcraftAdditions.variables.Variables;
-import buildcraftAdditions.villager.ComponentPowerPlant;
-import buildcraftAdditions.villager.PowerPlantCreationHandeler;
-import buildcraftAdditions.villager.VillagerTradeHandler;
 
 
 import eureka.api.EurekaInfo;
@@ -101,7 +95,6 @@ import eureka.api.EurekaRegistry;
 @Mod(modid = "bcadditions", name = "Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "after:BuildCraft|Energy;required-after:eureka", acceptedMinecraftVersions = "1.7.10")
 public class BuildcraftAdditions {
 
-	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 	public static ItemCanister ironCanister;
 	public static ItemCanister goldCanister;
 	public static ItemCanister diamondCanister;
@@ -329,15 +322,7 @@ public class BuildcraftAdditions {
 		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
 
 
-		VillagerRegistry.instance().registerVillagerId(457);
-		VillagerRegistry.instance().registerVillagerSkin(457, texture);
-		VillagerRegistry.instance().registerVillageTradeHandler(457, new VillagerTradeHandler());
-		VillagerRegistry.instance().registerVillageCreationHandler(new PowerPlantCreationHandeler());
-		try {
-			MapGenStructureIO.func_143031_a(ComponentPowerPlant.class, "bcadditions:powerplant");
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
+
 	}
 
 	@Mod.EventHandler
