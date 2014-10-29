@@ -25,6 +25,7 @@ public class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHa
 	protected ArrayList<ForgeDirection> outputs = new ArrayList<ForgeDirection>(6);
 
 	public TileKineticEnergyBufferBase(int maxEnergy, int maxInput, int maxOutput, int loss) {
+		super();
 		this.maxEnergy = maxEnergy;
 		this.maxInput = maxInput;
 		this.maxOutput = maxOutput;
@@ -136,7 +137,10 @@ public class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHa
 			energy -= loss;
 		else
 			energy = 0;
+		outputEnergy();
+	}
 
+	public void outputEnergy() {
 		for (ForgeDirection direction: outputs){
 			Location location = new Location(worldObj, xCoord, yCoord, zCoord);
 			location.move(direction);

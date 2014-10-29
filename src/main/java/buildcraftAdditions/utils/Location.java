@@ -2,7 +2,7 @@ package buildcraftAdditions.utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 import net.minecraftforge.common.util.ForgeDirection;
 /**
@@ -14,9 +14,9 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class Location {
 	public int x, y, z;
-	public IBlockAccess world;
+	public World world;
 
-	public Location(IBlockAccess world, int x, int y, int z) {
+	public Location(World world, int x, int y, int z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -40,5 +40,17 @@ public class Location {
 
 	public Block getBlock() {
 		return world.getBlock(x, y, z);
+	}
+
+	public void setMetadata(int meta) {
+		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+	}
+
+	public int getMeatadata() {
+		return world.getBlockMetadata(x, y, z);
+	}
+
+	public void addTileEntity(TileEntity entity) {
+		world.setTileEntity(x, y, z, entity);
 	}
 }

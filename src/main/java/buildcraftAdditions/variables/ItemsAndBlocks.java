@@ -42,11 +42,13 @@ import buildcraftAdditions.items.Tools.UpgradeRecipeExcavationAttachment;
 import buildcraftAdditions.items.Tools.UpgradeRecipeGoldStick;
 import buildcraftAdditions.items.Tools.UpgradeRecipeSawBlade;
 import buildcraftAdditions.items.Tools.UpgradeRecipeTiller;
+import buildcraftAdditions.multiBlocks.TileMultiBlockSlave;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
+import buildcraftAdditions.tileEntities.TileKEBT2;
 import buildcraftAdditions.tileEntities.TileKineticCoil;
 import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
@@ -282,6 +284,8 @@ public final class ItemsAndBlocks {
 			GameRegistry.registerTileEntity(TileMechanicalDuster.class, "TileMechanicalDuster");
 			GameRegistry.registerTileEntity(TileKineticDuster.class, "TileKineticDuster");
 			GameRegistry.registerTileEntity(TileKineticEnergyBufferTier1.class, "TileKineticEnergyBufferTier1");
+			GameRegistry.registerTileEntity(TileMultiBlockSlave.class, "TileMultiBlockSlave");
+			GameRegistry.registerTileEntity(TileKEBT2.class, "TileKEBT2");
 		}
 	}
 }

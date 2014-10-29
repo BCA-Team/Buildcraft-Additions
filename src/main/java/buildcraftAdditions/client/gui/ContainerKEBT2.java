@@ -1,6 +1,5 @@
-package buildcraftAdditions.blocks.multiBlocks;
+package buildcraftAdditions.client.gui;
 
-import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT2;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -8,9 +7,5 @@ import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT2;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class MultiBlockKEBT2 extends MulitBlockBase {
-
-	public MultiBlockKEBT2() {
-		super('K', new MultiBlockPaternKEBT2());
-	}
+public class ContainerKEBT2 extends ContainerBase {
 }
