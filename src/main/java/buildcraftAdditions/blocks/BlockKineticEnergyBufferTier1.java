@@ -3,6 +3,8 @@ package buildcraftAdditions.blocks;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -20,6 +22,9 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 
 	public BlockKineticEnergyBufferTier1() {
 		super(Material.iron);
+		this.setResistance(2f);
+		this.setHardness(2f);
+		this.setHarvestLevel(null, 0);
 	}
 
 	@Override
@@ -36,7 +41,17 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+		if (stack.stackTagCompound != null) {
+			stack.stackTagCompound.setInteger("x", x);
+			stack.stackTagCompound.setInteger("y", y);
+			stack.stackTagCompound.setInteger("z", z);
+			world.getTileEntity(x, y, z).readFromNBT(stack.stackTagCompound);
+		}
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileKineticEnergyBufferTier1();
 	}
 }
