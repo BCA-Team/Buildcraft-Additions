@@ -8,6 +8,7 @@ tile.blockDusterMechanical.name=Mechanical Duster
 tile.blockDusterKinetic.name=Kinetic Duster
 tile.blockCoilLava.name=Lava Coil
 tile.blockCoilKinetic.name=Kinetic Coil
+tile.blockKEBT1.name=Kinetic Energy Buffer
 
 item.ironCanister.name=Iron Canister
 item.goldCanister.name=Gold Canister

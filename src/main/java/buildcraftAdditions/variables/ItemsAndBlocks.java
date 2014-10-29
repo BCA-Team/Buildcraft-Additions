@@ -26,6 +26,7 @@ import buildcraftAdditions.blocks.BlockKineticEnergyBufferTier1;
 import buildcraftAdditions.blocks.BlockLavaCoil;
 import buildcraftAdditions.blocks.BlockMechanicalDuster;
 import buildcraftAdditions.blocks.BlockSemiAutomaticDuster;
+import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT2;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemPowerCapsuleTier1;
@@ -77,6 +78,7 @@ public final class ItemsAndBlocks {
 	public static BlockBCKinesisPipeWood kinesisPipeWood;
 	public static BlockBCKinisisPipeCobble kinisisPipeCobble;
 	public static BlockKineticEnergyBufferTier1 kebT1;
+	public static MultiBlockKEBT2 kebT2;
 
 	public static Item powerCapsuleTier1;
 	public static Item powerCapsuleTier2;
@@ -219,6 +221,10 @@ public final class ItemsAndBlocks {
 		kebT1 = new BlockKineticEnergyBufferTier1();
 		kebT1.setBlockName("blockKEBT1").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(kebT1, "KEBT1");
+
+		kebT2 = new MultiBlockKEBT2();
+		kebT2.setBlockName("blockKEBT2").setCreativeTab(BuildcraftAdditions.bcadditions);
+		GameRegistry.registerBlock(kebT2, "KEBT2");
 	}
 
 	public static void addRecepies() {

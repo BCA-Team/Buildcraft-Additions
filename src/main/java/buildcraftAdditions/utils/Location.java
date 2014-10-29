@@ -1,5 +1,6 @@
 package buildcraftAdditions.utils;
 
+import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 
@@ -35,5 +36,9 @@ public class Location {
 
 	public TileEntity getTileEntity() {
 		return world.getTileEntity(x, y, z);
+	}
+
+	public Block getBlock() {
+		return world.getBlock(x, y, z);
 	}
 }
