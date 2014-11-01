@@ -6,6 +6,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 
+import net.minecraftforge.common.util.ForgeDirection;
+
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.Utils;
 /**
@@ -36,5 +38,6 @@ public class GuiKEB extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		fontRendererObj.drawString(Utils.localize("tile.blockKEBT" + keb.tier + ".name"), 5, 6, 0x404040);
+		fontRendererObj.drawString(Integer.toString(keb.getEnergyStored(ForgeDirection.UNKNOWN)), 5, 60, 0x404040);
 	}
 }

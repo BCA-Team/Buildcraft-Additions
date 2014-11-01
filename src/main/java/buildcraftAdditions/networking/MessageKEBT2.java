@@ -7,8 +7,6 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
 import buildcraftAdditions.tileEntities.TileKEBT2;
 
 
@@ -29,12 +27,12 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 	public MessageKEBT2(TileKEBT2 keb) {
 		x = keb.xCoord;
 		y = keb.yCoord;
-		z = keb.yCoord;
+		z = keb.zCoord;
 		configuration = new int[6];
 		configuration = keb.configuration;
 		partOfMultiBlock = keb.partOfMultiBlock;
 		isMaster = keb.isMaster;
-		energy = keb.getEnergyStored(ForgeDirection.UNKNOWN);
+		energy = keb.energy;
 		masterX = keb.masterX;
 		masterY = keb.masterY;
 		masterZ = keb.masterZ;

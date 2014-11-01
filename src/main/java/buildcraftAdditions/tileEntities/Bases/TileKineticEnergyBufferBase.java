@@ -20,7 +20,8 @@ import buildcraftAdditions.utils.Location;
 public class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHandler {
 	public int energy, maxEnergy, maxInput, maxOutput, loss;
 	public int[] configuration = new int[6];
-	public int tier;
+	public int tier, timer;
+	public boolean sync;
 
 	public TileKineticEnergyBufferBase(int maxEnergy, int maxInput, int maxOutput, int loss, int tier) {
 		super();
@@ -117,6 +118,13 @@ public class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHa
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
+		if (sync) {
+			if (timer == 0) {
+				sync();
+				timer = 20;
+			}
+			timer--;
+		}
 		energy = energy - loss;
 		if (energy < 0)
 			energy = 0;
@@ -144,5 +152,9 @@ public class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHa
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
 		return true;
+	}
+
+	public void sync() {
+
 	}
 }

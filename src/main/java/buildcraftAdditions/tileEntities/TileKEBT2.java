@@ -39,7 +39,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMaster, I
 	public TileKEBT2 master;
 
 	public TileKEBT2() {
-		super(500000, 10000, 10000, 100, 2);
+		super(500000, 10000, 10000, 6, 2);
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMaster, I
 			return;
 		if (isMaster)
 			//handeling it is for later
-		return;
+			return;
 		if (master == null)
 			findMaster();
 		if (master == null)
@@ -173,11 +173,13 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMaster, I
 	public void onBlockActivated(EntityPlayer player) {
 		if (!partOfMultiBlock)
 			return;
+		if (!worldObj.isRemote)
+			sync();
 		if (isMaster)
-		player.openGui(BuildcraftAdditions.instance, Variables.GuiKEB, worldObj, xCoord, yCoord, zCoord);
+			player.openGui(BuildcraftAdditions.instance, Variables.GuiKEB, worldObj, xCoord, yCoord, zCoord);
 		else
-			if (master == null)
-				findMaster();
+		if (master == null)
+			findMaster();
 		if (master != null)
 			master.onBlockActivated(player);
 	}
@@ -188,6 +190,8 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMaster, I
 	}
 
 	private void findMaster() {
+		if (isMaster)
+			master = (TileKEBT2) worldObj.getTileEntity(xCoord, yCoord, zCoord);
 		TileEntity tileEntity = worldObj.getTileEntity(masterX, masterY, masterZ);
 		if (tileEntity != null && tileEntity instanceof IMaster)
 			master = (TileKEBT2) tileEntity;
@@ -206,7 +210,8 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMaster, I
 
 	@Override
 	public void sync() {
-		PacketHandeler.instance.sendToAllAround(new MessageKEBT2(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 15));
+		if (!worldObj.isRemote)
+			PacketHandeler.instance.sendToAllAround(new MessageKEBT2(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 15));
 	}
 
 	@Override

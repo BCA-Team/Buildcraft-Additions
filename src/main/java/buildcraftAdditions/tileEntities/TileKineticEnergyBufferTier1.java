@@ -19,6 +19,8 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
+		if (maxEnergy == 0)
+			return;
 		energyState = (energy * 9) / maxEnergy;
 		if (lastEnergyState != energyState && worldObj.getBlock(xCoord, yCoord, zCoord) == ItemsAndBlocks.kebT1)
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, energyState, 2);
