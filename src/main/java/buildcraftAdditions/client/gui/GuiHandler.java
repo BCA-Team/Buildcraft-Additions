@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 import buildcraftAdditions.items.Tools.ItemKineticTool;
+import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
@@ -47,6 +48,9 @@ public class GuiHandler implements IGuiHandler {
 			case Variables.GuiBasicCoil:
 				if (tile instanceof TileBasicCoil)
 					return new GuiBasicCoil(player.inventory, (TileBasicCoil) tile);
+			case Variables.GuiKEB:
+				if (tile instanceof TileKineticEnergyBufferBase)
+					return new GuiKEB((TileKineticEnergyBufferBase) tile);
 		}
 		return null;
 	}
@@ -75,6 +79,9 @@ public class GuiHandler implements IGuiHandler {
 			case Variables.GuiBasicCoil:
 				if (tile instanceof TileBasicCoil)
 					return new ContainerBasicCoil(player.inventory, (TileBasicCoil) tile);
+			case Variables.GuiKEB:
+				if (tile instanceof TileKineticEnergyBufferBase)
+					return new ContainerKEB((TileKineticEnergyBufferBase) tile);
 		}
 		return null;
 	}

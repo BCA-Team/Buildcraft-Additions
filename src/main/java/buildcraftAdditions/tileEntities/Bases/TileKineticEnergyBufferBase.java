@@ -1,7 +1,5 @@
 package buildcraftAdditions.tileEntities.Bases;
 
-import java.util.ArrayList;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -20,23 +18,25 @@ import buildcraftAdditions.utils.Location;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHandler {
-	protected int energy, maxEnergy, maxInput, maxOutput, loss;
-	protected ArrayList<ForgeDirection> inputs = new ArrayList<ForgeDirection>(6);
-	protected ArrayList<ForgeDirection> outputs = new ArrayList<ForgeDirection>(6);
+	public int energy, maxEnergy, maxInput, maxOutput, loss;
+	public int[] configuration = new int[6];
+	public int tier;
 
-	public TileKineticEnergyBufferBase(int maxEnergy, int maxInput, int maxOutput, int loss) {
+	public TileKineticEnergyBufferBase(int maxEnergy, int maxInput, int maxOutput, int loss, int tier) {
 		super();
 		this.maxEnergy = maxEnergy;
 		this.maxInput = maxInput;
 		this.maxOutput = maxOutput;
 		this.loss = loss;
-		for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS)
-			inputs.add(direction);
+		this.tier = tier;
+		for (int teller = 0; teller < 6; teller++) {
+			configuration[teller] = 0;
+		}
 	}
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		if (!inputs.contains(from))
+		if (configuration[from.ordinal()] != 0)
 			return 0;
 		int recieved = maxReceive;
 		if (recieved > maxEnergy - energy)
@@ -50,7 +50,7 @@ public class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHa
 
 	@Override
 	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-		if (!outputs.contains(from))
+		if (configuration[from.ordinal()] != 1)
 			return 0;
 		int extracted = maxExtract;
 		if (extracted > energy)
@@ -64,22 +64,21 @@ public class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHa
 
 	public void changeSideMode(int side, EntityPlayer player) {
 		ForgeDirection direction = ForgeDirection.getOrientation(side);
-		if (inputs.contains(direction)){
-			inputs.remove(direction);
-			outputs.add(direction);
+		if (configuration[direction.ordinal()] == 0){
+			configuration[direction.ordinal()] = 1;
 			if (player.worldObj.isRemote)
-			player.addChatComponentMessage(new ChatComponentText(direction.name() + " set to output"));
+				player.addChatComponentMessage(new ChatComponentText(direction.name() + " set to output"));
 			return;
 		}
-		if (outputs.contains(direction)) {
-			outputs.remove(direction);
+		if (configuration[direction.ordinal()] == 1) {
+			configuration[direction.ordinal()] = 2;
 			if (player.worldObj.isRemote)
-			player.addChatComponentMessage(new ChatComponentText(direction.name() + " dissabled"));
+				player.addChatComponentMessage(new ChatComponentText(direction.name() + " dissabled"));
 			return;
 		}
-		inputs.add(direction);
+		configuration[direction.ordinal()] = 3;
 		if (player.worldObj.isRemote)
-		player.addChatComponentMessage(new ChatComponentText(direction.name() + " set to input"));
+			player.addChatComponentMessage(new ChatComponentText(direction.name() + " set to input"));
 	}
 
 	@Override
@@ -100,17 +99,9 @@ public class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHa
 		maxInput = tag.getInteger("maxInput");
 		maxOutput = tag.getInteger("maxOutput");
 		loss = tag.getInteger("loss");
-		for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS) {
-			String state = tag.getString(direction.name());
-			if (state.equals("OUTPUT")) {
-				inputs.remove(direction);
-				outputs.add(direction);
-			}
-			else if (state.equals("DISSABLED"))
-				inputs.remove(direction);
+		if (tag.hasKey("configuration"))
+		configuration = tag.getIntArray("configuration");
 		}
-
-	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
@@ -120,31 +111,27 @@ public class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHa
 		tag.setInteger("maxInput", maxInput);
 		tag.setInteger("maxOutput", maxOutput);
 		tag.setInteger("loss", loss);
-		for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS) {
-			String state = "DISSABLED";
-			if (inputs.contains(direction))
-				state = "INPUT";
-			if (outputs.contains(direction))
-				state = "OUTPUT";
-			tag.setString(direction.name(), state);
+		tag.setIntArray("configuration", configuration);
 		}
-	}
 
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if (energy - loss > 0)
-			energy -= loss;
-		else
+		energy = energy - loss;
+		if (energy < 0)
 			energy = 0;
 		outputEnergy();
 	}
 
 	public void outputEnergy() {
-		for (ForgeDirection direction: outputs){
+		for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS){
+			if (configuration[direction.ordinal()] != 1)
+				continue;
 			Location location = new Location(worldObj, xCoord, yCoord, zCoord);
 			location.move(direction);
-			IEnergyHandler energyHandler = (IEnergyHandler) location.getTileEntity();
+			IEnergyHandler energyHandler = null;
+			if (location.getTileEntity() != null && location.getTileEntity() instanceof IEnergyHandler)
+				energyHandler = (IEnergyHandler) location.getTileEntity();
 			if (energyHandler != null) {
 				int sendEnergy = energy;
 				if (sendEnergy > maxOutput)

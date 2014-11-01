@@ -14,7 +14,6 @@ import net.minecraftforge.event.entity.player.AchievementEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import buildcraftAdditions.config.ConfigurationHandeler;
-import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.ItemsAndBlocks;
 import buildcraftAdditions.variables.Variables;
@@ -73,19 +72,14 @@ public class EventListener {
 		@SubscribeEvent
 		public void onInteraction(PlayerInteractEvent event){
 			Block block = event.world.getBlock(event.x, event.y, event.z);
-			if (block == ItemsAndBlocks.kebT1){
-				if (event.entityPlayer.getCurrentEquippedItem() == null) {
-					TileKineticEnergyBufferTier1 keb = (TileKineticEnergyBufferTier1) event.world.getTileEntity(event.x, event.y, event.z);
-					keb.changeSideMode(event.face, event.entityPlayer);
-				} else if (event.entityPlayer.getCurrentEquippedItem().getItem().getToolClasses(event.entityPlayer.getCurrentEquippedItem()).contains("wrench") && event.entityPlayer.isSneaking()) {
-					NBTTagCompound tag = new NBTTagCompound();
-					event.world.getTileEntity(event.x, event.y, event.z).writeToNBT(tag);
-					ItemStack stack = new ItemStack(ItemsAndBlocks.kebT1, 1, event.world.getBlockMetadata(event.x, event.y, event.z));
-					stack.stackTagCompound = tag;
-					Utils.dropItemstack(event.world, event.x, event.y, event.z, stack);
-					event.world.setBlockToAir(event.x, event.y, event.z);
-					event.world.removeTileEntity(event.x, event.y, event.z);
-				}
+			if (event.entityPlayer != null && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem().getToolClasses(event.entityPlayer.getCurrentEquippedItem()).contains("wrench") && event.entityPlayer.isSneaking() && event.world.getTileEntity(event.x, event.y, event.z) != null) {
+				NBTTagCompound tag = new NBTTagCompound();
+				event.world.getTileEntity(event.x, event.y, event.z).writeToNBT(tag);
+				ItemStack stack = new ItemStack(ItemsAndBlocks.kebT1, 1, event.world.getBlockMetadata(event.x, event.y, event.z));
+				stack.stackTagCompound = tag;
+				Utils.dropItemstack(event.world, event.x, event.y, event.z, stack);
+				event.world.setBlockToAir(event.x, event.y, event.z);
+				event.world.removeTileEntity(event.x, event.y, event.z);
 			}
 		}
 	}

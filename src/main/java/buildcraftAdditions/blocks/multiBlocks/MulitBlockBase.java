@@ -2,18 +2,15 @@ package buildcraftAdditions.blocks.multiBlocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.multiBlocks.IMaster;
+import buildcraftAdditions.multiBlocks.ISlave;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
-import buildcraftAdditions.multiBlocks.TileMultiBlockSlave;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -21,14 +18,10 @@ import buildcraftAdditions.multiBlocks.TileMultiBlockSlave;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class MulitBlockBase extends Block implements ITileEntityProvider {
+public class MulitBlockBase extends BlockContainer {
 	public char identifier;
 	public MultiBlockPatern patern;
 
-	@Override
-	public boolean hasTileEntity(int metadata) {
-		return super.hasTileEntity(metadata);
-	}
 
 	public MulitBlockBase(char identifier, MultiBlockPatern patern) {
 		super(Material.iron);
@@ -36,6 +29,11 @@ public class MulitBlockBase extends Block implements ITileEntityProvider {
 		setHarvestLevel(null, 0);
 		this.identifier = identifier;
 		this.patern = patern;
+	}
+
+	@Override
+	public void onBlockAdded(World world, int x, int y, int z) {
+		world.scheduleBlockUpdate(x, y, z, this, 80);
 	}
 
 	@Override
@@ -47,20 +45,21 @@ public class MulitBlockBase extends Block implements ITileEntityProvider {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
-		world.scheduleBlockUpdate(x, y, z, this, 80);
+	public boolean hasTileEntity(int metadata) {
+		return metadata == 1;
 	}
+
+
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
-		TileEntity slave = world.getTileEntity(x, y, z);
-		if (slave != null && slave instanceof TileMultiBlockSlave) {
-			((TileMultiBlockSlave) slave).openGui();
+		TileEntity entity = world.getTileEntity(x, y, z);
+		if (entity != null && entity instanceof ISlave) {
+			((ISlave) entity).onBlockActivated(player);
 			return true;
 		}
-		IMaster master = (IMaster) world.getTileEntity(x, y, z);
-		if (master != null) {
-			master.openGui();
+		if (entity != null && entity instanceof IMaster) {
+			((IMaster) entity).onBlockActivated(player);
 			return true;
 		}
 		return false;
@@ -68,13 +67,15 @@ public class MulitBlockBase extends Block implements ITileEntityProvider {
 
 	@Override
 	public void onBlockPreDestroy(World world, int x, int y, int z, int meta) {
-		TileMultiBlockSlave slave = (TileMultiBlockSlave) world.getTileEntity(x, y, z);
-		if (slave != null)
-			slave.destroyMultiblock();
+		TileEntity entity = world.getTileEntity(x, y, z);
+		if (entity != null && entity instanceof ISlave)
+			((ISlave) entity).invalidateMultiblock();
+		else  if (entity instanceof IMaster)
+			((IMaster) entity).invalidateMultiblock();
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return null;
 	}
 }

@@ -1,6 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
+import buildcraftAdditions.variables.ItemsAndBlocks;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -12,14 +13,14 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 	public int energyState, lastEnergyState;
 
 	public TileKineticEnergyBufferTier1() {
-		super(30000, 1000, 1000, 10);
+		super(30000, 1000, 1000, 10, 1);
 	}
 
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
 		energyState = (energy * 9) / maxEnergy;
-		if (lastEnergyState != energyState)
+		if (lastEnergyState != energyState && worldObj.getBlock(xCoord, yCoord, zCoord) == ItemsAndBlocks.kebT1)
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, energyState, 2);
 		lastEnergyState = energyState;
 	}

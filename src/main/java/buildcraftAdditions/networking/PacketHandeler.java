@@ -23,5 +23,6 @@ public class PacketHandeler {
 		instance.registerMessage(MessageHeatedFurnaceProgress.class, MessageHeatedFurnaceProgress.class, 4, Side.CLIENT);
 		instance.registerMessage(MessageFluidicCompressorA.class, MessageFluidicCompressorA.class, 5, Side.SERVER);
 		instance.registerMessage(MessageFluidicCompressorC.class, MessageFluidicCompressorC.class, 6, Side.CLIENT);
+		instance.registerMessage(MessageKEBT2.class, MessageKEBT2.class, 7, Side.CLIENT);
 	}
 }

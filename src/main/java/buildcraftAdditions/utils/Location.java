@@ -23,6 +23,10 @@ public class Location {
 		this.world = world;
 	}
 
+	public Location copy() {
+		return new Location(world, x, y, z);
+	}
+
 	public Location move (ForgeDirection direction) {
 		return move(direction, 1);
 	}
@@ -52,5 +56,17 @@ public class Location {
 
 	public void addTileEntity(TileEntity entity) {
 		world.setTileEntity(x, y, z, entity);
+	}
+
+	public void removeTileEntity() {
+		world.removeTileEntity(x, y, z);
+	}
+
+	public void scheduleBlockUpdate(int delay) {
+		world.scheduleBlockUpdate(x, y, z, getBlock(), delay);
+	}
+
+	public boolean isSameLocation(Location location) {
+		return world.provider.dimensionId == location.world.provider.dimensionId && x == location.x && y == location.y && z == location.z;
 	}
 }

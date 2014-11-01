@@ -1,6 +1,10 @@
 package buildcraftAdditions.blocks.multiBlocks;
 
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
 import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT2;
+import buildcraftAdditions.tileEntities.TileKEBT2;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -12,5 +16,15 @@ public class MultiBlockKEBT2 extends MulitBlockBase {
 
 	public MultiBlockKEBT2() {
 		super('K', new MultiBlockPaternKEBT2());
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world, int meta) {
+		return new TileKEBT2();
+	}
+
+	@Override
+	public boolean hasTileEntity(int metadata) {
+		return true;
 	}
 }

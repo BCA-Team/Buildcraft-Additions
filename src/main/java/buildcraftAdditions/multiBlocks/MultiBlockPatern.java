@@ -1,5 +1,8 @@
 package buildcraftAdditions.multiBlocks;
 
+import java.util.ArrayList;
+
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.util.ForgeDirection;
@@ -14,7 +17,7 @@ import buildcraftAdditions.utils.Location;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class MultiBlockPatern {
+public class MultiBlockPatern {
 	public ForgeDirection directions[];
 	public char identifier;
 
@@ -38,10 +41,39 @@ public abstract class MultiBlockPatern {
 		for (ForgeDirection direction: directions) {
 			location.move(direction);
 			location.setMetadata(1);
-			location.addTileEntity(new TileMultiBlockSlave(x, y, z, location.x, location.y, location.z));
+			ISlave slave = (ISlave) location.getTileEntity();
+			slave.formMultiblock(x, y, z);
 		}
 		addMaster(world, x, y, z);
 	}
 
-	public abstract void addMaster (World world, int x, int y, int z);
+	public void destroyMultiblock(World world, int x, int y, int z) {
+		Location location = new Location(world, x, y, z);
+		for (ForgeDirection direction: directions) {
+			location.move(direction);
+			if (location.getTileEntity() instanceof ISlave)
+				((ISlave) location.getTileEntity()).invalidateBlock();
+		}
+	}
+
+	public ArrayList<Location> getLocations(World world, int masterX, int masterY, int masterZ) {
+		ArrayList<Location> list = new ArrayList<Location>(directions.length);
+		Location location = new Location(world, masterX, masterY, masterZ);
+		for (ForgeDirection direction: directions) {
+			location.move(direction);
+			list.add(location.copy());
+		}
+		return list;
+
+
+	}
+
+	public void addMaster (World world, int x, int y, int z) {
+		TileEntity entity = world.getTileEntity(x, y, z);
+		if (entity != null && entity instanceof IMaster) {
+			IMaster master = (IMaster) entity;
+			master.makeMaster();
+			master.sync();
+		}
+	}
 }
