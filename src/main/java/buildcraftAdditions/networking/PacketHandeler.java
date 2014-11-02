@@ -24,5 +24,6 @@ public class PacketHandeler {
 		instance.registerMessage(MessageFluidicCompressorA.class, MessageFluidicCompressorA.class, 5, Side.SERVER);
 		instance.registerMessage(MessageFluidicCompressorC.class, MessageFluidicCompressorC.class, 6, Side.CLIENT);
 		instance.registerMessage(MessageKEBT2.class, MessageKEBT2.class, 7, Side.CLIENT);
+		instance.registerMessage(MessageKEBT1.class, MessageKEBT1.class, 8, Side.CLIENT);
 	}
 }
