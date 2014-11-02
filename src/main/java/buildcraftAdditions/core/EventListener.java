@@ -72,6 +72,8 @@ public class EventListener {
 		@SubscribeEvent
 		public void onInteraction(PlayerInteractEvent event){
 			Block block = event.world.getBlock(event.x, event.y, event.z);
+			if (block != ItemsAndBlocks.kebT1)
+				return;
 			if (event.entityPlayer != null && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem().getToolClasses(event.entityPlayer.getCurrentEquippedItem()).contains("wrench") && event.entityPlayer.isSneaking() && event.world.getTileEntity(event.x, event.y, event.z) != null) {
 				NBTTagCompound tag = new NBTTagCompound();
 				event.world.getTileEntity(event.x, event.y, event.z).writeToNBT(tag);

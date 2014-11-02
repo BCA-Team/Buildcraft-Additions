@@ -1,6 +1,7 @@
 package buildcraftAdditions.variables;
 
-import buildcraft.api.gates.ITrigger;
+import buildcraft.api.statements.ITriggerExternal;
+import buildcraft.api.statements.ITriggerInternal;
 
 import buildcraftAdditions.triggers.TriggerCanisterRequested;
 import buildcraftAdditions.triggers.TriggerDoneCharging;
@@ -15,9 +16,9 @@ import buildcraftAdditions.triggers.TriggerReadyToCharge;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public final class TrigersAndActions {
-	public static ITrigger triggerCanAcceptCanister = new TriggerCanisterRequested();
-	public static ITrigger triggerHasEmptyCanister = new TriggerHasEmptyCanister();
-	public static ITrigger triggerhasFullCanister = new TriggerHasFullCanister();
-	public static ITrigger triggerDoneCharging = new TriggerDoneCharging();
-	public static ITrigger triggerReadyToCharge = new TriggerReadyToCharge();
+	public static ITriggerExternal triggerCanAcceptCanister = new TriggerCanisterRequested();
+	public static ITriggerExternal triggerHasEmptyCanister = new TriggerHasEmptyCanister();
+	public static ITriggerExternal triggerhasFullCanister = new TriggerHasFullCanister();
+	public static ITriggerExternal triggerDoneCharging = new TriggerDoneCharging();
+	public static ITriggerExternal triggerReadyToCharge = new TriggerReadyToCharge();
 }

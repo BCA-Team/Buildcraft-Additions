@@ -8,22 +8,28 @@ package buildcraftAdditions.tileEntities;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
-import buildcraft.api.gates.IOverrideDefaultTriggers;
-import buildcraft.api.gates.ITrigger;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import buildcraft.api.statements.IStatementContainer;
+import buildcraft.api.statements.ITriggerExternal;
+import buildcraft.api.statements.ITriggerInternal;
+import buildcraft.api.statements.ITriggerProvider;
 
 import buildcraftAdditions.api.IKineticCapsule;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 import buildcraftAdditions.variables.TrigersAndActions;
 
-public class TileChargingStation extends TileMachineBase implements IInventory, IOverrideDefaultTriggers {
+public class TileChargingStation extends TileMachineBase implements IInventory, ITriggerProvider {
 
 	private final CustomInventory inventory = new CustomInventory("ChargingStation",1 , 1, this);
 
@@ -149,10 +155,15 @@ public class TileChargingStation extends TileMachineBase implements IInventory, 
 	}
 
 	@Override
-	public LinkedList<ITrigger> getTriggers() {
-		LinkedList<ITrigger> list = new LinkedList<ITrigger>();
-		list.add(TrigersAndActions.triggerDoneCharging);
-		list.add(TrigersAndActions.triggerReadyToCharge);
-		return list;
+	public Collection<ITriggerInternal> getInternalTriggers(IStatementContainer container) {
+		return null;
+	}
+
+	@Override
+	public Collection<ITriggerExternal> getExternalTriggers(ForgeDirection side, TileEntity tile) {
+		Collection<ITriggerExternal> triggers = new ArrayList<ITriggerExternal>(2);
+		triggers.add(TrigersAndActions.triggerDoneCharging);
+		triggers.add(TrigersAndActions.triggerReadyToCharge);
+		return triggers;
 	}
 }

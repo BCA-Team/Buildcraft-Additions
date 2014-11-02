@@ -57,7 +57,7 @@ dependencies {
 	compile "codechicken:CodeChickenCore:${config.version.mc}-${config.version.ccc}:dev"
 	compile "codechicken:NotEnoughItems:${config.version.mc}-${config.version.nei}:dev"
 	compile "mcp.mobius.waila:Waila:${config.version.waila}_${config.version.mc}"
-    	//compile "com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev"
+    	compile "com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev"
 }
  
 processResources
@@ -92,14 +92,3 @@ jar {
 }
 
 assemble.dependsOn deobfJar
-
-task copyMods(type: Copy, dependsOn: "extractUserDev") {
-    from { configurations.compile }
-    include "**/*Chicken*.jar", "**/*NotEnoughItems*.jar", "**/CodeChickenLib*"
-    into file("./././Minecraft/mods")
-    mustRunAfter "deobfBinJar"
-    mustRunAfter "repackMinecraft"
-}
-tasks.setupDevWorkspace.dependsOn copyMods
-tasks.setupDecompWorkspace.dependsOn copyMods
-tasks.ideaModule.dependsOn copyMods

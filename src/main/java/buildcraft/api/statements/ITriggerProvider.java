@@ -6,25 +6,23 @@
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
-package buildcraft.api.gates;
+package buildcraft.api.statements;
 
 import java.util.Collection;
 
-import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
-
-import buildcraft.api.transport.IPipeTile;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public interface ITriggerProvider {
 
 	/**
-	 * Returns the list of triggers that are available from the pipe holding the gate.
+	 * Returns the list of triggers that are available from the object holding the gate.
 	 */
-	Collection<ITrigger> getPipeTriggers(IPipeTile pipe);
+	Collection<ITriggerInternal> getInternalTriggers(IStatementContainer container);
 
 	/**
 	 * Returns the list of triggers available to a gate next to the given block.
 	 */
-	Collection<ITrigger> getNeighborTriggers(Block block, TileEntity tile);
+	Collection<ITriggerExternal> getExternalTriggers(ForgeDirection side, TileEntity tile);
 
 }

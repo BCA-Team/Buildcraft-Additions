@@ -6,7 +6,7 @@
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
-package buildcraft.api.gates;
+package buildcraft.api.statements;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
@@ -46,8 +46,7 @@ public interface IStatement {
 	String getDescription();
 
 	/**
-	 * Create parameters for the trigger. As for now, there is only one kind of
-	 * trigger parameter available so this subprogram is final.
+	 * Create parameters for the trigger.
 	 */
 	IStatementParameter createParameter(int index);
 

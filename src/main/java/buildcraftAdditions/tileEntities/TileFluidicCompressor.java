@@ -8,7 +8,8 @@ package buildcraftAdditions.tileEntities;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -26,8 +27,9 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.ItemFluidContainer;
 
-import buildcraft.api.gates.IOverrideDefaultTriggers;
-import buildcraft.api.gates.ITrigger;
+import buildcraft.api.statements.IActionExternal;
+import buildcraft.api.statements.IOverrideDefaultStatements;
+import buildcraft.api.statements.ITriggerExternal;
 
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.items.ItemCanister;
@@ -38,7 +40,7 @@ import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.variables.TrigersAndActions;
 
-public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler, IOverrideDefaultTriggers {
+public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler, IOverrideDefaultStatements {
 
 	public final int maxLiquid = FluidContainerRegistry.BUCKET_VOLUME * 10;
 	public Tank tank = new Tank(maxLiquid, this);
@@ -282,12 +284,19 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 		return 0;
 	}
 
+
+
 	@Override
-	public LinkedList<ITrigger> getTriggers() {
-		LinkedList<ITrigger> list = new LinkedList<ITrigger>();
-		list.add(TrigersAndActions.triggerCanAcceptCanister);
-		list.add(TrigersAndActions.triggerHasEmptyCanister);
-		list.add(TrigersAndActions.triggerhasFullCanister);
-		return list;
+	public List<ITriggerExternal> overrideTriggers() {
+		List<ITriggerExternal> triggers = new ArrayList<ITriggerExternal>();
+		triggers.add(TrigersAndActions.triggerCanAcceptCanister);
+		triggers.add(TrigersAndActions.triggerHasEmptyCanister);
+		triggers.add(TrigersAndActions.triggerhasFullCanister);
+		return triggers;
+	}
+
+	@Override
+	public List<IActionExternal> overrideActions() {
+		return new ArrayList<IActionExternal>();
 	}
 }

@@ -6,8 +6,10 @@
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
-package buildcraft.api.gates;
+package buildcraft.api.statements;
 
-public class ActionState {
+public interface IActionInternal extends IStatement {
 
+	void actionActivate(IStatementContainer source, IStatementParameter[] parameters);
+	
 }

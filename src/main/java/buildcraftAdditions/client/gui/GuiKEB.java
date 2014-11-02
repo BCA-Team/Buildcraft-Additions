@@ -32,6 +32,19 @@ public class GuiKEB extends GuiContainer {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		int percent = (keb.energy * 140) / keb.maxEnergy;
+		int temp  = percent;
+		if (temp > 35)
+			temp = 35;
+		drawTexturedModalRect(guiLeft + 90, guiTop + 18, 212, 42, 36, temp);
+		percent -= 35;
+		if (percent < 0)
+			return;
+		temp = percent;
+		if (temp >  35)
+			temp = 35;
+		drawTexturedModalRect(guiLeft + 90, guiTop + 53, 212, 77, 36, temp);
+
 	}
 
 	@Override

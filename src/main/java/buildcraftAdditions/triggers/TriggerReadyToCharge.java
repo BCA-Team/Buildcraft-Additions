@@ -7,10 +7,12 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraft.api.gates.IGate;
-import buildcraft.api.gates.IStatementParameter;
-import buildcraft.api.gates.ITrigger;
-import buildcraft.api.gates.ITriggerParameter;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import buildcraft.api.statements.IStatement;
+import buildcraft.api.statements.IStatementContainer;
+import buildcraft.api.statements.IStatementParameter;
+import buildcraft.api.statements.ITriggerExternal;
 
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.utils.Utils;
@@ -22,7 +24,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerReadyToCharge implements ITrigger {
+public class TriggerReadyToCharge implements ITriggerExternal {
 	public IIcon icon;
 
 	public TriggerReadyToCharge() {}
@@ -34,6 +36,11 @@ public class TriggerReadyToCharge implements ITrigger {
 
 	@Override
 	public IStatementParameter createParameter(int index) {
+		return null;
+	}
+
+	@Override
+	public IStatement rotateLeft() {
 		return null;
 	}
 
@@ -65,15 +72,9 @@ public class TriggerReadyToCharge implements ITrigger {
 	}
 
 	@Override
-	public ITrigger rotateLeft() {
-		return this;
-	}
-
-	@Override
-	public boolean isTriggerActive(IGate gate, ITriggerParameter[] parameters) {
-		TileEntity tile = gate.getPipe().getAdjacentTile(gate.getSide());
-		if (tile instanceof TileChargingStation) {
-			TileChargingStation chargingStation = (TileChargingStation) tile;
+	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
+		if (target instanceof TileChargingStation) {
+			TileChargingStation chargingStation = (TileChargingStation) target;
 			return chargingStation.getStackInSlot(0) == null;
 		}
 		return false;
