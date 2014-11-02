@@ -1,12 +1,13 @@
 package buildcraftAdditions.variables;
 
 import buildcraft.api.statements.ITriggerExternal;
-import buildcraft.api.statements.ITriggerInternal;
+import buildcraft.api.statements.StatementManager;
 
 import buildcraftAdditions.triggers.TriggerCanisterRequested;
 import buildcraftAdditions.triggers.TriggerDoneCharging;
 import buildcraftAdditions.triggers.TriggerHasEmptyCanister;
 import buildcraftAdditions.triggers.TriggerHasFullCanister;
+import buildcraftAdditions.triggers.TriggerProvider;
 import buildcraftAdditions.triggers.TriggerReadyToCharge;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -21,4 +22,13 @@ public final class TrigersAndActions {
 	public static ITriggerExternal triggerhasFullCanister = new TriggerHasFullCanister();
 	public static ITriggerExternal triggerDoneCharging = new TriggerDoneCharging();
 	public static ITriggerExternal triggerReadyToCharge = new TriggerReadyToCharge();
+
+	public static void register() {
+		StatementManager.registerTriggerProvider(new TriggerProvider());
+		StatementManager.registerStatement(triggerCanAcceptCanister);
+		StatementManager.registerStatement(triggerHasEmptyCanister);
+		StatementManager.registerStatement(triggerhasFullCanister);
+		StatementManager.registerStatement(triggerDoneCharging);
+		StatementManager.registerStatement(triggerReadyToCharge);
+	}
 }

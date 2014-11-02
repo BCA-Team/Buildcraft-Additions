@@ -8,9 +8,6 @@ package buildcraftAdditions.tileEntities;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -27,10 +24,6 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.ItemFluidContainer;
 
-import buildcraft.api.statements.IActionExternal;
-import buildcraft.api.statements.IOverrideDefaultStatements;
-import buildcraft.api.statements.ITriggerExternal;
-
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.networking.MessageFluidicCompressorC;
@@ -38,9 +31,8 @@ import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.variables.TrigersAndActions;
 
-public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler, IOverrideDefaultStatements {
+public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler {
 
 	public final int maxLiquid = FluidContainerRegistry.BUCKET_VOLUME * 10;
 	public Tank tank = new Tank(maxLiquid, this);
@@ -282,21 +274,5 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 			return tank.getFluid().amount;
 		}
 		return 0;
-	}
-
-
-
-	@Override
-	public List<ITriggerExternal> overrideTriggers() {
-		List<ITriggerExternal> triggers = new ArrayList<ITriggerExternal>();
-		triggers.add(TrigersAndActions.triggerCanAcceptCanister);
-		triggers.add(TrigersAndActions.triggerHasEmptyCanister);
-		triggers.add(TrigersAndActions.triggerhasFullCanister);
-		return triggers;
-	}
-
-	@Override
-	public List<IActionExternal> overrideActions() {
-		return new ArrayList<IActionExternal>();
 	}
 }

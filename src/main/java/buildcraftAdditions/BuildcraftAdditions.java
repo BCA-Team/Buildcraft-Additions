@@ -31,6 +31,7 @@ import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.variables.ItemsAndBlocks;
+import buildcraftAdditions.variables.TrigersAndActions;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -66,6 +67,7 @@ public class BuildcraftAdditions {
 		ConfigurationHandeler.init(event.getSuggestedConfigurationFile());
 		PacketHandeler.init();
 		ItemsAndBlocks.init();
+		TrigersAndActions.register();
 
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.redstone_ore), new ItemStack(Items.redstone, 6));
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, 2));

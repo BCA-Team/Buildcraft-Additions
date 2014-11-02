@@ -8,28 +8,16 @@ package buildcraftAdditions.tileEntities;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-
-import net.minecraftforge.common.util.ForgeDirection;
-
-import buildcraft.api.statements.IStatementContainer;
-import buildcraft.api.statements.ITriggerExternal;
-import buildcraft.api.statements.ITriggerInternal;
-import buildcraft.api.statements.ITriggerProvider;
 
 import buildcraftAdditions.api.IKineticCapsule;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
-import buildcraftAdditions.variables.TrigersAndActions;
 
-public class TileChargingStation extends TileMachineBase implements IInventory, ITriggerProvider {
+public class TileChargingStation extends TileMachineBase implements IInventory {
 
 	private final CustomInventory inventory = new CustomInventory("ChargingStation",1 , 1, this);
 
@@ -152,18 +140,5 @@ public class TileChargingStation extends TileMachineBase implements IInventory, 
 				return battery.getCapacity();
 			}
 		return 0;
-	}
-
-	@Override
-	public Collection<ITriggerInternal> getInternalTriggers(IStatementContainer container) {
-		return null;
-	}
-
-	@Override
-	public Collection<ITriggerExternal> getExternalTriggers(ForgeDirection side, TileEntity tile) {
-		Collection<ITriggerExternal> triggers = new ArrayList<ITriggerExternal>(2);
-		triggers.add(TrigersAndActions.triggerDoneCharging);
-		triggers.add(TrigersAndActions.triggerReadyToCharge);
-		return triggers;
 	}
 }
