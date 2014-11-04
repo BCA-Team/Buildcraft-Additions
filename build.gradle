@@ -30,7 +30,7 @@ group= "com.AEnterprise.BuildcraftAdditions" // http://maven.apache.org/guides/m
 archivesBaseName = "BuildcraftAdditions-1.7.10"
 
 if (System.getenv().BUILD_NUMBER != null) {
-    version += "-${System.getenv().BUILD_NUMBER}"
+    version += "-Jenkins"-${System.getenv().BUILD_NUMBER}"
 }
  
 minecraft {

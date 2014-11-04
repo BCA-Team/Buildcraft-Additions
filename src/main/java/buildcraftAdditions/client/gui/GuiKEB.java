@@ -32,8 +32,8 @@ public class GuiKEB extends GuiContainer {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-		int percent = (keb.energy * 140) / keb.maxEnergy;
-		int temp  = percent;
+		int percent = (keb.energy * 360) / keb.maxEnergy;
+		/*int temp  = percent;
 		if (temp > 35)
 			temp = 35;
 		drawTexturedModalRect(guiLeft + 90, guiTop + 18, 212, 42, 36, temp);
@@ -43,7 +43,7 @@ public class GuiKEB extends GuiContainer {
 		temp = percent;
 		if (temp >  35)
 			temp = 35;
-		drawTexturedModalRect(guiLeft + 90, guiTop + 53, 212, 77, 36, temp);
+		drawTexturedModalRect(guiLeft + 90, guiTop + 53, 212, 77, 36, temp);*/
 
 	}
 
@@ -53,4 +53,5 @@ public class GuiKEB extends GuiContainer {
 		fontRendererObj.drawString(Utils.localize("tile.blockKEBT" + keb.tier + ".name"), 5, 6, 0x404040);
 		fontRendererObj.drawString(Integer.toString(keb.getEnergyStored(ForgeDirection.UNKNOWN)), 5, 60, 0x404040);
 	}
+
 }

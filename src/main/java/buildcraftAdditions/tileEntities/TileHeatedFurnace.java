@@ -26,7 +26,7 @@ import buildcraftAdditions.utils.Utils;
  */
 public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInventory {
 	private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64, this);
-	public int progress;
+	public int progress, timer;
 	public boolean isCooking, shouldUpdateCoils, sync;
 	public TileCoilBase[] coils;
 
@@ -34,10 +34,13 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInv
 		progress = 0;
 		isCooking = false;
 		coils = new TileCoilBase[6];
+		sync = false;
 	}
 
 	@Override
 	public void updateEntity() {
+		if (worldObj.isRemote)
+			return;
 		if (shouldUpdateCoils) {
 			updateCoils();
 			shouldUpdateCoils = false;
@@ -72,12 +75,17 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInv
 				for (TileCoilBase coil : coils)
 					if (coil != null) {
 						progress += coil.getIncrement();
-						if (sync)
-							PacketHandeler.instance.sendToAllAround(new MessageHeatedFurnaceProgress(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
 					}
 			}
 		} else {
 			stop();
+		}
+		if (sync) {
+			if (timer == 0) {
+				PacketHandeler.instance.sendToAllAround(new MessageHeatedFurnaceProgress(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
+				timer = 15;
+			}
+			timer--;
 		}
 	}
 
