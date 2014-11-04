@@ -27,7 +27,7 @@ import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.core.InventoryTool;
 import buildcraftAdditions.utils.Utils;
 
-public class ItemPoweredBase extends ItemSword {
+public abstract class ItemPoweredBase extends ItemSword {
 
 	public int x, y, z;
 	public World world;
@@ -123,13 +123,6 @@ public class ItemPoweredBase extends ItemSword {
 		decreaseEnergy(stack, (block.getBlockHardness(world, x, y, z) * (ConfigurationHandeler.powerDifficultyModifiers[world.difficultySetting.getDifficultyId()]) * ConfigurationHandeler.basePowerModifier), player);
 
 		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
-		readBateries(stack, player);
-		list.add("I'M BROKEN, PLEASE RIGHT CLICK ME TO FIX ME");
 	}
 
 	public void readBateries(ItemStack stack, EntityPlayer player) {

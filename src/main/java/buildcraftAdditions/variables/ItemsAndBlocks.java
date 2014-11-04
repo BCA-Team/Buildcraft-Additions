@@ -152,6 +152,10 @@ public final class ItemsAndBlocks {
 		kineticTool = new ItemKineticTool();
 		GameRegistry.registerItem(kineticTool, "kineticMultiTool");
 
+		registerToolStack(new String[]{"Chainsaw"}, new String[]{""}, 1);
+
+
+
 		itemGrindingWheel = new ItemBase("grindingWheel");
 		GameRegistry.registerItem(itemGrindingWheel, "grindingWheel");
 
@@ -285,5 +289,14 @@ public final class ItemsAndBlocks {
 			GameRegistry.registerTileEntity(TileKineticEnergyBufferTier1.class, "TileKineticEnergyBufferTier1");
 			GameRegistry.registerTileEntity(TileKEBT2.class, "TileKineticEnergyBufferTier2");
 		}
+	}
+
+	private static void registerToolStack(String sticks[], String upgrades[], int number) {
+		ItemStack stack = new ItemStack(kineticTool);
+		for (String stick: sticks)
+			kineticTool.installStick(stack, stick);
+		for (String upgrade: upgrades)
+			kineticTool.installStick(stack, upgrade);
+		GameRegistry.registerCustomItemStack("KineticMultiTool" + number, stack);
 	}
 }
