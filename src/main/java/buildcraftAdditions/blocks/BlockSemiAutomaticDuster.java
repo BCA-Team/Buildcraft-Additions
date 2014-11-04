@@ -10,7 +10,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -19,9 +18,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
 import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.variables.Variables;
 
 
-import eureka.api.events.BlockPlacedEvent;
+import eureka.api.EurekaKnowledge;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -76,8 +76,9 @@ public class BlockSemiAutomaticDuster extends BlockBase {
 		if (entity instanceof EntityPlayer) {
 			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof TileSemiAutomaticDuster) {
-				FMLCommonHandler.instance().bus().post(new BlockPlacedEvent(world, x, y, z, (EntityPlayer) entity, this, 0));
-						((TileSemiAutomaticDuster) tileEntity).makeProgress((EntityPlayer) entity);
+				EntityPlayer player = (EntityPlayer) entity;
+				if (EurekaKnowledge.isFinished(player, Variables.DustT1Key))
+					((TileSemiAutomaticDuster) tileEntity).makeProgress((EntityPlayer) entity);
 			}
 		}
 	}
