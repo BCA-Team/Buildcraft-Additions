@@ -24,6 +24,11 @@ public class MultiBlockKEBT2 extends MulitBlockBase {
 	}
 
 	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	@Override
 	public boolean hasTileEntity(int metadata) {
 		return true;
 	}

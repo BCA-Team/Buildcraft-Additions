@@ -6,6 +6,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.multiBlocks.IMaster;
@@ -34,6 +35,11 @@ public class MulitBlockBase extends BlockContainer {
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
 		world.scheduleBlockUpdate(x, y, z, this, 80);
+	}
+
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		return null;
 	}
 
 	@Override
