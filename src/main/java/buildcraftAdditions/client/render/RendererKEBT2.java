@@ -25,10 +25,61 @@ public class RendererKEBT2 extends TileEntitySpecialRenderer {
 			new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides4.png"),
 			new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides5.png")};
 	public ResourceLocation topAndBottom = new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockTopAndBottom.png");
+	public ResourceLocation singleBlock = new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockRaw.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {
 		TileKEBT2 keb = (TileKEBT2) entity;
+		if (!keb.partOfMultiBlock) {
+			RenderHelper.disableStandardItemLighting();
+			GL11.glPushMatrix();
+			GL11.glTranslated(x, y, z);
+			Tessellator tessellator = Tessellator.instance;
+			tessellator.startDrawingQuads();
+			bindTexture(singleBlock);
+
+			//NORTH
+			tessellator.addVertexWithUV(0, 0, 0, 1, 1);
+			tessellator.addVertexWithUV(0, 1, 0, 1, 0);
+			tessellator.addVertexWithUV(1, 1, 0, 0, 0);
+			tessellator.addVertexWithUV(1, 0, 0, 0, 1);
+
+			//EAST
+			tessellator.addVertexWithUV(1, 0, 0, 0, 1);
+			tessellator.addVertexWithUV(1, 1, 0, 0, 0);
+			tessellator.addVertexWithUV(1, 1, 1, 1, 0);
+			tessellator.addVertexWithUV(1, 0, 1, 1, 1);
+
+			//SOUTH
+			tessellator.addVertexWithUV(1, 0, 1, 0, 1);
+			tessellator.addVertexWithUV(1, 1, 1, 0, 0);
+			tessellator.addVertexWithUV(0, 1, 1, 1, 0);
+			tessellator.addVertexWithUV(0, 0, 1, 1, 1);
+
+			//WEST
+			tessellator.addVertexWithUV(0, 0, 1, 1, 1);
+			tessellator.addVertexWithUV(0, 1, 1, 1, 0);
+			tessellator.addVertexWithUV(0, 1, 0, 0, 0);
+			tessellator.addVertexWithUV(0, 0, 0, 0, 1);
+
+
+			//BOTTOM
+			tessellator.addVertexWithUV(1, 0, 0, 1, 1);
+			tessellator.addVertexWithUV(1, 0, 1, 1, 0);
+			tessellator.addVertexWithUV(0, 0, 1, 0, 0);
+			tessellator.addVertexWithUV(0, 0, 0, 0, 1);
+
+			//TOP
+			tessellator.addVertexWithUV(0, 1, 0, 0, 1);
+			tessellator.addVertexWithUV(0, 1, 1, 0, 0);
+			tessellator.addVertexWithUV(1, 1, 1, 1, 0);
+			tessellator.addVertexWithUV(1, 1, 0, 1, 1);
+
+			tessellator.draw();
+			GL11.glPopMatrix();
+			RenderHelper.enableStandardItemLighting();
+			return;
+		}
 		if (!keb.isMaster)
 			return;
 		bindTexture(side[0]);
