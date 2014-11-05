@@ -24,6 +24,11 @@ public class MultiBlockKEBT2 extends MulitBlockBase {
 	}
 
 	@Override
+	public int getRenderType() {
+		return -1;
+	}
+
+	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}

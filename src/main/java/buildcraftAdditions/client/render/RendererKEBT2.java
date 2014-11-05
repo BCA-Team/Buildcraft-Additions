@@ -22,21 +22,23 @@ public class RendererKEBT2 extends TileEntitySpecialRenderer {
 	@Override
 	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {
 		TileKEBT2 keb = (TileKEBT2) entity;
+		if (!keb.isMaster)
+			return;
 		bindTexture(texture);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(x, y, z - 1);
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV(0, 0, 0, 0, 0);
-		tessellator.addVertexWithUV(0, 1, 0, 0, 1);
-		tessellator.addVertexWithUV(1, 1, 0, 1, 1);
-		tessellator.addVertexWithUV(1, 0, 0, 1, 0);
+		//NORTH
+		tessellator.addVertexWithUV(0, 0, 0, 1, 1);
+		tessellator.addVertexWithUV(0, 2, 0, 1, 0);
+		tessellator.addVertexWithUV(2, 2, 0, 0, 0);
+		tessellator.addVertexWithUV(2, 0, 0, 0, 1);
 
-		tessellator.addVertexWithUV(0, 0, 0, 0, 0);
-		tessellator.addVertexWithUV(1, 0, 0, 1, 0);
-		tessellator.addVertexWithUV(1, 1, 0, 1, 1);
-		tessellator.addVertexWithUV(0, 1, 0, 0, 1);
+
+
+
 
 		tessellator.draw();
 		GL11.glPopMatrix();
