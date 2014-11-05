@@ -17,27 +17,66 @@ import buildcraftAdditions.tileEntities.TileKEBT2;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class RendererKEBT2 extends TileEntitySpecialRenderer {
-	public ResourceLocation texture = new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockTopAndBottom.png");
+	public ResourceLocation side[] = new ResourceLocation[]{new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides0.png"),
+			new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides0.png"),
+			new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides1.png"),
+			new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides2.png"),
+			new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides3.png"),
+			new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides4.png"),
+			new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides5.png")};
+	public ResourceLocation topAndBottom = new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockTopAndBottom.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {
 		TileKEBT2 keb = (TileKEBT2) entity;
 		if (!keb.isMaster)
 			return;
-		bindTexture(texture);
+		bindTexture(side[0]);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z - 1);
+		GL11.glTranslated(x, y, z);
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
+
 		//NORTH
-		tessellator.addVertexWithUV(0, 0, 0, 1, 1);
-		tessellator.addVertexWithUV(0, 2, 0, 1, 0);
-		tessellator.addVertexWithUV(2, 2, 0, 0, 0);
-		tessellator.addVertexWithUV(2, 0, 0, 0, 1);
+		tessellator.addVertexWithUV(0, 0, -1, 1, 1);
+		tessellator.addVertexWithUV(0, 2, -1, 1, 0);
+		tessellator.addVertexWithUV(2, 2, -1, 0, 0);
+		tessellator.addVertexWithUV(2, 0, -1, 0, 1);
 
+		//EAST
+		tessellator.addVertexWithUV(2, 0, -1, 0, 1);
+		tessellator.addVertexWithUV(2, 2, -1, 0, 0);
+		tessellator.addVertexWithUV(2, 2, 1, 1, 0);
+		tessellator.addVertexWithUV(2, 0, 1, 1, 1);
 
+		//SOUTH
+		tessellator.addVertexWithUV(2, 0, 1, 0, 1);
+		tessellator.addVertexWithUV(2, 2, 1, 0, 0);
+		tessellator.addVertexWithUV(0, 2, 1, 1, 0);
+		tessellator.addVertexWithUV(0, 0, 1, 1, 1);
 
+		//WEST
+		tessellator.addVertexWithUV(0, 0, 1, 1, 1);
+		tessellator.addVertexWithUV(0, 2, 1, 1, 0);
+		tessellator.addVertexWithUV(0, 2, -1, 0, 0);
+		tessellator.addVertexWithUV(0, 0, -1, 0, 1);
+		tessellator.draw();
+
+		bindTexture(topAndBottom);
+		tessellator.startDrawingQuads();
+
+		//BOTTOM
+		tessellator.addVertexWithUV(2, 0, -1, 1, 1);
+		tessellator.addVertexWithUV(2, 0, 1, 1, 0);
+		tessellator.addVertexWithUV(0, 0, 1, 0, 0);
+		tessellator.addVertexWithUV(0, 0, -1, 0, 1);
+
+		//TOP
+		tessellator.addVertexWithUV(0, 2, -1, 0, 1);
+		tessellator.addVertexWithUV(0, 2, 1, 0, 0);
+		tessellator.addVertexWithUV(2, 2, 1, 1, 0);
+		tessellator.addVertexWithUV(2, 2, -1, 1, 1);
 
 
 		tessellator.draw();
