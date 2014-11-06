@@ -17,7 +17,7 @@ import buildcraftAdditions.tileEntities.TileKEBT2;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class RendererKEBT2 extends TileEntitySpecialRenderer {
-	public ResourceLocation side[] = new ResourceLocation[]{new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides0.png"),
+	public ResourceLocation side[] = new ResourceLocation[]{
 			new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides0.png"),
 			new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides1.png"),
 			new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides2.png"),
@@ -82,7 +82,7 @@ public class RendererKEBT2 extends TileEntitySpecialRenderer {
 		}
 		if (!keb.isMaster)
 			return;
-		bindTexture(side[0]);
+		bindTexture(side[keb.energyState]);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);

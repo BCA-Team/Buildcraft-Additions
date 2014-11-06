@@ -19,7 +19,7 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMessage> {
-	public int x, y, z, energy, configuration[], masterX, masterY, masterZ;
+	public int x, y, z, energy, configuration[], masterX, masterY, masterZ, energyState;
 	public boolean partOfMultiBlock, isMaster;
 
 	public MessageKEBT2() {}
@@ -36,6 +36,7 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 		masterX = keb.masterX;
 		masterY = keb.masterY;
 		masterZ = keb.masterZ;
+		energyState = keb.energyState;
 	}
 
 
@@ -53,6 +54,7 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 		masterX = buf.readInt();
 		masterY = buf.readInt();
 		masterZ = buf.readInt();
+		energyState = buf.readInt();
 	}
 
 	@Override
@@ -68,6 +70,7 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 		buf.writeInt(masterX);
 		buf.writeInt(masterY);
 		buf.writeInt(masterZ);
+		buf.writeInt(energyState);
 
 	}
 
@@ -83,6 +86,7 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 			keb.masterX = message.masterX;
 			keb.masterY = message.masterY;
 			keb.masterZ = message.masterZ;
+			keb.energyState = message.energyState;
 		}
 		return null;
 	}

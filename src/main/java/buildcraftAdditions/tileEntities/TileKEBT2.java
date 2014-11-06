@@ -35,7 +35,8 @@ import buildcraftAdditions.variables.Variables;
 public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMaster, ISlave {
 	private MultiBlockPatern patern = new MultiBlockPaternKEBT2();
 	public boolean isMaster, partOfMultiBlock;
-	public int masterX, masterY, masterZ;
+	public boolean renderUpdate = true;
+	public int masterX, masterY, masterZ, energyState, lastEnergyState;
 	public TileKEBT2 master;
 
 	public TileKEBT2() {
@@ -44,10 +45,17 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMaster, I
 
 	@Override
 	public void updateEntity() {
-		if (!isMaster) {
+		if (renderUpdate) {
+			sync();
+		}
+		if (!isMaster || worldObj.isRemote) {
 			return;
 		}
 		super.updateEntity();
+		energyState = (energy * 6) / maxEnergy;
+		if (energyState != lastEnergyState)
+			renderUpdate = true;
+		lastEnergyState = energyState;
 	}
 
 	@Override
@@ -220,6 +228,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMaster, I
 		this.masterX = masterX;
 		this.masterY = masterY;
 		this.masterZ = masterZ;
+		renderUpdate = true;
 	}
 
 	@Override
@@ -235,6 +244,12 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMaster, I
 	public void invalidateBlock() {
 		partOfMultiBlock = false;
 		isMaster = false;
+		energy = 0;
+		for (int teller = 0; teller < 6; teller++) {
+			configuration[teller] = 0;
+		}
+		energyState = 0;
+		lastEnergyState = 0;
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, ItemsAndBlocks.kebT2, 80);
 		sync();
