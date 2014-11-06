@@ -42,7 +42,7 @@ import buildcraftAdditions.variables.TrigersAndActions;
  */
 
 
-@Mod(modid = "bcadditions", name = "Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "after:BuildCraft|Energy;required-after:eureka", acceptedMinecraftVersions = "1.7.10")
+@Mod(modid = "bcadditions", name = "Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "after:BuildCraft|Energy;required-after:eureka;required-after:Forge@[10.13.2.1230,)", acceptedMinecraftVersions = "1.7.10")
 public class BuildcraftAdditions {
 
 
