@@ -85,17 +85,18 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMaster, I
 	}
 
 	@Override
-	public void changeSideMode(int side, EntityPlayer player) {
+	public void changeSideMode(int side) {
 		if (!partOfMultiBlock)
 			return;
-		if (isMaster)
-			//handeling it is for later
+		if (isMaster) {
+			super.changeSideMode(side);
 			return;
+		}
 		if (master == null)
 			findMaster();
 		if (master == null)
 			return;
-		master.changeSideMode(side, player);
+		master.changeSideMode(side);
 	}
 
 	@Override

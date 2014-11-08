@@ -69,12 +69,12 @@ public class GuiKEB extends GuiContainer {
 	@Override
 	public void initGui() {
 		super.initGui();
-		north = new GuiButton(1, guiLeft + 38, guiTop + 92, 50, 20, "Input");
-		east = new GuiButton(1, guiLeft + 38, guiTop + 115, 50, 20, "Input");
-		south = new GuiButton(1, guiLeft + 38, guiTop + 138, 50, 20, "Input");
-		west = new GuiButton(1, guiLeft + 120, guiTop + 92, 50, 20, "Input");
-		up = new GuiButton(1, guiLeft + 120, guiTop + 115, 50, 20, "Input");
-		down = new GuiButton(1, guiLeft + 120, guiTop + 138, 50, 20, "Input");
+		north = new GuiButton(1, guiLeft + 38, guiTop + 92, 50, 20, getStatus(2));
+		east = new GuiButton(1, guiLeft + 38, guiTop + 115, 50, 20, getStatus(5));
+		south = new GuiButton(1, guiLeft + 38, guiTop + 138, 50, 20, getStatus(3));
+		west = new GuiButton(1, guiLeft + 120, guiTop + 92, 50, 20, getStatus(4));
+		up = new GuiButton(1, guiLeft + 120, guiTop + 115, 50, 20, getStatus(1));
+		down = new GuiButton(1, guiLeft + 120, guiTop + 138, 50, 20, getStatus(0));
 		buttonList.add(north);
 		buttonList.add(east);
 		buttonList.add(south);
@@ -94,6 +94,24 @@ public class GuiKEB extends GuiContainer {
 		fontRendererObj.drawString("West: ", 93, 97, 0x404040);
 		fontRendererObj.drawString("Up: ", 93, 120, 0x404040);
 		fontRendererObj.drawString("Down: ", 93, 143, 0x404040);
+	}
+
+	@Override
+	protected void actionPerformed(GuiButton button) {
+		if (button == north) {
+			keb.changeSideMode(2);
+			north.displayString = getStatus(2);
+			keb.sendConfigurationToSever();
+		}
+	}
+
+	private String getStatus(int direction) {
+		int status = keb.configuration[direction];
+		if (status == 0)
+			return "Input";
+		else if (status == 1)
+			return "Output";
+		return "Dissabled";
 	}
 
 }
