@@ -3,10 +3,9 @@ package buildcraftAdditions.client.gui;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
-
-import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.Utils;
@@ -20,6 +19,7 @@ import buildcraftAdditions.utils.Utils;
 public class GuiKEB extends GuiContainer {
 	public ResourceLocation texture = new ResourceLocation("bcadditions","textures/gui/KineticEnergyBuffer.png");
 	private TileKineticEnergyBufferBase keb;
+	private GuiButton north, east, south, west, up, down;
 
 
 	public GuiKEB(TileKineticEnergyBufferBase keb) {
@@ -62,13 +62,38 @@ public class GuiKEB extends GuiContainer {
 		if (percent <= 0)
 			return;
 		drawTexturedModalRect(guiLeft + 65, guiTop + 17, 191, 42, percent, 11);
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void initGui() {
+		super.initGui();
+		north = new GuiButton(1, guiLeft + 38, guiTop + 92, 50, 20, "Input");
+		east = new GuiButton(1, guiLeft + 38, guiTop + 115, 50, 20, "Input");
+		south = new GuiButton(1, guiLeft + 38, guiTop + 138, 50, 20, "Input");
+		west = new GuiButton(1, guiLeft + 120, guiTop + 92, 50, 20, "Input");
+		up = new GuiButton(1, guiLeft + 120, guiTop + 115, 50, 20, "Input");
+		down = new GuiButton(1, guiLeft + 120, guiTop + 138, 50, 20, "Input");
+		buttonList.add(north);
+		buttonList.add(east);
+		buttonList.add(south);
+		buttonList.add(west);
+		buttonList.add(up);
+		buttonList.add(down);
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		fontRendererObj.drawString(Utils.localize("tile.blockKEBT" + keb.tier + ".name"), 5, 6, 0x404040);
-		fontRendererObj.drawString(Integer.toString(keb.getEnergyStored(ForgeDirection.UNKNOWN)), 5, 60, 0x404040);
+		//fontRendererObj.drawString(Integer.toString(keb.getEnergyStored(ForgeDirection.UNKNOWN)), 5, 60, 0x404040);
+		fontRendererObj.drawString("North: ", 5, 97, 0x404040);
+		fontRendererObj.drawString("East: ", 5, 120, 0x404040);
+		fontRendererObj.drawString("South: ", 5, 143, 0x404040);
+		fontRendererObj.drawString("West: ", 93, 97, 0x404040);
+		fontRendererObj.drawString("Up: ", 93, 120, 0x404040);
+		fontRendererObj.drawString("Down: ", 93, 143, 0x404040);
 	}
 
 }
