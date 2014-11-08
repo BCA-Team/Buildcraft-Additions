@@ -160,11 +160,13 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMaster, I
 
 	@Override
 	public void outputEnergy() {
+		if (energy == 0)
+			return;
 		ArrayList<Location> list = patern.getLocations(worldObj, xCoord, yCoord, zCoord);
 		for (Location from: list) {
 			for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS) {
-				if (energy == 0)
-					return;
+				if (configuration[direction.ordinal()] != 1)
+					continue;
 				Location location = from.copy();
 				location.move(direction);
 				IEnergyHandler target = (IEnergyHandler) location.getTileEntity();
