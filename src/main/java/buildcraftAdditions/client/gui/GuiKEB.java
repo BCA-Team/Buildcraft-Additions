@@ -87,7 +87,6 @@ public class GuiKEB extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		fontRendererObj.drawString(Utils.localize("tile.blockKEBT" + keb.tier + ".name"), 5, 6, 0x404040);
-		//fontRendererObj.drawString(Integer.toString(keb.getEnergyStored(ForgeDirection.UNKNOWN)), 5, 60, 0x404040);
 		fontRendererObj.drawString("North: ", 5, 97, 0x404040);
 		fontRendererObj.drawString("East: ", 5, 120, 0x404040);
 		fontRendererObj.drawString("South: ", 5, 143, 0x404040);
@@ -101,6 +100,26 @@ public class GuiKEB extends GuiContainer {
 		if (button == north) {
 			keb.changeSideMode(2);
 			north.displayString = getStatus(2);
+			keb.sendConfigurationToSever();
+		} else if (button == east) {
+			keb.changeSideMode(5);
+			east.displayString = getStatus(5);
+			keb.sendConfigurationToSever();
+		} else if (button == south) {
+			keb.changeSideMode(3);
+			south.displayString = getStatus(3);
+			keb.sendConfigurationToSever();
+		} else if (button == west) {
+			keb.changeSideMode(4);
+			west.displayString = getStatus(4);
+			keb.sendConfigurationToSever();
+		} else if (button == up) {
+			keb.changeSideMode(1);
+			up.displayString = getStatus(1);
+			keb.sendConfigurationToSever();
+		} else if (button == down) {
+			keb.changeSideMode(0);
+			down.displayString = getStatus(0);
 			keb.sendConfigurationToSever();
 		}
 	}
