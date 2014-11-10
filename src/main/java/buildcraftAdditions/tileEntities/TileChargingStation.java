@@ -13,7 +13,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import buildcraftAdditions.api.IKineticCapsule;
+import cofh.api.energy.IEnergyContainerItem;
+
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 
@@ -27,19 +28,16 @@ public class TileChargingStation extends TileMachineBase implements IInventory {
 
 	@Override
 	public void updateEntity() {
-		int charge = 100;
+		int charge = 6000;
 		ItemStack stack = inventory.getStackInSlot(0);
 		if (stack == null)
 			return;
-		if (!(stack.getItem() instanceof IKineticCapsule))
+		if (!(stack.getItem() instanceof IEnergyContainerItem))
 			return;
-		IKineticCapsule battery = (IKineticCapsule) stack.getItem();
-		if (battery.getEnergy(stack) + charge > battery.getCapacity())
-			charge = battery.getCapacity() - (int) battery.getEnergy(stack);
+		IEnergyContainerItem battery = (IEnergyContainerItem) stack.getItem();
 		if (energy < charge)
-			charge = (int) energy;
-		battery.increaseEnergy(stack, charge);
-		energy -= charge;
+			charge = energy;
+		energy -= battery.receiveEnergy(stack, charge, false);
 	}
 
 	@Override
@@ -111,33 +109,15 @@ public class TileChargingStation extends TileMachineBase implements IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return stack.getItem() instanceof IKineticCapsule;
+		return stack.getItem() instanceof IEnergyContainerItem;
 	}
 
 	public double getProgress() {
 		ItemStack stack = inventory.getStackInSlot(0);
 		if (stack != null)
-			if (stack.getItem() instanceof IKineticCapsule) {
-				IKineticCapsule battery = (IKineticCapsule) stack.getItem();
-				return battery.getEnergy(stack) / battery.getCapacity();
-			}
-		return 0;
-	}
-
-	public int getToolEnergy() {
-		ItemStack stack = inventory.getStackInSlot(0);
-		if (stack != null)
-			if (stack.getItem() instanceof IKineticCapsule)
-				return (int) stack.stackTagCompound.getDouble("energy");
-		return 0;
-	}
-
-	public int getToolMaxEnergy() {
-		ItemStack stack = inventory.getStackInSlot(0);
-		if (stack != null)
-			if (stack.getItem() instanceof IKineticCapsule) {
-				IKineticCapsule battery = (IKineticCapsule) stack.getItem();
-				return battery.getCapacity();
+			if (stack.getItem() instanceof IEnergyContainerItem) {
+				IEnergyContainerItem battery = (IEnergyContainerItem) stack.getItem();
+				return battery.getEnergyStored(stack) / battery.getMaxEnergyStored(stack);
 			}
 		return 0;
 	}

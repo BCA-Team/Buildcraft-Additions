@@ -27,11 +27,9 @@ import buildcraftAdditions.blocks.BlockLavaCoil;
 import buildcraftAdditions.blocks.BlockMechanicalDuster;
 import buildcraftAdditions.blocks.BlockSemiAutomaticDuster;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT2;
+import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
-import buildcraftAdditions.items.ItemPowerCapsuleTier1;
-import buildcraftAdditions.items.ItemPowerCapsuleTier2;
-import buildcraftAdditions.items.ItemPowerCapsuleTier3;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ToolCoreRecipe;
 import buildcraftAdditions.items.Tools.ToolUpgrade;
@@ -113,13 +111,16 @@ public final class ItemsAndBlocks {
 		diamondCanister = new ItemCanister("diamondCanister", 16000);
 		GameRegistry.registerItem(diamondCanister, "diamondCanister");
 
-		powerCapsuleTier1 = new ItemPowerCapsuleTier1();
-		GameRegistry.registerItem(powerCapsuleTier1, "powerCapsuleTier1");
+		powerCapsuleTier1 = new BatteryBase(60000, 1000, 1000, 1, "T1_battery");
+		powerCapsuleTier1.setUnlocalizedName("powerCapsuleTier1");
+		GameRegistry.registerItem(powerCapsuleTier1, "PowerCapsuleTier1");
 
-		powerCapsuleTier2 = new ItemPowerCapsuleTier2();
+		powerCapsuleTier2 = new BatteryBase(120000, 2000, 2000, 2, "T2_battery");
+		powerCapsuleTier2.setUnlocalizedName("PowerCapsuleTier2");
 		GameRegistry.registerItem(powerCapsuleTier2, "powerCapsuleTier2");
 
-		powerCapsuleTier3 = new ItemPowerCapsuleTier3();
+		powerCapsuleTier3 = new BatteryBase(240000, 4000, 4000, 3, "T3_battery");
+		powerCapsuleTier3.setUnlocalizedName("PowerCapsuleTier3");
 		GameRegistry.registerItem(powerCapsuleTier3, "powerCapsuleTier3");
 
 		ironStick = new ItemBase("stickIron");

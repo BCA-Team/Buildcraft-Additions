@@ -10,58 +10,40 @@ package buildcraftAdditions.items;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IIcon;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import cofh.api.energy.IEnergyContainerItem;
+
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.api.IKineticCapsule;
 
-public abstract class BatteryBase extends Item implements IKineticCapsule {
+public class BatteryBase extends Item implements IEnergyContainerItem {
+	protected int maxEnergy, maxExtract, maxInput, tier;
+	private String texture;
+	public IIcon icon;
 
-	public BatteryBase() {
+	public BatteryBase(int maxEnergy, int maxExtract, int maxInput, int tier, String texture) {
 		this.maxStackSize = 1;
 		setCreativeTab(BuildcraftAdditions.bcadditions);
-		this.setUnlocalizedName("batteryBase");
+		this.maxEnergy = maxEnergy;
+		this.maxExtract = maxExtract;
+		this.maxInput = maxInput;
+		this.tier = tier;
+		this.texture = texture;
 	}
 
-	@Override
-	public void decreaseEnergy(ItemStack stack, double energy) {
-		double energyStored = getEnergy(stack);
-		energyStored -= energy;
-		if (energyStored < 0)
-			energyStored = 0;
-		stack.stackTagCompound.setDouble("energy", Math.floor(energyStored));
-	}
-
-	@Override
-	public void increaseEnergy(ItemStack stack, double energy) {
-		double energyStored = getEnergy(stack);
-		energyStored += energy;
-		stack.stackTagCompound.setDouble("energy", Math.round(energyStored));
-	}
-
-	@Override
-	public double getEnergy(ItemStack stack) {
-		if (stack.stackTagCompound == null) {
-			stack.stackTagCompound = new NBTTagCompound();
-			stack.stackTagCompound.setDouble("energy", 0);
-		}
-		return stack.stackTagCompound.getDouble("energy");
-	}
-
-	@Override
-	public void setEnergy(ItemStack stack, double energy) {
+	public void setEnergy(ItemStack stack, int energy) {
 		if (stack.stackTagCompound == null)
 			stack.stackTagCompound = new NBTTagCompound();
-		stack.stackTagCompound.setDouble("energy", energy);
+		stack.stackTagCompound.setInteger("energy", energy);
 	}
-
-	public abstract String getType();
 
 	@Override
 	public boolean showDurabilityBar(ItemStack stack) {
@@ -70,13 +52,71 @@ public abstract class BatteryBase extends Item implements IKineticCapsule {
 
 	@Override
 	public double getDurabilityForDisplay(ItemStack stack) {
-		return (getCapacity() - getEnergy(stack)) / getCapacity();
+		return (((double)maxEnergy - getEnergyStored(stack))) / maxEnergy;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
+		list.add(Integer.toString(getEnergyStored(stack)) + "/" + Integer.toString(maxEnergy) + " RF");
+	}
+
+	@Override
+	public int receiveEnergy(ItemStack stack, int maxReceive, boolean simulate) {
+		int energy = getEnergyStored(stack);
+		int recieved = maxReceive;
+		if (recieved > maxEnergy - energy)
+			recieved = maxEnergy - energy;
+		if (recieved > maxReceive)
+			recieved = maxReceive;
+		if (!simulate)
+			energy += recieved;
+		setEnergy(stack, energy);
+		return recieved;
+	}
+
+	@Override
+	public int extractEnergy(ItemStack stack, int maxExtract, boolean simulate) {
+		int energy = getEnergyStored(stack);
+		int extracted = maxExtract;
+		if (extracted > energy)
+			extracted = energy;
+		if (extracted > maxExtract)
+			extracted = maxExtract;
+		if (!simulate)
+			energy -= extracted;
+		setEnergy(stack, energy);
+		return extracted;
+	}
+
+	@Override
+	public int getEnergyStored(ItemStack stack) {
+		if (stack.stackTagCompound == null) {
+			stack.stackTagCompound = new NBTTagCompound();
+			stack.stackTagCompound.setInteger("energy", 0);
+		}
+		return stack.stackTagCompound.getInteger("energy");
+	}
+
+	@Override
+	public int getMaxEnergyStored(ItemStack stack) {
+		return maxEnergy;
+	}
+
+	public String getType() {
+		return "(Tier " + tier + "): ";
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
-		list.add(Integer.toString((int) getEnergy(stack)) + "/" + Integer.toString(getCapacity()) + " MJ");
+	public void registerIcons(IIconRegister par1IconRegister) {
+		icon = par1IconRegister.registerIcon("bcadditions:" + texture);
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIconFromDamage(int damage) {
+		return icon;
+	}
 }
