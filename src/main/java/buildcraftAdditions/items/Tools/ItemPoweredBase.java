@@ -8,7 +8,6 @@ package buildcraftAdditions.items.Tools;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,12 +18,11 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import cofh.api.energy.IEnergyContainerItem;
 
-import buildcraftAdditions.api.IKineticCapsule;
 import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.core.InventoryTool;
+import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.utils.Utils;
 
 public abstract class ItemPoweredBase extends ItemSword {
@@ -32,7 +30,7 @@ public abstract class ItemPoweredBase extends ItemSword {
 	public int x, y, z;
 	public World world;
 	public int storageB1, storageB2, storageB3;
-	public double energyB1, energyB2, energyB3;
+	public int energyB1, energyB2, energyB3;
 	EntityPlayer player;
 
 	public ItemPoweredBase() {
@@ -128,7 +126,7 @@ public abstract class ItemPoweredBase extends ItemSword {
 	public void readBateries(ItemStack stack, EntityPlayer player) {
 		IInventory inventory = getInventory(player, stack);
 		inventory.openInventory();
-		IKineticCapsule battery = null;
+		IEnergyContainerItem battery = null;
 		ItemStack batteryStack = inventory.getStackInSlot(0);
 		storageB1 = 0;
 		storageB2 = 0;
@@ -137,21 +135,21 @@ public abstract class ItemPoweredBase extends ItemSword {
 		energyB2 = 0;
 		energyB3 = 0;
 		if (batteryStack != null) {
-			battery = (IKineticCapsule) batteryStack.getItem();
-			storageB1 = battery.getCapacity();
-			energyB1 = battery.getEnergy(batteryStack);
+			battery = (IEnergyContainerItem) batteryStack.getItem();
+			storageB1 = battery.getMaxEnergyStored(batteryStack);
+			energyB1 = battery.getEnergyStored(batteryStack);
 		}
 		batteryStack = inventory.getStackInSlot(1);
 		if (batteryStack != null) {
-			battery = (IKineticCapsule) batteryStack.getItem();
-			storageB2 += battery.getCapacity();
-			energyB2 = battery.getEnergy(batteryStack);
+			battery = (IEnergyContainerItem) batteryStack.getItem();
+			storageB2 += battery.getMaxEnergyStored(batteryStack);
+			energyB2 = battery.getEnergyStored(batteryStack);
 		}
 		batteryStack = inventory.getStackInSlot(2);
 		if (batteryStack != null) {
-			battery = (IKineticCapsule) batteryStack.getItem();
-			storageB3 = battery.getCapacity();
-			energyB3 = battery.getEnergy(batteryStack);
+			battery = (IEnergyContainerItem) batteryStack.getItem();
+			storageB3 = battery.getMaxEnergyStored(batteryStack);
+			energyB3 = battery.getEnergyStored(batteryStack);
 		}
 		stack.getItem().setMaxDamage(storageB1 + storageB2 + storageB3);
 		stack.getItem().setDamage(stack, (int) (storageB1 + storageB2 + storageB3 - energyB1 - energyB2 - energyB3));
@@ -160,20 +158,20 @@ public abstract class ItemPoweredBase extends ItemSword {
 	public void writeBateries(ItemStack stack, EntityPlayer player) {
 		IInventory inventory = getInventory(player, stack);
 		inventory.openInventory();
-		IKineticCapsule battery = null;
+		BatteryBase battery = null;
 		ItemStack batteryStack = inventory.getStackInSlot(0);
 		if (batteryStack != null) {
-			battery = (IKineticCapsule) batteryStack.getItem();
+			battery = (BatteryBase) batteryStack.getItem();
 			battery.setEnergy(batteryStack, energyB1);
 		}
 		batteryStack = inventory.getStackInSlot(1);
 		if (batteryStack != null) {
-			battery = (IKineticCapsule) batteryStack.getItem();
+			battery = (BatteryBase) batteryStack.getItem();
 			battery.setEnergy(batteryStack, energyB2);
 		}
 		batteryStack = inventory.getStackInSlot(2);
 		if (batteryStack != null) {
-			battery = (IKineticCapsule) batteryStack.getItem();
+			battery = (BatteryBase) batteryStack.getItem();
 			battery.setEnergy(batteryStack, energyB3);
 		}
 	}
