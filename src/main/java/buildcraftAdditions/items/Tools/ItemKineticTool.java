@@ -201,6 +201,29 @@ public class ItemKineticTool extends ItemPoweredBase {
 	}
 
 	@Override
+	public boolean canHarvestBlock(Block block, ItemStack stack) {
+		String harvestTool = "nothing";
+		if (block.getHarvestTool(0) != null)
+			harvestTool = block.getHarvestTool(0);
+		if (drill && (harvestTool.equals("pickaxe") || block.getMaterial() == Material.iron || block.getMaterial() == Material.rock)) {
+			stack.getItem().setHarvestLevel("pickaxe", 3);
+			setLastUsedMode(stack, "pickaxe");
+			return true;
+		}
+		if (chainsaw && (harvestTool.equals("axe") || block.getMaterial() == Material.leaves || block.getMaterial() == Material.wood || block.getMaterial() == Material.vine)) {
+			stack.getItem().setHarvestLevel("axe", 3);
+			setLastUsedMode(stack, "axe");
+			return true;
+		}
+		if (digger && (harvestTool.equals("shovel") || block.getMaterial() == Material.clay || block.getMaterial() == Material.grass || block.getMaterial() == Material.ground || block.getMaterial() == Material.snow || block.getMaterial() == Material.sand || block.getMaterial() == Material.craftedSnow)) {
+			stack.getItem().setHarvestLevel("shovel", 3);
+			setLastUsedMode(stack, "shovel");
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public double getDurabilityForDisplay(ItemStack stack) {
 		readBateries(stack, player);
 		return (getCapacity() - getEnergy()) / getCapacity();
