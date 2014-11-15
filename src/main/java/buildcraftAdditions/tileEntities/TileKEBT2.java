@@ -15,16 +15,15 @@ import cofh.api.energy.IEnergyHandler;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.blocks.multiBlocks.MulitBlockBase;
 import buildcraftAdditions.core.Logger;
-import buildcraftAdditions.multiBlocks.IMaster;
-import buildcraftAdditions.multiBlocks.ISlave;
+import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
 import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT2;
 import buildcraftAdditions.networking.MessageKEBT2;
 import buildcraftAdditions.networking.PacketHandeler;
-import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
-import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
+import buildcraftAdditions.utils.Location;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -32,7 +31,7 @@ import buildcraftAdditions.reference.Variables;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMaster, ISlave {
+public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBlockTile {
 	private MultiBlockPatern patern = new MultiBlockPaternKEBT2();
 	public boolean isMaster, partOfMultiBlock;
 	public boolean renderUpdate = true;
@@ -204,7 +203,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMaster, I
 		if (isMaster)
 			master = (TileKEBT2) worldObj.getTileEntity(xCoord, yCoord, zCoord);
 		TileEntity tileEntity = worldObj.getTileEntity(masterX, masterY, masterZ);
-		if (tileEntity != null && tileEntity instanceof IMaster)
+		if (tileEntity != null && tileEntity instanceof IMultiBlockTile)
 			master = (TileKEBT2) tileEntity;
 		else {
 			Logger.info("UNABLE TO FIND MASTER, SELF DESTRUCT INITIATED");

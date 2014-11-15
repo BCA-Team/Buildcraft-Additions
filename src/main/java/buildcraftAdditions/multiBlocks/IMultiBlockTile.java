@@ -8,15 +8,17 @@ import net.minecraft.entity.player.EntityPlayer;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public interface ISlave {
+public interface IMultiBlockTile {
 
-	public void formMultiblock(int masterX, int masterY, int masterZ);
-
-	public void invalidateMultiblock();
+	public void makeMaster();
 
 	public void sync();
 
+	public void invalidateMultiblock();
+
 	public void onBlockActivated(EntityPlayer player);
+
+	public void formMultiblock(int masterX, int masterY, int masterZ);
 
 	public void invalidateBlock();
 }
