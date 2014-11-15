@@ -126,7 +126,7 @@ public abstract class ItemPoweredBase extends ItemSword {
 	public void readBateries(ItemStack stack, EntityPlayer player) {
 		IInventory inventory = getInventory(player, stack);
 		inventory.openInventory();
-		IEnergyContainerItem battery = null;
+		IEnergyContainerItem battery;
 		ItemStack batteryStack = inventory.getStackInSlot(0);
 		storageB1 = 0;
 		storageB2 = 0;
@@ -134,25 +134,25 @@ public abstract class ItemPoweredBase extends ItemSword {
 		energyB1 = 0;
 		energyB2 = 0;
 		energyB3 = 0;
-		if (batteryStack != null) {
+		if (batteryStack != null && batteryStack.getItem() instanceof IEnergyContainerItem) {
 			battery = (IEnergyContainerItem) batteryStack.getItem();
 			storageB1 = battery.getMaxEnergyStored(batteryStack);
 			energyB1 = battery.getEnergyStored(batteryStack);
 		}
 		batteryStack = inventory.getStackInSlot(1);
-		if (batteryStack != null) {
+		if (batteryStack != null && batteryStack.getItem() instanceof IEnergyContainerItem) {
 			battery = (IEnergyContainerItem) batteryStack.getItem();
 			storageB2 += battery.getMaxEnergyStored(batteryStack);
 			energyB2 = battery.getEnergyStored(batteryStack);
 		}
 		batteryStack = inventory.getStackInSlot(2);
-		if (batteryStack != null) {
+		if (batteryStack != null && batteryStack.getItem() instanceof IEnergyContainerItem) {
 			battery = (IEnergyContainerItem) batteryStack.getItem();
 			storageB3 = battery.getMaxEnergyStored(batteryStack);
 			energyB3 = battery.getEnergyStored(batteryStack);
 		}
 		stack.getItem().setMaxDamage(storageB1 + storageB2 + storageB3);
-		stack.getItem().setDamage(stack, (int) (storageB1 + storageB2 + storageB3 - energyB1 - energyB2 - energyB3));
+		stack.getItem().setDamage(stack, storageB1 + storageB2 + storageB3 - energyB1 - energyB2 - energyB3);
 	}
 
 	public void writeBateries(ItemStack stack, EntityPlayer player) {
