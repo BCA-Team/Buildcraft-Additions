@@ -8,7 +8,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.blocks.multiBlocks.MulitBlockBase;
-import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.utils.Location;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -36,7 +35,6 @@ public class MultiBlockPatern {
 			if (!(block.identifier == identifier) || location.getMeatadata() != 0 )
 				return;
 		}
-		Logger.info("VALID MULTIBLOCK DETECTED");
 		location = new Location(world, x, y, z);
 		for (ForgeDirection direction: directions) {
 			location.move(direction);
