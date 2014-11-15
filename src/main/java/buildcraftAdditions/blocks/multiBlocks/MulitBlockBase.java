@@ -9,8 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import buildcraftAdditions.multiBlocks.IMaster;
-import buildcraftAdditions.multiBlocks.ISlave;
+import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -60,12 +59,8 @@ public class MulitBlockBase extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		TileEntity entity = world.getTileEntity(x, y, z);
-		if (entity != null && entity instanceof ISlave) {
-			((ISlave) entity).onBlockActivated(player);
-			return true;
-		}
-		if (entity != null && entity instanceof IMaster) {
-			((IMaster) entity).onBlockActivated(player);
+		if (entity != null && entity instanceof IMultiBlockTile) {
+			((IMultiBlockTile) entity).onBlockActivated(player);
 			return true;
 		}
 		return false;
@@ -74,10 +69,8 @@ public class MulitBlockBase extends BlockContainer {
 	@Override
 	public void onBlockPreDestroy(World world, int x, int y, int z, int meta) {
 		TileEntity entity = world.getTileEntity(x, y, z);
-		if (entity != null && entity instanceof ISlave)
-			((ISlave) entity).invalidateMultiblock();
-		else  if (entity instanceof IMaster)
-			((IMaster) entity).invalidateMultiblock();
+		if (entity != null && entity instanceof IMultiBlockTile)
+			((IMultiBlockTile) entity).invalidateMultiblock();
 	}
 
 	@Override

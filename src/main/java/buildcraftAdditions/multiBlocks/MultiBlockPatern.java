@@ -39,7 +39,7 @@ public class MultiBlockPatern {
 		for (ForgeDirection direction: directions) {
 			location.move(direction);
 			location.setMetadata(1);
-			ISlave slave = (ISlave) location.getTileEntity();
+			IMultiBlockTile slave = (IMultiBlockTile) location.getTileEntity();
 			slave.formMultiblock(x, y, z);
 		}
 		addMaster(world, x, y, z);
@@ -49,8 +49,8 @@ public class MultiBlockPatern {
 		Location location = new Location(world, x, y, z);
 		for (ForgeDirection direction: directions) {
 			location.move(direction);
-			if (location.getTileEntity() instanceof ISlave)
-				((ISlave) location.getTileEntity()).invalidateBlock();
+			if (location.getTileEntity() instanceof IMultiBlockTile)
+				((IMultiBlockTile) location.getTileEntity()).invalidateBlock();
 		}
 	}
 
@@ -68,8 +68,8 @@ public class MultiBlockPatern {
 
 	public void addMaster (World world, int x, int y, int z) {
 		TileEntity entity = world.getTileEntity(x, y, z);
-		if (entity != null && entity instanceof IMaster) {
-			IMaster master = (IMaster) entity;
+		if (entity != null && entity instanceof IMultiBlockTile) {
+			IMultiBlockTile master = (IMultiBlockTile) entity;
 			master.makeMaster();
 			master.sync();
 		}
