@@ -29,6 +29,7 @@ import buildcraftAdditions.blocks.BlockSemiAutomaticDuster;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT2;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemBase;
+import buildcraftAdditions.items.ItemBlockKEBT2;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ToolCoreRecipe;
@@ -40,7 +41,6 @@ import buildcraftAdditions.items.Tools.UpgradeRecipeExcavationAttachment;
 import buildcraftAdditions.items.Tools.UpgradeRecipeGoldStick;
 import buildcraftAdditions.items.Tools.UpgradeRecipeSawBlade;
 import buildcraftAdditions.items.Tools.UpgradeRecipeTiller;
-import buildcraftAdditions.items.itemBlocks.ItemBlockBCA;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileChargingStation;
@@ -92,7 +92,6 @@ public final class ItemsAndBlocks {
 	public static Item toolUpgradeDigger;
 	public static Item toolUpgradeDrill;
 	public static Item toolUpgradeChainsaw;
-	public static Item itemDust;
 	public static Item itemGrindingWheel;
 	public static Item itemIronWireUnhardened;
 	public static Item itemIronWire;
@@ -100,7 +99,6 @@ public final class ItemsAndBlocks {
 	public static Item goldWire;
 	public static Item diamondWireUnhardened;
 	public static Item diamondWire;
-	public static Item itemBlockKEBT2;
 	public static ItemKineticTool kineticTool;
 
 	public static void init() {
@@ -228,7 +226,7 @@ public final class ItemsAndBlocks {
 
 		kebT2 = new MultiBlockKEBT2();
 		kebT2.setBlockName("blockKEBT2").setCreativeTab(BuildcraftAdditions.bcadditions);
-		GameRegistry.registerBlock(kebT2, ItemBlockBCA.class, "KEBT2");
+		GameRegistry.registerBlock(kebT2, ItemBlockKEBT2.class, "KEBT2");
 	}
 
 	public static void addRecepies() {

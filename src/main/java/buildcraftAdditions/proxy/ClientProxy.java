@@ -17,12 +17,12 @@ import buildcraftAdditions.client.render.CanisterItemRender;
 import buildcraftAdditions.client.render.RendererDuster;
 import buildcraftAdditions.client.render.RendererDusterKinetic;
 import buildcraftAdditions.client.render.RendererKEBT2;
+import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileKEBT2;
 import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
-import buildcraftAdditions.reference.ItemsAndBlocks;
 
 public class ClientProxy extends CommonProxy {
 

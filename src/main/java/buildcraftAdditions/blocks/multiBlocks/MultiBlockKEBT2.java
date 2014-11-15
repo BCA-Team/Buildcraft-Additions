@@ -1,6 +1,8 @@
 package buildcraftAdditions.blocks.multiBlocks;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT2;
@@ -13,6 +15,17 @@ import buildcraftAdditions.tileEntities.TileKEBT2;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MultiBlockKEBT2 extends MulitBlockBase {
+	public IIcon icon;
+
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+		icon = register.registerIcon("bcadditions:energyBufferMultiblockRaw");
+	}
+
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		return icon;
+	}
 
 	public MultiBlockKEBT2() {
 		super('K', new MultiBlockPaternKEBT2());
