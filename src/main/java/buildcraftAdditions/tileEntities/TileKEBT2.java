@@ -39,7 +39,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public TileKEBT2 master;
 
 	public TileKEBT2() {
-		super(500000, 10000, 10000, 6, 2);
+		super(25000000, 10000, 10000, 6, 2);
 	}
 
 	@Override

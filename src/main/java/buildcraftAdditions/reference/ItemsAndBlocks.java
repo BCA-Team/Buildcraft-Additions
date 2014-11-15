@@ -111,15 +111,15 @@ public final class ItemsAndBlocks {
 		diamondCanister = new ItemCanister("diamondCanister", 16000);
 		GameRegistry.registerItem(diamondCanister, "diamondCanister");
 
-		powerCapsuleTier1 = new BatteryBase(60000, 1000, 1000, 1, "T1_battery");
+		powerCapsuleTier1 = new BatteryBase(100000, 1000, 1000, 1, "T1_battery");
 		powerCapsuleTier1.setUnlocalizedName("powerCapsuleTier1");
 		GameRegistry.registerItem(powerCapsuleTier1, "PowerCapsuleTier1");
 
-		powerCapsuleTier2 = new BatteryBase(120000, 2000, 2000, 2, "T2_battery");
+		powerCapsuleTier2 = new BatteryBase(300000, 2000, 2000, 2, "T2_battery");
 		powerCapsuleTier2.setUnlocalizedName("PowerCapsuleTier2");
 		GameRegistry.registerItem(powerCapsuleTier2, "powerCapsuleTier2");
 
-		powerCapsuleTier3 = new BatteryBase(240000, 4000, 4000, 3, "T3_battery");
+		powerCapsuleTier3 = new BatteryBase(1000000, 4000, 4000, 3, "T3_battery");
 		powerCapsuleTier3.setUnlocalizedName("PowerCapsuleTier3");
 		GameRegistry.registerItem(powerCapsuleTier3, "powerCapsuleTier3");
 
@@ -272,6 +272,8 @@ public final class ItemsAndBlocks {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(diamondWireUnhardened, 2), "DDD", 'D', "dustDiamond"));
 			GameRegistry.addSmelting(diamondWireUnhardened, new ItemStack(diamondWire, 2), 0.5f);
 			GameRegistry.addRecipe(new ItemStack(kineticCoil), "WWW", "WIW", "WWW", 'W', diamondWire, 'I', Items.iron_ingot);
+			GameRegistry.addRecipe(new ItemStack(kebT1), "IBI", "PBP", "IBI", 'I', Items.iron_ingot, 'B', powerCapsuleTier1, 'P', BCItems.PIPE_POWER_GOLD);
+			GameRegistry.addRecipe(new ItemStack(kebT2), "IBI", "PBP", "IBI", 'I', Items.iron_ingot, 'B', powerCapsuleTier2, 'P', BCItems.PIPE_POWER_GOLD);
 
 			GameRegistry.registerTileEntity(TileFluidicCompressor.class, "TileFluidicCompressor");
 			GameRegistry.registerTileEntity(TileChargingStation.class, "TileChargingStation");
