@@ -1,4 +1,4 @@
-package buildcraftAdditions.variables;
+package buildcraftAdditions.reference;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -40,6 +40,7 @@ import buildcraftAdditions.items.Tools.UpgradeRecipeExcavationAttachment;
 import buildcraftAdditions.items.Tools.UpgradeRecipeGoldStick;
 import buildcraftAdditions.items.Tools.UpgradeRecipeSawBlade;
 import buildcraftAdditions.items.Tools.UpgradeRecipeTiller;
+import buildcraftAdditions.items.itemBlocks.ItemBlockBCA;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileChargingStation;
@@ -99,6 +100,7 @@ public final class ItemsAndBlocks {
 	public static Item goldWire;
 	public static Item diamondWireUnhardened;
 	public static Item diamondWire;
+	public static Item itemBlockKEBT2;
 	public static ItemKineticTool kineticTool;
 
 	public static void init() {
@@ -226,7 +228,7 @@ public final class ItemsAndBlocks {
 
 		kebT2 = new MultiBlockKEBT2();
 		kebT2.setBlockName("blockKEBT2").setCreativeTab(BuildcraftAdditions.bcadditions);
-		GameRegistry.registerBlock(kebT2, "KEBT2");
+		GameRegistry.registerBlock(kebT2, ItemBlockBCA.class, "KEBT2");
 	}
 
 	public static void addRecepies() {

@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
-import buildcraftAdditions.variables.Variables;
+import buildcraftAdditions.reference.Variables;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

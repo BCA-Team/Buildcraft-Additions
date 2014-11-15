@@ -27,7 +27,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.variables.Variables;
+import buildcraftAdditions.reference.Variables;
 
 public class BlockFluidicCompressor extends BlockContainer {
 

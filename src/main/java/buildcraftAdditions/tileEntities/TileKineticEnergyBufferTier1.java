@@ -5,7 +5,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import buildcraftAdditions.networking.MessageKEBT1;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
-import buildcraftAdditions.variables.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemsAndBlocks;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

@@ -27,7 +27,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.variables.Variables;
+import buildcraftAdditions.reference.Variables;
 
 public class BlockChargingStation extends BlockContainer {
 

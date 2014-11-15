@@ -20,7 +20,7 @@ import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
-import buildcraftAdditions.variables.Variables;
+import buildcraftAdditions.reference.Variables;
 
 public class GuiHandler implements IGuiHandler {
 

@@ -20,7 +20,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.variables.Variables;
+import buildcraftAdditions.reference.Variables;
 
 /**
  * Copyright (c) 2014, AEnterprise

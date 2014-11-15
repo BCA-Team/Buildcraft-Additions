@@ -30,8 +30,8 @@ import buildcraftAdditions.core.ModIntegration;
 import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
-import buildcraftAdditions.variables.ItemsAndBlocks;
-import buildcraftAdditions.variables.TrigersAndActions;
+import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.TrigersAndActions;
 
 /**
  * Copyright (c) 2014, AEnterprise

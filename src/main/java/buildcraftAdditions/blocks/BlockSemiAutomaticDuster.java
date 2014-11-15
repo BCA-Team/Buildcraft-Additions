@@ -18,7 +18,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.variables.Variables;
+import buildcraftAdditions.reference.Variables;
 
 
 import eureka.api.EurekaKnowledge;

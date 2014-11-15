@@ -10,8 +10,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.utils.BCItems;
-import buildcraftAdditions.variables.ItemsAndBlocks;
-import buildcraftAdditions.variables.Variables;
+import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.Variables;
 
 
 import eureka.api.EurekaInfo;

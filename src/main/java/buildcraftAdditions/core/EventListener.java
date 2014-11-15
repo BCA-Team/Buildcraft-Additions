@@ -15,8 +15,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.variables.ItemsAndBlocks;
-import buildcraftAdditions.variables.Variables;
+import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.Variables;
 
 
 import eureka.api.EurekaKnowledge;

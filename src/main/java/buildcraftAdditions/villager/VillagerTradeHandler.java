@@ -18,7 +18,7 @@ import net.minecraft.village.MerchantRecipeList;
 
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 
-import buildcraftAdditions.variables.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemsAndBlocks;
 
 public class VillagerTradeHandler implements IVillageTradeHandler {
 

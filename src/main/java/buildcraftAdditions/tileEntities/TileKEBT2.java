@@ -23,8 +23,8 @@ import buildcraftAdditions.networking.MessageKEBT2;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.Location;
-import buildcraftAdditions.variables.ItemsAndBlocks;
-import buildcraftAdditions.variables.Variables;
+import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.Variables;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

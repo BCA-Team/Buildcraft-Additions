@@ -18,7 +18,7 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 
-import buildcraftAdditions.variables.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemsAndBlocks;
 
 public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 

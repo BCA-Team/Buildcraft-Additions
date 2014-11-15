@@ -14,7 +14,7 @@ import buildcraft.api.statements.ITriggerProvider;
 
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
-import buildcraftAdditions.variables.TrigersAndActions;
+import buildcraftAdditions.reference.TrigersAndActions;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

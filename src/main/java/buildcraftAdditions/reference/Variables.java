@@ -1,4 +1,4 @@
-package buildcraftAdditions.variables;
+package buildcraftAdditions.reference;
 
 /**
  * Copyright (c) 2014, AEnterprise

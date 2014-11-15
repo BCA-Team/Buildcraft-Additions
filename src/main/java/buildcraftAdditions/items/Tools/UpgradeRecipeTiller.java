@@ -6,7 +6,7 @@ import buildcraft.api.recipes.CraftingResult;
 import buildcraft.silicon.TileIntegrationTable;
 import buildcraft.transport.recipes.IntegrationTableRecipe;
 
-import buildcraftAdditions.variables.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemsAndBlocks;
 
 /**
  * Copyright (c) 2014, AEnterprise

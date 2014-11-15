@@ -1,4 +1,4 @@
-package buildcraftAdditions.variables;
+package buildcraftAdditions.reference;
 
 import buildcraft.api.statements.ITriggerExternal;
 import buildcraft.api.statements.StatementManager;
