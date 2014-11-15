@@ -17,7 +17,7 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 	public int energyState, lastEnergyState;
 
 	public TileKineticEnergyBufferTier1() {
-		super(3000000, 1000, 1000, 10, 1);
+		super(3000000, 30000, 30000, 10, 1);
 	}
 
 	@Override
