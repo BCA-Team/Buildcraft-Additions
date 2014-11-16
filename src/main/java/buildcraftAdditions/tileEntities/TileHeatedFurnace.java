@@ -67,9 +67,10 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInv
 				} else {
 					getStackInSlot(1).stackSize += result.stackSize;
 				}
-				getStackInSlot(0).stackSize--;
-				if (getStackInSlot(0).stackSize == 0)
+				if (getStackInSlot(0).stackSize <= 1)
 					setInventorySlotContents(0, null);
+				else
+				getStackInSlot(0).stackSize--;
 				progress = 0;
 			} else {
 				for (TileCoilBase coil : coils)
