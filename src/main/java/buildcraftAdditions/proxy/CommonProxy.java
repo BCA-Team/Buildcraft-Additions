@@ -1,9 +1,11 @@
 package buildcraftAdditions.proxy;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.server.FMLServerHandler;
 
 import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
@@ -31,6 +33,10 @@ public class CommonProxy {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+	}
+
+	public EntityPlayer getPlayer(String name) {
+		return FMLServerHandler.instance().getServer().getEntityWorld().getPlayerEntityByName(name);
 	}
 
 }

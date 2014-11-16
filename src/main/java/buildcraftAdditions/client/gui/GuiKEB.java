@@ -1,10 +1,13 @@
 package buildcraftAdditions.client.gui;
 
+import java.util.ArrayList;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
@@ -20,11 +23,13 @@ public class GuiKEB extends GuiContainer {
 	public ResourceLocation texture = new ResourceLocation("bcadditions","textures/gui/KineticEnergyBuffer.png");
 	private TileKineticEnergyBufferBase keb;
 	private GuiButton north, east, south, west, up, down;
+	boolean primed;
 
 
-	public GuiKEB(TileKineticEnergyBufferBase keb) {
-		super(new ContainerKEB(keb));
+	public GuiKEB(TileKineticEnergyBufferBase keb, EntityPlayer player) {
+		super(new ContainerKEB(keb, player));
 		this.keb = keb;
+		primed = false;
 	}
 
 	@Override
@@ -32,36 +37,36 @@ public class GuiKEB extends GuiContainer {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-		int percent = (keb.energy * 248) / keb.maxEnergy;
-		int temp = percent;
+		long percent = ((long) keb.energy * 248) / keb.maxEnergy;
+		int temp = (int) percent;
 		if (temp > 36)
 			temp = 36;
 		drawTexturedModalRect(guiLeft + 90, guiTop + 17, 215, 42, temp, 11);
 		percent -= 36;
 		if (percent <= 0)
 			return;
-		temp = percent;
+		temp =(int) percent;
 		if (temp > 62)
 			temp = 62;
 		drawTexturedModalRect(guiLeft + 115, guiTop + 28, 241, 53, 11, temp);
 		percent -= 62;
 		if (percent <= 0)
 			return;
-		temp = percent;
+		temp = (int) percent;
 		if (temp > 61)
 			temp = 61;
 		drawTexturedModalRect(guiLeft + 115 - temp, guiTop + 79, 241 - temp, 104, temp , 12);
 		percent -= 61;
 		if (percent <= 0)
 			return;
-		temp = percent;
+		temp = (int) percent;
 		if (percent > 62)
 			temp = 62;
 		drawTexturedModalRect(guiLeft + 54, guiTop + 79 - temp, 180, 104 - temp, 11, temp);
 		percent -=62;
 		if (percent <= 0)
 			return;
-		drawTexturedModalRect(guiLeft + 65, guiTop + 17, 191, 42, percent, 11);
+		drawTexturedModalRect(guiLeft + 65, guiTop + 17, 191, 42, (int) percent, 11);
 
 	}
 
@@ -93,6 +98,21 @@ public class GuiKEB extends GuiContainer {
 		fontRendererObj.drawString("West: ", 93, 97, 0x404040);
 		fontRendererObj.drawString("Up: ", 93, 120, 0x404040);
 		fontRendererObj.drawString("Down: ", 93, 143, 0x404040);
+		if (shouldDrawTooltip(mouseX - guiLeft, mouseY - guiTop)) {
+			ArrayList<String> list = new ArrayList<String>();
+			list.add(keb.energy + " / " + keb.maxEnergy + " RF");
+			this.drawHoveringText(list, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
+		}
+	}
+
+	private boolean shouldDrawTooltip(int mouseX, int mouseY) {
+		if (mouseX > 54 && mouseX < 125 && mouseY > 13 && mouseY < 27)
+			return true;
+		if (mouseX > 54 && mouseX < 65 && mouseY > 13 && mouseY < 90)
+			return true;
+		if (mouseX > 54 && mouseX < 125 && mouseY > 75 && mouseY < 90)
+			return true;
+		return mouseX > 110 && mouseX < 125 && mouseY > 13 && mouseY < 90;
 	}
 
 	@Override
@@ -121,6 +141,18 @@ public class GuiKEB extends GuiContainer {
 			keb.changeSideMode(0);
 			down.displayString = getStatus(0);
 			keb.sendConfigurationToSever();
+		}
+	}
+
+	@Override
+	protected void mouseClicked(int x, int y, int state) {
+		super.mouseClicked(x, y, state);
+
+		if (x > 191 && x < 239 && y > 66 && y < 115) {
+			if (primed)
+				keb.activateSelfDestruct();
+			else
+				primed = true;
 		}
 	}
 

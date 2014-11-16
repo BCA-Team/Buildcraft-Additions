@@ -8,6 +8,8 @@ package buildcraftAdditions.proxy;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import net.minecraft.entity.player.EntityPlayer;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 
@@ -42,5 +44,10 @@ public class ClientProxy extends CommonProxy {
 	public void addPowerplant() {
 		super.addPowerplant();
 		VillagerRegistry.instance().registerVillagerSkin(457, texture);
+	}
+
+	@Override
+	public EntityPlayer getPlayer(String name) {
+		return null;
 	}
 }

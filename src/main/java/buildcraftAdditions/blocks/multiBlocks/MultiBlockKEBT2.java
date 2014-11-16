@@ -1,11 +1,15 @@
 package buildcraftAdditions.blocks.multiBlocks;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT2;
+import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKEBT2;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -34,6 +38,15 @@ public class MultiBlockKEBT2 extends MulitBlockBase {
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileKEBT2();
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+		if (entity instanceof EntityPlayer) {
+			TileEntity tileEntity = world.getTileEntity(x, y, z);
+			if (tileEntity instanceof TileKineticEnergyBufferBase)
+				((TileKineticEnergyBufferBase) tileEntity).setOwner(((EntityPlayer) entity).getDisplayName());
+		}
 	}
 
 	@Override

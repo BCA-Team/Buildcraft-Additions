@@ -50,7 +50,7 @@ public class GuiHandler implements IGuiHandler {
 					return new GuiBasicCoil(player.inventory, (TileBasicCoil) tile);
 			case Variables.GuiKEB:
 				if (tile instanceof TileKineticEnergyBufferBase)
-					return new GuiKEB((TileKineticEnergyBufferBase) tile);
+					return new GuiKEB((TileKineticEnergyBufferBase) tile, player);
 		}
 		return null;
 	}
@@ -81,7 +81,7 @@ public class GuiHandler implements IGuiHandler {
 					return new ContainerBasicCoil(player.inventory, (TileBasicCoil) tile);
 			case Variables.GuiKEB:
 				if (tile instanceof TileKineticEnergyBufferBase)
-					return new ContainerKEB((TileKineticEnergyBufferBase) tile);
+					return new ContainerKEB((TileKineticEnergyBufferBase) tile, player);
 		}
 		return null;
 	}

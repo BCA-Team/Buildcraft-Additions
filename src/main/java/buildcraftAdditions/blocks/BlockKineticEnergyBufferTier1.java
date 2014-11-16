@@ -61,6 +61,11 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 			stack.stackTagCompound.setInteger("z", z);
 			world.getTileEntity(x, y, z).readFromNBT(stack.stackTagCompound);
 		}
+		if (entity instanceof EntityPlayer) {
+			TileEntity tileEntity = world.getTileEntity(x, y, z);
+			if (tileEntity instanceof TileKineticEnergyBufferBase)
+				((TileKineticEnergyBufferBase) tileEntity).setOwner(((EntityPlayer) entity).getDisplayName());
+		}
 	}
 
 	@Override

@@ -13,11 +13,13 @@ import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 public class ContainerKEB extends ContainerBase {
 	private TileKineticEnergyBufferBase keb;
 
-	public ContainerKEB(TileKineticEnergyBufferBase keb) {
+	public ContainerKEB(TileKineticEnergyBufferBase keb, EntityPlayer player) {
 		super();
 		keb.sync = true;
 		keb.timer = 0;
 		this.keb = keb;
+		if (player.getDisplayName().equals(keb.owner))
+			keb.destroyer = player;
 	}
 
 	@Override

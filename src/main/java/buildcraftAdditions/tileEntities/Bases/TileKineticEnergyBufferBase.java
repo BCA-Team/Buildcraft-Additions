@@ -1,13 +1,17 @@
 package buildcraftAdditions.tileEntities.Bases;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.world.Explosion;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyHandler;
 
 import buildcraftAdditions.networking.MessageKEBConfiguration;
+import buildcraftAdditions.networking.MessageSelfDestruct;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.utils.Location;
 /**
@@ -18,10 +22,12 @@ import buildcraftAdditions.utils.Location;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHandler {
-	public int energy, maxEnergy, maxInput, maxOutput, loss;
+	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
 	public int[] configuration = new int[6];
 	public int tier, timer;
-	public boolean sync;
+	public boolean sync, selfDestruct;
+	public String owner = " ";
+	public EntityPlayer destroyer;
 
 	public TileKineticEnergyBufferBase(int maxEnergy, int maxInput, int maxOutput, int loss, int tier) {
 		super();
@@ -96,6 +102,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		loss = tag.getInteger("loss");
 		if (tag.hasKey("configuration"))
 		configuration = tag.getIntArray("configuration");
+		owner = tag.getString("owner");
 		}
 
 	@Override
@@ -107,11 +114,18 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		tag.setInteger("maxOutput", maxOutput);
 		tag.setInteger("loss", loss);
 		tag.setIntArray("configuration", configuration);
+		tag.setString("owner", owner);
 		}
 
 	@Override
 	public void updateEntity() {
-		super.updateEntity();
+		if (selfDestruct) {
+			fuse--;
+			if (fuse % 20 == 0)
+				destroyer.addChatComponentMessage(new ChatComponentText("SELF DESTUCTION IN: " + fuse / 20));
+		}
+		if (fuse == 0 && selfDestruct)
+			byeBye();
 		if (sync) {
 			if (timer == 0) {
 				sync();
@@ -152,5 +166,26 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 
 	public void sendConfigurationToSever() {
 		PacketHandeler.instance.sendToServer(new MessageKEBConfiguration(this));
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public void activateSelfDestruct() {
+		if (worldObj.isRemote) {
+			PacketHandeler.instance.sendToServer(new MessageSelfDestruct(xCoord, yCoord, zCoord));
+			return;
+		}
+		selfDestruct = true;
+		fuse = 100;
+		destroyer.addChatComponentMessage(new ChatComponentText("SELF DESTRUCT ACTIVATED"));
+		destroyer.closeScreen();
+	}
+
+	public void byeBye() {
+		Explosion explosion = worldObj.createExplosion(destroyer, xCoord, yCoord, zCoord, energy / 900000, true);
+		explosion.doExplosionA();
+		explosion.doExplosionB(true);
 	}
 }
