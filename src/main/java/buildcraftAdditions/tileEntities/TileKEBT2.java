@@ -14,6 +14,7 @@ import cofh.api.energy.IEnergyHandler;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.blocks.multiBlocks.MulitBlockBase;
+import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
@@ -39,7 +40,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public TileKEBT2 master;
 
 	public TileKEBT2() {
-		super(25000000, 75000, 75000, 6, 2);
+		super(25000000, 75000, 75000, ConfigurationHandeler.KEB2powerloss, 2);
 	}
 
 	@Override

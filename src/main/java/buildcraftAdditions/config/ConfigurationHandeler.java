@@ -15,9 +15,9 @@ import buildcraftAdditions.core.VersionCheck;
  */
 public class ConfigurationHandeler {
 	public static Configuration configFile;
-	public static boolean shouldPrintChangelog, shouldRegisterDusts;
+	public static boolean shouldPrintChangelog, shouldRegisterDusts, powerloss;
 	public static int[] powerDifficultyModifiers = new int[4];
-	public static int basePowerModifier;
+	public static int basePowerModifier, KEB1powerloss, KEB2powerloss;
 
 	public static void init(File file) {
 		configFile = new Configuration(file);
@@ -37,8 +37,12 @@ public class ConfigurationHandeler {
 		powerDifficultyModifiers[3] = configFile.get("Power Usage", "HardDifficultyModifier", 4).getInt();
 		basePowerModifier = configFile.get("Power Usage", "BaseModifier", 10).getInt();
 
-		configFile.addCustomCategoryComment("Misc", "Stuff that didn't fit in any other category");
+		configFile.addCustomCategoryComment("KEB", "Configuration stuff or you Kinetic Energy Buffers");
+		powerloss = configFile.get("KEB", "powerloss", false).getBoolean();
+		KEB1powerloss = configFile.get("KEB", "KEB1powerloss", 10).getInt();
+		KEB2powerloss = configFile.get("KEB", "KEBT2powerloss", 5).getInt();
 
+		configFile.addCustomCategoryComment("Misc", "Stuff that didn't fit in any other category");
 		shouldRegisterDusts = configFile.get("Misc", "shouldRegisterDusts", true).setRequiresMcRestart(true).getBoolean();
 
 		if (configFile.hasChanged())

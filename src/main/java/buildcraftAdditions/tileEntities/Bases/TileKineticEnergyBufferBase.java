@@ -10,6 +10,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyHandler;
 
+import buildcraftAdditions.config.ConfigurationHandeler;
 import buildcraftAdditions.networking.MessageKEBConfiguration;
 import buildcraftAdditions.networking.MessageSelfDestruct;
 import buildcraftAdditions.networking.PacketHandeler;
@@ -101,10 +102,10 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		maxOutput = tag.getInteger("maxOutput");
 		loss = tag.getInteger("loss");
 		if (tag.hasKey("configuration"))
-		configuration = tag.getIntArray("configuration");
+			configuration = tag.getIntArray("configuration");
 		if (tag.hasKey("owner"))
-		owner = tag.getString("owner");
-		}
+			owner = tag.getString("owner");
+	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
@@ -116,8 +117,8 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		tag.setInteger("loss", loss);
 		tag.setIntArray("configuration", configuration);
 		if (owner != null)
-		tag.setString("owner", owner);
-		}
+			tag.setString("owner", owner);
+	}
 
 	@Override
 	public void updateEntity() {
@@ -135,7 +136,8 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 			}
 			timer--;
 		}
-		energy = energy - loss;
+		if (ConfigurationHandeler.powerloss)
+			energy = energy - loss;
 		if (energy < 0)
 			energy = 0;
 		outputEnergy();
