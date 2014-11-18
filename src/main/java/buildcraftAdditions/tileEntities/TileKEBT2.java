@@ -52,7 +52,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 			return;
 		}
 		super.updateEntity();
-		energyState = (energy * 6) / maxEnergy;
+		energyState = (energy * 5) / maxEnergy;
 		if (energyState != lastEnergyState)
 			renderUpdate = true;
 		lastEnergyState = energyState;

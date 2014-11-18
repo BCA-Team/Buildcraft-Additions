@@ -188,7 +188,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 	}
 
 	public void byeBye() {
-		Explosion explosion = worldObj.createExplosion(destroyer, xCoord, yCoord, zCoord, energy / 900000, true);
+		Explosion explosion = worldObj.createExplosion(destroyer, xCoord, yCoord, zCoord, (energy / 900000) + 5, true);
 		explosion.doExplosionA();
 		explosion.doExplosionB(true);
 	}
