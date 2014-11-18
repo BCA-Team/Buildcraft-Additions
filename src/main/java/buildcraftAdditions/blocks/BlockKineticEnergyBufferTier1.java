@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.BuildcraftAdditions;
@@ -51,6 +52,13 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 		if (meta > 8)
 			return icons[8];
 		return icons[meta];
+	}
+
+	@Override
+	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion) {
+		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		if (tileEntity instanceof TileKineticEnergyBufferBase)
+			((TileKineticEnergyBufferBase) tileEntity).byeBye();
 	}
 
 	@Override

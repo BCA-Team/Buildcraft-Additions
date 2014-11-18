@@ -126,7 +126,10 @@ public class GuiKEB extends GuiContainer {
 				list.add("BIG RED BUTTONS ARE VERY DANGEROUS");
 				list.add("DON'T PUSH IT");
 			} else {
-				list.add("PRESS HERE FOR A BIG BOOM");
+				if (player.getDisplayName().equals("rikbberkelder"))
+					list.add("KITTENS!!!!");
+				else
+					list.add("PRESS HERE FOR A BIG BOOM");
 			}
 			drawHoveringText(list, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
 		}
