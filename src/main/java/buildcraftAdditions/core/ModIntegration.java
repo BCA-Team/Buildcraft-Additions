@@ -83,7 +83,7 @@ public class ModIntegration {
 		if (oreList.isEmpty() || nuggetList.isEmpty())
 			return;
 		for (ItemStack poorOre : oreList) {
-			DusterRecipes.dusting().addDusterRecipe(poorOre, new ItemStack(nuggetList.get(0).getItem(), 2, nuggetList.get(0).getItemDamage()));
+			DusterRecipes.dusting().addDusterRecipe(poorOre, new ItemStack(nuggetList.get(0).getItem(), 4, nuggetList.get(0).getItemDamage()));
 		}
 	}
 }
