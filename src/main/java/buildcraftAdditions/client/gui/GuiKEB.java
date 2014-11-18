@@ -23,13 +23,15 @@ public class GuiKEB extends GuiContainer {
 	public ResourceLocation texture = new ResourceLocation("bcadditions","textures/gui/KineticEnergyBuffer.png");
 	private TileKineticEnergyBufferBase keb;
 	private GuiButton north, east, south, west, up, down;
-	boolean primed;
+	private boolean primed;
+	private EntityPlayer player;
 
 
 	public GuiKEB(TileKineticEnergyBufferBase keb, EntityPlayer player) {
 		super(new ContainerKEB(keb, player));
 		this.keb = keb;
 		primed = false;
+		this.player = player;
 	}
 
 	@Override
@@ -147,7 +149,8 @@ public class GuiKEB extends GuiContainer {
 	@Override
 	protected void mouseClicked(int x, int y, int state) {
 		super.mouseClicked(x, y, state);
-
+		if (!player.getDisplayName().equals(keb.owner))
+			return;
 		if (x > 191 && x < 239 && y > 66 && y < 115) {
 			if (primed)
 				keb.activateSelfDestruct();

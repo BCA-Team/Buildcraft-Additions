@@ -19,7 +19,8 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageKEBT1 implements IMessage, IMessageHandler<MessageKEBT1, IMessage> {
-	public int x, y, z, energy, configuration[];
+	public int x, y, z, energy, configuration[], length;
+	public String owner;
 
 	public MessageKEBT1(){}
 
@@ -30,6 +31,8 @@ public class MessageKEBT1 implements IMessage, IMessageHandler<MessageKEBT1, IMe
 		energy = keb.energy;
 		configuration = new int[6];
 		configuration = keb.configuration;
+		owner = keb.owner;
+		length = owner.length();
 	}
 
 	@Override
@@ -41,6 +44,10 @@ public class MessageKEBT1 implements IMessage, IMessageHandler<MessageKEBT1, IMe
 		configuration = new int[6];
 		for (int teller = 0; teller < 6; teller++)
 			configuration[teller] = buf.readInt();
+		length = buf.readInt();
+		owner = "";
+		for (int teller = 0; teller < length; teller++)
+			owner += buf.readChar();
 	}
 
 	@Override
@@ -51,6 +58,11 @@ public class MessageKEBT1 implements IMessage, IMessageHandler<MessageKEBT1, IMe
 		buf.writeInt(energy);
 		for (int teller = 0; teller < 6; teller++)
 			buf.writeInt(configuration[teller]);
+		buf.writeInt(length);
+		char[] letters = owner.toCharArray();
+		for (char letter: letters) {
+			buf.writeChar(letter);
+		}
 	}
 
 	@Override
@@ -60,6 +72,7 @@ public class MessageKEBT1 implements IMessage, IMessageHandler<MessageKEBT1, IMe
 			TileKineticEnergyBufferTier1 keb = (TileKineticEnergyBufferTier1) entity;
 			keb.energy = message.energy;
 			keb.configuration = message.configuration;
+			keb.owner = message.owner;
 		}
 		return null;
 	}

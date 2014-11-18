@@ -19,8 +19,9 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMessage> {
-	public int x, y, z, energy, configuration[], masterX, masterY, masterZ, energyState;
+	public int x, y, z, energy, configuration[], masterX, masterY, masterZ, energyState, length;
 	public boolean partOfMultiBlock, isMaster;
+	public String owner;
 
 	public MessageKEBT2() {}
 
@@ -37,6 +38,8 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 		masterY = keb.masterY;
 		masterZ = keb.masterZ;
 		energyState = keb.energyState;
+		owner = keb.owner;
+		length = owner.length();
 	}
 
 
@@ -55,6 +58,10 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 		masterY = buf.readInt();
 		masterZ = buf.readInt();
 		energyState = buf.readInt();
+		length = buf.readInt();
+		owner = "";
+		for (int teller = 0; teller < length; teller++)
+			owner += buf.readChar();
 	}
 
 	@Override
@@ -71,6 +78,11 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 		buf.writeInt(masterY);
 		buf.writeInt(masterZ);
 		buf.writeInt(energyState);
+		buf.writeInt(length);
+		char[] letters = owner.toCharArray();
+		for (char letter: letters) {
+			buf.writeChar(letter);
+		}
 
 	}
 
@@ -87,6 +99,7 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 			keb.masterY = message.masterY;
 			keb.masterZ = message.masterZ;
 			keb.energyState = message.energyState;
+			keb.owner = message.owner;
 		}
 		return null;
 	}

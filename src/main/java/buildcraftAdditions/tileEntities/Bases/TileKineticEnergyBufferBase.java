@@ -26,7 +26,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 	public int[] configuration = new int[6];
 	public int tier, timer;
 	public boolean sync, selfDestruct;
-	public String owner = " ";
+	public String owner;
 	public EntityPlayer destroyer;
 
 	public TileKineticEnergyBufferBase(int maxEnergy, int maxInput, int maxOutput, int loss, int tier) {
@@ -102,6 +102,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		loss = tag.getInteger("loss");
 		if (tag.hasKey("configuration"))
 		configuration = tag.getIntArray("configuration");
+		if (tag.hasKey("owner"))
 		owner = tag.getString("owner");
 		}
 
@@ -114,6 +115,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		tag.setInteger("maxOutput", maxOutput);
 		tag.setInteger("loss", loss);
 		tag.setIntArray("configuration", configuration);
+		if (owner != null)
 		tag.setString("owner", owner);
 		}
 
@@ -124,7 +126,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 			if (fuse % 20 == 0)
 				destroyer.addChatComponentMessage(new ChatComponentText("SELF DESTUCTION IN: " + fuse / 20));
 		}
-		if (fuse == 0 && selfDestruct)
+		if (fuse <= 0 && selfDestruct)
 			byeBye();
 		if (sync) {
 			if (timer == 0) {
