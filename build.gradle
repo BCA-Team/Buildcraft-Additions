@@ -37,7 +37,7 @@ if (System.getenv().BUILD_NUMBER != null) {
 }
 
 curse {
-    apiKey = ${config.apiToken}
+    apiKey = ${System.getenv().apikey}
     projectId = "221014"
     changelog = ${config.changelog}
     releaseType = "release"
