@@ -14,11 +14,9 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
- 
-apply plugin: 'forge'
-if (System.getenv().BUILD_NUMBER == null) {
+
 apply plugin: "curseforge"
-}
+apply plugin: 'forge'
  
 ext.buildProps = file "gradle.properties"
  
@@ -36,17 +34,22 @@ if (System.getenv().BUILD_NUMBER != null) {
     version += "-Jenkins-${System.getenv().BUILD_NUMBER}"
 }
 
-curse {
-    apiKey = ${System.getenv().apikey}
-    projectId = "221014"
-    changelog = ${config.changelog}
-    releaseType = "release"
-}
- 
 minecraft {
     version = "${config.version.mc}-${config.version.forge}"
     runDir = "eclipse"
     replace "@MODVERSION@", config.version.mod
+}
+
+curse {
+    if (System.getenv().APIKEY != null) {
+    apiKey = "${System.getenv().APIKEY}"
+    } else {
+    apiKey="0"
+    }
+    projectId = "221014"
+    changelog = "${config.changelog}"
+    releaseType = "release"
+    addGameVersion "1.7.10"
 }
 
 repositories {
