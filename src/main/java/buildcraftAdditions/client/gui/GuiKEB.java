@@ -123,13 +123,18 @@ public class GuiKEB extends GuiContainer {
 		if (shouldDrawWarning(mouseX - guiLeft, mouseY - guiTop)) {
 			ArrayList<String> list = new ArrayList<String>();
 			if (!primed) {
+				if (player.getDisplayName().equals("rikbberkelder"){
+					list.add("kittens?");
+				} else {
 				list.add("BIG RED BUTTONS ARE VERY DANGEROUS");
 				list.add("DON'T PUSH IT");
+				}
 			} else {
-				if (player.getDisplayName().equals("rikbberkelder"))
+				if (player.getDisplayName().equals("rikbberkelder")){
 					list.add("KITTENS!!!!");
-				else
+				} else {
 					list.add("PRESS HERE FOR A BIG BOOM");
+				}
 			}
 			drawHoveringText(list, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
 		}
