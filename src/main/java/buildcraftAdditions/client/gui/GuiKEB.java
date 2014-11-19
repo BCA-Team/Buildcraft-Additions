@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
+import buildcraftAdditions.utils.SpecialListMananger;
 import buildcraftAdditions.utils.Utils;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -23,7 +24,7 @@ public class GuiKEB extends GuiContainer {
 	public ResourceLocation texture = new ResourceLocation("bcadditions","textures/gui/KineticEnergyBuffer.png");
 	private TileKineticEnergyBufferBase keb;
 	private GuiButton north, east, south, west, up, down;
-	private boolean primed, yellow;
+	private boolean primed, yellow, green;
 	private EntityPlayer player;
 	private int teller;
 
@@ -34,6 +35,7 @@ public class GuiKEB extends GuiContainer {
 		primed = false;
 		this.player = player;
 		teller = 30;
+		green = SpecialListMananger.greenButtonList.contains(player.getDisplayName());
 	}
 
 	@Override
@@ -51,8 +53,12 @@ public class GuiKEB extends GuiContainer {
 			yellow = !yellow;
 		}
 
-		if (yellow)
+		if (yellow) {
+			if (!green)
 			drawTexturedModalRect(guiLeft + 67, guiTop + 30, 176, 115, 47, 47);
+			else
+				drawTexturedModalRect(guiLeft + 67, guiTop + 30, 176, 209, 47, 47);
+		}
 
 		int temp = (int) percent;
 		if (temp > 36)
@@ -123,15 +129,15 @@ public class GuiKEB extends GuiContainer {
 		if (shouldDrawWarning(mouseX - guiLeft, mouseY - guiTop)) {
 			ArrayList<String> list = new ArrayList<String>();
 			if (!primed) {
-				if (player.getDisplayName().equals("rikbberkelder")){
-					list.add("kittens?");
+				if (SpecialListMananger.specialTexts.containsKey(player.getDisplayName())){
+					list.add(SpecialListMananger.specialTexts.get(player.getDisplayName()) + "?");
 				} else {
 				list.add("BIG RED BUTTONS ARE VERY DANGEROUS");
 				list.add("DON'T PUSH IT");
 				}
 			} else {
-				if (player.getDisplayName().equals("rikbberkelder")){
-					list.add("KITTENS!!!!");
+				if (SpecialListMananger.specialTexts.containsKey(player.getDisplayName())){
+					list.add(SpecialListMananger.specialTexts.get(player.getDisplayName()) + "!!!");
 				} else {
 					list.add("PRESS HERE FOR A BIG BOOM");
 				}
