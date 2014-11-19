@@ -32,6 +32,7 @@ import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.TrigersAndActions;
+import buildcraftAdditions.utils.SpecialListMananger;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -68,6 +69,7 @@ public class BuildcraftAdditions {
 		PacketHandeler.init();
 		ItemsAndBlocks.init();
 		TrigersAndActions.register();
+		SpecialListMananger.init();
 
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.redstone_ore), new ItemStack(Items.redstone, 6));
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, 2));

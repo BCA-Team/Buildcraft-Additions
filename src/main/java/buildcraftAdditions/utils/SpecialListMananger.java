@@ -22,7 +22,7 @@ public class SpecialListMananger {
 	public static ArrayList<String> greenButtonList = new ArrayList<String>(20);
 	public static HashMap<String, String> specialTexts = new HashMap<String, String>(20);
 
-	public void init() {
+	public static void init() {
 		Thread thread = new SpecialListGetter();
 		thread.start();
 	}
