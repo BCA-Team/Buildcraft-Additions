@@ -19,7 +19,7 @@ public class SpecialListGetter extends Thread {
 		try {
 			URL listFile = new URL("https://raw.githubusercontent.com/AEnterprise/Buildcraft-Additions/master/src/main/resources/specialList.json");
 			File file = new File(listFile.toURI());
-			SpecialList.readFile(file);
+			SpecialListMananger.readFile(file);
 		} catch (Throwable e) {
 			Logger.error("Failed to get the special stuff list!");
 			e.printStackTrace();
