@@ -16,6 +16,9 @@ buildscript {
 }
  
 apply plugin: 'forge'
+if (System.getenv().BUILD_NUMBER == null) {
+apply plugin: "curseforge"
+}
  
 ext.buildProps = file "gradle.properties"
  
@@ -31,6 +34,13 @@ archivesBaseName = "BuildcraftAdditions-1.7.10"
 
 if (System.getenv().BUILD_NUMBER != null) {
     version += "-Jenkins-${System.getenv().BUILD_NUMBER}"
+}
+
+curse {
+    apiKey = ${config.apiToken}
+    projectId = "221014"
+    changelog = ${config.changelog}
+    releaseType = "release"
 }
  
 minecraft {
