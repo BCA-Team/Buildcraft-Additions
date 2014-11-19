@@ -123,7 +123,7 @@ public class GuiKEB extends GuiContainer {
 		if (shouldDrawWarning(mouseX - guiLeft, mouseY - guiTop)) {
 			ArrayList<String> list = new ArrayList<String>();
 			if (!primed) {
-				if (player.getDisplayName().equals("rikbberkelder"){
+				if (player.getDisplayName().equals("rikbberkelder")){
 					list.add("kittens?");
 				} else {
 				list.add("BIG RED BUTTONS ARE VERY DANGEROUS");
