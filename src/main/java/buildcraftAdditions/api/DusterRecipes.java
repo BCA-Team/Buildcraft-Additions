@@ -76,7 +76,10 @@ public class DusterRecipes {
     }
 
     public ItemStack getDustingResult(ItemStack input) {
-    	return dustingList.get(new ItemData(input)).copy();
+		ItemStack result = dustingList.get(new ItemData(input)).copy();
+		if (result == null)
+			return null;
+		return result.copy();
     }
 
     public boolean hasDustingResult(ItemStack input) {
