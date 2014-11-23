@@ -2,12 +2,13 @@ package buildcraftAdditions.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 import net.minecraftforge.oredict.OreDictionary;
+
 import buildcraftAdditions.api.IStackInfo.ItemData;
 
 /**
@@ -75,7 +76,7 @@ public class DusterRecipes {
     }
 
     public ItemStack getDustingResult(ItemStack input) {
-    	return dustingList.get(new ItemData(input));
+    	return dustingList.get(new ItemData(input)).copy();
     }
 
     public boolean hasDustingResult(ItemStack input) {
