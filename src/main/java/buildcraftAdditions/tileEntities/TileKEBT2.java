@@ -257,4 +257,13 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, ItemsAndBlocks.kebT2, 80);
 		sync();
 	}
+
+	public void destruction() {
+		if (isMaster)
+			byeBye();
+		if (master == null)
+			findMaster();
+		if (master != null)
+			master.byeBye();
+	}
 }

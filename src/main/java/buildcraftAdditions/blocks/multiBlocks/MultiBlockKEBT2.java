@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT2;
@@ -38,6 +39,13 @@ public class MultiBlockKEBT2 extends MulitBlockBase {
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileKEBT2();
+	}
+
+	@Override
+	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion) {
+		TileEntity entity = world.getTileEntity(x, y, z);
+		if (entity instanceof TileKEBT2)
+			((TileKEBT2) entity).destruction();
 	}
 
 	@Override
