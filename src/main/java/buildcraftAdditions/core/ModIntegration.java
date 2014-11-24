@@ -160,6 +160,7 @@ public class ModIntegration {
 				return;
 			itemDust = stack.getItem();
 		}
+		list = OreDictionary.getOres("ingot" + metalName);
 		for (ItemStack stack : list)
 			DusterRecipes.dusting().addDusterRecipe(stack, new ItemStack(itemDust, 2));
 		list = OreDictionary.getOres("ingot" + metalName);
