@@ -86,7 +86,6 @@ public class ModIntegration {
 
 		addDusts("Bronze", 0xAD6726);
 		addDusts("Manganese", 0xF3D2D2);
-		addDusts("Bronze", 0xBA702C);
 		addDusts("Hepatizon", 0x6B566B);
 		addDusts("DamascusSteel", 0x3D2C1F);
 		addDusts("Angmallen", 0xFAFA6C);
