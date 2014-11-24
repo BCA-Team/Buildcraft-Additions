@@ -150,7 +150,7 @@ public class ModIntegration {
 				itemDust.setUnlocalizedName(list.get(0).getUnlocalizedName().substring(5));
 			GameRegistry.registerItem(itemDust, "dust" + metalName);
 			OreDictionary.registerOre("dust" + metalName, itemDust);
-			GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metalName).get(0), 0);
+			GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metalName).get(0).copy(), 0);
 		} else {
 			ArrayList<ItemStack> tempList = OreDictionary.getOres("dust" + metalName);
 			if (tempList.isEmpty())
@@ -162,9 +162,9 @@ public class ModIntegration {
 		}
 		list = OreDictionary.getOres("ingot" + metalName);
 		for (ItemStack stack : list)
-			DusterRecipes.dusting().addDusterRecipe(stack, new ItemStack(itemDust, 2));
+			DusterRecipes.dusting().addDusterRecipe(stack.copy(), new ItemStack(itemDust, 2));
 		list = OreDictionary.getOres("ingot" + metalName);
 		for (ItemStack stack : list)
-			DusterRecipes.dusting().addDusterRecipe(stack, new ItemStack(itemDust, 1));
+			DusterRecipes.dusting().addDusterRecipe(stack.copy(), new ItemStack(itemDust, 1));
 	}
 }

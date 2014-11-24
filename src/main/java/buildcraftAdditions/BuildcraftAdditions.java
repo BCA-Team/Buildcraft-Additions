@@ -138,7 +138,7 @@ public class BuildcraftAdditions {
 			itemDust = new ItemDust(color).setUnlocalizedName("dust" + metalName);
 			GameRegistry.registerItem(itemDust, "dust" + metalName);
 			OreDictionary.registerOre("dust" + metalName, itemDust);
-			GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metalName).get(0), 0);
+			GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metalName).get(0).copy(), 0);
 		} else {
 			ArrayList<ItemStack> tempList = OreDictionary.getOres("dust" + metalName);
 			if (tempList.isEmpty())
@@ -149,10 +149,10 @@ public class BuildcraftAdditions {
 			itemDust = stack.getItem();
 		}
 		for (ItemStack stack : list)
-			DusterRecipes.dusting().addDusterRecipe(stack, new ItemStack(itemDust, 2));
+			DusterRecipes.dusting().addDusterRecipe(stack.copy(), new ItemStack(itemDust, 2));
 		list = OreDictionary.getOres("ingot" + metalName);
 		for (ItemStack stack : list)
-			DusterRecipes.dusting().addDusterRecipe(stack, new ItemStack(itemDust, 1));
+			DusterRecipes.dusting().addDusterRecipe(stack.copy(), new ItemStack(itemDust, 1));
 	}
 }
 
