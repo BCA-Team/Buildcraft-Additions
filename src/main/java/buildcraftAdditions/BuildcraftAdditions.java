@@ -103,9 +103,12 @@ public class BuildcraftAdditions {
 		addDusts("Ardite", 0xF28900);
 		addDusts("Steel", 0x878787);
 		addDusts("Manyullyn", 0xAB7EE3);
+		addDusts("Cobalt", 0x0064FF);
 
 		if (Loader.isModLoaded("Railcraft"))
 			ModIntegration.railcraftIntegration();
+		if (Loader.isModLoaded("Metallurgy"))
+			ModIntegration.metallurgyMetals();
 
 	}
 

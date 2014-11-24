@@ -4,11 +4,16 @@ import java.util.ArrayList;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.api.DusterRecipes;
+import buildcraftAdditions.config.ConfigurationHandeler;
+import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.utils.BCItems;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
@@ -77,6 +82,52 @@ public class ModIntegration {
 		EurekaRegistry.bindToKey(ItemsAndBlocks.kineticCoil, "kineticCoil");
 	}
 
+	public static void metallurgyMetals() {
+
+		addDusts("Bronze", 0xAD6726);
+		addDusts("Manganese", 0xF3D2D2);
+		addDusts("Bronze", 0xBA702C);
+		addDusts("Hepatizon", 0x6B566B);
+		addDusts("DamascusSteel", 0x3D2C1F);
+		addDusts("Angmallen", 0xFAFA6C);
+		addDusts("Steel", 0x919191);
+		addDusts("Eximite", 0x9E83B4);
+		addDusts("Meutoite", 0x5F5269);
+		addDusts("Desichalkos", 0x742EA8);
+		addDusts("Prometheum", 0x5A8156);
+		addDusts("DeepIron", 0x495B69);
+		addDusts("Infuscolium", 0xCB6293);
+		addDusts("BlackSteel", 0x395679);
+		addDusts("Oureclase", 0xDCA82E);
+		addDusts("AstralSilver", 0xC8D4D5);
+		addDusts("Carmot", 0xA99733);
+		addDusts("Mithril", 0x08B5C3);
+		addDusts("Rubracium", 0x8E2727);
+		addDusts("Quicksilver", 0x7CD3C7);
+		addDusts("Haderoth", 0xD1531E);
+		addDusts("Orichalcum", 0x547A38);
+		addDusts("Celenegil", 0x94CC48);
+		addDusts("Adamantine", 0xF04040);
+		addDusts("Atlarus", 0xF4D603);
+		addDusts("Tartarite", 0xFF763C);
+		addDusts("Ignatius", 0xE87400);
+		addDusts("ShadowIron", 0x8D7565);
+		addDusts("Lemurite", 0xEFEFEF);
+		addDusts("Midasium", 0xFFA826);
+		addDusts("Vyroxeres", 0x55E001);
+		addDusts("Ceruclase", 0x458FAB);
+		addDusts("Alduorite", 0xA3DEDE);
+		addDusts("Kalendrite", 0xAA5BBD);
+		addDusts("Vulcanite", 0xFF8448);
+		addDusts("Sanguinite", 0xB90000);
+		addDusts("ShadowSteel", 0x887362);
+		addDusts("Inolashite", 0x40AA7D);
+		addDusts("Amordrine", 0xA98DB1);
+		addDusts("Zinc", 0xDCDFA4);
+		addDusts("Brass", 0xD89634);
+		addDusts("Electrum", 0xDFD0AA);
+}
+
 	public static void addNuggets(String metal) {
 		ArrayList<ItemStack> oreList = OreDictionary.getOres("orePoor" + metal);
 		ArrayList<ItemStack> nuggetList = OreDictionary.getOres("nugget" + metal);
@@ -85,5 +136,32 @@ public class ModIntegration {
 		for (ItemStack poorOre : oreList) {
 			DusterRecipes.dusting().addDusterRecipe(poorOre, new ItemStack(nuggetList.get(0).getItem(), 4, nuggetList.get(0).getItemDamage()));
 		}
+	}
+
+	private static void addDusts(String metalName, int color) {
+		Item itemDust;
+		ArrayList<ItemStack> list;
+		list = OreDictionary.getOres("ingot" + metalName);
+		if (list.isEmpty())
+			return;
+		if (ConfigurationHandeler.shouldRegisterDusts) {
+			itemDust = new ItemDust(color).setUnlocalizedName("dust" + metalName);
+			GameRegistry.registerItem(itemDust, "dust" + metalName);
+			OreDictionary.registerOre("dust" + metalName, itemDust);
+			GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metalName).get(0), 0);
+		} else {
+			ArrayList<ItemStack> tempList = OreDictionary.getOres("dust" + metalName);
+			if (tempList.isEmpty())
+				return;
+			ItemStack stack = tempList.get(0);
+			if (stack == null)
+				return;
+			itemDust = stack.getItem();
+		}
+		for (ItemStack stack : list)
+			DusterRecipes.dusting().addDusterRecipe(stack, new ItemStack(itemDust, 2));
+		list = OreDictionary.getOres("ingot" + metalName);
+		for (ItemStack stack : list)
+			DusterRecipes.dusting().addDusterRecipe(stack, new ItemStack(itemDust, 1));
 	}
 }
