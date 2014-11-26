@@ -146,8 +146,12 @@ public class ModIntegration {
 		if (ConfigurationHandeler.shouldRegisterDusts) {
 			itemDust = new ItemDust(color).setUnlocalizedName("dust" + metalName);
 			list = OreDictionary.getOres("dust" + metalName);
-			if (!list.isEmpty())
-				itemDust.setUnlocalizedName(list.get(0).getUnlocalizedName().substring(5));
+			if (!list.isEmpty()) {
+				String name = list.get(0).getUnlocalizedName();
+				name = name.replace("item.", "");
+				itemDust.setUnlocalizedName(name);
+			}
+
 			GameRegistry.registerItem(itemDust, "dust" + metalName);
 			OreDictionary.registerOre("dust" + metalName, itemDust);
 			GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metalName).get(0).copy(), 0);

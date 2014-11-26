@@ -124,7 +124,7 @@ public class GuiKEB extends GuiContainer {
 		if (shouldDrawEnergyNumber(mouseX - guiLeft, mouseY - guiTop)) {
 			ArrayList<String> list = new ArrayList<String>();
 			list.add(keb.energy + " / " + keb.maxEnergy + " RF");
-			this.drawHoveringText(new ArrayList<String>(), mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
+			this.drawHoveringText(list, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
 		}
 		if (shouldDrawWarning(mouseX - guiLeft, mouseY - guiTop)) {
 			ArrayList<String> list = new ArrayList<String>();
