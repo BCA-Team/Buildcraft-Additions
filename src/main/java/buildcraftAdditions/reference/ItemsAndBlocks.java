@@ -27,6 +27,8 @@ import buildcraftAdditions.blocks.BlockLavaCoil;
 import buildcraftAdditions.blocks.BlockMechanicalDuster;
 import buildcraftAdditions.blocks.BlockSemiAutomaticDuster;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT2;
+import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Core;
+import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Plating;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemBlockKEBT2;
@@ -47,6 +49,7 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import buildcraftAdditions.tileEntities.TileKEBT2;
+import buildcraftAdditions.tileEntities.TileKEBT3;
 import buildcraftAdditions.tileEntities.TileKineticCoil;
 import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
@@ -79,6 +82,8 @@ public final class ItemsAndBlocks {
 	public static BlockBCKinisisPipeCobble kinisisPipeCobble;
 	public static BlockKineticEnergyBufferTier1 kebT1;
 	public static MultiBlockKEBT2 kebT2;
+	public static MultiBlockKEBT3Core kebT3Core;
+	public static MultiBlockKEBT3Plating kebT3Plating;
 
 	public static Item powerCapsuleTier1;
 	public static Item powerCapsuleTier2;
@@ -227,6 +232,14 @@ public final class ItemsAndBlocks {
 		kebT2 = new MultiBlockKEBT2();
 		kebT2.setBlockName("blockKEBT2").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(kebT2, ItemBlockKEBT2.class, "KEBT2");
+
+		kebT3Core = new MultiBlockKEBT3Core();
+		kebT3Core.setBlockName("blockKEBT3Core").setCreativeTab(BuildcraftAdditions.bcadditions);
+		GameRegistry.registerBlock(kebT3Core, "KEBT3Core");
+
+		kebT3Plating = new MultiBlockKEBT3Plating();
+		kebT3Plating.setBlockName("blockKEBT3Plating").setCreativeTab(BuildcraftAdditions.bcadditions);
+		GameRegistry.registerBlock(kebT3Plating, "KEBT3Plating");
 	}
 
 	public static void addRecepies() {
@@ -287,6 +300,7 @@ public final class ItemsAndBlocks {
 			GameRegistry.registerTileEntity(TileKineticDuster.class, "TileKineticDuster");
 			GameRegistry.registerTileEntity(TileKineticEnergyBufferTier1.class, "TileKineticEnergyBufferTier1");
 			GameRegistry.registerTileEntity(TileKEBT2.class, "TileKineticEnergyBufferTier2");
+			GameRegistry.registerTileEntity(TileKEBT3.class, "TileKineticEnergyBufferTier3");
 		}
 	}
 }

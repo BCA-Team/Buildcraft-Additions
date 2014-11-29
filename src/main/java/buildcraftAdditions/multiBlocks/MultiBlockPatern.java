@@ -36,6 +36,15 @@ public class MultiBlockPatern {
 		this.replacements = replacements;
 	}
 
+	public MultiBlockPatern(ForgeDirection directions[], char identifier, HashMap<String, String> replacements) {
+		int length = directions.length;
+		this.directions = directions;
+		this.identifiers = new char[length];
+		for (int t = 0; t < length; t++)
+			this.identifiers[t] = identifier;
+		this.replacements = replacements;
+	}
+
 	public void checkPatern(World world, int x, int y, int z) {
 		Location location = new Location(world, x, y, z);
 		int length = directions.length;
@@ -45,9 +54,9 @@ public class MultiBlockPatern {
 			if (!(location.getBlock() instanceof MulitBlockBase))
 				return;
 			MulitBlockBase block = (MulitBlockBase) location.getBlock();
-			if (!(block.identifier == identifiers[t]) || location.getMeatadata() != 0)
-				if (!(replacements.get(String.valueOf(block.identifier)).toCharArray()[0] == identifiers[t]))
-					return;
+			if (!(block.identifier == identifiers[t]) || location.getMeatadata() != 0) {
+				return;
+			}
 		}
 		location = new Location(world, x, y, z);
 		for (ForgeDirection direction: directions) {
