@@ -1,6 +1,7 @@
 package buildcraftAdditions.multiBlocks;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -18,22 +19,35 @@ import buildcraftAdditions.utils.Location;
  */
 public class MultiBlockPatern {
 	public ForgeDirection directions[];
-	public char identifier;
+	public char identifiers[];
+	public HashMap<String, String> replacements = new HashMap<String, String>(5);
 
 	public MultiBlockPatern(ForgeDirection directions[], char identifier) {
-			this.directions = directions;
-			this.identifier = identifier;
+		int length = directions.length;
+		this.directions = directions;
+		this.identifiers = new char[length];
+		for (int t = 0; t < length; t++)
+			this.identifiers[t] = identifier;
+	}
+
+	public MultiBlockPatern(ForgeDirection directions[], char identifiers[], HashMap<String, String> replacements) {
+		this.directions = directions;
+		this.identifiers = identifiers;
+		this.replacements = replacements;
 	}
 
 	public void checkPatern(World world, int x, int y, int z) {
 		Location location = new Location(world, x, y, z);
-		for (ForgeDirection direction: directions) {
+		int length = directions.length;
+		for (int t = 0; t < length; t++) {
+			ForgeDirection direction = directions[t];
 			location.move(direction);
 			if (!(location.getBlock() instanceof MulitBlockBase))
 				return;
 			MulitBlockBase block = (MulitBlockBase) location.getBlock();
-			if (!(block.identifier == identifier) || location.getMeatadata() != 0 )
-				return;
+			if (!(block.identifier == identifiers[t]) || location.getMeatadata() != 0)
+				if (!(replacements.get(String.valueOf(block.identifier)).toCharArray()[0] == identifiers[t]))
+					return;
 		}
 		location = new Location(world, x, y, z);
 		for (ForgeDirection direction: directions) {
