@@ -47,7 +47,7 @@ curse {
     apiKey="0"
     }
     projectId = "221014"
-    changelog = "${config.changelog}"
+    changelog = "test"
     releaseType = "release"
     addGameVersion "1.7.10"
 }

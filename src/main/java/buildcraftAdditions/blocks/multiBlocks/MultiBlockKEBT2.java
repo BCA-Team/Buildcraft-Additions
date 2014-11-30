@@ -20,20 +20,22 @@ import buildcraftAdditions.tileEntities.TileKEBT2;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MultiBlockKEBT2 extends MulitBlockBase {
-	public IIcon icon;
+	public IIcon icon[];
+
+	public MultiBlockKEBT2() {
+		super('K', new MultiBlockPaternKEBT2());
+	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-		icon = register.registerIcon("bcadditions:energyBufferMultiblockRaw");
+		icon = new IIcon[2];
+		icon[0] = register.registerIcon("bcadditions:energyBufferMultiblockRaw");
+		icon [1] = register.registerIcon("bcadditions:multiBlockSeeInvisible");
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return icon;
-	}
-
-	public MultiBlockKEBT2() {
-		super('K', new MultiBlockPaternKEBT2());
+		return icon[meta];
 	}
 
 	@Override
@@ -55,11 +57,6 @@ public class MultiBlockKEBT2 extends MulitBlockBase {
 			if (tileEntity instanceof TileKineticEnergyBufferBase)
 				((TileKineticEnergyBufferBase) tileEntity).setOwner(((EntityPlayer) entity).getDisplayName());
 		}
-	}
-
-	@Override
-	public int getRenderType() {
-		return -1;
 	}
 
 	@Override
