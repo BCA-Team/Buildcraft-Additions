@@ -6,8 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 
-import buildcraft.api.core.NetworkData;
-
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 
@@ -20,7 +18,6 @@ import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileBasicCoil extends TileCoilBase implements IInventory {
-	@NetworkData
 	private final CustomInventory inventory = new CustomInventory("BasicCoil", 1, 64, this);
 
 	public TileBasicCoil() {
