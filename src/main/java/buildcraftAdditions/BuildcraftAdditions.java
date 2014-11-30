@@ -88,6 +88,7 @@ public class BuildcraftAdditions {
 		OreDictionary.registerOre("dustDiamond", itemDust);
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(itemDust, 2));
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Items.diamond), new ItemStack(itemDust, 1));
+		DusterRecipes.dusting().addDusterRecipe(Items.blaze_rod, new ItemStack(Items.blaze_powder, 4));
 
 		addDusts("Iron", 0xD2CEC9);
 		addDusts("Gold", 0xF8DF17);
