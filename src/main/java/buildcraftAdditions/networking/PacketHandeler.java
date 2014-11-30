@@ -27,5 +27,6 @@ public class PacketHandeler {
 		instance.registerMessage(MessageKEBT1.class, MessageKEBT1.class, 8, Side.CLIENT);
 		instance.registerMessage(MessageKEBConfiguration.class, MessageKEBConfiguration.class, 9, Side.SERVER);
 		instance.registerMessage(MessageSelfDestruct.class, MessageSelfDestruct.class, 10, Side.SERVER);
+		instance.registerMessage(MessageKEBT3.class, MessageKEBT3.class, 11, Side.CLIENT);
 	}
 }

@@ -16,7 +16,7 @@ public interface IMultiBlockTile {
 
 	public void invalidateMultiblock();
 
-	public void onBlockActivated(EntityPlayer player);
+	public boolean onBlockActivated(EntityPlayer player);
 
 	public void formMultiblock(int masterX, int masterY, int masterZ);
 

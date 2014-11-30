@@ -27,7 +27,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 	public int[] configuration = new int[6];
 	public int tier, timer;
 	public boolean sync, selfDestruct;
-	public String owner;
+	public String owner = "";
 	public EntityPlayer destroyer;
 
 	public TileKineticEnergyBufferBase(int maxEnergy, int maxInput, int maxOutput, int loss, int tier) {

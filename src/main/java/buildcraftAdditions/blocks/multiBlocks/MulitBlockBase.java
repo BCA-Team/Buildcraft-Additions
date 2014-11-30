@@ -60,8 +60,7 @@ public class MulitBlockBase extends BlockContainer {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		TileEntity entity = world.getTileEntity(x, y, z);
 		if (entity != null && entity instanceof IMultiBlockTile) {
-			((IMultiBlockTile) entity).onBlockActivated(player);
-			return true;
+			return ((IMultiBlockTile) entity).onBlockActivated(player);
 		}
 		return false;
 	}

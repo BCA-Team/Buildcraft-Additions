@@ -181,9 +181,9 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
-	public void onBlockActivated(EntityPlayer player) {
+	public boolean onBlockActivated(EntityPlayer player) {
 		if (!partOfMultiBlock)
-			return;
+			return false;
 		if (!worldObj.isRemote)
 			sync();
 		if (isMaster)
@@ -193,6 +193,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 			findMaster();
 		if (master != null)
 			master.onBlockActivated(player);
+		return true;
 	}
 
 	public void destroyMultiblock() {
