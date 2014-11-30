@@ -23,7 +23,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.client.gui.GuiHandler;
-import buildcraftAdditions.config.ConfigurationHandeler;
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.core.ModIntegration;
@@ -65,7 +65,7 @@ public class BuildcraftAdditions {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		Logger.initiallize();
-		ConfigurationHandeler.init(event.getSuggestedConfigurationFile());
+		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		PacketHandeler.init();
 		ItemsAndBlocks.init();
 		TrigersAndActions.register();
@@ -135,7 +135,7 @@ public class BuildcraftAdditions {
 		list = OreDictionary.getOres("ore" + metalName);
 		if (list.isEmpty())
 			return;
-		if (ConfigurationHandeler.shouldRegisterDusts) {
+		if (ConfigurationHandler.shouldRegisterDusts) {
 			itemDust = new ItemDust(color).setUnlocalizedName("dust" + metalName);
 			GameRegistry.registerItem(itemDust, "dust" + metalName);
 			OreDictionary.registerOre("dust" + metalName, itemDust);

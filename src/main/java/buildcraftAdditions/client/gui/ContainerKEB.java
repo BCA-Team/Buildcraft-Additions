@@ -15,6 +15,7 @@ public class ContainerKEB extends ContainerBase {
 
 	public ContainerKEB(TileKineticEnergyBufferBase keb, EntityPlayer player) {
 		super();
+		keb.sync();
 		keb.sync = true;
 		keb.timer = 0;
 		this.keb = keb;

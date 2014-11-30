@@ -13,11 +13,11 @@ import buildcraftAdditions.core.VersionCheck;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ConfigurationHandeler {
+public class ConfigurationHandler {
 	public static Configuration configFile;
 	public static boolean shouldPrintChangelog, shouldRegisterDusts, powerloss;
 	public static int[] powerDifficultyModifiers = new int[4];
-	public static int basePowerModifier, KEB1powerloss, KEB2powerloss;
+	public static int basePowerModifier, KEB1powerloss, KEB2powerloss, KEB3powerloss;
 
 	public static void init(File file) {
 		configFile = new Configuration(file);
@@ -41,6 +41,7 @@ public class ConfigurationHandeler {
 		powerloss = configFile.get("KEB", "powerloss", false).getBoolean();
 		KEB1powerloss = configFile.get("KEB", "KEB1powerloss", 10).getInt();
 		KEB2powerloss = configFile.get("KEB", "KEBT2powerloss", 5).getInt();
+		KEB3powerloss = configFile.get("KEB", "KEBT3powerloss", 3).getInt();
 
 		configFile.addCustomCategoryComment("Misc", "Stuff that didn't fit in any other category");
 		shouldRegisterDusts = configFile.get("Misc", "shouldRegisterDusts", true).setRequiresMcRestart(true).getBoolean();

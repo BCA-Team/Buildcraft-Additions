@@ -13,7 +13,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.AchievementEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
-import buildcraftAdditions.config.ConfigurationHandeler;
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
@@ -37,7 +37,7 @@ public class EventListener {
 			//version check stuff
 			if (VersionCheck.newerVersionAvailable && event != null) {
 				event.player.addChatComponentMessage(new ChatComponentText("There is a newer version of Buildcraft Additions available (" + VersionCheck.newerVersionNumber + ") Please consider updating"));
-				if (!ConfigurationHandeler.shouldPrintChangelog)
+				if (!ConfigurationHandler.shouldPrintChangelog)
 					return;
 				event.player.addChatComponentMessage(new ChatComponentText("Changelog: "));
 				for (int t = 0; t < VersionCheck.numLines; t++) {
@@ -51,7 +51,7 @@ public class EventListener {
 		@SubscribeEvent
 		public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
 			if (event.modID.equals("bcadditions"))
-				ConfigurationHandeler.readConfig();
+				ConfigurationHandler.readConfig();
 		}
 
 		@SubscribeEvent

@@ -14,6 +14,7 @@ import cofh.api.energy.IEnergyHandler;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.blocks.multiBlocks.MulitBlockBase;
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
@@ -40,7 +41,19 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public TileKEBT3 master;
 
 	public TileKEBT3() {
-		super(1000, 1000, 1000, 1000, 3);
+		super(100000000, 300000, 300000, ConfigurationHandler.KEB3powerloss, 3);
+	}
+
+	@Override
+	public void updateEntity() {
+		if (renderUpdate) {
+			sync();
+			renderUpdate = false;
+		}
+		if (!isMaster || worldObj.isRemote) {
+			return;
+		}
+		super.updateEntity();
 	}
 
 	@Override
@@ -155,7 +168,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 				Location location = from.copy();
 				location.move(direction);
 				IEnergyHandler target = (IEnergyHandler) location.getTileEntity();
-				if (target == null || target instanceof TileKEBT2)
+				if (target == null || target instanceof TileKEBT3)
 					continue;
 				int output = maxOutput;
 				if (output > energy)
@@ -167,17 +180,20 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public boolean onBlockActivated(EntityPlayer player) {
-		if (!partOfMultiBlock)
-			return false;
 		if (!worldObj.isRemote)
 			sync();
-		if (isMaster)
+		if (!partOfMultiBlock)
+			return false;
+		if (isMaster) {
 			player.openGui(BuildcraftAdditions.instance, Variables.GuiKEB, worldObj, xCoord, yCoord, zCoord);
-		else
-		if (master == null)
-			findMaster();
-		if (master != null)
-			master.onBlockActivated(player);
+			Logger.info("Energy stored: " + energy + " (" + worldObj.isRemote +")");
+		}
+		else {
+			if (master == null)
+				findMaster();
+			if (master != null)
+				master.onBlockActivated(player);
+		}
 		return true;
 	}
 
@@ -217,7 +233,8 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 		this.masterX = masterX;
 		this.masterY = masterY;
 		this.masterZ = masterZ;
-		renderUpdate = true;
+		if (!worldObj.isRemote)
+			sync();
 	}
 
 	@Override

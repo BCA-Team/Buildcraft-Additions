@@ -12,7 +12,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.api.DusterRecipes;
-import buildcraftAdditions.config.ConfigurationHandeler;
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.utils.BCItems;
 import buildcraftAdditions.reference.ItemsAndBlocks;
@@ -143,7 +143,7 @@ public class ModIntegration {
 		list = OreDictionary.getOres("ingot" + metalName);
 		if (list.isEmpty())
 			return;
-		if (ConfigurationHandeler.shouldRegisterDusts) {
+		if (ConfigurationHandler.shouldRegisterDusts) {
 			itemDust = new ItemDust(color).setUnlocalizedName("dust" + metalName);
 			list = OreDictionary.getOres("dust" + metalName);
 			if (!list.isEmpty()) {

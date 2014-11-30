@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 
 import cofh.api.energy.IEnergyContainerItem;
 
-import buildcraftAdditions.config.ConfigurationHandeler;
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.InventoryTool;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.utils.Utils;
@@ -118,7 +118,7 @@ public abstract class ItemPoweredBase extends ItemSword {
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entity) {
-		decreaseEnergy(stack, (block.getBlockHardness(world, x, y, z) * (ConfigurationHandeler.powerDifficultyModifiers[world.difficultySetting.getDifficultyId()]) * ConfigurationHandeler.basePowerModifier), player);
+		decreaseEnergy(stack, (block.getBlockHardness(world, x, y, z) * (ConfigurationHandler.powerDifficultyModifiers[world.difficultySetting.getDifficultyId()]) * ConfigurationHandler.basePowerModifier), player);
 
 		return false;
 	}

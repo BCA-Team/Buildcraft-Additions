@@ -7,7 +7,6 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-import buildcraftAdditions.tileEntities.TileKEBT2;
 import buildcraftAdditions.tileEntities.TileKEBT3;
 
 
@@ -90,7 +89,7 @@ public class MessageKEBT3 implements IMessage, IMessageHandler<MessageKEBT3, IMe
 	@Override
 	public IMessage onMessage(MessageKEBT3 message, MessageContext ctx) {
 		TileEntity entity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
-		if (entity != null && entity instanceof TileKEBT2) {
+		if (entity != null && entity instanceof TileKEBT3) {
 			TileKEBT3 keb = (TileKEBT3) entity;
 			keb.configuration = message.configuration;
 			keb.partOfMultiBlock = message.partOfMultiBlock;

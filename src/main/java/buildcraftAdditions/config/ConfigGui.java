@@ -27,9 +27,9 @@ public class ConfigGui extends GuiConfig {
 
 	public static List<IConfigElement> getList() {
 		List list = new ArrayList<IConfigElement>();
-		list.add(new ConfigElement(ConfigurationHandeler.configFile.getCategory("updates")));
-		list.add(new ConfigElement(ConfigurationHandeler.configFile.getCategory("power usage")));
-		list.add(new ConfigElement(ConfigurationHandeler.configFile.getCategory("misc")));
+		list.add(new ConfigElement(ConfigurationHandler.configFile.getCategory("updates")));
+		list.add(new ConfigElement(ConfigurationHandler.configFile.getCategory("power usage")));
+		list.add(new ConfigElement(ConfigurationHandler.configFile.getCategory("misc")));
 		return list;
 	}
 }

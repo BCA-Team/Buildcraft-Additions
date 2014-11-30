@@ -10,7 +10,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyHandler;
 
-import buildcraftAdditions.config.ConfigurationHandeler;
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.networking.MessageKEBConfiguration;
 import buildcraftAdditions.networking.MessageSelfDestruct;
 import buildcraftAdditions.networking.PacketHandeler;
@@ -136,7 +136,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 			}
 			timer--;
 		}
-		if (ConfigurationHandeler.powerloss)
+		if (ConfigurationHandler.powerloss)
 			energy = energy - loss;
 		if (energy < 0)
 			energy = 0;

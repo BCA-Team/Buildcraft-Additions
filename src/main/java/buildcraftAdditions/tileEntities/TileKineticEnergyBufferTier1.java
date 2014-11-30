@@ -2,7 +2,7 @@ package buildcraftAdditions.tileEntities;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-import buildcraftAdditions.config.ConfigurationHandeler;
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.networking.MessageKEBT1;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
@@ -18,7 +18,7 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 	public int energyState, lastEnergyState;
 
 	public TileKineticEnergyBufferTier1() {
-		super(3000000, 30000, 30000, ConfigurationHandeler.KEB1powerloss, 1);
+		super(3000000, 30000, 30000, ConfigurationHandler.KEB1powerloss, 1);
 	}
 
 	@Override
