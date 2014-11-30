@@ -33,7 +33,7 @@ public interface IStatementParameter {
 
 	/**
 	 * Something that is initially unintuitive: you HAVE to
-	 * keep your icons as static reference, due to the fact
+	 * keep your icons as static variables, due to the fact
 	 * that every IStatementParameter is instantiated upon creation,
 	 * in opposition to IStatements which are singletons (due to the
 	 * fact that they, unlike Parameters, store no additional data)

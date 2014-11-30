@@ -11,13 +11,11 @@ package buildcraft.api.power;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
- * Essentially only used for Wooden Power Pipe connection rules.
- *
- * This Tile Entity interface allows you to indicate that a block can emit power
- * from a specific side.
+ * Engines should implement this interface if they want to support
+ * BuildCraft's behaviour of passing energy between engines
+ * without using receiveEnergy() (which has other issues).
  */
-@Deprecated
-public interface IPowerEmitter {
-
-	boolean canEmitPowerFrom(ForgeDirection side);
+public interface IEngine {
+    boolean canReceiveFromEngine(ForgeDirection side);
+    int receiveEnergyFromEngine(ForgeDirection side, int energy, boolean simulate);
 }
