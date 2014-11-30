@@ -31,7 +31,6 @@ import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Core;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Plating;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemBase;
-import buildcraftAdditions.items.ItemBlockKEBT2;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ToolCoreRecipe;
@@ -231,7 +230,7 @@ public final class ItemsAndBlocks {
 
 		kebT2 = new MultiBlockKEBT2();
 		kebT2.setBlockName("blockKEBT2").setCreativeTab(BuildcraftAdditions.bcadditions);
-		GameRegistry.registerBlock(kebT2, ItemBlockKEBT2.class, "KEBT2");
+		GameRegistry.registerBlock(kebT2, "KEBT2");
 
 		kebT3Core = new MultiBlockKEBT3Core();
 		kebT3Core.setBlockName("blockKEBT3Core").setCreativeTab(BuildcraftAdditions.bcadditions);
