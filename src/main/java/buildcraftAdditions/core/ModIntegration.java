@@ -2,6 +2,7 @@ package buildcraftAdditions.core;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -12,11 +13,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.api.DusterRecipes;
+import buildcraftAdditions.blocks.BlockBasic;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.items.ItemDust;
-import buildcraftAdditions.utils.BCItems;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.utils.BCItems;
 
 
 import eureka.api.EurekaInfo;
@@ -80,6 +82,16 @@ public class ModIntegration {
 		EurekaRegistry.registerDrops("kineticCoil", new ItemStack(Items.iron_ingot), new ItemStack(ItemsAndBlocks.diamondWire, 8));
 		EurekaRegistry.addPlaceBlockProgress(ItemsAndBlocks.lavaCoilBlock, "kineticCoil");
 		EurekaRegistry.bindToKey(ItemsAndBlocks.kineticCoil, "kineticCoil");
+
+		EurekaRegistry.register(new EurekaInfo("KEBT1", "BCA", 3, new ItemStack(ItemsAndBlocks.kebT1, 1, 8)));
+		EurekaRegistry.registerDrops("KEBT1", new ItemStack(Items.iron_ingot, 4), new ItemStack(ItemsAndBlocks.powerCapsuleTier1, 3), new ItemStack(BCItems.PIPE_POWER_GOLD, 2));
+		EurekaRegistry.addCrafingProgress(ItemsAndBlocks.powerCapsuleTier1, "KEBT1");
+		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT1, "KEBT1");
+
+		Block temp = new BlockBasic("energyBufferMultiblockSides5");
+		GameRegistry.registerBlock(temp, "test");
+
+		EurekaRegistry.register(new EurekaInfo("KEBT2", "BCA", 4, new ItemStack(temp)));
 	}
 
 	public static void metallurgyMetals() {
