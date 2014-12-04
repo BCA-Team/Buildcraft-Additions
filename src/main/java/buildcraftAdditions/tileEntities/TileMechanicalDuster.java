@@ -66,6 +66,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IInventory, 
 		if (oldProgressStage != progressStage) {
 			TargetPoint point = new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30);
 			PacketHandeler.instance.sendToAllAround(new MessageMechanicDuster(xCoord, yCoord, zCoord, progressStage, getStackInSlot(0)), point);
+			oldProgressStage = progressStage;
 		}
 	}
 
