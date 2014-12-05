@@ -25,6 +25,14 @@ buildProps.withReader {
     prop.load(it)
     ext.config = new ConfigSlurper().parse prop
 }
+
+ext.curseProperties = file "curse.properties"
+
+curseProperties.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.curseProps = new ConfigSlurper().parse prop
+}
  
 version = "${config.version.mod}"
 group= "com.AEnterprise.BuildcraftAdditions" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -41,15 +49,11 @@ minecraft {
 }
 
 curse {
-    if (System.getenv().APIKEY != null) {
-    apiKey = "${System.getenv().APIKEY}"
-    } else {
-    apiKey="0"
-    }
-    projectId = "221014"
-    changelog = "test"
+    apiKey = "${curseProps.api_token}"
+    projectId = "${curseProps.project_id}"
+
     releaseType = "release"
-    addGameVersion "1.7.10"
+    changelog = ""
 }
 
 repositories {
