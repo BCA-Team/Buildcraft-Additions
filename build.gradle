@@ -26,16 +26,19 @@ buildProps.withReader {
     ext.config = new ConfigSlurper().parse prop
 }
 
-ext.curseProperties = file "curse.properties"
+def curseFile = file 'curse.properties'
+def doCurse = curseFile.exists()
 
-curseProperties.withReader {
-    def prop = new Properties()
-    prop.load(it)
-    ext.curseProps = new ConfigSlurper().parse prop
+if (doCurse) {
+    curseFile.withReader {
+        def prop = new Properties()
+        prop.load(it)
+        ext.curseProps = new ConfigSlurper().parse prop
+    }
 }
  
 version = "${config.version.mod}"
-group= "com.AEnterprise.BuildcraftAdditions" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "com.AEnterprise.BuildcraftAdditions" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "BuildcraftAdditions-1.7.10"
 
 if (System.getenv().BUILD_NUMBER != null) {
@@ -49,11 +52,20 @@ minecraft {
 }
 
 curse {
-    apiKey = "${curseProps.api_token}"
-    projectId = "${curseProps.project_id}"
+    doFirst {
+        println("Curse.properties found, uploading to curse!")
+        apiKey = "${curseProps.api_token}"
+        projectId = "${curseProps.project_id}"
 
-    releaseType = "release"
-    changelog = ""
+        releaseType = "release"
+        changelog = ""
+    }
+}
+
+task checkCurse() << {
+    if (!doCurse) {
+        throw new GradleException("No curse.properties file specified, This task shoudln't be used!")
+    }
 }
 
 repositories {
@@ -67,8 +79,8 @@ repositories {
         url = "http://mobiusstrip.eu/maven"
     }
     maven {
-	name = "buildcraft"
-	url = "http://mod-buildcraft.com"
+	    name = "buildcraft"
+	    url = "http://mod-buildcraft.com"
     }
 }
  
@@ -78,7 +90,7 @@ dependencies {
 	compile "codechicken:CodeChickenCore:${config.version.mc}-${config.version.ccc}:dev"
 	compile "codechicken:NotEnoughItems:${config.version.mc}-${config.version.nei}:dev"
 	compile "mcp.mobius.waila:Waila:${config.version.waila}_${config.version.mc}"
-    	compile "com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev"
+    compile "com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev"
 }
  
 processResources
@@ -113,3 +125,4 @@ jar {
 }
 
 assemble.dependsOn deobfJar
+curse.dependsOn checkCurse
