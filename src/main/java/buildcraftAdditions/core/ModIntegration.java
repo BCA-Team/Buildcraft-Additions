@@ -92,6 +92,13 @@ public class ModIntegration {
 		GameRegistry.registerBlock(temp, "test");
 
 		EurekaRegistry.register(new EurekaInfo("KEBT2", "BCA", 4, new ItemStack(temp)));
+		EurekaRegistry.registerDrops("KEBT2", new ItemStack(Items.iron_ingot, 6), new ItemStack(BCItems.PIPE_POWER_GOLD, 2), new ItemStack(ItemsAndBlocks.powerCapsuleTier2));
+		EurekaRegistry.addPlaceBlockProgress(ItemsAndBlocks.kebT1, "KEBT2");
+		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT2, "KEBT2");
+
+		EurekaRegistry.register(new EurekaInfo("KEBT3", "BCA", 2, new ItemStack(temp)));
+		EurekaRegistry.registerDrops("KEBT3", new ItemStack(BCItems.PIPE_POWER_DIAMOND, 2), new ItemStack(Items.gold_ingot, 4), new ItemStack(Items.iron_ingot, 3));
+		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT3Plating, "KEBT3");
 	}
 
 	public static void metallurgyMetals() {
