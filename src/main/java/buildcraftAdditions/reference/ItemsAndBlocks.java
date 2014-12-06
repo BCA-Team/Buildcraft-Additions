@@ -179,9 +179,11 @@ public final class ItemsAndBlocks {
 		GameRegistry.registerItem(diamondWire, "wireDiamond");
 
 		kinesisPipeWood = new BlockBCKinesisPipeWood();
+		kinesisPipeWood.setBlockName("kinesisPipeWood");
 		GameRegistry.registerBlock(kinesisPipeWood, "kinesisPipeWood");
 
 		kinisisPipeCobble = new BlockBCKinisisPipeCobble();
+		kinisisPipeCobble.setBlockName("kinesisPipeCobble");
 		GameRegistry.registerBlock(kinisisPipeCobble, "kinesisPipeCobble");
 
 		fluidicCompressorBlock = new BlockFluidicCompressor();
@@ -286,6 +288,8 @@ public final class ItemsAndBlocks {
 			GameRegistry.addRecipe(new ItemStack(kineticCoil), "WWW", "WIW", "WWW", 'W', diamondWire, 'I', Items.iron_ingot);
 			GameRegistry.addRecipe(new ItemStack(kebT1), "IBI", "PBP", "IBI", 'I', Items.iron_ingot, 'B', powerCapsuleTier1, 'P', BCItems.PIPE_POWER_GOLD);
 			GameRegistry.addRecipe(new ItemStack(kebT2), "III", "PBP", "III", 'I', Items.iron_ingot, 'B', powerCapsuleTier2, 'P', BCItems.PIPE_POWER_GOLD);
+			GameRegistry.addRecipe(new ItemStack(kebT3Core), "DBD", "PBP", "DBD", 'D', Items.diamond, 'B', powerCapsuleTier3, 'P', BCItems.PIPE_POWER_DIAMOND);
+			GameRegistry.addRecipe(new ItemStack(kebT3Plating), "PGP", "GGG", "III", 'P', BCItems.PIPE_POWER_DIAMOND, 'G', Items.gold_ingot, 'I', Items.iron_ingot);
 
 			GameRegistry.registerTileEntity(TileFluidicCompressor.class, "TileFluidicCompressor");
 			GameRegistry.registerTileEntity(TileChargingStation.class, "TileChargingStation");
