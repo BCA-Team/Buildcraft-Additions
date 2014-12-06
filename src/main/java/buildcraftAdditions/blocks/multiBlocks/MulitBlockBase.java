@@ -45,13 +45,13 @@ public class MulitBlockBase extends BlockContainer {
 	public void updateTick(World world, int x, int y, int z, Random random) {
 		if (world.getBlockMetadata(x, y, z) == 0) {
 			patern.checkPatern(world, x, y, z);
-			world.scheduleBlockUpdate(x, y, z, this, 1);
+			world.scheduleBlockUpdate(x, y, z, this, 80);
 		}
 	}
 
 	@Override
 	public boolean hasTileEntity(int metadata) {
-		return metadata == 1;
+		return true;
 	}
 
 
