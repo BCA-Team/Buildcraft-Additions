@@ -10,6 +10,9 @@ tile.blockCoilLava.name=Lava Coil
 tile.blockCoilKinetic.name=Kinetic Coil
 tile.blockKEBT1.name=Kinetic Energy Buffer
 tile.blockKEBT2.name=Large Kinetic Energy Buffer
+tile.blockKEBT3Core.name=Extra Large Kinetic Energy Buffer Core
+tile.blockKEBT3Plating.name=Extra Large Kinetic Energy Buffer Plating
+tile.blockKEBT3=Extra Large Kinetic Energy Buffer
 
 item.ironCanister.name=Iron Canister
 item.goldCanister.name=Gold Canister
@@ -137,7 +140,7 @@ engineeringDiary.heatedFurnace.page1=Stone wasn’t cutting it anymore. You alre
 engineeringDiary.heatedFurnace.page2=By surrounding a Furnace with Iron Ingots, you completely got rid of the fuel slot. Oops. @ @ However you were not to go down beaten and since you already know of the energy transmitting capabilities of Iron you’re convinced
 engineeringDiary.heatedFurnace.page3=you can make something to power this Furnace... You decide to place it in the world and see if you can think of something
 engineeringDiary.heatedFurnace.howToMakeProgress=Craft furnaces
-engineeringDiary.heatedFurnaceFinished=After placing all those furnaces you think of a way to make a better, more effective and faster furnace
+eureka.heatedFurnaceFinished=After placing all those furnaces you think of a way to make a better, more effective and faster furnace
 
 engineeringDiary.basicCoil.title=Basic Coil
 engineeringDiary.basicCoil.page0=This Coil can be used to power the Heated Furnace.
@@ -149,7 +152,7 @@ engineeringDiary.basicCoil.page5=that resembles a tower, but in the size of a bl
 engineeringDiary.basicCoil.page6=if not good ol’ Furnace fuel? The heat makes the wires spin, making contact with the Furnace and cooking anything inside it. A single Coil operates a Heated Furnace at 1/5th of the speed of a regular Furnace,
 engineeringDiary.basicCoil.page7=but in compensation the fuel lasts 5 times as much. Having all 6 sides of a Heated Furnace surrounded with Coils can make it cook faster than a regular Furnace.
 engineeringDiary.basicCoil.howToMakeProgress=Place a heated furnace
-engineeringDiary.basicCoilFinished=You already knew how to make the heated furnace but now that you actually placed it you come up with a way to actually heat it
+eureka.basicCoilFinished=You already knew how to make the heated furnace but now that you actually placed it you come up with a way to actually heat it
 
 engineeringDiary.lavaCoil.title=Lava Coil
 engineeringDiary.lavaCoil.page0=This Coil can power the Heated Furnace with Lava.
@@ -157,7 +160,7 @@ engineeringDiary.lavaCoil.page1=It was a logical step up. After your initial Coi
 engineeringDiary.lavaCoil.page2=them simply don’t take Coal for power. You decide to place Lava in these. Its a long shot, but they’re just as green as Fluid Sealant, so why not? @ @ It works. You really thought it was just going to melt it, but nope.
 engineeringDiary.lavaCoil.page3=These Coils take the already hot fluid Lava and use it to make even more heat. Now we’re talking.
 engineeringDiary.lavaCoil.howToMakeProgress=Place Basic Coils
-engineeringDiary.lavaCoilFinished=You observe your basic coils and there heat generation and ask yourself if you can't use lava heating for a new type of coil
+eureka.lavaCoilFinished=You observe your basic coils and there heat generation and ask yourself if you can't use lava heating for a new type of coil
 
 engineeringDiary.kineticCoil.title=Kinetic Coil
 engineeringDiary.kineticCoil.page0=This Coil can power the Heated Furnace with Lasers.
@@ -165,7 +168,7 @@ engineeringDiary.kineticCoil.page1=This time you were a bit conservative on usin
 engineeringDiary.kineticCoil.page2=It was clear from the start where these would be getting their source of power. @ @ Lasers. @ @ Diamonds are great conductors of energy after all and neither Coal nor Lava would ever generate enough heat to
 engineeringDiary.kineticCoil.page3=make Diamonds spin. After this one you’re never having a Furnace wall again.
 engineeringDiary.kineticCoil.howToMakeProgress=Place Lava Coils
-engineeringDiary.kineticCoilFinished=Those lava coils are great, but like with all things: there is always something better
+eureka.kineticCoilFinished=Those lava coils are great, but like with all things: there is always something better
 
 engineeringDiary.KEBT1.title=Basic Kinetic Energy Buffer
 engineeringDiary.KEBT1.page0=Basic energy storage in block form
@@ -174,7 +177,7 @@ engineeringDiary.KEBT1.page2=Determined to make it work, you make a simple machi
 engineeringDiary.KEBT1.page3=which ought to be enough to transmit energy to regular machines. Encase it all in some Iron, and you’ve got yourself a Kinetic Energy Buffer! @ @ The block has an interesting GUI, but the most notable thing about it is the fact
 engineeringDiary.KEBT1.page4=that you can use a Wrench to move it!
 engineeringDiary.KEBT1.howToMakeProgress=Craft kinetic capsules
-engineeringDiary.KEBT1Finished=Storing eneryg is batteries is usefull but now it's time to also store it in block form
+eureka.KEBT1Finished=Storing eneryg is batteries is usefull but now it's time to also store it in block form
 
 engineeringDiary.KEBT2.title=Large Kinetic Energy Buffer
 engineeringDiary.KEBT2.page0=Larger energy storage
@@ -182,9 +185,15 @@ engineeringDiary.KEBT2.page1=After your initial discovery of the Kinetic Energy 
 engineeringDiary.KEBT2.page2=By placing just one Capsule per block and filling the gaps with Iron Ingots, you make a block that is capable of connecting with others of the same kind. Adding them one by one, you make a small cubic structure,
 engineeringDiary.KEBT2.page3=which works just like a larger Kinetic Energy Buffer, except you can’t move it.
 engineeringDiary.KEBT2.howToMakeProgress=Place Kinetec Energy Buffers
-engineeringDiary.KEBT2Finished=These single blocks hold alot of power but it's not enough, time to step things up
+eureka.KEBT2Finished=These single blocks hold alot of power but it's not enough, time to step things up
 
-
+engineeringDiary.KEBT3.title=Extra Large Kinetic Energy Buffer
+engineeringDiary.KEBT3.page0=Even more energy storage
+engineeringDiary.KEBT3.page1= So Tier 2 Kinetic Capsules can’t stack on the same block. But does the same hold true for Tier 3? Nope. Turns out you can fit 3 of them inside a single block! The downside is that you have to use Diamonds to cover the structure,
+engineeringDiary.KEBT3.page2=and only Diamond Kinesis Pipes are able to handle the energy rate inside the block. Not only that, to keep it all in there even more shielding is needed. By combining Gold and Iron (with some Diamond Kinesis Pipes to keep the energy flow going)
+engineeringDiary.KEBT3.page3=you can create the perfect plating for the block. Safe, yet conducting.
+engineeringDiary.KEBT3.howToMakeProgress=Assemble 2 Large Kinetic Energy Buffers
+eureka.KEBT3Finished=Massive power storage just isn't enough
 
 engineeringDiary.requiredResearch=Required research:
 engineeringDiary.progress=Progress:
