@@ -54,8 +54,10 @@ public class MultiBlockKEBT2 extends MulitBlockBase {
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
 		if (entity instanceof EntityPlayer) {
 			TileEntity tileEntity = world.getTileEntity(x, y, z);
-			if (tileEntity instanceof TileKineticEnergyBufferBase)
+			if (tileEntity instanceof TileKineticEnergyBufferBase) {
 				((TileKineticEnergyBufferBase) tileEntity).setOwner(((EntityPlayer) entity).getDisplayName());
+				((TileKineticEnergyBufferBase) tileEntity).destroyer = ((EntityPlayer) entity);
+			}
 		}
 	}
 

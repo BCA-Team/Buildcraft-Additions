@@ -25,6 +25,9 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.Location;
+
+
+import eureka.api.EurekaKnowledge;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -218,6 +221,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public void makeMaster() {
 		isMaster = true;
 		partOfMultiBlock = true;
+		EurekaKnowledge.makeProgress(destroyer, "KEBT3", 1);
 	}
 
 	@Override
@@ -239,9 +243,10 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public void invalidateMultiblock() {
-		if (isMaster)
+		if (isMaster) {
 			patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord);
-		else
+			EurekaKnowledge.makeProgress(destroyer, "KEBT3", -1);
+		} else
 			patern.destroyMultiblock(worldObj, masterX, masterY, masterZ);
 
 	}
