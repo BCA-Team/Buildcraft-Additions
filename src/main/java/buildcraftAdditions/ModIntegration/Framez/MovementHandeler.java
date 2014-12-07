@@ -3,6 +3,7 @@ package buildcraftAdditions.ModIntegration.Framez;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import buildcraftAdditions.tileEntities.TileKEBT2;
 import buildcraftAdditions.tileEntities.TileKEBT3;
 
@@ -31,6 +32,8 @@ public class MovementHandeler implements IMovementHandler {
 			((TileKEBT2) entity).moved = true;
 		if (entity instanceof TileKEBT3)
 			((TileKEBT3) entity).moved = true;
+		if (entity instanceof TileHeatedFurnace)
+			((TileHeatedFurnace) entity).shouldUpdateCoils = true;
 		return false;
 	}
 
