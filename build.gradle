@@ -84,7 +84,7 @@ repositories {
     }
     maven {
     name = "amadornesrepo"
-    url = "http://maven.amadornes.com"
+    url = "http://maven.amadornes.com/"
     }
 }
  
@@ -95,7 +95,7 @@ dependencies {
 	compile "codechicken:NotEnoughItems:${config.version.mc}-${config.version.nei}:dev"
 	compile "mcp.mobius.waila:Waila:${config.version.waila}_${config.version.mc}"
 	compile "com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev"
-	compile "framez:Framez:${config.version.framez}:Framez-${config.version.framez}-api"
+	compile "framez:Framez:${config.version.framez}:deobf"
 }
  
 processResources
