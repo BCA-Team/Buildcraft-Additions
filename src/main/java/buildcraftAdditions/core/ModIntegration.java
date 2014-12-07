@@ -101,7 +101,7 @@ public class ModIntegration {
 		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT3Plating, "KEBT3");
 	}
 
-	public static void metallurgyMetals() {
+	public static void metals() {
 
 		addDusts("Bronze", 0xAD6726);
 		addDusts("Manganese", 0xF3D2D2);
