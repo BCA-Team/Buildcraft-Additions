@@ -10,9 +10,9 @@ tile.blockCoilLava.name=Lava Coil
 tile.blockCoilKinetic.name=Kinetic Coil
 tile.blockKEBT1.name=Kinetic Energy Buffer
 tile.blockKEBT2.name=Large Kinetic Energy Buffer
-tile.blockKEBT3Core.name=Extra Large Kinetic Energy Buffer Core
-tile.blockKEBT3Plating.name=Extra Large Kinetic Energy Buffer Plating
-tile.blockKEBT3.name=Extra Large Kinetic Energy Buffer
+tile.blockKEBT3Core.name=Advanced Kinetic Energy Buffer Core
+tile.blockKEBT3Plating.name=Advanced Kinetic Energy Buffer Plating
+tile.blockKEBT3.name=Advanced Kinetic Energy Buffer
 
 item.ironCanister.name=Iron Canister
 item.goldCanister.name=Gold Canister
@@ -187,7 +187,7 @@ engineeringDiary.KEBT2.page3=which works just like a larger Kinetic Energy Buffe
 engineeringDiary.KEBT2.howToMakeProgress=Place Kinetec Energy Buffers
 eureka.KEBT2Finished=These single blocks hold alot of power but it's not enough, time to step things up
 
-engineeringDiary.KEBT3.title=Extra Large Kinetic Energy Buffer
+engineeringDiary.KEBT3.title=Advanced Kinetic Energy Buffer
 engineeringDiary.KEBT3.page0=Even more energy storage
 engineeringDiary.KEBT3.page1= So Tier 2 Kinetic Capsules can’t stack on the same block. But does the same hold true for Tier 3? Nope. Turns out you can fit 3 of them inside a single block! The downside is that you have to use Diamonds to cover the structure,
 engineeringDiary.KEBT3.page2=and only Diamond Kinesis Pipes are able to handle the energy rate inside the block. Not only that, to keep it all in there even more shielding is needed. By combining Gold and Iron (with some Diamond Kinesis Pipes to keep the energy flow going)
