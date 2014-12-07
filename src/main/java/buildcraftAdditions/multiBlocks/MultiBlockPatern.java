@@ -46,26 +46,32 @@ public class MultiBlockPatern {
 	}
 
 	public void checkPatern(World world, int x, int y, int z) {
-		Location location = new Location(world, x, y, z);
+		if (isPaternValid(world, x, y, z)) {
+			Location location = new Location(world, x, y, z);
+			for (ForgeDirection direction : directions) {
+				location.move(direction);
+				location.setMetadata(1);
+				IMultiBlockTile slave = (IMultiBlockTile) location.getTileEntity();
+				slave.formMultiblock(x, y, z);
+			}
+			addMaster(world, x, y, z);
+		}
+	}
+
+	public boolean isPaternValid(World world, int startX, int startY, int startZ) {
+		Location location = new Location(world, startX, startY, startZ);
 		int length = directions.length;
 		for (int t = 0; t < length; t++) {
 			ForgeDirection direction = directions[t];
 			location.move(direction);
 			if (!(location.getBlock() instanceof MulitBlockBase))
-				return;
+				return false;
 			MulitBlockBase block = (MulitBlockBase) location.getBlock();
 			if (!(block.identifier == identifiers[t]) || location.getMeatadata() != 0) {
-				return;
+				return false;
 			}
 		}
-		location = new Location(world, x, y, z);
-		for (ForgeDirection direction: directions) {
-			location.move(direction);
-			location.setMetadata(1);
-			IMultiBlockTile slave = (IMultiBlockTile) location.getTileEntity();
-			slave.formMultiblock(x, y, z);
-		}
-		addMaster(world, x, y, z);
+		return true;
 	}
 
 	public void destroyMultiblock(World world, int x, int y, int z) {

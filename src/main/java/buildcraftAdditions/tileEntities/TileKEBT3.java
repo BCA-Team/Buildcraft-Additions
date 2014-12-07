@@ -34,10 +34,10 @@ import buildcraftAdditions.utils.Location;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBlockTile {
-	MultiBlockPatern patern = new MultiBlockPaternKEBT3();
-	public boolean isMaster, partOfMultiBlock;
+	public MultiBlockPatern patern = new MultiBlockPaternKEBT3();
+	public boolean isMaster, partOfMultiBlock, moved;
 	public boolean renderUpdate = true;
-	public int masterX, masterY, masterZ, energyState, lastEnergyState;
+	public int masterX, masterY, masterZ, energyState, lastEnergyState, oldX, oldY, oldZ;
 	public TileKEBT3 master;
 
 	public TileKEBT3() {
@@ -46,6 +46,13 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public void updateEntity() {
+		if (moved && isMaster) {
+			if (!patern.isPaternValid(worldObj, xCoord, yCoord, zCoord)) {
+				patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord);
+				patern.destroyMultiblock(worldObj, oldX, oldY, oldZ);
+			}
+			moved = false;
+		}
 		if (renderUpdate) {
 			sync();
 			renderUpdate = false;
@@ -248,6 +255,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public void invalidateBlock() {
+
 		if (isMaster)
 			worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, ItemsAndBlocks.kebT3Core, 80);
 		partOfMultiBlock = false;

@@ -1,4 +1,4 @@
-package buildcraftAdditions.core;
+package buildcraftAdditions.ModIntegration;
 
 import java.util.ArrayList;
 
@@ -8,10 +8,12 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.oredict.OreDictionary;
 
+import buildcraftAdditions.ModIntegration.Framez.MovementHandeler;
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.blocks.BlockBasic;
 import buildcraftAdditions.config.ConfigurationHandler;
@@ -21,6 +23,7 @@ import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.BCItems;
 
 
+import com.amadornes.framez.api.FramezApi;
 import eureka.api.EurekaInfo;
 import eureka.api.EurekaRegistry;
 
@@ -33,14 +36,22 @@ import eureka.api.EurekaRegistry;
  */
 public class ModIntegration {
 
-	public static void railcraftIntegration() {
+	public static void integrate() {
+		eurekaResearch();
+		railcraftIntegration();
+		metals();
+		if (Loader.isModLoaded("framez"))
+			Framez();
+	}
+
+	private static void railcraftIntegration() {
 		addNuggets("Iron");
 		addNuggets("Gold");
 		addNuggets("Copper");
 		addNuggets("Tin");
 	}
 
-	public static void eurekaResearch() {
+	private static void eurekaResearch() {
 		EurekaRegistry.registerCategory("BCA", new ItemStack(ItemsAndBlocks.kineticDusterBlock));
 
 		EurekaRegistry.register(new EurekaInfo(Variables.DustT0Key, "BCA", 1, new ItemStack(ItemsAndBlocks.basicDusterBlock)));
@@ -101,7 +112,7 @@ public class ModIntegration {
 		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT3Plating, "KEBT3");
 	}
 
-	public static void metals() {
+	private static void metals() {
 
 		addDusts("Bronze", 0xAD6726);
 		addDusts("Manganese", 0xF3D2D2);
@@ -146,7 +157,7 @@ public class ModIntegration {
 		addDusts("Electrum", 0xDFD0AA);
 }
 
-	public static void addNuggets(String metal) {
+	private static void addNuggets(String metal) {
 		ArrayList<ItemStack> oreList = OreDictionary.getOres("orePoor" + metal);
 		ArrayList<ItemStack> nuggetList = OreDictionary.getOres("nugget" + metal);
 		if (oreList.isEmpty() || nuggetList.isEmpty())
@@ -189,5 +200,9 @@ public class ModIntegration {
 		list = OreDictionary.getOres("ingot" + metalName);
 		for (ItemStack stack : list)
 			DusterRecipes.dusting().addDusterRecipe(stack.copy(), new ItemStack(itemDust, 1));
+	}
+
+	private static void Framez() {
+		FramezApi.inst().getMovementApi().registerMovementHandler(new MovementHandeler());
 	}
 }

@@ -25,7 +25,7 @@ import buildcraftAdditions.client.gui.GuiHandler;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
-import buildcraftAdditions.core.ModIntegration;
+import buildcraftAdditions.ModIntegration.ModIntegration;
 import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
@@ -105,9 +105,7 @@ public class BuildcraftAdditions {
 		addDusts("Manyullyn", 0xAB7EE3);
 		addDusts("Cobalt", 0x0064FF);
 
-		ModIntegration.railcraftIntegration();
-		//try to process all the ores
-		ModIntegration.metals();
+		ModIntegration.integrate();
 
 	}
 
@@ -121,7 +119,6 @@ public class BuildcraftAdditions {
 	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-		ModIntegration.eurekaResearch();
 	}
 
 	public void addDusts(String metalName, int color) {

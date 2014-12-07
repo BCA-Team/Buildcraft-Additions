@@ -36,18 +36,26 @@ import eureka.api.EurekaKnowledge;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBlockTile {
-	private MultiBlockPatern patern = new MultiBlockPaternKEBT2();
-	public boolean isMaster, partOfMultiBlock;
+	public MultiBlockPatern patern = new MultiBlockPaternKEBT2();
+	public boolean isMaster, partOfMultiBlock, moved;
 	public boolean renderUpdate = true;
-	public int masterX, masterY, masterZ, energyState, lastEnergyState;
+	public int masterX, masterY, masterZ, energyState, lastEnergyState, oldX, oldY, oldZ;
 	public TileKEBT2 master;
 
 	public TileKEBT2() {
 		super(25000000, 75000, 75000, ConfigurationHandler.KEB2powerloss, 2);
+		moved = false;
 	}
 
 	@Override
 	public void updateEntity() {
+		if (moved && isMaster) {
+			if (!patern.isPaternValid(worldObj, xCoord, yCoord, zCoord)) {
+				patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord);
+				patern.destroyMultiblock(worldObj, oldX, oldY, oldZ);
+			}
+			moved = false;
+		}
 		if (renderUpdate) {
 			sync();
 		}
