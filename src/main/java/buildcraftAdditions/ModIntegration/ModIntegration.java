@@ -13,7 +13,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.oredict.OreDictionary;
 
-import buildcraftAdditions.ModIntegration.Framez.MovementHandeler;
+import buildcraftAdditions.ModIntegration.Framez.FramezIntegration;
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.blocks.BlockBasic;
 import buildcraftAdditions.config.ConfigurationHandler;
@@ -23,7 +23,6 @@ import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.BCItems;
 
 
-import com.amadornes.framez.api.FramezApi;
 import eureka.api.EurekaInfo;
 import eureka.api.EurekaRegistry;
 
@@ -41,7 +40,7 @@ public class ModIntegration {
 		railcraftIntegration();
 		metals();
 		if (Loader.isModLoaded("framez"))
-			Framez();
+			FramezIntegration.Framez();
 	}
 
 	private static void railcraftIntegration() {
@@ -200,9 +199,5 @@ public class ModIntegration {
 		list = OreDictionary.getOres("ingot" + metalName);
 		for (ItemStack stack : list)
 			DusterRecipes.dusting().addDusterRecipe(stack.copy(), new ItemStack(itemDust, 1));
-	}
-
-	private static void Framez() {
-		FramezApi.inst().getMovementApi().registerMovementHandler(new MovementHandeler());
 	}
 }
