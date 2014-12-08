@@ -8,13 +8,11 @@
  */
 package buildcraft.api.core;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 import net.minecraftforge.common.util.ForgeDirection;
-
-
-import io.netty.buffer.ByteBuf;
 
 public class Position implements ISerializable {
 
