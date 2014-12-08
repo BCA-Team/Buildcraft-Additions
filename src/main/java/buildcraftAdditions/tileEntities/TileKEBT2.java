@@ -39,7 +39,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public MultiBlockPatern patern = new MultiBlockPaternKEBT2();
 	public boolean isMaster, partOfMultiBlock, moved;
 	public boolean renderUpdate = true;
-	public int masterX, masterY, masterZ, energyState, lastEnergyState, oldX, oldY, oldZ;
+	public int masterX, masterY, masterZ, energyState, lastEnergyState, oldmasterX, oldmasterY, oldmasterZ;
 	public TileKEBT2 master;
 
 	public TileKEBT2() {
@@ -49,10 +49,10 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public void updateEntity() {
-		if (moved && isMaster) {
-			if (!patern.isPaternValid(worldObj, xCoord, yCoord, zCoord)) {
-				patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord);
-				patern.destroyMultiblock(worldObj, oldX, oldY, oldZ);
+		if (moved) {
+			if (!patern.isPaternValid(worldObj, masterX, masterY, masterZ)) {
+				patern.destroyMultiblock(worldObj, masterX, masterY, masterZ);
+				patern.destroyMultiblock(worldObj, oldmasterX, oldmasterY, oldmasterZ);
 			}
 			moved = false;
 		}
