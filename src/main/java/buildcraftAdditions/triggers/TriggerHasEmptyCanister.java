@@ -73,7 +73,7 @@ public class TriggerHasEmptyCanister implements ITriggerExternal {
 	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
 		if (target instanceof TileFluidicCompressor) {
 			TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) target;
-			return (fluidicCompressor.getStackInSlot(1) != null && fluidicCompressor.getStackInSlot(1).stackTagCompound.hasKey("Fluid"));
+			return (fluidicCompressor.getStackInSlot(1) != null && fluidicCompressor.getStackInSlot(1).stackTagCompound != null && fluidicCompressor.getStackInSlot(1).stackTagCompound.hasKey("Fluid"));
 		}
 		return false;
 	}
