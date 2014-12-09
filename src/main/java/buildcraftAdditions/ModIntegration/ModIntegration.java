@@ -22,7 +22,6 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.BCItems;
 
-
 import eureka.api.EurekaInfo;
 import eureka.api.EurekaRegistry;
 
@@ -154,6 +153,16 @@ public class ModIntegration {
 		addDusts("Zinc", 0xDCDFA4);
 		addDusts("Brass", 0xD89634);
 		addDusts("Electrum", 0xDFD0AA);
+		addDusts("Aluminum", 0xEDEDED);
+		addDusts("Ardite", 0xF28900);
+		addDusts("Manyullyn", 0xAB7EE3);
+		addDusts("Cobalt", 0x0064FF);
+		addDusts("Copper", 0xBF5E1F);
+		addDusts("Lead", 0x808096);
+		addDusts("Nickel", 0xBAB0A4);
+		addDusts("Platinum", 0xABCDEF);
+		addDusts("Silver", 0xB3B3B3);
+		addDusts("Tin", 0xF2F2F2);
 }
 
 	private static void addNuggets(String metal) {

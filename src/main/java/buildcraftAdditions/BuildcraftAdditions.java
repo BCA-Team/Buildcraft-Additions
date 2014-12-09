@@ -20,12 +20,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
+import buildcraftAdditions.ModIntegration.ModIntegration;
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.client.gui.GuiHandler;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
-import buildcraftAdditions.ModIntegration.ModIntegration;
 import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
@@ -91,19 +91,6 @@ public class BuildcraftAdditions {
 
 		addDusts("Iron", 0xD2CEC9);
 		addDusts("Gold", 0xF8DF17);
-		addDusts("Copper", 0xBF5E1F);
-		addDusts("Lead", 0x808096);
-		addDusts("Nickel", 0xBAB0A4);
-		addDusts("Platinum", 0xABCDEF);
-		addDusts("Silver", 0xB3B3B3);
-		addDusts("Tin", 0xF2F2F2);
-
-		//TiC metals
-		addDusts("Aluminum", 0xEDEDED);
-		addDusts("Ardite", 0xF28900);
-		addDusts("Steel", 0x878787);
-		addDusts("Manyullyn", 0xAB7EE3);
-		addDusts("Cobalt", 0x0064FF);
 
 		ModIntegration.integrate();
 
