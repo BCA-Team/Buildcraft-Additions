@@ -1,6 +1,5 @@
 package buildcraftAdditions.blocks.multiBlocks;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,19 +22,7 @@ public class MultiBlockKEBT2 extends MulitBlockBase {
 	public IIcon icon[];
 
 	public MultiBlockKEBT2() {
-		super('K', new MultiBlockPaternKEBT2());
-	}
-
-	@Override
-	public void registerBlockIcons(IIconRegister register) {
-		icon = new IIcon[2];
-		icon[0] = register.registerIcon("bcadditions:energyBufferMultiblockRaw");
-		icon [1] = register.registerIcon("bcadditions:multiBlockSeeInvisible");
-	}
-
-	@Override
-	public IIcon getIcon(int side, int meta) {
-		return icon[meta];
+		super('K', new MultiBlockPaternKEBT2(), "energyBufferMultiblockRaw");
 	}
 
 	@Override
@@ -59,15 +46,5 @@ public class MultiBlockKEBT2 extends MulitBlockBase {
 				((TileKineticEnergyBufferBase) tileEntity).destroyer = ((EntityPlayer) entity);
 			}
 		}
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	public boolean hasTileEntity(int metadata) {
-		return true;
 	}
 }

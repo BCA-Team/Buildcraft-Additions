@@ -1,6 +1,5 @@
 package buildcraftAdditions.blocks.multiBlocks;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -22,28 +21,12 @@ public class MultiBlockKEBT3Plating extends MulitBlockBase {
 	public IIcon icon[];
 
 	public MultiBlockKEBT3Plating() {
-		super('W', new MultiBlockPaternKEBT3());
-	}
-
-	@Override
-	public void registerBlockIcons(IIconRegister register) {
-		icon = new IIcon[2];
-		icon [1] = register.registerIcon("bcadditions:multiBlockSeeInvisible");
-	}
-
-	@Override
-	public IIcon getIcon(int side, int meta) {
-		return icon[meta];
+		super('W', new MultiBlockPaternKEBT3(), "textureKEBT3Plating");
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		return super.onBlockActivated(world, x, y, z, player, meta, hitX, hitY, hitZ);
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
 	}
 
 	@Override
@@ -58,10 +41,5 @@ public class MultiBlockKEBT3Plating extends MulitBlockBase {
 			if (tileEntity instanceof TileKineticEnergyBufferBase)
 				((TileKineticEnergyBufferBase) tileEntity).setOwner(((EntityPlayer) entity).getDisplayName());
 		}
-	}
-
-	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
-
 	}
 }

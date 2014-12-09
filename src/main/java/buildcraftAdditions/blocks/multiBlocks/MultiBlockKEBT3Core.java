@@ -26,7 +26,7 @@ public class MultiBlockKEBT3Core extends MulitBlockBase {
 	}
 
 	public MultiBlockKEBT3Core() {
-		super('C', new MultiBlockPaternKEBT3());
+		super('C', new MultiBlockPaternKEBT3(), "textureKEBT3Core");
 	}
 
 	@Override
