@@ -1,7 +1,11 @@
 package buildcraftAdditions.tileEntities;
 
+import java.util.Collection;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -9,9 +13,13 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import buildcraft.api.recipes.BuildcraftRecipeRegistry;
+
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
 import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
+import buildcraftAdditions.networking.MessageRefinery;
+import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 /**
@@ -22,17 +30,21 @@ import buildcraftAdditions.tileEntities.Bases.TileBase;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler {
-	public int masterX, masterY, masterZ, rotationIndex;
+	public int masterX, masterY, masterZ, rotationIndex, timer;
 	public boolean isMaster, partOfMultiBlock;
 	public MultiBlockPatern patern = new MultiBlockPaternRefinery();
+	public TileRefinery master;
+	Collection recepies = BuildcraftRecipeRegistry.refinery.getRecipes();
 
-	@Override
 	public void updateEntity() {
+		if (timer == 0) {
+			sync();
+			timer = 40;
+		}
 	}
 
 	@Override
 	public void makeMaster(int rotationIndex) {
-		System.out.println("VALID REFINERY");
 		isMaster = true;
 		partOfMultiBlock = true;
 		this.rotationIndex = rotationIndex;
@@ -40,7 +52,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void sync() {
-
+		if (!worldObj.isRemote)
+			PacketHandeler.instance.sendToAllAround(new MessageRefinery(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 20));
 	}
 
 	@Override
