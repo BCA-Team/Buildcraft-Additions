@@ -11,7 +11,24 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class MultiBlockPaternRefinery extends MultiBlockPatern {
 
 	public MultiBlockPaternRefinery() {
-		super(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH}, 'R');
-		identifiers[1] = '\n';
+		super(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.NORTH, ForgeDirection.NORTH,
+				ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH,
+				ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH,
+				ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH,
+				ForgeDirection.EAST, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH,
+				ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.UP,
+				ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH,
+				ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.NORTH,
+				ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH,
+				ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.WEST, ForgeDirection.SOUTH, ForgeDirection.SOUTH,
+				ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH,
+				ForgeDirection.SOUTH, ForgeDirection.UP, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH,
+				ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH,
+				ForgeDirection.EAST, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH,
+				ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.EAST,
+				ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH,
+				ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH}, 'R');
+		for (int t = 38; t < 45; t++)
+			identifiers[t] = '\n';
 	}
 }
