@@ -19,7 +19,7 @@ import buildcraftAdditions.utils.Location;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MultiBlockPatern {
-	public ForgeDirection directions[];
+	public ForgeDirection directions[], rotatedDirections[];
 	public char identifiers[];
 	public HashMap<String, String> replacements = new HashMap<String, String>(5);
 
@@ -103,7 +103,7 @@ public class MultiBlockPatern {
 
 	}
 
-	public void addMaster (World world, int x, int y, int z) {
+	private void addMaster(World world, int x, int y, int z) {
 		TileEntity entity = world.getTileEntity(x, y, z);
 		if (entity != null && entity instanceof IMultiBlockTile) {
 			IMultiBlockTile master = (IMultiBlockTile) entity;
