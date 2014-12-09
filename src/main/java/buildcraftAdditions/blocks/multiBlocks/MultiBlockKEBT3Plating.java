@@ -21,7 +21,7 @@ public class MultiBlockKEBT3Plating extends MultiBlockBase {
 	public IIcon icon[];
 
 	public MultiBlockKEBT3Plating() {
-		super('W', new MultiBlockPaternKEBT3(), "textureKEBT3Plating");
+		super('W', new MultiBlockPaternKEBT3(), "energyBufferMultiblockPlating");
 	}
 
 	@Override

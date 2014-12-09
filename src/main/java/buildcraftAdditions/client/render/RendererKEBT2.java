@@ -25,7 +25,6 @@ public class RendererKEBT2 extends TileEntitySpecialRenderer {
 			new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides4.png"),
 			new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockSides5.png")};
 	public ResourceLocation topAndBottom = new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockTopAndBottom.png");
-	public ResourceLocation singleBlock = new ResourceLocation("bcadditions", "textures/blocks/energyBufferMultiblockRaw.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {

@@ -129,13 +129,11 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		}
 		if (fuse <= 0 && selfDestruct)
 			byeBye();
-		if (sync) {
 			if (timer == 0) {
 				sync();
 				timer = 20;
 			}
 			timer--;
-		}
 		if (ConfigurationHandler.powerloss)
 			energy = energy - loss;
 		if (energy < 0)

@@ -37,8 +37,7 @@ import eureka.api.EurekaKnowledge;
 public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBlockTile {
 	public MultiBlockPatern patern = new MultiBlockPaternKEBT2();
 	public boolean isMaster, partOfMultiBlock, moved;
-	public boolean renderUpdate = true;
-	public int masterX, masterY, masterZ, energyState, lastEnergyState, oldmasterX, oldmasterY, oldmasterZ;
+	public int masterX, masterY, masterZ, energyState, oldmasterX, oldmasterY, oldmasterZ;
 	public TileKEBT2 master;
 
 	public TileKEBT2() {
@@ -55,17 +54,11 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 			}
 			moved = false;
 		}
-		if (renderUpdate) {
-			sync();
-		}
 		if (!isMaster || worldObj.isRemote) {
 			return;
 		}
 		super.updateEntity();
 		energyState = (energy * 5) / maxEnergy;
-		if (energyState != lastEnergyState)
-			renderUpdate = true;
-		lastEnergyState = energyState;
 	}
 
 	@Override
@@ -245,7 +238,6 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 		this.masterX = masterX;
 		this.masterY = masterY;
 		this.masterZ = masterZ;
-		renderUpdate = true;
 	}
 
 	@Override
@@ -267,7 +259,6 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 			configuration[teller] = 0;
 		}
 		energyState = 0;
-		lastEnergyState = 0;
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, ItemsAndBlocks.kebT2, 80);
 		sync();

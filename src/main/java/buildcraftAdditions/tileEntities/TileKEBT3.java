@@ -36,8 +36,7 @@ import buildcraftAdditions.utils.Location;
 public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBlockTile {
 	public MultiBlockPatern patern = new MultiBlockPaternKEBT3();
 	public boolean isMaster, partOfMultiBlock, moved;
-	public boolean renderUpdate = true;
-	public int masterX, masterY, masterZ, energyState, lastEnergyState, oldmasterX, oldmasterY, oldmasterZ;
+	public int masterX, masterY, masterZ, energyState, oldmasterX, oldmasterY, oldmasterZ;
 	public TileKEBT3 master;
 
 	public TileKEBT3() {
@@ -53,14 +52,11 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 			}
 			moved = false;
 		}
-		if (renderUpdate) {
-			sync();
-			renderUpdate = false;
-		}
 		if (!isMaster || worldObj.isRemote) {
 			return;
 		}
 		super.updateEntity();
+		energyState = (int) (((long) energy) * 4) / maxEnergy;
 	}
 
 	@Override
@@ -226,6 +222,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public void makeMaster() {
 		isMaster = true;
 		partOfMultiBlock = true;
+		sync();
 	}
 
 	@Override
@@ -265,7 +262,6 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 			configuration[teller] = 0;
 		}
 		energyState = 0;
-		lastEnergyState = 0;
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 		sync();
 	}
