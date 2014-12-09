@@ -11,6 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class MultiBlockPaternRefinery extends MultiBlockPatern {
 
 	public MultiBlockPaternRefinery() {
-		super(new ForgeDirection[]{}, 'R');
+		super(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH}, 'R');
+		identifiers[1] = '\n';
 	}
 }

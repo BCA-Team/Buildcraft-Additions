@@ -3,7 +3,8 @@ package buildcraftAdditions.blocks.multiBlocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import buildcraftAdditions.multiBlocks.MultiBlockPatern;
+import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
+import buildcraftAdditions.tileEntities.TileRefinery;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -13,12 +14,12 @@ import buildcraftAdditions.multiBlocks.MultiBlockPatern;
  */
 public class MultiBlockRefineryWalls extends MultiBlockBase {
 
-	public MultiBlockRefineryWalls(char identifier, MultiBlockPatern patern, String textureName) {
-		super(identifier, patern, textureName);
+	public MultiBlockRefineryWalls() {
+		super('R', new MultiBlockPaternRefinery(), "textureRefinery");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return null;
+		return new TileRefinery();
 	}
 }

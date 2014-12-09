@@ -9,6 +9,8 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
+import buildcraftAdditions.multiBlocks.MultiBlockPatern;
+import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -20,6 +22,7 @@ import buildcraftAdditions.tileEntities.Bases.TileBase;
 public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler {
 	public int masterX, masterY, masterZ;
 	public boolean isMaster, partOfMultiBlock;
+	public MultiBlockPatern patern = new MultiBlockPaternRefinery();
 
 	@Override
 	public void updateEntity() {
@@ -29,6 +32,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public void makeMaster() {
 		System.out.println("VALID REFINERY");
+		isMaster = true;
+		partOfMultiBlock = true;
 	}
 
 	@Override
@@ -38,7 +43,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void invalidateMultiblock() {
-
+		if (isMaster)
+			patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord);
+		else
+			patern.destroyMultiblock(worldObj, masterX, masterY, masterZ);
 	}
 
 	@Override
@@ -48,12 +56,18 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void formMultiblock(int masterX, int masterY, int masterZ) {
-
+		partOfMultiBlock = true;
+		this.masterX = masterX;
+		this.masterY = masterY;
+		this.masterZ = masterZ;
 	}
 
 	@Override
 	public void invalidateBlock() {
-
+		partOfMultiBlock = false;
+		isMaster = false;
+		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
+		sync();
 	}
 
 	@Override

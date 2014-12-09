@@ -29,6 +29,7 @@ import buildcraftAdditions.blocks.BlockSemiAutomaticDuster;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT2;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Core;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Plating;
+import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryWalls;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
@@ -54,6 +55,7 @@ import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
 import buildcraftAdditions.tileEntities.TileLavaCoil;
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
+import buildcraftAdditions.tileEntities.TileRefinery;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
 import buildcraftAdditions.utils.BCItems;
 /**
@@ -83,6 +85,7 @@ public final class ItemsAndBlocks {
 	public static MultiBlockKEBT2 kebT2;
 	public static MultiBlockKEBT3Core kebT3Core;
 	public static MultiBlockKEBT3Plating kebT3Plating;
+	public static MultiBlockRefineryWalls refineryWalls;
 
 	public static Item powerCapsuleTier1;
 	public static Item powerCapsuleTier2;
@@ -241,6 +244,10 @@ public final class ItemsAndBlocks {
 		kebT3Plating = new MultiBlockKEBT3Plating();
 		kebT3Plating.setBlockName("blockKEBT3Plating").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(kebT3Plating, "KEBT3Plating");
+
+		refineryWalls = new MultiBlockRefineryWalls();
+		refineryWalls.setBlockName("blockRefineryWalls").setCreativeTab(BuildcraftAdditions.bcadditions);
+		GameRegistry.registerBlock(refineryWalls, "refinerywals");
 	}
 
 	public static void addRecepies() {
@@ -303,5 +310,6 @@ public final class ItemsAndBlocks {
 		GameRegistry.registerTileEntity(TileKineticEnergyBufferTier1.class, "TileKineticEnergyBufferTier1");
 		GameRegistry.registerTileEntity(TileKEBT2.class, "TileKineticEnergyBufferTier2");
 		GameRegistry.registerTileEntity(TileKEBT3.class, "TileKineticEnergyBufferTier3");
+		GameRegistry.registerTileEntity(TileRefinery.class, "TileRefinery");
 	}
 }

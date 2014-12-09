@@ -3,6 +3,7 @@ package buildcraftAdditions.multiBlocks;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -50,9 +51,11 @@ public class MultiBlockPatern {
 			Location location = new Location(world, x, y, z);
 			for (ForgeDirection direction : directions) {
 				location.move(direction);
-				location.setMetadata(1);
-				IMultiBlockTile slave = (IMultiBlockTile) location.getTileEntity();
-				slave.formMultiblock(x, y, z);
+				if (location.getBlock().getMaterial() != Material.air) {
+					location.setMetadata(1);
+					IMultiBlockTile slave = (IMultiBlockTile) location.getTileEntity();
+					slave.formMultiblock(x, y, z);
+				}
 			}
 			addMaster(world, x, y, z);
 		}
@@ -64,11 +67,16 @@ public class MultiBlockPatern {
 		for (int t = 0; t < length; t++) {
 			ForgeDirection direction = directions[t];
 			location.move(direction);
-			if (!(location.getBlock() instanceof MultiBlockBase))
-				return false;
-			MultiBlockBase block = (MultiBlockBase) location.getBlock();
-			if (!(block.identifier == identifiers[t]) || location.getMeatadata() != 0) {
-				return false;
+			if (identifiers[t] == '\n') {
+				if (location.getBlock().getMaterial() != Material.air)
+					return false;
+			} else {
+				if (!(location.getBlock() instanceof MultiBlockBase))
+					return false;
+				MultiBlockBase block = (MultiBlockBase) location.getBlock();
+				if (!(block.identifier == identifiers[t]) || location.getMeatadata() != 0) {
+					return false;
+				}
 			}
 		}
 		return true;
