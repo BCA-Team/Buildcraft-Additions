@@ -245,7 +245,6 @@ public final class ItemsAndBlocks {
 
 	public static void addRecepies() {
 		if (Loader.isModLoaded("BuildCraft|Transport")) {
-
 			BuildcraftRecipeRegistry.assemblyTable.addRecipe("ironStick", 1000, new ItemStack(ironStick), Items.iron_ingot);
 			BuildcraftRecipeRegistry.assemblyTable.addRecipe("goldStick", 2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
 			BuildcraftRecipeRegistry.assemblyTable.addRecipe("diamondStick", 3000, new ItemStack(diamondStick), new ItemStack(Items.diamond, 2));
@@ -290,20 +289,19 @@ public final class ItemsAndBlocks {
 			GameRegistry.addRecipe(new ItemStack(kebT2), "III", "PBP", "III", 'I', Items.iron_ingot, 'B', powerCapsuleTier2, 'P', BCItems.PIPE_POWER_GOLD);
 			//GameRegistry.addRecipe(new ItemStack(kebT3Core), "DBD", "PBP", "DBD", 'D', Items.diamond, 'B', powerCapsuleTier3, 'P', BCItems.PIPE_POWER_DIAMOND);
 			//GameRegistry.addRecipe(new ItemStack(kebT3Plating), "PGP", "GGG", "III", 'P', BCItems.PIPE_POWER_DIAMOND, 'G', Items.gold_ingot, 'I', Items.iron_ingot);
-
-			GameRegistry.registerTileEntity(TileFluidicCompressor.class, "TileFluidicCompressor");
-			GameRegistry.registerTileEntity(TileChargingStation.class, "TileChargingStation");
-			GameRegistry.registerTileEntity(TileHeatedFurnace.class, "TileHeatedFurnace");
-			GameRegistry.registerTileEntity(TileBasicCoil.class, "TileBasicCoil");
-			GameRegistry.registerTileEntity(TileLavaCoil.class, "TileCoilLava");
-			GameRegistry.registerTileEntity(TileKineticCoil.class, "TileCoilKinetic");
-			GameRegistry.registerTileEntity(TileBasicDuster.class, "TileBasicDuster");
-			GameRegistry.registerTileEntity(TileSemiAutomaticDuster.class, "TileSemiAutomaticDuster");
-			GameRegistry.registerTileEntity(TileMechanicalDuster.class, "TileMechanicalDuster");
-			GameRegistry.registerTileEntity(TileKineticDuster.class, "TileKineticDuster");
-			GameRegistry.registerTileEntity(TileKineticEnergyBufferTier1.class, "TileKineticEnergyBufferTier1");
-			GameRegistry.registerTileEntity(TileKEBT2.class, "TileKineticEnergyBufferTier2");
-			GameRegistry.registerTileEntity(TileKEBT3.class, "TileKineticEnergyBufferTier3");
 		}
+		GameRegistry.registerTileEntity(TileFluidicCompressor.class, "TileFluidicCompressor");
+		GameRegistry.registerTileEntity(TileChargingStation.class, "TileChargingStation");
+		GameRegistry.registerTileEntity(TileHeatedFurnace.class, "TileHeatedFurnace");
+		GameRegistry.registerTileEntity(TileBasicCoil.class, "TileBasicCoil");
+		GameRegistry.registerTileEntity(TileLavaCoil.class, "TileCoilLava");
+		GameRegistry.registerTileEntity(TileKineticCoil.class, "TileCoilKinetic");
+		GameRegistry.registerTileEntity(TileBasicDuster.class, "TileBasicDuster");
+		GameRegistry.registerTileEntity(TileSemiAutomaticDuster.class, "TileSemiAutomaticDuster");
+		GameRegistry.registerTileEntity(TileMechanicalDuster.class, "TileMechanicalDuster");
+		GameRegistry.registerTileEntity(TileKineticDuster.class, "TileKineticDuster");
+		GameRegistry.registerTileEntity(TileKineticEnergyBufferTier1.class, "TileKineticEnergyBufferTier1");
+		GameRegistry.registerTileEntity(TileKEBT2.class, "TileKineticEnergyBufferTier2");
+		GameRegistry.registerTileEntity(TileKEBT3.class, "TileKineticEnergyBufferTier3");
 	}
 }
