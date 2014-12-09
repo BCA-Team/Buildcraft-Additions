@@ -19,13 +19,13 @@ import buildcraftAdditions.multiBlocks.MultiBlockPatern;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class MulitBlockBase extends BlockContainer {
+public abstract class MultiBlockBase extends BlockContainer {
 	public char identifier;
 	public MultiBlockPatern patern;
 	public String textureName;
 	public IIcon icon[];
 
-	public MulitBlockBase(char identifier, MultiBlockPatern patern, String textureName) {
+	public MultiBlockBase(char identifier, MultiBlockPatern patern, String textureName) {
 		super(Material.iron);
 		setHardness(4f);
 		setHarvestLevel(null, 0);

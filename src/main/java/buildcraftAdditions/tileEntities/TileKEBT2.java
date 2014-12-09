@@ -13,7 +13,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.IEnergyHandler;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.blocks.multiBlocks.MulitBlockBase;
+import buildcraftAdditions.blocks.multiBlocks.MultiBlockBase;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
@@ -219,7 +219,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 			master = (TileKEBT2) tileEntity;
 		else {
 			Logger.info("UNABLE TO FIND MASTER, SELF DESTRUCT INITIATED");
-			MulitBlockBase block = (MulitBlockBase) worldObj.getBlock(xCoord, yCoord, zCoord);
+			MultiBlockBase block = (MultiBlockBase) worldObj.getBlock(xCoord, yCoord, zCoord);
 			block.patern.destroyMultiblock(worldObj, masterX, masterY, masterZ);
 		}
 	}

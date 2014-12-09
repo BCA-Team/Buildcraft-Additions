@@ -17,7 +17,7 @@ import buildcraftAdditions.tileEntities.TileKEBT3;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class MultiBlockKEBT3Core extends MulitBlockBase {
+public class MultiBlockKEBT3Core extends MultiBlockBase {
 	public IIcon icon;
 
 	@Override

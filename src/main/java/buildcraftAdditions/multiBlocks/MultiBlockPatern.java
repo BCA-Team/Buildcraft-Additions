@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraftAdditions.blocks.multiBlocks.MulitBlockBase;
+import buildcraftAdditions.blocks.multiBlocks.MultiBlockBase;
 import buildcraftAdditions.utils.Location;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -64,9 +64,9 @@ public class MultiBlockPatern {
 		for (int t = 0; t < length; t++) {
 			ForgeDirection direction = directions[t];
 			location.move(direction);
-			if (!(location.getBlock() instanceof MulitBlockBase))
+			if (!(location.getBlock() instanceof MultiBlockBase))
 				return false;
-			MulitBlockBase block = (MulitBlockBase) location.getBlock();
+			MultiBlockBase block = (MultiBlockBase) location.getBlock();
 			if (!(block.identifier == identifiers[t]) || location.getMeatadata() != 0) {
 				return false;
 			}
