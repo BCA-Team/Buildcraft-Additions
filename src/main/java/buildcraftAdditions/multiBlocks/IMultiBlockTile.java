@@ -1,6 +1,8 @@
 package buildcraftAdditions.multiBlocks;
 
 import net.minecraft.entity.player.EntityPlayer;
+
+import net.minecraftforge.common.util.ForgeDirection;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -21,4 +23,6 @@ public interface IMultiBlockTile {
 	public void formMultiblock(int masterX, int masterY, int masterZ);
 
 	public void invalidateBlock();
+
+	public void moved(ForgeDirection direction);
 }

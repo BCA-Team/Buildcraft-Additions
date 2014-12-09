@@ -270,6 +270,28 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 		sync();
 	}
 
+	@Override
+	public void moved(ForgeDirection direction) {
+		if (isMaster) {
+			oldmasterX = xCoord;
+			oldmasterY = yCoord;
+			oldmasterZ = zCoord;
+			masterX = xCoord + direction.offsetX;
+			masterY = yCoord + direction.offsetY;
+			masterZ = zCoord + direction.offsetZ;
+			moved = true;
+		} else {
+			oldmasterX = masterX;
+			oldmasterY = masterY;
+			oldmasterZ = masterZ;
+			moved = true;
+			master = null;
+			masterX += direction.offsetX;
+			masterY += direction.offsetY;
+			masterZ += direction.offsetZ;
+		}
+	}
+
 	public void destruction() {
 		if (isMaster)
 			byeBye();

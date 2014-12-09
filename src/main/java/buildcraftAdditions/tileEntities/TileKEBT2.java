@@ -26,7 +26,6 @@ import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.Location;
 
-
 import eureka.api.EurekaKnowledge;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -272,6 +271,28 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, ItemsAndBlocks.kebT2, 80);
 		sync();
+	}
+
+	@Override
+	public void moved(ForgeDirection direction) {
+		if (isMaster) {
+			oldmasterX = xCoord;
+			oldmasterY = yCoord;
+			oldmasterZ = zCoord;
+			masterX = xCoord + direction.offsetX;
+			masterY = yCoord + direction.offsetY;
+			masterZ = zCoord + direction.offsetZ;
+			moved = true;
+		} else {
+			oldmasterX = masterX;
+			oldmasterY = masterY;
+			oldmasterZ = masterZ;
+			moved = true;
+			master = null;
+			masterX += direction.offsetX;
+			masterY += direction.offsetY;
+			masterZ += direction.offsetZ;
+		}
 	}
 
 	public void destruction() {
