@@ -11,6 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockBase;
 import buildcraftAdditions.utils.Location;
+import buildcraftAdditions.utils.RotationUtils;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -47,25 +48,35 @@ public class MultiBlockPatern {
 	}
 
 	public void checkPatern(World world, int x, int y, int z) {
-		if (isPaternValid(world, x, y, z)) {
+		int rotation = 0;
+		boolean valid = false;
+		for (int t = 0; t < 4; t++) {
+			if (isPaternValid(world, x, y, z, t)) {
+				rotation = t;
+				valid = true;
+			}
+		}
+		if (valid) {
+			rotatedDirections = RotationUtils.rotateDirections(directions, rotation);
 			Location location = new Location(world, x, y, z);
-			for (ForgeDirection direction : directions) {
+			for (ForgeDirection direction : rotatedDirections) {
 				location.move(direction);
 				if (location.getBlock().getMaterial() != Material.air) {
 					location.setMetadata(1);
 					IMultiBlockTile slave = (IMultiBlockTile) location.getTileEntity();
-					slave.formMultiblock(x, y, z);
+					slave.formMultiblock(x, y, z, rotation);
 				}
+				addMaster(world, x, y, z);
 			}
-			addMaster(world, x, y, z);
 		}
 	}
 
-	public boolean isPaternValid(World world, int startX, int startY, int startZ) {
+	public boolean isPaternValid(World world, int startX, int startY, int startZ, int rotationIndex) {
 		Location location = new Location(world, startX, startY, startZ);
 		int length = directions.length;
+		rotatedDirections = RotationUtils.rotateDirections(directions, rotationIndex);
 		for (int t = 0; t < length; t++) {
-			ForgeDirection direction = directions[t];
+			ForgeDirection direction = rotatedDirections[t];
 			location.move(direction);
 			if (identifiers[t] == '\n') {
 				if (location.getBlock().getMaterial() != Material.air)
@@ -82,9 +93,10 @@ public class MultiBlockPatern {
 		return true;
 	}
 
-	public void destroyMultiblock(World world, int x, int y, int z) {
+	public void destroyMultiblock(World world, int x, int y, int z, int rotationIndex) {
 		Location location = new Location(world, x, y, z);
-		for (ForgeDirection direction: directions) {
+		rotatedDirections = RotationUtils.rotateDirections(directions, rotationIndex);
+		for (ForgeDirection direction : rotatedDirections) {
 			location.move(direction);
 			if (location.getTileEntity() instanceof IMultiBlockTile)
 				((IMultiBlockTile) location.getTileEntity()).invalidateBlock();

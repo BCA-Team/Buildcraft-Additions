@@ -37,7 +37,7 @@ import eureka.api.EurekaKnowledge;
 public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBlockTile {
 	public MultiBlockPatern patern = new MultiBlockPaternKEBT2();
 	public boolean isMaster, partOfMultiBlock, moved;
-	public int masterX, masterY, masterZ, energyState, oldmasterX, oldmasterY, oldmasterZ;
+	public int masterX, masterY, masterZ, energyState, oldmasterX, oldmasterY, oldmasterZ, rotationIndex;
 	public TileKEBT2 master;
 
 	public TileKEBT2() {
@@ -48,9 +48,9 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	@Override
 	public void updateEntity() {
 		if (moved) {
-			if (!patern.isPaternValid(worldObj, masterX, masterY, masterZ)) {
-				patern.destroyMultiblock(worldObj, masterX, masterY, masterZ);
-				patern.destroyMultiblock(worldObj, oldmasterX, oldmasterY, oldmasterZ);
+			if (!patern.isPaternValid(worldObj, masterX, masterY, masterZ, rotationIndex)) {
+				patern.destroyMultiblock(worldObj, masterX, masterY, masterZ, rotationIndex);
+				patern.destroyMultiblock(worldObj, oldmasterX, oldmasterY, oldmasterZ, rotationIndex);
 			}
 			moved = false;
 		}
@@ -136,6 +136,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 		masterZ = tag.getInteger("masterZ");
 		isMaster = tag.getBoolean("isMaster");
 		partOfMultiBlock = tag.getBoolean("partOfMultiblock");
+		rotationIndex = tag.getInteger("rotationIndex");
 	}
 
 	@Override
@@ -146,6 +147,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 		tag.setInteger("masterZ", masterZ);
 		tag.setBoolean("isMaster", isMaster);
 		tag.setBoolean("partOfMultiblock", partOfMultiBlock);
+		tag.setInteger("rotationIndex", rotationIndex);
 	}
 
 	@Override
@@ -201,7 +203,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	public void destroyMultiblock() {
 		MultiBlockPatern patern = new MultiBlockPaternKEBT2();
-		patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord);
+		patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, rotationIndex);
 	}
 
 	private void findMaster() {
@@ -213,7 +215,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 		else {
 			Logger.info("UNABLE TO FIND MASTER, SELF DESTRUCT INITIATED");
 			MultiBlockBase block = (MultiBlockBase) worldObj.getBlock(xCoord, yCoord, zCoord);
-			block.patern.destroyMultiblock(worldObj, masterX, masterY, masterZ);
+			block.patern.destroyMultiblock(worldObj, masterX, masterY, masterZ, rotationIndex);
 		}
 	}
 
@@ -233,20 +235,21 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
-	public void formMultiblock(int masterX, int masterY, int masterZ) {
+	public void formMultiblock(int masterX, int masterY, int masterZ, int rotationIndex) {
 		partOfMultiBlock = true;
 		this.masterX = masterX;
 		this.masterY = masterY;
 		this.masterZ = masterZ;
+		this.rotationIndex = rotationIndex;
 	}
 
 	@Override
 	public void invalidateMultiblock() {
 		if (isMaster) {
-			patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord);
+			patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, rotationIndex);
 			EurekaKnowledge.makeProgress(destroyer, "KEBT3", -1);
 		} else
-			patern.destroyMultiblock(worldObj, masterX, masterY, masterZ);
+			patern.destroyMultiblock(worldObj, masterX, masterY, masterZ, rotationIndex);
 
 	}
 

@@ -10,7 +10,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class RotationUtils {
 
-	public ForgeDirection[] rotateDirections(ForgeDirection[] directions, int rotationIndex) {
+	public static ForgeDirection[] rotateDirections(ForgeDirection[] directions, int rotationIndex) {
 		int length = directions.length;
 		ForgeDirection[] rotatedDirections = new ForgeDirection[length];
 		for (int t = 0; t < length; t++) {
@@ -19,7 +19,7 @@ public class RotationUtils {
 		return rotatedDirections;
 	}
 
-	public ForgeDirection rotatateDirection(ForgeDirection direction, int rotationIndex) {
+	public static ForgeDirection rotatateDirection(ForgeDirection direction, int rotationIndex) {
 		switch (rotationIndex) {
 			case 0:
 				return direction;

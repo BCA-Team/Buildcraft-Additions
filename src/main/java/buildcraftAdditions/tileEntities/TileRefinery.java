@@ -1,6 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -20,7 +21,7 @@ import buildcraftAdditions.tileEntities.Bases.TileBase;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler {
-	public int masterX, masterY, masterZ;
+	public int masterX, masterY, masterZ, rotationIndex;
 	public boolean isMaster, partOfMultiBlock;
 	public MultiBlockPatern patern = new MultiBlockPaternRefinery();
 
@@ -44,9 +45,9 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public void invalidateMultiblock() {
 		if (isMaster)
-			patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord);
+			patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, rotationIndex);
 		else
-			patern.destroyMultiblock(worldObj, masterX, masterY, masterZ);
+			patern.destroyMultiblock(worldObj, masterX, masterY, masterZ, rotationIndex);
 	}
 
 	@Override
@@ -55,11 +56,24 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	@Override
-	public void formMultiblock(int masterX, int masterY, int masterZ) {
+	public void readFromNBT(NBTTagCompound tag) {
+		super.readFromNBT(tag);
+		rotationIndex = tag.getInteger("rotationIndex");
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound tag) {
+		super.writeToNBT(tag);
+		tag.setInteger("rotationIndex", rotationIndex);
+	}
+
+	@Override
+	public void formMultiblock(int masterX, int masterY, int masterZ, int rotationIndex) {
 		partOfMultiBlock = true;
 		this.masterX = masterX;
 		this.masterY = masterY;
 		this.masterZ = masterZ;
+		this.rotationIndex = rotationIndex;
 	}
 
 	@Override
