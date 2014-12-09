@@ -12,6 +12,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
 import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
+import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -27,14 +28,14 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void updateEntity() {
-
 	}
 
 	@Override
-	public void makeMaster() {
+	public void makeMaster(int rotationIndex) {
 		System.out.println("VALID REFINERY");
 		isMaster = true;
 		partOfMultiBlock = true;
+		this.rotationIndex = rotationIndex;
 	}
 
 	@Override
@@ -81,6 +82,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		partOfMultiBlock = false;
 		isMaster = false;
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
+		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, ItemsAndBlocks.refineryWalls, 80);
 		sync();
 	}
 

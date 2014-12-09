@@ -12,7 +12,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public interface IMultiBlockTile {
 
-	public void makeMaster();
+	public void makeMaster(int rotationIndex);
 
 	public void sync();
 

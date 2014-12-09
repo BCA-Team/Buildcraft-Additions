@@ -66,8 +66,8 @@ public class MultiBlockPatern {
 					IMultiBlockTile slave = (IMultiBlockTile) location.getTileEntity();
 					slave.formMultiblock(x, y, z, rotation);
 				}
-				addMaster(world, x, y, z);
 			}
+			addMaster(world, x, y, z, rotation);
 		}
 	}
 
@@ -115,11 +115,11 @@ public class MultiBlockPatern {
 
 	}
 
-	private void addMaster(World world, int x, int y, int z) {
+	private void addMaster(World world, int x, int y, int z, int rotationIndex) {
 		TileEntity entity = world.getTileEntity(x, y, z);
 		if (entity != null && entity instanceof IMultiBlockTile) {
 			IMultiBlockTile master = (IMultiBlockTile) entity;
-			master.makeMaster();
+			master.makeMaster(rotationIndex);
 			master.sync();
 		}
 	}

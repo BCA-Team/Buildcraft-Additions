@@ -221,10 +221,10 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
-	public void makeMaster() {
+	public void makeMaster(int rotationIndex) {
 		isMaster = true;
 		partOfMultiBlock = true;
-		sync();
+		this.rotationIndex = rotationIndex;
 	}
 
 	@Override

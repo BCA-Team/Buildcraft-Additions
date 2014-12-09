@@ -220,10 +220,11 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
-	public void makeMaster() {
+	public void makeMaster(int rotationIndex) {
 		isMaster = true;
 		partOfMultiBlock = true;
 		EurekaKnowledge.makeProgress(destroyer, "KEBT3", 1);
+		this.rotationIndex = rotationIndex;
 	}
 
 	@Override
