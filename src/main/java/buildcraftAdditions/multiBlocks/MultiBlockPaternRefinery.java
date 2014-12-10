@@ -30,5 +30,7 @@ public class MultiBlockPaternRefinery extends MultiBlockPatern {
 				ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH}, 'R');
 		for (int t = 38; t < 45; t++)
 			identifiers[t] = '\n';
+		identifiers[37] = 'V';
+		identifiers[45] = 'V';
 	}
 }

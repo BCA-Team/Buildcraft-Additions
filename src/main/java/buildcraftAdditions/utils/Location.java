@@ -69,4 +69,8 @@ public class Location {
 	public boolean isSameLocation(Location location) {
 		return world.provider.dimensionId == location.world.provider.dimensionId && x == location.x && y == location.y && z == location.z;
 	}
+
+	public void neighbourUpdate() {
+		world.notifyBlockOfNeighborChange(x, y, z, getBlock());
+	}
 }

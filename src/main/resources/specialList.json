@@ -1,5 +1,9 @@
 {
-	"greenButton": ["rikbberkelder", "corjaantje", "AEnterprise", "alexbilb"],
+  "greenButton": [
+	"rikbberkelder",
+	"corjaantje",
+	"alexbilb"
+  ],
 	"specialTextNames": ["rikbberkelder", "corjaantje", "AEnterprise", "alexbilb"],
 	"specialTexts": ["Kittens", "HissssssssBOOOM", "KABOOM", "I have no idea what i’m doing"]
 }

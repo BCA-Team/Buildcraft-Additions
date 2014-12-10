@@ -67,6 +67,7 @@ public class MultiBlockPatern {
 					slave.formMultiblock(x, y, z, rotation);
 				}
 			}
+			letNeighboursKnow(world, x, y, z, rotation);
 			addMaster(world, x, y, z, rotation);
 		}
 	}
@@ -103,10 +104,11 @@ public class MultiBlockPatern {
 		}
 	}
 
-	public ArrayList<Location> getLocations(World world, int masterX, int masterY, int masterZ) {
+	public ArrayList<Location> getLocations(World world, int masterX, int masterY, int masterZ, int rotationIndex) {
 		ArrayList<Location> list = new ArrayList<Location>(directions.length);
 		Location location = new Location(world, masterX, masterY, masterZ);
-		for (ForgeDirection direction: directions) {
+		rotatedDirections = RotationUtils.rotateDirections(directions, rotationIndex);
+		for (ForgeDirection direction : rotatedDirections) {
 			location.move(direction);
 			list.add(location.copy());
 		}
@@ -121,6 +123,15 @@ public class MultiBlockPatern {
 			IMultiBlockTile master = (IMultiBlockTile) entity;
 			master.makeMaster(rotationIndex);
 			master.sync();
+		}
+	}
+
+	public void letNeighboursKnow(World world, int x, int y, int z, int rotationIndex) {
+		rotatedDirections = RotationUtils.rotateDirections(directions, rotationIndex);
+		Location location = new Location(world, x, y, z);
+		for (ForgeDirection direction : rotatedDirections) {
+			location.move(direction);
+			location.neighbourUpdate();
 		}
 	}
 }

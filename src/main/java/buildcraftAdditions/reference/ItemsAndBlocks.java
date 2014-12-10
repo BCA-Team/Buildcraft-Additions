@@ -29,6 +29,7 @@ import buildcraftAdditions.blocks.BlockSemiAutomaticDuster;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT2;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Core;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Plating;
+import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryValve;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryWalls;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemBase;
@@ -86,6 +87,7 @@ public final class ItemsAndBlocks {
 	public static MultiBlockKEBT3Core kebT3Core;
 	public static MultiBlockKEBT3Plating kebT3Plating;
 	public static MultiBlockRefineryWalls refineryWalls;
+	public static MultiBlockRefineryValve refineryValve;
 
 	public static Item powerCapsuleTier1;
 	public static Item powerCapsuleTier2;
@@ -248,6 +250,10 @@ public final class ItemsAndBlocks {
 		refineryWalls = new MultiBlockRefineryWalls();
 		refineryWalls.setBlockName("blockRefineryWalls").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(refineryWalls, "refinerywals");
+
+		refineryValve = new MultiBlockRefineryValve();
+		refineryValve.setBlockName("blockRefineryValve").setCreativeTab(BuildcraftAdditions.bcadditions);
+		GameRegistry.registerBlock(refineryValve, "refineryValve");
 	}
 
 	public static void addRecepies() {

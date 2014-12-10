@@ -165,7 +165,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public void outputEnergy() {
 		if (energy == 0)
 			return;
-		ArrayList<Location> list = patern.getLocations(worldObj, xCoord, yCoord, zCoord);
+		ArrayList<Location> list = patern.getLocations(worldObj, xCoord, yCoord, zCoord, rotationIndex);
 		for (Location from: list) {
 			for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS) {
 				if (configuration[direction.ordinal()] != 1)

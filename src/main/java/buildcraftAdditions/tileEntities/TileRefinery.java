@@ -37,7 +37,7 @@ import buildcraftAdditions.utils.Tank;
  */
 public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyHandler {
 	public int masterX, masterY, masterZ, rotationIndex, timer, energy, maxEnergy;
-	public boolean isMaster, partOfMultiBlock;
+	public boolean isMaster, partOfMultiBlock, init, valve;
 	public MultiBlockPatern patern = new MultiBlockPaternRefinery();
 	public TileRefinery master;
 	public Tank input = new Tank(10000, this);
@@ -48,6 +48,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public TileRefinery() {
 		maxEnergy = 50000;
 		timer = 0;
+		init = false;
 	}
 
 	public void updateEntity() {
@@ -66,7 +67,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			return;
 		}
 		CraftingResult<FluidStack> r = currentRecepie.craft(this, false);
+		if (r == null || r.crafted == null)
+			return;
 		output.fill(r.crafted.copy(), true);
+		energy -= r.energyCost;
 	}
 
 	private void updateRecepie() {
@@ -133,6 +137,18 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		masterX = tag.getInteger("masterX");
 		masterY = tag.getInteger("masterY");
 		masterZ = tag.getInteger("masterZ");
+		if (tag.hasKey("fluidIDinput") && tag.hasKey("fluidIDoutput")) {
+			FluidStack stack;
+			if (tag.getInteger("fluidIDinput") == -1)
+				stack = null;
+			else
+				stack = new FluidStack(tag.getInteger("fluidIDinput"), tag.getInteger("fluidAmountInput"));
+			input.setFluid(stack);
+			if (tag.getInteger("fluidIDoutput") == -1)
+				stack = null;
+			else
+				stack = new FluidStack(tag.getInteger("fluidIDoutput"), tag.getInteger("fluidAmountOutput"));
+		}
 		updateRecepie();
 	}
 
@@ -144,6 +160,18 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		tag.setInteger("masterX", masterX);
 		tag.setInteger("masterY", masterY);
 		tag.setInteger("masterZ", masterZ);
+		if (input.getFluid() == null) {
+			tag.setInteger("fluidIDinput", -1);
+		} else {
+			tag.setInteger("fluidIDinput", input.getFluid().fluidID);
+			tag.setInteger("fluidAmountInput", input.getFluid().amount);
+		}
+		if (output.getFluid() == null) {
+			tag.setInteger("fluidIDoutput", -1);
+		} else {
+			tag.setInteger("fluidIDoutput", output.getFluid().fluidID);
+			tag.setInteger("fluidAmountOutput", output.getFluid().amount);
+		}
 	}
 
 	@Override
@@ -159,6 +187,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public void invalidateBlock() {
 		partOfMultiBlock = false;
 		isMaster = false;
+		input.setFluid(null);
+		output.setFluid(null);
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, ItemsAndBlocks.refineryWalls, 80);
 		sync();
@@ -171,17 +201,19 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		if (isMaster) {
-			int result = input.fill(resource, doFill);
-			updateRecepie();
-			return result;
-		} else {
-			if (master == null)
-				findMaster();
-			if (master != null)
-				return master.fill(from, resource, doFill);
-		}
+		if (!valve)
+			return 0;
+		if (master == null)
+			findMaster();
+		if (master != null)
+			return master.realFill(resource, doFill);
 		return 0;
+	}
+
+	public int realFill(FluidStack resource, boolean doFill) {
+		int result = input.fill(resource, doFill);
+		updateRecepie();
+		return result;
 	}
 
 	@Override
@@ -191,40 +223,44 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		if (isMaster) {
-			FluidStack result = output.drain(maxDrain, doDrain);
-			updateRecepie();
-			return result;
-		} else {
-			if (master == null)
-				findMaster();
-			if (master != null)
-				return master.drain(from, maxDrain, doDrain);
-		}
+		if (!valve)
+			return null;
+		if (master == null)
+			findMaster();
+		if (master != null)
+			return master.realDrain(maxDrain, doDrain);
 		return null;
+	}
+
+	public FluidStack realDrain(int maxDrain, boolean doDrain) {
+		FluidStack result = output.drain(maxDrain, doDrain);
+		updateRecepie();
+		return result;
 	}
 
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		return partOfMultiBlock;
+		return partOfMultiBlock && valve;
 	}
 
 	@Override
 	public boolean canDrain(ForgeDirection from, Fluid fluid) {
-		return partOfMultiBlock;
+		return partOfMultiBlock && valve;
 	}
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		if (isMaster)
-			return new FluidTankInfo[]{new FluidTankInfo(input), new FluidTankInfo(output)};
-		if (partOfMultiBlock) {
+		if (!valve)
+			return null;
 			if (master == null)
 				findMaster();
 			if (master != null)
-				return master.getTankInfo(from);
-		}
-		return null;
+				return master.realGetTankInfo();
+		return new FluidTankInfo[]{new FluidTankInfo(input), new FluidTankInfo(output)};
+	}
+
+	public FluidTankInfo[] realGetTankInfo() {
+		return new FluidTankInfo[]{new FluidTankInfo(input), new FluidTankInfo(output)};
 	}
 
 	@Override
@@ -317,6 +353,6 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
-		return partOfMultiBlock;
+		return true;
 	}
 }
