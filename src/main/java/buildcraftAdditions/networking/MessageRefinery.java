@@ -7,6 +7,8 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
+import net.minecraftforge.fluids.FluidStack;
+
 import buildcraftAdditions.tileEntities.TileRefinery;
 
 import io.netty.buffer.ByteBuf;
@@ -18,7 +20,7 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageRefinery implements IMessage, IMessageHandler<MessageRefinery, IMessage> {
-	public int x, y, z, masterX, masterY, masterZ;
+	public int x, y, z, masterX, masterY, masterZ, rotationIndex, fluidIDinput, fluidAmountInput, fluidIDoutput, fluidAmountOutput;
 	public boolean isMaster, partOfMultiblock;
 
 	public MessageRefinery() {
@@ -33,6 +35,19 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		masterZ = refinery.masterZ;
 		isMaster = refinery.isMaster;
 		partOfMultiblock = refinery.partOfMultiBlock;
+		rotationIndex = refinery.rotationIndex;
+		if (refinery.input.getFluid() == null) {
+			fluidIDinput = -1;
+		} else {
+			fluidIDinput = refinery.input.getFluid().fluidID;
+			fluidAmountInput = refinery.input.getFluid().amount;
+		}
+		if (refinery.output.getFluid() == null) {
+			fluidIDoutput = -1;
+		} else {
+			fluidIDoutput = refinery.output.getFluid().fluidID;
+			fluidAmountOutput = refinery.output.getFluid().amount;
+		}
 	}
 
 	@Override
@@ -45,6 +60,11 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		masterZ = buf.readInt();
 		isMaster = buf.readBoolean();
 		partOfMultiblock = buf.readBoolean();
+		rotationIndex = buf.readInt();
+		fluidIDinput = buf.readInt();
+		fluidAmountInput = buf.readInt();
+		fluidIDoutput = buf.readInt();
+		fluidAmountOutput = buf.readInt();
 	}
 
 	@Override
@@ -57,6 +77,11 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		buf.writeInt(masterZ);
 		buf.writeBoolean(isMaster);
 		buf.writeBoolean(partOfMultiblock);
+		buf.writeInt(rotationIndex);
+		buf.writeInt(fluidIDinput);
+		buf.writeInt(fluidAmountInput);
+		buf.writeInt(fluidIDoutput);
+		buf.writeInt(fluidAmountOutput);
 	}
 
 	@Override
@@ -69,6 +94,21 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 			refinery.masterZ = message.masterZ;
 			refinery.isMaster = message.isMaster;
 			refinery.partOfMultiBlock = message.partOfMultiblock;
+			refinery.rotationIndex = message.rotationIndex;
+			FluidStack stack;
+			if (message.fluidIDinput == -1)
+				stack = null;
+			else {
+				stack = new FluidStack(message.fluidIDinput, message.fluidAmountInput);
+			}
+			refinery.input.setFluid(stack);
+
+			if (message.fluidIDoutput == -1)
+				stack = null;
+			else {
+				stack = new FluidStack(message.fluidIDoutput, message.fluidAmountOutput);
+			}
+			refinery.output.setFluid(stack);
 		}
 		return null;
 	}

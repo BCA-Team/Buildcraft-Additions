@@ -3,6 +3,7 @@ package buildcraftAdditions.utils;
 import net.minecraft.tileentity.TileEntity;
 
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -30,5 +31,9 @@ public class Tank extends FluidTank {
 		if (fluid == null)
 			return null;
 		return fluid.getFluid();
+	}
+
+	public void setFluid(FluidStack stack) {
+		fluid = stack;
 	}
 }
