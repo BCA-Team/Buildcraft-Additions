@@ -21,7 +21,7 @@ import io.netty.buffer.ByteBuf;
  */
 public class MessageRefinery implements IMessage, IMessageHandler<MessageRefinery, IMessage> {
 	public int x, y, z, masterX, masterY, masterZ, rotationIndex, fluidIDinput, fluidAmountInput, fluidIDoutput, fluidAmountOutput;
-	public boolean isMaster, partOfMultiblock;
+	public boolean isMaster, partOfMultiblock, valve;
 
 	public MessageRefinery() {
 	}
@@ -36,6 +36,7 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		isMaster = refinery.isMaster;
 		partOfMultiblock = refinery.partOfMultiBlock;
 		rotationIndex = refinery.rotationIndex;
+		valve = refinery.valve;
 		if (refinery.input.getFluid() == null) {
 			fluidIDinput = -1;
 		} else {
@@ -65,6 +66,7 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		fluidAmountInput = buf.readInt();
 		fluidIDoutput = buf.readInt();
 		fluidAmountOutput = buf.readInt();
+		valve = buf.readBoolean();
 	}
 
 	@Override
@@ -82,6 +84,7 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		buf.writeInt(fluidAmountInput);
 		buf.writeInt(fluidIDoutput);
 		buf.writeInt(fluidAmountOutput);
+		buf.writeBoolean(valve);
 	}
 
 	@Override
@@ -95,6 +98,7 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 			refinery.isMaster = message.isMaster;
 			refinery.partOfMultiBlock = message.partOfMultiblock;
 			refinery.rotationIndex = message.rotationIndex;
+			refinery.valve = message.valve;
 			FluidStack stack;
 			if (message.fluidIDinput == -1)
 				stack = null;

@@ -60,7 +60,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (!isMaster)
 			return;
 
-		if (currentRecepie == null)
+		if (currentResult == null || currentRecepie == null)
 			return;
 
 		if (energy < currentResult.energyCost) {
@@ -132,6 +132,9 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
+		isMaster = tag.getBoolean("isMaster");
+		partOfMultiBlock = tag.getBoolean("partOfMultiblock");
+		valve = tag.getBoolean("valve");
 		rotationIndex = tag.getInteger("rotationIndex");
 		energy = tag.getInteger("energy");
 		masterX = tag.getInteger("masterX");
@@ -155,6 +158,9 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
+		tag.setBoolean("isMaster", isMaster);
+		tag.setBoolean("partOfMultiblock", partOfMultiBlock);
+		tag.setBoolean("valve", valve);
 		tag.setInteger("rotationIndex", rotationIndex);
 		tag.setInteger("energy", energy);
 		tag.setInteger("masterX", masterX);
