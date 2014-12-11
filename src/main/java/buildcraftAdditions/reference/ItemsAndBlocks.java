@@ -106,13 +106,13 @@ public final class ItemsAndBlocks {
 	public static ItemKineticTool kineticTool;
 
 	public static void init() {
-		ironCanister = new ItemCanister("ironCanister", 1000);
+		ironCanister = new ItemCanister("ironCanister", 2000);
 		GameRegistry.registerItem(ironCanister, "ironCanister");
 
-		goldCanister = new ItemCanister("goldCanister", 4000);
+		goldCanister = new ItemCanister("goldCanister", 8000);
 		GameRegistry.registerItem(goldCanister, "goldCanister");
 
-		diamondCanister = new ItemCanister("diamondCanister", 16000);
+		diamondCanister = new ItemCanister("diamondCanister", 64000);
 		GameRegistry.registerItem(diamondCanister, "diamondCanister");
 
 		powerCapsuleTier1 = new BatteryBase(100000, 1000, 1000, 1, "T1_battery");
