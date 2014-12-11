@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 
@@ -38,7 +39,7 @@ import buildcraftAdditions.utils.Tank;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyHandler {
-	public int masterX, masterY, masterZ, rotationIndex, timer, energy, maxEnergy;
+	public int masterX, masterY, masterZ, rotationIndex, timer, energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer;
 	public boolean isMaster, partOfMultiBlock, init, valve;
 	public MultiBlockPatern patern = new MultiBlockPaternRefinery();
 	public TileRefinery master;
@@ -59,20 +60,33 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			timer = 40;
 		}
 		timer--;
+		updateHeat();
 		if (!isMaster)
 			return;
-
+		energyCost = currentRecepie == null ? 0 : (int) (50 + (50 * ((double) currentHeat / 100)));
 		if (currentResult == null || currentRecepie == null)
 			return;
-
-		if (energy < currentResult.energyCost) {
+		if (energy < energyCost || currentHeat < requiredHeat) {
+			energyCost = 0;
 			return;
 		}
 		CraftingResult<FluidStack> r = currentRecepie.craft(this, false);
+
 		if (r == null || r.crafted == null)
 			return;
 		output.fill(r.crafted.copy(), true);
-		energy -= r.energyCost;
+		energy -= energyCost;
+	}
+
+	private void updateHeat() {
+		if (heatTimer == 0) {
+			if (currentHeat > requiredHeat)
+				currentHeat--;
+			if (currentHeat < requiredHeat)
+				currentHeat++;
+			heatTimer = 10;
+		}
+		heatTimer -= 1;
 	}
 
 	private void updateRecepie() {
@@ -80,9 +94,12 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			currentResult = recepie.craft(this, true);
 			if (currentResult != null) {
 				currentRecepie = recepie;
+				requiredHeat = currentResult.energyCost;
 				break;
 			}
 		}
+		if (currentResult == null)
+			requiredHeat = 0;
 	}
 
 	@Override
@@ -130,6 +147,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, rotationIndex));
 		}
 		location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, rotationIndex));
+		if (output.getFluid() == null || output.getFluid().amount < 1000)
+			return;
 		while (output.getFluid().amount > 1000) {
 			location.setBlock(output.getFluidType().getBlock());
 			output.drain(1000, true);
@@ -140,6 +159,20 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public boolean onBlockActivated(EntityPlayer player) {
 		if (isMaster) {
+			if (!worldObj.isRemote) {
+				String fluid = "Nothing";
+				if (input.getFluid() != null)
+					fluid = input.getFluid().amount + " mb of " + input.getFluid().getLocalizedName();
+				player.addChatComponentMessage(new ChatComponentText("Input:  " + fluid));
+				fluid = "Nothing";
+				if (output.getFluid() != null)
+					fluid = output.getFluid().amount + " mb of " + output.getFluid().getLocalizedName();
+				player.addChatComponentMessage(new ChatComponentText("Output:  " + fluid));
+				player.addChatComponentMessage(new ChatComponentText("Energy stored: " + energy));
+				player.addChatComponentMessage(new ChatComponentText("Heat: " + currentHeat));
+				player.addChatComponentMessage(new ChatComponentText("Required Heat: " + requiredHeat));
+				player.addChatComponentMessage(new ChatComponentText("Energy used: " + energyCost));
+			}
 			return true;
 		}
 		if (partOfMultiBlock) {
@@ -162,6 +195,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		masterX = tag.getInteger("masterX");
 		masterY = tag.getInteger("masterY");
 		masterZ = tag.getInteger("masterZ");
+		currentHeat = tag.getInteger("currentHeat");
+		requiredHeat = tag.getInteger("requiredHeat");
 		if (tag.hasKey("fluidIDinput") && tag.hasKey("fluidIDoutput")) {
 			FluidStack stack;
 			if (tag.getInteger("fluidIDinput") == -1)
@@ -188,6 +223,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		tag.setInteger("masterX", masterX);
 		tag.setInteger("masterY", masterY);
 		tag.setInteger("masterZ", masterZ);
+		tag.setInteger("currentHeat", currentHeat);
+		tag.setInteger("requiredHeat", requiredHeat);
 		if (input.getFluid() == null) {
 			tag.setInteger("fluidIDinput", -1);
 		} else {
@@ -222,6 +259,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		masterX = 0;
 		masterY = 0;
 		masterZ = 0;
+		requiredHeat = 0;
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, ItemsAndBlocks.refineryWalls, 80);
 		sync();

@@ -20,7 +20,7 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageRefinery implements IMessage, IMessageHandler<MessageRefinery, IMessage> {
-	public int x, y, z, masterX, masterY, masterZ, rotationIndex, fluidIDinput, fluidAmountInput, fluidIDoutput, fluidAmountOutput;
+	public int x, y, z, masterX, masterY, masterZ, rotationIndex, fluidIDinput, fluidAmountInput, fluidIDoutput, fluidAmountOutput, requiredHeat, currentHeat, energyCost;
 	public boolean isMaster, partOfMultiblock, valve;
 
 	public MessageRefinery() {
@@ -37,6 +37,9 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		partOfMultiblock = refinery.partOfMultiBlock;
 		rotationIndex = refinery.rotationIndex;
 		valve = refinery.valve;
+		currentHeat = refinery.currentHeat;
+		requiredHeat = refinery.requiredHeat;
+		energyCost = refinery.energyCost;
 		if (refinery.input.getFluid() == null) {
 			fluidIDinput = -1;
 		} else {
@@ -67,6 +70,9 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		fluidIDoutput = buf.readInt();
 		fluidAmountOutput = buf.readInt();
 		valve = buf.readBoolean();
+		currentHeat = buf.readInt();
+		requiredHeat = buf.readInt();
+		energyCost = buf.readInt();
 	}
 
 	@Override
@@ -85,6 +91,10 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		buf.writeInt(fluidIDoutput);
 		buf.writeInt(fluidAmountOutput);
 		buf.writeBoolean(valve);
+		buf.writeInt(currentHeat);
+		buf.writeInt(requiredHeat);
+		buf.writeInt(energyCost);
+
 	}
 
 	@Override
@@ -99,6 +109,9 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 			refinery.partOfMultiBlock = message.partOfMultiblock;
 			refinery.rotationIndex = message.rotationIndex;
 			refinery.valve = message.valve;
+			refinery.energyCost = message.energyCost;
+			refinery.currentHeat = message.currentHeat;
+			refinery.requiredHeat = message.requiredHeat;
 			FluidStack stack;
 			if (message.fluidIDinput == -1)
 				stack = null;
