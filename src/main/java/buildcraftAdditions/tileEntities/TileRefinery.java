@@ -40,7 +40,7 @@ import buildcraftAdditions.utils.Tank;
  */
 public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyHandler {
 	public int masterX, masterY, masterZ, rotationIndex, timer, energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer;
-	public boolean isMaster, partOfMultiBlock, init, valve;
+	public boolean isMaster, partOfMultiBlock, init, valve, isCooling;
 	public MultiBlockPatern patern = new MultiBlockPaternRefinery();
 	public TileRefinery master;
 	public Tank input = new Tank(3000, this);
@@ -55,6 +55,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	public void updateEntity() {
+		if (input.getFluid() != null && input.getFluid().amount == 0)
+			input.setFluid(null);
+		if (input.getFluid() == null)
+			updateRecepie();
 		if (timer == 0) {
 			sync();
 			timer = 40;
@@ -63,29 +67,34 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		updateHeat();
 		if (!isMaster)
 			return;
-		energyCost = currentRecepie == null ? 0 : (int) (50 + (50 * ((double) currentHeat / 100)));
+		energyCost = (currentResult == null || currentRecepie == null || isCooling || energy < (int) (50 + (50 * ((double) currentHeat / 100)))) ? 0 : (int) (50 + (50 * ((double) currentHeat / 100)));
+		energy -= energyCost;
 		if (currentResult == null || currentRecepie == null)
 			return;
-		if (energy < energyCost || currentHeat < requiredHeat) {
-			energyCost = 0;
+		if (currentHeat < requiredHeat) {
 			return;
 		}
 		CraftingResult<FluidStack> r = currentRecepie.craft(this, false);
 
-		if (r == null || r.crafted == null)
+		if (r == null || r.crafted == null || energyCost == 0)
 			return;
 		output.fill(r.crafted.copy(), true);
-		energy -= energyCost;
 	}
 
 	private void updateHeat() {
 		if (heatTimer == 0) {
-			if (currentHeat > requiredHeat)
+			if ((currentHeat > requiredHeat || (energy < energyCost || energyCost == 0)) && currentHeat > 0) {
 				currentHeat--;
-			if (currentHeat < requiredHeat)
+				isCooling = true;
+			}
+			if (currentHeat < requiredHeat && (energy >= energyCost && energyCost != 0)) {
 				currentHeat++;
+				isCooling = false;
+			}
 			heatTimer = 10;
 		}
+		if (currentHeat == 0)
+			isCooling = false;
 		heatTimer -= 1;
 	}
 
@@ -95,10 +104,9 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			if (currentResult != null) {
 				currentRecepie = recepie;
 				requiredHeat = currentResult.energyCost;
-				break;
+				return;
 			}
 		}
-		if (currentResult == null)
 			requiredHeat = 0;
 	}
 
