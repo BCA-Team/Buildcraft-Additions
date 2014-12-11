@@ -23,6 +23,13 @@ public class Location {
 		this.world = world;
 	}
 
+	public Location(TileEntity entity) {
+		world = entity.getWorldObj();
+		x = entity.xCoord;
+		y = entity.yCoord;
+		z = entity.zCoord;
+	}
+
 	public Location copy() {
 		return new Location(world, x, y, z);
 	}
@@ -35,6 +42,12 @@ public class Location {
 		x += (direction.offsetX * blocks);
 		y += (direction.offsetY * blocks);
 		z += direction.offsetZ;
+		return this;
+	}
+
+	public Location move(ForgeDirection[] directions) {
+		for (ForgeDirection direction : directions)
+			move(direction);
 		return this;
 	}
 
@@ -72,5 +85,9 @@ public class Location {
 
 	public void neighbourUpdate() {
 		world.notifyBlockOfNeighborChange(x, y, z, getBlock());
+	}
+
+	public void setBlock(Block block) {
+		world.setBlock(x, y, z, block);
 	}
 }

@@ -27,6 +27,8 @@ import buildcraftAdditions.networking.MessageRefinery;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
+import buildcraftAdditions.utils.Location;
+import buildcraftAdditions.utils.RotationUtils;
 import buildcraftAdditions.utils.Tank;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -40,8 +42,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public boolean isMaster, partOfMultiBlock, init, valve;
 	public MultiBlockPatern patern = new MultiBlockPaternRefinery();
 	public TileRefinery master;
-	public Tank input = new Tank(10000, this);
-	public Tank output = new Tank(10000, this);
+	public Tank input = new Tank(3000, this);
+	public Tank output = new Tank(3000, this);
 	private CraftingResult<FluidStack> currentResult;
 	private IFlexibleRecipe<FluidStack> currentRecepie;
 
@@ -109,10 +111,30 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void invalidateMultiblock() {
-		if (isMaster)
+		if (isMaster) {
 			patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, rotationIndex);
+		}
 		else
 			patern.destroyMultiblock(worldObj, masterX, masterY, masterZ, rotationIndex);
+	}
+
+	private void emptyTanks() {
+		if (input.getFluid() == null || input.getFluid().amount < 1000)
+			return;
+		ForgeDirection[] directions = RotationUtils.rotateDirections(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.UP}, rotationIndex);
+		Location location = new Location(this);
+		location.move(directions);
+		while (input.getFluid().amount > 1000) {
+			location.setBlock(input.getFluidType().getBlock());
+			input.drain(1000, true);
+			location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, rotationIndex));
+		}
+		location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, rotationIndex));
+		while (output.getFluid().amount > 1000) {
+			location.setBlock(output.getFluidType().getBlock());
+			output.drain(1000, true);
+			location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, rotationIndex));
+		}
 	}
 
 	@Override
@@ -191,10 +213,15 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void invalidateBlock() {
+		if (isMaster)
+			emptyTanks();
 		partOfMultiBlock = false;
 		isMaster = false;
 		input.setFluid(null);
 		output.setFluid(null);
+		masterX = 0;
+		masterY = 0;
+		masterZ = 0;
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, ItemsAndBlocks.refineryWalls, 80);
 		sync();
