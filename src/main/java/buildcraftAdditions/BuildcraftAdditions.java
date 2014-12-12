@@ -20,12 +20,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
+import buildcraftAdditions.ModIntegration.ModIntegration;
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.client.gui.GuiHandler;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
-import buildcraftAdditions.ModIntegration.ModIntegration;
 import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
@@ -106,7 +106,6 @@ public class BuildcraftAdditions {
 		addDusts("Cobalt", 0x0064FF);
 
 		ModIntegration.integrate();
-
 	}
 
 	@Mod.EventHandler

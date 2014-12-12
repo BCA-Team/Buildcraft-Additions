@@ -19,6 +19,10 @@ public class Tank extends FluidTank {
 		this.tile = entity;
 	}
 
+	public Tank(int capacity) {
+		super(capacity);
+	}
+
 	public boolean isEmpty(){
 		return fluid == null || fluid.amount == 0;
 	}

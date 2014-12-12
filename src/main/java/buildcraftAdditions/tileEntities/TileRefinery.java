@@ -114,7 +114,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 				return;
 			}
 		}
-			requiredHeat = 0;
+		requiredHeat = 0;
 	}
 
 	@Override
@@ -157,7 +157,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		Location location = new Location(this);
 		location.move(directions);
 		while (input.getFluid().amount > 1000) {
-			location.setBlock(input.getFluidType().getBlock());
+			if (input.getFluidType().getBlock() != null)
+				location.setBlock(input.getFluidType().getBlock());
 			input.drain(1000, true);
 			location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, rotationIndex));
 		}
@@ -356,10 +357,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
 		if (!valve)
 			return null;
-			if (master == null)
-				findMaster();
-			if (master != null)
-				return master.realGetTankInfo();
+		if (master == null)
+			findMaster();
+		if (master != null)
+			return master.realGetTankInfo();
 		return new FluidTankInfo[]{new FluidTankInfo(input), new FluidTankInfo(output)};
 	}
 
