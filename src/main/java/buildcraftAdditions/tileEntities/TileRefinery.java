@@ -39,8 +39,8 @@ import buildcraftAdditions.utils.Tank;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyHandler {
-	public int masterX, masterY, masterZ, rotationIndex, timer, energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer;
-	public boolean isMaster, partOfMultiBlock, init, valve, isCooling;
+	public int masterX, masterY, masterZ, rotationIndex, timer, energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer, oldmasterX, oldmasterY, oldmasterZ;
+	public boolean isMaster, partOfMultiBlock, init, valve, isCooling, moved;
 	public MultiBlockPatern patern = new MultiBlockPaternRefinery();
 	public TileRefinery master;
 	public Tank input = new Tank(3000, this);
@@ -55,6 +55,13 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	public void updateEntity() {
+		if (moved) {
+			if (!patern.isPaternValid(worldObj, masterX, masterY, masterZ, rotationIndex)) {
+				patern.destroyMultiblock(worldObj, masterX, masterY, masterZ, rotationIndex);
+				patern.destroyMultiblock(worldObj, oldmasterX, oldmasterY, oldmasterZ, rotationIndex);
+			}
+			moved = false;
+		}
 		if (input.getFluid() != null && input.getFluid().amount == 0)
 			input.setFluid(null);
 		if (input.getFluid() == null)
@@ -275,6 +282,24 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void moved(ForgeDirection direction) {
+		if (isMaster) {
+			oldmasterX = xCoord;
+			oldmasterY = yCoord;
+			oldmasterZ = zCoord;
+			masterX = xCoord + direction.offsetX;
+			masterY = yCoord + direction.offsetY;
+			masterZ = zCoord + direction.offsetZ;
+			moved = true;
+		} else {
+			oldmasterX = masterX;
+			oldmasterY = masterY;
+			oldmasterZ = masterZ;
+			moved = true;
+			master = null;
+			masterX += direction.offsetX;
+			masterY += direction.offsetY;
+			masterZ += direction.offsetZ;
+		}
 
 	}
 
