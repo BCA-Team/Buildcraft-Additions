@@ -1,6 +1,12 @@
 package buildcraftAdditions.multiBlocks;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.ForgeDirection;
+
+import buildcraftAdditions.utils.Location;
+import buildcraftAdditions.utils.RotationUtils;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -14,4 +20,21 @@ public class MultiBlockPaternKEBT2 extends MultiBlockPatern {
 		super(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.UP, ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.SOUTH}, 'K');
 	}
 
+	@Override
+	public void checkPatern(World world, int x, int y, int z) {
+		if (isPaternValid(world, x, y, z, 0)) {
+			rotatedDirections = RotationUtils.rotateDirections(directions, 0);
+			Location location = new Location(world, x, y, z);
+			for (ForgeDirection direction : rotatedDirections) {
+				location.move(direction);
+				if (location.getBlock().getMaterial() != Material.air) {
+					location.setMetadata(1);
+					IMultiBlockTile slave = (IMultiBlockTile) location.getTileEntity();
+					slave.formMultiblock(x, y, z, 0);
+				}
+			}
+			letNeighboursKnow(world, x, y, z, 0);
+			addMaster(world, x, y, z, 0);
+		}
+	}
 }

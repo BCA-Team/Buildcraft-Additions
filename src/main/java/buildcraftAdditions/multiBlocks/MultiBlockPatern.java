@@ -117,7 +117,7 @@ public class MultiBlockPatern {
 
 	}
 
-	private void addMaster(World world, int x, int y, int z, int rotationIndex) {
+	protected void addMaster(World world, int x, int y, int z, int rotationIndex) {
 		TileEntity entity = world.getTileEntity(x, y, z);
 		if (entity != null && entity instanceof IMultiBlockTile) {
 			IMultiBlockTile master = (IMultiBlockTile) entity;

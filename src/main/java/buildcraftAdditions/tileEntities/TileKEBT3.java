@@ -191,7 +191,6 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 			return false;
 		if (isMaster) {
 			player.openGui(BuildcraftAdditions.instance, Variables.GuiKEB, worldObj, xCoord, yCoord, zCoord);
-			Logger.info("Energy stored: " + energy + " (" + worldObj.isRemote +")");
 		}
 		else {
 			if (master == null)
