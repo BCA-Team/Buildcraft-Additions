@@ -139,7 +139,7 @@ engineeringDiary.heatedFurnace.page0=A new furnace that can be powered in variou
 engineeringDiary.heatedFurnace.page1=Stone wasn’t cutting it anymore. You already had a myriad of Furnaces, but they were getting hard to manage. You just wanted something that could take more Coal at once, but what you got was something totally unexpected.
 engineeringDiary.heatedFurnace.page2=By surrounding a Furnace with Iron Ingots, you completely got rid of the fuel slot. Oops. @ @ However you were not to go down beaten and since you already know of the energy transmitting capabilities of Iron you’re convinced
 engineeringDiary.heatedFurnace.page3=you can make something to power this Furnace... You decide to place it in the world and see if you can think of something
-engineeringDiary.heatedFurnace.howToMakeProgress=Craft furnaces
+engineeringDiary.heatedFurnace.howToMakeProgress=Place furnaces
 eureka.heatedFurnaceFinished=After placing all those furnaces you think of a way to make a better, more effective and faster furnace
 
 engineeringDiary.basicCoil.title=Basic Coil
