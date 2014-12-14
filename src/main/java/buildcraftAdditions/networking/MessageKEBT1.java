@@ -8,7 +8,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
-
+import buildcraftAdditions.utils.EnumSideStatus;
 
 import io.netty.buffer.ByteBuf;
 /**
@@ -19,8 +19,9 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageKEBT1 implements IMessage, IMessageHandler<MessageKEBT1, IMessage> {
-	public int x, y, z, energy, configuration[], length;
+	public int x, y, z, energy, length;
 	public String owner;
+	public EnumSideStatus configuration[];
 
 	public MessageKEBT1(){}
 
@@ -29,7 +30,7 @@ public class MessageKEBT1 implements IMessage, IMessageHandler<MessageKEBT1, IMe
 		y = keb.yCoord;
 		z = keb.zCoord;
 		energy = keb.energy;
-		configuration = new int[6];
+		configuration = new EnumSideStatus[6];
 		configuration = keb.configuration;
 		owner = keb.owner;
 		length = owner.length();
@@ -41,9 +42,9 @@ public class MessageKEBT1 implements IMessage, IMessageHandler<MessageKEBT1, IMe
 		y = buf.readInt();
 		z = buf.readInt();
 		energy = buf.readInt();
-		configuration = new int[6];
+		configuration = new EnumSideStatus[6];
 		for (int teller = 0; teller < 6; teller++)
-			configuration[teller] = buf.readInt();
+			configuration[teller] = EnumSideStatus.values()[buf.readInt()];
 		length = buf.readInt();
 		owner = "";
 		for (int teller = 0; teller < length; teller++)
@@ -57,7 +58,7 @@ public class MessageKEBT1 implements IMessage, IMessageHandler<MessageKEBT1, IMe
 		buf.writeInt(z);
 		buf.writeInt(energy);
 		for (int teller = 0; teller < 6; teller++)
-			buf.writeInt(configuration[teller]);
+			buf.writeInt(configuration[teller].ordinal());
 		buf.writeInt(length);
 		char[] letters = owner.toCharArray();
 		for (char letter: letters) {

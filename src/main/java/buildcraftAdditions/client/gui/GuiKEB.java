@@ -10,6 +10,8 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
+import net.minecraftforge.common.util.ForgeDirection;
+
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.SpecialListMananger;
 import buildcraftAdditions.utils.Utils;
@@ -97,18 +99,19 @@ public class GuiKEB extends GuiContainer {
 	@Override
 	public void initGui() {
 		super.initGui();
-		north = new GuiButton(1, guiLeft + 38, guiTop + 92, 50, 20, getStatus(2));
-		east = new GuiButton(1, guiLeft + 38, guiTop + 115, 50, 20, getStatus(5));
-		south = new GuiButton(1, guiLeft + 38, guiTop + 138, 50, 20, getStatus(3));
-		west = new GuiButton(1, guiLeft + 120, guiTop + 92, 50, 20, getStatus(4));
-		up = new GuiButton(1, guiLeft + 120, guiTop + 115, 50, 20, getStatus(1));
-		down = new GuiButton(1, guiLeft + 120, guiTop + 138, 50, 20, getStatus(0));
+		north = new GuiButton(1, guiLeft + 38, guiTop + 92, 50, 20, "");
+		east = new GuiButton(1, guiLeft + 38, guiTop + 115, 50, 20, "");
+		south = new GuiButton(1, guiLeft + 38, guiTop + 138, 50, 20, "");
+		west = new GuiButton(1, guiLeft + 120, guiTop + 92, 50, 20, "");
+		up = new GuiButton(1, guiLeft + 120, guiTop + 115, 50, 20, "");
+		down = new GuiButton(1, guiLeft + 120, guiTop + 138, 50, 20, "");
 		buttonList.add(north);
 		buttonList.add(east);
 		buttonList.add(south);
 		buttonList.add(west);
 		buttonList.add(up);
 		buttonList.add(down);
+		updateStrings();
 	}
 
 	@Override
@@ -162,31 +165,32 @@ public class GuiKEB extends GuiContainer {
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
+		ForgeDirection direction = ForgeDirection.UNKNOWN;
 		if (button == north) {
-			keb.changeSideMode(2);
-			north.displayString = getStatus(2);
-			keb.sendConfigurationToSever();
+			direction = ForgeDirection.NORTH;
 		} else if (button == east) {
-			keb.changeSideMode(5);
-			east.displayString = getStatus(5);
-			keb.sendConfigurationToSever();
+			direction = ForgeDirection.EAST;
 		} else if (button == south) {
-			keb.changeSideMode(3);
-			south.displayString = getStatus(3);
-			keb.sendConfigurationToSever();
+			direction = ForgeDirection.SOUTH;
 		} else if (button == west) {
-			keb.changeSideMode(4);
-			west.displayString = getStatus(4);
-			keb.sendConfigurationToSever();
+			direction = ForgeDirection.WEST;
 		} else if (button == up) {
-			keb.changeSideMode(1);
-			up.displayString = getStatus(1);
-			keb.sendConfigurationToSever();
+			direction = ForgeDirection.UP;
 		} else if (button == down) {
-			keb.changeSideMode(0);
-			down.displayString = getStatus(0);
-			keb.sendConfigurationToSever();
+			direction = ForgeDirection.DOWN;
 		}
+		keb.changeStatus(direction);
+		updateStrings();
+		keb.sendConfigurationToSever();
+	}
+
+	private void updateStrings() {
+		north.displayString = keb.getStatus(ForgeDirection.NORTH).getText();
+		east.displayString = keb.getStatus(ForgeDirection.EAST).getText();
+		south.displayString = keb.getStatus(ForgeDirection.SOUTH).getText();
+		west.displayString = keb.getStatus(ForgeDirection.WEST).getText();
+		up.displayString = keb.getStatus(ForgeDirection.UP).getText();
+		down.displayString = keb.getStatus(ForgeDirection.DOWN).getText();
 	}
 
 	@Override
@@ -200,15 +204,6 @@ public class GuiKEB extends GuiContainer {
 			else
 				primed = true;
 		}
-	}
-
-	private String getStatus(int direction) {
-		int status = keb.configuration[direction];
-		if (status == 0)
-			return "Input";
-		else if (status == 1)
-			return "Output";
-		return "Dissabled";
 	}
 
 }

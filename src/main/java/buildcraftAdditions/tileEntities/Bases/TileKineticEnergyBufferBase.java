@@ -14,7 +14,10 @@ import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.networking.MessageKEBConfiguration;
 import buildcraftAdditions.networking.MessageSelfDestruct;
 import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.utils.EnumSideStatus;
+import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Location;
+import buildcraftAdditions.utils.Utils;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -22,9 +25,9 @@ import buildcraftAdditions.utils.Location;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHandler {
+public abstract class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHandler, IConfigurableOutput {
 	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
-	public int[] configuration = new int[6];
+	public EnumSideStatus[] configuration = new EnumSideStatus[6];
 	public int tier, timer;
 	public boolean sync, selfDestruct;
 	public String owner = "";
@@ -38,13 +41,13 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		this.loss = loss;
 		this.tier = tier;
 		for (int teller = 0; teller < 6; teller++) {
-			configuration[teller] = 0;
+			configuration[teller] = EnumSideStatus.INPUT;
 		}
 	}
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		if (configuration[from.ordinal()] != 0)
+		if (configuration[from.ordinal()] != EnumSideStatus.INPUT && configuration[from.ordinal()] != EnumSideStatus.BOTH)
 			return 0;
 		int recieved = maxReceive;
 		if (recieved > maxEnergy - energy)
@@ -58,7 +61,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 
 	@Override
 	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-		if (configuration[from.ordinal()] != 1)
+		if (configuration[from.ordinal()] != EnumSideStatus.OUTPUT && configuration[from.ordinal()] != EnumSideStatus.BOTH)
 			return 0;
 		int extracted = maxExtract;
 		if (extracted > energy)
@@ -68,19 +71,6 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		if (!simulate)
 			energy -= extracted;
 		return extracted;
-	}
-
-	public void changeSideMode(int side) {
-		ForgeDirection direction = ForgeDirection.getOrientation(side);
-		if (configuration[direction.ordinal()] == 0){
-			configuration[direction.ordinal()] = 1;
-			return;
-		}
-		if (configuration[direction.ordinal()] == 1) {
-			configuration[direction.ordinal()] = 2;
-			return;
-		}
-		configuration[direction.ordinal()] = 0;
 	}
 
 	@Override
@@ -101,8 +91,10 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		maxInput = tag.getInteger("maxInput");
 		maxOutput = tag.getInteger("maxOutput");
 		loss = tag.getInteger("loss");
-		if (tag.hasKey("configuration"))
-			configuration = tag.getIntArray("configuration");
+		if (tag.hasKey("configuration")) {
+			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+				configuration[direction.ordinal()] = Utils.intToStatus(tag.getInteger("configuration" + direction.ordinal()));
+		}
 		if (tag.hasKey("owner"))
 			owner = tag.getString("owner");
 	}
@@ -115,7 +107,10 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		tag.setInteger("maxInput", maxInput);
 		tag.setInteger("maxOutput", maxOutput);
 		tag.setInteger("loss", loss);
-		tag.setIntArray("configuration", configuration);
+		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+			tag.setBoolean("configuration", true);
+			tag.setInteger("configuration" + direction.ordinal(), Utils.statusToInt(configuration[direction.ordinal()]));
+		}
 		if (owner != null)
 			tag.setString("owner", owner);
 	}
@@ -143,7 +138,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 
 	public void outputEnergy() {
 		for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS){
-			if (configuration[direction.ordinal()] != 1)
+			if (configuration[direction.ordinal()] != EnumSideStatus.OUTPUT && configuration[direction.ordinal()] != EnumSideStatus.BOTH)
 				continue;
 			Location location = new Location(worldObj, xCoord, yCoord, zCoord);
 			location.move(direction);
@@ -189,5 +184,22 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		Explosion explosion = worldObj.createExplosion(destroyer, xCoord, yCoord, zCoord, (energy / 900000) + 5, true);
 		explosion.doExplosionA();
 		explosion.doExplosionB(true);
+	}
+
+	public EnumSideStatus getStatus(ForgeDirection side) {
+		return configuration[side.ordinal()];
+	}
+
+	public void changeStatus(ForgeDirection side) {
+		EnumSideStatus status = configuration[side.ordinal()];
+		if (status == EnumSideStatus.INPUT)
+			status = EnumSideStatus.OUTPUT;
+		else if (status == EnumSideStatus.OUTPUT)
+			status = EnumSideStatus.BOTH;
+		else if (status == EnumSideStatus.BOTH)
+			status = EnumSideStatus.DISSABLED;
+		else if (status == EnumSideStatus.DISSABLED)
+			status = EnumSideStatus.INPUT;
+		configuration[side.ordinal()] = status;
 	}
 }

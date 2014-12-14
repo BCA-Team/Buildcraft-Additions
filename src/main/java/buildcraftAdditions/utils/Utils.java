@@ -69,4 +69,30 @@ public class Utils {
 		GL11.glColor4f(red, green, blue, 1.0F);
 	}
 
+	public static EnumSideStatus intToStatus(int number) {
+		switch (number) {
+			case 0:
+				return EnumSideStatus.INPUT;
+			case 1:
+				return EnumSideStatus.OUTPUT;
+			case 2:
+				return EnumSideStatus.BOTH;
+			case 3:
+				return EnumSideStatus.DISSABLED;
+		}
+		return null;
+	}
+
+	public static int statusToInt(EnumSideStatus status) {
+		if (status == EnumSideStatus.INPUT)
+			return 0;
+		if (status == EnumSideStatus.OUTPUT)
+			return 1;
+		if (status == EnumSideStatus.BOTH)
+			return 2;
+		if (status == EnumSideStatus.DISSABLED)
+			return 3;
+		return -1;
+	}
+
 }

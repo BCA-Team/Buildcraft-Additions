@@ -7,7 +7,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
-
+import buildcraftAdditions.utils.EnumSideStatus;
 
 import io.netty.buffer.ByteBuf;
 /**
@@ -18,7 +18,8 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageKEBConfiguration implements IMessage, IMessageHandler<MessageKEBConfiguration, IMessage> {
-	public int x, y, z, configuration[];
+	public int x, y, z;
+	public EnumSideStatus configuration[];
 
 	public MessageKEBConfiguration(){}
 
@@ -26,7 +27,7 @@ public class MessageKEBConfiguration implements IMessage, IMessageHandler<Messag
 		x= keb.xCoord;
 		y = keb.yCoord;
 		z = keb.zCoord;
-		configuration = new int[6];
+		configuration = new EnumSideStatus[6];
 		configuration = keb.configuration;
 	}
 
@@ -35,9 +36,9 @@ public class MessageKEBConfiguration implements IMessage, IMessageHandler<Messag
 		x = buf.readInt();
 		y = buf.readInt();
 		z = buf.readInt();
-		configuration = new int[6];
+		configuration = new EnumSideStatus[6];
 		for (int teller = 0; teller < 6; teller++)
-			configuration[teller] = buf.readInt();
+			configuration[teller] = EnumSideStatus.values()[buf.readInt()];
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class MessageKEBConfiguration implements IMessage, IMessageHandler<Messag
 		buf.writeInt(y);
 		buf.writeInt(z);
 		for (int teller = 0; teller < 6; teller++)
-			buf.writeInt(configuration[teller]);
+			buf.writeInt(configuration[teller].ordinal());
 	}
 
 	@Override

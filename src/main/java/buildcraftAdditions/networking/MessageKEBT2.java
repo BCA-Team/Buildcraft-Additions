@@ -8,7 +8,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 import buildcraftAdditions.tileEntities.TileKEBT2;
-
+import buildcraftAdditions.utils.EnumSideStatus;
 
 import io.netty.buffer.ByteBuf;
 /**
@@ -19,9 +19,10 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMessage> {
-	public int x, y, z, energy, configuration[], masterX, masterY, masterZ, energyState, length;
+	public int x, y, z, energy, masterX, masterY, masterZ, energyState, length;
 	public boolean partOfMultiBlock, isMaster;
 	public String owner;
+	public EnumSideStatus configuration[];
 
 	public MessageKEBT2() {}
 
@@ -29,7 +30,7 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 		x = keb.xCoord;
 		y = keb.yCoord;
 		z = keb.zCoord;
-		configuration = new int[6];
+		configuration = new EnumSideStatus[6];
 		configuration = keb.configuration;
 		partOfMultiBlock = keb.partOfMultiBlock;
 		isMaster = keb.isMaster;
@@ -48,9 +49,9 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 		x = buf.readInt();
 		y = buf.readInt();
 		z = buf.readInt();
-		configuration = new int[6];
+		configuration = new EnumSideStatus[6];
 		for (int teller = 0; teller < 6; teller++)
-			configuration[teller] = buf.readInt();
+			configuration[teller] = EnumSideStatus.values()[buf.readInt()];
 		partOfMultiBlock = buf.readBoolean();
 		isMaster = buf.readBoolean();
 		energy = buf.readInt();
@@ -70,7 +71,7 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 		buf.writeInt(y);
 		buf.writeInt(z);
 		for (int teller = 0; teller < 6; teller++)
-			buf.writeInt(configuration[teller]);
+			buf.writeInt(configuration[teller].ordinal());
 		buf.writeBoolean(partOfMultiBlock);
 		buf.writeBoolean(isMaster);
 		buf.writeInt(energy);

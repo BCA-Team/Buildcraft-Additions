@@ -24,6 +24,7 @@ import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
+import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.Location;
 
 import eureka.api.EurekaKnowledge;
@@ -85,21 +86,6 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 		if (master == null)
 			return 0;
 		return master.receiveEnergy(from, maxExtract, simulate);
-	}
-
-	@Override
-	public void changeSideMode(int side) {
-		if (!partOfMultiBlock)
-			return;
-		if (isMaster) {
-			super.changeSideMode(side);
-			return;
-		}
-		if (master == null)
-			findMaster();
-		if (master == null)
-			return;
-		master.changeSideMode(side);
 	}
 
 	@Override
@@ -170,7 +156,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 		ArrayList<Location> list = patern.getLocations(worldObj, xCoord, yCoord, zCoord, rotationIndex);
 		for (Location from: list) {
 			for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS) {
-				if (configuration[direction.ordinal()] != 1)
+				if (configuration[direction.ordinal()] != EnumSideStatus.OUTPUT && configuration[direction.ordinal()] != EnumSideStatus.BOTH)
 					continue;
 				Location location = from.copy();
 				location.move(direction);
@@ -260,7 +246,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 		isMaster = false;
 		energy = 0;
 		for (int teller = 0; teller < 6; teller++) {
-			configuration[teller] = 0;
+			configuration[teller] = EnumSideStatus.INPUT;
 		}
 		energyState = 0;
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
