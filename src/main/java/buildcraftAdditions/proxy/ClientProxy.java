@@ -14,6 +14,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.fluids.Fluid;
 
 import buildcraftAdditions.client.render.CanisterItemRender;
 import buildcraftAdditions.client.render.RendererDuster;
@@ -52,5 +53,10 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public EntityPlayer getPlayer(String name) {
 		return null;
+	}
+
+	@Override
+	public void cloneFluidTextures(Fluid source, Fluid target) {
+		target.setIcons(source.getStillIcon(), source.getFlowingIcon());
 	}
 }

@@ -15,6 +15,7 @@ import net.minecraftforge.event.entity.player.AchievementEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 
+import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
@@ -92,7 +93,7 @@ public class EventListener {
 			if (event.map.getTextureType() == 0) {
 				for (int t = 0; t < RefineryRecepieConverter.inputs.length; t++) {
 					if (RefineryRecepieConverter.inputs[t] != null && RefineryRecepieConverter.outputs[t] != null)
-						FluidRegistry.getFluid(RefineryRecepieConverter.outputs[t].getFluid().getName()).setIcons(RefineryRecepieConverter.inputs[t].getFluid().getStillIcon(), RefineryRecepieConverter.inputs[t].getFluid().getFlowingIcon());
+						BuildcraftAdditions.proxy.cloneFluidTextures(FluidRegistry.getFluid(RefineryRecepieConverter.outputs[t].getFluid().getName()), RefineryRecepieConverter.inputs[t].getFluid());
 				}
 			}
 		}
