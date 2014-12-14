@@ -10,14 +10,16 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.AchievementEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 
 import buildcraftAdditions.config.ConfigurationHandler;
-import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
-
+import buildcraftAdditions.utils.RefineryRecepieConverter;
+import buildcraftAdditions.utils.Utils;
 
 import eureka.api.EurekaKnowledge;
 
@@ -82,6 +84,16 @@ public class EventListener {
 				Utils.dropItemstack(event.world, event.x, event.y, event.z, stack);
 				event.world.setBlockToAir(event.x, event.y, event.z);
 				event.world.removeTileEntity(event.x, event.y, event.z);
+			}
+		}
+
+		@SubscribeEvent
+		public void textures(TextureStitchEvent.Post event) {
+			if (event.map.getTextureType() == 0) {
+				for (int t = 0; t < RefineryRecepieConverter.inputs.length; t++) {
+					if (RefineryRecepieConverter.inputs[t] != null && RefineryRecepieConverter.outputs[t] != null)
+						FluidRegistry.getFluid(RefineryRecepieConverter.outputs[t].getFluid().getName()).setIcons(RefineryRecepieConverter.inputs[t].getFluid().getStillIcon(), RefineryRecepieConverter.inputs[t].getFluid().getFlowingIcon());
+				}
 			}
 		}
 	}

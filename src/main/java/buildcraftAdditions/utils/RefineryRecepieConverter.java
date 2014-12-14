@@ -19,11 +19,11 @@ import buildcraftAdditions.core.Logger;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class RefineryRecepieConverter {
+	public static CraftingResult<FluidStack> results[] = new CraftingResult[20];
+	public static FluidStack inputs[] = new FluidStack[20];
+	public static FluidStack outputs[] = new FluidStack[20];
 
 	public static void doYourThing() {
-		CraftingResult<FluidStack> results[] = new CraftingResult[20];
-		FluidStack inputs[] = new FluidStack[20];
-		FluidStack outputs[] = new FluidStack[20];
 		int teller = 0;
 		int fluids = FluidRegistry.getRegisteredFluids().size();
 		Collection<IFlexibleRecipe<FluidStack>> recepies = BuildcraftRecipeRegistry.refinery.getRecipes();
