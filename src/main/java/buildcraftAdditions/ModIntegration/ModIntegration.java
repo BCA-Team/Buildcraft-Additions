@@ -105,9 +105,9 @@ public class ModIntegration {
 		EurekaRegistry.addPlaceBlockProgress(ItemsAndBlocks.kebT1, "KEBT2");
 		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT2, "KEBT2");
 
-		EurekaRegistry.register(new EurekaInfo("KEBT3", "BCA", 2, new ItemStack(temp), "KEBT2"));
-		EurekaRegistry.registerDrops("KEBT3", new ItemStack(BCItems.PIPE_POWER_DIAMOND, 2), new ItemStack(Items.gold_ingot, 4), new ItemStack(Items.iron_ingot, 3));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT3Plating, "KEBT3");
+		//EurekaRegistry.register(new EurekaInfo("KEBT3", "BCA", 2, new ItemStack(temp), "KEBT2"));
+		//EurekaRegistry.registerDrops("KEBT3", new ItemStack(BCItems.PIPE_POWER_DIAMOND, 2), new ItemStack(Items.gold_ingot, 4), new ItemStack(Items.iron_ingot, 3));
+		//EurekaRegistry.bindToKey(ItemsAndBlocks.kebT3Plating, "KEBT3");
 	}
 
 	private static void metals() {

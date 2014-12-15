@@ -234,13 +234,13 @@ public final class ItemsAndBlocks {
 		kebT2.setBlockName("blockKEBT2").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(kebT2, "KEBT2");
 
-		kebT3Core = new MultiBlockKEBT3Core();
-		kebT3Core.setBlockName("blockKEBT3Core").setCreativeTab(BuildcraftAdditions.bcadditions);
-		GameRegistry.registerBlock(kebT3Core, "KEBT3Core");
+		//kebT3Core = new MultiBlockKEBT3Core();
+		//kebT3Core.setBlockName("blockKEBT3Core").setCreativeTab(BuildcraftAdditions.bcadditions);
+		//GameRegistry.registerBlock(kebT3Core, "KEBT3Core");
 
-		kebT3Plating = new MultiBlockKEBT3Plating();
-		kebT3Plating.setBlockName("blockKEBT3Plating").setCreativeTab(BuildcraftAdditions.bcadditions);
-		GameRegistry.registerBlock(kebT3Plating, "KEBT3Plating");
+		//kebT3Plating = new MultiBlockKEBT3Plating();
+		//kebT3Plating.setBlockName("blockKEBT3Plating").setCreativeTab(BuildcraftAdditions.bcadditions);
+		//GameRegistry.registerBlock(kebT3Plating, "KEBT3Plating");
 	}
 
 	public static void addRecepies() {
