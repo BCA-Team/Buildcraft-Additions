@@ -9,7 +9,7 @@ import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
 
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.inventories.CustomInventory;
@@ -25,7 +25,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileMechanicalDuster extends TileBaseDuster implements IInventory, IEnergyHandler {
+public class TileMechanicalDuster extends TileBaseDuster implements IInventory, IEnergyReceiver {
 	public int progress, progressStage, oldProgressStage, energy, maxEnergy;
 	public EntityPlayer player;
 	private CustomInventory inventory = new CustomInventory("mechanicalDuster", 1, 1, this);
@@ -165,11 +165,6 @@ public class TileMechanicalDuster extends TileBaseDuster implements IInventory, 
 		if (!simulate)
 			energy += energyRecieved;
 		return energyRecieved;
-	}
-
-	@Override
-	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-		return 0;
 	}
 
 	@Override

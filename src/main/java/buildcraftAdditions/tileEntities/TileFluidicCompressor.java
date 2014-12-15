@@ -21,11 +21,10 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidContainerItem;
 import net.minecraftforge.fluids.IFluidHandler;
-import net.minecraftforge.fluids.ItemFluidContainer;
 
 import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.networking.MessageFluidicCompressorC;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
@@ -48,10 +47,10 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 			return;
 		ItemStack itemstack = inventory.getStackInSlot(0);
 		if (itemstack != null) {
-			ItemFluidContainer item = null;
+			IFluidContainerItem item = null;
 			Item itemInSlot = itemstack.getItem();
-			if (itemInSlot instanceof ItemCanister) {
-				item = (ItemCanister) itemstack.getItem();
+			if (itemInSlot instanceof IFluidContainerItem) {
+				item = (IFluidContainerItem) itemstack.getItem();
 			}
 			if (item != null) {
 				int amount = 100;
@@ -180,7 +179,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 		if (itemStack == null)
 			return false;
 		Item item = itemStack.getItem();
-		return slotid == 0 && item instanceof ItemCanister;
+		return slotid == 0 && item instanceof IFluidContainerItem;
 	}
 
 	@Override
@@ -233,10 +232,10 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 		if (itemstack == null)
 			return 0;
 		Item item = itemstack.getItem();
-		if (!(item instanceof ItemCanister))
+		if (!(item instanceof IFluidContainerItem))
 			return 0;
 		FluidStack fluidstack = Utils.getFluidStackFromItemStack(itemstack);
-		ItemCanister canister = (ItemCanister) itemstack.getItem();
+		IFluidContainerItem canister = (IFluidContainerItem) itemstack.getItem();
 		if (fluidstack == null) {
 			if (fill) {
 				return 0;

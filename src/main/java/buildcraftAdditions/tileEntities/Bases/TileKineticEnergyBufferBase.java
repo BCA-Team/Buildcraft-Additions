@@ -9,6 +9,7 @@ import net.minecraft.world.Explosion;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
 
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.networking.MessageKEBConfiguration;
@@ -143,7 +144,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 			Location location = new Location(worldObj, xCoord, yCoord, zCoord);
 			location.move(direction);
 			IEnergyHandler energyHandler = null;
-			if (location.getTileEntity() != null && location.getTileEntity() instanceof IEnergyHandler)
+			if (location.getTileEntity() != null && location.getTileEntity() instanceof IEnergyReceiver)
 				energyHandler = (IEnergyHandler) location.getTileEntity();
 			if (energyHandler != null) {
 				int sendEnergy = energy;
