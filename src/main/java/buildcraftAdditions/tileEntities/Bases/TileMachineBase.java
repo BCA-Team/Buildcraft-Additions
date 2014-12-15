@@ -4,7 +4,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -12,7 +12,7 @@ import cofh.api.energy.IEnergyHandler;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileMachineBase extends TileBase implements IEnergyHandler {
+public abstract class TileMachineBase extends TileBase implements IEnergyReceiver {
 	protected int energy;
 	private int maxEnergy;
 
@@ -42,10 +42,6 @@ public abstract class TileMachineBase extends TileBase implements IEnergyHandler
 		return energyRecieved;
 	}
 
-	@Override
-	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-		return 0;
-	}
 
 	@Override
 	public int getEnergyStored(ForgeDirection from) {
