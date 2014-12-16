@@ -1,0 +1,38 @@
+#Slovak language file by leSamo (twitter: @leSamoSK)
+
+tile.blockFluidicCompressor.name=Kompresor tekutín
+tile.blockChargingStation.name=Nabíjacia stanica
+tile.blockHeatedFurnace.name=Tepelná pec
+tile.blockCoilBasic.name=Základná cievka
+tile.blockDusterBasic.name=Základný drvič
+tile.blockDusterSemiAutomatic.name=Poloautomatický drvič
+tile.blockDusterMechanical.name=Mechanický drvič
+tile.blockDusterKinetic.name=Kinetický drvič
+tile.blockCoilLava.name=Lávová cievka
+tile.blockCoilKinetic.name=Kinetická cievka
+tile.blockKEBT1.name=Kinetická batéria
+tile.blockKEBT2.name=Veľká kinetická batéria
+tile.blockKEBT3Core.name=Jadro pokročilej kinetickej batérie
+tile.blockKEBT3Plating.name=Obal pokročilej kinetickej batérie
+tile.blockKEBT3.name=Pokročilá kinetická batéria
+
+tooltip.installed=Naištalované
+tooltip.deactivated=Deaktivované
+tooltip.upgradesPossible=Možné vylepšenia
+
+gui.progress=Postup
+gui.fluid=Tekutina
+gui.noFluid=Prázdne
+gui.fluidStored=Množstvo tekutiny
+gui.energyInTool=Uskladnená energia
+gui.maxEnergy=Maximálna energia
+
+gui.nei.dusting=Drvenie
+
+trigger.canisterRequested=Kanister je potrebný
+trigger.hasEmptyCanister=Obsahuje prázdny kanister
+trigger.hasFullCanister=Obsahuje plný kanister
+trigger.doneCharging=Nabité
+trigger.readyToCharge=Pripravené na nabíjanie
+
+itemGroup.BuildcraftAdditions=Buildcraft Doplnky
