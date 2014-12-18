@@ -93,7 +93,7 @@ public class EventListener {
 			if (event.map.getTextureType() == 0) {
 				for (int t = 0; t < RefineryRecepieConverter.inputs.length; t++) {
 					if (RefineryRecepieConverter.inputs[t] != null && RefineryRecepieConverter.outputs[t] != null)
-						BuildcraftAdditions.proxy.cloneFluidTextures(FluidRegistry.getFluid(RefineryRecepieConverter.outputs[t].getFluid().getName()), RefineryRecepieConverter.inputs[t].getFluid());
+						BuildcraftAdditions.proxy.cloneFluidTextures(FluidRegistry.getFluid(RefineryRecepieConverter.outputs[t].getFluid().getName()), RefineryRecepieConverter.gas[t].getFluid());
 				}
 			}
 		}

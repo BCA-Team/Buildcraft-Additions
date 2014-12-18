@@ -22,6 +22,7 @@ public class RefineryRecepieConverter {
 	public static CraftingResult<FluidStack> results[] = new CraftingResult[20];
 	public static FluidStack inputs[] = new FluidStack[20];
 	public static FluidStack outputs[] = new FluidStack[20];
+	public static FluidStack gas[] = new FluidStack[20];
 
 	public static void doYourThing() {
 		int teller = 0;
@@ -50,6 +51,7 @@ public class RefineryRecepieConverter {
 			fluid.setIcons(results[t].crafted.getFluid().getStillIcon(), results[t].crafted.getFluid().getFlowingIcon());
 			fluid.setTemperature(results[t].energyCost);
 			FluidRegistry.registerFluid(fluid);
+			gas[t] = new FluidStack(fluid, outputs[t].amount);
 			BuildcraftRecipeRegistry.refinery.removeRecipe(results[t].recipe);
 			BuildcraftRecipeRegistry.refinery.addRecipe(results[t].recipe.getId() + "_GAS", new FluidStack(inputs[t].getFluid(), 1000 - inputs[t].amount), new FluidStack(fluid, outputs[t].amount), results[t].energyCost, 0);
 			Logger.info("Recepie replaced");
