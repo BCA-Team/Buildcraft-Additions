@@ -108,8 +108,8 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		tag.setInteger("maxInput", maxInput);
 		tag.setInteger("maxOutput", maxOutput);
 		tag.setInteger("loss", loss);
+		tag.setBoolean("configuration", true);
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-			tag.setBoolean("configuration", true);
 			tag.setInteger("configuration" + direction.ordinal(), Utils.statusToInt(configuration[direction.ordinal()]));
 		}
 		if (owner != null)
@@ -143,9 +143,9 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 				continue;
 			Location location = new Location(worldObj, xCoord, yCoord, zCoord);
 			location.move(direction);
-			IEnergyHandler energyHandler = null;
+			IEnergyReceiver energyHandler = null;
 			if (location.getTileEntity() != null && location.getTileEntity() instanceof IEnergyReceiver)
-				energyHandler = (IEnergyHandler) location.getTileEntity();
+				energyHandler = (IEnergyReceiver) location.getTileEntity();
 			if (energyHandler != null) {
 				int sendEnergy = energy;
 				if (sendEnergy > maxOutput)
@@ -187,10 +187,12 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		explosion.doExplosionB(true);
 	}
 
+	@Override
 	public EnumSideStatus getStatus(ForgeDirection side) {
 		return configuration[side.ordinal()];
 	}
 
+	@Override
 	public void changeStatus(ForgeDirection side) {
 		EnumSideStatus status = configuration[side.ordinal()];
 		if (status == EnumSideStatus.INPUT)

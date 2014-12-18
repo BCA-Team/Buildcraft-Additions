@@ -1,15 +1,14 @@
 package buildcraftAdditions.tileEntities;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.reference.Variables;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -18,7 +17,7 @@ import buildcraftAdditions.reference.Variables;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileBasicDuster extends TileBaseDuster implements IInventory {
+public class TileBasicDuster extends TileBaseDuster {
 	public CustomInventory inventory = new CustomInventory("Duster", 1, 1, this);
 
 	public TileBasicDuster() {
@@ -110,5 +109,20 @@ public class TileBasicDuster extends TileBaseDuster implements IInventory {
 		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, DusterRecipes.dusting().getDustingResult(getStackInSlot(0)));
 		setInventorySlotContents(0, null);
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int side) {
+		return new int[0];
+	}
+
+	@Override
+	public boolean canInsertItem(int slot, ItemStack stack, int side) {
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int slot, ItemStack item, int side) {
+		return false;
 	}
 }

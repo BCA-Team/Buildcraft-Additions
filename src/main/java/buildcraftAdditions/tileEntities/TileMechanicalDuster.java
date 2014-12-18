@@ -1,7 +1,6 @@
 package buildcraftAdditions.tileEntities;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -25,7 +24,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileMechanicalDuster extends TileBaseDuster implements IInventory, IEnergyReceiver {
+public class TileMechanicalDuster extends TileBaseDuster implements IEnergyReceiver {
 	public int progress, progressStage, oldProgressStage, energy, maxEnergy;
 	public EntityPlayer player;
 	private CustomInventory inventory = new CustomInventory("mechanicalDuster", 1, 1, this);
@@ -180,6 +179,21 @@ public class TileMechanicalDuster extends TileBaseDuster implements IInventory, 
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
 		return true;
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int side) {
+		return new int[]{0};
+	}
+
+	@Override
+	public boolean canInsertItem(int slot, ItemStack stack, int side) {
+		return true;
+	}
+
+	@Override
+	public boolean canExtractItem(int slot, ItemStack item, int side) {
+		return false;
 	}
 }
 

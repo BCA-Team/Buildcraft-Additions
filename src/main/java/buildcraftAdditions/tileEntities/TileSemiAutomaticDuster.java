@@ -1,6 +1,5 @@
 package buildcraftAdditions.tileEntities;
 
-import buildcraftAdditions.api.DusterRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -11,13 +10,14 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.transport.IPipeTile;
 
+import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageSemiAutomaticDuster;
 import buildcraftAdditions.networking.PacketHandeler;
-import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
-import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.reference.Variables;
-
+import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
+import buildcraftAdditions.utils.EnumSideStatus;
+import buildcraftAdditions.utils.Utils;
 
 import eureka.api.EurekaKnowledge;
 
@@ -28,7 +28,7 @@ import eureka.api.EurekaKnowledge;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileSemiAutomaticDuster extends TileBaseDuster {
+public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 	private CustomInventory inventory = new CustomInventory("semiAutomaticDuster", 1, 1, this);
 
 	public TileSemiAutomaticDuster() {
@@ -184,5 +184,22 @@ public class TileSemiAutomaticDuster extends TileBaseDuster {
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		inventory.writeNBT(tag);
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int side) {
+		if (configuration[side] == EnumSideStatus.BOTH || configuration[side] == EnumSideStatus.INPUT)
+			return new int[]{0};
+		return new int[0];
+	}
+
+	@Override
+	public boolean canInsertItem(int slot, ItemStack stack, int side) {
+		return configuration[side] == EnumSideStatus.INPUT || configuration[side] == EnumSideStatus.BOTH;
+	}
+
+	@Override
+	public boolean canExtractItem(int slot, ItemStack item, int side) {
+		return configuration[side] == EnumSideStatus.OUTPUT || configuration[side] == EnumSideStatus.BOTH;
 	}
 }
