@@ -19,7 +19,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 
 public class ItemBase extends Item {
 	public IIcon icon;
-	String name;
+	public String name;
 
 	public ItemBase(String name) {
 		super();
