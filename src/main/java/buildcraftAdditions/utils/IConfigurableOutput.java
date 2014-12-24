@@ -13,4 +13,6 @@ public interface IConfigurableOutput {
 	public EnumSideStatus getStatus(ForgeDirection side);
 
 	public void changeStatus(ForgeDirection side);
+
+	public void overrideConfiguration(EnumSideStatus newConfiguration[]);
 }

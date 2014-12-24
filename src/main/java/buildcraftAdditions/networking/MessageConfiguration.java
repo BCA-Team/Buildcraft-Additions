@@ -6,8 +6,11 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
+import net.minecraftforge.common.util.ForgeDirection;
+
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.EnumSideStatus;
+import buildcraftAdditions.utils.IConfigurableOutput;
 
 import io.netty.buffer.ByteBuf;
 /**
@@ -17,18 +20,21 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class MessageKEBConfiguration implements IMessage, IMessageHandler<MessageKEBConfiguration, IMessage> {
+public class MessageConfiguration implements IMessage, IMessageHandler<MessageConfiguration, IMessage> {
 	public int x, y, z;
 	public EnumSideStatus configuration[];
 
-	public MessageKEBConfiguration(){}
+	public MessageConfiguration() {
+	}
 
-	public MessageKEBConfiguration(TileKineticEnergyBufferBase keb) {
-		x= keb.xCoord;
-		y = keb.yCoord;
-		z = keb.zCoord;
+	public MessageConfiguration(TileEntity entity) {
+		x = entity.xCoord;
+		y = entity.yCoord;
+		z = entity.zCoord;
 		configuration = new EnumSideStatus[6];
-		configuration = keb.configuration;
+		IConfigurableOutput configurableOutput = (IConfigurableOutput) entity;
+		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+			configuration[direction.ordinal()] = configurableOutput.getStatus(direction);
 	}
 
 	@Override
@@ -51,11 +57,11 @@ public class MessageKEBConfiguration implements IMessage, IMessageHandler<Messag
 	}
 
 	@Override
-	public IMessage onMessage(MessageKEBConfiguration message, MessageContext ctx) {
+	public IMessage onMessage(MessageConfiguration message, MessageContext ctx) {
 		TileEntity entity = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
 		if (entity != null && entity instanceof TileKineticEnergyBufferBase) {
-			TileKineticEnergyBufferBase keb = (TileKineticEnergyBufferBase) entity;
-			keb.configuration = message.configuration;
+			IConfigurableOutput configurableOutput = (IConfigurableOutput) entity;
+			configurableOutput.overrideConfiguration(message.configuration);
 		}
 		return null;
 	}

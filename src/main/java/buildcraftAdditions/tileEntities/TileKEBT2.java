@@ -178,7 +178,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 		if (!worldObj.isRemote)
 			sync();
 		if (isMaster)
-			player.openGui(BuildcraftAdditions.instance, Variables.GuiKEB, worldObj, xCoord, yCoord, zCoord);
+			player.openGui(BuildcraftAdditions.instance, Variables.GUI_KEB, worldObj, xCoord, yCoord, zCoord);
 		else
 		if (master == null)
 			findMaster();

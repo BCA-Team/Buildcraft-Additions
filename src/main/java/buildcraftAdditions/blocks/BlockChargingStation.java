@@ -25,9 +25,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.reference.Variables;
 
 public class BlockChargingStation extends BlockContainer {
 
@@ -59,7 +59,7 @@ public class BlockChargingStation extends BlockContainer {
 
 
 		if (!world.isRemote)
-			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GuiChargingStation, world, x, y, z);
+			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GUI_CHARGING_STATION, world, x, y, z);
 
 		return true;
 	}

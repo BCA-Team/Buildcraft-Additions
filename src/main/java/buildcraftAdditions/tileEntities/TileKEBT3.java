@@ -176,7 +176,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 		if (!partOfMultiBlock)
 			return false;
 		if (isMaster) {
-			player.openGui(BuildcraftAdditions.instance, Variables.GuiKEB, worldObj, xCoord, yCoord, zCoord);
+			player.openGui(BuildcraftAdditions.instance, Variables.GUI_KEB, worldObj, xCoord, yCoord, zCoord);
 		}
 		else {
 			if (master == null)

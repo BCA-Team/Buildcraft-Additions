@@ -34,6 +34,7 @@ import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryWalls;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
+import buildcraftAdditions.items.ItemMachineConfigurator;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ToolCoreRecipe;
 import buildcraftAdditions.items.Tools.ToolUpgrade;
@@ -109,6 +110,7 @@ public final class ItemsAndBlocks {
 	public static Item diamondWireUnhardened;
 	public static Item diamondWire;
 	public static ItemKineticTool kineticTool;
+	public static Item machineConfigurator;
 
 	public static void init() {
 		ironCanister = new ItemCanister("ironCanister", 2000);
@@ -182,6 +184,9 @@ public final class ItemsAndBlocks {
 
 		diamondWire = new ItemBase("wireDiamond");
 		GameRegistry.registerItem(diamondWire, "wireDiamond");
+
+		machineConfigurator = new ItemMachineConfigurator();
+		GameRegistry.registerItem(machineConfigurator, "machineConfigurator");
 
 		kinesisPipeWood = new BlockBCKinesisPipeWood();
 		kinesisPipeWood.setBlockName("kinesisPipeWood");

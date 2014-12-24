@@ -12,9 +12,9 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
-import buildcraftAdditions.reference.Variables;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -43,7 +43,7 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		if (world.getTileEntity(x, y, z) instanceof TileKineticEnergyBufferBase)
-			player.openGui(BuildcraftAdditions.instance, Variables.GuiKEB, world, x, y, z);
+			player.openGui(BuildcraftAdditions.instance, Variables.GUI_KEB, world, x, y, z);
 		return true;
 	}
 

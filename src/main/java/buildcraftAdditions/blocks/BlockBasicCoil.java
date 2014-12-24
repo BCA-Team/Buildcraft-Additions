@@ -10,8 +10,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.tileEntities.TileBasicCoil;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -37,7 +37,7 @@ public class BlockBasicCoil extends BlockCoilBase {
 			return false;
 
 		if (!world.isRemote)
-			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GuiBasicCoil, world, x, y, z);
+			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GUI_BASIC_COIL, world, x, y, z);
 
 		return true;
 	}

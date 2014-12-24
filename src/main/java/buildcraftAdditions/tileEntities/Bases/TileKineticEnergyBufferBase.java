@@ -12,7 +12,7 @@ import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyReceiver;
 
 import buildcraftAdditions.config.ConfigurationHandler;
-import buildcraftAdditions.networking.MessageKEBConfiguration;
+import buildcraftAdditions.networking.MessageConfiguration;
 import buildcraftAdditions.networking.MessageSelfDestruct;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.utils.EnumSideStatus;
@@ -163,7 +163,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 	public abstract void sync();
 
 	public void sendConfigurationToSever() {
-		PacketHandeler.instance.sendToServer(new MessageKEBConfiguration(this));
+		PacketHandeler.instance.sendToServer(new MessageConfiguration(this));
 	}
 
 	public void setOwner(String owner) {
@@ -204,5 +204,10 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		else if (status == EnumSideStatus.DISSABLED)
 			status = EnumSideStatus.INPUT;
 		configuration[side.ordinal()] = status;
+	}
+
+	@Override
+	public void overrideConfiguration(EnumSideStatus[] newConfiguration) {
+		configuration = newConfiguration;
 	}
 }

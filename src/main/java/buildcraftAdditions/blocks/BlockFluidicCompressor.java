@@ -25,9 +25,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.reference.Variables;
 
 public class BlockFluidicCompressor extends BlockContainer {
 
@@ -58,7 +58,7 @@ public class BlockFluidicCompressor extends BlockContainer {
 
 
 		if (!world.isRemote)
-			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GuiFluidicCompressor, world, x, y, z);
+			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GUI_FLUIDIC_COMPRESSOR, world, x, y, z);
 
 		return true;
 	}

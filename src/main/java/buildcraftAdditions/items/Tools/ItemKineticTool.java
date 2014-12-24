@@ -16,8 +16,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -62,7 +62,7 @@ public class ItemKineticTool extends ItemPoweredBase {
 			stack.setTagCompound(new NBTTagCompound());
 		if (player.isSneaking()) {
 			if (!world.isRemote)
-				player.openGui(BuildcraftAdditions.instance, Variables.GuiKineticTool, world, x, y, z);
+				player.openGui(BuildcraftAdditions.instance, Variables.GUI_KINETIC_TOOL, world, x, y, z);
 		}
 		readUpgrades(stack);
 		readBateries(stack, player);

@@ -61,4 +61,9 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 			status = EnumSideStatus.INPUT;
 		configuration[side.ordinal()] = status;
 	}
+
+	@Override
+	public void overrideConfiguration(EnumSideStatus[] newConfiguration) {
+		configuration = newConfiguration;
+	}
 }

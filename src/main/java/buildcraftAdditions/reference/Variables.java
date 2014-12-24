@@ -8,15 +8,16 @@ package buildcraftAdditions.reference;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-public class Variables {
+public final class Variables {
 
 	//GUI ID's
-	public static final int GuiFluidicCompressor = 70;
-	public static final int GuiChargingStation = 71;
-	public static final int GuiKineticTool = 72;
-	public static final int GuiHeatedFurnace = 73;
-	public static final int GuiBasicCoil = 74;
-	public static final int GuiKEB = 75;
+	public static final int GUI_FLUIDIC_COMPRESSOR = 70;
+	public static final int GUI_CHARGING_STATION = 71;
+	public static final int GUI_KINETIC_TOOL = 72;
+	public static final int GUI_HEATED_FURNACE = 73;
+	public static final int GUI_BASIC_COIL = 74;
+	public static final int GUI_KEB = 75;
+	public static final int GUI_MACHINE_CONFIGURATOR = 76;
 
 
 	//EUREKA NBT names
@@ -25,7 +26,4 @@ public class Variables {
 	public static final String DustT2Key1 = "dusterTier2-1";
 	public static final String DustT2Key2 = "dusterTier2-2";
 	public static final String KineticToolKey = "kineticTool";
-
-	public static final String CoilT1Key = "coilTier1";
-	public static final String CoilT2Key = "coilTier2";
 }
