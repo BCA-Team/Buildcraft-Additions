@@ -2,6 +2,10 @@ package buildcraftAdditions.utils;
 
 import java.util.Collection;
 
+import net.minecraft.block.Block;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -10,6 +14,7 @@ import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 import buildcraft.api.recipes.CraftingResult;
 import buildcraft.api.recipes.IFlexibleRecipe;
 
+import buildcraftAdditions.blocks.FluidBlockBase;
 import buildcraftAdditions.core.Logger;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -46,12 +51,20 @@ public class RefineryRecepieConverter {
 		}
 		for (int t = 0; t < teller; t++) {
 			Fluid fluid = new Fluid(results[t].crafted.getFluid().getName() + "Gas");
-			fluid.setDensity(2);
+			fluid.setDensity(-50);
 			fluid.setGaseous(true);
 			fluid.setIcons(results[t].crafted.getFluid().getStillIcon(), results[t].crafted.getFluid().getFlowingIcon());
 			fluid.setTemperature(results[t].energyCost);
 			FluidRegistry.registerFluid(fluid);
 			gas[t] = new FluidStack(fluid, outputs[t].amount);
+			Block fluidblock = new FluidBlockBase(fluid);
+			GameRegistry.registerBlock(fluidblock, fluid.getName()+"gasBlock");
+			fluid.setBlock(fluidblock);
+			if (inputs[t].getFluid().getBlock() == null) {
+				fluidblock = new FluidBlockBase(inputs[t].getFluid());
+				GameRegistry.registerBlock(fluidblock, fluid.getName()+"Block");
+				inputs[t].getFluid().setBlock(fluidblock);
+			}
 			BuildcraftRecipeRegistry.refinery.removeRecipe(results[t].recipe);
 			BuildcraftRecipeRegistry.refinery.addRecipe(results[t].recipe.getId() + "_GAS", new FluidStack(inputs[t].getFluid(), 1000 - inputs[t].amount), new FluidStack(fluid, outputs[t].amount), results[t].energyCost, 0);
 			Logger.info("Recepie replaced");
