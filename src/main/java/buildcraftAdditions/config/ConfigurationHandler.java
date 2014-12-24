@@ -15,7 +15,7 @@ import buildcraftAdditions.core.VersionCheck;
  */
 public class ConfigurationHandler {
 	public static Configuration configFile;
-	public static boolean shouldPrintChangelog, shouldRegisterDusts, powerloss;
+	public static boolean shouldPrintChangelog, shouldRegisterDusts, powerloss, eurekaIntegration;
 	public static int[] powerDifficultyModifiers = new int[4];
 	public static int basePowerModifier, KEB1powerloss, KEB2powerloss, KEB3powerloss;
 
@@ -45,6 +45,7 @@ public class ConfigurationHandler {
 
 		configFile.addCustomCategoryComment("Misc", "Stuff that didn't fit in any other category");
 		shouldRegisterDusts = configFile.get("Misc", "shouldRegisterDusts", true).setRequiresMcRestart(true).getBoolean();
+		eurekaIntegration = configFile.get("Misc", "eurekaIntegration", true).setRequiresMcRestart(true).getBoolean();
 
 		if (configFile.hasChanged())
 			configFile.save();

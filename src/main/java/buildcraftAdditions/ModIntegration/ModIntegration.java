@@ -35,7 +35,8 @@ import eureka.api.EurekaRegistry;
 public class ModIntegration {
 
 	public static void integrate() {
-		eurekaResearch();
+		if (ConfigurationHandler.eurekaIntegration)
+			eurekaResearch();
 		railcraftIntegration();
 		metals();
 		if (Loader.isModLoaded("framez"))
@@ -163,7 +164,7 @@ public class ModIntegration {
 		addDusts("Platinum", 0xABCDEF);
 		addDusts("Silver", 0xB3B3B3);
 		addDusts("Tin", 0xF2F2F2);
-}
+	}
 
 	private static void addNuggets(String metal) {
 		ArrayList<ItemStack> oreList = OreDictionary.getOres("orePoor" + metal);
