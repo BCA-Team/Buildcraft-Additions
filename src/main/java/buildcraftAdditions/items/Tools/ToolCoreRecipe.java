@@ -4,11 +4,11 @@ import net.minecraft.item.ItemStack;
 
 import buildcraft.BuildCraftCore;
 import buildcraft.api.recipes.CraftingResult;
-import buildcraft.silicon.ItemRedstoneChipset;
 import buildcraft.silicon.TileIntegrationTable;
 import buildcraft.transport.recipes.IntegrationTableRecipe;
 
 import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.utils.BCItems;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -20,12 +20,15 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
 public class ToolCoreRecipe extends IntegrationTableRecipe {
 
 	public ToolCoreRecipe(){
-		setContents("toolCore", ItemsAndBlocks.toolCore, 30000, 100000, BuildCraftCore.goldGearItem, ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem());
+		setContents("toolCore", ItemsAndBlocks.toolCore, 30000, 100000);
 	}
 
 	@Override
 	public CraftingResult<ItemStack> craft(TileIntegrationTable crafter, boolean preview, ItemStack inputA, ItemStack inputB) {
-		return super.craft(crafter, preview, inputA, inputB);
+		CraftingResult<ItemStack> result = super.craft(crafter, preview, inputA, inputB);
+		if (result != null)
+			result.crafted = new ItemStack(ItemsAndBlocks.toolCore);
+		return result;
 	}
 
 	@Override
@@ -35,7 +38,7 @@ public class ToolCoreRecipe extends IntegrationTableRecipe {
 
 	@Override
 	public boolean isValidInputB(ItemStack inputB) {
-		return inputB != null && inputB.getItem() == ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem();
+		return inputB != null && inputB.getItem() == BCItems.CHIPSET_DIAMOND;
 	}
 
 	@Override
