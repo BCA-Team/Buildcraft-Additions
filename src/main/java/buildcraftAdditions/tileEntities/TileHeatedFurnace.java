@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageHeatedFurnaceProgress;
 import buildcraftAdditions.networking.PacketHandeler;
@@ -59,7 +60,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInv
 			}
 			if (progress > 0)
 				isCooking = true;
-			if (progress >= 6500) {
+			if (progress >= ConfigurationHandler.heatedFurnaceHeatRequired) {
 				ItemStack inputStack = getStackInSlot(0);
 				ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inputStack);
 				if (getStackInSlot(1) == null) {
@@ -237,7 +238,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInv
 	}
 
 	public int getScaledProgress() {
-		return (progress * 23) / 6500 + 1;
+		return (progress * 23) / ConfigurationHandler.heatedFurnaceHeatRequired + 1;
 	}
 
 	@Override

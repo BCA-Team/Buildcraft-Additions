@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 
@@ -36,7 +37,7 @@ public class TileBasicCoil extends TileCoilBase implements IInventory {
 		}
 		if (burning)
 			burnTime--;
-		if (burning && increment < 16)
+		if (burning && increment < ConfigurationHandler.basicCoilHeat)
 			increment++;
 		if (!burning && increment > 0)
 			increment--;
@@ -130,6 +131,6 @@ public class TileBasicCoil extends TileCoilBase implements IInventory {
 	public int getBurnIconHeight() {
 		if (fullBurnTime == 0)
 			return 0;
-		return (burnTime * 16) / fullBurnTime;
+		return (burnTime * ConfigurationHandler.basicCoilHeat) / fullBurnTime;
 	}
 }
