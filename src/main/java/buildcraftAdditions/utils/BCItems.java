@@ -83,4 +83,5 @@ public final class BCItems {
 	public static final Item SEALANT = GameRegistry.findItem("BuildCraft|Transport", "pipeWaterproof");
 
 	public static final Item CHIPSET_REDSTONE = GameRegistry.findItem("BuildCraft|Silicon", "redstoneChipset");
+	public static final Item CHIPSET_DIAMOND = GameRegistry.findItemStack("BuildCraft|Silicon", "redstone_diamond_chipset", 1).getItem();
 }

@@ -9,6 +9,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 
 /**
@@ -57,7 +58,7 @@ public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
 		if (!isBurning() && shouldHeat && lava >= 100) {
 			lava = lava - 100;
 			burnTime = 10000;
-			increment = 32;
+			increment = ConfigurationHandler.lavaCoilHeat;
 			burning = true;
 		}
 		if (!isBurning())

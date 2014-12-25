@@ -36,7 +36,8 @@ import eureka.api.EurekaRegistry;
 public class ModIntegration {
 
 	public static void integrate() {
-		eurekaResearch();
+		if (ConfigurationHandler.eurekaIntegration)
+			eurekaResearch();
 		railcraftIntegration();
 		metals();
 		if (Loader.isModLoaded("framez"))
@@ -107,9 +108,9 @@ public class ModIntegration {
 		EurekaRegistry.addPlaceBlockProgress(ItemsAndBlocks.kebT1, "KEBT2");
 		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT2, "KEBT2");
 
-		EurekaRegistry.register(new EurekaInfo("KEBT3", "BCA", 2, new ItemStack(temp), "KEBT2"));
-		EurekaRegistry.registerDrops("KEBT3", new ItemStack(BCItems.PIPE_POWER_DIAMOND, 2), new ItemStack(Items.gold_ingot, 4), new ItemStack(Items.iron_ingot, 3));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT3Plating, "KEBT3");
+		//EurekaRegistry.register(new EurekaInfo("KEBT3", "BCA", 2, new ItemStack(temp), "KEBT2"));
+		//EurekaRegistry.registerDrops("KEBT3", new ItemStack(BCItems.PIPE_POWER_DIAMOND, 2), new ItemStack(Items.gold_ingot, 4), new ItemStack(Items.iron_ingot, 3));
+		//EurekaRegistry.bindToKey(ItemsAndBlocks.kebT3Plating, "KEBT3");
 	}
 
 	private static void metals() {
@@ -155,6 +156,16 @@ public class ModIntegration {
 		addDusts("Zinc", 0xDCDFA4);
 		addDusts("Brass", 0xD89634);
 		addDusts("Electrum", 0xDFD0AA);
+		addDusts("Aluminum", 0xEDEDED);
+		addDusts("Ardite", 0xF28900);
+		addDusts("Manyullyn", 0xAB7EE3);
+		addDusts("Cobalt", 0x0064FF);
+		addDusts("Copper", 0xBF5E1F);
+		addDusts("Lead", 0x808096);
+		addDusts("Nickel", 0xBAB0A4);
+		addDusts("Platinum", 0xABCDEF);
+		addDusts("Silver", 0xB3B3B3);
+		addDusts("Tin", 0xF2F2F2);
 }
 
 	private static void addNuggets(String metal) {

@@ -58,13 +58,14 @@ curse {
         projectId = "${curseProps.project_id}"
 
         releaseType = "release"
-        changelog = """update to BC 6.2.2
-update to eureka 2.2
-fix dusters crashing when input has no result
-fix some packet spams
-written the code for 3rd tier duster, will be available in survival in next release
-added framez integration
-fix fluidic compressor triger crash"""
+        changelog = """update to BC 6.2.6
+update RF api
+fix tileEntities not being registered if BC wasn't installed
+fix double steel dust
+fluid canisters storage has been increased
+fix mod ores not getting processed
+fix heated furnace researche localization
+"""
     }
 }
 
