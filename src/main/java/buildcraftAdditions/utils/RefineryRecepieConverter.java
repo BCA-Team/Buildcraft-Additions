@@ -77,6 +77,7 @@ public class RefineryRecepieConverter {
 				if (data.fluid.getFluid() == inputs[t].getFluid() && data.emptyContainer.getItem() == Items.bucket)
 					stack = new ItemStack(new ItemTextureDuplicate(data.filledContainer.getUnlocalizedName(), data.filledContainer.getItem().getIconFromDamage(0), fluid));
 			}
+
 			boolean test = false;
 			if (stack != null)
 				test = FluidContainerRegistry.registerFluidContainer(fluid, stack, new ItemStack(Items.bucket));
