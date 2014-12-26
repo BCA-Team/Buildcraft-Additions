@@ -8,6 +8,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT3;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKEBT3;
 /**
@@ -21,7 +22,7 @@ public class MultiBlockKEBT3Plating extends MultiBlockBase {
 	public IIcon icon[];
 
 	public MultiBlockKEBT3Plating() {
-		super('W', new MultiBlockPaternKEBT3(), "energyBufferMultiblockPlating");
+		super(Variables.Identifiers.KEBT3_PLATING, new MultiBlockPaternKEBT3(), "energyBufferMultiblockPlating");
 	}
 
 	@Override

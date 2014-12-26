@@ -15,17 +15,16 @@ import cofh.api.energy.IEnergyHandler;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockBase;
 import buildcraftAdditions.config.ConfigurationHandler;
-import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
-import buildcraftAdditions.multiBlocks.MultiBlockPatern;
-import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT2;
 import buildcraftAdditions.networking.MessageKEBT2;
+import buildcraftAdditions.networking.MessageMultiBlockData;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.Location;
+import buildcraftAdditions.utils.MultiBlockData;
 
 import eureka.api.EurekaKnowledge;
 /**
@@ -36,26 +35,21 @@ import eureka.api.EurekaKnowledge;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBlockTile {
-	public MultiBlockPatern patern = new MultiBlockPaternKEBT2();
-	public boolean isMaster, partOfMultiBlock, moved;
-	public int masterX, masterY, masterZ, energyState, oldmasterX, oldmasterY, oldmasterZ, rotationIndex;
+	public int energyState;
+	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.KEBT2);
 	public TileKEBT2 master;
 
 	public TileKEBT2() {
 		super(25000000, 75000, 75000, ConfigurationHandler.KEB2powerloss, 2);
-		moved = false;
 	}
 
 	@Override
 	public void updateEntity() {
-		if (moved) {
-			if (!patern.isPaternValid(worldObj, masterX, masterY, masterZ, rotationIndex)) {
-				patern.destroyMultiblock(worldObj, masterX, masterY, masterZ, rotationIndex);
-				patern.destroyMultiblock(worldObj, oldmasterX, oldmasterY, oldmasterZ, rotationIndex);
-			}
-			moved = false;
+		if (data.moved) {
+			data.afterMoveCheck(worldObj);
+			data.moved = false;
 		}
-		if (!isMaster || worldObj.isRemote) {
+		if (!data.isMaster || worldObj.isRemote) {
 			return;
 		}
 		super.updateEntity();
@@ -64,9 +58,9 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		if (!partOfMultiBlock)
+		if (!data.partOfMultiBlock)
 			return 0;
-		if (isMaster)
+		if (data.isMaster)
 			return super.receiveEnergy(from, maxReceive, simulate);
 		if (master == null)
 			findMaster();
@@ -77,9 +71,9 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-		if (!partOfMultiBlock)
+		if (!data.partOfMultiBlock)
 			return 0;
-		if (isMaster)
+		if (data.isMaster)
 			return super.extractEnergy(from, maxExtract, simulate);
 		if (master == null)
 			findMaster();
@@ -90,9 +84,9 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public int getEnergyStored(ForgeDirection from) {
-		if (!partOfMultiBlock)
+		if (!data.partOfMultiBlock)
 			return 0;
-		if (isMaster)
+		if (data.isMaster)
 			return super.getEnergyStored(from);
 		if (master == null)
 			findMaster();
@@ -103,9 +97,9 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public int getMaxEnergyStored(ForgeDirection from) {
-		if (!partOfMultiBlock)
+		if (!data.partOfMultiBlock)
 			return 0;
-		if (isMaster)
+		if (data.isMaster)
 			return super.getMaxEnergyStored(from);
 		if (master == null)
 			findMaster();
@@ -117,30 +111,20 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		masterX = tag.getInteger("masterX");
-		masterY = tag.getInteger("masterY");
-		masterZ = tag.getInteger("masterZ");
-		isMaster = tag.getBoolean("isMaster");
-		partOfMultiBlock = tag.getBoolean("partOfMultiblock");
-		rotationIndex = tag.getInteger("rotationIndex");
+		data.readFromNBT(tag);
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		tag.setInteger("masterX", masterX);
-		tag.setInteger("masterY", masterY);
-		tag.setInteger("masterZ", masterZ);
-		tag.setBoolean("isMaster", isMaster);
-		tag.setBoolean("partOfMultiblock", partOfMultiBlock);
-		tag.setInteger("rotationIndex", rotationIndex);
+		data.writeToNBT(tag);
 	}
 
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
-		if (!partOfMultiBlock)
+		if (!data.partOfMultiBlock)
 			return false;
-		if (isMaster)
+		if (data.isMaster)
 			return super.canConnectEnergy(from);
 		if (master == null)
 			findMaster();
@@ -153,7 +137,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public void outputEnergy() {
 		if (energy == 0)
 			return;
-		ArrayList<Location> list = patern.getLocations(worldObj, xCoord, yCoord, zCoord, rotationIndex);
+		ArrayList<Location> list = data.patern.getLocations(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
 		for (Location from: list) {
 			for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS) {
 				if (configuration[direction.ordinal()] != EnumSideStatus.OUTPUT && configuration[direction.ordinal()] != EnumSideStatus.BOTH)
@@ -173,11 +157,11 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public boolean onBlockActivated(EntityPlayer player) {
-		if (!partOfMultiBlock)
+		if (!data.partOfMultiBlock)
 			return false;
 		if (!worldObj.isRemote)
 			sync();
-		if (isMaster)
+		if (data.isMaster)
 			player.openGui(BuildcraftAdditions.instance, Variables.GUI_KEB, worldObj, xCoord, yCoord, zCoord);
 		else
 		if (master == null)
@@ -188,62 +172,57 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	public void destroyMultiblock() {
-		MultiBlockPatern patern = new MultiBlockPaternKEBT2();
-		patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, rotationIndex);
+		data.patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
 	}
 
 	private void findMaster() {
-		if (isMaster)
+		if (data.isMaster)
 			master = (TileKEBT2) worldObj.getTileEntity(xCoord, yCoord, zCoord);
-		TileEntity tileEntity = worldObj.getTileEntity(masterX, masterY, masterZ);
-		if (tileEntity != null && tileEntity instanceof IMultiBlockTile)
+		TileEntity tileEntity = worldObj.getTileEntity(data.masterX, data.masterY, data.masterZ);
+		if (tileEntity != null && tileEntity instanceof TileKEBT2)
 			master = (TileKEBT2) tileEntity;
 		else {
-			Logger.info("UNABLE TO FIND MASTER, SELF DESTRUCT INITIATED");
 			MultiBlockBase block = (MultiBlockBase) worldObj.getBlock(xCoord, yCoord, zCoord);
-			block.patern.destroyMultiblock(worldObj, masterX, masterY, masterZ, rotationIndex);
+			block.patern.destroyMultiblock(worldObj, data.masterX, data.masterY, data.masterZ, data.rotationIndex);
 		}
 	}
 
 	@Override
 	public void makeMaster(int rotationIndex) {
-		isMaster = true;
-		partOfMultiBlock = true;
+		data.isMaster = true;
+		data.partOfMultiBlock = true;
 		EurekaKnowledge.makeProgress(destroyer, "KEBT3", 1);
-		this.rotationIndex = rotationIndex;
+		data.rotationIndex = rotationIndex;
 	}
 
 	@Override
 	public void sync() {
 		if (!worldObj.isRemote) {
-			PacketHandeler.instance.sendToAllAround(new MessageKEBT2(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 15));
+			NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 15);
+			PacketHandeler.instance.sendToAllAround(new MessageKEBT2(this), point);
+			PacketHandeler.instance.sendToAllAround(new MessageMultiBlockData(this, xCoord, yCoord, zCoord), point);
 		}
 
 	}
 
 	@Override
 	public void formMultiblock(int masterX, int masterY, int masterZ, int rotationIndex) {
-		partOfMultiBlock = true;
-		this.masterX = masterX;
-		this.masterY = masterY;
-		this.masterZ = masterZ;
-		this.rotationIndex = rotationIndex;
+		data.formMultiBlock(masterX, masterY, masterZ);
 	}
 
 	@Override
 	public void invalidateMultiblock() {
-		if (isMaster) {
-			patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, rotationIndex);
+		if (data.isMaster) {
+			data.patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
 			EurekaKnowledge.makeProgress(destroyer, "KEBT3", -1);
 		} else
-			patern.destroyMultiblock(worldObj, masterX, masterY, masterZ, rotationIndex);
+			data.patern.destroyMultiblock(worldObj, data.masterX, data.masterY, data.masterZ, data.rotationIndex);
 
 	}
 
 	@Override
 	public void invalidateBlock() {
-		partOfMultiBlock = false;
-		isMaster = false;
+		data.invalidate();
 		energy = 0;
 		for (int teller = 0; teller < 6; teller++) {
 			configuration[teller] = EnumSideStatus.INPUT;
@@ -256,28 +235,72 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public void moved(ForgeDirection direction) {
-		if (isMaster) {
-			oldmasterX = xCoord;
-			oldmasterY = yCoord;
-			oldmasterZ = zCoord;
-			masterX = xCoord + direction.offsetX;
-			masterY = yCoord + direction.offsetY;
-			masterZ = zCoord + direction.offsetZ;
-			moved = true;
-		} else {
-			oldmasterX = masterX;
-			oldmasterY = masterY;
-			oldmasterZ = masterZ;
-			moved = true;
-			master = null;
-			masterX += direction.offsetX;
-			masterY += direction.offsetY;
-			masterZ += direction.offsetZ;
-		}
+		data.onMove(direction);
+		master = null;
+	}
+
+	@Override
+	public int getMasterX() {
+		return data.masterX;
+	}
+
+	@Override
+	public int getMasterY() {
+		return data.masterY;
+	}
+
+	@Override
+	public int getMasterZ() {
+		return data.masterZ;
+	}
+
+	@Override
+	public int getRotationIndex() {
+		return data.rotationIndex;
+	}
+
+	@Override
+	public boolean isMaster() {
+		return data.isMaster;
+	}
+
+	@Override
+	public boolean isPartOfMultiblock() {
+		return data.partOfMultiBlock;
+	}
+
+	@Override
+	public void setMasterX(int masterX) {
+		data.masterX = masterX;
+	}
+
+	@Override
+	public void setMasterY(int masterY) {
+		data.masterY = masterY;
+	}
+
+	@Override
+	public void setMasterZ(int masterZ) {
+		data.masterZ = masterZ;
+	}
+
+	@Override
+	public void setIsMaster(boolean isMaster) {
+		data.isMaster = isMaster;
+	}
+
+	@Override
+	public void setPartOfMultiBlock(boolean partOfMultiBlock) {
+		data.partOfMultiBlock = partOfMultiBlock;
+	}
+
+	@Override
+	public void setRotationIndex(int rotationIndex) {
+		data.rotationIndex = rotationIndex;
 	}
 
 	public void destruction() {
-		if (isMaster)
+		if (data.isMaster)
 			byeBye();
 		if (master == null)
 			findMaster();

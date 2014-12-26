@@ -1,6 +1,8 @@
 package buildcraftAdditions.multiBlocks;
 
 import net.minecraftforge.common.util.ForgeDirection;
+
+import buildcraftAdditions.reference.Variables;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -16,7 +18,7 @@ public class MultiBlockPaternKEBT3 extends MultiBlockPatern {
 				ForgeDirection.EAST, ForgeDirection.EAST, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.WEST,
 				ForgeDirection.WEST, ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.DOWN, ForgeDirection.DOWN,
 				ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.WEST,
-				ForgeDirection.WEST, ForgeDirection.NORTH, ForgeDirection.NORTH}, 'W');
-		identifiers[17] = 'C';
+				ForgeDirection.WEST, ForgeDirection.NORTH, ForgeDirection.NORTH}, Variables.Identifiers.KEBT3_PLATING);
+		identifiers[17] = Variables.Identifiers.KEBT3_CORE;
 	}
 }

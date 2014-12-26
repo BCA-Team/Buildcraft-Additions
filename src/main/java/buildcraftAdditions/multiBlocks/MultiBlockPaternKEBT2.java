@@ -5,6 +5,7 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.RotationUtils;
 /**
@@ -17,7 +18,8 @@ import buildcraftAdditions.utils.RotationUtils;
 public class MultiBlockPaternKEBT2 extends MultiBlockPatern {
 
 	public MultiBlockPaternKEBT2() {
-		super(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.UP, ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.SOUTH}, 'K');
+		super(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.SOUTH, ForgeDirection.WEST,
+				ForgeDirection.UP, ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.SOUTH}, Variables.Identifiers.KEBT2);
 	}
 
 	@Override

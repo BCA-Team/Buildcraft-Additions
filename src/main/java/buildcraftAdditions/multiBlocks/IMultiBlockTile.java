@@ -25,4 +25,28 @@ public interface IMultiBlockTile {
 	public void invalidateBlock();
 
 	public void moved(ForgeDirection direction);
+
+	public int getMasterX();
+
+	public int getMasterY();
+
+	public int getMasterZ();
+
+	public int getRotationIndex();
+
+	public boolean isMaster();
+
+	public boolean isPartOfMultiblock();
+
+	public void setMasterX(int masterX);
+
+	public void setMasterY(int masterY);
+
+	public void setMasterZ(int masterZ);
+
+	public void setIsMaster(boolean isMaster);
+
+	public void setPartOfMultiBlock(boolean partOfMultiBlock);
+
+	public void setRotationIndex(int rotationIndex);
 }

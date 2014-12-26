@@ -9,6 +9,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT2;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKEBT2;
 /**
@@ -22,7 +23,7 @@ public class MultiBlockKEBT2 extends MultiBlockBase {
 	public IIcon icon[];
 
 	public MultiBlockKEBT2() {
-		super('K', new MultiBlockPaternKEBT2(), "energyBufferMultiblockRaw");
+		super(Variables.Identifiers.KEBT2, new MultiBlockPaternKEBT2(), "energyBufferMultiblockRaw");
 	}
 
 	@Override

@@ -19,8 +19,7 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMessage> {
-	public int x, y, z, energy, masterX, masterY, masterZ, energyState, length;
-	public boolean partOfMultiBlock, isMaster;
+	public int x, y, z, energy, energyState, length;
 	public String owner;
 	public EnumSideStatus configuration[];
 
@@ -32,12 +31,7 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 		z = keb.zCoord;
 		configuration = new EnumSideStatus[6];
 		configuration = keb.configuration;
-		partOfMultiBlock = keb.partOfMultiBlock;
-		isMaster = keb.isMaster;
 		energy = keb.energy;
-		masterX = keb.masterX;
-		masterY = keb.masterY;
-		masterZ = keb.masterZ;
 		energyState = keb.energyState;
 		owner = keb.owner;
 		length = owner.length();
@@ -52,12 +46,7 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 		configuration = new EnumSideStatus[6];
 		for (int teller = 0; teller < 6; teller++)
 			configuration[teller] = EnumSideStatus.values()[buf.readInt()];
-		partOfMultiBlock = buf.readBoolean();
-		isMaster = buf.readBoolean();
 		energy = buf.readInt();
-		masterX = buf.readInt();
-		masterY = buf.readInt();
-		masterZ = buf.readInt();
 		energyState = buf.readInt();
 		length = buf.readInt();
 		owner = "";
@@ -72,12 +61,7 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 		buf.writeInt(z);
 		for (int teller = 0; teller < 6; teller++)
 			buf.writeInt(configuration[teller].ordinal());
-		buf.writeBoolean(partOfMultiBlock);
-		buf.writeBoolean(isMaster);
 		buf.writeInt(energy);
-		buf.writeInt(masterX);
-		buf.writeInt(masterY);
-		buf.writeInt(masterZ);
 		buf.writeInt(energyState);
 		buf.writeInt(length);
 		char[] letters = owner.toCharArray();
@@ -93,12 +77,7 @@ public class MessageKEBT2 implements IMessage, IMessageHandler<MessageKEBT2, IMe
 		if (entity != null && entity instanceof TileKEBT2) {
 			TileKEBT2 keb = (TileKEBT2) entity;
 			keb.configuration = message.configuration;
-			keb.partOfMultiBlock = message.partOfMultiBlock;
-			keb.isMaster = message.isMaster;
 			keb.energy = message.energy;
-			keb.masterX = message.masterX;
-			keb.masterY = message.masterY;
-			keb.masterZ = message.masterZ;
 			keb.energyState = message.energyState;
 			keb.owner = message.owner;
 		}

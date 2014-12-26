@@ -1,5 +1,9 @@
 package buildcraftAdditions.reference;
 
+import buildcraftAdditions.multiBlocks.MultiBlockPatern;
+import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT2;
+import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT3;
+import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -26,4 +30,22 @@ public final class Variables {
 	public static final String DustT2Key1 = "dusterTier2-1";
 	public static final String DustT2Key2 = "dusterTier2-2";
 	public static final String KineticToolKey = "kineticTool";
+
+	//Multiblock identifiers
+	public static final class Identifiers {
+		public static final char REFINERY_WALLS = 'R';
+		public static final char REFINERY_VALVE = 'V';
+		public static final char KEBT3_PLATING = 'W';
+		public static final char KEBT3_CORE = 'C';
+		public static final char KEBT2 = 'K';
+		public static final char COOLING_TOWER_WALLS = 'T';
+	}
+
+	//multiblock paterns
+	public static final class Paterns {
+		public static final MultiBlockPatern KEBT2 = new MultiBlockPaternKEBT2();
+		public static final MultiBlockPatern KEBT3 = new MultiBlockPaternKEBT3();
+		public static final MultiBlockPatern REFINERY = new MultiBlockPaternRefinery();
+	}
+
 }

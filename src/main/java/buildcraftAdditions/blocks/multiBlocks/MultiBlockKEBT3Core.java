@@ -8,6 +8,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT3;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKEBT3;
 /**
@@ -26,7 +27,7 @@ public class MultiBlockKEBT3Core extends MultiBlockBase {
 	}
 
 	public MultiBlockKEBT3Core() {
-		super('C', new MultiBlockPaternKEBT3(), "energyBufferMultiblockCore");
+		super(Variables.Identifiers.KEBT3_CORE, new MultiBlockPaternKEBT3(), "energyBufferMultiblockCore");
 	}
 
 	@Override

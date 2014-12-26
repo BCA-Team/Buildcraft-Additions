@@ -22,13 +22,14 @@ import buildcraft.api.recipes.IFlexibleCrafter;
 import buildcraft.api.recipes.IFlexibleRecipe;
 
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
-import buildcraftAdditions.multiBlocks.MultiBlockPatern;
-import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
+import buildcraftAdditions.networking.MessageMultiBlockData;
 import buildcraftAdditions.networking.MessageRefinery;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.utils.Location;
+import buildcraftAdditions.utils.MultiBlockData;
 import buildcraftAdditions.utils.RotationUtils;
 import buildcraftAdditions.utils.Tank;
 /**
@@ -39,14 +40,14 @@ import buildcraftAdditions.utils.Tank;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyHandler {
-	public int masterX, masterY, masterZ, rotationIndex, timer, energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer, oldmasterX, oldmasterY, oldmasterZ;
-	public boolean isMaster, partOfMultiBlock, init, valve, isCooling, moved;
-	public MultiBlockPatern patern = new MultiBlockPaternRefinery();
+	public int timer, energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer;
+	public boolean init, valve, isCooling, moved;
 	public TileRefinery master;
 	public Tank input = new Tank(3000, this);
 	public Tank output = new Tank(3000, this);
 	private CraftingResult<FluidStack> currentResult;
 	private IFlexibleRecipe<FluidStack> currentRecepie;
+	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.REFINERY);
 
 	public TileRefinery() {
 		maxEnergy = 50000;
@@ -55,12 +56,9 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	public void updateEntity() {
-		if (moved) {
-			if (!patern.isPaternValid(worldObj, masterX, masterY, masterZ, rotationIndex)) {
-				patern.destroyMultiblock(worldObj, masterX, masterY, masterZ, rotationIndex);
-				patern.destroyMultiblock(worldObj, oldmasterX, oldmasterY, oldmasterZ, rotationIndex);
-			}
-			moved = false;
+		if (data.moved) {
+			data.afterMoveCheck(worldObj);
+			data.moved = false;
 		}
 		if (input.getFluid() != null && input.getFluid().amount == 0)
 			input.setFluid(null);
@@ -72,7 +70,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		}
 		timer--;
 		updateHeat();
-		if (!isMaster)
+		if (!data.isMaster)
 			return;
 		energyCost = (currentResult == null || currentRecepie == null || isCooling || energy < (int) (50 + (50 * ((double) currentHeat / 100)))) ? 0 : (int) (50 + (50 * ((double) currentHeat / 100)));
 		energy -= energyCost;
@@ -119,17 +117,17 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void makeMaster(int rotationIndex) {
-		isMaster = true;
-		partOfMultiBlock = true;
-		this.rotationIndex = rotationIndex;
+		data.isMaster = true;
+		data.partOfMultiBlock = true;
+		data.rotationIndex = rotationIndex;
 	}
 
 	public void findMaster() {
-		TileEntity entity = worldObj.getTileEntity(masterX, masterY, masterZ);
+		TileEntity entity = worldObj.getTileEntity(data.masterX, data.masterY, data.masterZ);
 		if (entity instanceof TileRefinery) {
 			master = (TileRefinery) entity;
 		}
-		if (master == null || !master.isMaster) {
+		if (master == null || !master.data.isMaster) {
 			master = null;
 			invalidateMultiblock();
 		}
@@ -137,44 +135,47 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void sync() {
-		if (!worldObj.isRemote)
-			PacketHandeler.instance.sendToAllAround(new MessageRefinery(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 20));
+		if (!worldObj.isRemote) {
+			NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 20);
+			PacketHandeler.instance.sendToAllAround(new MessageRefinery(this), point);
+			PacketHandeler.instance.sendToAllAround(new MessageMultiBlockData(this, xCoord, yCoord, zCoord), point);
+		}
 	}
 
 	@Override
 	public void invalidateMultiblock() {
-		if (isMaster) {
-			patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, rotationIndex);
+		if (data.isMaster) {
+			data.patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
 		}
 		else
-			patern.destroyMultiblock(worldObj, masterX, masterY, masterZ, rotationIndex);
+			data.patern.destroyMultiblock(worldObj, data.masterX, data.masterY, data.masterZ, data.rotationIndex);
 	}
 
 	private void emptyTanks() {
 		if (input.getFluid() == null || input.getFluid().amount < 1000)
 			return;
-		ForgeDirection[] directions = RotationUtils.rotateDirections(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.UP}, rotationIndex);
+		ForgeDirection[] directions = RotationUtils.rotateDirections(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.UP}, data.rotationIndex);
 		Location location = new Location(this);
 		location.move(directions);
 		while (input.getFluid().amount > 1000) {
 			if (input.getFluidType().getBlock() != null)
 				location.setBlock(input.getFluidType().getBlock());
 			input.drain(1000, true);
-			location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, rotationIndex));
+			location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, data.rotationIndex));
 		}
-		location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, rotationIndex));
+		location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, data.rotationIndex));
 		if (output.getFluid() == null || output.getFluid().amount < 1000)
 			return;
 		while (output.getFluid().amount > 1000) {
 			location.setBlock(output.getFluidType().getBlock());
 			output.drain(1000, true);
-			location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, rotationIndex));
+			location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, data.rotationIndex));
 		}
 	}
 
 	@Override
 	public boolean onBlockActivated(EntityPlayer player) {
-		if (isMaster) {
+		if (data.isMaster) {
 			if (!worldObj.isRemote) {
 				String fluid = "Nothing";
 				if (input.getFluid() != null)
@@ -191,7 +192,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			}
 			return true;
 		}
-		if (partOfMultiBlock) {
+		if (data.partOfMultiBlock) {
 			if (master == null)
 				findMaster();
 			if (master != null)
@@ -203,16 +204,11 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		isMaster = tag.getBoolean("isMaster");
-		partOfMultiBlock = tag.getBoolean("partOfMultiblock");
 		valve = tag.getBoolean("valve");
-		rotationIndex = tag.getInteger("rotationIndex");
 		energy = tag.getInteger("energy");
-		masterX = tag.getInteger("masterX");
-		masterY = tag.getInteger("masterY");
-		masterZ = tag.getInteger("masterZ");
 		currentHeat = tag.getInteger("currentHeat");
 		requiredHeat = tag.getInteger("requiredHeat");
+		data.writeToNBT(tag);
 		if (tag.hasKey("fluidIDinput") && tag.hasKey("fluidIDoutput")) {
 			FluidStack stack;
 			if (tag.getInteger("fluidIDinput") == -1)
@@ -224,6 +220,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 				stack = null;
 			else
 				stack = new FluidStack(tag.getInteger("fluidIDoutput"), tag.getInteger("fluidAmountOutput"));
+			output.setFluid(stack);
 		}
 		updateRecepie();
 	}
@@ -231,14 +228,9 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		tag.setBoolean("isMaster", isMaster);
-		tag.setBoolean("partOfMultiblock", partOfMultiBlock);
+		data.readFromNBT(tag);
 		tag.setBoolean("valve", valve);
-		tag.setInteger("rotationIndex", rotationIndex);
 		tag.setInteger("energy", energy);
-		tag.setInteger("masterX", masterX);
-		tag.setInteger("masterY", masterY);
-		tag.setInteger("masterZ", masterZ);
 		tag.setInteger("currentHeat", currentHeat);
 		tag.setInteger("requiredHeat", requiredHeat);
 		if (input.getFluid() == null) {
@@ -257,24 +249,20 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void formMultiblock(int masterX, int masterY, int masterZ, int rotationIndex) {
-		partOfMultiBlock = true;
-		this.masterX = masterX;
-		this.masterY = masterY;
-		this.masterZ = masterZ;
-		this.rotationIndex = rotationIndex;
+		data.partOfMultiBlock = true;
+		data.masterX = masterX;
+		data.masterY = masterY;
+		data.masterZ = masterZ;
+		data.rotationIndex = rotationIndex;
 	}
 
 	@Override
 	public void invalidateBlock() {
-		if (isMaster)
+		if (data.isMaster)
 			emptyTanks();
-		partOfMultiBlock = false;
-		isMaster = false;
 		input.setFluid(null);
 		output.setFluid(null);
-		masterX = 0;
-		masterY = 0;
-		masterZ = 0;
+		data.invalidate();
 		requiredHeat = 0;
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, ItemsAndBlocks.refineryWalls, 80);
@@ -283,25 +271,68 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void moved(ForgeDirection direction) {
-		if (isMaster) {
-			oldmasterX = xCoord;
-			oldmasterY = yCoord;
-			oldmasterZ = zCoord;
-			masterX = xCoord + direction.offsetX;
-			masterY = yCoord + direction.offsetY;
-			masterZ = zCoord + direction.offsetZ;
-			moved = true;
-		} else {
-			oldmasterX = masterX;
-			oldmasterY = masterY;
-			oldmasterZ = masterZ;
-			moved = true;
-			master = null;
-			masterX += direction.offsetX;
-			masterY += direction.offsetY;
-			masterZ += direction.offsetZ;
-		}
+		data.onMove(direction);
+		master = null;
+	}
 
+	@Override
+	public int getMasterX() {
+		return data.masterX;
+	}
+
+	@Override
+	public int getMasterY() {
+		return data.masterY;
+	}
+
+	@Override
+	public int getMasterZ() {
+		return data.masterZ;
+	}
+
+	@Override
+	public int getRotationIndex() {
+		return data.rotationIndex;
+	}
+
+	@Override
+	public boolean isMaster() {
+		return data.isMaster;
+	}
+
+	@Override
+	public boolean isPartOfMultiblock() {
+		return data.partOfMultiBlock;
+	}
+
+	@Override
+	public void setMasterX(int masterX) {
+		data.masterX = masterX;
+	}
+
+	@Override
+	public void setMasterY(int masterY) {
+		data.masterY = masterY;
+	}
+
+	@Override
+	public void setMasterZ(int masterZ) {
+		data.masterZ = masterZ;
+	}
+
+	@Override
+	public void setIsMaster(boolean isMaster) {
+		data.isMaster = isMaster;
+	}
+
+	@Override
+	public void setPartOfMultiBlock(boolean partOfMultiBlock) {
+		data.partOfMultiBlock = partOfMultiBlock;
+	}
+
+	@Override
+	public void setRotationIndex(int rotationIndex) {
+		data.rotationIndex = rotationIndex;
 	}
 
 	@Override
@@ -345,12 +376,12 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		return partOfMultiBlock && valve;
+		return data.partOfMultiBlock && valve;
 	}
 
 	@Override
 	public boolean canDrain(ForgeDirection from, Fluid fluid) {
-		return partOfMultiBlock && valve;
+		return data.partOfMultiBlock && valve;
 	}
 
 	@Override
@@ -409,7 +440,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		if (isMaster) {
+		if (data.isMaster) {
 			int recieved = maxReceive;
 			if (recieved > maxEnergy - energy)
 				recieved = maxEnergy - energy;
@@ -432,7 +463,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public int getEnergyStored(ForgeDirection from) {
-		if (isMaster)
+		if (data.isMaster)
 			return energy;
 		else {
 			if (master == null)
@@ -445,7 +476,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public int getMaxEnergyStored(ForgeDirection from) {
-		if (isMaster)
+		if (data.isMaster)
 			return maxEnergy;
 		else {
 			if (master == null)

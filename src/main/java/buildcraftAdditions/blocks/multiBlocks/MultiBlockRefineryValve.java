@@ -6,6 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileRefinery;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -24,7 +25,7 @@ public class MultiBlockRefineryValve extends MultiBlockBase {
 	}
 
 	public MultiBlockRefineryValve() {
-		super('V', new MultiBlockPaternRefinery(), "valve");
+		super(Variables.Identifiers.REFINERY_VALVE, new MultiBlockPaternRefinery(), "valve");
 	}
 
 	@Override

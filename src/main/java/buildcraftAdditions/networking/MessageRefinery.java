@@ -20,8 +20,8 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageRefinery implements IMessage, IMessageHandler<MessageRefinery, IMessage> {
-	public int x, y, z, masterX, masterY, masterZ, rotationIndex, fluidIDinput, fluidAmountInput, fluidIDoutput, fluidAmountOutput, requiredHeat, currentHeat, energyCost;
-	public boolean isMaster, partOfMultiblock, valve;
+	public int x, y, z, fluidIDinput, fluidAmountInput, fluidIDoutput, fluidAmountOutput, requiredHeat, currentHeat, energyCost;
+	public boolean valve;
 
 	public MessageRefinery() {
 	}
@@ -30,12 +30,6 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		x = refinery.xCoord;
 		y = refinery.yCoord;
 		z = refinery.zCoord;
-		masterX = refinery.masterX;
-		masterY = refinery.masterY;
-		masterZ = refinery.masterZ;
-		isMaster = refinery.isMaster;
-		partOfMultiblock = refinery.partOfMultiBlock;
-		rotationIndex = refinery.rotationIndex;
 		valve = refinery.valve;
 		currentHeat = refinery.currentHeat;
 		requiredHeat = refinery.requiredHeat;
@@ -59,12 +53,6 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		x = buf.readInt();
 		y = buf.readInt();
 		z = buf.readInt();
-		masterX = buf.readInt();
-		masterY = buf.readInt();
-		masterZ = buf.readInt();
-		isMaster = buf.readBoolean();
-		partOfMultiblock = buf.readBoolean();
-		rotationIndex = buf.readInt();
 		fluidIDinput = buf.readInt();
 		fluidAmountInput = buf.readInt();
 		fluidIDoutput = buf.readInt();
@@ -80,12 +68,6 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		buf.writeInt(x);
 		buf.writeInt(y);
 		buf.writeInt(z);
-		buf.writeInt(masterX);
-		buf.writeInt(masterY);
-		buf.writeInt(masterZ);
-		buf.writeBoolean(isMaster);
-		buf.writeBoolean(partOfMultiblock);
-		buf.writeInt(rotationIndex);
 		buf.writeInt(fluidIDinput);
 		buf.writeInt(fluidAmountInput);
 		buf.writeInt(fluidIDoutput);
@@ -102,12 +84,6 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		TileEntity entity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
 		if (entity instanceof TileRefinery) {
 			TileRefinery refinery = (TileRefinery) entity;
-			refinery.masterX = message.masterX;
-			refinery.masterY = message.masterY;
-			refinery.masterZ = message.masterZ;
-			refinery.isMaster = message.isMaster;
-			refinery.partOfMultiBlock = message.partOfMultiblock;
-			refinery.rotationIndex = message.rotationIndex;
 			refinery.valve = message.valve;
 			refinery.energyCost = message.energyCost;
 			refinery.currentHeat = message.currentHeat;

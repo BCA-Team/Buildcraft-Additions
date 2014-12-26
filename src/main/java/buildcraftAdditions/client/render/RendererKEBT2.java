@@ -29,7 +29,7 @@ public class RendererKEBT2 extends TileEntitySpecialRenderer {
 	@Override
 	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {
 		TileKEBT2 keb = (TileKEBT2) entity;
-		if (!keb.isMaster)
+		if (!keb.isMaster())
 			return;
 		bindTexture(side[keb.energyState]);
 		RenderHelper.disableStandardItemLighting();

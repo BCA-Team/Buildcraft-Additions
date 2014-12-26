@@ -1,6 +1,8 @@
 package buildcraftAdditions.multiBlocks;
 
 import net.minecraftforge.common.util.ForgeDirection;
+
+import buildcraftAdditions.reference.Variables;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -27,10 +29,10 @@ public class MultiBlockPaternRefinery extends MultiBlockPatern {
 				ForgeDirection.EAST, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH,
 				ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.EAST,
 				ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH,
-				ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH}, 'R');
+				ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.NORTH}, Variables.Identifiers.REFINERY_WALLS);
 		for (int t = 38; t < 45; t++)
 			identifiers[t] = '\n';
-		identifiers[37] = 'V';
-		identifiers[45] = 'V';
+		identifiers[37] = Variables.Identifiers.REFINERY_VALVE;
+		identifiers[45] = Variables.Identifiers.REFINERY_VALVE;
 	}
 }
