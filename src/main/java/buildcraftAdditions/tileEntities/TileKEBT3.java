@@ -206,7 +206,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public void formMultiblock(int masterX, int masterY, int masterZ, int rotationIndex) {
-		data.formMultiBlock(masterX, masterY, masterZ);
+		data.formMultiBlock(masterX, masterY, masterZ, rotationIndex);
 		if (!worldObj.isRemote)
 			sync();
 	}

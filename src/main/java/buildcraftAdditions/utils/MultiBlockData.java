@@ -32,11 +32,12 @@ public class MultiBlockData {
 		return this;
 	}
 
-	public MultiBlockData formMultiBlock(int masterX, int masterY, int masterZ) {
+	public MultiBlockData formMultiBlock(int masterX, int masterY, int masterZ, int rotationIndex) {
 		this.masterX = masterX;
 		this.masterY = masterY;
 		this.masterZ = masterZ;
 		partOfMultiBlock = true;
+		this.rotationIndex = rotationIndex;
 		return this;
 	}
 

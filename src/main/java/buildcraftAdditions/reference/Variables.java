@@ -1,6 +1,7 @@
 package buildcraftAdditions.reference;
 
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
+import buildcraftAdditions.multiBlocks.MultiBlockPaternCoolingTower;
 import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT2;
 import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT3;
 import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
@@ -39,6 +40,7 @@ public final class Variables {
 		public static final char KEBT3_CORE = 'C';
 		public static final char KEBT2 = 'K';
 		public static final char COOLING_TOWER_WALLS = 'T';
+		public static final char COOLING_TOWER_VALVE = 'D';
 	}
 
 	//multiblock paterns
@@ -46,6 +48,7 @@ public final class Variables {
 		public static final MultiBlockPatern KEBT2 = new MultiBlockPaternKEBT2();
 		public static final MultiBlockPatern KEBT3 = new MultiBlockPaternKEBT3();
 		public static final MultiBlockPatern REFINERY = new MultiBlockPaternRefinery();
+		public static final MultiBlockPatern COOLING_TOWER = new MultiBlockPaternCoolingTower();
 	}
 
 }

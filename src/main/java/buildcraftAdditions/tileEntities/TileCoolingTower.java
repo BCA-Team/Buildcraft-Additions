@@ -2,10 +2,16 @@ package buildcraftAdditions.tileEntities;
 
 import net.minecraft.entity.player.EntityPlayer;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
+import buildcraftAdditions.networking.MessageMultiBlockData;
+import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
+import buildcraftAdditions.utils.MultiBlockData;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -14,107 +20,118 @@ import buildcraftAdditions.tileEntities.Bases.TileBase;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileCoolingTower extends TileBase implements IMultiBlockTile {
+	MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.COOLING_TOWER);
 
-	protected TileCoolingTower() {
+	@Override
+	public void updateEntity() {
+		if (data.moved)
+			data.afterMoveCheck(worldObj);
+	}
+
+	public TileCoolingTower() {
 	}
 
 	@Override
 	public void makeMaster(int rotationIndex) {
-
+		data.isMaster = true;
+		data.rotationIndex = rotationIndex;
 	}
 
 	@Override
 	public void sync() {
-
+		if (!worldObj.isRemote) {
+			NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 15);
+			PacketHandeler.instance.sendToAllAround(new MessageMultiBlockData(this, xCoord, yCoord, zCoord), point);
+		}
 	}
 
 	@Override
 	public void invalidateMultiblock() {
-
+		if (isMaster())
+			data.patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
+		else
+			data.patern.destroyMultiblock(worldObj, data.masterX, data.masterY, data.masterZ, data.rotationIndex);
 	}
 
 	@Override
 	public boolean onBlockActivated(EntityPlayer player) {
-		return false;
+		return isPartOfMultiblock();
 	}
 
 	@Override
 	public void formMultiblock(int masterX, int masterY, int masterZ, int rotationIndex) {
-
+		data.formMultiBlock(masterX, masterY, masterZ, rotationIndex);
+		sync();
 	}
 
 	@Override
 	public void invalidateBlock() {
-
+		data.invalidate();
+		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 	}
 
 	@Override
 	public void moved(ForgeDirection direction) {
-
+		data.onMove(direction);
 	}
 
 	@Override
 	public int getMasterX() {
-		return 0;
+		return data.masterX;
 	}
 
 	@Override
 	public int getMasterY() {
-		return 0;
+		return data.masterY;
 	}
 
 	@Override
 	public int getMasterZ() {
-		return 0;
+		return data.masterZ;
 	}
 
 	@Override
 	public int getRotationIndex() {
-		return 0;
+		return data.rotationIndex;
 	}
 
 	@Override
 	public boolean isMaster() {
-		return false;
+		return data.isMaster;
 	}
 
 	@Override
 	public boolean isPartOfMultiblock() {
-		return false;
+		return data.partOfMultiBlock;
 	}
 
 	@Override
 	public void setMasterX(int masterX) {
-
+		data.masterX = masterX;
 	}
 
 	@Override
 	public void setMasterY(int masterY) {
-
+		data.masterY = masterY;
 	}
 
 	@Override
 	public void setMasterZ(int masterZ) {
-
+		data.masterZ = masterZ;
 	}
 
 	@Override
 	public void setIsMaster(boolean isMaster) {
-
+		data.isMaster = isMaster;
 	}
 
 	@Override
 	public void setPartOfMultiBlock(boolean partOfMultiBlock) {
-
+		data.partOfMultiBlock = partOfMultiBlock;
 	}
 
 	@Override
 	public void setRotationIndex(int rotationIndex) {
-
-	}
-
-	@Override
-	public void updateEntity() {
-
+		data.rotationIndex = rotationIndex;
 	}
 }

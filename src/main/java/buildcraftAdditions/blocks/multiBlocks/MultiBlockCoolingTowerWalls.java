@@ -4,6 +4,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.tileEntities.TileCoolingTower;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -11,14 +12,14 @@ import buildcraftAdditions.reference.Variables;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class MultiBlockCoolingTowerPlating extends MultiBlockBase {
+public class MultiBlockCoolingTowerWalls extends MultiBlockBase {
 
-	public MultiBlockCoolingTowerPlating() {
-		super(Variables.Identifiers.COOLING_TOWER_WALLS, null, "coolingtowerplating");
+	public MultiBlockCoolingTowerWalls() {
+		super(Variables.Identifiers.COOLING_TOWER_WALLS, Variables.Paterns.COOLING_TOWER, "coolingtowerplating");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return null;
+		return new TileCoolingTower();
 	}
 }

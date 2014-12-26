@@ -26,6 +26,8 @@ import buildcraftAdditions.blocks.BlockKineticEnergyBufferTier1;
 import buildcraftAdditions.blocks.BlockLavaCoil;
 import buildcraftAdditions.blocks.BlockMechanicalDuster;
 import buildcraftAdditions.blocks.BlockSemiAutomaticDuster;
+import buildcraftAdditions.blocks.multiBlocks.MultiBlockCoolingTowerValve;
+import buildcraftAdditions.blocks.multiBlocks.MultiBlockCoolingTowerWalls;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT2;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Core;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Plating;
@@ -48,6 +50,7 @@ import buildcraftAdditions.items.Tools.UpgradeRecipeTiller;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileChargingStation;
+import buildcraftAdditions.tileEntities.TileCoolingTower;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import buildcraftAdditions.tileEntities.TileKEBT2;
@@ -89,6 +92,8 @@ public final class ItemsAndBlocks {
 	public static MultiBlockKEBT3Plating kebT3Plating;
 	public static MultiBlockRefineryWalls refineryWalls;
 	public static MultiBlockRefineryValve refineryValve;
+	public static MultiBlockCoolingTowerWalls coolingTowerWalls;
+	public static MultiBlockCoolingTowerValve coolingTowerValve;
 
 	public static Item powerCapsuleTier1;
 	public static Item powerCapsuleTier2;
@@ -259,6 +264,14 @@ public final class ItemsAndBlocks {
 		refineryValve = new MultiBlockRefineryValve();
 		refineryValve.setBlockName("blockRefineryValve").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(refineryValve, "refineryValve");
+
+		coolingTowerWalls = new MultiBlockCoolingTowerWalls();
+		coolingTowerWalls.setBlockName("blockCoolingTowerWalls").setCreativeTab(BuildcraftAdditions.bcadditions);
+		GameRegistry.registerBlock(coolingTowerWalls, "blockCoolingTowerWalls)");
+
+		coolingTowerValve = new MultiBlockCoolingTowerValve();
+		coolingTowerValve.setBlockName("blockCoolingTowerValve").setCreativeTab(BuildcraftAdditions.bcadditions);
+		GameRegistry.registerBlock(coolingTowerValve, "blockCoolingTowerValve");
 	}
 
 	public static void addRecepies() {
@@ -322,5 +335,6 @@ public final class ItemsAndBlocks {
 		GameRegistry.registerTileEntity(TileKEBT2.class, "TileKineticEnergyBufferTier2");
 		GameRegistry.registerTileEntity(TileKEBT3.class, "TileKineticEnergyBufferTier3");
 		GameRegistry.registerTileEntity(TileRefinery.class, "TileRefinery");
+		GameRegistry.registerTileEntity(TileCoolingTower.class, "CoolingTower");
 	}
 }
