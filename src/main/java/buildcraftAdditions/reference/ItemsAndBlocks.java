@@ -11,7 +11,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
-import buildcraft.factory.TileRefinery;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.blocks.BlockBCKinesisPipeWood;
@@ -304,6 +303,5 @@ public final class ItemsAndBlocks {
 		GameRegistry.registerTileEntity(TileKineticEnergyBufferTier1.class, "TileKineticEnergyBufferTier1");
 		GameRegistry.registerTileEntity(TileKEBT2.class, "TileKineticEnergyBufferTier2");
 		GameRegistry.registerTileEntity(TileKEBT3.class, "TileKineticEnergyBufferTier3");
-		GameRegistry.registerTileEntity(TileRefinery.class, "TileRefinery");
 	}
 }
