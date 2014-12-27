@@ -1,6 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 
@@ -65,9 +66,22 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile {
 	}
 
 	@Override
+	public void readFromNBT(NBTTagCompound tag) {
+		super.readFromNBT(tag);
+		data.readFromNBT(tag);
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound tag) {
+		super.writeToNBT(tag);
+		data.writeToNBT(tag);
+	}
+
+	@Override
 	public void invalidateBlock() {
 		data.invalidate();
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
+		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 	}
 
 	@Override
