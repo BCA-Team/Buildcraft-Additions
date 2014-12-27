@@ -7,8 +7,6 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-import net.minecraftforge.fluids.FluidStack;
-
 import buildcraftAdditions.tileEntities.TileRefinery;
 
 import io.netty.buffer.ByteBuf;
@@ -20,7 +18,7 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageRefinery implements IMessage, IMessageHandler<MessageRefinery, IMessage> {
-	public int x, y, z, fluidIDinput, fluidAmountInput, fluidIDoutput, fluidAmountOutput, requiredHeat, currentHeat, energyCost;
+	public int x, y, z, requiredHeat, currentHeat, energyCost;
 	public boolean valve;
 
 	public MessageRefinery() {
@@ -34,18 +32,6 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		currentHeat = refinery.currentHeat;
 		requiredHeat = refinery.requiredHeat;
 		energyCost = refinery.energyCost;
-		if (refinery.input.getFluid() == null) {
-			fluidIDinput = -1;
-		} else {
-			fluidIDinput = refinery.input.getFluid().fluidID;
-			fluidAmountInput = refinery.input.getFluid().amount;
-		}
-		if (refinery.output.getFluid() == null) {
-			fluidIDoutput = -1;
-		} else {
-			fluidIDoutput = refinery.output.getFluid().fluidID;
-			fluidAmountOutput = refinery.output.getFluid().amount;
-		}
 	}
 
 	@Override
@@ -53,10 +39,6 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		x = buf.readInt();
 		y = buf.readInt();
 		z = buf.readInt();
-		fluidIDinput = buf.readInt();
-		fluidAmountInput = buf.readInt();
-		fluidIDoutput = buf.readInt();
-		fluidAmountOutput = buf.readInt();
 		valve = buf.readBoolean();
 		currentHeat = buf.readInt();
 		requiredHeat = buf.readInt();
@@ -68,10 +50,6 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		buf.writeInt(x);
 		buf.writeInt(y);
 		buf.writeInt(z);
-		buf.writeInt(fluidIDinput);
-		buf.writeInt(fluidAmountInput);
-		buf.writeInt(fluidIDoutput);
-		buf.writeInt(fluidAmountOutput);
 		buf.writeBoolean(valve);
 		buf.writeInt(currentHeat);
 		buf.writeInt(requiredHeat);
@@ -88,20 +66,6 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 			refinery.energyCost = message.energyCost;
 			refinery.currentHeat = message.currentHeat;
 			refinery.requiredHeat = message.requiredHeat;
-			FluidStack stack;
-			if (message.fluidIDinput == -1)
-				stack = null;
-			else {
-				stack = new FluidStack(message.fluidIDinput, message.fluidAmountInput);
-			}
-			refinery.input.setFluid(stack);
-
-			if (message.fluidIDoutput == -1)
-				stack = null;
-			else {
-				stack = new FluidStack(message.fluidIDoutput, message.fluidAmountOutput);
-			}
-			refinery.output.setFluid(stack);
 		}
 		return null;
 	}

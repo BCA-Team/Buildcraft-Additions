@@ -24,10 +24,11 @@ import buildcraft.api.recipes.IFlexibleRecipe;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.networking.MessageMultiBlockData;
 import buildcraftAdditions.networking.MessageRefinery;
+import buildcraftAdditions.networking.MessageTank;
 import buildcraftAdditions.networking.PacketHandeler;
-import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
+import buildcraftAdditions.utils.ITankHolder;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.MultiBlockData;
 import buildcraftAdditions.utils.RotationUtils;
@@ -39,12 +40,12 @@ import buildcraftAdditions.utils.Tank;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyHandler {
+public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyHandler, ITankHolder {
 	public int timer, energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer;
 	public boolean init, valve, isCooling, moved;
 	public TileRefinery master;
-	public Tank input = new Tank(3000, this);
-	public Tank output = new Tank(3000, this);
+	private Tank input = new Tank(3000, this);
+	private Tank output = new Tank(3000, this);
 	private CraftingResult<FluidStack> currentResult;
 	private IFlexibleRecipe<FluidStack> currentRecepie;
 	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.REFINERY);
@@ -137,16 +138,16 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public void sync() {
 		if (!worldObj.isRemote) {
 			NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 20);
-			PacketHandeler.instance.sendToAllAround(new MessageRefinery(this), point);
 			PacketHandeler.instance.sendToAllAround(new MessageMultiBlockData(this, xCoord, yCoord, zCoord), point);
+			PacketHandeler.instance.sendToAllAround(new MessageRefinery(this), point);
+			PacketHandeler.instance.sendToAllAround(new MessageTank(this, xCoord, yCoord, zCoord), point);
 		}
 	}
 
 	@Override
 	public void invalidateMultiblock() {
-		if (data.isMaster) {
+		if (isMaster())
 			data.patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
-		}
 		else
 			data.patern.destroyMultiblock(worldObj, data.masterX, data.masterY, data.masterZ, data.rotationIndex);
 	}
@@ -208,7 +209,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		energy = tag.getInteger("energy");
 		currentHeat = tag.getInteger("currentHeat");
 		requiredHeat = tag.getInteger("requiredHeat");
-		data.writeToNBT(tag);
+		data.readFromNBT(tag);
 		if (tag.hasKey("fluidIDinput") && tag.hasKey("fluidIDoutput")) {
 			FluidStack stack;
 			if (tag.getInteger("fluidIDinput") == -1)
@@ -228,7 +229,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		data.readFromNBT(tag);
+		data.writeToNBT(tag);
 		tag.setBoolean("valve", valve);
 		tag.setInteger("energy", energy);
 		tag.setInteger("currentHeat", currentHeat);
@@ -249,23 +250,20 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void formMultiblock(int masterX, int masterY, int masterZ, int rotationIndex) {
-		data.partOfMultiBlock = true;
-		data.masterX = masterX;
-		data.masterY = masterY;
-		data.masterZ = masterZ;
-		data.rotationIndex = rotationIndex;
+		data.formMultiBlock(masterX, masterY, masterZ, rotationIndex);
+		sync();
 	}
 
 	@Override
 	public void invalidateBlock() {
 		if (data.isMaster)
 			emptyTanks();
+		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
+		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 		input.setFluid(null);
 		output.setFluid(null);
-		data.invalidate();
 		requiredHeat = 0;
-		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
-		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, ItemsAndBlocks.refineryWalls, 80);
+		data.invalidate();
 		sync();
 	}
 
@@ -490,5 +488,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
 		return true;
+	}
+
+	@Override
+	public Tank[] getTanks() {
+		return new Tank[]{input, output};
 	}
 }

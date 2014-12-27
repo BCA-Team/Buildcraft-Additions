@@ -1,5 +1,7 @@
 package buildcraftAdditions.blocks.multiBlocks;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -21,5 +23,12 @@ public class MultiBlockCoolingTowerValve extends MultiBlockBase {
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileCoolingTower();
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack stack) {
+		TileEntity entity = world.getTileEntity(x, y, z);
+		if (entity instanceof TileCoolingTower)
+			((TileCoolingTower) entity).valve = true;
 	}
 }
