@@ -1,5 +1,6 @@
 package buildcraftAdditions.utils;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 import net.minecraftforge.fluids.Fluid;
@@ -13,10 +14,12 @@ import net.minecraftforge.fluids.FluidTank;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class Tank extends FluidTank {
+	protected String name;
 
-	public Tank(int capacity, TileEntity entity) {
+	public Tank(int capacity, TileEntity entity, String name) {
 		super(capacity);
 		this.tile = entity;
+		this.name = name;
 	}
 
 	public Tank(int capacity) {
@@ -39,5 +42,32 @@ public class Tank extends FluidTank {
 
 	public void setFluid(FluidStack stack) {
 		fluid = stack;
+	}
+
+	public void saveToNBT(NBTTagCompound tag) {
+		if (getFluid() == null) {
+			tag.setInteger("fluidID" + name, -1);
+		} else {
+			tag.setInteger("fluidID" + name, getFluid().fluidID);
+			tag.setInteger("fluidAmount" + name, getFluid().amount);
+		}
+	}
+
+	public Tank readFromNBT(NBTTagCompound tag) {
+		FluidStack stack;
+		if (tag.getInteger("fluidID" + name) == -1)
+			stack = null;
+		else
+			stack = new FluidStack(tag.getInteger("fluidID" + name), tag.getInteger("fluidAmount" + name));
+		setFluid(stack);
+		return this;
+	}
+
+	@Override
+	public String toString() {
+		String fluid = "nothing";
+		if (this.fluid != null && this.getFluidAmount() > 0)
+			fluid = getFluid().amount + " of " + getFluid().getLocalizedName();
+		return name + ": " + fluid;
 	}
 }

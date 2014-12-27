@@ -2,6 +2,8 @@ package buildcraftAdditions.tileEntities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 
@@ -28,18 +30,26 @@ import buildcraftAdditions.utils.Tank;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFluidHandler, ITankHolder {
-	MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.COOLING_TOWER);
+	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.COOLING_TOWER);
 	public boolean valve;
-	private Tank input = new Tank(2000, this);
-	private Tank output = new Tank(2000, this);
+	private Tank input = new Tank(2000, this, "input");
+	private Tank output = new Tank(2000, this, "output");
+	private Tank coolant = new Tank(10000, this, "coolant");
+	private TileCoolingTower master;
+	private int timer;
+
 
 	@Override
 	public void updateEntity() {
 		if (data.moved)
 			data.afterMoveCheck(worldObj);
-	}
-
-	public TileCoolingTower() {
+		if (!isMaster())
+			return;
+		if (timer == 0) {
+			sync();
+			timer = 40;
+		} else
+			timer--;
 	}
 
 	@Override
@@ -67,6 +77,13 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 
 	@Override
 	public boolean onBlockActivated(EntityPlayer player) {
+		if (isMaster()) {
+			player.addChatComponentMessage(new ChatComponentText(input.toString()));
+			player.addChatComponentMessage(new ChatComponentText(output.toString()));
+			return true;
+		}
+		if (masterCheck())
+			return master.onBlockActivated(player);
 		return isPartOfMultiblock();
 	}
 
@@ -80,12 +97,20 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		data.readFromNBT(tag);
+		input.readFromNBT(tag);
+		output.readFromNBT(tag);
+		coolant.readFromNBT(tag);
+		valve = tag.getBoolean("valve");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		data.writeToNBT(tag);
+		input.saveToNBT(tag);
+		output.saveToNBT(tag);
+		coolant.saveToNBT(tag);
+		tag.setBoolean("valve", valve);
 	}
 
 	@Override
@@ -94,6 +119,14 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 		sync();
+	}
+
+	private void findMaster() {
+		TileEntity entity = worldObj.getTileEntity(data.masterX, data.masterY, data.masterZ);
+		if (entity instanceof TileCoolingTower)
+			master = (TileCoolingTower) entity;
+		else
+			data.invalidataMultiblock(worldObj);
 	}
 
 	@Override
@@ -163,6 +196,12 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+		if (isMaster())
+			return input.fill(resource, doFill);
+		if (isPartOfMultiblock() && valve) {
+			if (masterCheck())
+				return master.fill(from, resource, doFill);
+		}
 		return 0;
 	}
 
@@ -173,26 +212,47 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+		if (isMaster())
+			return output.drain(maxDrain, doDrain);
+		if (isPartOfMultiblock() && valve) {
+			if (masterCheck())
+				return master.drain(from, maxDrain, doDrain);
+		}
 		return null;
 	}
 
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		return false;
+		return valve;
 	}
 
 	@Override
 	public boolean canDrain(ForgeDirection from, Fluid fluid) {
-		return false;
+		return valve;
 	}
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+		if (valve) {
+			if (masterCheck())
+				return master.getRealInfo();
+			return new FluidTankInfo[]{new FluidTankInfo(input), new FluidTankInfo(output)};
+		}
 		return new FluidTankInfo[0];
+	}
+
+	private FluidTankInfo[] getRealInfo() {
+		return new FluidTankInfo[]{new FluidTankInfo(input), new FluidTankInfo(output)};
 	}
 
 	@Override
 	public Tank[] getTanks() {
 		return new Tank[]{input, output};
+	}
+
+	private boolean masterCheck() {
+		if (master == null)
+			findMaster();
+		return master != null;
 	}
 }

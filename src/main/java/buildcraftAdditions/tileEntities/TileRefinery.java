@@ -44,8 +44,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public int timer, energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer;
 	public boolean init, valve, isCooling, moved;
 	public TileRefinery master;
-	private Tank input = new Tank(3000, this);
-	private Tank output = new Tank(3000, this);
+	private Tank input = new Tank(3000, this, "Input");
+	private Tank output = new Tank(3000, this, "Output");
 	private CraftingResult<FluidStack> currentResult;
 	private IFlexibleRecipe<FluidStack> currentRecepie;
 	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.REFINERY);
@@ -153,7 +153,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	private void emptyTanks() {
-		if (input.getFluid() == null || input.getFluid().amount < 1000)
+		if (input.getFluid() == null || input.getFluid().amount < 1000 || input.getFluidType() == null)
 			return;
 		ForgeDirection[] directions = RotationUtils.rotateDirections(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.UP}, data.rotationIndex);
 		Location location = new Location(this);
@@ -165,7 +165,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, data.rotationIndex));
 		}
 		location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, data.rotationIndex));
-		if (output.getFluid() == null || output.getFluid().amount < 1000)
+		if (output.getFluid() == null || output.getFluid().amount < 1000 || output.getFluidType() == null)
 			return;
 		while (output.getFluid().amount > 1000) {
 			location.setBlock(output.getFluidType().getBlock());
@@ -210,19 +210,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		currentHeat = tag.getInteger("currentHeat");
 		requiredHeat = tag.getInteger("requiredHeat");
 		data.readFromNBT(tag);
-		if (tag.hasKey("fluidIDinput") && tag.hasKey("fluidIDoutput")) {
-			FluidStack stack;
-			if (tag.getInteger("fluidIDinput") == -1)
-				stack = null;
-			else
-				stack = new FluidStack(tag.getInteger("fluidIDinput"), tag.getInteger("fluidAmountInput"));
-			input.setFluid(stack);
-			if (tag.getInteger("fluidIDoutput") == -1)
-				stack = null;
-			else
-				stack = new FluidStack(tag.getInteger("fluidIDoutput"), tag.getInteger("fluidAmountOutput"));
-			output.setFluid(stack);
-		}
+		input.readFromNBT(tag);
+		output.readFromNBT(tag);
 		updateRecepie();
 	}
 
@@ -234,18 +223,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		tag.setInteger("energy", energy);
 		tag.setInteger("currentHeat", currentHeat);
 		tag.setInteger("requiredHeat", requiredHeat);
-		if (input.getFluid() == null) {
-			tag.setInteger("fluidIDinput", -1);
-		} else {
-			tag.setInteger("fluidIDinput", input.getFluid().fluidID);
-			tag.setInteger("fluidAmountInput", input.getFluid().amount);
-		}
-		if (output.getFluid() == null) {
-			tag.setInteger("fluidIDoutput", -1);
-		} else {
-			tag.setInteger("fluidIDoutput", output.getFluid().fluidID);
-			tag.setInteger("fluidAmountOutput", output.getFluid().amount);
-		}
+		input.saveToNBT(tag);
+		output.saveToNBT(tag);
 	}
 
 	@Override

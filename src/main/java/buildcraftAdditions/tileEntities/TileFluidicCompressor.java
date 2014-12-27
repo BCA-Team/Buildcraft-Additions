@@ -34,7 +34,7 @@ import buildcraftAdditions.utils.Utils;
 public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler {
 
 	public final int maxLiquid = FluidContainerRegistry.BUCKET_VOLUME * 10;
-	public Tank tank = new Tank(maxLiquid, this);
+	public Tank tank = new Tank(maxLiquid, this, "");
 	private final CustomInventory inventory = new CustomInventory("FluidicCompressor", 2, 1, this);
 	public boolean fill, sync;
 
@@ -113,7 +113,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
 		inventory.writeNBT(nbtTagCompound);
-		tank.writeToNBT(nbtTagCompound);
+		tank.saveToNBT(nbtTagCompound);
 		nbtTagCompound.setBoolean("fill", fill);
 	}
 

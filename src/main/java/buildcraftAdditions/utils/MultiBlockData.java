@@ -32,6 +32,10 @@ public class MultiBlockData {
 		return this;
 	}
 
+	public void invalidataMultiblock(World world) {
+		patern.destroyMultiblock(world, masterX, masterY, masterZ, rotationIndex);
+	}
+
 	public MultiBlockData formMultiBlock(int masterX, int masterY, int masterZ, int rotationIndex) {
 		this.masterX = masterX;
 		this.masterY = masterY;
