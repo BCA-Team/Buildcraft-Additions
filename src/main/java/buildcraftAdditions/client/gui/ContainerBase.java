@@ -1,6 +1,7 @@
 package buildcraftAdditions.client.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -12,6 +13,14 @@ import net.minecraft.item.ItemStack;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class ContainerBase extends Container {
+
+	public void addPlayerInventory(InventoryPlayer invPlayer, int x, int y) {
+		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
+			for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex)
+				addSlotToContainer(new Slot(invPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, x + inventoryColumnIndex * 18, y + inventoryRowIndex * 18));
+		for (int hotBarIndex = 0; hotBarIndex < 9; ++hotBarIndex)
+			addSlotToContainer(new Slot(invPlayer, hotBarIndex, 8 + hotBarIndex * 18, y + 58));
+	}
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {

@@ -31,5 +31,6 @@ public class PacketHandeler {
 		instance.registerMessage(MessageRefinery.class, MessageRefinery.class, 12, Side.CLIENT);
 		instance.registerMessage(MessageMultiBlockData.class, MessageMultiBlockData.class, 13, Side.CLIENT);
 		instance.registerMessage(MessageTank.class, MessageTank.class, 14, Side.CLIENT);
+		instance.registerMessage(MessageWidgetUpdate.class, MessageWidgetUpdate.class, 15, Side.SERVER);
 	}
 }
