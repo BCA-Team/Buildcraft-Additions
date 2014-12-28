@@ -22,7 +22,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.ModIntegration.ModIntegration;
 import buildcraftAdditions.api.DusterRecipes;
-import buildcraftAdditions.client.gui.GuiHandler;
+import buildcraftAdditions.client.gui.gui.GuiHandler;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;

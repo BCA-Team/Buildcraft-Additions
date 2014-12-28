@@ -1,4 +1,4 @@
-package buildcraftAdditions.client.gui;
+package buildcraftAdditions.client.gui.gui;
 
 import org.lwjgl.opengl.GL11;
 
@@ -10,7 +10,8 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.tileEntities.TileBasicCoil;
+import buildcraftAdditions.client.gui.containers.ContainerHeatedFurnace;
+import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -21,13 +22,13 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @SideOnly(Side.CLIENT)
-public class GuiBasicCoil extends GuiContainer {
-	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/BasicCoilGui.png");
-	TileBasicCoil coil;
+public class GuiHeatedFurnace extends GuiContainer {
+	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/HeatedFurnaceGUI.png");
+	public TileHeatedFurnace furnace;
 
-	public GuiBasicCoil(InventoryPlayer inventoryplayer, TileBasicCoil coil) {
-		super(new ContainerBasicCoil(inventoryplayer, coil));
-		this.coil = coil;
+	public GuiHeatedFurnace(InventoryPlayer inventoryplayer, TileHeatedFurnace furnace) {
+		super(new ContainerHeatedFurnace(inventoryplayer, furnace));
+		this.furnace = furnace;
 	}
 
 	@Override
@@ -37,13 +38,13 @@ public class GuiBasicCoil extends GuiContainer {
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;
-		drawTexturedModalRect(j + 79, k + 28 + (16 - coil.getBurnIconHeight()), 176, 16 - coil.getBurnIconHeight(), 16, coil.getBurnIconHeight());
+		drawTexturedModalRect(j + 79, k + 34, 176, 14, furnace.getScaledProgress(), 16);
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		super.drawGuiContainerForegroundLayer(par1, par2);
-		String title = Utils.localize("tile.blockCoilBasic.name");
+		String title = Utils.localize("tile.blockHeatedFurnace.name");
 		fontRendererObj.drawString(title, 5, 6, 0x404040);
 		fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 96) + 2, 0x404040);
 	}

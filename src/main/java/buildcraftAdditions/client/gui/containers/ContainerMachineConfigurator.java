@@ -1,4 +1,4 @@
-package buildcraftAdditions.client.gui;
+package buildcraftAdditions.client.gui.containers;
 
 /**
  * Copyright (c) 2014, AEnterprise

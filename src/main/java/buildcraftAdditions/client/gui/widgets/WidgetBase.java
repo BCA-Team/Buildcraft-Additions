@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.ResourceLocation;
 
-import buildcraftAdditions.client.gui.GuiBase;
+import buildcraftAdditions.client.gui.gui.GuiBase;
 
 /**
  * Copyright (c) 2014, AEnterprise

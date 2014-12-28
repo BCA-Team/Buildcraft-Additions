@@ -1,4 +1,4 @@
-package buildcraftAdditions.client.gui;
+package buildcraftAdditions.client.gui.gui;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -21,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import buildcraftAdditions.client.gui.containers.ContainerKineticTool;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.utils.Utils;
 

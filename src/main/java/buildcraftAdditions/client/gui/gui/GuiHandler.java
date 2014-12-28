@@ -1,4 +1,4 @@
-package buildcraftAdditions.client.gui;
+package buildcraftAdditions.client.gui.gui;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -14,6 +14,13 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 
+import buildcraftAdditions.client.gui.containers.ContainerBasicCoil;
+import buildcraftAdditions.client.gui.containers.ContainerChargingStation;
+import buildcraftAdditions.client.gui.containers.ContainerFluidicCompressor;
+import buildcraftAdditions.client.gui.containers.ContainerHeatedFurnace;
+import buildcraftAdditions.client.gui.containers.ContainerKEB;
+import buildcraftAdditions.client.gui.containers.ContainerKineticTool;
+import buildcraftAdditions.client.gui.containers.ContainerMachineConfigurator;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ItemPoweredBase;
 import buildcraftAdditions.reference.Variables;

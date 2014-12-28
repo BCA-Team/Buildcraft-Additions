@@ -1,4 +1,4 @@
-package buildcraftAdditions.client.gui;
+package buildcraftAdditions.client.gui.gui;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -23,6 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.fluids.FluidStack;
 
+import buildcraftAdditions.client.gui.containers.ContainerFluidicCompressor;
 import buildcraftAdditions.networking.MessageFluidicCompressorA;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;

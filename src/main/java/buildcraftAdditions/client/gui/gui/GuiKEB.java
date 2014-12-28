@@ -1,4 +1,4 @@
-package buildcraftAdditions.client.gui;
+package buildcraftAdditions.client.gui.gui;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraftAdditions.client.gui.containers.ContainerKEB;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.SpecialListMananger;
 import buildcraftAdditions.utils.Utils;

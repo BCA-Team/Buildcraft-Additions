@@ -1,4 +1,4 @@
-package buildcraftAdditions.client.gui;
+package buildcraftAdditions.client.gui.gui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +109,8 @@ public abstract class GuiBase extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		drawString(StatCollector.translateToLocal("container.inventory"), 5, ySize + 6);
+		if (drawPlayerInv)
+			drawString(StatCollector.translateToLocal("container.inventory"), 5, ySize + 6);
 		drawString(Utils.localize(String.format("gui.%s.name", getInventoryName())), 5, 6);
 	}
 

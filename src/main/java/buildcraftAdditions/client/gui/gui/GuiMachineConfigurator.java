@@ -1,7 +1,8 @@
-package buildcraftAdditions.client.gui;
+package buildcraftAdditions.client.gui.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 
+import buildcraftAdditions.client.gui.containers.ContainerMachineConfigurator;
 import buildcraftAdditions.utils.IConfigurableOutput;
 /**
  * Copyright (c) 2014, AEnterprise
