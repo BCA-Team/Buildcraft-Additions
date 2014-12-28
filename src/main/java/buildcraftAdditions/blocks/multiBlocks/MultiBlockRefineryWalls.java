@@ -16,7 +16,7 @@ import buildcraftAdditions.tileEntities.TileRefinery;
 public class MultiBlockRefineryWalls extends MultiBlockBase {
 
 	public MultiBlockRefineryWalls() {
-		super(Variables.Identifiers.REFINERY_WALLS, new MultiBlockPaternRefinery(), "textureRefinery");
+		super(Variables.Identifiers.REFINERY_WALLS, new MultiBlockPaternRefinery(), "heaterPlating", "heaterSidesMultiblock");
 	}
 
 	@Override

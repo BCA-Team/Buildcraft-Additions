@@ -13,6 +13,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import buildcraftAdditions.api.CoolingTowerRecepie;
+import buildcraftAdditions.api.CoolingTowerRecepieMananger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.networking.MessageMultiBlockData;
 import buildcraftAdditions.networking.MessageTank;
@@ -37,6 +39,8 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private Tank coolant = new Tank(10000, this, "coolant");
 	private TileCoolingTower master;
 	private int timer;
+	private CoolingTowerRecepie currentRecepie;
+	private float heat;
 
 
 	@Override
@@ -50,6 +54,13 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			timer = 40;
 		} else
 			timer--;
+	}
+
+	private void updateRecepie() {
+		if (input.getFluid() == null || input.getFluidAmount() == 0)
+			currentRecepie = null;
+		else
+			currentRecepie = CoolingTowerRecepieMananger.getRecepie(input.getFluid().getFluid());
 	}
 
 	@Override
@@ -73,6 +84,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			data.patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
 		else
 			data.patern.destroyMultiblock(worldObj, data.masterX, data.masterY, data.masterZ, data.rotationIndex);
+		currentRecepie = null;
 	}
 
 	@Override
@@ -101,6 +113,8 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		output.readFromNBT(tag);
 		coolant.readFromNBT(tag);
 		valve = tag.getBoolean("valve");
+		heat = tag.getFloat("heat");
+		updateRecepie();
 	}
 
 	@Override
@@ -110,6 +124,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		input.saveToNBT(tag);
 		output.saveToNBT(tag);
 		coolant.saveToNBT(tag);
+		tag.setFloat("heat", heat);
 		tag.setBoolean("valve", valve);
 	}
 
@@ -119,6 +134,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 		sync();
+		currentRecepie = null;
 	}
 
 	private void findMaster() {
@@ -196,8 +212,11 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		if (isMaster())
-			return input.fill(resource, doFill);
+		if (isMaster()) {
+			int filled = input.fill(resource, doFill);
+			updateRecepie();
+			return filled;
+		}
 		if (isPartOfMultiblock() && valve) {
 			if (masterCheck())
 				return master.fill(from, resource, doFill);
@@ -212,8 +231,11 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		if (isMaster())
-			return output.drain(maxDrain, doDrain);
+		if (isMaster()) {
+			FluidStack drained = output.drain(maxDrain, doDrain);
+			updateRecepie();
+			return drained;
+		}
 		if (isPartOfMultiblock() && valve) {
 			if (masterCheck())
 				return master.drain(from, maxDrain, doDrain);

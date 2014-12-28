@@ -22,23 +22,28 @@ import buildcraftAdditions.multiBlocks.MultiBlockPatern;
 public abstract class MultiBlockBase extends BlockContainer {
 	public char identifier;
 	public MultiBlockPatern patern;
-	public String textureName;
+	public String textureName, secondTexture;
 	public IIcon icon[];
 
 	public MultiBlockBase(char identifier, MultiBlockPatern patern, String textureName) {
+		this(identifier, patern, textureName, "multiBlockSeeInvisible");
+	}
+
+	public MultiBlockBase(char identifier, MultiBlockPatern patern, String textureName, String secondTexture) {
 		super(Material.iron);
 		setHardness(4f);
 		setHarvestLevel(null, 0);
 		this.identifier = identifier;
 		this.patern = patern;
 		this.textureName = textureName;
+		this.secondTexture = secondTexture;
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
 		icon = new IIcon[2];
 		icon[0] = register.registerIcon("bcadditions:" + textureName);
-		icon[1] = register.registerIcon("bcadditions:multiBlockSeeInvisible");
+		icon[1] = register.registerIcon("bcadditions:" + secondTexture);
 	}
 
 	@Override

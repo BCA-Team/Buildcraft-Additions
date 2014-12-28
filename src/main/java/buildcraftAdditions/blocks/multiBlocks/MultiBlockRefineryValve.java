@@ -25,7 +25,7 @@ public class MultiBlockRefineryValve extends MultiBlockBase {
 	}
 
 	public MultiBlockRefineryValve() {
-		super(Variables.Identifiers.REFINERY_VALVE, new MultiBlockPaternRefinery(), "valve");
+		super(Variables.Identifiers.REFINERY_VALVE, new MultiBlockPaternRefinery(), "refineryValve_2", "refineryValve");
 	}
 
 	@Override

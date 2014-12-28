@@ -20,7 +20,7 @@ public class CoolingTowerRecepieMananger {
 		return true;
 	}
 
-	public CoolingTowerRecepie getRecepie(Fluid input) {
+	public static CoolingTowerRecepie getRecepie(Fluid input) {
 		for (CoolingTowerRecepie recepie : recepies) {
 			if (recepie.input == input)
 				return recepie;
