@@ -21,6 +21,7 @@ import buildcraftAdditions.client.gui.containers.ContainerHeatedFurnace;
 import buildcraftAdditions.client.gui.containers.ContainerKEB;
 import buildcraftAdditions.client.gui.containers.ContainerKineticTool;
 import buildcraftAdditions.client.gui.containers.ContainerMachineConfigurator;
+import buildcraftAdditions.client.gui.containers.ContainerRefinery;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ItemPoweredBase;
 import buildcraftAdditions.reference.Variables;
@@ -29,6 +30,7 @@ import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
+import buildcraftAdditions.tileEntities.TileRefinery;
 import buildcraftAdditions.utils.IConfigurableOutput;
 
 public class GuiHandler implements IGuiHandler {
@@ -40,29 +42,32 @@ public class GuiHandler implements IGuiHandler {
 		TileEntity tile = world.getTileEntity(x, y, z);
 
 		switch (ID) {
-			case Variables.GUI_FLUIDIC_COMPRESSOR:
+			case Variables.Gui.FLUIDIC_COMPRESSOR:
 				if (tile instanceof TileFluidicCompressor)
 					return new GuiFluidicCompressor(player.inventory, (TileFluidicCompressor) tile);
-			case Variables.GUI_CHARGING_STATION:
+			case Variables.Gui.CHARGING_STATION:
 				if (tile instanceof TileChargingStation)
 					return new GuiChargingStation(player.inventory, (TileChargingStation) tile);
-			case Variables.GUI_KINETIC_TOOL:
+			case Variables.Gui.KINETIC_TOOL:
 				if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemKineticTool) {
 					ItemKineticTool tool = (ItemKineticTool) player.getCurrentEquippedItem().getItem();
 					return new GuiKineticTool(player.inventory, tool, ItemPoweredBase.getInventory(player), player.getCurrentEquippedItem(), player);
 				}
-			case Variables.GUI_HEATED_FURNACE:
+			case Variables.Gui.HEATED_FURNACE:
 				if (tile instanceof TileHeatedFurnace)
 					return new GuiHeatedFurnace(player.inventory, (TileHeatedFurnace) tile);
-			case Variables.GUI_BASIC_COIL:
+			case Variables.Gui.BASIC_COIL:
 				if (tile instanceof TileBasicCoil)
 					return new GuiBasicCoil(player.inventory, (TileBasicCoil) tile);
-			case Variables.GUI_KEB:
+			case Variables.Gui.KEB:
 				if (tile instanceof TileKineticEnergyBufferBase)
 					return new GuiKEB((TileKineticEnergyBufferBase) tile, player);
-				case Variables.GUI_MACHINE_CONFIGURATOR:
-					if (tile instanceof IConfigurableOutput)
-						return new GuiMachineConfigurator((IConfigurableOutput) tile);
+			case Variables.Gui.MACHINE_CONFIGURATOR:
+				if (tile instanceof IConfigurableOutput)
+					return new GuiMachineConfigurator((IConfigurableOutput) tile);
+			case Variables.Gui.REFINERY:
+				if (tile instanceof TileRefinery)
+					return new GuiRefinery((TileRefinery) tile);
 		}
 		return null;
 	}
@@ -74,28 +79,30 @@ public class GuiHandler implements IGuiHandler {
 		TileEntity tile = world.getTileEntity(x, y, z);
 
 		switch (ID) {
-			case Variables.GUI_FLUIDIC_COMPRESSOR:
+			case Variables.Gui.FLUIDIC_COMPRESSOR:
 				if (tile instanceof TileFluidicCompressor)
 					return new ContainerFluidicCompressor(player.inventory, (TileFluidicCompressor) tile);
-			case Variables.GUI_CHARGING_STATION:
+			case Variables.Gui.CHARGING_STATION:
 				if (tile instanceof TileChargingStation)
 					return new ContainerChargingStation(player.inventory, (TileChargingStation) tile);
-			case Variables.GUI_KINETIC_TOOL:
+			case Variables.Gui.KINETIC_TOOL:
 				if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemKineticTool) {
 					ItemKineticTool tool = (ItemKineticTool) player.getCurrentEquippedItem().getItem();
 					return new ContainerKineticTool(player.inventory, tool, ItemPoweredBase.getInventory(player), player.getCurrentEquippedItem(), player);
 				}
-			case Variables.GUI_HEATED_FURNACE:
+			case Variables.Gui.HEATED_FURNACE:
 				if (tile instanceof TileHeatedFurnace)
 					return new ContainerHeatedFurnace(player.inventory, (TileHeatedFurnace) tile);
-			case Variables.GUI_BASIC_COIL:
+			case Variables.Gui.BASIC_COIL:
 				if (tile instanceof TileBasicCoil)
 					return new ContainerBasicCoil(player.inventory, (TileBasicCoil) tile);
-			case Variables.GUI_KEB:
+			case Variables.Gui.KEB:
 				if (tile instanceof TileKineticEnergyBufferBase)
 					return new ContainerKEB((TileKineticEnergyBufferBase) tile, player);
-				case Variables.GUI_MACHINE_CONFIGURATOR:
-					return new ContainerMachineConfigurator();
+			case Variables.Gui.MACHINE_CONFIGURATOR:
+				return new ContainerMachineConfigurator();
+			case Variables.Gui.REFINERY:
+				return new ContainerRefinery();
 		}
 		return null;
 	}

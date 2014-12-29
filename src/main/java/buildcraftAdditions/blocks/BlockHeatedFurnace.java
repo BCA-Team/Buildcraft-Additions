@@ -55,7 +55,7 @@ public class BlockHeatedFurnace extends BlockContainer {
 
 
 		if (!world.isRemote)
-			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GUI_HEATED_FURNACE, world, x, y, z);
+			entityplayer.openGui(BuildcraftAdditions.instance, Variables.Gui.HEATED_FURNACE, world, x, y, z);
 
 		return true;
 	}

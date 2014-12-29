@@ -16,14 +16,16 @@ import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
 public final class Variables {
 
 	//GUI ID's
-	public static final int GUI_FLUIDIC_COMPRESSOR = 70;
-	public static final int GUI_CHARGING_STATION = 71;
-	public static final int GUI_KINETIC_TOOL = 72;
-	public static final int GUI_HEATED_FURNACE = 73;
-	public static final int GUI_BASIC_COIL = 74;
-	public static final int GUI_KEB = 75;
-	public static final int GUI_MACHINE_CONFIGURATOR = 76;
-
+	public static final class Gui {
+		public static final int FLUIDIC_COMPRESSOR = 70;
+		public static final int CHARGING_STATION = 71;
+		public static final int KINETIC_TOOL = 72;
+		public static final int HEATED_FURNACE = 73;
+		public static final int BASIC_COIL = 74;
+		public static final int KEB = 75;
+		public static final int MACHINE_CONFIGURATOR = 76;
+		public static final int REFINERY = 77;
+	}
 
 	//EUREKA NBT names
 	public static final String DustT0Key = "dusterTier0";

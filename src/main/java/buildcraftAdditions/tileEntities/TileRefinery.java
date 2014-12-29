@@ -4,7 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 
@@ -21,6 +20,7 @@ import buildcraft.api.recipes.CraftingResult;
 import buildcraft.api.recipes.IFlexibleCrafter;
 import buildcraft.api.recipes.IFlexibleRecipe;
 
+import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.networking.MessageMultiBlockData;
 import buildcraftAdditions.networking.MessageRefinery;
@@ -57,6 +57,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	public void updateEntity() {
+		if (worldObj.isRemote)
+			return;
 		if (data.moved) {
 			data.afterMoveCheck(worldObj);
 			data.moved = false;
@@ -80,14 +82,17 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (currentHeat < requiredHeat) {
 			return;
 		}
-		CraftingResult<FluidStack> r = currentRecepie.craft(this, false);
+		CraftingResult<FluidStack> r = currentRecepie.craft(this, true);
 
-		if (r == null || r.crafted == null || energyCost == 0)
+		if (r == null || r.crafted == null || energyCost == 0 || output.isFull())
 			return;
+		currentRecepie.craft(this, false);
 		output.fill(r.crafted.copy(), true);
 	}
 
 	private void updateHeat() {
+		if (worldObj.isRemote)
+			return;
 		if (heatTimer == 0) {
 			if ((currentHeat > requiredHeat || (energy < energyCost || energyCost == 0)) && currentHeat > 0) {
 				currentHeat--;
@@ -178,18 +183,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public boolean onBlockActivated(EntityPlayer player) {
 		if (data.isMaster) {
 			if (!worldObj.isRemote) {
-				String fluid = "Nothing";
-				if (input.getFluid() != null)
-					fluid = input.getFluid().amount + " mb of " + input.getFluid().getLocalizedName();
-				player.addChatComponentMessage(new ChatComponentText("Input:  " + fluid));
-				fluid = "Nothing";
-				if (output.getFluid() != null)
-					fluid = output.getFluid().amount + " mb of " + output.getFluid().getLocalizedName();
-				player.addChatComponentMessage(new ChatComponentText("Output:  " + fluid));
-				player.addChatComponentMessage(new ChatComponentText("Energy stored: " + energy));
-				player.addChatComponentMessage(new ChatComponentText("Heat: " + currentHeat));
-				player.addChatComponentMessage(new ChatComponentText("Required Heat: " + requiredHeat));
-				player.addChatComponentMessage(new ChatComponentText("Energy used: " + energyCost));
+				player.openGui(BuildcraftAdditions.instance, Variables.Gui.REFINERY, worldObj, xCoord, yCoord, zCoord);
 			}
 			return true;
 		}

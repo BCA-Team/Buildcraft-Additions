@@ -58,7 +58,7 @@ public class BlockFluidicCompressor extends BlockContainer {
 
 
 		if (!world.isRemote)
-			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GUI_FLUIDIC_COMPRESSOR, world, x, y, z);
+			entityplayer.openGui(BuildcraftAdditions.instance, Variables.Gui.FLUIDIC_COMPRESSOR, world, x, y, z);
 
 		return true;
 	}

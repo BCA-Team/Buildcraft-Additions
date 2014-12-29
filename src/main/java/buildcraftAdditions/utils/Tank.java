@@ -70,4 +70,8 @@ public class Tank extends FluidTank {
 			fluid = getFluid().amount + " of " + getFluid().getLocalizedName();
 		return name + ": " + fluid;
 	}
+
+	public int getMaxCapacity() {
+		return capacity;
+	}
 }

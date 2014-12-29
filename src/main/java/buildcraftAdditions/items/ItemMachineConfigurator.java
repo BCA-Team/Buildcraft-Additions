@@ -23,7 +23,7 @@ public class ItemMachineConfigurator extends ItemBase {
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ) {
 		if (world.getTileEntity(x, y, z) instanceof IConfigurableOutput) {
-			player.openGui(BuildcraftAdditions.instance, Variables.GUI_MACHINE_CONFIGURATOR, world, x, y, z);
+			player.openGui(BuildcraftAdditions.instance, Variables.Gui.MACHINE_CONFIGURATOR, world, x, y, z);
 			return true;
 		}
 		return false;

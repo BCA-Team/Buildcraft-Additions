@@ -59,7 +59,7 @@ public class BlockChargingStation extends BlockContainer {
 
 
 		if (!world.isRemote)
-			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GUI_CHARGING_STATION, world, x, y, z);
+			entityplayer.openGui(BuildcraftAdditions.instance, Variables.Gui.CHARGING_STATION, world, x, y, z);
 
 		return true;
 	}

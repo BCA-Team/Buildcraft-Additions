@@ -26,13 +26,13 @@ public class WidgetBase {
 	public final int height;
 	public final int u;
 	public final int v;
-	public int value;
 	public GuiBase gui;
-	public final ResourceLocation[] textures;
+	public ResourceLocation[] textures;
 	public int textureIndex = 0;
 	public boolean enabled = true;
+	public boolean playSound = true;
 
-	public WidgetBase(int id, int x, int y, int u, int v, int width, int height, int value, GuiBase gui, String... textures) {
+	public WidgetBase(int id, int x, int y, int u, int v, int width, int height, GuiBase gui, String... textures) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
@@ -40,7 +40,6 @@ public class WidgetBase {
 		this.v = v;
 		this.width = width;
 		this.height = height;
-		this.value = value;
 		this.gui = gui;
 		this.textures = new ResourceLocation[textures.length];
 
@@ -48,23 +47,38 @@ public class WidgetBase {
 			this.textures[i] = new ResourceLocation(textures[i]);
 	}
 
-	public void render() {
+	public void render(int mouseX, int mouseY) {
+
 		float shade = enabled ? 1.0F : 0.2F;
 		GL11.glColor4f(shade, shade, shade, shade);
-		gui.bindTexture(textures[textureIndex]);
-		gui.drawTexturedModalRect(x, y, u, v, width, height);
+		if (textures.length != 0 && textures[textureIndex] != null) {
+			gui.bindTexture(textures[textureIndex]);
+			gui.drawTexturedModalRect(x, y, u, v, width, height);
+		}
+		List<String> tooltipList = getToolTip();
+		if (tooltipList != null && getBounds().contains(mouseX, mouseY)) {
+			gui.drawHoveringText(tooltipList, mouseX, mouseY);
+		}
+		GL11.glDisable(GL11.GL_LIGHTING);
 	}
 
 	public void onWidgetClicked(int x, int y, int button) {
-		gui.soundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
-		gui.widgetActionPerformed(this);
+		if (playSound) {
+			gui.soundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
+			gui.widgetActionPerformed(this);
+		}
 	}
 
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, width, height);
 	}
 
-	public void addTooltip(int mouseX, int mouseY, List<String> curTip, boolean shift) {
+	public WidgetBase dissableClickSound() {
+		playSound = false;
+		return this;
+	}
 
+	public List<String> getToolTip() {
+		return null;
 	}
 }

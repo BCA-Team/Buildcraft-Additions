@@ -27,10 +27,12 @@ import eureka.utils.Utils;
  */
 public abstract class GuiBase extends GuiContainer {
 
-	public static final int TEXT_COLOR = 0x404040;
+	protected static int TEXT_COLOR = 0x404040;
 	public static final ResourceLocation MC_BLOCK_SHEET = TextureMap.locationBlocksTexture;
 	public static final ResourceLocation MC_ITEM_SHEET = TextureMap.locationItemsTexture;
 	public static final ResourceLocation PLAYER_INV_TEXTURE = new ResourceLocation("bcadditions:textures/gui/guiPlayerInv.png");
+	protected static int titleXoffset = 5;
+	protected static int titleYoffset = 6;
 
 	public final ResourceLocation texture;
 	public boolean drawPlayerInv = true;
@@ -73,7 +75,11 @@ public abstract class GuiBase extends GuiContainer {
 	}
 
 	public void drawString(String text, int x, int y) {
-		fontRendererObj.drawString(text, x, y, TEXT_COLOR);
+		drawString(text, x, y, TEXT_COLOR);
+	}
+
+	public void drawString(String text, int x, int y, int color) {
+		fontRendererObj.drawString(text, x, y, color);
 	}
 
 	public void widgetActionPerformed(WidgetBase widget) {
@@ -104,14 +110,14 @@ public abstract class GuiBase extends GuiContainer {
 		}
 
 		for (WidgetBase widget : widgets)
-			widget.render();
+			widget.render(x, y);
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		if (drawPlayerInv)
 			drawString(StatCollector.translateToLocal("container.inventory"), 5, ySize + 6);
-		drawString(Utils.localize(String.format("gui.%s.name", getInventoryName())), 5, 6);
+		drawString(Utils.localize(String.format("gui.%s.name", getInventoryName())), titleXoffset, titleYoffset);
 	}
 
 	@Override
@@ -133,5 +139,9 @@ public abstract class GuiBase extends GuiContainer {
 		widgets.clear();
 		buttonList.clear();
 		initialize();
+	}
+
+	public void drawHoveringText(List list, int x, int y) {
+		super.drawHoveringText(list, x, y, fontRendererObj);
 	}
 }

@@ -37,7 +37,7 @@ public class BlockBasicCoil extends BlockCoilBase {
 			return false;
 
 		if (!world.isRemote)
-			entityplayer.openGui(BuildcraftAdditions.instance, Variables.GUI_BASIC_COIL, world, x, y, z);
+			entityplayer.openGui(BuildcraftAdditions.instance, Variables.Gui.BASIC_COIL, world, x, y, z);
 
 		return true;
 	}

@@ -62,7 +62,7 @@ public class ItemKineticTool extends ItemPoweredBase {
 			stack.setTagCompound(new NBTTagCompound());
 		if (player.isSneaking()) {
 			if (!world.isRemote)
-				player.openGui(BuildcraftAdditions.instance, Variables.GUI_KINETIC_TOOL, world, x, y, z);
+				player.openGui(BuildcraftAdditions.instance, Variables.Gui.KINETIC_TOOL, world, x, y, z);
 		}
 		readUpgrades(stack);
 		readBateries(stack, player);

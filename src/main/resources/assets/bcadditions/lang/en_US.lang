@@ -57,12 +57,19 @@ tooltip.installed=Installed
 tooltip.deactivated=Deactivated
 tooltip.upgradesPossible=Upgrades Possible
 
+fluid.fluid.gas=Gas
+
 gui.progress=Progress
 gui.fluid=Fluid
 gui.noFluid=Empty
 gui.fluidStored=Amount of Fluid
 gui.energyInTool=Energy Stored
 gui.maxEnergy=Max Energy
+gui.refinery.name=Refinery
+gui.heat=Heat
+gui.requiredHeat=Required Heat
+gui.powerUsage=Power Usage
+gui.empty=Empty
 
 gui.nei.dusting=Dusting
 
