@@ -16,7 +16,8 @@ import buildcraft.api.recipes.CraftingResult;
 import buildcraft.api.recipes.IFlexibleRecipe;
 
 import buildcraftAdditions.api.CoolingTowerRecepie;
-import buildcraftAdditions.api.CoolingTowerRecepieMananger;
+import buildcraftAdditions.api.RecepieMananger;
+import buildcraftAdditions.api.RefineryRecepie;
 import buildcraftAdditions.blocks.FluidBlockBase;
 import buildcraftAdditions.core.Logger;
 /**
@@ -74,7 +75,8 @@ public class RefineryRecepieConverter {
 			coolingTowerRecepies.put(gas[t].getFluid(), fluid);
 			BuildcraftRecipeRegistry.refinery.removeRecipe(results[t].recipe);
 			BuildcraftRecipeRegistry.refinery.addRecipe(results[t].recipe.getId() + "_GAS", new FluidStack(inputs[t].getFluid(), 1000 - inputs[t].amount), new FluidStack(fluid, outputs[t].amount), results[t].energyCost, 0);
-			CoolingTowerRecepieMananger.registerRecepie(new CoolingTowerRecepie(fluid, outputs[t].getFluid(), ((float) results[t].energyCost) / 2000));
+			RecepieMananger.registerRecepie(new CoolingTowerRecepie(fluid, outputs[t].getFluid(), ((float) results[t].energyCost) / 2000));
+			RecepieMananger.registerRecepie(new RefineryRecepie(inputs[t].getFluid(), 1000 - inputs[t].amount, fluid, outputs[t].amount, results[t].energyCost));
 		}
 	}
 }

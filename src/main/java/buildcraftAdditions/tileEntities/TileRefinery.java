@@ -15,12 +15,11 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import cofh.api.energy.IEnergyHandler;
 
-import buildcraft.api.recipes.BuildcraftRecipeRegistry;
-import buildcraft.api.recipes.CraftingResult;
 import buildcraft.api.recipes.IFlexibleCrafter;
-import buildcraft.api.recipes.IFlexibleRecipe;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.api.RecepieMananger;
+import buildcraftAdditions.api.RefineryRecepie;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.networking.MessageMultiBlockData;
 import buildcraftAdditions.networking.MessageRefinery;
@@ -46,8 +45,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public TileRefinery master;
 	private Tank input = new Tank(3000, this, "Input");
 	private Tank output = new Tank(3000, this, "Output");
-	private CraftingResult<FluidStack> currentResult;
-	private IFlexibleRecipe<FluidStack> currentRecepie;
+	private Fluid outputFluid;
+	private int inputAmount, outputAmount;
 	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.REFINERY);
 
 	public TileRefinery() {
@@ -75,19 +74,16 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		updateHeat();
 		if (!data.isMaster)
 			return;
-		energyCost = (currentResult == null || currentRecepie == null || isCooling || energy < (int) (50 + (50 * ((double) currentHeat / 100)))) ? 0 : (int) (50 + (50 * ((double) currentHeat / 100)));
+		energyCost = (isCooling || energy < (int) (50 + (50 * ((double) currentHeat / 100)))) ? 0 : (int) (50 + (50 * ((double) currentHeat / 100)));
 		energy -= energyCost;
-		if (currentResult == null || currentRecepie == null)
-			return;
 		if (currentHeat < requiredHeat) {
 			return;
 		}
-		CraftingResult<FluidStack> r = currentRecepie.craft(this, true);
 
-		if (r == null || r.crafted == null || energyCost == 0 || output.isFull())
+		if (energyCost == 0 || output.isFull())
 			return;
-		currentRecepie.craft(this, false);
-		output.fill(r.crafted.copy(), true);
+		input.drain(inputAmount, true);
+		output.fill(new FluidStack(outputFluid, outputAmount), true);
 	}
 
 	private void updateHeat() {
@@ -110,15 +106,14 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	private void updateRecepie() {
-		for (IFlexibleRecipe<FluidStack> recepie : BuildcraftRecipeRegistry.refinery.getRecipes()) {
-			currentResult = recepie.craft(this, true);
-			if (currentResult != null) {
-				currentRecepie = recepie;
-				requiredHeat = currentResult.energyCost;
-				lastRequiredHeat = requiredHeat;
-				return;
-			}
-		}
+		if (!input.isEmpty()) {
+			RefineryRecepie recepie = RecepieMananger.getRefineryRecepie(input.getFluid().getFluid());
+			requiredHeat = recepie.getRequiredHeat();
+			lastRequiredHeat = requiredHeat;
+			outputFluid = recepie.getOutput();
+			outputAmount = recepie.getOutputAmount();
+			inputAmount = recepie.getInputAmount();
+		} else
 		requiredHeat = 0;
 	}
 

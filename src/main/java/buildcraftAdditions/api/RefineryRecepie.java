@@ -8,14 +8,16 @@ import net.minecraftforge.fluids.Fluid;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class CoolingTowerRecepie {
+public class RefineryRecepie {
 	private Fluid input, output;
-	private float heat;
+	private int requiredHeat, inputAmount, outputAmount;
 
-	public CoolingTowerRecepie(Fluid input, Fluid output, float heat) {
+	public RefineryRecepie(Fluid input, int inputAmount, Fluid output, int outputAmount, int requiredHeat) {
 		this.input = input;
 		this.output = output;
-		this.heat = heat;
+		this.requiredHeat = requiredHeat;
+		this.inputAmount = inputAmount;
+		this.outputAmount = outputAmount;
 	}
 
 	public Fluid getInput() {
@@ -26,7 +28,15 @@ public class CoolingTowerRecepie {
 		return output;
 	}
 
-	public float getHeat() {
-		return heat;
+	public int getRequiredHeat() {
+		return requiredHeat;
+	}
+
+	public int getInputAmount() {
+		return inputAmount;
+	}
+
+	public int getOutputAmount() {
+		return outputAmount;
 	}
 }

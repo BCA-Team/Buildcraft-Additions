@@ -14,7 +14,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import buildcraftAdditions.api.CoolingTowerRecepie;
-import buildcraftAdditions.api.CoolingTowerRecepieMananger;
+import buildcraftAdditions.api.RecepieMananger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.networking.MessageMultiBlockData;
 import buildcraftAdditions.networking.MessageTank;
@@ -60,7 +60,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		if (input.getFluid() == null || input.getFluidAmount() == 0)
 			currentRecepie = null;
 		else
-			currentRecepie = CoolingTowerRecepieMananger.getRecepie(input.getFluid().getFluid());
+			currentRecepie = RecepieMananger.getCoolingTowerRecepie(input.getFluid().getFluid());
 	}
 
 	@Override
