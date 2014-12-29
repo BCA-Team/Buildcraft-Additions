@@ -41,7 +41,7 @@ import buildcraftAdditions.utils.Tank;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyHandler, ITankHolder {
-	public int timer, energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer;
+	public int timer, energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer, lastRequiredHeat;
 	public boolean init, valve, isCooling, moved;
 	public TileRefinery master;
 	private Tank input = new Tank(3000, this, "Input");
@@ -115,6 +115,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			if (currentResult != null) {
 				currentRecepie = recepie;
 				requiredHeat = currentResult.energyCost;
+				lastRequiredHeat = requiredHeat;
 				return;
 			}
 		}

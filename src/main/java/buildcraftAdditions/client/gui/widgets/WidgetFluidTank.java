@@ -24,8 +24,8 @@ public class WidgetFluidTank extends WidgetBase {
 	public ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
 	private Tank tank;
 
-	public WidgetFluidTank(int id, int x, int y, int u, int v, int width, int height, GuiBase gui, Tank tank, String... textures) {
-		super(id, x, y, u, v, width, height, gui, textures);
+	public WidgetFluidTank(int id, int x, int y, int width, int height, GuiBase gui, Tank tank) {
+		super(id, x, y, 0, 0, width, height, gui);
 		this.tank = tank;
 	}
 

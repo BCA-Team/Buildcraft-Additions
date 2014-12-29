@@ -52,28 +52,30 @@ public class GuiRefinery extends GuiBase {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		GL11.glDisable(GL11.GL_LIGHTING);
 		bindTexture(texture());
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		drawTexturedModalRect(guiLeft + 53, guiTop + 150, 0, 186, 80, 7);
 		drawString(Utils.localize("gui.heat") + ": " + refinery.currentHeat, guiLeft + 45, guiTop + 80);
 		drawString(Utils.localize("gui.requiredHeat") + ": " + refinery.requiredHeat, guiLeft + 45, guiTop + 90);
 		drawString(Utils.localize("gui.powerUsage") + ": " + refinery.energyCost, guiLeft + 45, guiTop + 100);
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
 
-
-		GL11.glEnable(GL11.GL_LIGHTING);
-		bindTexture(texture);
-		drawTexturedModalRect(guiLeft + 50, guiTop + 150, 0, 186, 80, 6);
-		GL11.glEnable(GL11.GL_LIGHTING);
-
-		//rendering widgets last so tooltips are above the other stuff being rendered
+		//rendering widgets afther so tooltips are above the other stuff being rendered
 		for (WidgetBase widget : widgets)
 			widget.render(x, y);
-		GL11.glEnable(GL11.GL_LIGHTING);
+
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		bindTexture(texture());
+		drawTexturedModalRect(guiLeft + 22, guiTop + 70, 190, 70, 20, 50);
+		drawTexturedModalRect(guiLeft + 148, guiTop + 70, 190, 70, 20, 50);
+		int width = (refinery.currentHeat * 68) / refinery.lastRequiredHeat;
+		drawTexturedModalRect(guiLeft + 59, guiTop + 151, 6, 198, width, 5);
+		drawTexturedModalRect(guiLeft + 59, guiTop + 151, 6, 193, 80, 5);
 	}
 
 	@Override
 	public void initialize() {
-		addWidget(new WidgetFluidTank(0, guiLeft + 22, guiTop + 65, 0, 0, 16, 52, this, refinery.getTanks()[0]));
-		addWidget(new WidgetFluidTank(1, guiLeft + 148, guiTop + 65, 0, 0, 16, 52, this, refinery.getTanks()[1]));
+		addWidget(new WidgetFluidTank(0, guiLeft + 22, guiTop + 65, 16, 52, this, refinery.getTanks()[0]));
+		addWidget(new WidgetFluidTank(1, guiLeft + 148, guiTop + 65, 16, 52, this, refinery.getTanks()[1]));
 	}
 }
