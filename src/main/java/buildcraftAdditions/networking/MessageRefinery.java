@@ -18,7 +18,7 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageRefinery implements IMessage, IMessageHandler<MessageRefinery, IMessage> {
-	public int x, y, z, lastRequiredHeat, currentHeat, energyCost;
+	public int x, y, z, requiredHeat, lastRequiredHeat, currentHeat, energyCost;
 	public boolean valve;
 
 	public MessageRefinery() {
@@ -32,6 +32,7 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		currentHeat = refinery.currentHeat;
 		lastRequiredHeat = refinery.lastRequiredHeat;
 		energyCost = refinery.energyCost;
+		requiredHeat = refinery.requiredHeat;
 	}
 
 	@Override
@@ -43,6 +44,7 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		currentHeat = buf.readInt();
 		lastRequiredHeat = buf.readInt();
 		energyCost = buf.readInt();
+		requiredHeat = buf.readInt();
 	}
 
 	@Override
@@ -54,7 +56,7 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 		buf.writeInt(currentHeat);
 		buf.writeInt(lastRequiredHeat);
 		buf.writeInt(energyCost);
-
+		buf.writeInt(requiredHeat);
 	}
 
 	@Override
@@ -66,6 +68,7 @@ public class MessageRefinery implements IMessage, IMessageHandler<MessageRefiner
 			refinery.energyCost = message.energyCost;
 			refinery.currentHeat = message.currentHeat;
 			refinery.lastRequiredHeat = message.lastRequiredHeat;
+			refinery.requiredHeat = message.requiredHeat;
 		}
 		return null;
 	}
