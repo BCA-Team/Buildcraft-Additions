@@ -16,6 +16,7 @@ import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -98,7 +99,8 @@ public class BuildcraftAdditions {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent evt) {
 		FMLCommonHandler.instance().bus().register(new EventListener.FML());
-		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
+		if (evt.getSide() == Side.CLIENT)
+			MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
 	}
 
 	@Mod.EventHandler

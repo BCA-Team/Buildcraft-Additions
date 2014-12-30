@@ -9,6 +9,8 @@ import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.AchievementEvent;
@@ -88,6 +90,7 @@ public class EventListener {
 			}
 		}
 
+		@SideOnly(Side.CLIENT)
 		@SubscribeEvent
 		public void textures(TextureStitchEvent.Post event) {
 			if (event.map.getTextureType() == 0) {
