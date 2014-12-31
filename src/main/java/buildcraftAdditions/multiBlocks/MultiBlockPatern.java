@@ -94,6 +94,27 @@ public class MultiBlockPatern {
 		return true;
 	}
 
+	public boolean isPaternValid(World world, int startX, int startY, int startZ) {
+		Location location = new Location(world, startX, startY, startZ);
+		int length = directions.length;
+		for (int t = 0; t < length; t++) {
+			ForgeDirection direction = directions[t];
+			location.move(direction);
+			if (identifiers[t] == '\n') {
+				if (location.getBlock().getMaterial() != Material.air)
+					return false;
+			} else {
+				if (!(location.getBlock() instanceof MultiBlockBase))
+					return false;
+				MultiBlockBase block = (MultiBlockBase) location.getBlock();
+				if (!(block.identifier == identifiers[t]) || location.getMeatadata() != 0) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	public void destroyMultiblock(World world, int x, int y, int z, int rotationIndex) {
 		Location location = new Location(world, x, y, z);
 		rotatedDirections = RotationUtils.rotateDirections(directions, rotationIndex);

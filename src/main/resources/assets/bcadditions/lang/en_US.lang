@@ -70,6 +70,7 @@ gui.heat=Heat
 gui.requiredHeat=Required Heat
 gui.powerUsage=Power Usage
 gui.empty=Empty
+gui.coolingTower.name=Cooling Tower
 
 gui.nei.dusting=Dusting
 

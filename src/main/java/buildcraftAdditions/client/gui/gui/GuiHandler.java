@@ -16,6 +16,7 @@ import cpw.mods.fml.common.network.IGuiHandler;
 
 import buildcraftAdditions.client.gui.containers.ContainerBasicCoil;
 import buildcraftAdditions.client.gui.containers.ContainerChargingStation;
+import buildcraftAdditions.client.gui.containers.ContainerCoolingTower;
 import buildcraftAdditions.client.gui.containers.ContainerFluidicCompressor;
 import buildcraftAdditions.client.gui.containers.ContainerHeatedFurnace;
 import buildcraftAdditions.client.gui.containers.ContainerKEB;
@@ -28,6 +29,7 @@ import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.tileEntities.TileChargingStation;
+import buildcraftAdditions.tileEntities.TileCoolingTower;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import buildcraftAdditions.tileEntities.TileRefinery;
@@ -68,6 +70,9 @@ public class GuiHandler implements IGuiHandler {
 			case Variables.Gui.REFINERY:
 				if (tile instanceof TileRefinery)
 					return new GuiRefinery((TileRefinery) tile);
+			case Variables.Gui.COOLING_TOWER:
+				if (tile instanceof TileCoolingTower)
+					return new GuiCoolingTower((TileCoolingTower) tile);
 		}
 		return null;
 	}
@@ -103,6 +108,8 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerMachineConfigurator();
 			case Variables.Gui.REFINERY:
 				return new ContainerRefinery();
+			case Variables.Gui.COOLING_TOWER:
+				return new ContainerCoolingTower();
 		}
 		return null;
 	}

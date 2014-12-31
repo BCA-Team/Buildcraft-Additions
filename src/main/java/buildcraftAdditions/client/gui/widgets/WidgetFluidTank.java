@@ -33,7 +33,7 @@ public class WidgetFluidTank extends WidgetBase {
 	public void render(int mouseX, int mouseY) {
 		super.render(mouseX, mouseY);
 		if (tank.getFluid() != null)
-			drawFluid(tank.getFluid(), ((float) this.tank.getFluid().amount / (float) (tank.getMaxCapacity()) * height), x, y, width, height);
+			drawFluid(tank.getFluid(), ((float) (tank.getFluid().amount * height) / (float) (tank.getMaxCapacity())), x, y, width, height);
 	}
 
 	@Override
