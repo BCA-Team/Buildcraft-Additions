@@ -7,6 +7,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Utils;
+
+import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -65,5 +67,19 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 	@Override
 	public void overrideConfiguration(EnumSideStatus[] newConfiguration) {
 		configuration = newConfiguration;
+	}
+
+	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+			buf.writeInt(Utils.statusToInt(configuration[direction.ordinal()]));
+		return buf;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+			configuration[direction.ordinal()] = Utils.intToStatus(buf.readInt());
+		return buf;
 	}
 }

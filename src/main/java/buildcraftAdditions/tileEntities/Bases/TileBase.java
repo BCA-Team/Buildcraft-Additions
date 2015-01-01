@@ -2,6 +2,8 @@ package buildcraftAdditions.tileEntities.Bases;
 
 import net.minecraft.tileentity.TileEntity;
 
+import buildcraftAdditions.networking.ISyncronizedTile;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -9,9 +11,23 @@ import net.minecraft.tileentity.TileEntity;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileBase extends TileEntity {
+public abstract class TileBase extends TileEntity implements ISyncronizedTile {
 
 	@Override
 	public abstract void updateEntity();
 
+	@Override
+	public int getX() {
+		return xCoord;
+	}
+
+	@Override
+	public int getY() {
+		return yCoord;
+	}
+
+	@Override
+	public int getZ() {
+		return zCoord;
+	}
 }

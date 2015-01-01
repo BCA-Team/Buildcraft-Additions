@@ -295,23 +295,25 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	}
 
 	@Override
-	public void writeToByteBuff(ByteBuf buf) {
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
 		buf.writeBoolean(valve);
 		buf.writeDouble(heat);
 		input.writeToByteBuff(buf);
 		output.writeToByteBuff(buf);
 		coolant.writeToByteBuff(buf);
 		data.writeToByteBuff(buf);
+		return buf;
 	}
 
 	@Override
-	public void readFromByteBuff(ByteBuf buf) {
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		valve = buf.readBoolean();
 		heat = buf.readDouble();
 		buf = input.readFromByteBuff(buf);
 		buf = output.readFromByteBuff(buf);
 		buf = coolant.readFromByteBuff(buf);
 		buf = data.readFromByteBuff(buf);
+		return buf;
 	}
 
 	@Override

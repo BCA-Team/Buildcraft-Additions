@@ -21,9 +21,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.RecepieMananger;
 import buildcraftAdditions.api.RefineryRecepie;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
-import buildcraftAdditions.networking.MessageMultiBlockData;
-import buildcraftAdditions.networking.MessageRefinery;
-import buildcraftAdditions.networking.MessageTank;
+import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
@@ -32,6 +30,8 @@ import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.MultiBlockData;
 import buildcraftAdditions.utils.RotationUtils;
 import buildcraftAdditions.utils.Tank;
+
+import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -139,9 +139,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public void sync() {
 		if (!worldObj.isRemote) {
 			NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 20);
-			PacketHandeler.instance.sendToAllAround(new MessageMultiBlockData(this, xCoord, yCoord, zCoord), point);
-			PacketHandeler.instance.sendToAllAround(new MessageRefinery(this), point);
-			PacketHandeler.instance.sendToAllAround(new MessageTank(this, xCoord, yCoord, zCoord), point);
+			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), point);
 		}
 	}
 
@@ -462,5 +460,31 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public Tank[] getTanks() {
 		return new Tank[]{input, output};
+	}
+
+	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		buf.writeBoolean(valve);
+		buf.writeInt(currentHeat);
+		buf.writeInt(lastRequiredHeat);
+		buf.writeInt(energyCost);
+		buf.writeInt(requiredHeat);
+		input.writeToByteBuff(buf);
+		output.writeToByteBuff(buf);
+		data.writeToByteBuff(buf);
+		return buf;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		valve = buf.readBoolean();
+		currentHeat = buf.readInt();
+		lastRequiredHeat = buf.readInt();
+		energyCost = buf.readInt();
+		requiredHeat = buf.readInt();
+		buf = input.readFromByteBuff(buf);
+		buf = output.readFromByteBuff(buf);
+		data.readFromByteBuff(buf);
+		return buf;
 	}
 }

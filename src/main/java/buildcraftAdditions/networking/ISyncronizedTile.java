@@ -10,9 +10,9 @@ import io.netty.buffer.ByteBuf;
  */
 public interface ISyncronizedTile {
 
-	public void writeToByteBuff(ByteBuf buf);
+	public ByteBuf writeToByteBuff(ByteBuf buf);
 
-	public void readFromByteBuff(ByteBuf buf);
+	public ByteBuf readFromByteBuff(ByteBuf buf);
 
 	public int getX();
 

@@ -10,7 +10,6 @@ import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

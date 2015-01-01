@@ -3,10 +3,10 @@ package buildcraftAdditions.tileEntities;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 import buildcraftAdditions.config.ConfigurationHandler;
-import buildcraftAdditions.networking.MessageKEBT1;
+import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandeler;
-import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -35,6 +35,6 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 	@Override
 	public void sync() {
 		if (!worldObj.isRemote)
-			PacketHandeler.instance.sendToAllAround(new MessageKEBT1(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
+			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
 	}
 }

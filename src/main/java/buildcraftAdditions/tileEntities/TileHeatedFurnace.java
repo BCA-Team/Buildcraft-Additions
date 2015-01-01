@@ -10,13 +10,18 @@ import net.minecraft.tileentity.TileEntity;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 
+import net.minecraftforge.common.util.ForgeDirection;
+
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.networking.MessageHeatedFurnaceProgress;
+import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
+import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -84,7 +89,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInv
 		}
 		if (sync) {
 			if (timer == 0) {
-				PacketHandeler.instance.sendToAllAround(new MessageHeatedFurnaceProgress(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
+				PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
 				timer = 15;
 			}
 			timer--;
@@ -119,42 +124,11 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInv
 	}
 
 	public void updateCoils() {
-		//for (int dir: ForgeDirection.VALID_DIRECTIONS)
-		TileEntity entity = worldObj.getTileEntity(xCoord - 1, yCoord, zCoord);
-		if (entity instanceof TileCoilBase) {
-			coils[0] = (TileCoilBase) entity;
-		} else {
-			coils[0] = null;
-		}
-		entity = worldObj.getTileEntity(xCoord + 1, yCoord, zCoord);
-		if (entity instanceof TileCoilBase) {
-			coils[1] = (TileCoilBase) entity;
-		} else {
-			coils[1] = null;
-		}
-		entity = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
-		if (entity instanceof TileCoilBase) {
-			coils[2] = (TileCoilBase) entity;
-		} else {
-			coils[2] = null;
-		}
-		entity = worldObj.getTileEntity(xCoord, yCoord + 1, zCoord);
-		if (entity instanceof TileCoilBase) {
-			coils[3] = (TileCoilBase) entity;
-		} else {
-			coils[3] = null;
-		}
-		entity = worldObj.getTileEntity(xCoord, yCoord, zCoord - 1);
-		if (entity instanceof TileCoilBase) {
-			coils[4] = (TileCoilBase) entity;
-		} else {
-			coils[4] = null;
-		}
-		entity = worldObj.getTileEntity(xCoord, yCoord, zCoord + 1);
-		if (entity instanceof TileCoilBase) {
-			coils[5] = (TileCoilBase) entity;
-		} else {
-			coils[5] = null;
+		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+			Location location = new Location(worldObj, xCoord, yCoord, zCoord).move(direction);
+			TileEntity entity = location.getTileEntity();
+			if (entity instanceof TileCoilBase)
+				coils[direction.ordinal()] = (TileCoilBase) entity;
 		}
 		isCooking = false;
 	}
@@ -254,5 +228,17 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInv
 	@Override
 	public boolean canExtractItem(int slot, ItemStack stack, int side) {
 		return slot == 1;
+	}
+
+	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		buf.writeInt(progress);
+		return null;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		progress = buf.readInt();
+		return null;
 	}
 }

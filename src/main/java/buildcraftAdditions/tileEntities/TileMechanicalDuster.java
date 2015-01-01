@@ -1,6 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -12,10 +13,12 @@ import cofh.api.energy.IEnergyReceiver;
 
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.networking.MessageMechanicDuster;
+import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -64,7 +67,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 		}
 		if (oldProgressStage != progressStage) {
 			TargetPoint point = new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30);
-			PacketHandeler.instance.sendToAllAround(new MessageMechanicDuster(xCoord, yCoord, zCoord, progressStage, getStackInSlot(0)), point);
+			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), point);
 			oldProgressStage = progressStage;
 		}
 	}
@@ -152,7 +155,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, DusterRecipes.dusting().getDustingResult(getStackInSlot(0)));
 		setInventorySlotContents(0, null);
 		if (!worldObj.isRemote)
-			PacketHandeler.instance.sendToAllAround(new MessageMechanicDuster(xCoord, yCoord, zCoord, progressStage, getStackInSlot(0)), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
+			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -194,6 +197,26 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 	@Override
 	public boolean canExtractItem(int slot, ItemStack item, int side) {
 		return false;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		buf = super.readFromByteBuff(buf);
+		int id = buf.readInt();
+		int meta = buf.readInt();
+		ItemStack stack = id == -1 ? null : new ItemStack(Item.getItemById(id), 1, meta);
+		setInventorySlotContents(0, stack);
+		return buf;
+	}
+
+	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		buf = super.writeToByteBuff(buf);
+		int id = getStackInSlot(0) == null ? -1 : Item.getIdFromItem(getStackInSlot(0).getItem());
+		int meta = getStackInSlot(0) == null ? -1 : getStackInSlot(0).getItemDamage();
+		buf.writeInt(id);
+		buf.writeInt(meta);
+		return buf;
 	}
 }
 

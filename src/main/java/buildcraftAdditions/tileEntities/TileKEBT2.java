@@ -16,8 +16,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockBase;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
-import buildcraftAdditions.networking.MessageKEBT2;
-import buildcraftAdditions.networking.MessageMultiBlockData;
+import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
@@ -27,6 +26,7 @@ import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.MultiBlockData;
 
 import eureka.api.EurekaKnowledge;
+import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -196,11 +196,26 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		buf = super.writeToByteBuff(buf);
+		buf.writeInt(energyState);
+		buf = data.writeToByteBuff(buf);
+		return buf;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		buf = super.readFromByteBuff(buf);
+		energyState = buf.readInt();
+		buf = data.readFromByteBuff(buf);
+		return buf;
+	}
+
+	@Override
 	public void sync() {
 		if (!worldObj.isRemote) {
 			NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 15);
-			PacketHandeler.instance.sendToAllAround(new MessageKEBT2(this), point);
-			PacketHandeler.instance.sendToAllAround(new MessageMultiBlockData(this, xCoord, yCoord, zCoord), point);
+			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), point);
 		}
 
 	}

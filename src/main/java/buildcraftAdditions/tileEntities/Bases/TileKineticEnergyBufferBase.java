@@ -12,6 +12,7 @@ import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyReceiver;
 
 import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.networking.ISyncronizedTile;
 import buildcraftAdditions.networking.MessageConfiguration;
 import buildcraftAdditions.networking.MessageSelfDestruct;
 import buildcraftAdditions.networking.PacketHandeler;
@@ -19,6 +20,8 @@ import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
+
+import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -26,7 +29,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHandler, IConfigurableOutput {
+public abstract class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHandler, IConfigurableOutput, ISyncronizedTile {
 	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
 	public EnumSideStatus[] configuration = new EnumSideStatus[6];
 	public int tier, timer;
@@ -209,5 +212,45 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 	@Override
 	public void overrideConfiguration(EnumSideStatus[] newConfiguration) {
 		configuration = newConfiguration;
+	}
+
+	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		buf.writeInt(energy);
+		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+			buf.writeInt(Utils.statusToInt(configuration[direction.ordinal()]));
+		int length = owner.length();
+		buf.writeInt(length);
+		char[] chars = owner.toCharArray();
+		for (int t = 0; t < length; t++)
+			buf.writeChar(chars[t]);
+		return buf;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		energy = buf.readInt();
+		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+			configuration[direction.ordinal()] = Utils.intToStatus(buf.readInt());
+		int length = buf.readInt();
+		owner = "";
+		for (int teller = 0; teller < length; teller++)
+			owner += buf.readChar();
+		return buf;
+	}
+
+	@Override
+	public int getX() {
+		return xCoord;
+	}
+
+	@Override
+	public int getY() {
+		return yCoord;
+	}
+
+	@Override
+	public int getZ() {
+		return zCoord;
 	}
 }

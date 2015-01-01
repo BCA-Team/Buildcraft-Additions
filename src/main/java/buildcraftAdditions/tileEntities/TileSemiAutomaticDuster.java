@@ -2,6 +2,7 @@ package buildcraftAdditions.tileEntities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -12,7 +13,7 @@ import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.networking.MessageSemiAutomaticDuster;
+import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
@@ -20,6 +21,7 @@ import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.Utils;
 
 import eureka.api.EurekaKnowledge;
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -133,7 +135,7 @@ public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		inventory.setInventorySlotContents(slot, stack);
 		if (!worldObj.isRemote)
-			PacketHandeler.instance.sendToAll(new MessageSemiAutomaticDuster(xCoord, yCoord, zCoord, stack));
+			PacketHandeler.instance.sendToAll(new MessageByteBuff(this));
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -201,5 +203,25 @@ public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 	@Override
 	public boolean canExtractItem(int slot, ItemStack item, int side) {
 		return configuration[side] == EnumSideStatus.OUTPUT || configuration[side] == EnumSideStatus.BOTH;
+	}
+
+	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		buf = super.writeToByteBuff(buf);
+		int id = getStackInSlot(0) == null ? -1 : Item.getIdFromItem(getStackInSlot(0).getItem());
+		int meta = getStackInSlot(0) == null ? -1 : getStackInSlot(0).getItemDamage();
+		buf.writeInt(id);
+		buf.writeInt(meta);
+		return buf;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		buf = super.readFromByteBuff(buf);
+		int id = buf.readInt();
+		int meta = buf.readInt();
+		ItemStack stack = id == -1 ? null : new ItemStack(Item.getItemById(id), 1, meta);
+		setInventorySlotContents(0, stack);
+		return buf;
 	}
 }

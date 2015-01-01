@@ -25,11 +25,13 @@ import net.minecraftforge.fluids.IFluidContainerItem;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.networking.MessageFluidicCompressorC;
+import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
+
+import io.netty.buffer.ByteBuf;
 
 public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler {
 
@@ -41,6 +43,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	public TileFluidicCompressor() {
 		super(800);
 	}
+
 	@Override
 	public void updateEntity() {
 		if (worldObj.isRemote)
@@ -186,7 +189,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
 		int amount = tank.fill(resource, doFill);
 		if (sync)
-			PacketHandeler.instance.sendToAllAround(new MessageFluidicCompressorC(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
+			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
 		return amount;
 	}
 
@@ -199,7 +202,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
 		FluidStack fluid = tank.drain(maxDrain, doDrain);
 		if (sync)
-			PacketHandeler.instance.sendToAllAround(new MessageFluidicCompressorC(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
+			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
 		return  fluid;
 	}
 
@@ -273,5 +276,19 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 			return tank.getFluid().amount;
 		}
 		return 0;
+	}
+
+	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		super.writeToByteBuff(buf);
+		tank.writeToByteBuff(buf);
+		return null;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		buf = super.readFromByteBuff(buf);
+		buf = tank.readFromByteBuff(buf);
+		return null;
 	}
 }

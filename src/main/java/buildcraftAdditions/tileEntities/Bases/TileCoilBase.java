@@ -4,8 +4,10 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-import buildcraftAdditions.networking.MessageCoilStatus;
+import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandeler;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -21,12 +23,12 @@ public abstract class TileCoilBase extends TileBase {
 
 	public void startHeating() {
 		shouldHeat = true;
-		PacketHandeler.instance.sendToAllAround(new MessageCoilStatus(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
+		PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
 	}
 
 	public void stopHeating() {
 		shouldHeat = false;
-		PacketHandeler.instance.sendToAllAround(new MessageCoilStatus(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
+		PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
 	}
 
 	@Override
@@ -55,6 +57,18 @@ public abstract class TileCoilBase extends TileBase {
 
 	public boolean isBurning() {
 		return burning;
+	}
+
+	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		buf.writeBoolean(shouldHeat);
+		return buf;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		shouldHeat = buf.readBoolean();
+		return buf;
 	}
 
 }

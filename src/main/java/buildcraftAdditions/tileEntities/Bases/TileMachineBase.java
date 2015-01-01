@@ -5,6 +5,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
+
+import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -56,5 +58,17 @@ public abstract class TileMachineBase extends TileBase implements IEnergyReceive
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
 		return true;
+	}
+
+	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		buf.writeInt(energy);
+		return buf;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		energy = buf.readInt();
+		return buf;
 	}
 }

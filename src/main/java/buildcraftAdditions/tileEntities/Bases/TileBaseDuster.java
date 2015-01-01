@@ -6,6 +6,7 @@ import net.minecraft.inventory.ISidedInventory;
 import buildcraftAdditions.api.DusterRecipes;
 
 import eureka.api.EurekaKnowledge;
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -37,5 +38,15 @@ public abstract class TileBaseDuster extends TileBase implements ISidedInventory
 
 	public void makeProgress(EntityPlayer player, String key) {
 		EurekaKnowledge.makeProgress(player, key, 1);
+	}
+
+	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		return buf;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		return buf;
 	}
 }

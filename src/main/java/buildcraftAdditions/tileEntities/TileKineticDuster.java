@@ -2,6 +2,7 @@ package buildcraftAdditions.tileEntities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -15,11 +16,13 @@ import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.networking.MessageDusterKinetic;
+import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
 import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.Utils;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -64,7 +67,7 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		inventory.setInventorySlotContents(slot, stack);
 		if (!worldObj.isRemote)
-			PacketHandeler.instance.sendToAllAround(new MessageDusterKinetic(xCoord, yCoord, zCoord, progressStage, stack), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
+			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
 	}
 
 	@Override
@@ -110,6 +113,28 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 	}
 
 	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		buf = super.writeToByteBuff(buf);
+		buf.writeInt(progressStage);
+		int id = getStackInSlot(0) == null ? -1 : Item.getIdFromItem(getStackInSlot(0).getItem());
+		int meta = getStackInSlot(0) == null ? -1 : getStackInSlot(0).getItemDamage();
+		buf.writeInt(id);
+		buf.writeInt(meta);
+		return buf;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		buf = super.readFromByteBuff(buf);
+		progressStage = buf.readInt();
+		int id = buf.readInt();
+		int meta = buf.readInt();
+		ItemStack stack = id == -1 ? null : new ItemStack(Item.getItemById(id), 1, meta);
+		setInventorySlotContents(0, stack);
+		return buf;
+	}
+
+	@Override
 	public void receiveLaserEnergy(int energy) {
 		progress += energy;
 		oldProgressStage = progressStage;
@@ -126,7 +151,7 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 			progressStage = 3;
 
 		if (progressStage != oldProgressStage)
-			PacketHandeler.instance.sendToAllAround(new MessageDusterKinetic(xCoord, yCoord, zCoord, progressStage, getStackInSlot(0)), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
+			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
 	}
 
 	@Override
