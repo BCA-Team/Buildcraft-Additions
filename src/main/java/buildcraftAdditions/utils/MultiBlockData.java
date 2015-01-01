@@ -6,6 +6,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
+import buildcraftAdditions.networking.ISyncObject;
+
+import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -13,7 +16,7 @@ import buildcraftAdditions.multiBlocks.MultiBlockPatern;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class MultiBlockData {
+public class MultiBlockData implements ISyncObject {
 	public int masterX, masterY, masterZ, rotationIndex, oldmasterX, oldmasterY, oldmasterZ;
 	public boolean isMaster, partOfMultiBlock, moved;
 	public MultiBlockPatern patern;
@@ -96,5 +99,19 @@ public class MultiBlockData {
 			patern.destroyMultiblock(world, oldmasterX, oldmasterY, oldmasterZ, rotationIndex);
 		}
 		moved = false;
+	}
+
+	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		buf.writeBoolean(isMaster);
+		buf.writeBoolean(partOfMultiBlock);
+		return buf;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		isMaster = buf.readBoolean();
+		partOfMultiBlock = buf.readBoolean();
+		return null;
 	}
 }

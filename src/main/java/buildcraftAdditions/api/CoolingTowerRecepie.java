@@ -10,9 +10,9 @@ import net.minecraftforge.fluids.Fluid;
  */
 public class CoolingTowerRecepie {
 	private Fluid input, output;
-	private float heat;
+	private double heat;
 
-	public CoolingTowerRecepie(Fluid input, Fluid output, float heat) {
+	public CoolingTowerRecepie(Fluid input, Fluid output, double heat) {
 		this.input = input;
 		this.output = output;
 		this.heat = heat;
@@ -26,7 +26,7 @@ public class CoolingTowerRecepie {
 		return output;
 	}
 
-	public float getHeat() {
+	public double getHeat() {
 		return heat;
 	}
 }

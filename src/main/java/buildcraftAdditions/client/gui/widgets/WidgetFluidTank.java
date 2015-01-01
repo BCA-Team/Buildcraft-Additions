@@ -40,8 +40,8 @@ public class WidgetFluidTank extends WidgetBase {
 	public List<String> getToolTip() {
 		List<String> list = new ArrayList<String>(3);
 		String fluid = Utils.localize("gui.empty");
-		if (tank.getFluid() != null && tank.getFluidAmount() > 0)
-			fluid = tank.getFluid().getLocalizedName();
+			if (tank.getFluid() != null && tank.getFluidAmount() > 0)
+				fluid = tank.getFluid().getLocalizedName();
 		list.add(fluid);
 		if (!fluid.equals(Utils.localize("gui.empty")))
 			list.add(tank.getFluidAmount() + "mB");

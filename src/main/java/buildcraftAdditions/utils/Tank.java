@@ -6,6 +6,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+
+import buildcraftAdditions.networking.ISyncObject;
+
+import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -13,7 +17,7 @@ import net.minecraftforge.fluids.FluidTank;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class Tank extends FluidTank {
+public class Tank extends FluidTank implements ISyncObject {
 	protected String name;
 
 	public Tank(int capacity, TileEntity entity, String name) {
@@ -73,5 +77,28 @@ public class Tank extends FluidTank {
 
 	public int getMaxCapacity() {
 		return capacity;
+	}
+
+	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		if (fluid != null && getFluidAmount() > 0) {
+			buf.writeInt(fluid.fluidID);
+			buf.writeInt(getFluidAmount());
+		} else {
+			buf.writeInt(-1);
+			buf.writeInt(0);
+		}
+		return buf;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		int id = buf.readInt();
+		int amount = buf.readInt();
+		if (id == -1)
+			setFluid(null);
+		else
+			setFluid(new FluidStack(id, amount));
+		return buf;
 	}
 }

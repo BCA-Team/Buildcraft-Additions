@@ -16,9 +16,8 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.CoolingTowerRecepie;
 import buildcraftAdditions.api.RecepieMananger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
-import buildcraftAdditions.networking.INetworkTile;
-import buildcraftAdditions.networking.MessageMultiBlockData;
-import buildcraftAdditions.networking.MessageTank;
+import buildcraftAdditions.networking.ISyncronizedTile;
+import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
@@ -34,7 +33,7 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFluidHandler, ITankHolder, INetworkTile {
+public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFluidHandler, ITankHolder, ISyncronizedTile {
 	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.COOLING_TOWER);
 	public int tank;
 	public boolean valve;
@@ -44,7 +43,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private TileCoolingTower master;
 	private int timer;
 	private CoolingTowerRecepie currentRecepie;
-	public float heat;
+	public double heat;
 
 
 	@Override
@@ -82,8 +81,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	public void sync() {
 		if (!worldObj.isRemote) {
 			NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 15);
-			PacketHandeler.instance.sendToAllAround(new MessageMultiBlockData(this, xCoord, yCoord, zCoord), point);
-			PacketHandeler.instance.sendToAllAround(new MessageTank(this, xCoord, yCoord, zCoord), point);
+			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), point);
 		}
 	}
 
@@ -121,7 +119,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		output.readFromNBT(tag);
 		coolant.readFromNBT(tag);
 		valve = tag.getBoolean("valve");
-		heat = tag.getFloat("heat");
+		heat = tag.getDouble("heat");
 		tank = tag.getInteger("tank");
 		updateRecepie();
 	}
@@ -133,7 +131,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		input.saveToNBT(tag);
 		output.saveToNBT(tag);
 		coolant.saveToNBT(tag);
-		tag.setFloat("heat", heat);
+		tag.setDouble("heat", heat);
 		tag.setBoolean("valve", valve);
 		tag.setInteger("tank", tank);
 	}
@@ -146,6 +144,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		input.setFluid(null);
 		output.setFluid(null);
 		coolant.setFluid(null);
+		heat = 0;
 		sync();
 		currentRecepie = null;
 	}
@@ -297,11 +296,36 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 
 	@Override
 	public void writeToByteBuff(ByteBuf buf) {
-
+		buf.writeBoolean(valve);
+		buf.writeDouble(heat);
+		input.writeToByteBuff(buf);
+		output.writeToByteBuff(buf);
+		coolant.writeToByteBuff(buf);
+		data.writeToByteBuff(buf);
 	}
 
 	@Override
-	public void readyFromByteBuff(ByteBuf buf) {
+	public void readFromByteBuff(ByteBuf buf) {
+		valve = buf.readBoolean();
+		heat = buf.readDouble();
+		buf = input.readFromByteBuff(buf);
+		buf = output.readFromByteBuff(buf);
+		buf = coolant.readFromByteBuff(buf);
+		buf = data.readFromByteBuff(buf);
+	}
 
+	@Override
+	public int getX() {
+		return xCoord;
+	}
+
+	@Override
+	public int getY() {
+		return yCoord;
+	}
+
+	@Override
+	public int getZ() {
+		return zCoord;
 	}
 }
