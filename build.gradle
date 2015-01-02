@@ -58,13 +58,8 @@ curse {
         projectId = "${curseProps.project_id}"
 
         releaseType = "release"
-        changelog = """update to BC 6.2.6
-update RF api
-fix tileEntities not being registered if BC wasn't installed
-fix double steel dust
-fluid canisters storage has been increased
-fix mod ores not getting processed
-fix heated furnace researche localization
+        changelog = """implemented the refinery and parts of the cooling tower
+complete network rewrite MIGHT HAVE SERIOUS SYNCING ISSUES, HAS POTENTIAL FOR CRASHES AND MIGHT BREAK YOUR WORLD!
 """
     }
 }
