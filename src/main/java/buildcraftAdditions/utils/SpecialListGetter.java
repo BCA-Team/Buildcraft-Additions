@@ -24,7 +24,7 @@ public class SpecialListGetter extends Thread {
 			URL listFile = new URL("https://raw.githubusercontent.com/AEnterprise/Buildcraft-Additions/master/src/main/resources/specialList.json");
 			BufferedReader reader = new BufferedReader(new InputStreamReader(listFile.openStream()));
 
-			File file = new File("temp");
+			File file = new File("bcaTempFile");
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 			String line;
 			while ((line = reader.readLine()) != null)

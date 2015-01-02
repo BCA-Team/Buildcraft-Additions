@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 import buildcraftAdditions.core.Logger;
 
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 /**
@@ -38,6 +37,8 @@ public class SpecialListMananger {
 		} catch (Throwable e) {
 			Logger.error("Error while reading the special list file");
 			e.printStackTrace();
+		} finally {
+			file.delete();
 		}
 	}
 }
