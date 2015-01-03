@@ -38,7 +38,7 @@ public class GuiCoolingTower extends GuiBase {
 		super.drawGuiContainerBackgroundLayer(f, x, y);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		bindTexture(texture());
-		drawString("Heat: " + tower.heat, guiLeft + 50, guiTop + 60);
+		drawString("Heat: " + Math.round(tower.heat), guiLeft + 50, guiTop + 60);
 		drawWidgets(x, y);
 		drawTooltips(x, y);
 	}

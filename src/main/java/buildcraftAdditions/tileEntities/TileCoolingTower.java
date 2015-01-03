@@ -60,12 +60,14 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			timer = 40;
 		} else
 			timer--;
-		while (!coolant.isEmpty() && heat > 0) {
+		int max = 20;
+		while (!coolant.isEmpty() && heat > 0 && max > 0) {
 			ICoolant cooling = CoolantManager.INSTANCE.getCoolant(coolant.getFluid().getFluid());
-			if (cooling != null) {
-				coolant.drain(1, true);
-				heat -= cooling.getDegreesCoolingPerMB(heat);
-			}
+			if (cooling == null)
+				break;
+			coolant.drain(1, true);
+			heat -= cooling.getDegreesCoolingPerMB(heat) * 2;
+			max--;
 		}
 		if (currentRecepie == null || output.isFull() || heat > 80)
 			return;

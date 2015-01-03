@@ -53,6 +53,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		maxEnergy = 50000;
 		timer = 0;
 		init = false;
+		lastRequiredHeat = 1;
 	}
 
 	public void updateEntity() {
@@ -197,6 +198,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		energy = tag.getInteger("energy");
 		currentHeat = tag.getInteger("currentHeat");
 		requiredHeat = tag.getInteger("requiredHeat");
+		lastRequiredHeat = tag.getInteger("lastRequiredHeat");
 		data.readFromNBT(tag);
 		input.readFromNBT(tag);
 		output.readFromNBT(tag);
@@ -211,6 +213,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		tag.setInteger("energy", energy);
 		tag.setInteger("currentHeat", currentHeat);
 		tag.setInteger("requiredHeat", requiredHeat);
+		tag.setInteger("lastRequiredHeat", lastRequiredHeat);
 		input.saveToNBT(tag);
 		output.saveToNBT(tag);
 	}
