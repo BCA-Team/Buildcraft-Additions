@@ -12,6 +12,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import buildcraft.api.fuels.ICoolant;
+import buildcraft.energy.fuels.CoolantManager;
+
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.CoolingTowerRecepie;
 import buildcraftAdditions.api.RecepieMananger;
@@ -43,7 +46,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private TileCoolingTower master;
 	private int timer;
 	private CoolingTowerRecepie currentRecepie;
-	public double heat;
+	public float heat;
 
 
 	@Override
@@ -57,7 +60,14 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			timer = 40;
 		} else
 			timer--;
-		if (currentRecepie == null || output.isFull() || heat > 20)
+		while (!coolant.isEmpty() && heat > 0) {
+			ICoolant cooling = CoolantManager.INSTANCE.getCoolant(coolant.getFluid().getFluid());
+			if (cooling != null) {
+				coolant.drain(1, true);
+				heat -= cooling.getDegreesCoolingPerMB(heat);
+			}
+		}
+		if (currentRecepie == null || output.isFull() || heat > 80)
 			return;
 		input.drain(1, true);
 		output.fill(new FluidStack(currentRecepie.getOutput(), 1), true);
@@ -119,7 +129,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		output.readFromNBT(tag);
 		coolant.readFromNBT(tag);
 		valve = tag.getBoolean("valve");
-		heat = tag.getDouble("heat");
+		heat = tag.getFloat("heat");
 		tank = tag.getInteger("tank");
 		updateRecepie();
 	}
@@ -131,7 +141,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		input.saveToNBT(tag);
 		output.saveToNBT(tag);
 		coolant.saveToNBT(tag);
-		tag.setDouble("heat", heat);
+		tag.setFloat("heat", heat);
 		tag.setBoolean("valve", valve);
 		tag.setInteger("tank", tank);
 	}
@@ -297,7 +307,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	@Override
 	public ByteBuf writeToByteBuff(ByteBuf buf) {
 		buf.writeBoolean(valve);
-		buf.writeDouble(heat);
+		buf.writeFloat(heat);
 		input.writeToByteBuff(buf);
 		output.writeToByteBuff(buf);
 		coolant.writeToByteBuff(buf);
@@ -308,7 +318,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	@Override
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		valve = buf.readBoolean();
-		heat = buf.readDouble();
+		heat = buf.readFloat();
 		buf = input.readFromByteBuff(buf);
 		buf = output.readFromByteBuff(buf);
 		buf = coolant.readFromByteBuff(buf);
