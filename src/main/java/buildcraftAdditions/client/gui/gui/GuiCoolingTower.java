@@ -16,7 +16,7 @@ import buildcraftAdditions.tileEntities.TileCoolingTower;
  */
 public class GuiCoolingTower extends GuiBase {
 	private TileCoolingTower tower;
-	public ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/refineryHeater.png");
+	public ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/coolingTower.png");
 
 	public GuiCoolingTower(TileCoolingTower tower) {
 		super(new ContainerCoolingTower());
@@ -40,6 +40,14 @@ public class GuiCoolingTower extends GuiBase {
 		bindTexture(texture());
 		drawString("Heat: " + Math.round(tower.heat), guiLeft + 50, guiTop + 60);
 		drawWidgets(x, y);
+		bindTexture(texture());
+		drawTexturedModalRect(guiLeft + 22, guiTop + 70, 190, 70, 20, 50);
+		drawTexturedModalRect(guiLeft + 148, guiTop + 70, 190, 70, 20, 50);
+		drawTexturedModalRect(guiLeft + 85, guiTop + 113, 190, 70, 20, 50);
+		int width = (int) (tower.heat * 68) / 80;
+		drawTexturedModalRect(guiLeft + 53, guiTop + 84, 0, 186, 80, 7);
+		drawTexturedModalRect(guiLeft + 59, guiTop + 85, 6, 198, width, 5);
+		drawTexturedModalRect(guiLeft + 59, guiTop + 85, 6, 193, 80, 5);
 		drawTooltips(x, y);
 	}
 
@@ -65,8 +73,8 @@ public class GuiCoolingTower extends GuiBase {
 
 	@Override
 	public void initialize() {
-		addWidget(new WidgetFluidTank(0, guiLeft + 80, guiTop + 20, 10, 30, this, tower.getTanks()[0]));
-		addWidget(new WidgetFluidTank(1, guiLeft + 95, guiTop + 20, 10, 30, this, tower.getTanks()[1]));
-		addWidget(new WidgetFluidTank(2, guiLeft + 110, guiTop + 20, 10, 30, this, tower.getTanks()[2]));
+		addWidget(new WidgetFluidTank(0, guiLeft + 22, guiTop + 65, 16, 52, this, tower.getTanks()[0]));
+		addWidget(new WidgetFluidTank(1, guiLeft + 148, guiTop + 65, 16, 52, this, tower.getTanks()[1]));
+		addWidget(new WidgetFluidTank(2, guiLeft + 85, guiTop + 108, 16, 52, this, tower.getTanks()[2]));
 	}
 }

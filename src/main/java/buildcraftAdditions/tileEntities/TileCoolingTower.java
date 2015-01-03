@@ -66,7 +66,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			if (cooling == null)
 				break;
 			coolant.drain(1, true);
-			heat -= cooling.getDegreesCoolingPerMB(heat) * 2;
+			heat -= cooling.getDegreesCoolingPerMB(heat);
 			max--;
 		}
 		if (currentRecepie == null || output.isFull() || heat > 80)
