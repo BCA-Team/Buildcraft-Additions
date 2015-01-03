@@ -55,11 +55,14 @@ public class WidgetBase {
 			gui.bindTexture(textures[textureIndex]);
 			gui.drawTexturedModalRect(x, y, u, v, width, height);
 		}
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
+	}
+
+	public void renderTooltip(int mouseX, int mouseY) {
 		List<String> tooltipList = getToolTip();
 		if (tooltipList != null && getBounds().contains(mouseX, mouseY)) {
 			gui.drawHoveringText(tooltipList, mouseX, mouseY);
 		}
-		GL11.glDisable(GL11.GL_LIGHTING);
 	}
 
 	public void onWidgetClicked(int x, int y, int button) {

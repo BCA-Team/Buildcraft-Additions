@@ -33,6 +33,7 @@ public abstract class GuiBase extends GuiContainer {
 	public static final ResourceLocation PLAYER_INV_TEXTURE = new ResourceLocation("bcadditions:textures/gui/guiPlayerInv.png");
 	protected static int titleXoffset = 5;
 	protected static int titleYoffset = 6;
+	protected boolean shouldDrawWidgets = true;
 
 	public final ResourceLocation texture;
 	public boolean drawPlayerInv = true;
@@ -108,9 +109,20 @@ public abstract class GuiBase extends GuiContainer {
 			bindTexture(PLAYER_INV_TEXTURE);
 			drawTexturedModalRect(guiLeft, guiTop + ySize, 0, 0, xSizePlayerInv, ySizePlayerInv);
 		}
+		if (shouldDrawWidgets) {
+			drawWidgets(x, y);
+			drawTooltips(x, y);
+		}
+	}
 
+	protected void drawWidgets(int x, int y) {
 		for (WidgetBase widget : widgets)
 			widget.render(x, y);
+	}
+
+	protected void drawTooltips(int x, int y) {
+		for (WidgetBase widget : widgets)
+			widget.renderTooltip(x, y);
 	}
 
 	@Override
