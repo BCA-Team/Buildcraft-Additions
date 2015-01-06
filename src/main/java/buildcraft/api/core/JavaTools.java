@@ -8,19 +8,13 @@
  */
 package buildcraft.api.core;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
-public class JavaTools {
-	public static double bounds(double value, double min, double max) {
-		return Math.max(min, Math.min(value, max));
+public final class JavaTools {
+	private JavaTools(){
+	
 	}
-
+	
 	public static <T> T[] concat(T[] first, T[] second) {
 		T[] result = Arrays.copyOf(first, first.length + second.length);
 		System.arraycopy(second, 0, result, first.length, second.length);
@@ -37,46 +31,6 @@ public class JavaTools {
 		float[] result = Arrays.copyOf(first, first.length + second.length);
 		System.arraycopy(second, 0, result, first.length, second.length);
 		return result;
-	}
-
-	public <T> T[] concatenate (T[] a, T[] b) {
-	    int aLen = a.length;
-	    int bLen = b.length;
-
-	    @SuppressWarnings("unchecked")
-		T[] c = (T[]) Array.newInstance(a.getClass().getComponentType(), aLen + bLen);
-	    System.arraycopy(a, 0, c, 0, aLen);
-	    System.arraycopy(b, 0, c, aLen, bLen);
-
-	    return c;
-	}
-
-	public static List<Field> getAllFields(Class<?> clas) {
-	    List<Field> result = new ArrayList<Field>();
-
-	    Class<?> current = clas;
-
-	    while (current != null && current != Object.class) {
-			Collections.addAll(result, current.getDeclaredFields());
-
-	        current = current.getSuperclass();
-	    }
-
-	    return result;
-	}
-
-	public static List<Method> getAllMethods(Class<?> clas) {
-	    List<Method> result = new ArrayList<Method>();
-
-	    Class<?> current = clas;
-
-	    while (current != null && current != Object.class) {
-			Collections.addAll(result, current.getDeclaredMethods());
-
-	        current = current.getSuperclass();
-	    }
-
-	    return result;
 	}
 
 	public static String surroundWithQuotes(String stringToSurroundWithQuotes) {
