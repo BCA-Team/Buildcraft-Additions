@@ -56,6 +56,8 @@ item.wireGold.name=Gold Wire
 item.wireGoldUnhardened.name=Gold Wire (Unhardened)
 item.wireDiamond.name=Diamond Wire
 item.wireDiamondUnhardened.name=Diamond Wire (Unhardened)
+item.heatPlatingRaw.name=Raw Heat Conducting Plating
+item.heatPlating.name=Heat Conducting Plating
 
 tooltip.installed=Installed
 tooltip.deactivated=Deactivated

@@ -116,6 +116,8 @@ public final class ItemsAndBlocks {
 	public static Item diamondWire;
 	public static ItemKineticTool kineticTool;
 	public static Item machineConfigurator;
+	public static Item heatPlating;
+	public static Item heatPlatingRaw;
 
 	public static void init() {
 		ironCanister = new ItemCanister("ironCanister", 2000);
@@ -192,6 +194,14 @@ public final class ItemsAndBlocks {
 
 		machineConfigurator = new ItemMachineConfigurator();
 		GameRegistry.registerItem(machineConfigurator, "machineConfigurator");
+
+		heatPlatingRaw = new ItemBase("heatPlatingRaw");
+		GameRegistry.registerItem(heatPlatingRaw, "heatPlatingRaw");
+
+		heatPlating = new ItemBase("heatPlating");
+		GameRegistry.registerItem(heatPlating, "heatPlating");
+
+		//START BLOCKS
 
 		kinesisPipeWood = new BlockBCKinesisPipeWood();
 		kinesisPipeWood.setBlockName("kinesisPipeWood");
@@ -320,6 +330,12 @@ public final class ItemsAndBlocks {
 			GameRegistry.addRecipe(new ItemStack(kebT2), "III", "PBP", "III", 'I', Items.iron_ingot, 'B', powerCapsuleTier2, 'P', BCItems.PIPE_POWER_GOLD);
 			GameRegistry.addRecipe(new ItemStack(kebT3Core), "DBD", "PBP", "DBD", 'D', Items.diamond, 'B', powerCapsuleTier3, 'P', BCItems.PIPE_POWER_DIAMOND);
 			GameRegistry.addRecipe(new ItemStack(kebT3Plating), "PGP", "GGG", "III", 'P', BCItems.PIPE_POWER_DIAMOND, 'G', Items.gold_ingot, 'I', Items.iron_ingot);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(heatPlatingRaw, 2), "DD", "DD", 'D', "dustIron"));
+			GameRegistry.addSmelting(new ItemStack(heatPlatingRaw), new ItemStack(heatPlating), 0);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(refineryWalls, 10), "PPP", "PDP", "PPP", 'P', heatPlating, 'D', "dustDiamond"));
+			GameRegistry.addRecipe(new ItemStack(refineryValve, 4), " P ", "PBP", " P ", 'P', heatPlating, 'B', Blocks.iron_bars);
+			GameRegistry.addRecipe(new ItemStack(coolingTowerWalls, 10), "PPP", "PDP", "PPP", 'P', heatPlating, 'D', Items.redstone);
+			GameRegistry.addRecipe(new ItemStack(coolingTowerValve), "V", 'V', refineryValve);
 		}
 		GameRegistry.registerTileEntity(TileFluidicCompressor.class, "TileFluidicCompressor");
 		GameRegistry.registerTileEntity(TileChargingStation.class, "TileChargingStation");

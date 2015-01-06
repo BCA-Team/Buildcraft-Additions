@@ -70,24 +70,24 @@ public class BuildcraftAdditions {
 		TrigersAndActions.register();
 		SpecialListMananger.init();
 
+		Item itemDust = new ItemDust(Integer.parseInt("13ECFC", 16)).setUnlocalizedName("dustDiamond");
+		GameRegistry.registerItem(itemDust, "dustDiamond");
+		OreDictionary.registerOre("dustDiamond", itemDust);
+
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.redstone_ore), new ItemStack(Items.redstone, 6));
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, 2));
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.lapis_ore), new ItemStack(Items.dye, 6, 4));
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.quartz_ore), new ItemStack(Items.quartz, 2));
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.stone), new ItemStack(Blocks.gravel));
 		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.sand));
+		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(itemDust, 4));
+		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Items.diamond), new ItemStack(itemDust, 2));
+		DusterRecipes.dusting().addDusterRecipe(Items.blaze_rod, new ItemStack(Items.blaze_powder, 4));
 	}
 
 	@Mod.EventHandler
 	public void doneLoading(FMLLoadCompleteEvent event) {
 		ItemsAndBlocks.addRecepies();
-
-		Item itemDust = new ItemDust(Integer.parseInt("13ECFC", 16)).setUnlocalizedName("dustDiamond");
-		GameRegistry.registerItem(itemDust, "dustDiamond");
-		OreDictionary.registerOre("dustDiamond", itemDust);
-		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Blocks.diamond_ore), new ItemStack(itemDust, 2));
-		DusterRecipes.dusting().addDusterRecipe(new ItemStack(Items.diamond), new ItemStack(itemDust, 1));
-		DusterRecipes.dusting().addDusterRecipe(Items.blaze_rod, new ItemStack(Items.blaze_powder, 4));
 
 		addDusts("Iron", 0xD2CEC9);
 		addDusts("Gold", 0xF8DF17);
