@@ -58,8 +58,7 @@ curse {
         projectId = "${curseProps.project_id}"
 
         releaseType = "release"
-        changelog = """implemented the refinery and parts of the cooling tower
-complete network rewrite MIGHT HAVE SERIOUS SYNCING ISSUES, HAS POTENTIAL FOR CRASHES AND MIGHT BREAK YOUR WORLD!
+        changelog = """update to BC 6.3.0, no other changes as all efforts are currently focused on BCA 2.0 (and i didn't get any bug reports)
 """
     }
 }
