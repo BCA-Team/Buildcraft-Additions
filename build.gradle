@@ -58,13 +58,7 @@ curse {
         projectId = "${curseProps.project_id}"
 
         releaseType = "release"
-        changelog = """update to BC 6.2.6
-update RF api
-fix tileEntities not being registered if BC wasn't installed
-fix double steel dust
-fluid canisters storage has been increased
-fix mod ores not getting processed
-fix heated furnace researche localization
+        changelog = """update to BC 6.3.0, no other changes as all efforts are currently focused on BCA 2.0 (and i didn't get any bug reports)
 """
     }
 }
