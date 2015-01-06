@@ -1,9 +1,13 @@
 package buildcraftAdditions.reference;
 
+import java.util.ArrayList;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -336,6 +340,18 @@ public final class ItemsAndBlocks {
 			GameRegistry.addRecipe(new ItemStack(refineryValve, 4), " P ", "PBP", " P ", 'P', heatPlating, 'B', Blocks.iron_bars);
 			GameRegistry.addRecipe(new ItemStack(coolingTowerWalls, 10), "PPP", "PDP", "PPP", 'P', heatPlating, 'D', Items.redstone);
 			GameRegistry.addRecipe(new ItemStack(coolingTowerValve), "V", 'V', refineryValve);
+
+			//remove BC refinery recepie
+			ItemStack stack = new ItemStack(BCItems.REFINERY);
+			ArrayList recepieList = (ArrayList) CraftingManager.getInstance().getRecipeList();
+			for (int t = 0; t < recepieList.size(); t++) {
+				IRecipe recipe = (IRecipe) recepieList.get(t);
+				ItemStack recipeResult = recipe.getRecipeOutput();
+				if (ItemStack.areItemStacksEqual(stack, recipeResult)) {
+					recepieList.remove(t);
+					return;
+				}
+			}
 		}
 		GameRegistry.registerTileEntity(TileFluidicCompressor.class, "TileFluidicCompressor");
 		GameRegistry.registerTileEntity(TileChargingStation.class, "TileChargingStation");
