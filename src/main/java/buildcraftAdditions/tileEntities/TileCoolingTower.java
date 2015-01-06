@@ -3,6 +3,7 @@ package buildcraftAdditions.tileEntities;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.biome.BiomeGenBase;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 
@@ -18,6 +19,7 @@ import buildcraft.energy.fuels.CoolantManager;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.CoolingTowerRecepie;
 import buildcraftAdditions.api.RecepieMananger;
+import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.networking.ISyncronizedTile;
 import buildcraftAdditions.networking.MessageByteBuff;
@@ -66,7 +68,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			if (cooling == null)
 				break;
 			coolant.drain(1, true);
-			heat -= cooling.getDegreesCoolingPerMB(heat);
+			heat -= cooling.getDegreesCoolingPerMB(heat) * 1.5;
 			max--;
 		}
 		if (currentRecepie == null || output.isFull() || heat > 80)
@@ -109,6 +111,8 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	@Override
 	public boolean onBlockActivated(EntityPlayer player) {
 		if (isMaster()) {
+			BiomeGenBase biome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
+			Logger.info("Biome temp: " + biome.temperature);
 			player.openGui(BuildcraftAdditions.instance, Variables.Gui.COOLING_TOWER, worldObj, xCoord, yCoord, zCoord);
 			return true;
 		}

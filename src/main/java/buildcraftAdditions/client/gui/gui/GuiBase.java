@@ -128,9 +128,9 @@ public abstract class GuiBase extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		if (drawPlayerInv)
-			drawString(StatCollector.translateToLocal("container.inventory"), 5, ySize + 6);
+			drawString(StatCollector.translateToLocal("container.inventory"), 5, ySize + 6, TEXT_COLOR);
 		String name = Utils.localize(String.format("gui.%s.name", getInventoryName()));
-		drawString(name, getXSize() / 2 - (name.length() * 2), titleYoffset);
+		drawString(name, getXSize() / 2 - (name.length() * 2), titleYoffset, TEXT_COLOR);
 	}
 
 	@Override

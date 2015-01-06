@@ -17,7 +17,7 @@ public class ContainerBase extends Container {
 	public void addPlayerInventory(InventoryPlayer invPlayer, int x, int y) {
 		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
 			for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex)
-				addSlotToContainer(new Slot(invPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, x + inventoryColumnIndex * 18, y + inventoryRowIndex * 18));
+				addSlotToContainer(new Slot(invPlayer, inventoryColumnIndex + inventoryRowIndex * 9, x + inventoryColumnIndex * 18 - 12, y + inventoryRowIndex * 18));
 		for (int hotBarIndex = 0; hotBarIndex < 9; ++hotBarIndex)
 			addSlotToContainer(new Slot(invPlayer, hotBarIndex, 8 + hotBarIndex * 18, y + 58));
 	}

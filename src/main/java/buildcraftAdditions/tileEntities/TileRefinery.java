@@ -75,13 +75,13 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		updateHeat();
 		if (!data.isMaster)
 			return;
-		energyCost = (isCooling || energy < (int) (50 + (50 * ((double) currentHeat / 100)))) ? 0 : (int) (50 + (50 * ((double) currentHeat / 100)));
+		energyCost = (input.getFluid() == null || isCooling || energy < (int) (50 + (50 * ((double) currentHeat / 100)))) ? 0 : (int) (50 + (50 * ((double) currentHeat / 100)));
 		energy -= energyCost;
 		if (currentHeat < requiredHeat) {
 			return;
 		}
 
-		if (energyCost == 0 || output.isFull())
+		if (energyCost == 0 || output.isFull() || input.isEmpty())
 			return;
 		input.drain(inputAmount, true);
 		output.fill(new FluidStack(outputFluid, outputAmount), true);

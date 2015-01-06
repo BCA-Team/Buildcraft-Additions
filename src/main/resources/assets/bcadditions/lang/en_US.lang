@@ -13,6 +13,10 @@ tile.blockKEBT2.name=Large Kinetic Energy Buffer
 tile.blockKEBT3Core.name=Advanced Kinetic Energy Buffer Core
 tile.blockKEBT3Plating.name=Advanced Kinetic Energy Buffer Plating
 tile.blockKEBT3.name=Advanced Kinetic Energy Buffer
+tile.blockRefineryWalls.name=Refinery Plating
+tile.blockRefineryValve.name=Refinery Valve
+tile.blockCoolingTowerWalls.name=Cooling Tower Walls
+tile.blockCoolingTowerValve.name=Cooling Tower Valve
 
 item.ironCanister.name=Iron Canister
 item.goldCanister.name=Gold Canister
@@ -71,6 +75,7 @@ gui.requiredHeat=Required Heat
 gui.powerUsage=Power Usage
 gui.empty=Empty
 gui.coolingTower.name=Cooling Tower
+gui.basicCoil.name=Basic Coil
 
 gui.nei.dusting=Dusting
 
