@@ -8,6 +8,8 @@ package buildcraftAdditions.proxy;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -28,6 +30,7 @@ import buildcraftAdditions.tileEntities.TileKEBT3;
 import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
+import org.lwjgl.input.Keyboard;
 
 public class ClientProxy extends CommonProxy {
 
@@ -59,4 +62,13 @@ public class ClientProxy extends CommonProxy {
 	public void cloneFluidTextures(Fluid source, Fluid target) {
 		target.setIcons(source.getStillIcon(), source.getFlowingIcon());
 	}
+
+	public GuiScreen getCurrentOpenedScreen() {
+		return Minecraft.getMinecraft().currentScreen;
+	}
+
+	public boolean isShiftKeyDown() {
+		return Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode());
+	}
+
 }

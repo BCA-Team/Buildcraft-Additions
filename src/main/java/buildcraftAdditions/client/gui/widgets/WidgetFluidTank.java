@@ -13,6 +13,7 @@ import net.minecraftforge.fluids.FluidStack;
 import buildcraftAdditions.client.gui.gui.GuiBase;
 import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -21,7 +22,6 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class WidgetFluidTank extends WidgetBase {
-	public ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
 	private Tank tank;
 
 	public WidgetFluidTank(int id, int x, int y, int width, int height, GuiBase gui, Tank tank) {
@@ -53,7 +53,7 @@ public class WidgetFluidTank extends WidgetBase {
 			return;
 		}
 		IIcon icon = fluid.getFluid().getIcon(fluid);
-		gui.mc.renderEngine.bindTexture(BLOCK_TEXTURE);
+		gui.mc.renderEngine.bindTexture(MC_BLOCK_SHEET);
 		Utils.setGLColorFromInt(fluid.getFluid().getColor(fluid));
 		int fullX = width / 16;
 		int fullY = height / 16;

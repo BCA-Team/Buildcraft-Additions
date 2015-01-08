@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import buildcraftAdditions.client.gui.containers.ContainerCoolingTower;
 import buildcraftAdditions.client.gui.widgets.WidgetFluidTank;
 import buildcraftAdditions.tileEntities.TileCoolingTower;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -22,9 +23,10 @@ public class GuiCoolingTower extends GuiBase {
 		super(new ContainerCoolingTower());
 		this.tower = tower;
 		setDrawPlayerInv(false);
-		titleXoffset = 70;
-		titleYoffset = 3;
-		TEXT_COLOR = 0xFFCC00;
+		setTitleXOffset(70);
+		setTitleYOffset(3);
+		setTextColor(0xFFCC00);
+		setDrawTitleMiddle(true);
 		shouldDrawWidgets = false;
 	}
 

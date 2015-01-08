@@ -8,6 +8,7 @@ import buildcraftAdditions.client.gui.containers.ContainerRefinery;
 import buildcraftAdditions.client.gui.widgets.WidgetFluidTank;
 import buildcraftAdditions.tileEntities.TileRefinery;
 import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -22,9 +23,10 @@ public class GuiRefinery extends GuiBase {
 	public GuiRefinery(TileRefinery refinery) {
 		super(new ContainerRefinery());
 		setDrawPlayerInv(false);
-		titleXoffset = 70;
-		titleYoffset = 3;
-		TEXT_COLOR = 0xFFCC00;
+		setTitleXOffset(70);
+		setTitleYOffset(3);
+		setTextColor(0xFFCC00);
+		setDrawTitleMiddle(true);
 		this.refinery = refinery;
 	}
 

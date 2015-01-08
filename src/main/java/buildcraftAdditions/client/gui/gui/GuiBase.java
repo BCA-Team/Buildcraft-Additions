@@ -27,19 +27,20 @@ import eureka.utils.Utils;
  */
 public abstract class GuiBase extends GuiContainer {
 
-	protected static int TEXT_COLOR = 0x404040;
 	public static final ResourceLocation MC_BLOCK_SHEET = TextureMap.locationBlocksTexture;
 	public static final ResourceLocation MC_ITEM_SHEET = TextureMap.locationItemsTexture;
 	public static final ResourceLocation PLAYER_INV_TEXTURE = new ResourceLocation("bcadditions:textures/gui/guiPlayerInv.png");
-	protected static int titleXoffset = 5;
-	protected static int titleYoffset = 6;
-	protected boolean shouldDrawWidgets = true;
 
 	public final ResourceLocation texture;
 	public boolean drawPlayerInv = true;
 	public List<WidgetBase> widgets = new ArrayList<WidgetBase>();
 	public int xSizePlayerInv = 175;
 	public int ySizePlayerInv = 99;
+	public int titleXoffset = 5;
+	public int titleYoffset = 6;
+	public boolean shouldDrawWidgets = true;
+	public int textColor = 0x404040;
+	public boolean drawTitleMiddle = false;
 
 	public GuiBase(Container container) {
 		super(container);
@@ -50,6 +51,26 @@ public abstract class GuiBase extends GuiContainer {
 
 	public GuiBase setDrawPlayerInv(boolean draw) {
 		this.drawPlayerInv = draw;
+		return this;
+	}
+
+	public GuiBase setTitleXOffset(int offset) {
+		this.titleXoffset = offset;
+		return this;
+	}
+
+	public GuiBase setTitleYOffset(int offset) {
+		this.titleYoffset = offset;
+		return this;
+	}
+
+	public GuiBase setTextColor(int color) {
+		this.textColor = color;
+		return this;
+	}
+
+	public GuiBase setDrawTitleMiddle(boolean value) {
+		this.drawTitleMiddle = value;
 		return this;
 	}
 
@@ -76,7 +97,7 @@ public abstract class GuiBase extends GuiContainer {
 	}
 
 	public void drawString(String text, int x, int y) {
-		drawString(text, x, y, TEXT_COLOR);
+		drawString(text, x, y, textColor);
 	}
 
 	public void drawString(String text, int x, int y, int color) {
@@ -128,9 +149,9 @@ public abstract class GuiBase extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		if (drawPlayerInv)
-			drawString(StatCollector.translateToLocal("container.inventory"), 5, ySize + 6, TEXT_COLOR);
+			drawString(StatCollector.translateToLocal("container.inventory"), 5, ySize + 6, textColor);
 		String name = Utils.localize(String.format("gui.%s.name", getInventoryName()));
-		drawString(name, getXSize() / 2 - (name.length() * 2), titleYoffset, TEXT_COLOR);
+		drawString(name, drawTitleMiddle ? getXSize() / 2 - (name.length() * 2) : titleXoffset, titleYoffset, textColor);
 	}
 
 	@Override

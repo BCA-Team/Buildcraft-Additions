@@ -3,6 +3,7 @@ package buildcraftAdditions.client.gui.widgets;
 import java.awt.Rectangle;
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.TextureMap;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -19,6 +20,9 @@ import buildcraftAdditions.client.gui.gui.GuiBase;
  */
 public class WidgetBase {
 
+	public static final ResourceLocation MC_BLOCK_SHEET = TextureMap.locationBlocksTexture;
+	public static final ResourceLocation MC_ITEM_SHEET = TextureMap.locationItemsTexture;
+
 	public final int id;
 	public final int x;
 	public final int y;
@@ -29,6 +33,7 @@ public class WidgetBase {
 	public GuiBase gui;
 	public ResourceLocation[] textures;
 	public int textureIndex = 0;
+	public int value = 0;
 	public boolean enabled = true;
 	public boolean playSound = true;
 
@@ -45,6 +50,16 @@ public class WidgetBase {
 
 		for (int i = 0; i < textures.length; i++)
 			this.textures[i] = new ResourceLocation(textures[i]);
+	}
+
+	public WidgetBase(int id, int x, int y, int u, int v, int width, int height, GuiBase gui, int value, String... textures) {
+		this(id, x, y, u, v, width, height, gui, textures);
+		this.value = value;
+	}
+
+	public WidgetBase dissableClickSound() {
+		playSound = false;
+		return this;
 	}
 
 	public void render(int mouseX, int mouseY) {
@@ -74,11 +89,6 @@ public class WidgetBase {
 
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, width, height);
-	}
-
-	public WidgetBase dissableClickSound() {
-		playSound = false;
-		return this;
 	}
 
 	public List<String> getToolTip() {
