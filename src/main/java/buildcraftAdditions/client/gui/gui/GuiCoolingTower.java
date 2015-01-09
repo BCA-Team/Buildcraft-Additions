@@ -1,12 +1,10 @@
 package buildcraftAdditions.client.gui.gui;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.util.ResourceLocation;
-
 import buildcraftAdditions.client.gui.containers.ContainerCoolingTower;
 import buildcraftAdditions.client.gui.widgets.WidgetFluidTank;
 import buildcraftAdditions.tileEntities.TileCoolingTower;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -16,6 +14,7 @@ import buildcraftAdditions.tileEntities.TileCoolingTower;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class GuiCoolingTower extends GuiBase {
+
 	private TileCoolingTower tower;
 	public ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/coolingTower.png");
 
@@ -26,21 +25,14 @@ public class GuiCoolingTower extends GuiBase {
 		setTitleXOffset(70);
 		setTitleYOffset(3);
 		setTextColor(0xFFCC00);
-		setDrawTitleMiddle(true);
+		setCenterTitle(true);
 		shouldDrawWidgets = false;
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		super.drawGuiContainerForegroundLayer(x, y);
-	}
-
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
-		super.drawGuiContainerBackgroundLayer(f, x, y);
+	public void drawBackgroundPostWidgets(float f, int x, int y) {
 		GL11.glDisable(GL11.GL_LIGHTING);
 		bindTexture(texture());
-		drawString("Heat: " + Math.round(tower.heat), guiLeft + 50, guiTop + 60);
 		drawWidgets(x, y);
 		bindTexture(texture());
 		drawTexturedModalRect(guiLeft + 22, guiTop + 70, 190, 70, 20, 50);
@@ -50,7 +42,11 @@ public class GuiCoolingTower extends GuiBase {
 		drawTexturedModalRect(guiLeft + 53, guiTop + 84, 0, 186, 80, 7);
 		drawTexturedModalRect(guiLeft + 59, guiTop + 85, 6, 198, width, 5);
 		drawTexturedModalRect(guiLeft + 59, guiTop + 85, 6, 193, 80, 5);
-		drawTooltips(x, y);
+	}
+
+	@Override
+	public void drawForegroundExtra(int x, int y) {
+		drawString("Heat: " + Math.round(tower.heat), guiLeft + 50, guiTop + 60);
 	}
 
 	@Override

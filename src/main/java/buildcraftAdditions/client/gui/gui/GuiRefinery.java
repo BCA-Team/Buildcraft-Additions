@@ -1,13 +1,11 @@
 package buildcraftAdditions.client.gui.gui;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.util.ResourceLocation;
-
 import buildcraftAdditions.client.gui.containers.ContainerRefinery;
 import buildcraftAdditions.client.gui.widgets.WidgetFluidTank;
 import buildcraftAdditions.tileEntities.TileRefinery;
 import buildcraftAdditions.utils.Utils;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -17,6 +15,7 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class GuiRefinery extends GuiBase {
+
 	public ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/refineryHeater.png");
 	TileRefinery refinery;
 
@@ -26,7 +25,7 @@ public class GuiRefinery extends GuiBase {
 		setTitleXOffset(70);
 		setTitleYOffset(3);
 		setTextColor(0xFFCC00);
-		setDrawTitleMiddle(true);
+		setCenterTitle(true);
 		this.refinery = refinery;
 	}
 
@@ -51,21 +50,23 @@ public class GuiRefinery extends GuiBase {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
-		super.drawGuiContainerBackgroundLayer(f, x, y);
+	public void drawBackgroundPostWidgets(float f, int x, int y) {
 		GL11.glDisable(GL11.GL_LIGHTING);
 		bindTexture(texture());
 		drawTexturedModalRect(guiLeft + 53, guiTop + 150, 0, 186, 80, 7);
-		drawString(Utils.localize("gui.heat") + ": " + refinery.currentHeat, guiLeft + 45, guiTop + 80);
-		drawString(Utils.localize("gui.requiredHeat") + ": " + refinery.requiredHeat, guiLeft + 45, guiTop + 90);
-		drawString(Utils.localize("gui.powerUsage") + ": " + refinery.energyCost, guiLeft + 45, guiTop + 100);
 		bindTexture(texture());
 		drawTexturedModalRect(guiLeft + 22, guiTop + 70, 190, 70, 20, 50);
 		drawTexturedModalRect(guiLeft + 148, guiTop + 70, 190, 70, 20, 50);
 		int width = (refinery.currentHeat * 68) / refinery.lastRequiredHeat;
 		drawTexturedModalRect(guiLeft + 59, guiTop + 151, 6, 198, width, 5);
 		drawTexturedModalRect(guiLeft + 59, guiTop + 151, 6, 193, 80, 5);
-		drawTooltips(x, y);
+	}
+
+	@Override
+	public void drawForegroundExtra(int x, int y) {
+		drawString(Utils.localize("gui.heat") + ": " + refinery.currentHeat, guiLeft + 45, guiTop + 80);
+		drawString(Utils.localize("gui.requiredHeat") + ": " + refinery.requiredHeat, guiLeft + 45, guiTop + 90);
+		drawString(Utils.localize("gui.powerUsage") + ": " + refinery.energyCost, guiLeft + 45, guiTop + 100);
 	}
 
 	@Override

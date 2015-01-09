@@ -349,7 +349,7 @@ public final class ItemsAndBlocks {
 				ItemStack recipeResult = recipe.getRecipeOutput();
 				if (ItemStack.areItemStacksEqual(stack, recipeResult)) {
 					recepieList.remove(t);
-					return;
+					break;
 				}
 			}
 		}

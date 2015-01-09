@@ -63,11 +63,11 @@ public class ClientProxy extends CommonProxy {
 		target.setIcons(source.getStillIcon(), source.getFlowingIcon());
 	}
 
-	public GuiScreen getCurrentOpenedScreen() {
+	public static GuiScreen getCurrentOpenedScreen() {
 		return Minecraft.getMinecraft().currentScreen;
 	}
 
-	public boolean isShiftKeyDown() {
+	public static boolean isShiftKeyDown() {
 		return Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode());
 	}
 

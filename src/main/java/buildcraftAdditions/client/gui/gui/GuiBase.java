@@ -1,10 +1,8 @@
 package buildcraftAdditions.client.gui.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
+import buildcraftAdditions.client.gui.widgets.WidgetBase;
+import buildcraftAdditions.proxy.ClientProxy;
+import eureka.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -13,10 +11,11 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import org.apache.commons.lang3.text.WordUtils;
+import org.lwjgl.opengl.GL11;
 
-import buildcraftAdditions.client.gui.widgets.WidgetBase;
-
-import eureka.utils.Utils;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -40,7 +39,7 @@ public abstract class GuiBase extends GuiContainer {
 	public int titleYoffset = 6;
 	public boolean shouldDrawWidgets = true;
 	public int textColor = 0x404040;
-	public boolean drawTitleMiddle = false;
+	public boolean centerTitle = false;
 
 	public GuiBase(Container container) {
 		super(container);
@@ -69,8 +68,8 @@ public abstract class GuiBase extends GuiContainer {
 		return this;
 	}
 
-	public GuiBase setDrawTitleMiddle(boolean value) {
-		this.drawTitleMiddle = value;
+	public GuiBase setCenterTitle(boolean value) {
+		this.centerTitle = value;
 		return this;
 	}
 
@@ -130,10 +129,20 @@ public abstract class GuiBase extends GuiContainer {
 			bindTexture(PLAYER_INV_TEXTURE);
 			drawTexturedModalRect(guiLeft, guiTop + ySize, 0, 0, xSizePlayerInv, ySizePlayerInv);
 		}
-		if (shouldDrawWidgets) {
+		drawBackgroundPreWidgets(f, x, y);
+
+		if (shouldDrawWidgets)
 			drawWidgets(x, y);
-			drawTooltips(x, y);
-		}
+
+		drawBackgroundPostWidgets(f, x, y);
+	}
+
+	public void drawBackgroundPreWidgets(float f, int x, int y) {
+
+	}
+
+	public void drawBackgroundPostWidgets(float f, int x, int y) {
+
 	}
 
 	protected void drawWidgets(int x, int y) {
@@ -141,17 +150,17 @@ public abstract class GuiBase extends GuiContainer {
 			widget.render(x, y);
 	}
 
-	protected void drawTooltips(int x, int y) {
-		for (WidgetBase widget : widgets)
-			widget.renderTooltip(x, y);
-	}
-
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		if (drawPlayerInv)
 			drawString(StatCollector.translateToLocal("container.inventory"), 5, ySize + 6, textColor);
 		String name = Utils.localize(String.format("gui.%s.name", getInventoryName()));
-		drawString(name, drawTitleMiddle ? getXSize() / 2 - (name.length() * 2) : titleXoffset, titleYoffset, textColor);
+		drawString(name, centerTitle ? getXSize() / 2 - (name.length() * 2) : titleXoffset, titleYoffset, textColor);
+		drawForegroundExtra(x, y);
+	}
+
+	public void drawForegroundExtra(int x, int y) {
+
 	}
 
 	@Override
@@ -169,13 +178,30 @@ public abstract class GuiBase extends GuiContainer {
 		}
 	}
 
+	@Override
+	public void drawScreen(int x, int y, float f) {
+		super.drawScreen(x, y, f);
+		List<String> tooltips = new ArrayList<String>();
+
+		for (WidgetBase widget : widgets)
+			if (widget.getBounds().contains(x, y))
+				widget.addTooltip(x, y, tooltips, ClientProxy.isShiftKeyDown());
+
+		if (!tooltips.isEmpty()) {
+			List<String> finalLines = new ArrayList<String>();
+			for (String line : tooltips) {
+				String[] lines = WordUtils.wrap(line, 50).split(System.getProperty("line.separator"));
+				for (String wrappedLine : lines) {
+					finalLines.add(wrappedLine);
+				}
+			}
+			drawHoveringText(tooltips, x, y, fontRendererObj);
+		}
+	}
+
 	public void redraw() {
 		widgets.clear();
 		buttonList.clear();
 		initialize();
-	}
-
-	public void drawHoveringText(List list, int x, int y) {
-		super.drawHoveringText(list, x, y, fontRendererObj);
 	}
 }

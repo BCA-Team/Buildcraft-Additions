@@ -1,15 +1,13 @@
 package buildcraftAdditions.client.gui.widgets;
 
-import java.awt.Rectangle;
-import java.util.List;
-
+import buildcraftAdditions.client.gui.gui.GuiBase;
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocation;
-
-import buildcraftAdditions.client.gui.gui.GuiBase;
+import java.awt.*;
+import java.util.List;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -57,8 +55,8 @@ public class WidgetBase {
 		this.value = value;
 	}
 
-	public WidgetBase dissableClickSound() {
-		playSound = false;
+	public WidgetBase setEnableClockSound(boolean value) {
+		playSound = value;
 		return this;
 	}
 
@@ -66,32 +64,24 @@ public class WidgetBase {
 
 		float shade = enabled ? 1.0F : 0.2F;
 		GL11.glColor4f(shade, shade, shade, shade);
-		if (textures.length != 0 && textures[textureIndex] != null) {
+		if (textures.length != 0 && textures[textureIndex] != null)
 			gui.bindTexture(textures[textureIndex]);
-			gui.drawTexturedModalRect(x, y, u, v, width, height);
-		}
+		gui.drawTexturedModalRect(x, y, u, v, width, height);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
-	}
-
-	public void renderTooltip(int mouseX, int mouseY) {
-		List<String> tooltipList = getToolTip();
-		if (tooltipList != null && getBounds().contains(mouseX, mouseY)) {
-			gui.drawHoveringText(tooltipList, mouseX, mouseY);
-		}
 	}
 
 	public void onWidgetClicked(int x, int y, int button) {
 		if (playSound) {
 			gui.soundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
-			gui.widgetActionPerformed(this);
 		}
+		gui.widgetActionPerformed(this);
 	}
 
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, width, height);
 	}
 
-	public List<String> getToolTip() {
-		return null;
+	public void addTooltip(int mouseX, int mouseY, List<String> tooltips, boolean shift) {
+
 	}
 }

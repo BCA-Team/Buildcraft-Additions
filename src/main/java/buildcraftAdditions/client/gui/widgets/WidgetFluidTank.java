@@ -1,18 +1,13 @@
 package buildcraftAdditions.client.gui.widgets;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.ResourceLocation;
-
-import net.minecraftforge.fluids.FluidStack;
-
 import buildcraftAdditions.client.gui.gui.GuiBase;
 import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.IIcon;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -26,6 +21,7 @@ public class WidgetFluidTank extends WidgetBase {
 
 	public WidgetFluidTank(int id, int x, int y, int width, int height, GuiBase gui, Tank tank) {
 		super(id, x, y, 0, 0, width, height, gui);
+		setEnableClockSound(false);
 		this.tank = tank;
 	}
 
@@ -37,15 +33,16 @@ public class WidgetFluidTank extends WidgetBase {
 	}
 
 	@Override
-	public List<String> getToolTip() {
-		List<String> list = new ArrayList<String>(3);
+	public void addTooltip(int mouseX, int mouseY, List<String> tooltips, boolean shift) {
 		String fluid = Utils.localize("gui.empty");
-			if (tank.getFluid() != null && tank.getFluidAmount() > 0)
-				fluid = tank.getFluid().getLocalizedName();
-		list.add(fluid);
+
+		if (tank.getFluid() != null && tank.getFluidAmount() > 0)
+			fluid = tank.getFluid().getLocalizedName();
+
+		tooltips.add(fluid);
+
 		if (!fluid.equals(Utils.localize("gui.empty")))
-			list.add(tank.getFluidAmount() + "mB");
-		return list;
+			tooltips.add(tank.getFluidAmount() + "mB");
 	}
 
 	private void drawFluid(FluidStack fluid, float level, int x, int y, int width, int height) {
