@@ -116,8 +116,8 @@ public final class ItemsAndBlocks {
 		GameRegistry.registerItem(diamondCanister, "diamondCanister");
 
 		powerCapsuleTier1 = new BatteryBase(100000, 1000, 1000, 1, "T1_battery");
-		powerCapsuleTier1.setUnlocalizedName("powerCapsuleTier1");
-		GameRegistry.registerItem(powerCapsuleTier1, "PowerCapsuleTier1");
+		powerCapsuleTier1.setUnlocalizedName("PowerCapsuleTier1");
+		GameRegistry.registerItem(powerCapsuleTier1, "powerCapsuleTier1");
 
 		powerCapsuleTier2 = new BatteryBase(300000, 2000, 2000, 2, "T2_battery");
 		powerCapsuleTier2.setUnlocalizedName("PowerCapsuleTier2");
