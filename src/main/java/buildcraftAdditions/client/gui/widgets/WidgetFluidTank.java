@@ -1,11 +1,9 @@
 package buildcraftAdditions.client.gui.widgets;
 
 import buildcraftAdditions.client.gui.gui.GuiBase;
+import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.IIcon;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class WidgetFluidTank extends WidgetBase {
 	public void render(int mouseX, int mouseY) {
 		super.render(mouseX, mouseY);
 		if (tank.getFluid() != null)
-			drawFluid(tank.getFluid(), (int) (((float) this.tank.getFluid().amount / (float) (tank.getMaxCapacity())) * height), x, y, width, height);
+			RenderUtils.drawFluid(tank.getFluid(), (int) (((float) this.tank.getFluid().amount / (float) (tank.getMaxCapacity())) * height), x, y, width, height);
 	}
 
 	@Override
@@ -43,46 +41,5 @@ public class WidgetFluidTank extends WidgetBase {
 
 		if (!fluid.equals(Utils.localize("gui.empty")))
 			tooltips.add(tank.getFluidAmount() + "mB");
-	}
-
-	private void drawFluid(FluidStack fluid, float level, int x, int y, int width, int height) {
-		if (fluid == null || fluid.getFluid() == null) {
-			return;
-		}
-		IIcon icon = fluid.getFluid().getIcon(fluid);
-		gui.mc.renderEngine.bindTexture(MC_BLOCK_SHEET);
-		Utils.setGLColorFromInt(fluid.getFluid().getColor(fluid));
-		int fullX = width / 16;
-		int fullY = height / 16;
-		int lastX = width - fullX * 16;
-		int lastY = height - fullY * 16;
-		float fullLvl = (height - level) / 16;
-		float lastLvl = (height - level) - fullLvl * 16;
-		for (int i = 0; i < fullX; i++) {
-			for (int j = 0; j < fullY; j++) {
-				if (j >= fullLvl) {
-					drawCutIcon(icon, x + i * 16, y + j * 16, 16, 16, j == fullLvl ? lastLvl : 0);
-				}
-			}
-		}
-		for (int i = 0; i < fullX; i++) {
-			drawCutIcon(icon, x + i * 16, y + fullY * 16, 16, lastY, fullLvl == fullY ? lastLvl : 0);
-		}
-		for (int i = 0; i < fullY; i++) {
-			if (i >= fullLvl) {
-				drawCutIcon(icon, x + fullX * 16, y + i * 16, lastX, 16, i == fullLvl ? lastLvl : 0);
-			}
-		}
-		drawCutIcon(icon, x + fullX * 16, y + fullY * 16, lastX, lastY, fullLvl == fullY ? lastLvl : 0);
-	}
-
-	private void drawCutIcon(IIcon icon, int x, int y, int width, int height, float cut) {
-		Tessellator tess = Tessellator.instance;
-		tess.startDrawingQuads();
-		tess.addVertexWithUV(x, y + height, 0, icon.getMinU(), icon.getInterpolatedV(height));
-		tess.addVertexWithUV(x + width, y + height, 0, icon.getInterpolatedU(width), icon.getInterpolatedV(height));
-		tess.addVertexWithUV(x + width, y + cut, 0, icon.getInterpolatedU(width), icon.getInterpolatedV(cut));
-		tess.addVertexWithUV(x, y + cut, 0, icon.getMinU(), icon.getInterpolatedV(cut));
-		tess.draw();
 	}
 }

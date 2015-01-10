@@ -26,7 +26,7 @@ public class GuiCoolingTower extends GuiBase {
 		setTitleYOffset(3);
 		setTextColor(0xFFCC00);
 		setCenterTitle(true);
-		shouldDrawWidgets = false;
+		setDrawWidgets(false);
 	}
 
 	@Override

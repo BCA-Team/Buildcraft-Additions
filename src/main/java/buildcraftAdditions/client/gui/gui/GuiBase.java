@@ -2,12 +2,11 @@ package buildcraftAdditions.client.gui.gui;
 
 import buildcraftAdditions.client.gui.widgets.WidgetBase;
 import buildcraftAdditions.proxy.ClientProxy;
+import buildcraftAdditions.utils.RenderUtils;
 import eureka.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -26,8 +25,6 @@ import java.util.List;
  */
 public abstract class GuiBase extends GuiContainer {
 
-	public static final ResourceLocation MC_BLOCK_SHEET = TextureMap.locationBlocksTexture;
-	public static final ResourceLocation MC_ITEM_SHEET = TextureMap.locationItemsTexture;
 	public static final ResourceLocation PLAYER_INV_TEXTURE = new ResourceLocation("bcadditions:textures/gui/guiPlayerInv.png");
 
 	public final ResourceLocation texture;
@@ -73,6 +70,11 @@ public abstract class GuiBase extends GuiContainer {
 		return this;
 	}
 
+	public GuiBase setDrawWidgets(boolean value) {
+		this.shouldDrawWidgets = value;
+		return this;
+	}
+
 	public abstract ResourceLocation texture();
 
 	public abstract int getXSize();
@@ -83,16 +85,12 @@ public abstract class GuiBase extends GuiContainer {
 
 	public abstract void initialize();
 
-	public TextureManager textureManager() {
-		return Minecraft.getMinecraft().getTextureManager();
-	}
-
 	public SoundHandler soundHandler() {
 		return Minecraft.getMinecraft().getSoundHandler();
 	}
 
 	public void bindTexture(ResourceLocation texture) {
-		textureManager().bindTexture(texture);
+		RenderUtils.bindTexture(texture);
 	}
 
 	public void drawString(String text, int x, int y) {

@@ -2,7 +2,6 @@ package buildcraftAdditions.client.gui.widgets;
 
 import buildcraftAdditions.client.gui.gui.GuiBase;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
@@ -17,9 +16,6 @@ import java.util.List;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class WidgetBase {
-
-	public static final ResourceLocation MC_BLOCK_SHEET = TextureMap.locationBlocksTexture;
-	public static final ResourceLocation MC_ITEM_SHEET = TextureMap.locationItemsTexture;
 
 	public final int id;
 	public final int x;
@@ -64,7 +60,7 @@ public class WidgetBase {
 
 		float shade = enabled ? 1.0F : 0.2F;
 		GL11.glColor4f(shade, shade, shade, shade);
-		if (textures.length != 0 && textures[textureIndex] != null)
+		if (textures[textureIndex] != null)
 			gui.bindTexture(textures[textureIndex]);
 		gui.drawTexturedModalRect(x, y, u, v, width, height);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
