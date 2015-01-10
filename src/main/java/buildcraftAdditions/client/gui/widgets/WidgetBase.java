@@ -60,10 +60,9 @@ public class WidgetBase {
 
 		float shade = enabled ? 1.0F : 0.2F;
 		GL11.glColor4f(shade, shade, shade, shade);
-		if (textures[textureIndex] != null)
+		if (textureIndex != 0 && textures[textureIndex] != null)
 			gui.bindTexture(textures[textureIndex]);
 		gui.drawTexturedModalRect(x, y, u, v, width, height);
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
 	}
 
 	public void onWidgetClicked(int x, int y, int button) {

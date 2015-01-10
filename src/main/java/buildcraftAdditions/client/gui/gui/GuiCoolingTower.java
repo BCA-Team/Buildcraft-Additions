@@ -4,7 +4,6 @@ import buildcraftAdditions.client.gui.containers.ContainerCoolingTower;
 import buildcraftAdditions.client.gui.widgets.WidgetFluidTank;
 import buildcraftAdditions.tileEntities.TileCoolingTower;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -26,15 +25,10 @@ public class GuiCoolingTower extends GuiBase {
 		setTitleYOffset(3);
 		setTextColor(0xFFCC00);
 		setCenterTitle(true);
-		setDrawWidgets(false);
 	}
 
 	@Override
 	public void drawBackgroundPostWidgets(float f, int x, int y) {
-		GL11.glDisable(GL11.GL_LIGHTING);
-		bindTexture(texture());
-		drawWidgets(x, y);
-		bindTexture(texture());
 		drawTexturedModalRect(guiLeft + 22, guiTop + 70, 190, 70, 20, 50);
 		drawTexturedModalRect(guiLeft + 148, guiTop + 70, 190, 70, 20, 50);
 		drawTexturedModalRect(guiLeft + 85, guiTop + 113, 190, 70, 20, 50);
@@ -46,7 +40,7 @@ public class GuiCoolingTower extends GuiBase {
 
 	@Override
 	public void drawForegroundExtra(int x, int y) {
-		drawString("Heat: " + Math.round(tower.heat), guiLeft + 50, guiTop + 60);
+		drawString("Heat: " + Math.round(tower.heat), 50, 60);
 	}
 
 	@Override

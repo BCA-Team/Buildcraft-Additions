@@ -127,10 +127,12 @@ public abstract class GuiBase extends GuiContainer {
 			bindTexture(PLAYER_INV_TEXTURE);
 			drawTexturedModalRect(guiLeft, guiTop + ySize, 0, 0, xSizePlayerInv, ySizePlayerInv);
 		}
+		bindTexture(texture());
 		drawBackgroundPreWidgets(f, x, y);
 
 		if (shouldDrawWidgets)
 			drawWidgets(x, y);
+		bindTexture(texture());
 
 		drawBackgroundPostWidgets(f, x, y);
 	}
