@@ -66,9 +66,4 @@ public class ClientProxy extends CommonProxy {
 	public static GuiScreen getCurrentOpenedScreen() {
 		return Minecraft.getMinecraft().currentScreen;
 	}
-
-	public static boolean isShiftKeyDown() {
-		return Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode());
-	}
-
 }

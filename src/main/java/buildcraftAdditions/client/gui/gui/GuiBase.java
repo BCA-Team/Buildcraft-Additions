@@ -185,7 +185,7 @@ public abstract class GuiBase extends GuiContainer {
 
 		for (WidgetBase widget : widgets)
 			if (widget.getBounds().contains(x, y))
-				widget.addTooltip(x, y, tooltips, ClientProxy.isShiftKeyDown());
+				widget.addTooltip(x, y, tooltips, isShiftKeyDown());
 
 		if (!tooltips.isEmpty()) {
 			List<String> finalLines = new ArrayList<String>();
