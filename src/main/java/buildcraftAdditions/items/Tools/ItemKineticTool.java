@@ -253,7 +253,7 @@ public class ItemKineticTool extends ItemPoweredBase {
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
 		readBateries(stack, player);
 		readUpgrades(stack);
-		list.add(Integer.toString((int) getEnergy()) + "/" + Integer.toString(getCapacity()) + " MJ");
+		list.add(Integer.toString((int) getEnergy()) + "/" + Integer.toString(getCapacity()) + " RF");
 		if (chainsaw)
 			list.add(Utils.localize("item.toolUpgradeChainsaw.name") + " " + Utils.localize("tooltip.installed"));
 		if (digger)
