@@ -16,6 +16,8 @@ import net.minecraftforge.fluids.IFluidHandler;
 import cofh.api.energy.IEnergyHandler;
 
 import buildcraft.api.recipes.IFlexibleCrafter;
+import buildcraft.api.transport.IPipeConnection;
+import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.RecepieMananger;
@@ -39,7 +41,7 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyHandler, ITankHolder {
+public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyHandler, ITankHolder, IPipeConnection {
 	public int timer, energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer, lastRequiredHeat;
 	public boolean init, valve, isCooling, moved;
 	public TileRefinery master;
@@ -489,5 +491,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		buf = output.readFromByteBuff(buf);
 		data.readFromByteBuff(buf);
 		return buf;
+	}
+
+	@Override
+	public ConnectOverride overridePipeConnection(IPipeTile.PipeType type, ForgeDirection with) {
+		return valve && type == IPipeTile.PipeType.FLUID ? ConnectOverride.CONNECT : ConnectOverride.DISCONNECT;
 	}
 }
