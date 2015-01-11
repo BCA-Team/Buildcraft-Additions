@@ -84,8 +84,12 @@ repositories {
 	    url = "http://mod-buildcraft.com"
     }
     maven {
-    name = "amadornesrepo"
-    url = "http://maven.amadornes.com/"
+        name = "amadornesrepo"
+        url = "http://maven.amadornes.com/"
+    }
+    ivy {
+        name "MineTweaker3"
+        artifactPattern "http://minetweaker3.powerofbytes.com/download/[module]-[revision].[ext]"
     }
 }
  
@@ -97,6 +101,7 @@ dependencies {
 	compile "mcp.mobius.waila:Waila:${config.version.waila}_${config.version.mc}"
 	compile "com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev"
 	compile "framez:Framez:${config.version.framez}:deobf"
+    compile name: 'MineTweaker3', version: config.version.minetweaker, ext: 'jar'
 }
  
 processResources
