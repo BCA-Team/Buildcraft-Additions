@@ -259,13 +259,14 @@ public class ItemKineticTool extends ItemPoweredBase {
 		list.add(Integer.toString((int) getEnergy()) + "/" + Integer.toString(getCapacity()) + " RF");
 		if (Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode())) {
 			if (chainsaw)
-				list.add(Utils.localize("item.toolUpgradeChainsaw.name") + " " + Utils.localize("tooltip.installed"));
+				list.add(String.format(Utils.localize("tooltip.installed"), Utils.localize("item.toolUpgradeChainsaw.name")));
 			if (digger)
-				list.add(Utils.localize("item.toolUpgradeDigger.name") + " " + Utils.localize("tooltip.installed"));
+				list.add(String.format(Utils.localize("tooltip.installed"), Utils.localize("item.toolUpgradeDigger.name")));
 			if (drill)
-				list.add(Utils.localize("item.toolUpgradeDrill.name") + " " + Utils.localize("tooltip.installed"));
+				list.add(String.format(Utils.localize("tooltip.installed"), Utils.localize("item.toolUpgradeDrill.name")));
 			if (hoe)
-				list.add(Utils.localize("item.toolUpgradeHoe.name") + " " + Utils.localize("tooltip.installed"));
+				list.add(String.format(Utils.localize("tooltip.installed"), Utils.localize("item.toolUpgradeHoe.name")));
+
 			if (!(chainsaw && digger && drill && hoe))
 				list.add(Utils.localize("tooltip.upgradesPossible") + ": " + upgradesAllowed);
 		} else

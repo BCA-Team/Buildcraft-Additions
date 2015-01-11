@@ -52,15 +52,10 @@ public class ItemCanister extends ItemFluidContainer {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean visible) {
 		FluidStack fStack = Utils.getFluidStackFromItemStack(itemStack);
-		int buckets = this.capacity / 1000;
-		if (buckets < 1)
-			return;
-		if (fStack == null && buckets == 1)
-			list.add("Can hold " + buckets + " bucket of fluid");
-		else if (fStack == null && buckets > 1)
-			list.add("Can hold " + buckets + " buckets of fluid");
+		if (fStack == null)
+			list.add(String.format(Utils.localize("tooltip.FluidCapacity"), capacity / 1000));
 		else
-			list.add("Currently stores " + Integer.toString(fStack.amount) + " mB of " + fStack.getFluid().getLocalizedName(fStack));
+			list.add(String.format(Utils.localize("tooltip.storedFluid"), fStack.amount, fStack.getFluid().getLocalizedName(fStack)));
 	}
 
 	@Override

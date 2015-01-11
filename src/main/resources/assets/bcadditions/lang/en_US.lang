@@ -59,10 +59,12 @@ item.wireDiamondUnhardened.name=Diamond Wire (Unhardened)
 item.heatPlatingRaw.name=Raw Heat Conducting Plating
 item.heatPlating.name=Heat Conducting Plating
 
-tooltip.installed=Installed
+tooltip.installed=%s Installed
 tooltip.deactivated=Deactivated
 tooltip.upgradesPossible=Upgrades Possible
 tooltip.holdShiftForMoreInfo=Hold Shift for more info
+tooltip.FluidCapacity=Can hold %s buckets of fluid
+tooltip.storedFluid=Currently stores %s mb of %s
 
 fluid.fluid.gas=Gas
 
@@ -240,3 +242,5 @@ shouldRegisterDusts=Register Dusts
 shouldRegisterDusts.tooltip=Set to false to prevent BCA from registering new dusts
 
 kineticTool.outOfPower=OUT OF POWER, BLOCK BREAKING ABORTED
+
+updatenotification=There is a newer version of Buildcraft Additions available (%s). Please consider updating
