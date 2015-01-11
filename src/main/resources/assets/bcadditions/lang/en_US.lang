@@ -260,3 +260,6 @@ kineticTool.outOfPower=OUT OF POWER, BLOCK BREAKING ABORTED
 
 updatenotification=There is a newer version of Buildcraft Additions available (%s). Please consider updating
 changelogNotification=Changelog
+
+selfdestructCountdouwn=SELF DESTUCTION IN
+selfdestructActivated=SELF DESTRUCT ACTIVATED

@@ -124,7 +124,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		if (selfDestruct) {
 			fuse--;
 			if (fuse % 20 == 0)
-				destroyer.addChatComponentMessage(new ChatComponentText("SELF DESTUCTION IN: " + fuse / 20));
+				destroyer.addChatComponentMessage(new ChatComponentText(Utils.localize("selfdestructCountdouwn") + ": " + fuse / 20));
 		}
 		if (fuse <= 0 && selfDestruct)
 			byeBye();
@@ -180,7 +180,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		}
 		selfDestruct = true;
 		fuse = 100;
-		destroyer.addChatComponentMessage(new ChatComponentText("SELF DESTRUCT ACTIVATED"));
+		destroyer.addChatComponentMessage(new ChatComponentText(Utils.localize("selfdestructActivated")));
 		destroyer.closeScreen();
 	}
 
