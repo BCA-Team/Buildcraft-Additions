@@ -190,6 +190,7 @@ public class ModIntegration {
 			if (!list.isEmpty()) {
 				String name = list.get(0).getUnlocalizedName();
 				name = name.replace("item.", "");
+				name = name.replace("ic2.", "");
 				itemDust.setUnlocalizedName(name);
 			}
 
