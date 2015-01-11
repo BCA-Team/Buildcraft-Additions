@@ -340,6 +340,10 @@ public final class ItemsAndBlocks {
 			GameRegistry.addRecipe(new ItemStack(refineryValve, 4), " P ", "PBP", " P ", 'P', heatPlating, 'B', Blocks.iron_bars);
 			GameRegistry.addRecipe(new ItemStack(coolingTowerWalls, 10), "PPP", "PDP", "PPP", 'P', heatPlating, 'D', Items.redstone);
 			GameRegistry.addRecipe(new ItemStack(coolingTowerValve), "V", 'V', refineryValve);
+			GameRegistry.addRecipe(new ItemStack(toolUpgradeChainsaw), "U", 'U', toolUpgradeDigger);
+			GameRegistry.addRecipe(new ItemStack(toolUpgradeDigger), "U", 'U', toolUpgradeDrill);
+			GameRegistry.addRecipe(new ItemStack(toolUpgradeDrill), "U", 'U', toolUpgradeHoe);
+			GameRegistry.addRecipe(new ItemStack(toolUpgradeHoe), "U", 'U', toolUpgradeChainsaw);
 
 			//remove BC refinery recepie
 			ItemStack stack = new ItemStack(BCItems.REFINERY);
