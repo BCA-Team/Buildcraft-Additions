@@ -164,7 +164,7 @@ eureka.lavaCoilFinished=You observe your basic coils and there heat generation a
 
 engineeringDiary.kineticCoil.title=Kinetic Coil
 engineeringDiary.kineticCoil.page0=This Coil can power the Heated Furnace with Lasers.
-engineeringDiary.kineticCoil.page1=This time you were a bit conservative on using Diamonds to upgrade something, considering just how many you’d need, but then again you were curious about it. It was clear from the start where these would be
+engineeringDiary.kineticCoil.page1=This time you were a bit conservative on using Diamonds to upgrade something, considering just how many you’d need, but then again you were curious about it.
 engineeringDiary.kineticCoil.page2=It was clear from the start where these would be getting their source of power. @ @ Lasers. @ @ Diamonds are great conductors of energy after all and neither Coal nor Lava would ever generate enough heat to
 engineeringDiary.kineticCoil.page3=make Diamonds spin. After this one you’re never having a Furnace wall again.
 engineeringDiary.kineticCoil.howToMakeProgress=Place Lava Coils
