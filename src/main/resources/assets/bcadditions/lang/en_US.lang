@@ -62,6 +62,7 @@ item.heatPlating.name=Heat Conducting Plating
 tooltip.installed=Installed
 tooltip.deactivated=Deactivated
 tooltip.upgradesPossible=Upgrades Possible
+tooltip.holdShiftForMoreInfo=Hold Shift for more info
 
 fluid.fluid.gas=Gas
 

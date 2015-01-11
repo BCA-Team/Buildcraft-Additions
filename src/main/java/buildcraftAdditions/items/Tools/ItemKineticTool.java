@@ -2,8 +2,11 @@ package buildcraftAdditions.items.Tools;
 
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -254,15 +257,19 @@ public class ItemKineticTool extends ItemPoweredBase {
 		readBateries(stack, player);
 		readUpgrades(stack);
 		list.add(Integer.toString((int) getEnergy()) + "/" + Integer.toString(getCapacity()) + " RF");
-		if (chainsaw)
-			list.add(Utils.localize("item.toolUpgradeChainsaw.name") + " " + Utils.localize("tooltip.installed"));
-		if (digger)
-			list.add(Utils.localize("item.toolUpgradeDigger.name") + " " + Utils.localize("tooltip.installed"));
-		if (drill)
-			list.add(Utils.localize("item.toolUpgradeDrill.name") + " " + Utils.localize("tooltip.installed"));
-		if (hoe)
-			list.add(Utils.localize("item.toolUpgradeHoe.name") + " " + Utils.localize("tooltip.installed"));
-		list.add(Utils.localize("tooltip.upgradesPossible") + ": " + upgradesAllowed);
+		if (Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode())) {
+			if (chainsaw)
+				list.add(Utils.localize("item.toolUpgradeChainsaw.name") + " " + Utils.localize("tooltip.installed"));
+			if (digger)
+				list.add(Utils.localize("item.toolUpgradeDigger.name") + " " + Utils.localize("tooltip.installed"));
+			if (drill)
+				list.add(Utils.localize("item.toolUpgradeDrill.name") + " " + Utils.localize("tooltip.installed"));
+			if (hoe)
+				list.add(Utils.localize("item.toolUpgradeHoe.name") + " " + Utils.localize("tooltip.installed"));
+			if (!(chainsaw && digger && drill && hoe))
+				list.add(Utils.localize("tooltip.upgradesPossible") + ": " + upgradesAllowed);
+		} else
+			list.add("<" + Utils.localize("tooltip.holdShiftForMoreInfo") + ">");
 	}
 
 	public void setPlayer(EntityPlayer player) {
