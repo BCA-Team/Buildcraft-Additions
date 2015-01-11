@@ -28,6 +28,7 @@ import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.creative.TabBCAdditions;
 import buildcraftAdditions.creative.TabCanisters;
+import buildcraftAdditions.creative.TabDusts;
 import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
@@ -54,6 +55,7 @@ public class BuildcraftAdditions {
 
 	public static CreativeTabs bcadditions = new TabBCAdditions();
 	public static CreativeTabs bcaCannisters = new TabCanisters();
+	public static CreativeTabs bcaDusts = new TabDusts();
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

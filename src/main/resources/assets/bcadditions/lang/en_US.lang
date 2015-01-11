@@ -107,6 +107,7 @@ trigger.readyToCharge=Ready To Charge
 
 itemGroup.BuildcraftAdditions=Buildcraft Additions
 itemGroup.bcaCanisters=Fluid Canisters
+itemGroup.bcaDusts=Dusts
 
 Eureka=EUREKA!
 eureka.dusterTier0Finished=You start planning all your feature builds but realize you'll need a ton of resources. You also start thinking of a way to make that easier.
