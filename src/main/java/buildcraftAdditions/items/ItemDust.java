@@ -23,7 +23,7 @@ public class ItemDust extends Item {
 	public int color;
 
 	public ItemDust(int color) {
-		setCreativeTab(BuildcraftAdditions.bcadditions);
+		setCreativeTab(BuildcraftAdditions.bcaDusts);
 		this.color = color;
 	}
 

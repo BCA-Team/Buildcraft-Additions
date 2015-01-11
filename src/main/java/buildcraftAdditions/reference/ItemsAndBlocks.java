@@ -99,9 +99,9 @@ public final class ItemsAndBlocks {
 	public static MultiBlockCoolingTowerWalls coolingTowerWalls;
 	public static MultiBlockCoolingTowerValve coolingTowerValve;
 
-	public static Item powerCapsuleTier1;
-	public static Item powerCapsuleTier2;
-	public static Item powerCapsuleTier3;
+	public static BatteryBase powerCapsuleTier1;
+	public static BatteryBase powerCapsuleTier2;
+	public static BatteryBase powerCapsuleTier3;
 	public static Item ironStick;
 	public static Item goldStick;
 	public static Item diamondStick;

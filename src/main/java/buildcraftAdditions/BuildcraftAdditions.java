@@ -26,6 +26,9 @@ import buildcraftAdditions.client.gui.gui.GuiHandler;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
+import buildcraftAdditions.creative.TabBCAdditions;
+import buildcraftAdditions.creative.TabCanisters;
+import buildcraftAdditions.creative.TabDusts;
 import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.networking.PacketHandeler;
 import buildcraftAdditions.proxy.CommonProxy;
@@ -40,8 +43,6 @@ import buildcraftAdditions.utils.SpecialListMananger;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-
-
 @Mod(modid = "bcadditions", name = "Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "after:BuildCraft|Energy;required-after:eureka;required-after:Forge@[10.13.2.1230,)", acceptedMinecraftVersions = "1.7.10")
 public class BuildcraftAdditions {
 
@@ -52,14 +53,9 @@ public class BuildcraftAdditions {
 	@SidedProxy(clientSide = "buildcraftAdditions.proxy.ClientProxy", serverSide = "buildcraftAdditions.proxy.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static CreativeTabs bcadditions = new CreativeTabs("BuildcraftAdditions") {
-
-		@Override
-		public Item getTabIconItem() {
-			return new ItemStack(ItemsAndBlocks.fluidicCompressorBlock, 1).getItem();
-		}
-
-	};
+	public static CreativeTabs bcadditions = new TabBCAdditions();
+	public static CreativeTabs bcaCannisters = new TabCanisters();
+	public static CreativeTabs bcaDusts = new TabDusts();
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
