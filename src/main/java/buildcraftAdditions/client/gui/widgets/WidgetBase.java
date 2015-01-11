@@ -1,14 +1,12 @@
 package buildcraftAdditions.client.gui.widgets;
 
-import java.awt.Rectangle;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
+import buildcraftAdditions.client.gui.gui.GuiBase;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
-import buildcraftAdditions.client.gui.gui.GuiBase;
+import java.awt.*;
+import java.util.List;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -29,6 +27,7 @@ public class WidgetBase {
 	public GuiBase gui;
 	public ResourceLocation[] textures;
 	public int textureIndex = 0;
+	public int value = 0;
 	public boolean enabled = true;
 	public boolean playSound = true;
 
@@ -47,41 +46,37 @@ public class WidgetBase {
 			this.textures[i] = new ResourceLocation(textures[i]);
 	}
 
+	public WidgetBase(int id, int x, int y, int u, int v, int width, int height, GuiBase gui, int value, String... textures) {
+		this(id, x, y, u, v, width, height, gui, textures);
+		this.value = value;
+	}
+
+	public WidgetBase setEnableClockSound(boolean value) {
+		playSound = value;
+		return this;
+	}
+
 	public void render(int mouseX, int mouseY) {
 
 		float shade = enabled ? 1.0F : 0.2F;
 		GL11.glColor4f(shade, shade, shade, shade);
-		if (textures.length != 0 && textures[textureIndex] != null) {
+		if (textureIndex != 0 && textures[textureIndex] != null)
 			gui.bindTexture(textures[textureIndex]);
-			gui.drawTexturedModalRect(x, y, u, v, width, height);
-		}
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
-	}
-
-	public void renderTooltip(int mouseX, int mouseY) {
-		List<String> tooltipList = getToolTip();
-		if (tooltipList != null && getBounds().contains(mouseX, mouseY)) {
-			gui.drawHoveringText(tooltipList, mouseX, mouseY);
-		}
+		gui.drawTexturedModalRect(x, y, u, v, width, height);
 	}
 
 	public void onWidgetClicked(int x, int y, int button) {
 		if (playSound) {
 			gui.soundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
-			gui.widgetActionPerformed(this);
 		}
+		gui.widgetActionPerformed(this);
 	}
 
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, width, height);
 	}
 
-	public WidgetBase dissableClickSound() {
-		playSound = false;
-		return this;
-	}
+	public void addTooltip(int mouseX, int mouseY, List<String> tooltips, boolean shift) {
 
-	public List<String> getToolTip() {
-		return null;
 	}
 }
