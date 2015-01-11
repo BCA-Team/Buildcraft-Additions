@@ -119,12 +119,12 @@ public class GuiKEB extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		fontRendererObj.drawString(Utils.localize("tile.blockKEBT" + keb.tier + ".name"), 5, 6, 0x404040);
-		fontRendererObj.drawString("North: ", 5, 97, 0x404040);
-		fontRendererObj.drawString("East: ", 5, 120, 0x404040);
-		fontRendererObj.drawString("South: ", 5, 143, 0x404040);
-		fontRendererObj.drawString("West: ", 93, 97, 0x404040);
-		fontRendererObj.drawString("Up: ", 93, 120, 0x404040);
-		fontRendererObj.drawString("Down: ", 93, 143, 0x404040);
+		fontRendererObj.drawString(Utils.localize("gui.north") + ": ", 5, 97, 0x404040);
+		fontRendererObj.drawString(Utils.localize("gui.east") + ": ", 5, 120, 0x404040);
+		fontRendererObj.drawString(Utils.localize("gui.south") + ": ", 5, 143, 0x404040);
+		fontRendererObj.drawString(Utils.localize("gui.west") + ": ", 93, 97, 0x404040);
+		fontRendererObj.drawString(Utils.localize("gui.up") + ": ", 93, 120, 0x404040);
+		fontRendererObj.drawString(Utils.localize("gui.down") + ": ", 93, 143, 0x404040);
 		if (shouldDrawEnergyNumber(mouseX - guiLeft, mouseY - guiTop)) {
 			ArrayList<String> list = new ArrayList<String>();
 			list.add(keb.energy + " / " + keb.maxEnergy + " RF");
@@ -136,14 +136,14 @@ public class GuiKEB extends GuiContainer {
 				if (SpecialListMananger.specialTexts.containsKey(player.getDisplayName())){
 					list.add(SpecialListMananger.specialTexts.get(player.getDisplayName()) + "?");
 				} else {
-				list.add("BIG RED BUTTONS ARE VERY DANGEROUS");
-				list.add("DON'T PUSH IT");
+					list.add(Utils.localize("gui.keb.dangerousButton"));
+					list.add(Utils.localize("gui.keb.noPushing"));
 				}
 			} else {
 				if (SpecialListMananger.specialTexts.containsKey(player.getDisplayName())){
 					list.add(SpecialListMananger.specialTexts.get(player.getDisplayName()) + "!!!");
 				} else {
-					list.add("PRESS HERE FOR A BIG BOOM");
+					list.add(Utils.localize("gui.keb.pressForBoom"));
 				}
 			}
 			drawHoveringText(list, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);

@@ -44,7 +44,7 @@ public class EventListener {
 				event.player.addChatComponentMessage(new ChatComponentText("There is a newer version of Buildcraft Additions available (" + VersionCheck.newerVersionNumber + ") Please consider updating"));
 				if (!ConfigurationHandler.shouldPrintChangelog)
 					return;
-				event.player.addChatComponentMessage(new ChatComponentText("Changelog: "));
+				event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("changelogNotification") + ": "));
 				for (int t = 0; t < VersionCheck.numLines; t++) {
 
 					event.player.addChatComponentMessage(new ChatComponentText("- " + VersionCheck.changelog[t]));

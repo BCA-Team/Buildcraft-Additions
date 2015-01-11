@@ -81,6 +81,21 @@ gui.powerUsage=Power Usage
 gui.empty=Empty
 gui.coolingTower.name=Cooling Tower
 gui.basicCoil.name=Basic Coil
+gui.north=North
+gui.east=East
+gui.south=South
+gui.west=West
+gui.up=Up
+gui.down=Down
+gui.Input=Input
+gui.Output=Output
+gui.Disabled=Disabled
+gui.Both=Both
+
+gui.keb.dangerousButton=BIG RED BUTTONS ARE VERY DANGEROUS
+gui.keb.noPushing=DON'T PUSH IT
+gui.keb.pressForBoom=PRESS HERE FOR A BIG BOOM
+
 
 gui.nei.dusting=Dusting
 
@@ -244,3 +259,4 @@ shouldRegisterDusts.tooltip=Set to false to prevent BCA from registering new dus
 kineticTool.outOfPower=OUT OF POWER, BLOCK BREAKING ABORTED
 
 updatenotification=There is a newer version of Buildcraft Additions available (%s). Please consider updating
+changelogNotification=Changelog
