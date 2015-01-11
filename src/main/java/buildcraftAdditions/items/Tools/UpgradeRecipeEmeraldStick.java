@@ -3,6 +3,7 @@ package buildcraftAdditions.items.Tools;
 import net.minecraft.item.ItemStack;
 
 import buildcraft.api.recipes.CraftingResult;
+import buildcraft.silicon.ItemRedstoneChipset;
 import buildcraft.silicon.TileIntegrationTable;
 import buildcraft.transport.recipes.IntegrationTableRecipe;
 
@@ -18,7 +19,7 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
 public class UpgradeRecipeEmeraldStick extends IntegrationTableRecipe {
 
 	public UpgradeRecipeEmeraldStick() {
-		setContents("emeraldStick", ItemsAndBlocks.kineticTool, 10000, 60);
+		setContents("emeraldStick", ItemsAndBlocks.kineticTool, 10000, 60, ItemRedstoneChipset.Chipset.DIAMOND.getStack());
 	}
 
 	@Override
@@ -38,6 +39,8 @@ public class UpgradeRecipeEmeraldStick extends IntegrationTableRecipe {
 	@Override
 	public CraftingResult<ItemStack> craft(TileIntegrationTable crafter, boolean preview, ItemStack inputA, ItemStack inputB) {
 		CraftingResult<ItemStack> result = super.craft(crafter, preview, inputA, inputB);
+		if (result == null)
+			return null;
 		ItemStack outputStack = inputA.copy();
 		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
 		output.installStick(outputStack, "emeraldStick");

@@ -3,6 +3,7 @@ package buildcraftAdditions.items.Tools;
 import net.minecraft.item.ItemStack;
 
 import buildcraft.api.recipes.CraftingResult;
+import buildcraft.silicon.ItemRedstoneChipset;
 import buildcraft.silicon.TileIntegrationTable;
 import buildcraft.transport.recipes.IntegrationTableRecipe;
 
@@ -18,7 +19,7 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
 public class UpgradeRecipeDiamondStick extends IntegrationTableRecipe {
 
 	public UpgradeRecipeDiamondStick() {
-		setContents("diamondStick", ItemsAndBlocks.kineticTool, 10000, 600);
+		setContents("diamondStick", ItemsAndBlocks.kineticTool, 10000, 600, ItemRedstoneChipset.Chipset.GOLD.getStack());
 	}
 
 	@Override
@@ -38,6 +39,8 @@ public class UpgradeRecipeDiamondStick extends IntegrationTableRecipe {
 	@Override
 	public CraftingResult<ItemStack> craft(TileIntegrationTable crafter, boolean preview, ItemStack inputA, ItemStack inputB) {
 		CraftingResult<ItemStack> result =  super.craft(crafter, preview, inputA, inputB);
+		if (result == null)
+			return null;
 		ItemStack outputStack = inputA.copy();
 		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
 		output.installStick(outputStack, "diamondStick");
