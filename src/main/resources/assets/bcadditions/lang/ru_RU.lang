@@ -259,3 +259,7 @@ shouldRegisterDusts.tooltip=Выберите "false", чтобы BCA не рег
 kineticTool.outOfPower=КОНЧИЛАСЬ ЭНЕРГИЯ, БЛОК НЕ БУДЕТ СЛОМАН
 
 updatenotification=Доступна новая версия Buildcraft Additions (%s). Пожалуйста, обновитесь
+changelogNotification=Изменения
+
+selfdestructCountdouwn=САМОУНИЧТОЖЕНИЕ ЧЕРЕЗ
+selfdestructActivated=САМОУНИЧТОЖЕНИЕ АКТИВИРОВАНО
