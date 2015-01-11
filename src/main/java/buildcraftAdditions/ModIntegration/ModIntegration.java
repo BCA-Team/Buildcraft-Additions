@@ -14,6 +14,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.ModIntegration.Framez.FramezIntegration;
+import buildcraftAdditions.ModIntegration.MineTweaker.MineTweakerIntegreation;
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.blocks.BlockBasic;
 import buildcraftAdditions.config.ConfigurationHandler;
@@ -43,6 +44,8 @@ public class ModIntegration {
 		if (Loader.isModLoaded("framez"))
 			FramezIntegration.Framez();
 		RefineryRecepieConverter.doYourThing();
+		if (Loader.isModLoaded("MineTweaker3"))
+			MineTweakerIntegreation.integrate();
 	}
 
 	private static void railcraftIntegration() {

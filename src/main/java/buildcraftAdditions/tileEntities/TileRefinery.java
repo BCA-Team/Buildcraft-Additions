@@ -93,7 +93,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (worldObj.isRemote)
 			return;
 		if (heatTimer == 0) {
-			if ((currentHeat > requiredHeat || (energy < energyCost || energyCost == 0)) && currentHeat > 0) {
+			if ((currentHeat > requiredHeat || (energy < energyCost || energyCost == 0)) && currentHeat > 20) {
 				currentHeat--;
 				isCooling = true;
 			}

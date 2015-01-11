@@ -75,6 +75,11 @@ public class DusterRecipes {
     	dustingList.put(data, output);
     }
 
+    public void removeDusterRecipe(Item input) {
+        ItemData data = new ItemData(input);
+        dustingList.remove(data);
+    }
+
     public ItemStack getDustingResult(ItemStack input) {
 		ItemStack result = dustingList.get(new ItemData(input));
 		if (result == null)
