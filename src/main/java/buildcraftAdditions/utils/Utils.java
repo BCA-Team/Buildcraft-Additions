@@ -39,6 +39,14 @@ public class Utils {
 		return orientationTable[orientationIndex];
 	}
 
+	public static ForgeDirection get3dOrientation(EntityLivingBase entity) {
+		if (entity.rotationPitch < -45.5F)
+			return ForgeDirection.UP;
+		else if (entity.rotationPitch > 45.5F)
+			return ForgeDirection.DOWN;
+		return get2dOrientation(entity);
+	}
+
 	public static int[] createSlotArray(int first, int count) {
 		int[] slots = new int[count];
 		for (int k = first; k < first + count; k++) {

@@ -17,6 +17,7 @@ tile.blockRefineryWalls.name=Refinery Plating
 tile.blockRefineryValve.name=Refinery Valve
 tile.blockCoolingTowerWalls.name=Cooling Tower Walls
 tile.blockCoolingTowerValve.name=Cooling Tower Valve
+tile.blockItemSorter.name=Sort-O-Tron
 
 item.ironCanister.name=Iron Canister
 item.goldCanister.name=Gold Canister
