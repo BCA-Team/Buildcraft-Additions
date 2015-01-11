@@ -1,5 +1,14 @@
 package buildcraftAdditions.nei;
 
+import net.minecraft.item.ItemStack;
+
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+
+import buildcraftAdditions.items.ItemCanister;
+import buildcraftAdditions.reference.ItemsAndBlocks;
+
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 
@@ -20,8 +29,25 @@ public class NEIConfig implements IConfigureNEI {
         API.registerRecipeHandler(dustingRecipeHandler);
         API.registerUsageHandler(dustingRecipeHandler);
 
+        API.addItemListEntry(new ItemStack(ItemsAndBlocks.powerCapsuleTier1));
+        API.addItemListEntry(new ItemStack(ItemsAndBlocks.powerCapsuleTier2));
+        API.addItemListEntry(new ItemStack(ItemsAndBlocks.powerCapsuleTier3));
+        API.addItemListEntry(ItemsAndBlocks.powerCapsuleTier1.createdFilledBattery());
+        API.addItemListEntry(ItemsAndBlocks.powerCapsuleTier2.createdFilledBattery());
+        API.addItemListEntry(ItemsAndBlocks.powerCapsuleTier3.createdFilledBattery());
+
+        API.addItemListEntry(new ItemStack(ItemsAndBlocks.ironCanister));
+        API.addItemListEntry(new ItemStack(ItemsAndBlocks.goldCanister));
+        API.addItemListEntry(new ItemStack(ItemsAndBlocks.diamondCanister));
+        addFullCanisters(ItemsAndBlocks.ironCanister);
+        addFullCanisters(ItemsAndBlocks.goldCanister);
+        addFullCanisters(ItemsAndBlocks.diamondCanister);
     }
 
+    public void addFullCanisters(ItemCanister canister) {
+        for (Fluid fluid : FluidRegistry.getRegisteredFluids().values())
+            API.addItemListEntry(canister.getFilledItemStack(new FluidStack(fluid, canister.getCapacity())));
+    }
     @Override
     public String getName() {
         return "Buildcraft Additions";

@@ -119,4 +119,12 @@ public class BatteryBase extends Item implements IEnergyContainerItem {
 	public IIcon getIconFromDamage(int damage) {
 		return icon;
 	}
+
+	public ItemStack createdFilledBattery() {
+		ItemStack stack = new ItemStack (this);
+		if (stack.getTagCompound() == null)
+			stack.setTagCompound(new NBTTagCompound());
+		stack.getTagCompound().setInteger("energy", maxEnergy);
+		return stack;
+	}
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 
 import cpw.mods.fml.relauncher.Side;
@@ -69,5 +70,23 @@ public class ItemCanister extends ItemFluidContainer {
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int damage) {
 		return itemIcon;
+	}
+
+	public ItemStack getFilledItemStack(FluidStack fluidStack) {
+		ItemStack itemStack = new ItemStack(this);
+		if (itemStack.getTagCompound() == null)
+			itemStack.setTagCompound(new NBTTagCompound());
+		NBTTagCompound fluidTag = fluidStack.writeToNBT(new NBTTagCompound());
+
+		if (fluidStack.amount > capacity)
+			fluidTag.setInteger("Amount", capacity);
+
+		itemStack.getTagCompound().setTag("Fluid", fluidTag);
+
+		return itemStack;
+	}
+
+	public int getCapacity() {
+		return capacity;
 	}
 }
