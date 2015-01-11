@@ -1,6 +1,7 @@
 package buildcraftAdditions.ModIntegration;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -18,6 +19,7 @@ import buildcraftAdditions.ModIntegration.MineTweaker.MineTweakerIntegreation;
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.blocks.BlockBasic;
 import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
@@ -46,6 +48,8 @@ public class ModIntegration {
 		RefineryRecepieConverter.doYourThing();
 		if (Loader.isModLoaded("MineTweaker3"))
 			MineTweakerIntegreation.integrate();
+		if (Loader.isModLoaded("TConstruct"))
+			tinkersConstructIntegration();
 	}
 
 	private static void railcraftIntegration() {
@@ -53,6 +57,20 @@ public class ModIntegration {
 		addNuggets("Gold");
 		addNuggets("Copper");
 		addNuggets("Tin");
+	}
+
+	private static void tinkersConstructIntegration() { //NOTE: this will crash when a battery is placed on the tool for every TCon version before the 681 jenkins build! will be fixed
+		try {
+			Class<?> toolsClass = Class.forName("tconstruct.tools.TinkerTools");
+			Object modifier = toolsClass.getField("modFlux").get(null);
+			Class<?> modifierClass = Class.forName("tconstruct.modifiers.tools.ModFlux");
+			List<ItemStack> batteries = (List<ItemStack>) modifierClass.getField("batteries").get(modifier);
+			batteries.add(new ItemStack(ItemsAndBlocks.powerCapsuleTier1));
+			batteries.add(new ItemStack(ItemsAndBlocks.powerCapsuleTier2));
+			batteries.add(new ItemStack(ItemsAndBlocks.powerCapsuleTier3));
+		} catch (Exception e) {
+			Logger.error("power capsule haven't been initialized to TinkersConstruct's Flux Modifier, this is a bug!");
+		}
 	}
 
 	private static void eurekaResearch() {
