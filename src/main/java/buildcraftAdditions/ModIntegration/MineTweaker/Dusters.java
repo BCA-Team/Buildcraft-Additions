@@ -25,6 +25,11 @@ public class Dusters {
 	public static void addDusting(IItemStack input, IItemStack output) {
 		MineTweakerAPI.apply(new AddRecepieAction(input, output));
 	}
+	
+	@ZenMethod
+	public static void removeDusting(IItemStack input) {
+		MineTweakerAPI.apply(new removeRecepeAction( input));
+	}
 
 	public static ItemStack toStack(IItemStack iStack) {
 		if (iStack == null)
