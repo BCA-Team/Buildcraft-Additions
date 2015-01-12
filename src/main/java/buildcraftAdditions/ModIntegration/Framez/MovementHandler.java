@@ -16,7 +16,7 @@ import com.amadornes.framez.api.movement.IMovingBlock;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class MovementHandeler implements IMovementHandler {
+public class MovementHandler implements IMovementHandler {
 
 	@Override
 	public boolean handleStartMoving(IMovingBlock iMovingBlock) {

@@ -11,7 +11,7 @@ import com.amadornes.framez.api.FramezApi;
 public class FramezIntegration {
 
 	public static void Framez() {
-		FramezApi.inst().getMovementApi().registerMovementHandler(new MovementHandeler());
+		FramezApi.inst().getMovementApi().registerMovementHandler(new MovementHandler());
 	}
 
 }
