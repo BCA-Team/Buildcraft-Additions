@@ -295,7 +295,7 @@ public final class ItemsAndBlocks {
 		GameRegistry.registerBlock(itemSorter, "blockItemSorter");
 	}
 
-	public static void addRecepies() {
+	public static void addRecipes() {
 		if (Loader.isModLoaded("BuildCraft|Transport")) {
 			BuildcraftRecipeRegistry.assemblyTable.addRecipe("ironStick", 1000, new ItemStack(ironStick), Items.iron_ingot);
 			BuildcraftRecipeRegistry.assemblyTable.addRecipe("goldStick", 2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
@@ -352,14 +352,14 @@ public final class ItemsAndBlocks {
 			GameRegistry.addRecipe(new ItemStack(toolUpgradeDrill), "U", 'U', toolUpgradeHoe);
 			GameRegistry.addRecipe(new ItemStack(toolUpgradeHoe), "U", 'U', toolUpgradeChainsaw);
 
-			//remove BC refinery recepie
+			//remove BC refinery recipe
 			ItemStack stack = new ItemStack(BCItems.REFINERY);
-			ArrayList recepieList = (ArrayList) CraftingManager.getInstance().getRecipeList();
-			for (int t = 0; t < recepieList.size(); t++) {
-				IRecipe recipe = (IRecipe) recepieList.get(t);
+			ArrayList recipeList = (ArrayList) CraftingManager.getInstance().getRecipeList();
+			for (int t = 0; t < recipeList.size(); t++) {
+				IRecipe recipe = (IRecipe) recipeList.get(t);
 				ItemStack recipeResult = recipe.getRecipeOutput();
 				if (ItemStack.areItemStacksEqual(stack, recipeResult)) {
-					recepieList.remove(t);
+					recipeList.remove(t);
 					break;
 				}
 			}

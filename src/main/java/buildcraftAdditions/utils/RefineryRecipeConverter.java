@@ -15,9 +15,9 @@ import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 import buildcraft.api.recipes.CraftingResult;
 import buildcraft.api.recipes.IFlexibleRecipe;
 
-import buildcraftAdditions.api.CoolingTowerRecepie;
-import buildcraftAdditions.api.RecepieMananger;
-import buildcraftAdditions.api.RefineryRecepie;
+import buildcraftAdditions.api.CoolingTowerRecipe;
+import buildcraftAdditions.api.RecipeMananger;
+import buildcraftAdditions.api.RefineryRecipe;
 import buildcraftAdditions.blocks.FluidBlockBase;
 import buildcraftAdditions.core.Logger;
 /**
@@ -27,30 +27,30 @@ import buildcraftAdditions.core.Logger;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class RefineryRecepieConverter {
+public class RefineryRecipeConverter {
 	public static CraftingResult<FluidStack> results[] = new CraftingResult[20];
 	public static FluidStack inputs[] = new FluidStack[20];
 	public static FluidStack outputs[] = new FluidStack[20];
 	public static FluidStack gas[] = new FluidStack[20];
-	public static HashMap<Fluid, Fluid> coolingTowerRecepies = new HashMap<Fluid, Fluid>();
+	public static HashMap<Fluid, Fluid> coolingTowerRecipes = new HashMap<Fluid, Fluid>();
 
 	public static void doYourThing() {
 		int teller = 0;
 		int fluids = FluidRegistry.getRegisteredFluids().size();
-		Collection<IFlexibleRecipe<FluidStack>> recepies = BuildcraftRecipeRegistry.refinery.getRecipes();
-		for (IFlexibleRecipe<FluidStack> recepie : recepies) {
+		Collection<IFlexibleRecipe<FluidStack>> recipes = BuildcraftRecipeRegistry.refinery.getRecipes();
+		for (IFlexibleRecipe<FluidStack> recipe : recipes) {
 			DummyFlexibleCrafter dummy = new DummyFlexibleCrafter();
 			for (int fluidID = 0; fluidID < fluids; fluidID++) {
 				dummy.input.setFluid(new FluidStack(fluidID, 1000));
 				dummy.output.setFluid(null);
-				CraftingResult<FluidStack> currentResult = recepie.craft(dummy, false);
+				CraftingResult<FluidStack> currentResult = recipe.craft(dummy, false);
 				if (currentResult != null) {
 					results[teller] = currentResult;
 					dummy.output.fill(currentResult.crafted.copy(), true);
 					outputs[teller] = dummy.output.getFluid();
 					inputs[teller] = dummy.input.getFluid();
 					teller++;
-					Logger.info("Builcraft refinery recepie detected, input: " + dummy.input.getFluid().getLocalizedName() + ", output: " + dummy.output.getFluid().getLocalizedName());
+					Logger.info("Builcraft refinery recipe detected, input: " + dummy.input.getFluid().getLocalizedName() + ", output: " + dummy.output.getFluid().getLocalizedName());
 				}
 			}
 		}
@@ -72,11 +72,11 @@ public class RefineryRecepieConverter {
 				GameRegistry.registerBlock(fluidblock, fluid.getName()+"Block");
 				inputs[t].getFluid().setBlock(fluidblock);
 			}
-			coolingTowerRecepies.put(gas[t].getFluid(), fluid);
+			coolingTowerRecipes.put(gas[t].getFluid(), fluid);
 			BuildcraftRecipeRegistry.refinery.removeRecipe(results[t].recipe);
 			BuildcraftRecipeRegistry.refinery.addRecipe(results[t].recipe.getId() + "_GAS", new FluidStack(inputs[t].getFluid(), 1000 - inputs[t].amount), new FluidStack(fluid, outputs[t].amount), results[t].energyCost, 0);
-			RecepieMananger.registerRecepie(new CoolingTowerRecepie(fluid, outputs[t].getFluid(), ((float) results[t].energyCost) / 2000));
-			RecepieMananger.registerRecepie(new RefineryRecepie(inputs[t].getFluid(), 1000 - inputs[t].amount, fluid, outputs[t].amount, results[t].energyCost));
+			RecipeMananger.registerRecipe(new CoolingTowerRecipe(fluid, outputs[t].getFluid(), ((float) results[t].energyCost) / 2000));
+			RecipeMananger.registerRecipe(new RefineryRecipe(inputs[t].getFluid(), 1000 - inputs[t].amount, fluid, outputs[t].amount, results[t].energyCost));
 		}
 	}
 }

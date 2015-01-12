@@ -23,7 +23,7 @@ public class Dusters {
 
 	@ZenMethod
 	public static void addDusting(IItemStack input, IItemStack output) {
-		MineTweakerAPI.apply(new AddRecepieAction(input, output));
+		MineTweakerAPI.apply(new AddRecipeAction(input, output));
 	}
 	
 	@ZenMethod
@@ -40,11 +40,11 @@ public class Dusters {
 		}
 	}
 
-	private static class AddRecepieAction implements IUndoableAction {
+	private static class AddRecipeAction implements IUndoableAction {
 		public IItemStack input;
 		public IItemStack output;
 
-		public AddRecepieAction(IItemStack input, IItemStack output) {
+		public AddRecipeAction(IItemStack input, IItemStack output) {
 			this.input = input;
 			this.output = output;
 		}
@@ -66,12 +66,12 @@ public class Dusters {
 
 		@Override
 		public String describe() {
-			return "Adding duster recepie for " + input.getDisplayName() + "with an output of " + output.getDisplayName() + "* " + output.getAmount();
+			return "Adding duster recipe for " + input.getDisplayName() + "with an output of " + output.getDisplayName() + "* " + output.getAmount();
 		}
 
 		@Override
 		public String describeUndo() {
-			return "Removing duster recepie with as input " + input.getDisplayName();
+			return "Removing duster recipe with as input " + input.getDisplayName();
 		}
 
 		@Override
@@ -104,7 +104,7 @@ public class Dusters {
 
 		@Override
 		public String describe() {
-			return "Removing dusting recepie with input " + input.getDisplayName();
+			return "Removing dusting recipe with input " + input.getDisplayName();
 		}
 
 		@Override

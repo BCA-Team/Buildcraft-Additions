@@ -24,7 +24,7 @@ import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.BCItems;
-import buildcraftAdditions.utils.RefineryRecepieConverter;
+import buildcraftAdditions.utils.RefineryRecipeConverter;
 
 import eureka.api.EurekaInfo;
 import eureka.api.EurekaRegistry;
@@ -45,7 +45,7 @@ public class ModIntegration {
 		metals();
 		if (Loader.isModLoaded("framez"))
 			FramezIntegration.Framez();
-		RefineryRecepieConverter.doYourThing();
+		RefineryRecipeConverter.doYourThing();
 		if (Loader.isModLoaded("MineTweaker3"))
 			MineTweakerIntegreation.integrate();
 		if (Loader.isModLoaded("TConstruct"))

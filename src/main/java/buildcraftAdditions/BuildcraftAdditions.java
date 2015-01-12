@@ -83,7 +83,7 @@ public class BuildcraftAdditions {
 
 	@Mod.EventHandler
 	public void doneLoading(FMLLoadCompleteEvent event) {
-		ItemsAndBlocks.addRecepies();
+		ItemsAndBlocks.addRecipes();
 
 		addDusts("Iron", 0xD2CEC9);
 		addDusts("Gold", 0xF8DF17);

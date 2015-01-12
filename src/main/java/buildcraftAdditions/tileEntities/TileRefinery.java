@@ -20,8 +20,8 @@ import buildcraft.api.transport.IPipeConnection;
 import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.api.RecepieMananger;
-import buildcraftAdditions.api.RefineryRecepie;
+import buildcraftAdditions.api.RecipeMananger;
+import buildcraftAdditions.api.RefineryRecipe;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandler;
@@ -68,7 +68,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (input.getFluid() != null && input.getFluid().amount == 0)
 			input.setFluid(null);
 		if (input.getFluid() == null)
-			updateRecepie();
+			updateRecipe();
 		if (timer == 0) {
 			sync();
 			timer = 40;
@@ -108,14 +108,14 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		heatTimer -= 1;
 	}
 
-	private void updateRecepie() {
+	private void updateRecipe() {
 		if (!input.isEmpty()) {
-			RefineryRecepie recepie = RecepieMananger.getRefineryRecepie(input.getFluid().getFluid());
-			requiredHeat = recepie.getRequiredHeat();
+			RefineryRecipe recipe = RecipeMananger.getRefineryRecipe(input.getFluid().getFluid());
+			requiredHeat = recipe.getRequiredHeat();
 			lastRequiredHeat = requiredHeat;
-			outputFluid = recepie.getOutput();
-			outputAmount = recepie.getOutputAmount();
-			inputAmount = recepie.getInputAmount();
+			outputFluid = recipe.getOutput();
+			outputAmount = recipe.getOutputAmount();
+			inputAmount = recipe.getInputAmount();
 		} else
 		requiredHeat = 0;
 	}
@@ -204,7 +204,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		data.readFromNBT(tag);
 		input.readFromNBT(tag);
 		output.readFromNBT(tag);
-		updateRecepie();
+		updateRecipe();
 	}
 
 	@Override
@@ -318,7 +318,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	public int realFill(FluidStack resource, boolean doFill) {
 		int result = input.fill(resource, doFill);
-		updateRecepie();
+		updateRecipe();
 		return result;
 	}
 
@@ -340,7 +340,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	public FluidStack realDrain(int maxDrain, boolean doDrain) {
 		FluidStack result = output.drain(maxDrain, doDrain);
-		updateRecepie();
+		updateRecipe();
 		return result;
 	}
 

@@ -19,8 +19,8 @@ import buildcraft.api.transport.IPipeTile;
 import buildcraft.energy.fuels.CoolantManager;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.api.CoolingTowerRecepie;
-import buildcraftAdditions.api.RecepieMananger;
+import buildcraftAdditions.api.CoolingTowerRecipe;
+import buildcraftAdditions.api.RecipeMananger;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.networking.ISyncronizedTile;
@@ -49,7 +49,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private Tank coolant = new Tank(10000, this, "coolant");
 	private TileCoolingTower master;
 	private int timer;
-	private CoolingTowerRecepie currentRecepie;
+	private CoolingTowerRecipe currentRecipe;
 	public float heat;
 
 
@@ -73,18 +73,18 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			heat -= cooling.getDegreesCoolingPerMB(heat) * 1.5;
 			max--;
 		}
-		if (currentRecepie == null || output.isFull() || heat > 80)
+		if (currentRecipe == null || output.isFull() || heat > 80)
 			return;
 		input.drain(1, true);
-		output.fill(new FluidStack(currentRecepie.getOutput(), 1), true);
-		heat += currentRecepie.getHeat();
+		output.fill(new FluidStack(currentRecipe.getOutput(), 1), true);
+		heat += currentRecipe.getHeat();
 	}
 
-	private void updateRecepie() {
+	private void updateRecipe() {
 		if (input.getFluid() == null || input.getFluidAmount() == 0)
-			currentRecepie = null;
+			currentRecipe = null;
 		else
-			currentRecepie = RecepieMananger.getCoolingTowerRecepie(input.getFluid().getFluid());
+			currentRecipe = RecipeMananger.getCoolingTowerRecipe(input.getFluid().getFluid());
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			data.patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
 		else
 			data.patern.destroyMultiblock(worldObj, data.masterX, data.masterY, data.masterZ, data.rotationIndex);
-		currentRecepie = null;
+		currentRecipe = null;
 	}
 
 	@Override
@@ -139,7 +139,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		valve = tag.getBoolean("valve");
 		heat = tag.getFloat("heat");
 		tank = tag.getInteger("tank");
-		updateRecepie();
+		updateRecipe();
 	}
 
 	@Override
@@ -164,7 +164,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		coolant.setFluid(null);
 		heat = 0;
 		sync();
-		currentRecepie = null;
+		currentRecipe = null;
 	}
 
 	private void findMaster() {
@@ -252,7 +252,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private int fill(FluidStack resouce, boolean doFill, int tankID) {
 		Tank tank = getTanks()[tankID];
 		int filled = tank.fill(resouce, doFill);
-		updateRecepie();
+		updateRecipe();
 		return filled;
 	}
 
@@ -273,7 +273,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private FluidStack drain(int maxDrain, boolean doDrain, int tankID) {
 		Tank tank = getTanks()[tankID];
 		FluidStack drained = tank.drain(maxDrain, doDrain);
-		updateRecepie();
+		updateRecipe();
 		return drained;
 	}
 

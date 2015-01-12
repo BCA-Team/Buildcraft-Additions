@@ -21,7 +21,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
-import buildcraftAdditions.utils.RefineryRecepieConverter;
+import buildcraftAdditions.utils.RefineryRecipeConverter;
 import buildcraftAdditions.utils.Utils;
 
 import eureka.api.EurekaKnowledge;
@@ -94,9 +94,9 @@ public class EventListener {
 		@SubscribeEvent
 		public void textures(TextureStitchEvent.Post event) {
 			if (event.map.getTextureType() == 0) {
-				for (int t = 0; t < RefineryRecepieConverter.inputs.length; t++) {
-					if (RefineryRecepieConverter.inputs[t] != null && RefineryRecepieConverter.outputs[t] != null)
-						BuildcraftAdditions.proxy.cloneFluidTextures(FluidRegistry.getFluid(RefineryRecepieConverter.outputs[t].getFluid().getName()), RefineryRecepieConverter.gas[t].getFluid());
+				for (int t = 0; t < RefineryRecipeConverter.inputs.length; t++) {
+					if (RefineryRecipeConverter.inputs[t] != null && RefineryRecipeConverter.outputs[t] != null)
+						BuildcraftAdditions.proxy.cloneFluidTextures(FluidRegistry.getFluid(RefineryRecipeConverter.outputs[t].getFluid().getName()), RefineryRecipeConverter.gas[t].getFluid());
 				}
 			}
 		}
