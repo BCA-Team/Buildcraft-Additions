@@ -30,6 +30,7 @@ import buildcraftAdditions.blocks.BlockKineticEnergyBufferTier1;
 import buildcraftAdditions.blocks.BlockLavaCoil;
 import buildcraftAdditions.blocks.BlockMechanicalDuster;
 import buildcraftAdditions.blocks.BlockSemiAutomaticDuster;
+import buildcraftAdditions.blocks.multiBlocks.BlockItemSorter;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockCoolingTowerValve;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockCoolingTowerWalls;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT2;
@@ -57,6 +58,7 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileCoolingTower;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
+import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.tileEntities.TileKEBT2;
 import buildcraftAdditions.tileEntities.TileKEBT3;
 import buildcraftAdditions.tileEntities.TileKineticCoil;
@@ -98,6 +100,7 @@ public final class ItemsAndBlocks {
 	public static MultiBlockRefineryValve refineryValve;
 	public static MultiBlockCoolingTowerWalls coolingTowerWalls;
 	public static MultiBlockCoolingTowerValve coolingTowerValve;
+	public static BlockItemSorter itemSorter;
 
 	public static BatteryBase powerCapsuleTier1;
 	public static BatteryBase powerCapsuleTier2;
@@ -286,6 +289,10 @@ public final class ItemsAndBlocks {
 		coolingTowerValve = new MultiBlockCoolingTowerValve();
 		coolingTowerValve.setBlockName("blockCoolingTowerValve").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(coolingTowerValve, "blockCoolingTowerValve");
+
+		itemSorter = new BlockItemSorter();
+		itemSorter.setBlockName("blockItemSorter").setCreativeTab(BuildcraftAdditions.bcadditions);
+		GameRegistry.registerBlock(itemSorter, "blockItemSorter");
 	}
 
 	public static void addRecepies() {
@@ -372,5 +379,6 @@ public final class ItemsAndBlocks {
 		GameRegistry.registerTileEntity(TileKEBT3.class, "TileKineticEnergyBufferTier3");
 		GameRegistry.registerTileEntity(TileRefinery.class, "TileRefinery");
 		GameRegistry.registerTileEntity(TileCoolingTower.class, "CoolingTower");
+		GameRegistry.registerTileEntity(TileItemSorter.class, "ItemSorter");
 	}
 }
