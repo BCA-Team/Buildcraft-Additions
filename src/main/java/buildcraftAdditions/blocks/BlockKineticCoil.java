@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import buildcraft.api.power.ILaserTargetBlock;
 
 import buildcraftAdditions.tileEntities.TileKineticCoil;
+import buildcraftAdditions.utils.RenderUtils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -50,9 +51,9 @@ public class BlockKineticCoil extends BlockCoilBase implements ILaserTargetBlock
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		sides = par1IconRegister.registerIcon("bcadditions:coilKineticSides");
-		top = par1IconRegister.registerIcon("bcadditions:coilKineticTop");
-		bottom = par1IconRegister.registerIcon("bcadditions:coilKineticBottom");
+	public void registerBlockIcons(IIconRegister register) {
+		sides = RenderUtils.registerIcon(register, "coilKineticSides");
+		top = RenderUtils.registerIcon(register, "coilKineticTop");
+		bottom = RenderUtils.registerIcon(register, "coilKineticBottom");
 	}
 }

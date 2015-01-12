@@ -17,6 +17,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
+import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -113,10 +114,10 @@ public class BlockBasicDuster extends BlockBase {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-		front = register.registerIcon("bcadditions:dusterFront");
-		back = register.registerIcon("bcadditions:dusterBack");
-		sides = register.registerIcon("bcadditions:dusterSides");
-		top = register.registerIcon("bcadditions:dusterTop");
-		bottom = register.registerIcon("bcadditions:dusterBottom");
+		front = RenderUtils.registerIcon(register, "dusterFront");
+		back = RenderUtils.registerIcon(register, "dusterBack");
+		sides = RenderUtils.registerIcon(register, "dusterSides");
+		top = RenderUtils.registerIcon(register, "dusterTop");
+		bottom = RenderUtils.registerIcon(register, "dusterBottom");
 	}
 }

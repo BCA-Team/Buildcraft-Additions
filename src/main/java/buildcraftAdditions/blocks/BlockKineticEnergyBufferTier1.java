@@ -15,6 +15,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
+import buildcraftAdditions.utils.RenderUtils;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -33,10 +34,10 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(IIconRegister register) {
 		icons = new IIcon[9];
 		for (int teller = 0; teller < 9; teller++){
-			icons[teller] = iconRegister.registerIcon("bcadditions:kineticEnergyBuffer" + teller);
+			icons[teller] = RenderUtils.registerIcon(register, "kineticEnergyBuffer" + teller);
 		}
 	}
 

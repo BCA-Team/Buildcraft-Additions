@@ -15,11 +15,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
+import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
-import buildcraftAdditions.reference.Variables;
-
 
 import eureka.api.EurekaKnowledge;
 
@@ -114,9 +114,9 @@ public class BlockSemiAutomaticDuster extends BlockBase {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-		front = register.registerIcon("bcadditions:dusterSemiAutomaticFront");
-		sides = register.registerIcon("bcadditions:dusterSemiAutomaticSides");
-		top = register.registerIcon("bcadditions:dusterSemiAutomaticTop");
-		bottom = register.registerIcon("bcadditions:dusterSemiAutomaticBottom");
+		front = RenderUtils.registerIcon(register, "dusterSemiAutomaticFront");
+		sides = RenderUtils.registerIcon(register, "dusterSemiAutomaticSides");
+		top = RenderUtils.registerIcon(register, "dusterSemiAutomaticTop");
+		bottom = RenderUtils.registerIcon(register, "dusterSemiAutomaticBottom");
 	}
 }

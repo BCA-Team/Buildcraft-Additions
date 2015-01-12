@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.reference.Variables;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -31,7 +32,7 @@ public class ItemBase extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconRegister) {
-		icon = iconRegister.registerIcon("bcadditions:" + name);
+		icon = iconRegister.registerIcon(Variables.MOD.ID + ":" + name);
 	}
 
 	@Override

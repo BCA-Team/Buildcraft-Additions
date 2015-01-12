@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.tileEntities.TileLavaCoil;
+import buildcraftAdditions.utils.RenderUtils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -60,10 +61,10 @@ public class BlockLavaCoil extends BlockCoilBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		sides = par1IconRegister.registerIcon("bcadditions:coilLavaSides");
-		top = par1IconRegister.registerIcon("bcadditions:coilLavaTop");
-		bottom = par1IconRegister.registerIcon("bcadditions:coilLavaBottom");
+	public void registerBlockIcons(IIconRegister register) {
+		sides = RenderUtils.registerIcon(register, "coilLavaSides");
+		top = RenderUtils.registerIcon(register, "coilLavaTop");
+		bottom = RenderUtils.registerIcon(register, "coilLavaBottom");
 	}
 
 	@Override

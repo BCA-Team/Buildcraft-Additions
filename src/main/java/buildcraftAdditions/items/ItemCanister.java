@@ -23,6 +23,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.ItemFluidContainer;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
 public class ItemCanister extends ItemFluidContainer {
@@ -61,9 +62,9 @@ public class ItemCanister extends ItemFluidContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon("bcadditions:" + name);
-		this.overlay = iconRegister.registerIcon("bcadditions:fluidOverlay");
+	public void registerIcons(IIconRegister register) {
+		itemIcon = RenderUtils.registerIcon(register, name);
+		overlay = RenderUtils.registerIcon(register, "fluidOverlay");
 	}
 
 	@Override

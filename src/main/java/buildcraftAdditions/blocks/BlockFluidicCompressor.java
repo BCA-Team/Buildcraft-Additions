@@ -27,6 +27,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
+import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
 public class BlockFluidicCompressor extends BlockContainer {
@@ -111,11 +112,11 @@ public class BlockFluidicCompressor extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		textureFront = par1IconRegister.registerIcon("bcadditions:fluidicCompressor_front");
-		textureSide = par1IconRegister.registerIcon("bcadditions:fluidicCompressor_sides");
-		textureTop = par1IconRegister.registerIcon("bcadditions:fluidicCompressor_top");
-		textureBack = par1IconRegister.registerIcon("bcadditions:fluidicCompressor_back");
-		textureBottom = par1IconRegister.registerIcon("bcadditions:fluidicCompressor_bottom");
+	public void registerBlockIcons(IIconRegister register) {
+		textureFront = RenderUtils.registerIcon(register, "fluidicCompressor_front");
+		textureSide = RenderUtils.registerIcon(register, "fluidicCompressor_sides");
+		textureTop = RenderUtils.registerIcon(register, "fluidicCompressor_top");
+		textureBack = RenderUtils.registerIcon(register, "fluidicCompressor_back");
+		textureBottom = RenderUtils.registerIcon(register, "fluidicCompressor_bottom");
 	}
 }

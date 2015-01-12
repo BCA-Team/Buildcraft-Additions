@@ -4,6 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+
+import buildcraftAdditions.utils.RenderUtils;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -27,7 +29,7 @@ public class BlockBasic extends Block {
 
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-		icon = register.registerIcon("bcadditions:" + name);
+		icon = RenderUtils.registerIcon(register, name);
 	}
 
 	@Override

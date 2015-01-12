@@ -20,6 +20,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
+import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -152,13 +153,13 @@ public class BlockHeatedFurnace extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		front = par1IconRegister.registerIcon("bcadditions:furnaceFront");
-		frontActivated = par1IconRegister.registerIcon("bcadditions:furnaceFront_on");
-		top = par1IconRegister.registerIcon("bcadditions:furnaceTop");
-		back = par1IconRegister.registerIcon("bcadditions:furnaceBack");
-		bottom = par1IconRegister.registerIcon("bcadditions:furnaceBottom");
-		sides = par1IconRegister.registerIcon("bcadditions:furnaceSide");
+	public void registerBlockIcons(IIconRegister register) {
+		front = RenderUtils.registerIcon(register, "furnaceFront");
+		frontActivated = RenderUtils.registerIcon(register, "furnaceFront_on");
+		top = RenderUtils.registerIcon(register, "furnaceTop");
+		back = RenderUtils.registerIcon(register, "furnaceBack");
+		bottom = RenderUtils.registerIcon(register, "furnaceBottom");
+		sides = RenderUtils.registerIcon(register, "furnaceSide");
 	}
 
 

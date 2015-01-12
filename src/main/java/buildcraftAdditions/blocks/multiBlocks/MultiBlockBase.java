@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
+import buildcraftAdditions.utils.RenderUtils;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -42,8 +43,8 @@ public abstract class MultiBlockBase extends BlockContainer {
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
 		icon = new IIcon[2];
-		icon[0] = register.registerIcon("bcadditions:" + textureName);
-		icon[1] = register.registerIcon("bcadditions:" + secondTexture);
+		icon[0] = RenderUtils.registerIcon(register, textureName);
+		icon[1] = RenderUtils.registerIcon(register, secondTexture);
 	}
 
 	@Override

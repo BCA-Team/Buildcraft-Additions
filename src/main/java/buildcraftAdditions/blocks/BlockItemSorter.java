@@ -1,4 +1,4 @@
-package buildcraftAdditions.blocks.multiBlocks;
+package buildcraftAdditions.blocks;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -22,6 +22,7 @@ import buildcraft.api.tools.IToolWrench;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileItemSorter;
+import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -51,11 +52,11 @@ public class BlockItemSorter extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
-		textureSide = register.registerIcon("bcadditions:itemSorterSide");
-		textureUp = register.registerIcon("bcadditions:itemSorterUp");
-		textureDown = register.registerIcon("bcadditions:itemSorterDown");
-		textureLeft = register.registerIcon("bcadditions:itemSorterLeft");
-		textureRight = register.registerIcon("bcadditions:itemSorterRight");
+		textureSide = RenderUtils.registerIcon(register, "itemSorterSide");
+		textureUp = RenderUtils.registerIcon(register, "itemSorterUp");
+		textureDown = RenderUtils.registerIcon(register, "itemSorterDown");
+		textureLeft = RenderUtils.registerIcon(register, "itemSorterLeft");
+		textureRight = RenderUtils.registerIcon(register, "itemSorterRight");
 	}
 
 	@Override

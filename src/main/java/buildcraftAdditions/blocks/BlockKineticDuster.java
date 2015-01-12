@@ -18,6 +18,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.power.ILaserTargetBlock;
 
 import buildcraftAdditions.tileEntities.TileKineticDuster;
+import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -106,13 +107,13 @@ public class BlockKineticDuster extends BlockBase implements ILaserTargetBlock {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister register) {
 		sides = new IIcon[4];
-		sides[0] = par1IconRegister.registerIcon("bcadditions:dusterKineticSide0");
-		sides[1] = par1IconRegister.registerIcon("bcadditions:dusterKineticSide1");
-		sides[2] = par1IconRegister.registerIcon("bcadditions:dusterKineticSide2");
-		sides[3] = par1IconRegister.registerIcon("bcadditions:dusterKineticSide3");
-		bottom = par1IconRegister.registerIcon("bcadditions:dusterKineticBottom");
-		top = par1IconRegister.registerIcon("bcadditions:dusterKineticTop");
+		sides[0] = RenderUtils.registerIcon(register, "dusterKineticSide0");
+		sides[1] = RenderUtils.registerIcon(register, "dusterKineticSide1");
+		sides[2] = RenderUtils.registerIcon(register, "dusterKineticSide2");
+		sides[3] = RenderUtils.registerIcon(register, "dusterKineticSide3");
+		bottom = RenderUtils.registerIcon(register, "dusterKineticBottom");
+		top = RenderUtils.registerIcon(register, "dusterKineticTop");
 	}
 }

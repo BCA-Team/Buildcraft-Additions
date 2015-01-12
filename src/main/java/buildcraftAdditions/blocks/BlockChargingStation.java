@@ -27,6 +27,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileChargingStation;
+import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
 public class BlockChargingStation extends BlockContainer {
@@ -94,13 +95,13 @@ public class BlockChargingStation extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		textureFront = par1IconRegister.registerIcon("bcadditions:charger_front");
-		textureTop = par1IconRegister.registerIcon("bcadditions:charger_top");
-		textureBack = par1IconRegister.registerIcon("bcadditions:charger_back");
-		textureBottom = par1IconRegister.registerIcon("bcadditions:charger_bottom");
-		textureLeft = par1IconRegister.registerIcon("bcadditions:charger_leftSide");
-		textureRight = par1IconRegister.registerIcon("bcadditions:charger_rightSide");
+	public void registerBlockIcons(IIconRegister register) {
+		textureFront = RenderUtils.registerIcon(register, "charger_front");
+		textureTop = RenderUtils.registerIcon(register, "charger_top");
+		textureBack = RenderUtils.registerIcon(register, "charger_back");
+		textureBottom = RenderUtils.registerIcon(register, "charger_bottom");
+		textureLeft = RenderUtils.registerIcon(register, "charger_leftSide");
+		textureRight = RenderUtils.registerIcon(register, "charger_rightSide");
 	}
 
 	@Override

@@ -15,6 +15,11 @@ import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
 
 public final class Variables {
 
+	public static final class MOD {
+		public static final String ID = "bcadditions";
+		public static final String NAME = "Buildcraft Additions";
+	}
+
 	//GUI ID's
 	public static final class Gui {
 		public static final int FLUIDIC_COMPRESSOR = 70;

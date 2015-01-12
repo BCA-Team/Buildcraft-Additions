@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
+import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -123,13 +124,13 @@ public class BlockMechanicalDuster extends BlockBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		front = par1IconRegister.registerIcon("bcadditions:dusterMechanicalFront");
-		sides = par1IconRegister.registerIcon("bcadditions:dusterMechanicalSides");
-		bottom = par1IconRegister.registerIcon("bcadditions:dusterMechanicalBottom");
-		top[0] = par1IconRegister.registerIcon("bcadditions:dusterMechanicalTop0");
-		top[1] = par1IconRegister.registerIcon("bcadditions:dusterMechanicalTop1");
-		top[2] = par1IconRegister.registerIcon("bcadditions:dusterMechanicalTop2");
-		top[3] = par1IconRegister.registerIcon("bcadditions:dusterMechanicalTop3");
+	public void registerBlockIcons(IIconRegister register) {
+		front = RenderUtils.registerIcon(register, "dusterMechanicalFront");
+		sides = RenderUtils.registerIcon(register, "dusterMechanicalSides");
+		bottom = RenderUtils.registerIcon(register, "dusterMechanicalBottom");
+		top[0] = RenderUtils.registerIcon(register, "dusterMechanicalTop0");
+		top[1] = RenderUtils.registerIcon(register, "dusterMechanicalTop1");
+		top[2] = RenderUtils.registerIcon(register, "dusterMechanicalTop2");
+		top[3] = RenderUtils.registerIcon(register, "dusterMechanicalTop3");
 	}
 }

@@ -34,6 +34,7 @@ import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.TrigersAndActions;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.SpecialListMananger;
 
 /**
@@ -43,11 +44,10 @@ import buildcraftAdditions.utils.SpecialListMananger;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-@Mod(modid = "bcadditions", name = "Buildcraft Additions", version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "after:BuildCraft|Energy;required-after:eureka;required-after:Forge@[10.13.2.1230,)", acceptedMinecraftVersions = "1.7.10")
+@Mod(modid = Variables.MOD.ID, name = Variables.MOD.NAME, version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "after:BuildCraft|Energy;required-after:eureka;required-after:Forge@[10.13.2.1230,)", acceptedMinecraftVersions = "1.7.10")
 public class BuildcraftAdditions {
 
-
-	@Mod.Instance("bcadditions")
+	@Mod.Instance(Variables.MOD.ID)
 	public static BuildcraftAdditions instance;
 
 	@SidedProxy(clientSide = "buildcraftAdditions.proxy.ClientProxy", serverSide = "buildcraftAdditions.proxy.CommonProxy")

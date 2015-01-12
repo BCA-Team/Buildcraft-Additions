@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
+import buildcraftAdditions.utils.RenderUtils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -65,9 +66,9 @@ public class BlockBasicCoil extends BlockCoilBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		sides = par1IconRegister.registerIcon("bcadditions:coilBasicSides");
-		top = par1IconRegister.registerIcon("bcadditions:coilBasicTop");
-		bottom = par1IconRegister.registerIcon("bcadditions:coilBasicBottom");
+	public void registerBlockIcons(IIconRegister register) {
+		sides = RenderUtils.registerIcon(register, "coilBasicSides");
+		top = RenderUtils.registerIcon(register, "coilBasicTop");
+		bottom = RenderUtils.registerIcon(register, "coilBasicBottom");
 	}
 }

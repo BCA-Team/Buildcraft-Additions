@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.reference.Variables;
 
 public class ToolUpgrade extends Item {
 	public String type;
@@ -35,7 +36,7 @@ public class ToolUpgrade extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister) {
-		icon = par1IconRegister.registerIcon("bcadditions:" + getType() + "Upgrade");
+		icon = par1IconRegister.registerIcon(Variables.MOD.ID + ":" + getType() + "Upgrade");
 	}
 
 	@Override
