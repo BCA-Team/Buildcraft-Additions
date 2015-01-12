@@ -5,7 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.networking.PacketHandler;
 
 import io.netty.buffer.ByteBuf;
 
@@ -23,12 +23,12 @@ public abstract class TileCoilBase extends TileBase {
 
 	public void startHeating() {
 		shouldHeat = true;
-		PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
+		PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
 	}
 
 	public void stopHeating() {
 		shouldHeat = false;
-		PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
+		PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
 	}
 
 	@Override

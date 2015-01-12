@@ -30,7 +30,7 @@ import buildcraftAdditions.creative.TabBCAdditions;
 import buildcraftAdditions.creative.TabCanisters;
 import buildcraftAdditions.creative.TabDusts;
 import buildcraftAdditions.items.ItemDust;
-import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.TrigersAndActions;
@@ -61,7 +61,7 @@ public class BuildcraftAdditions {
 	public void preInit(FMLPreInitializationEvent event) {
 		Logger.initiallize();
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
-		PacketHandeler.init();
+		PacketHandler.init();
 		ItemsAndBlocks.init();
 		TrigersAndActions.register();
 		SpecialListMananger.init();

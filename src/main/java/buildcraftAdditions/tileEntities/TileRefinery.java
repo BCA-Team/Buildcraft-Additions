@@ -24,7 +24,7 @@ import buildcraftAdditions.api.RecepieMananger;
 import buildcraftAdditions.api.RefineryRecepie;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.utils.ITankHolder;
@@ -142,7 +142,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public void sync() {
 		if (!worldObj.isRemote) {
 			NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 20);
-			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), point);
+			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), point);
 		}
 	}
 

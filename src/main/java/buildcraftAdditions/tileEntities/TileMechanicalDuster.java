@@ -14,7 +14,7 @@ import cofh.api.energy.IEnergyReceiver;
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;
 
@@ -67,7 +67,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 		}
 		if (oldProgressStage != progressStage) {
 			TargetPoint point = new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30);
-			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), point);
+			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), point);
 			oldProgressStage = progressStage;
 		}
 	}
@@ -155,7 +155,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, DusterRecipes.dusting().getDustingResult(getStackInSlot(0)));
 		setInventorySlotContents(0, null);
 		if (!worldObj.isRemote)
-			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
+			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 

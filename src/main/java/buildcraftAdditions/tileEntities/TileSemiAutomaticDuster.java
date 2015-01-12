@@ -14,7 +14,7 @@ import buildcraft.api.transport.IPipeTile;
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
 import buildcraftAdditions.utils.EnumSideStatus;
@@ -135,7 +135,7 @@ public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		inventory.setInventorySlotContents(slot, stack);
 		if (!worldObj.isRemote)
-			PacketHandeler.instance.sendToAll(new MessageByteBuff(this));
+			PacketHandler.instance.sendToAll(new MessageByteBuff(this));
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 

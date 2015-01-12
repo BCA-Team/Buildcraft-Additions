@@ -26,7 +26,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
@@ -189,7 +189,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
 		int amount = tank.fill(resource, doFill);
 		if (sync)
-			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
+			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
 		return amount;
 	}
 
@@ -202,7 +202,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
 		FluidStack fluid = tank.drain(maxDrain, doDrain);
 		if (sync)
-			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
+			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
 		return  fluid;
 	}
 

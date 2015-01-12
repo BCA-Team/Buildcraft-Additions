@@ -17,7 +17,7 @@ import buildcraft.api.transport.IPipeTile;
 import buildcraftAdditions.api.DusterRecipes;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
 import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.Utils;
@@ -67,7 +67,7 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		inventory.setInventorySlotContents(slot, stack);
 		if (!worldObj.isRemote)
-			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
+			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
 	}
 
 	@Override
@@ -151,7 +151,7 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 			progressStage = 3;
 
 		if (progressStage != oldProgressStage)
-			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
+			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
 	}
 
 	@Override

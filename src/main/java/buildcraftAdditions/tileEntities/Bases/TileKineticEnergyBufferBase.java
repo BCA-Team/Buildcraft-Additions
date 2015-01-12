@@ -15,7 +15,7 @@ import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.networking.ISyncronizedTile;
 import buildcraftAdditions.networking.MessageConfiguration;
 import buildcraftAdditions.networking.MessageSelfDestruct;
-import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Location;
@@ -166,7 +166,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 	public abstract void sync();
 
 	public void sendConfigurationToSever() {
-		PacketHandeler.instance.sendToServer(new MessageConfiguration(this));
+		PacketHandler.instance.sendToServer(new MessageConfiguration(this));
 	}
 
 	public void setOwner(String owner) {
@@ -175,7 +175,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 
 	public void activateSelfDestruct() {
 		if (worldObj.isRemote) {
-			PacketHandeler.instance.sendToServer(new MessageSelfDestruct(xCoord, yCoord, zCoord));
+			PacketHandler.instance.sendToServer(new MessageSelfDestruct(xCoord, yCoord, zCoord));
 			return;
 		}
 		selfDestruct = true;

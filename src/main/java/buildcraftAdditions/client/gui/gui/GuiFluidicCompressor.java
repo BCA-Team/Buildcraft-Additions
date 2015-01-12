@@ -25,7 +25,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import buildcraftAdditions.client.gui.containers.ContainerFluidicCompressor;
 import buildcraftAdditions.networking.MessageFluidicCompressorA;
-import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.utils.Utils;
 
@@ -51,11 +51,11 @@ public class GuiFluidicCompressor extends GuiContainer {
 		int mY = mouseY - guiTop;
 		if (mX >= 20 && mX <= 39 && mY >= 25 && mY <= 41 && !fluidicCompressor.fill) {
 			fluidicCompressor.fill = true;
-			PacketHandeler.instance.sendToServer(new MessageFluidicCompressorA(true, fluidicCompressor));
+			PacketHandler.instance.sendToServer(new MessageFluidicCompressorA(true, fluidicCompressor));
 		}
 		if (mX >= 20 && mX <= 39 && mY >= 45 && mY <= 61 && fluidicCompressor.fill) {
 			fluidicCompressor.fill = false;
-			PacketHandeler.instance.sendToServer(new MessageFluidicCompressorA(false, fluidicCompressor));
+			PacketHandler.instance.sendToServer(new MessageFluidicCompressorA(false, fluidicCompressor));
 		}
 
 	}

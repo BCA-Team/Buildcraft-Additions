@@ -4,7 +4,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 /**
@@ -35,6 +35,6 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 	@Override
 	public void sync() {
 		if (!worldObj.isRemote)
-			PacketHandeler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
+			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
 	}
 }

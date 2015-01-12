@@ -16,7 +16,7 @@ import net.minecraft.inventory.Slot;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandeler;
+import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 
 public class ContainerFluidicCompressor extends ContainerBase {
@@ -29,7 +29,7 @@ public class ContainerFluidicCompressor extends ContainerBase {
 		playerIInventory = inventory;
 		fluidicCompressor = tile;
 		fluidicCompressor.sync = true;
-		PacketHandeler.instance.sendToAllAround(new MessageByteBuff(fluidicCompressor), new NetworkRegistry.TargetPoint(fluidicCompressor.getWorldObj().provider.dimensionId, fluidicCompressor.xCoord, fluidicCompressor.yCoord, fluidicCompressor.zCoord, 5));
+		PacketHandler.instance.sendToAllAround(new MessageByteBuff(fluidicCompressor), new NetworkRegistry.TargetPoint(fluidicCompressor.getWorldObj().provider.dimensionId, fluidicCompressor.xCoord, fluidicCompressor.yCoord, fluidicCompressor.zCoord, 5));
 
 		this.addSlotToContainer(new Slot(tile, 0, 89, 31));
 		this.addSlotToContainer(new Slot(tile, 1, 126, 35));

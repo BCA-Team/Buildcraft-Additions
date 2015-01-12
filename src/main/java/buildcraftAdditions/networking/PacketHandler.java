@@ -11,7 +11,7 @@ import cpw.mods.fml.relauncher.Side;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class PacketHandeler {
+public class PacketHandler {
 
 	public static final SimpleNetworkWrapper instance = NetworkRegistry.INSTANCE.newSimpleChannel("bcadditions");
 
