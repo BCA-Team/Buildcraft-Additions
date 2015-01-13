@@ -22,7 +22,7 @@ public class DusterRecipes {
 
     private static final DusterRecipes dusting = new DusterRecipes();
 
-    private final HashMap<IStackInfo, ItemStack> dustingList = new HashMap<IStackInfo, ItemStack>();
+    private HashMap<IStackInfo, ItemStack> dustingList = new HashMap<IStackInfo, ItemStack>();
 
     private DusterRecipes() {
     }

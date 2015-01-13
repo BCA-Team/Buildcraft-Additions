@@ -1,11 +1,11 @@
 package buildcraftAdditions.client.gui.widgets;
 
+import java.util.List;
+
 import buildcraftAdditions.client.gui.gui.GuiBase;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
-
-import java.util.List;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -26,7 +26,7 @@ public class WidgetFluidTank extends WidgetBase {
 	@Override
 	public void render(int mouseX, int mouseY) {
 		if (tank.getFluid() != null)
-			RenderUtils.drawFluid(tank.getFluid(), (int) (((float) this.tank.getFluid().amount / (float) (tank.getMaxCapacity())) * height), x, y, width, height);
+			RenderUtils.drawFluid(tank.getFluid(), tank.getFluidAmount() * 100 * height / tank.getMaxCapacity() , x, y, width, height);
 	}
 
 	@Override
