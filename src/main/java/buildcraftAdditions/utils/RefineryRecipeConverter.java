@@ -55,7 +55,7 @@ public class RefineryRecipeConverter {
 			}
 		}
 		for (int t = 0; t < teller; t++) {
-			Fluid fluid = new Fluid(results[t].crafted.getFluid().getName() + "Gas");
+			newFluid fluid = new newFluid(results[t].crafted.getFluid().getName() + "Gas");
 			fluid.setDensity(-50);
 			fluid.setGaseous(true);
 			fluid.setIcons(results[t].crafted.getFluid().getStillIcon(), results[t].crafted.getFluid().getFlowingIcon());
@@ -77,6 +77,18 @@ public class RefineryRecipeConverter {
 			BuildcraftRecipeRegistry.refinery.addRecipe(results[t].recipe.getId() + "_GAS", new FluidStack(inputs[t].getFluid(), 1000 - inputs[t].amount), new FluidStack(fluid, outputs[t].amount), results[t].energyCost, 0);
 			RecipeMananger.registerRecipe(new CoolingTowerRecipe(fluid, outputs[t].getFluid(), ((float) results[t].energyCost) / 2000));
 			RecipeMananger.registerRecipe(new RefineryRecipe(inputs[t].getFluid(), 1000 - inputs[t].amount, fluid, outputs[t].amount, results[t].energyCost));
+		}
+	}
+
+	public static class newFluid extends Fluid {
+
+		public newFluid(String fluidName) {
+			super(fluidName);
+		}
+
+		@Override
+		public int getColor() {
+			return 0xcccccc;
 		}
 	}
 }

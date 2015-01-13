@@ -11,7 +11,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
 
 import buildcraft.api.recipes.IFlexibleCrafter;
 import buildcraft.api.transport.IPipeConnection;
@@ -37,7 +37,7 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyHandler, ITankHolder, IPipeConnection {
+public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyReceiver, ITankHolder, IPipeConnection {
 	public int energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer, lastRequiredHeat;
 	public boolean init, valve, isCooling, moved;
 	public TileRefinery master;
@@ -408,11 +408,6 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			if (master != null)
 				return master.receiveEnergy(from, maxReceive, simulate);
 		}
-		return 0;
-	}
-
-	@Override
-	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
 		return 0;
 	}
 
