@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockBase;
@@ -141,8 +141,10 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 					continue;
 				Location location = from.copy();
 				location.move(direction);
-				IEnergyHandler target = (IEnergyHandler) location.getTileEntity();
-				if (target == null || target instanceof TileKEBT2)
+				if (location.getTileEntity() == null || !(location.getTileEntity() instanceof IEnergyReceiver))
+					continue;
+				IEnergyReceiver target = (IEnergyReceiver) location.getTileEntity();
+				if (target instanceof TileKEBT2)
 					continue;
 				int output = maxOutput;
 				if (output > energy)
