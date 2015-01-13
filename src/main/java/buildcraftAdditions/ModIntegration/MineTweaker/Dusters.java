@@ -2,7 +2,7 @@ package buildcraftAdditions.ModIntegration.MineTweaker;
 
 import net.minecraft.item.ItemStack;
 
-import buildcraftAdditions.api.DusterRecipes;
+import buildcraftAdditions.api.recipe.BCARecipeManager;
 
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
@@ -28,7 +28,7 @@ public class Dusters {
 	
 	@ZenMethod
 	public static void removeDusting(IItemStack input) {
-		MineTweakerAPI.apply(new removeRecepeAction( input));
+		MineTweakerAPI.apply(new RemoveRecipeAction( input));
 	}
 
 	public static ItemStack toStack(IItemStack iStack) {
@@ -51,7 +51,7 @@ public class Dusters {
 
 		@Override
 		public void apply() {
-			DusterRecipes.dusting().addDusterRecipe(toStack(input).getItem(), toStack(output));
+			BCARecipeManager.duster.addRecipe(toStack(input), toStack(output));
 		}
 
 		@Override
@@ -61,7 +61,7 @@ public class Dusters {
 
 		@Override
 		public void undo() {
-			DusterRecipes.dusting().removeDusterRecipe(toStack(input).getItem());
+			BCARecipeManager.duster.removeRecipe(toStack(input));
 		}
 
 		@Override
@@ -80,16 +80,16 @@ public class Dusters {
 		}
 	}
 
-	private static class removeRecepeAction implements IUndoableAction {
+	private static class RemoveRecipeAction implements IUndoableAction {
 		IItemStack input;
 
-		public removeRecepeAction(IItemStack input) {
+		public RemoveRecipeAction(IItemStack input) {
 			this.input = input;
 		}
 
 		@Override
 		public void apply() {
-			DusterRecipes.dusting().removeDusterRecipe(toStack(input).getItem());
+			BCARecipeManager.duster.removeRecipe(toStack(input));
 		}
 
 		@Override

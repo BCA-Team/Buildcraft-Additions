@@ -14,7 +14,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.power.ILaserTarget;
 import buildcraft.api.transport.IPipeTile;
 
-import buildcraftAdditions.api.DusterRecipes;
+import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandler;
@@ -106,7 +106,7 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 
 	@Override
 	public boolean requiresLaserEnergy() {
-		return getStackInSlot(0) != null && DusterRecipes.dusting().hasDustingResult(getStackInSlot(0));
+		return BCARecipeManager.duster.getRecipe(getStackInSlot(0)) != null;
 	}
 
 	@Override
@@ -173,9 +173,9 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 
 	@Override
 	public void dust() {
-		ItemStack output = DusterRecipes.dusting().getDustingResult(getStackInSlot(0));
+		ItemStack output = BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput();
 
-		//first try to put it intro a pipe
+		//first try to put it into a pipe
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 			if (configuration[direction.ordinal()] != EnumSideStatus.OUTPUT && configuration[direction.ordinal()] != EnumSideStatus.BOTH)
 				continue;
@@ -193,7 +193,7 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 				}
 			}
 		}
-		//try to put it intro an inventory
+		//try to put it into an inventory
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 			if (configuration[direction.ordinal()] != EnumSideStatus.OUTPUT && configuration[direction.ordinal()] != EnumSideStatus.BOTH)
 				continue;
