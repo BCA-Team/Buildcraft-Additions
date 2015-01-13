@@ -2,7 +2,11 @@ package buildcraftAdditions.tileEntities.Bases;
 
 import net.minecraft.tileentity.TileEntity;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
+
 import buildcraftAdditions.networking.ISyncronizedTile;
+import buildcraftAdditions.networking.MessageByteBuff;
+import buildcraftAdditions.networking.PacketHandler;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -12,9 +16,21 @@ import buildcraftAdditions.networking.ISyncronizedTile;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class TileBase extends TileEntity implements ISyncronizedTile {
+	public int timer;
+	public int networkRange = 15;
 
 	@Override
-	public abstract void updateEntity();
+	public void updateEntity() {
+		if (timer <= 0) {
+			sync();
+			timer = 20;
+		} else
+			timer--;
+	}
+
+	public void sync() {
+		PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
+	}
 
 	@Override
 	public int getX() {

@@ -65,9 +65,4 @@ public class TileKineticCoil extends TileCoilBase implements ILaserTarget {
 	public double getZCoord() {
 		return zCoord;
 	}
-
-	@Override
-	public void updateEntity() {
-
-	}
 }

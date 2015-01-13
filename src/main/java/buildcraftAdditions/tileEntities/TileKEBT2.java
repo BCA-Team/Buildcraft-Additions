@@ -6,8 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyHandler;
@@ -16,8 +14,6 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockBase;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
-import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
@@ -45,6 +41,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public void updateEntity() {
+		super.updateEntity();
 		if (data.moved) {
 			data.afterMoveCheck(worldObj);
 			data.moved = false;
@@ -209,15 +206,6 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 		energyState = buf.readInt();
 		buf = data.readFromByteBuff(buf);
 		return buf;
-	}
-
-	@Override
-	public void sync() {
-		if (!worldObj.isRemote) {
-			NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 15);
-			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), point);
-		}
-
 	}
 
 	@Override

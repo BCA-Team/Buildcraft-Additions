@@ -8,14 +8,10 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 import buildcraftAdditions.utils.Location;
@@ -32,19 +28,19 @@ import io.netty.buffer.ByteBuf;
  */
 public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInventory {
 	private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64, this);
-	public int progress, timer;
-	public boolean isCooking, shouldUpdateCoils, sync;
+	public int progress;
+	public boolean isCooking, shouldUpdateCoils;
 	public TileCoilBase[] coils;
 
 	public TileHeatedFurnace() {
 		progress = 0;
 		isCooking = false;
 		coils = new TileCoilBase[6];
-		sync = false;
 	}
 
 	@Override
 	public void updateEntity() {
+		super.updateEntity();
 		if (worldObj.isRemote)
 			return;
 		if (shouldUpdateCoils) {
@@ -86,13 +82,6 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInv
 			}
 		} else {
 			stop();
-		}
-		if (sync) {
-			if (timer == 0) {
-				PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
-				timer = 15;
-			}
-			timer--;
 		}
 	}
 

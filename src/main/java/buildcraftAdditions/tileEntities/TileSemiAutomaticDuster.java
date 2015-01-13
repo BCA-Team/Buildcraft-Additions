@@ -106,11 +106,6 @@ public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 	}
 
 	@Override
-	public void updateEntity() {
-
-	}
-
-	@Override
 	public int getSizeInventory() {
 		return inventory.getSizeInventory();
 	}

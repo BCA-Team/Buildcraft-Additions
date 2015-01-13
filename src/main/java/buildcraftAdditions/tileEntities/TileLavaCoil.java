@@ -50,6 +50,7 @@ public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
 
 	@Override
 	public void updateEntity() {
+		super.updateEntity();
 		lavaVar = lava;
 		if (isBurning() && burnTime > 0)
 			burnTime--;

@@ -18,7 +18,6 @@ public class ContainerHeatedFurnace extends ContainerBase {
 
 	public ContainerHeatedFurnace(IInventory inventory, TileHeatedFurnace furnace) {
 		super();
-		furnace.sync = true;
 		this.furnace = furnace;
 
 		this.addSlotToContainer(new Slot(furnace, 0, 56, 34));
@@ -43,6 +42,5 @@ public class ContainerHeatedFurnace extends ContainerBase {
 	@Override
 	public void onContainerClosed(EntityPlayer player) {
 		super.onContainerClosed(player);
-		furnace.sync = false;
 	}
 }

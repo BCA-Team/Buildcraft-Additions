@@ -28,6 +28,7 @@ public class TileChargingStation extends TileMachineBase implements IInventory {
 
 	@Override
 	public void updateEntity() {
+		super.updateEntity();
 		int charge = 6000;
 		ItemStack stack = inventory.getStackInSlot(0);
 		if (stack == null)

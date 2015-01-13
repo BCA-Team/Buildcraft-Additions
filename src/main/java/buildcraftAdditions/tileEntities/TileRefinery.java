@@ -5,8 +5,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -23,8 +21,6 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.RecipeMananger;
 import buildcraftAdditions.api.RefineryRecipe;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
-import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.utils.ITankHolder;
@@ -42,7 +38,7 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyHandler, ITankHolder, IPipeConnection {
-	public int timer, energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer, lastRequiredHeat;
+	public int energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer, lastRequiredHeat;
 	public boolean init, valve, isCooling, moved;
 	public TileRefinery master;
 	private Tank input = new Tank(3000, this, "Input");
@@ -53,12 +49,13 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	public TileRefinery() {
 		maxEnergy = 50000;
-		timer = 0;
 		init = false;
-		lastRequiredHeat = 1;
+		lastRequiredHeat = 20;
+		currentHeat = 20;
 	}
 
 	public void updateEntity() {
+		super.updateEntity();
 		if (worldObj.isRemote)
 			return;
 		if (data.moved) {
@@ -69,11 +66,6 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			input.setFluid(null);
 		if (input.getFluid() == null)
 			updateRecipe();
-		if (timer == 0) {
-			sync();
-			timer = 40;
-		}
-		timer--;
 		updateHeat();
 		if (!data.isMaster)
 			return;
@@ -139,14 +131,6 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	@Override
-	public void sync() {
-		if (!worldObj.isRemote) {
-			NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 20);
-			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), point);
-		}
-	}
-
-	@Override
 	public void invalidateMultiblock() {
 		if (isMaster())
 			data.patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
@@ -179,6 +163,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public boolean onBlockActivated(EntityPlayer player) {
 		if (data.isMaster) {
+			sync();
 			if (!worldObj.isRemote) {
 				player.openGui(BuildcraftAdditions.instance, Variables.Gui.REFINERY, worldObj, xCoord, yCoord, zCoord);
 			}

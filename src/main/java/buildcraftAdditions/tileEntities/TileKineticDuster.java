@@ -39,9 +39,6 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 		super("");
 	}
 
-	@Override
-	public void updateEntity() {
-	}
 
 	@Override
 	public int getSizeInventory() {

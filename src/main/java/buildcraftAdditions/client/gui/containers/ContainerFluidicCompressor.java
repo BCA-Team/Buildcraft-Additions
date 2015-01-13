@@ -28,7 +28,6 @@ public class ContainerFluidicCompressor extends ContainerBase {
 		super();
 		playerIInventory = inventory;
 		fluidicCompressor = tile;
-		fluidicCompressor.sync = true;
 		PacketHandler.instance.sendToAllAround(new MessageByteBuff(fluidicCompressor), new NetworkRegistry.TargetPoint(fluidicCompressor.getWorldObj().provider.dimensionId, fluidicCompressor.xCoord, fluidicCompressor.yCoord, fluidicCompressor.zCoord, 5));
 
 		this.addSlotToContainer(new Slot(tile, 0, 89, 31));
@@ -47,7 +46,6 @@ public class ContainerFluidicCompressor extends ContainerBase {
 	@Override
 	public void onContainerClosed(EntityPlayer player) {
 		super.onContainerClosed(player);
-		fluidicCompressor.sync = false;
 	}
 
 	@Override

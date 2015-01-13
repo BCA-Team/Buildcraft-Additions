@@ -34,6 +34,11 @@ public abstract class TileBaseDuster extends TileBase implements ISidedInventory
 		}
 	}
 
+	@Override
+	public boolean canUpdate() {
+		return false;
+	}
+
 	public abstract void dust();
 
 	public void makeProgress(EntityPlayer player, String key) {

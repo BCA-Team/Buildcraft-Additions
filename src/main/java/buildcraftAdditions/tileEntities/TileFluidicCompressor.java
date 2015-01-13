@@ -14,8 +14,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -25,8 +23,6 @@ import net.minecraftforge.fluids.IFluidContainerItem;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
@@ -38,7 +34,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	public final int maxLiquid = FluidContainerRegistry.BUCKET_VOLUME * 10;
 	public Tank tank = new Tank(maxLiquid, this, "");
 	private final CustomInventory inventory = new CustomInventory("FluidicCompressor", 2, 1, this);
-	public boolean fill, sync;
+	public boolean fill;
 
 	public TileFluidicCompressor() {
 		super(800);
@@ -46,6 +42,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 
 	@Override
 	public void updateEntity() {
+		super.updateEntity();
 		if (worldObj.isRemote)
 			return;
 		ItemStack itemstack = inventory.getStackInSlot(0);
@@ -188,8 +185,6 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
 		int amount = tank.fill(resource, doFill);
-		if (sync)
-			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
 		return amount;
 	}
 
@@ -201,8 +196,6 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
 		FluidStack fluid = tank.drain(maxDrain, doDrain);
-		if (sync)
-			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 5));
 		return  fluid;
 	}
 

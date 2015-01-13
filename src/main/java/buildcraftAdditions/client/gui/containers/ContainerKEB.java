@@ -16,8 +16,6 @@ public class ContainerKEB extends ContainerBase {
 	public ContainerKEB(TileKineticEnergyBufferBase keb, EntityPlayer player) {
 		super();
 		keb.sync();
-		keb.sync = true;
-		keb.timer = 0;
 		this.keb = keb;
 		if (player.getDisplayName().equals(keb.owner))
 			keb.destroyer = player;
@@ -26,7 +24,6 @@ public class ContainerKEB extends ContainerBase {
 	@Override
 	public void onContainerClosed(EntityPlayer player) {
 		super.onContainerClosed(player);
-		keb.sync = false;
 
 	}
 }

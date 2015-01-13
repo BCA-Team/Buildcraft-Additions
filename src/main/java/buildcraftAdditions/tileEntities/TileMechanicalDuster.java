@@ -37,9 +37,14 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 		maxEnergy = 2000;
 	}
 
+	@Override
+	public boolean canUpdate() {
+		return true;
+	}
 
 	@Override
 	public void updateEntity() {
+		super.updateEntity();
 		if (energy >= 4) {
 			if (getStackInSlot(0) != null && DusterRecipes.dusting().hasDustingResult(getStackInSlot(0))) {
 				progress++;

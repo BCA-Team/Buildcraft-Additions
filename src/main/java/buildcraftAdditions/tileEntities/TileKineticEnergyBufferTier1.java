@@ -1,10 +1,6 @@
 package buildcraftAdditions.tileEntities;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-
 import buildcraftAdditions.config.ConfigurationHandler;
-import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 /**
@@ -30,11 +26,5 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 		if (lastEnergyState != energyState && worldObj.getBlock(xCoord, yCoord, zCoord) == ItemsAndBlocks.kebT1)
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, energyState, 2);
 		lastEnergyState = energyState;
-	}
-
-	@Override
-	public void sync() {
-		if (!worldObj.isRemote)
-			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
 	}
 }

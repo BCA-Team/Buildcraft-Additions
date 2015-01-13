@@ -3,9 +3,6 @@ package buildcraftAdditions.tileEntities;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.biome.BiomeGenBase;
-
-import cpw.mods.fml.common.network.NetworkRegistry;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -21,11 +18,8 @@ import buildcraft.energy.fuels.CoolantManager;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.CoolingTowerRecipe;
 import buildcraftAdditions.api.RecipeMananger;
-import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.networking.ISyncronizedTile;
-import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.utils.ITankHolder;
@@ -48,22 +42,17 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private Tank output = new Tank(2000, this, "output");
 	private Tank coolant = new Tank(10000, this, "coolant");
 	private TileCoolingTower master;
-	private int timer;
 	private CoolingTowerRecipe currentRecipe;
 	public float heat;
 
 
 	@Override
 	public void updateEntity() {
+		super.updateEntity();
 		if (data.moved)
 			data.afterMoveCheck(worldObj);
 		if (!isMaster())
 			return;
-		if (timer == 0) {
-			sync();
-			timer = 40;
-		} else
-			timer--;
 		int max = 20;
 		while (!coolant.isEmpty() && heat > 0 && max > 0) {
 			ICoolant cooling = CoolantManager.INSTANCE.getCoolant(coolant.getFluid().getFluid());
@@ -94,14 +83,6 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	}
 
 	@Override
-	public void sync() {
-		if (!worldObj.isRemote) {
-			NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 15);
-			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), point);
-		}
-	}
-
-	@Override
 	public void invalidateMultiblock() {
 		if (isMaster())
 			data.patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
@@ -113,8 +94,6 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	@Override
 	public boolean onBlockActivated(EntityPlayer player) {
 		if (isMaster()) {
-			BiomeGenBase biome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
-			Logger.info("Biome temp: " + biome.temperature);
 			player.openGui(BuildcraftAdditions.instance, Variables.Gui.COOLING_TOWER, worldObj, xCoord, yCoord, zCoord);
 			return true;
 		}

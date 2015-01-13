@@ -29,6 +29,7 @@ public class TileBasicCoil extends TileCoilBase implements IInventory {
 
 	@Override
 	public void updateEntity() {
+		super.updateEntity();
 		if (burnTime == 0) {
 			burning = false;
 			if (shouldHeat)

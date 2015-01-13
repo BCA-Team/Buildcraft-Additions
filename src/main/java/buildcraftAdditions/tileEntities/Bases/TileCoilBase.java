@@ -2,11 +2,6 @@ package buildcraftAdditions.tileEntities.Bases;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-
-import buildcraftAdditions.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandler;
-
 import io.netty.buffer.ByteBuf;
 
 /**
@@ -23,12 +18,13 @@ public abstract class TileCoilBase extends TileBase {
 
 	public void startHeating() {
 		shouldHeat = true;
-		PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
+		sync();
 	}
 
 	public void stopHeating() {
 		shouldHeat = false;
-		PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10));
+		//force a sync so client doesn't burn additional fuel and causes sync issues
+		sync();
 	}
 
 	@Override

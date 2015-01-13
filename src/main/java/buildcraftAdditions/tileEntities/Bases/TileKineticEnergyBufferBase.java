@@ -2,7 +2,6 @@ package buildcraftAdditions.tileEntities.Bases;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.Explosion;
 
@@ -29,11 +28,11 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileKineticEnergyBufferBase extends TileEntity implements IEnergyHandler, IConfigurableOutput, ISyncronizedTile {
+public abstract class TileKineticEnergyBufferBase extends TileBase implements IEnergyHandler, IConfigurableOutput, ISyncronizedTile {
 	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
 	public EnumSideStatus[] configuration = new EnumSideStatus[6];
-	public int tier, timer;
-	public boolean sync, selfDestruct;
+	public int tier;
+	public boolean selfDestruct;
 	public String owner = "";
 	public EntityPlayer destroyer;
 
@@ -121,6 +120,7 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 
 	@Override
 	public void updateEntity() {
+		super.updateEntity();
 		if (selfDestruct) {
 			fuse--;
 			if (fuse % 20 == 0)
@@ -128,11 +128,6 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 		}
 		if (fuse <= 0 && selfDestruct)
 			byeBye();
-			if (timer == 0) {
-				sync();
-				timer = 20;
-			}
-			timer--;
 		if (ConfigurationHandler.powerloss)
 			energy = energy - loss;
 		if (energy < 0)
@@ -162,8 +157,6 @@ public abstract class TileKineticEnergyBufferBase extends TileEntity implements 
 	public boolean canConnectEnergy(ForgeDirection from) {
 		return true;
 	}
-
-	public abstract void sync();
 
 	public void sendConfigurationToSever() {
 		PacketHandler.instance.sendToServer(new MessageConfiguration(this));
