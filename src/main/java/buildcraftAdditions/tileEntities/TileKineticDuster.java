@@ -189,7 +189,7 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 			if (entity instanceof IPipeTile) {
 				IPipeTile pipe = (IPipeTile) entity;
 				if (output != null && pipe.isPipeConnected(direction.getOpposite()) && pipe.getPipeType() == IPipeTile.PipeType.ITEM) {
-					int leftOver = pipe.injectItem(output.copy(), true, direction.getOpposite());
+					int leftOver = pipe.injectItem(output.copy(), true, direction.getOpposite(), null);
 					output.stackSize -= leftOver;
 					if (output.stackSize == 0)
 						output = null;
