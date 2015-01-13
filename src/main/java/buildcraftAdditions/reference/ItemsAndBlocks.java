@@ -1,20 +1,9 @@
 package buildcraftAdditions.reference;
 
-import java.util.ArrayList;
-
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
-
-import net.minecraftforge.oredict.ShapedOreRecipe;
-
-import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.blocks.BlockBCKinesisPipeWood;
@@ -43,15 +32,7 @@ import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemMachineConfigurator;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
-import buildcraftAdditions.items.Tools.ToolCoreRecipe;
 import buildcraftAdditions.items.Tools.ToolUpgrade;
-import buildcraftAdditions.items.Tools.UpgradeRecipeDiamondStick;
-import buildcraftAdditions.items.Tools.UpgradeRecipeDrillHead;
-import buildcraftAdditions.items.Tools.UpgradeRecipeEmeraldStick;
-import buildcraftAdditions.items.Tools.UpgradeRecipeExcavationAttachment;
-import buildcraftAdditions.items.Tools.UpgradeRecipeGoldStick;
-import buildcraftAdditions.items.Tools.UpgradeRecipeSawBlade;
-import buildcraftAdditions.items.Tools.UpgradeRecipeTiller;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileChargingStation;
@@ -68,7 +49,6 @@ import buildcraftAdditions.tileEntities.TileLavaCoil;
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import buildcraftAdditions.tileEntities.TileRefinery;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
-import buildcraftAdditions.utils.BCItems;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -297,72 +277,7 @@ public final class ItemsAndBlocks {
 
 	public static void addRecipes() {
 		if (Loader.isModLoaded("BuildCraft|Transport")) {
-			BuildcraftRecipeRegistry.assemblyTable.addRecipe("ironStick", 1000, new ItemStack(ironStick), Items.iron_ingot);
-			BuildcraftRecipeRegistry.assemblyTable.addRecipe("goldStick", 2000, new ItemStack(goldStick), new ItemStack(Items.gold_ingot, 4));
-			BuildcraftRecipeRegistry.assemblyTable.addRecipe("diamondStick", 3000, new ItemStack(diamondStick), new ItemStack(Items.diamond, 2));
-			BuildcraftRecipeRegistry.assemblyTable.addRecipe("kineticTool", 8000, new ItemStack(kineticTool), new ItemStack(Items.diamond, 3), ironStick, toolCore);
-			BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeChainsaw", 1000, new ItemStack(toolUpgradeChainsaw), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
-			BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeDrill", 1000, new ItemStack(toolUpgradeDrill), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
-			BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeDigger", 1000, new ItemStack(toolUpgradeDigger), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
-			BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeHoe", 1000, new ItemStack(toolUpgradeHoe), toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
-			BuildcraftRecipeRegistry.integrationTable.addRecipe(new ToolCoreRecipe());
-			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeDrillHead());
-			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeExcavationAttachment());
-			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeSawBlade());
-			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeTiller());
-			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeGoldStick());
-			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeDiamondStick());
-			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeEmeraldStick());
 
-			GameRegistry.addRecipe(new ItemStack(ironCanister, 4), "PIP", "IGI", "PIP", 'P', BCItems.SEALANT, 'I', Items.iron_ingot, 'G', Blocks.glass_pane);
-			GameRegistry.addRecipe(new ItemStack(goldCanister), "PGP", "GIG", "PGP", 'P', BCItems.SEALANT, 'G', Items.gold_ingot, 'I', ironCanister);
-			GameRegistry.addRecipe(new ItemStack(diamondCanister), "PDP", "DGD", "PDP", 'P', BCItems.SEALANT, 'D', Items.diamond, 'G', goldCanister);
-			GameRegistry.addRecipe(new ItemStack(fluidicCompressorBlock), "IFI", "PGP", "IMI", 'I', BCItems.IRON_GEAR, 'F', BCItems.FLOODGATE, 'P', Blocks.piston, 'G', goldCanister, 'M', BCItems.PUMP);
-			GameRegistry.addRecipe(new ItemStack(chargingStationBlock), "I I", "WKW", "I I", 'I', BCItems.IRON_GEAR, 'W', BCItems.PIPE_POWER_WOOD, 'K', powerCapsuleTier2);
-			GameRegistry.addRecipe(new ItemStack(powerCapsuleTier1), "IGI", "IRI", "IGI", 'I', Items.iron_ingot, 'G', Items.gold_ingot, 'R', Blocks.redstone_block);
-			GameRegistry.addRecipe(new ItemStack(powerCapsuleTier2), "GDG", "GPG", "GDG", 'G', Items.gold_ingot, 'D', Items.diamond, 'P', powerCapsuleTier1);
-			GameRegistry.addRecipe(new ItemStack(powerCapsuleTier3), "DED", "DPD", "DED", 'D', Items.diamond, 'E', Items.emerald, 'P', powerCapsuleTier2);
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(basicDusterBlock), "GIG", "SLS", "SSS", 'G', BCItems.STONE_GEAR, 'I', Items.iron_ingot, 'S', Blocks.stone, 'L', "slimeball"));
-			GameRegistry.addRecipe(new ItemStack(mechanicalDusterBlock), "GMG", "SFS", "SSS", 'G', BCItems.IRON_GEAR, 'M', Items.gold_ingot, 'F', itemGrindingWheel, 'S', Blocks.stone);
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(semiAutomaticDusterBlock), "GMG", "PLP", "SSS", 'G', BCItems.IRON_GEAR, 'M', Items.gold_ingot, 'P', BCItems.PIPE_ITEMS_GOLD, 'L', "slimeball", 'S', Blocks.stone));
-			GameRegistry.addRecipe(new ItemStack(kineticDusterBlock), "GGG", "P P", "IDI", 'G', Blocks.glass, 'P', BCItems.PIPE_ITEMS_GOLD, 'I', BCItems.GOLD_GEAR, 'D', BCItems.DIAMOND_GEAR);
-			GameRegistry.addRecipe(new ItemStack(itemGrindingWheel), "FFF", "FGF", "FFF", 'F', Items.flint, 'G', BCItems.STONE_GEAR);
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(itemIronWireUnhardened, 2), "DDD", 'D', "dustIron"));
-			GameRegistry.addSmelting(itemIronWireUnhardened, new ItemStack(itemIronWire, 2), 0.5f);
-			GameRegistry.addRecipe(new ItemStack(basicCoilBlock), "WWW", "WIW", "WWW", 'W', itemIronWire, 'I', Items.iron_ingot);
-			GameRegistry.addRecipe(new ItemStack(heatedFurnaceBlock), "III", "IFI", "III", 'I', Items.iron_ingot, 'F', Blocks.furnace);
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(goldWireUnhardened, 2), "DDD", 'D', "dustGold"));
-			GameRegistry.addSmelting(goldWireUnhardened, new ItemStack(goldWire, 2), 0.5f);
-			GameRegistry.addRecipe(new ItemStack(lavaCoilBlock), "WWW", "WIW", "WWW", 'W', goldWire, 'I', Items.iron_ingot);
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(diamondWireUnhardened, 2), "DDD", 'D', "dustDiamond"));
-			GameRegistry.addSmelting(diamondWireUnhardened, new ItemStack(diamondWire, 2), 0.5f);
-			GameRegistry.addRecipe(new ItemStack(kineticCoil), "WWW", "WIW", "WWW", 'W', diamondWire, 'I', Items.iron_ingot);
-			GameRegistry.addRecipe(new ItemStack(kebT1), "IBI", "PBP", "IBI", 'I', Items.iron_ingot, 'B', powerCapsuleTier1, 'P', BCItems.PIPE_POWER_GOLD);
-			GameRegistry.addRecipe(new ItemStack(kebT2), "III", "PBP", "III", 'I', Items.iron_ingot, 'B', powerCapsuleTier2, 'P', BCItems.PIPE_POWER_GOLD);
-			GameRegistry.addRecipe(new ItemStack(kebT3Core), "DBD", "PBP", "DBD", 'D', Items.diamond, 'B', powerCapsuleTier3, 'P', BCItems.PIPE_POWER_DIAMOND);
-			GameRegistry.addRecipe(new ItemStack(kebT3Plating), "PGP", "GGG", "III", 'P', BCItems.PIPE_POWER_DIAMOND, 'G', Items.gold_ingot, 'I', Items.iron_ingot);
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(heatPlatingRaw, 2), "DD", "DD", 'D', "dustIron"));
-			GameRegistry.addSmelting(new ItemStack(heatPlatingRaw), new ItemStack(heatPlating), 0);
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(refineryWalls, 10), "PPP", "PDP", "PPP", 'P', heatPlating, 'D', "dustDiamond"));
-			GameRegistry.addRecipe(new ItemStack(refineryValve, 4), " P ", "PBP", " P ", 'P', heatPlating, 'B', Blocks.iron_bars);
-			GameRegistry.addRecipe(new ItemStack(coolingTowerWalls, 10), "PPP", "PDP", "PPP", 'P', heatPlating, 'D', Items.redstone);
-			GameRegistry.addRecipe(new ItemStack(coolingTowerValve), "V", 'V', refineryValve);
-			GameRegistry.addRecipe(new ItemStack(toolUpgradeChainsaw), "U", 'U', toolUpgradeDigger);
-			GameRegistry.addRecipe(new ItemStack(toolUpgradeDigger), "U", 'U', toolUpgradeDrill);
-			GameRegistry.addRecipe(new ItemStack(toolUpgradeDrill), "U", 'U', toolUpgradeHoe);
-			GameRegistry.addRecipe(new ItemStack(toolUpgradeHoe), "U", 'U', toolUpgradeChainsaw);
-
-			//remove BC refinery recipe
-			ItemStack stack = new ItemStack(BCItems.REFINERY);
-			ArrayList recipeList = (ArrayList) CraftingManager.getInstance().getRecipeList();
-			for (int t = 0; t < recipeList.size(); t++) {
-				IRecipe recipe = (IRecipe) recipeList.get(t);
-				ItemStack recipeResult = recipe.getRecipeOutput();
-				if (ItemStack.areItemStacksEqual(stack, recipeResult)) {
-					recipeList.remove(t);
-					break;
-				}
-			}
 		}
 		GameRegistry.registerTileEntity(TileFluidicCompressor.class, "TileFluidicCompressor");
 		GameRegistry.registerTileEntity(TileChargingStation.class, "TileChargingStation");

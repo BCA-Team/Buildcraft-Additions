@@ -1,4 +1,4 @@
-package buildcraftAdditions.triggers;
+package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -24,39 +24,22 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerHasEmptyCanister implements ITriggerExternal {
+public class TriggerCanisterRequested implements ITriggerExternal {
 	public IIcon icon;
 
 	@Override
-	public String getDescription() {
-		return Utils.localize("trigger.hasEmptyCanister");
-	}
-
-	@Override
-	public IStatementParameter createParameter(int index) {
-		return null;
-	}
-
-	@Override
-	public IStatement rotateLeft() {
-		return this;
-	}
-
-	@Override
 	public String getUniqueTag() {
-		return "bcadditions:TriggerHasEmptyCanister";
+		return "canisterRequestedTriger";
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public IIcon getIcon() {
 		return icon;
 	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
 	public void registerIcons(IIconRegister iconregister) {
-		icon = iconregister.registerIcon("bcadditions:TriggerHasEmptyCanister");
+		icon = iconregister.registerIcon("bcadditions:TriggerCanisterRequested");
 	}
 
 	@Override
@@ -70,11 +53,25 @@ public class TriggerHasEmptyCanister implements ITriggerExternal {
 	}
 
 	@Override
+	public String getDescription() {
+		return Utils.localize("trigger.canisterRequested");
+	}
+
+	@Override
+	public IStatementParameter createParameter(int index) {
+		return null;
+	}
+
+	@Override
+	public IStatement rotateLeft() {
+		return this;
+	}
+
+
+	@Override
 	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
-		if (target instanceof TileFluidicCompressor) {
-			TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) target;
-			return (fluidicCompressor.getStackInSlot(1) != null && fluidicCompressor.getStackInSlot(1).stackTagCompound != null && fluidicCompressor.getStackInSlot(1).stackTagCompound.hasKey("Fluid"));
-		}
+		if ((target instanceof TileFluidicCompressor))
+			return ((TileFluidicCompressor) target).getStackInSlot(0) == null;
 		return false;
 	}
 }

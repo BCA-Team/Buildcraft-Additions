@@ -1,4 +1,4 @@
-package buildcraftAdditions.triggers;
+package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;

@@ -1,4 +1,4 @@
-package buildcraftAdditions.triggers;
+package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -14,7 +14,7 @@ import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
 import buildcraft.api.statements.ITriggerExternal;
 
-import buildcraftAdditions.tileEntities.TileFluidicCompressor;
+import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -24,22 +24,41 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerCanisterRequested implements ITriggerExternal {
+public class TriggerReadyToCharge implements ITriggerExternal {
 	public IIcon icon;
+
+	public TriggerReadyToCharge() {}
+
+	@Override
+	public String getDescription() {
+		return Utils.localize("trigger.readyToCharge");
+	}
+
+	@Override
+	public IStatementParameter createParameter(int index) {
+		return null;
+	}
+
+	@Override
+	public IStatement rotateLeft() {
+		return null;
+	}
 
 	@Override
 	public String getUniqueTag() {
-		return "canisterRequestedTriger";
+		return "bcadditions:TriggerReadyToCharge";
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon() {
 		return icon;
 	}
-	@SideOnly(Side.CLIENT)
+
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconregister) {
-		icon = iconregister.registerIcon("bcadditions:TriggerCanisterRequested");
+		icon = iconregister.registerIcon("bcadditions:TriggerReadyToCharge");
 	}
 
 	@Override
@@ -53,25 +72,11 @@ public class TriggerCanisterRequested implements ITriggerExternal {
 	}
 
 	@Override
-	public String getDescription() {
-		return Utils.localize("trigger.canisterRequested");
-	}
-
-	@Override
-	public IStatementParameter createParameter(int index) {
-		return null;
-	}
-
-	@Override
-	public IStatement rotateLeft() {
-		return this;
-	}
-
-
-	@Override
 	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
-		if ((target instanceof TileFluidicCompressor))
-			return ((TileFluidicCompressor) target).getStackInSlot(0) == null;
+		if (target instanceof TileChargingStation) {
+			TileChargingStation chargingStation = (TileChargingStation) target;
+			return chargingStation.getStackInSlot(0) == null;
+		}
 		return false;
 	}
 }

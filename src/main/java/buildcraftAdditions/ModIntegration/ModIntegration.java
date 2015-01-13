@@ -14,6 +14,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.oredict.OreDictionary;
 
+import buildcraftAdditions.ModIntegration.Buildcraft.BuildcraftIntegration;
 import buildcraftAdditions.ModIntegration.Framez.FramezIntegration;
 import buildcraftAdditions.ModIntegration.MineTweaker.MineTweakerIntegreation;
 import buildcraftAdditions.api.DusterRecipes;
@@ -50,6 +51,9 @@ public class ModIntegration {
 			MineTweakerIntegreation.integrate();
 		if (Loader.isModLoaded("TConstruct"))
 			tinkersConstructIntegration();
+		if (Loader.isModLoaded("BuildCraft|Transport")) {
+			BuildcraftIntegration.integrate();
+		}
 	}
 
 	private static void railcraftIntegration() {

@@ -33,7 +33,6 @@ import buildcraftAdditions.items.ItemDust;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.reference.ItemsAndBlocks;
-import buildcraftAdditions.reference.TrigersAndActions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.SpecialListMananger;
 
@@ -63,7 +62,6 @@ public class BuildcraftAdditions {
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		PacketHandler.init();
 		ItemsAndBlocks.init();
-		TrigersAndActions.register();
 		SpecialListMananger.init();
 
 		Item itemDust = new ItemDust(Integer.parseInt("13ECFC", 16)).setUnlocalizedName("dustDiamond");

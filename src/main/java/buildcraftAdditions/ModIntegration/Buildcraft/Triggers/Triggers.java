@@ -1,14 +1,7 @@
-package buildcraftAdditions.reference;
+package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
 
 import buildcraft.api.statements.ITriggerExternal;
 import buildcraft.api.statements.StatementManager;
-
-import buildcraftAdditions.triggers.TriggerCanisterRequested;
-import buildcraftAdditions.triggers.TriggerDoneCharging;
-import buildcraftAdditions.triggers.TriggerHasEmptyCanister;
-import buildcraftAdditions.triggers.TriggerHasFullCanister;
-import buildcraftAdditions.triggers.TriggerProvider;
-import buildcraftAdditions.triggers.TriggerReadyToCharge;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -16,7 +9,7 @@ import buildcraftAdditions.triggers.TriggerReadyToCharge;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public final class TrigersAndActions {
+public class Triggers {
 	public static ITriggerExternal triggerCanAcceptCanister = new TriggerCanisterRequested();
 	public static ITriggerExternal triggerHasEmptyCanister = new TriggerHasEmptyCanister();
 	public static ITriggerExternal triggerhasFullCanister = new TriggerHasFullCanister();

@@ -1,4 +1,4 @@
-package buildcraftAdditions.triggers;
+package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,7 +14,6 @@ import buildcraft.api.statements.ITriggerProvider;
 
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
-import buildcraftAdditions.reference.TrigersAndActions;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -32,12 +31,12 @@ public class TriggerProvider implements ITriggerProvider {
 	public Collection<ITriggerExternal> getExternalTriggers(ForgeDirection side, TileEntity tile) {
 		Collection<ITriggerExternal> triggers = new ArrayList<ITriggerExternal>();
 		if (tile instanceof TileFluidicCompressor) {
-			triggers.add(TrigersAndActions.triggerCanAcceptCanister);
-			triggers.add(TrigersAndActions.triggerHasEmptyCanister);
-			triggers.add(TrigersAndActions.triggerhasFullCanister);
+			triggers.add(Triggers.triggerCanAcceptCanister);
+			triggers.add(Triggers.triggerHasEmptyCanister);
+			triggers.add(Triggers.triggerhasFullCanister);
 		} else if (tile instanceof TileChargingStation) {
-			triggers.add(TrigersAndActions.triggerDoneCharging);
-			triggers.add(TrigersAndActions.triggerReadyToCharge);
+			triggers.add(Triggers.triggerDoneCharging);
+			triggers.add(Triggers.triggerReadyToCharge);
 		}
 		return triggers;
 	}

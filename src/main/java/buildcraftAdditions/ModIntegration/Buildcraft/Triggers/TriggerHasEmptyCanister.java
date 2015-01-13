@@ -1,4 +1,4 @@
-package buildcraftAdditions.triggers;
+package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -14,7 +14,7 @@ import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
 import buildcraft.api.statements.ITriggerExternal;
 
-import buildcraftAdditions.tileEntities.TileChargingStation;
+import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -24,14 +24,12 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerReadyToCharge implements ITriggerExternal {
+public class TriggerHasEmptyCanister implements ITriggerExternal {
 	public IIcon icon;
-
-	public TriggerReadyToCharge() {}
 
 	@Override
 	public String getDescription() {
-		return Utils.localize("trigger.readyToCharge");
+		return Utils.localize("trigger.hasEmptyCanister");
 	}
 
 	@Override
@@ -41,12 +39,12 @@ public class TriggerReadyToCharge implements ITriggerExternal {
 
 	@Override
 	public IStatement rotateLeft() {
-		return null;
+		return this;
 	}
 
 	@Override
 	public String getUniqueTag() {
-		return "bcadditions:TriggerReadyToCharge";
+		return "bcadditions:TriggerHasEmptyCanister";
 	}
 
 	@Override
@@ -58,7 +56,7 @@ public class TriggerReadyToCharge implements ITriggerExternal {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconregister) {
-		icon = iconregister.registerIcon("bcadditions:TriggerReadyToCharge");
+		icon = iconregister.registerIcon("bcadditions:TriggerHasEmptyCanister");
 	}
 
 	@Override
@@ -73,9 +71,9 @@ public class TriggerReadyToCharge implements ITriggerExternal {
 
 	@Override
 	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
-		if (target instanceof TileChargingStation) {
-			TileChargingStation chargingStation = (TileChargingStation) target;
-			return chargingStation.getStackInSlot(0) == null;
+		if (target instanceof TileFluidicCompressor) {
+			TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) target;
+			return (fluidicCompressor.getStackInSlot(1) != null && fluidicCompressor.getStackInSlot(1).stackTagCompound != null && fluidicCompressor.getStackInSlot(1).stackTagCompound.hasKey("Fluid"));
 		}
 		return false;
 	}
