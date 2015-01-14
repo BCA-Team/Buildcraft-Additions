@@ -68,9 +68,6 @@ public class BuildcraftAdditions {
 		Item dustDiamond = new ItemDust(0x13ECFC).setUnlocalizedName("dustDiamond");
 		GameRegistry.registerItem(dustDiamond, "dustDiamond");
 		OreDictionary.registerOre("dustDiamond", dustDiamond);
-		Item dustEmerald = new ItemDust(0x17DD62).setUnlocalizedName("dustEmerald");
-		GameRegistry.registerItem(dustEmerald, "dustEmerald");
-		OreDictionary.registerOre("dustEmerald", dustEmerald);
 
 		BCARecipeManager.duster = new DusterRecipeManager();
 
@@ -80,10 +77,9 @@ public class BuildcraftAdditions {
 		BCARecipeManager.duster.addRecipe("oreQuartz", new ItemStack(Items.quartz, 2));
 		BCARecipeManager.duster.addRecipe("stone", new ItemStack(Blocks.gravel));
 		BCARecipeManager.duster.addRecipe("cobblestone", new ItemStack(Blocks.sand));
-		BCARecipeManager.duster.addRecipe("oreDiamond", new ItemStack(dustDiamond, 2));
+		BCARecipeManager.duster.addRecipe("oreDiamond", new ItemStack(Items.diamond, 2));
 		BCARecipeManager.duster.addRecipe("gemDiamond", new ItemStack(dustDiamond));
-		BCARecipeManager.duster.addRecipe("oreEmerald", new ItemStack(dustEmerald, 2));
-		BCARecipeManager.duster.addRecipe("gemEmerald", new ItemStack(dustEmerald));
+		BCARecipeManager.duster.addRecipe("oreEmerald", new ItemStack(Items.emerald, 2));
 		BCARecipeManager.duster.addRecipe(new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_powder, 4));
 	}
 
