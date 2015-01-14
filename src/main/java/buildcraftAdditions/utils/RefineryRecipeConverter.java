@@ -55,7 +55,7 @@ public class RefineryRecipeConverter {
 			}
 		}
 		for (int t = 0; t < teller; t++) {
-			newFluid fluid = new newFluid(results[t].crafted.getFluid().getName() + "Gas");
+			BCAFluid fluid = new BCAFluid(results[t].crafted.getFluid().getName() + "Gas");
 			fluid.setDensity(-50);
 			fluid.setGaseous(true);
 			fluid.setIcons(results[t].crafted.getFluid().getStillIcon(), results[t].crafted.getFluid().getFlowingIcon());
@@ -80,15 +80,20 @@ public class RefineryRecipeConverter {
 		}
 	}
 
-	public static class newFluid extends Fluid {
+	public static class BCAFluid extends Fluid {
 
-		public newFluid(String fluidName) {
+		public BCAFluid(String fluidName) {
 			super(fluidName);
 		}
 
 		@Override
 		public int getColor() {
 			return 0xcccccc;
+		}
+
+		@Override
+		public int getColor(FluidStack stack) {
+			return getColor();
 		}
 	}
 }

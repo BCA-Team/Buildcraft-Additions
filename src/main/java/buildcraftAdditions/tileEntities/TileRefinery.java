@@ -95,7 +95,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			}
 			heatTimer = 10;
 		}
-		if (currentHeat == 0)
+		if (currentHeat == 20)
 			isCooling = false;
 		heatTimer -= 1;
 	}
