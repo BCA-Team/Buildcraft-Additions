@@ -1,12 +1,10 @@
 package buildcraftAdditions;
 
-import java.util.ArrayList;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -15,12 +13,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.ModIntegration.ModIntegration;
+import buildcraftAdditions.api.item.BCAItemManager;
+import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.client.gui.gui.GuiHandler;
 import buildcraftAdditions.config.ConfigurationHandler;
@@ -29,7 +27,8 @@ import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.creative.TabBCAdditions;
 import buildcraftAdditions.creative.TabCanisters;
 import buildcraftAdditions.creative.TabDusts;
-import buildcraftAdditions.items.ItemDust;
+import buildcraftAdditions.items.dust.DustManager;
+import buildcraftAdditions.items.dust.DustTypes;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.recipe.duster.DusterRecipeManager;
@@ -47,88 +46,63 @@ import buildcraftAdditions.utils.SpecialListMananger;
 @Mod(modid = Variables.MOD.ID, name = Variables.MOD.NAME, version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "after:BuildCraft|Energy;required-after:eureka;required-after:Forge@[10.13.2.1230,)", acceptedMinecraftVersions = "1.7.10")
 public class BuildcraftAdditions {
 
-	@Mod.Instance(Variables.MOD.ID)
-	public static BuildcraftAdditions instance;
+    @Mod.Instance(Variables.MOD.ID)
+    public static BuildcraftAdditions instance;
 
-	@SidedProxy(clientSide = "buildcraftAdditions.proxy.ClientProxy", serverSide = "buildcraftAdditions.proxy.CommonProxy")
-	public static CommonProxy proxy;
+    @SidedProxy(clientSide = "buildcraftAdditions.proxy.ClientProxy", serverSide = "buildcraftAdditions.proxy.CommonProxy")
+    public static CommonProxy proxy;
 
-	public static CreativeTabs bcadditions = new TabBCAdditions();
-	public static CreativeTabs bcaCannisters = new TabCanisters();
-	public static CreativeTabs bcaDusts = new TabDusts();
+    public static CreativeTabs bcadditions = new TabBCAdditions();
+    public static CreativeTabs bcaCannisters = new TabCanisters();
+    public static CreativeTabs bcaDusts = new TabDusts();
 
-	@Mod.EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		Logger.initiallize();
-		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
-		PacketHandler.init();
-		ItemsAndBlocks.init();
-		SpecialListMananger.init();
+    @Mod.EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        Logger.initiallize();
+        ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+        PacketHandler.init();
+        ItemsAndBlocks.init();
+        SpecialListMananger.init();
 
-		Item dustDiamond = new ItemDust(0x13ECFC).setUnlocalizedName("dustDiamond");
-		GameRegistry.registerItem(dustDiamond, "dustDiamond");
-		OreDictionary.registerOre("dustDiamond", dustDiamond);
+        BCARecipeManager.duster = new DusterRecipeManager();
+        BCAItemManager.dusts = new DustManager();
+    }
 
-		BCARecipeManager.duster = new DusterRecipeManager();
+    @Mod.EventHandler
+    public void doneLoading(FMLLoadCompleteEvent event) {
+        ItemsAndBlocks.addRecipes();
 
-		BCARecipeManager.duster.addRecipe("oreRedstone", new ItemStack(Items.redstone, 6));
-		BCARecipeManager.duster.addRecipe("oreCoal", new ItemStack(Items.coal, 2));
-		BCARecipeManager.duster.addRecipe("oreLapis", new ItemStack(Items.dye, 6, 4));
-		BCARecipeManager.duster.addRecipe("oreQuartz", new ItemStack(Items.quartz, 2));
-		BCARecipeManager.duster.addRecipe("stone", new ItemStack(Blocks.gravel));
-		BCARecipeManager.duster.addRecipe("cobblestone", new ItemStack(Blocks.sand));
-		BCARecipeManager.duster.addRecipe("oreDiamond", new ItemStack(Items.diamond, 2));
-		BCARecipeManager.duster.addRecipe("gemDiamond", new ItemStack(dustDiamond));
-		BCARecipeManager.duster.addRecipe("oreEmerald", new ItemStack(Items.emerald, 2));
-		BCARecipeManager.duster.addRecipe(new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_powder, 4));
-	}
+        int meta = 1;
+        BCAItemManager.dusts.addDust(meta++, "Iron", 0xD2CEC9, DustTypes.METAL_DUST);
+        BCAItemManager.dusts.addDust(meta++, "Gold", 0xF8DF17, DustTypes.METAL_DUST);
+        BCAItemManager.dusts.addDust(meta++, "Diamond", 0x13ECFC, DustTypes.GEM_DUST);
 
-	@Mod.EventHandler
-	public void doneLoading(FMLLoadCompleteEvent event) {
-		ItemsAndBlocks.addRecipes();
+        BCARecipeManager.duster.addRecipe("oreRedstone", new ItemStack(Items.redstone, 6));
+        BCARecipeManager.duster.addRecipe("oreCoal", new ItemStack(Items.coal, 2));
+        BCARecipeManager.duster.addRecipe("oreLapis", new ItemStack(Items.dye, 6, 4));
+        BCARecipeManager.duster.addRecipe("oreQuartz", new ItemStack(Items.quartz, 2));
+        BCARecipeManager.duster.addRecipe("stone", new ItemStack(Blocks.gravel));
+        BCARecipeManager.duster.addRecipe("cobblestone", new ItemStack(Blocks.sand));
+        BCARecipeManager.duster.addRecipe("oreDiamond", new ItemStack(Items.diamond, 2));
+        BCARecipeManager.duster.addRecipe("oreEmerald", new ItemStack(Items.emerald, 2));
+        BCARecipeManager.duster.addRecipe(new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_powder, 4));
 
-		addDusts("Iron", 0xD2CEC9);
-		addDusts("Gold", 0xF8DF17);
+        ModIntegration.integrate();
 
-		ModIntegration.integrate();
-	}
+        for (IDust dust : BCAItemManager.dusts.getDusts()) {
+            if (dust != null) {
+                dust.getDustType().register(dust.getMeta(), dust.getName(), dust.getDustStack());
+            }
+        }
+    }
 
-	@Mod.EventHandler
-	public void load(FMLInitializationEvent event) {
-		proxy.registerRenderers();
-		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-		FMLCommonHandler.instance().bus().register(new EventListener.FML());
-		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
-	}
+    @Mod.EventHandler
+    public void load(FMLInitializationEvent event) {
+        proxy.registerRenderers();
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+        FMLCommonHandler.instance().bus().register(new EventListener.FML());
+        MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
+    }
 
-	public void addDusts(String metalName, int color) {
-		Item itemDust;
-		ArrayList<ItemStack> list;
-		list = OreDictionary.getOres("ingot" + metalName);
-		if (list.isEmpty())
-			return;
-		list = OreDictionary.getOres("ore" + metalName);
-		if (list.isEmpty())
-			return;
-		if (ConfigurationHandler.shouldRegisterDusts) {
-			itemDust = new ItemDust(color).setUnlocalizedName("dust" + metalName);
-			GameRegistry.registerItem(itemDust, "dust" + metalName);
-			OreDictionary.registerOre("dust" + metalName, itemDust);
-			GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metalName).get(0).copy(), 0);
-		} else {
-			ArrayList<ItemStack> tempList = OreDictionary.getOres("dust" + metalName);
-			if (tempList.isEmpty())
-				return;
-			ItemStack stack = tempList.get(0);
-			if (stack == null)
-				return;
-			itemDust = stack.getItem();
-		}
-		for (ItemStack stack : list)
-			BCARecipeManager.duster.addRecipe(stack.copy(), new ItemStack(itemDust, 2));
-		list = OreDictionary.getOres("ingot" + metalName);
-		for (ItemStack stack : list)
-			BCARecipeManager.duster.addRecipe(stack.copy(), new ItemStack(itemDust, 1));
-	}
 }
 

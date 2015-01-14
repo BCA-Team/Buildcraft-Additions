@@ -28,6 +28,7 @@ import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Plating;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryValve;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryWalls;
 import buildcraftAdditions.items.BatteryBase;
+import buildcraftAdditions.items.dust.ItemDust;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemMachineConfigurator;
@@ -105,6 +106,7 @@ public final class ItemsAndBlocks {
 	public static Item machineConfigurator;
 	public static Item heatPlating;
 	public static Item heatPlatingRaw;
+	public static Item dust;
 
 	public static void init() {
 		ironCanister = new ItemCanister("ironCanister", 2000);
@@ -187,6 +189,9 @@ public final class ItemsAndBlocks {
 
 		heatPlating = new ItemBase("heatPlating");
 		GameRegistry.registerItem(heatPlating, "heatPlating");
+
+		dust = new ItemDust();
+		GameRegistry.registerItem(dust, "dust");
 
 		//START BLOCKS
 
