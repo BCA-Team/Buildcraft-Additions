@@ -1,6 +1,6 @@
-package buildcraftAdditions.api.recipe.duster;
+package buildcraftAdditions.api.item;
 
-import net.minecraft.item.ItemStack;
+import buildcraftAdditions.api.item.dust.IDustManager;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -9,10 +9,11 @@ import net.minecraft.item.ItemStack;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public interface IDusterRecipe {
+public final class BCAItemManager {
 
-	ItemStack getInput();
+	public static IDustManager dusts;
 
-	ItemStack getOutput();
+	private BCAItemManager() {
+	}
 
 }

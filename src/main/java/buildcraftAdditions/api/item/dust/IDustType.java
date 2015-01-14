@@ -1,4 +1,4 @@
-package buildcraftAdditions.api.recipe.duster;
+package buildcraftAdditions.api.item.dust;
 
 import net.minecraft.item.ItemStack;
 
@@ -9,10 +9,12 @@ import net.minecraft.item.ItemStack;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public interface IDusterRecipe {
+public interface IDustType {
 
-	ItemStack getInput();
+	void register(int meta, String name, ItemStack dust);
 
-	ItemStack getOutput();
+	String getName();
+
+	boolean isValid(int meta, String name, ItemStack dust);
 
 }

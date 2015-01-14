@@ -1,8 +1,8 @@
 package buildcraftAdditions.api.recipe.duster;
 
-import net.minecraft.item.ItemStack;
-
 import java.util.List;
+
+import net.minecraft.item.ItemStack;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -13,14 +13,14 @@ import java.util.List;
  */
 public interface IDusterRecipeManager {
 
-    void addRecipe(ItemStack input, ItemStack output);
+	void addRecipe(ItemStack input, ItemStack output);
 
-    void addRecipe(String oreInput, ItemStack output);
+	void addRecipe(String oreInput, ItemStack output);
 
-    void removeRecipe(ItemStack input);
+	void removeRecipe(ItemStack input);
 
-    IDusterRecipe getRecipe(ItemStack input);
+	IDusterRecipe getRecipe(ItemStack input);
 
-    List<? extends IDusterRecipe> getRecipes();
+	List<? extends IDusterRecipe> getRecipes();
 
 }

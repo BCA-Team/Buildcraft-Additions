@@ -1,12 +1,10 @@
 package buildcraftAdditions;
 
-import java.util.ArrayList;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -15,12 +13,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.ModIntegration.ModIntegration;
+import buildcraftAdditions.api.item.BCAItemManager;
+import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.client.gui.gui.GuiHandler;
 import buildcraftAdditions.config.ConfigurationHandler;
@@ -29,7 +27,8 @@ import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.creative.TabBCAdditions;
 import buildcraftAdditions.creative.TabCanisters;
 import buildcraftAdditions.creative.TabDusts;
-import buildcraftAdditions.items.ItemDust;
+import buildcraftAdditions.items.dust.DustManager;
+import buildcraftAdditions.items.dust.DustTypes;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.recipe.duster.DusterRecipeManager;
@@ -65,11 +64,18 @@ public class BuildcraftAdditions {
 		ItemsAndBlocks.init();
 		SpecialListMananger.init();
 
-		Item dustDiamond = new ItemDust(0x13ECFC).setUnlocalizedName("dustDiamond");
-		GameRegistry.registerItem(dustDiamond, "dustDiamond");
-		OreDictionary.registerOre("dustDiamond", dustDiamond);
-
 		BCARecipeManager.duster = new DusterRecipeManager();
+		BCAItemManager.dusts = new DustManager();
+	}
+
+	@Mod.EventHandler
+	public void doneLoading(FMLLoadCompleteEvent event) {
+		ItemsAndBlocks.addRecipes();
+
+		int meta = 1;
+		BCAItemManager.dusts.addDust(meta++, "Iron", 0xD2CEC9, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Gold", 0xF8DF17, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Diamond", 0x13ECFC, DustTypes.GEM_DUST);
 
 		BCARecipeManager.duster.addRecipe("oreRedstone", new ItemStack(Items.redstone, 6));
 		BCARecipeManager.duster.addRecipe("oreCoal", new ItemStack(Items.coal, 2));
@@ -78,19 +84,16 @@ public class BuildcraftAdditions {
 		BCARecipeManager.duster.addRecipe("stone", new ItemStack(Blocks.gravel));
 		BCARecipeManager.duster.addRecipe("cobblestone", new ItemStack(Blocks.sand));
 		BCARecipeManager.duster.addRecipe("oreDiamond", new ItemStack(Items.diamond, 2));
-		BCARecipeManager.duster.addRecipe("gemDiamond", new ItemStack(dustDiamond));
 		BCARecipeManager.duster.addRecipe("oreEmerald", new ItemStack(Items.emerald, 2));
 		BCARecipeManager.duster.addRecipe(new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_powder, 4));
-	}
-
-	@Mod.EventHandler
-	public void doneLoading(FMLLoadCompleteEvent event) {
-		ItemsAndBlocks.addRecipes();
-
-		addDusts("Iron", 0xD2CEC9);
-		addDusts("Gold", 0xF8DF17);
 
 		ModIntegration.integrate();
+
+		for (IDust dust : BCAItemManager.dusts.getDusts()) {
+			if (dust != null) {
+				dust.getDustType().register(dust.getMeta(), dust.getName(), dust.getDustStack());
+			}
+		}
 	}
 
 	@Mod.EventHandler
@@ -101,34 +104,5 @@ public class BuildcraftAdditions {
 		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
 	}
 
-	public void addDusts(String metalName, int color) {
-		Item itemDust;
-		ArrayList<ItemStack> list;
-		list = OreDictionary.getOres("ingot" + metalName);
-		if (list.isEmpty())
-			return;
-		list = OreDictionary.getOres("ore" + metalName);
-		if (list.isEmpty())
-			return;
-		if (ConfigurationHandler.shouldRegisterDusts) {
-			itemDust = new ItemDust(color).setUnlocalizedName("dust" + metalName);
-			GameRegistry.registerItem(itemDust, "dust" + metalName);
-			OreDictionary.registerOre("dust" + metalName, itemDust);
-			GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metalName).get(0).copy(), 0);
-		} else {
-			ArrayList<ItemStack> tempList = OreDictionary.getOres("dust" + metalName);
-			if (tempList.isEmpty())
-				return;
-			ItemStack stack = tempList.get(0);
-			if (stack == null)
-				return;
-			itemDust = stack.getItem();
-		}
-		for (ItemStack stack : list)
-			BCARecipeManager.duster.addRecipe(stack.copy(), new ItemStack(itemDust, 2));
-		list = OreDictionary.getOres("ingot" + metalName);
-		for (ItemStack stack : list)
-			BCARecipeManager.duster.addRecipe(stack.copy(), new ItemStack(itemDust, 1));
-	}
 }
 

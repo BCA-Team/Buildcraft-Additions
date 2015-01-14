@@ -11,9 +11,9 @@ import buildcraftAdditions.api.recipe.duster.IDusterRecipeManager;
  */
 public final class BCARecipeManager {
 
-    public static IDusterRecipeManager duster;
+	public static IDusterRecipeManager duster;
 
-    private BCARecipeManager() {
-    }
+	private BCARecipeManager() {
+	}
 
 }
