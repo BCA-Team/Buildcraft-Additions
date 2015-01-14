@@ -17,7 +17,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import buildcraftAdditions.ModIntegration.Buildcraft.BuildcraftIntegration;
 import buildcraftAdditions.ModIntegration.Framez.FramezIntegration;
 import buildcraftAdditions.ModIntegration.MineTweaker.MineTweakerIntegreation;
-import buildcraftAdditions.api.DusterRecipes;
+import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.blocks.BlockBasic;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.Logger;
@@ -199,7 +199,7 @@ public class ModIntegration {
 		if (oreList.isEmpty() || nuggetList.isEmpty())
 			return;
 		for (ItemStack poorOre : oreList) {
-			DusterRecipes.dusting().addDusterRecipe(poorOre, new ItemStack(nuggetList.get(0).getItem(), 4, nuggetList.get(0).getItemDamage()));
+			BCARecipeManager.duster.addRecipe(poorOre, new ItemStack(nuggetList.get(0).getItem(), 4, nuggetList.get(0).getItemDamage()));
 		}
 	}
 
@@ -233,9 +233,9 @@ public class ModIntegration {
 		}
 		list = OreDictionary.getOres("ore" + metalName);
 		for (ItemStack stack : list)
-			DusterRecipes.dusting().addDusterRecipe(stack.copy(), new ItemStack(itemDust, 2));
+			BCARecipeManager.duster.addRecipe(stack.copy(), new ItemStack(itemDust, 2));
 		list = OreDictionary.getOres("ingot" + metalName);
 		for (ItemStack stack : list)
-			DusterRecipes.dusting().addDusterRecipe(stack.copy(), new ItemStack(itemDust, 1));
+			BCARecipeManager.duster.addRecipe(stack.copy(), new ItemStack(itemDust, 1));
 	}
 }

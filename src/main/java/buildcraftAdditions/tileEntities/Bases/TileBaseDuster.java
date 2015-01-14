@@ -3,7 +3,7 @@ package buildcraftAdditions.tileEntities.Bases;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 
-import buildcraftAdditions.api.DusterRecipes;
+import buildcraftAdditions.api.recipe.BCARecipeManager;
 
 import eureka.api.EurekaKnowledge;
 import io.netty.buffer.ByteBuf;
@@ -24,7 +24,7 @@ public abstract class TileBaseDuster extends TileBase implements ISidedInventory
 	}
 
 	public void makeProgress(EntityPlayer player) {
-		if (getStackInSlot(0) != null && DusterRecipes.dusting().hasDustingResult(getStackInSlot(0))) {
+		if (BCARecipeManager.duster.getRecipe(getStackInSlot(0)) != null) {
 			progress++;
 			if (progress == 8) {
 				dust();

@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
 
-import buildcraftAdditions.api.DusterRecipes;
+import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandler;
@@ -46,7 +46,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 	public void updateEntity() {
 		super.updateEntity();
 		if (energy >= 4) {
-			if (getStackInSlot(0) != null && DusterRecipes.dusting().hasDustingResult(getStackInSlot(0))) {
+			if (BCARecipeManager.duster.getRecipe(getStackInSlot(0)) != null) {
 				progress++;
 				energy -= 4;
 				oldProgressStage = progressStage;
@@ -157,7 +157,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 
 	@Override
 	public void dust() {
-		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, DusterRecipes.dusting().getDustingResult(getStackInSlot(0)));
+		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput());
 		setInventorySlotContents(0, null);
 		if (!worldObj.isRemote)
 			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));

@@ -1,4 +1,4 @@
-package buildcraftAdditions.nei;
+package buildcraftAdditions.ModIntegration.nei;
 
 import net.minecraft.item.ItemStack;
 

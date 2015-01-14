@@ -1,7 +1,8 @@
-package buildcraftAdditions.nei;
+package buildcraftAdditions.ModIntegration.nei;
 
-import buildcraftAdditions.api.DusterRecipes;
+import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.IStackInfo;
+import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
@@ -45,30 +46,31 @@ public class DustingRecipeHandler extends TemplateRecipeHandler {
     @Override
     public void loadCraftingRecipes(String outputId, Object... results) {
         if (outputId.equals(getRecipeID())) {
-            HashMap<IStackInfo, ItemStack> recipes = DusterRecipes.dusting().getDustingList();
-            for (Entry<IStackInfo, ItemStack> recipe : recipes.entrySet())
-                arecipes.add(new CachedDustingRecipe(recipe.getKey().getResult(), recipe.getValue()));
-        } else
+            for (IDusterRecipe recipe : BCARecipeManager.duster.getRecipes())
+                arecipes.add(new CachedDustingRecipe(recipe.getInput(), recipe.getOutput()));
+        } else {
             super.loadCraftingRecipes(outputId, results);
+        }
     }
 
     @Override
     public void loadCraftingRecipes(ItemStack result) {
-        HashMap<IStackInfo, ItemStack> recipes = DusterRecipes.dusting().getDustingList();
-        for (Entry<IStackInfo, ItemStack> recipe : recipes.entrySet())
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getValue(), result))
-                arecipes.add(new CachedDustingRecipe(recipe.getKey().getResult(), recipe.getValue()));
+        for (IDusterRecipe recipe : BCARecipeManager.duster.getRecipes()) {
+            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getOutput(), result)) {
+                arecipes.add(new CachedDustingRecipe(recipe.getInput(), recipe.getOutput()));
+            }
+        }
     }
 
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
-        HashMap<IStackInfo, ItemStack> recipes = DusterRecipes.dusting().getDustingList();
-        for (Entry<IStackInfo, ItemStack> recipe : recipes.entrySet())
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getKey().getResult(), ingredient)) {
-                CachedDustingRecipe cRecipe = new CachedDustingRecipe(recipe.getKey().getResult(), recipe.getValue());
-                cRecipe.setIngredientPermutation(Arrays.asList(cRecipe.input), ingredient);
+        for (IDusterRecipe recipe : BCARecipeManager.duster.getRecipes()) {
+            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getInput(), ingredient)) {
+                CachedDustingRecipe cRecipe = new CachedDustingRecipe(recipe.getInput(), recipe.getOutput());
+                cRecipe.setIngredientPermutation(cRecipe.getIngredients(), ingredient);
                 arecipes.add(cRecipe);
             }
+        }
     }
 
     @Override

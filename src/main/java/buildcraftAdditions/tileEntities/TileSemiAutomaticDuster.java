@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.transport.IPipeTile;
 
-import buildcraftAdditions.api.DusterRecipes;
+import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandler;
@@ -39,7 +39,7 @@ public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 
 	@Override
 	public void dust() {
-		ItemStack output = DusterRecipes.dusting().getDustingResult(getStackInSlot(0));
+		ItemStack output = BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput();
 
 		//first try to put it intro a pipe
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
