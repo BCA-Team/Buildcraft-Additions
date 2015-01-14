@@ -88,7 +88,7 @@ public class RefineryRecipeConverter {
 
 		@Override
 		public int getColor() {
-			return 0xcccccc;
+			return 0xb0b3b6;
 		}
 
 		@Override
