@@ -16,6 +16,11 @@ public class Triggers {
 	public static ITriggerExternal triggerDoneCharging = new TriggerDoneCharging();
 	public static ITriggerExternal triggerReadyToCharge = new TriggerReadyToCharge();
 
+	public static ITriggerExternal KEBCharged = new TriggerKEBCharged();
+	public static ITriggerExternal KEBUnder75 = new TriggerKEBUnder75();
+	public static ITriggerExternal KEBUnder50 = new TriggerKEBUnder50();
+	public static ITriggerExternal KEBUnder25 = new TriggerKEBUnder25();
+
 	public static void register() {
 		StatementManager.registerTriggerProvider(new TriggerProvider());
 		StatementManager.registerStatement(triggerCanAcceptCanister);
@@ -23,5 +28,9 @@ public class Triggers {
 		StatementManager.registerStatement(triggerhasFullCanister);
 		StatementManager.registerStatement(triggerDoneCharging);
 		StatementManager.registerStatement(triggerReadyToCharge);
+		StatementManager.registerStatement(KEBCharged);
+		StatementManager.registerStatement(KEBUnder75);
+		StatementManager.registerStatement(KEBUnder50);
+		StatementManager.registerStatement(KEBUnder25);
 	}
 }

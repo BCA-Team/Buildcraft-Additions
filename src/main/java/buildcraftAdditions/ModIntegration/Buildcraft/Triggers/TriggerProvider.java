@@ -12,6 +12,7 @@ import buildcraft.api.statements.ITriggerExternal;
 import buildcraft.api.statements.ITriggerInternal;
 import buildcraft.api.statements.ITriggerProvider;
 
+import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 /**
@@ -37,6 +38,11 @@ public class TriggerProvider implements ITriggerProvider {
 		} else if (tile instanceof TileChargingStation) {
 			triggers.add(Triggers.triggerDoneCharging);
 			triggers.add(Triggers.triggerReadyToCharge);
+		} else if (tile instanceof TileKineticEnergyBufferBase) {
+			triggers.add(Triggers.KEBCharged);
+			triggers.add(Triggers.KEBUnder75);
+			triggers.add(Triggers.KEBUnder50);
+			triggers.add(Triggers.KEBUnder25);
 		}
 		return triggers;
 	}

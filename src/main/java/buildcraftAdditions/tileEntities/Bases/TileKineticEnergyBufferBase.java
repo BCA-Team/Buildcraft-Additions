@@ -155,7 +155,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
-		return true;
+		return configuration[from.ordinal()] != EnumSideStatus.DISSABLED;
 	}
 
 	public void sendConfigurationToSever() {
@@ -245,5 +245,9 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	@Override
 	public int getZ() {
 		return zCoord;
+	}
+
+	public int getEnergyLevel() {
+		return (energy * 100) / maxEnergy;
 	}
 }

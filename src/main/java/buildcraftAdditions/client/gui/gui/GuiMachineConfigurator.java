@@ -1,6 +1,6 @@
 package buildcraftAdditions.client.gui.gui;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.util.ResourceLocation;
 
 import buildcraftAdditions.client.gui.containers.ContainerMachineConfigurator;
 import buildcraftAdditions.utils.IConfigurableOutput;
@@ -11,14 +11,54 @@ import buildcraftAdditions.utils.IConfigurableOutput;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class GuiMachineConfigurator extends GuiContainer {
+public class GuiMachineConfigurator extends GuiBase {
+	public ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/machineConfigurator.png");
+	private IConfigurableOutput configurableOutput;
 
 	public GuiMachineConfigurator(IConfigurableOutput configurableOutput) {
 		super(new ContainerMachineConfigurator());
+		this.configurableOutput = configurableOutput;
+		setCenterTitle(true);
+		setDrawPlayerInv(false);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+	public ResourceLocation texture() {
+		return texture;
+	}
 
+	@Override
+	public void drawBackgroundPreWidgets(float f, int x, int y) {
+		super.drawBackgroundPreWidgets(f, x, y);
+	}
+
+	@Override
+	public void drawBackgroundPostWidgets(float f, int x, int y) {
+		super.drawBackgroundPostWidgets(f, x, y);
+	}
+
+	@Override
+	public int getXSize() {
+		return 175;
+	}
+
+	@Override
+	public int getYSize() {
+		return 165;
+	}
+
+	@Override
+	public String getInventoryName() {
+		return "machineConfigurator";
+	}
+
+	@Override
+	public void initialize() {
+
+	}
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
+		super.drawGuiContainerBackgroundLayer(f, x, y);
 	}
 }

@@ -7,8 +7,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
 
-import buildcraftAdditions.tileEntities.TileFluidicCompressor;
-
+import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -16,16 +15,14 @@ import buildcraftAdditions.tileEntities.TileFluidicCompressor;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerCanisterRequested extends BasicTrigger {
+public class TriggerKEBUnder25 extends BasicTrigger {
 
-	public TriggerCanisterRequested() {
-		super("canisterRequested", "TriggerCanisterRequested");
+	public TriggerKEBUnder25() {
+		super("KEBUnder25", "lessThan25%");
 	}
 
 	@Override
 	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
-		if ((target instanceof TileFluidicCompressor))
-			return ((TileFluidicCompressor) target).getStackInSlot(0) == null;
-		return false;
+		return target instanceof TileKineticEnergyBufferBase && ((TileKineticEnergyBufferBase) target).getEnergyLevel() < 25;
 	}
 }
