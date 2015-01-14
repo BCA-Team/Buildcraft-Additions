@@ -1,7 +1,6 @@
 package buildcraftAdditions.tileEntities;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -13,7 +12,6 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import cofh.api.energy.IEnergyReceiver;
 
-import buildcraft.api.recipes.IFlexibleCrafter;
 import buildcraft.api.transport.IPipeConnection;
 import buildcraft.api.transport.IPipeTile;
 
@@ -37,7 +35,7 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IFlexibleCrafter, IEnergyReceiver, ITankHolder, IPipeConnection {
+public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IEnergyReceiver, ITankHolder, IPipeConnection {
 	public int energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer, lastRequiredHeat;
 	public boolean init, valve, isCooling, moved;
 	public TileRefinery master;
@@ -352,45 +350,6 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	public FluidTankInfo[] realGetTankInfo() {
 		return new FluidTankInfo[]{new FluidTankInfo(input), new FluidTankInfo(output)};
-	}
-
-	@Override
-	public int getCraftingItemStackSize() {
-		return 0;
-	}
-
-	@Override
-	public ItemStack getCraftingItemStack(int slotid) {
-		return null;
-	}
-
-	@Override
-	public ItemStack decrCraftingItemStack(int slotid, int val) {
-		return null;
-	}
-
-	@Override
-	public FluidStack getCraftingFluidStack(int tankid) {
-		return input.getFluid();
-	}
-
-	@Override
-	public FluidStack decrCraftingFluidStack(int tankid, int amount) {
-		FluidStack fluid = null;
-		if (amount > input.getFluidAmount()) {
-			fluid = input.getFluid();
-			input.setFluid(null);
-		} else {
-			fluid = input.getFluid().copy();
-			fluid.amount = amount;
-			input.getFluid().amount -= amount;
-		}
-		return fluid;
-	}
-
-	@Override
-	public int getCraftingFluidStackSize() {
-		return 1;
 	}
 
 	@Override
