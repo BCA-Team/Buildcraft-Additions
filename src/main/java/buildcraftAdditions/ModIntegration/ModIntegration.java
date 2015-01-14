@@ -6,8 +6,8 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -17,11 +17,12 @@ import net.minecraftforge.oredict.OreDictionary;
 import buildcraftAdditions.ModIntegration.Buildcraft.BuildcraftIntegration;
 import buildcraftAdditions.ModIntegration.Framez.FramezIntegration;
 import buildcraftAdditions.ModIntegration.MineTweaker.MineTweakerIntegreation;
+import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.blocks.BlockBasic;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.Logger;
-import buildcraftAdditions.items.ItemDust;
+import buildcraftAdditions.items.dust.DustTypes;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.BCItems;
@@ -140,58 +141,60 @@ public class ModIntegration {
 
 	private static void metals() {
 
-		addDusts("Bronze", 0xAD6726);
-		addDusts("Manganese", 0xF3D2D2);
-		addDusts("Hepatizon", 0x6B566B);
-		addDusts("DamascusSteel", 0x3D2C1F);
-		addDusts("Angmallen", 0xFAFA6C);
-		addDusts("Steel", 0x919191);
-		addDusts("Eximite", 0x9E83B4);
-		addDusts("Meutoite", 0x5F5269);
-		addDusts("Desichalkos", 0x742EA8);
-		addDusts("Prometheum", 0x5A8156);
-		addDusts("DeepIron", 0x495B69);
-		addDusts("Infuscolium", 0xCB6293);
-		addDusts("BlackSteel", 0x395679);
-		addDusts("Oureclase", 0xDCA82E);
-		addDusts("AstralSilver", 0xC8D4D5);
-		addDusts("Carmot", 0xA99733);
-		addDusts("Mithril", 0x08B5C3);
-		addDusts("Rubracium", 0x8E2727);
-		addDusts("Quicksilver", 0x7CD3C7);
-		addDusts("Haderoth", 0xD1531E);
-		addDusts("Orichalcum", 0x547A38);
-		addDusts("Celenegil", 0x94CC48);
-		addDusts("Adamantine", 0xF04040);
-		addDusts("Atlarus", 0xF4D603);
-		addDusts("Tartarite", 0xFF763C);
-		addDusts("Ignatius", 0xE87400);
-		addDusts("ShadowIron", 0x8D7565);
-		addDusts("Lemurite", 0xEFEFEF);
-		addDusts("Midasium", 0xFFA826);
-		addDusts("Vyroxeres", 0x55E001);
-		addDusts("Ceruclase", 0x458FAB);
-		addDusts("Alduorite", 0xA3DEDE);
-		addDusts("Kalendrite", 0xAA5BBD);
-		addDusts("Vulcanite", 0xFF8448);
-		addDusts("Sanguinite", 0xB90000);
-		addDusts("ShadowSteel", 0x887362);
-		addDusts("Inolashite", 0x40AA7D);
-		addDusts("Amordrine", 0xA98DB1);
-		addDusts("Zinc", 0xDCDFA4);
-		addDusts("Brass", 0xD89634);
-		addDusts("Electrum", 0xDFD0AA);
-		addDusts("Aluminum", 0xEDEDED);
-		addDusts("Ardite", 0xF28900);
-		addDusts("Manyullyn", 0xAB7EE3);
-		addDusts("Cobalt", 0x0064FF);
-		addDusts("Copper", 0xBF5E1F);
-		addDusts("Lead", 0x808096);
-		addDusts("Nickel", 0xBAB0A4);
-		addDusts("Platinum", 0xABCDEF);
-		addDusts("Silver", 0xB3B3B3);
-		addDusts("Tin", 0xF2F2F2);
-}
+		int meta = 4;
+
+		BCAItemManager.dusts.addDust(meta++, "Bronze", 0xAD6726, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Manganese", 0xF3D2D2, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Hepatizon", 0x6B566B, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "DamascusSteel", 0x3D2C1F, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Angmallen", 0xFAFA6C, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Steel", 0x919191, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Eximite", 0x9E83B4, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Meutoite", 0x5F5269, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Desichalkos", 0x742EA8, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Prometheum", 0x5A8156, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "DeepIron", 0x495B69, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Infuscolium", 0xCB6293, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "BlackSteel", 0x395679, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Oureclase", 0xDCA82E, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "AstralSilver", 0xC8D4D5, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Carmot", 0xA99733, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Mithril", 0x08B5C3, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Rubracium", 0x8E2727, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Quicksilver", 0x7CD3C7, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Haderoth", 0xD1531E, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Orichalcum", 0x547A38, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Celenegil", 0x94CC48, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Adamantine", 0xF04040, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Atlarus", 0xF4D603, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Tartarite", 0xFF763C, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Ignatius", 0xE87400, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "ShadowIron", 0x8D7565, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Lemurite", 0xEFEFEF, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Midasium", 0xFFA826, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Vyroxeres", 0x55E001, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Ceruclase", 0x458FAB, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Alduorite", 0xA3DEDE, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Kalendrite", 0xAA5BBD, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Vulcanite", 0xFF8448, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Sanguinite", 0xB90000, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "ShadowSteel", 0x887362, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Inolashite", 0x40AA7D, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Amordrine", 0xA98DB1, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Zinc", 0xDCDFA4, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Brass", 0xD89634, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Electrum", 0xDFD0AA, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Aluminum", 0xEDEDED, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Ardite", 0xF28900, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Manyullyn", 0xAB7EE3, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Cobalt", 0x0064FF, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Copper", 0xBF5E1F, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Lead", 0x808096, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Nickel", 0xBAB0A4, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Platinum", 0xABCDEF, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Silver", 0xB3B3B3, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Tin", 0xF2F2F2, DustTypes.METAL_DUST);
+	}
 
 	private static void addNuggets(String metal) {
 		ArrayList<ItemStack> oreList = OreDictionary.getOres("orePoor" + metal);
@@ -203,39 +206,4 @@ public class ModIntegration {
 		}
 	}
 
-	private static void addDusts(String metalName, int color) {
-		Item itemDust;
-		ArrayList<ItemStack> list;
-		list = OreDictionary.getOres("ingot" + metalName);
-		if (list.isEmpty())
-			return;
-		if (ConfigurationHandler.shouldRegisterDusts) {
-			itemDust = new ItemDust(color).setUnlocalizedName("dust" + metalName);
-			list = OreDictionary.getOres("dust" + metalName);
-			if (!list.isEmpty()) {
-				String name = list.get(0).getUnlocalizedName();
-				name = name.replace("item.", "");
-				name = name.replace("ic2.", "");
-				itemDust.setUnlocalizedName(name);
-			}
-
-			GameRegistry.registerItem(itemDust, "dust" + metalName);
-			OreDictionary.registerOre("dust" + metalName, itemDust);
-			GameRegistry.addSmelting(itemDust, OreDictionary.getOres("ingot" + metalName).get(0).copy(), 0);
-		} else {
-			ArrayList<ItemStack> tempList = OreDictionary.getOres("dust" + metalName);
-			if (tempList.isEmpty())
-				return;
-			ItemStack stack = tempList.get(0);
-			if (stack == null)
-				return;
-			itemDust = stack.getItem();
-		}
-		list = OreDictionary.getOres("ore" + metalName);
-		for (ItemStack stack : list)
-			BCARecipeManager.duster.addRecipe(stack.copy(), new ItemStack(itemDust, 2));
-		list = OreDictionary.getOres("ingot" + metalName);
-		for (ItemStack stack : list)
-			BCARecipeManager.duster.addRecipe(stack.copy(), new ItemStack(itemDust, 1));
-	}
 }
