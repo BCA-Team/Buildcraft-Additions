@@ -20,37 +20,37 @@ import buildcraftAdditions.api.item.dust.IDust;
  */
 public class ItemDust extends Item {
 
-    public ItemDust() {
-        setUnlocalizedName("dustUnknown");
-        setTextureName("bcadditions:dust");
-        setCreativeTab(BuildcraftAdditions.bcaDusts);
-        setHasSubtypes(true);
-    }
+	public ItemDust() {
+		setUnlocalizedName("dustUnknown");
+		setTextureName("bcadditions:dust");
+		setCreativeTab(BuildcraftAdditions.bcaDusts);
+		setHasSubtypes(true);
+	}
 
-    @Override
-    public int getColorFromItemStack(ItemStack stack, int pass) {
-        IDust dust = BCAItemManager.dusts.getDust(stack.getItemDamage());
-        if (dust != null) {
-            return dust.getColorMultiplier();
-        }
-        return super.getColorFromItemStack(stack, pass);
-    }
+	@Override
+	public int getColorFromItemStack(ItemStack stack, int pass) {
+		IDust dust = BCAItemManager.dusts.getDust(stack.getItemDamage());
+		if (dust != null) {
+			return dust.getColorMultiplier();
+		}
+		return super.getColorFromItemStack(stack, pass);
+	}
 
-    @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        IDust dust = BCAItemManager.dusts.getDust(stack.getItemDamage());
-        if (dust != null) {
-            return "item.dust" + dust.getName();
-        }
-        return super.getUnlocalizedName(stack);
-    }
+	@Override
+	public String getUnlocalizedName(ItemStack stack) {
+		IDust dust = BCAItemManager.dusts.getDust(stack.getItemDamage());
+		if (dust != null) {
+			return "item.dust" + dust.getName();
+		}
+		return super.getUnlocalizedName(stack);
+	}
 
-    @Override
-    public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
-        for (IDust dust : BCAItemManager.dusts.getDusts()) {
-            if (dust != null) {
-                list.add(dust.getDustStack());
-            }
-        }
-    }
+	@Override
+	public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
+		for (IDust dust : BCAItemManager.dusts.getDusts()) {
+			if (dust != null) {
+				list.add(dust.getDustStack());
+			}
+		}
+	}
 }

@@ -6,8 +6,8 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -145,17 +145,17 @@ public class ModIntegration {
 
 		BCAItemManager.dusts.addDust(meta++, "Bronze", 0xAD6726, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Manganese", 0xF3D2D2, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++,  "Hepatizon", 0x6B566B, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++,  "DamascusSteel", 0x3D2C1F, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++,  "Angmallen", 0xFAFA6C, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++,  "Steel", 0x919191, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++,  "Eximite", 0x9E83B4, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++,  "Meutoite", 0x5F5269, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++,  "Desichalkos", 0x742EA8, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++,  "Prometheum", 0x5A8156, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++,  "DeepIron", 0x495B69, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++,  "Infuscolium", 0xCB6293, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++,  "BlackSteel", 0x395679, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Hepatizon", 0x6B566B, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "DamascusSteel", 0x3D2C1F, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Angmallen", 0xFAFA6C, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Steel", 0x919191, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Eximite", 0x9E83B4, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Meutoite", 0x5F5269, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Desichalkos", 0x742EA8, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Prometheum", 0x5A8156, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "DeepIron", 0x495B69, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Infuscolium", 0xCB6293, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "BlackSteel", 0x395679, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Oureclase", 0xDCA82E, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "AstralSilver", 0xC8D4D5, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Carmot", 0xA99733, DustTypes.METAL_DUST);
@@ -194,7 +194,7 @@ public class ModIntegration {
 		BCAItemManager.dusts.addDust(meta++, "Platinum", 0xABCDEF, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Silver", 0xB3B3B3, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Tin", 0xF2F2F2, DustTypes.METAL_DUST);
-}
+	}
 
 	private static void addNuggets(String metal) {
 		ArrayList<ItemStack> oreList = OreDictionary.getOres("orePoor" + metal);

@@ -11,16 +11,16 @@ import java.util.List;
  */
 public interface IDustManager {
 
-    void addDust(int meta, String name, int colorMultiplier, IDustType dustType);
+	void addDust(int meta, String name, int colorMultiplier, IDustType dustType);
 
-    void removeDust(int meta);
+	void removeDust(int meta);
 
-    void removeDust(String name);
+	void removeDust(String name);
 
-    IDust getDust(int meta);
+	IDust getDust(int meta);
 
-    IDust getDust(String name);
+	IDust getDust(String name);
 
-    List<? extends  IDust> getDusts();
+	List<? extends IDust> getDusts();
 
 }

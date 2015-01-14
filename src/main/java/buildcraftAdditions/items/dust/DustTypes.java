@@ -21,50 +21,50 @@ import buildcraftAdditions.api.recipe.BCARecipeManager;
  */
 public class DustTypes {
 
-    public static final IDustType METAL_DUST = new IDustType() {
+	public static final IDustType METAL_DUST = new IDustType() {
 
-        @Override
-        public void register(int meta,String name, ItemStack dust) {
-            OreDictionary.registerOre("dust" + name, dust.copy());
-            ItemStack twoDusts = dust.copy();
-            twoDusts.stackSize = 2;
-            BCARecipeManager.duster.addRecipe("ore" + name, twoDusts);
-            BCARecipeManager.duster.addRecipe("ingot" + name, dust.copy());
-            List<ItemStack> stacks = OreDictionary.getOres("ingot" + name);
-            if (stacks.size() > 0) {
-                GameRegistry.addSmelting(dust.copy(), stacks.get(0).copy(), 0);
-            }
-        }
+		@Override
+		public void register(int meta, String name, ItemStack dust) {
+			OreDictionary.registerOre("dust" + name, dust.copy());
+			ItemStack twoDusts = dust.copy();
+			twoDusts.stackSize = 2;
+			BCARecipeManager.duster.addRecipe("ore" + name, twoDusts);
+			BCARecipeManager.duster.addRecipe("ingot" + name, dust.copy());
+			List<ItemStack> stacks = OreDictionary.getOres("ingot" + name);
+			if (stacks.size() > 0) {
+				GameRegistry.addSmelting(dust.copy(), stacks.get(0).copy(), 0);
+			}
+		}
 
-        @Override
-        public String getName() {
-            return "Metal";
-        }
+		@Override
+		public String getName() {
+			return "Metal";
+		}
 
-        @Override
-        public boolean isValid(int meta, String name, ItemStack dust) {
-            return OreDictionary.getOres("ore" + name).size() > 0 || OreDictionary.getOres("ingot" + name).size() > 0 || OreDictionary.getOres("dust" + name).size() > 0;
-        }
+		@Override
+		public boolean isValid(int meta, String name, ItemStack dust) {
+			return OreDictionary.getOres("ore" + name).size() > 0 || OreDictionary.getOres("ingot" + name).size() > 0 || OreDictionary.getOres("dust" + name).size() > 0;
+		}
 
-    };
+	};
 
-    public static final IDustType GEM_DUST = new IDustType() {
+	public static final IDustType GEM_DUST = new IDustType() {
 
-        @Override
-        public void register(int meta, String name, ItemStack dust) {
-            OreDictionary.registerOre("dust" + name, dust.copy());
-            BCARecipeManager.duster.addRecipe("gem" + name, dust.copy());
-        }
+		@Override
+		public void register(int meta, String name, ItemStack dust) {
+			OreDictionary.registerOre("dust" + name, dust.copy());
+			BCARecipeManager.duster.addRecipe("gem" + name, dust.copy());
+		}
 
-        @Override
-        public String getName() {
-            return "Gem";
-        }
+		@Override
+		public String getName() {
+			return "Gem";
+		}
 
-        @Override
-        public boolean isValid(int meta, String name, ItemStack dust) {
-            return OreDictionary.getOres("ore" + name).size() > 0 || OreDictionary.getOres("gem" + name).size() > 0 || OreDictionary.getOres("dust" + name).size() > 0;
-        }
-    };
+		@Override
+		public boolean isValid(int meta, String name, ItemStack dust) {
+			return OreDictionary.getOres("ore" + name).size() > 0 || OreDictionary.getOres("gem" + name).size() > 0 || OreDictionary.getOres("dust" + name).size() > 0;
+		}
+	};
 
 }

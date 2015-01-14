@@ -1,10 +1,11 @@
 package buildcraftAdditions.items.dust;
 
+import net.minecraft.item.ItemStack;
+
+
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.item.dust.IDustType;
 import buildcraftAdditions.reference.ItemsAndBlocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -15,39 +16,39 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class Dust implements IDust {
 
-    private final String name;
-    private final int meta, colorMultiplier;
-    private final IDustType dustType;
+	private final String name;
+	private final int meta, colorMultiplier;
+	private final IDustType dustType;
 
-    public Dust(int meta, String name, int colorMultiplier, IDustType dustType) {
-        this.meta = meta;
-        this.name = name;
-        this.colorMultiplier = colorMultiplier;
-        this.dustType = dustType;
-    }
+	public Dust(int meta, String name, int colorMultiplier, IDustType dustType) {
+		this.meta = meta;
+		this.name = name;
+		this.colorMultiplier = colorMultiplier;
+		this.dustType = dustType;
+	}
 
-    @Override
-    public int getMeta() {
-        return meta;
-    }
+	@Override
+	public int getMeta() {
+		return meta;
+	}
 
-    @Override
-    public String getName() {
-        return name;
-    }
+	@Override
+	public String getName() {
+		return name;
+	}
 
-    @Override
-    public int getColorMultiplier() {
-        return colorMultiplier;
-    }
+	@Override
+	public int getColorMultiplier() {
+		return colorMultiplier;
+	}
 
-    @Override
-    public IDustType getDustType() {
-        return dustType;
-    }
+	@Override
+	public IDustType getDustType() {
+		return dustType;
+	}
 
-    @Override
-    public ItemStack getDustStack() {;
-        return new ItemStack(ItemsAndBlocks.dust, 1, getMeta());
-    }
+	@Override
+	public ItemStack getDustStack() {
+		return new ItemStack(ItemsAndBlocks.dust, 1, getMeta());
+	}
 }

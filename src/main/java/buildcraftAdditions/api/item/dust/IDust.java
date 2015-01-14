@@ -11,14 +11,14 @@ import net.minecraft.item.ItemStack;
  */
 public interface IDust {
 
-    String getName();
+	String getName();
 
-    int getMeta();
+	int getMeta();
 
-    IDustType getDustType();
+	IDustType getDustType();
 
-    int getColorMultiplier();
+	int getColorMultiplier();
 
-    ItemStack getDustStack();
+	ItemStack getDustStack();
 
 }

@@ -11,9 +11,9 @@ import buildcraftAdditions.api.item.dust.IDustManager;
  */
 public final class BCAItemManager {
 
-    public static IDustManager dusts;
+	public static IDustManager dusts;
 
-    private BCAItemManager() {
-    }
+	private BCAItemManager() {
+	}
 
 }

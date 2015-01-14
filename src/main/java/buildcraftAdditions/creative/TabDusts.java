@@ -12,24 +12,24 @@ import buildcraftAdditions.api.item.dust.IDust;
 
 public class TabDusts extends CreativeTabs {
 
-    public TabDusts() {
-        super("bcaDusts");
-    }
+	public TabDusts() {
+		super("bcaDusts");
+	}
 
-    @Override
-    public Item getTabIconItem() {
-        return null;
-    }
+	@Override
+	public Item getTabIconItem() {
+		return null;
+	}
 
-    @Override
-    public ItemStack getIconItemStack() {
-        IDust dust = BCAItemManager.dusts.getDust(3);
-        if (dust != null) {
-            ItemStack stack = dust.getDustStack();
-            if(stack != null) {
-                return stack;
-            }
-        }
-        return new ItemStack(Items.diamond);
-    }
+	@Override
+	public ItemStack getIconItemStack() {
+		IDust dust = BCAItemManager.dusts.getDust(3);
+		if (dust != null) {
+			ItemStack stack = dust.getDustStack();
+			if (stack != null) {
+				return stack;
+			}
+		}
+		return new ItemStack(Items.diamond);
+	}
 }

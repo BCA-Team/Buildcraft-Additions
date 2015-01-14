@@ -2,54 +2,22 @@ package buildcraftAdditions.reference;
 
 import net.minecraft.item.Item;
 
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.blocks.BlockBCKinesisPipeWood;
-import buildcraftAdditions.blocks.BlockBCKinisisPipeCobble;
-import buildcraftAdditions.blocks.BlockBasicCoil;
-import buildcraftAdditions.blocks.BlockBasicDuster;
-import buildcraftAdditions.blocks.BlockChargingStation;
-import buildcraftAdditions.blocks.BlockFluidicCompressor;
-import buildcraftAdditions.blocks.BlockHeatedFurnace;
-import buildcraftAdditions.blocks.BlockItemSorter;
-import buildcraftAdditions.blocks.BlockKineticCoil;
-import buildcraftAdditions.blocks.BlockKineticDuster;
-import buildcraftAdditions.blocks.BlockKineticEnergyBufferTier1;
-import buildcraftAdditions.blocks.BlockLavaCoil;
-import buildcraftAdditions.blocks.BlockMechanicalDuster;
-import buildcraftAdditions.blocks.BlockSemiAutomaticDuster;
-import buildcraftAdditions.blocks.multiBlocks.MultiBlockCoolingTowerValve;
-import buildcraftAdditions.blocks.multiBlocks.MultiBlockCoolingTowerWalls;
-import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT2;
-import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Core;
-import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Plating;
-import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryValve;
-import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryWalls;
+import buildcraftAdditions.blocks.*;
+import buildcraftAdditions.blocks.multiBlocks.*;
 import buildcraftAdditions.items.BatteryBase;
-import buildcraftAdditions.items.dust.ItemDust;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemMachineConfigurator;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ToolUpgrade;
-import buildcraftAdditions.tileEntities.TileBasicCoil;
-import buildcraftAdditions.tileEntities.TileBasicDuster;
-import buildcraftAdditions.tileEntities.TileChargingStation;
-import buildcraftAdditions.tileEntities.TileCoolingTower;
-import buildcraftAdditions.tileEntities.TileFluidicCompressor;
-import buildcraftAdditions.tileEntities.TileHeatedFurnace;
-import buildcraftAdditions.tileEntities.TileItemSorter;
-import buildcraftAdditions.tileEntities.TileKEBT2;
-import buildcraftAdditions.tileEntities.TileKEBT3;
-import buildcraftAdditions.tileEntities.TileKineticCoil;
-import buildcraftAdditions.tileEntities.TileKineticDuster;
-import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
-import buildcraftAdditions.tileEntities.TileLavaCoil;
-import buildcraftAdditions.tileEntities.TileMechanicalDuster;
-import buildcraftAdditions.tileEntities.TileRefinery;
-import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
+import buildcraftAdditions.items.dust.ItemDust;
+import buildcraftAdditions.tileEntities.*;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

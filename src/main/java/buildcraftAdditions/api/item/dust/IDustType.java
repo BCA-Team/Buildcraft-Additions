@@ -11,10 +11,10 @@ import net.minecraft.item.ItemStack;
  */
 public interface IDustType {
 
-    void register(int meta, String name, ItemStack dust);
+	void register(int meta, String name, ItemStack dust);
 
-    String getName();
+	String getName();
 
-    boolean isValid(int meta, String name, ItemStack dust);
+	boolean isValid(int meta, String name, ItemStack dust);
 
 }

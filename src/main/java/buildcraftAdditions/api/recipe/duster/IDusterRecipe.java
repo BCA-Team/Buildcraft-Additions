@@ -11,8 +11,8 @@ import net.minecraft.item.ItemStack;
  */
 public interface IDusterRecipe {
 
-    ItemStack getInput();
+	ItemStack getInput();
 
-    ItemStack getOutput();
+	ItemStack getOutput();
 
 }
