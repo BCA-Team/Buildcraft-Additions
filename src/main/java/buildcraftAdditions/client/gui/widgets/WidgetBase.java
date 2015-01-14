@@ -1,12 +1,14 @@
 package buildcraftAdditions.client.gui.widgets;
 
-import buildcraftAdditions.client.gui.gui.GuiBase;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocation;
+import java.awt.Rectangle;
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
-import java.awt.*;
-import java.util.List;
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.util.ResourceLocation;
+
+import buildcraftAdditions.client.gui.gui.GuiBase;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -49,6 +51,10 @@ public class WidgetBase {
 	public WidgetBase(int id, int x, int y, int u, int v, int width, int height, GuiBase gui, int value, String... textures) {
 		this(id, x, y, u, v, width, height, gui, textures);
 		this.value = value;
+	}
+
+	public WidgetBase(int id, int x, int y, int width, int height, GuiBase gui) {
+		this(id, x, y, 0, 0, width, height, gui, "");
 	}
 
 	public WidgetBase setEnableClockSound(boolean value) {

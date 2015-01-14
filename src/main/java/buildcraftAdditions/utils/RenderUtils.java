@@ -76,4 +76,15 @@ public class RenderUtils
 	public static IIcon registerIcon(IIconRegister register, String name) {
 		return register.registerIcon(Variables.MOD.ID + ":" + name);
 	}
+
+	public static void drawImage(ResourceLocation image, int x, int y, int width, int height) {
+		bindTexture(image);
+		Tessellator tess = Tessellator.instance;
+		tess.startDrawingQuads();
+		tess.addVertexWithUV(x, y + height, 0, 0, height);
+		tess.addVertexWithUV(x + width, y + height, 0, width, height);
+		tess.addVertexWithUV(x + width, y, 0, width, height);
+		tess.addVertexWithUV(x, y, 0, 0, height);
+		tess.draw();
+	}
 }

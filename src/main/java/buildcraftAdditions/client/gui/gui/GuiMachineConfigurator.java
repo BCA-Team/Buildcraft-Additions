@@ -3,6 +3,7 @@ package buildcraftAdditions.client.gui.gui;
 import net.minecraft.util.ResourceLocation;
 
 import buildcraftAdditions.client.gui.containers.ContainerMachineConfigurator;
+import buildcraftAdditions.client.gui.widgets.WidgetButton;
 import buildcraftAdditions.utils.IConfigurableOutput;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -54,7 +55,7 @@ public class GuiMachineConfigurator extends GuiBase {
 
 	@Override
 	public void initialize() {
-
+		addWidget(new WidgetButton(0, 20, 20, 120, this));
 	}
 
 	@Override
