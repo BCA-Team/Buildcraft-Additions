@@ -106,6 +106,12 @@ trigger.hasEmptyCanister=Has Empty Canister
 trigger.hasFullCanister=Has Full Canister
 trigger.doneCharging=Done Charging
 trigger.readyToCharge=Ready To Charge
+trigger.KEBCharged=Fully charged
+trigger.KEBUnder25=Less the 25% charged
+trigger.KEBUnder50=Less then 50% charged
+trigger.KEBUnder75=Less then 75% charged
+trigger.KEBUnder100=Less then 100% charged
+trigger.KEBEngineControl=Smart Engine Control
 
 itemGroup.BuildcraftAdditions=Buildcraft Additions
 itemGroup.bcaCanisters=Fluid Canisters

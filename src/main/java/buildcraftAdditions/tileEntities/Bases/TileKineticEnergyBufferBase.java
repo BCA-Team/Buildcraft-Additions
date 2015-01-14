@@ -32,7 +32,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
 	public EnumSideStatus[] configuration = new EnumSideStatus[6];
 	public int tier;
-	public boolean selfDestruct;
+	public boolean selfDestruct, engineControl;
 	public String owner = "";
 	public EntityPlayer destroyer;
 
@@ -94,6 +94,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 		maxInput = tag.getInteger("maxInput");
 		maxOutput = tag.getInteger("maxOutput");
 		loss = tag.getInteger("loss");
+		engineControl = tag.getBoolean("engineControl");
 		if (tag.hasKey("configuration")) {
 			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
 				configuration[direction.ordinal()] = Utils.intToStatus(tag.getInteger("configuration" + direction.ordinal()));
@@ -111,6 +112,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 		tag.setInteger("maxOutput", maxOutput);
 		tag.setInteger("loss", loss);
 		tag.setBoolean("configuration", true);
+		tag.setBoolean("engineControl", engineControl);
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 			tag.setInteger("configuration" + direction.ordinal(), Utils.statusToInt(configuration[direction.ordinal()]));
 		}
@@ -120,6 +122,10 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 
 	@Override
 	public void updateEntity() {
+		if (getEnergyLevel() > 85)
+			engineControl = false;
+		if (getEnergyLevel() < 30)
+			engineControl = true;
 		super.updateEntity();
 		if (selfDestruct) {
 			fuse--;
