@@ -22,7 +22,7 @@ public class ContainerHeatedFurnace extends ContainerBase {
 		this.furnace = furnace;
 
 		this.addSlotToContainer(new Slot(furnace, 0, 56, 34));
-		this.addSlotToContainer(new Slot(furnace, 1, 116, 34));
+		this.addSlotToContainer(new SlotOutput(furnace, 1, 116, 34));
 
 		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex) {
 			for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex) {
