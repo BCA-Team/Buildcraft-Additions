@@ -112,6 +112,7 @@ public class BuildcraftAdditions {
 		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
 	}
 
+	@Mod.EventHandler
 	public void onIMC(FMLInterModComms.IMCEvent event) {
 		processIMC(event.getMessages());
 	}
