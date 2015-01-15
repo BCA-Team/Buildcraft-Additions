@@ -173,7 +173,7 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 
 	@Override
 	public void dust() {
-		ItemStack output = BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput();
+		ItemStack output = BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput(getStackInSlot(0));
 
 		//first try to put it into a pipe
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {

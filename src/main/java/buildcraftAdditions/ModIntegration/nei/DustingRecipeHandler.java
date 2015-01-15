@@ -1,24 +1,23 @@
 package buildcraftAdditions.ModIntegration.nei;
 
-import buildcraftAdditions.api.recipe.BCARecipeManager;
-import buildcraftAdditions.api.IStackInfo;
-import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
-import codechicken.nei.NEIServerUtils;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
+import java.awt.Rectangle;
+import java.util.Arrays;
+import java.util.List;
+
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import org.lwjgl.opengl.GL11;
 
-import java.awt.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
+import buildcraftAdditions.api.recipe.BCARecipeManager;
+import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
 
 import static codechicken.lib.gui.GuiDraw.changeTexture;
 import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
+import codechicken.nei.NEIServerUtils;
+import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.TemplateRecipeHandler;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -46,8 +45,10 @@ public class DustingRecipeHandler extends TemplateRecipeHandler {
     @Override
     public void loadCraftingRecipes(String outputId, Object... results) {
         if (outputId.equals(getRecipeID())) {
-            for (IDusterRecipe recipe : BCARecipeManager.duster.getRecipes())
-                arecipes.add(new CachedDustingRecipe(recipe.getInput(), recipe.getOutput()));
+            for (IDusterRecipe recipe : BCARecipeManager.duster.getRecipes()) {
+                for (ItemStack stack : recipe.getInputs())
+                    arecipes.add(new CachedDustingRecipe(stack, recipe.getOutput(stack)));
+            }
         } else {
             super.loadCraftingRecipes(outputId, results);
         }
@@ -56,8 +57,10 @@ public class DustingRecipeHandler extends TemplateRecipeHandler {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (IDusterRecipe recipe : BCARecipeManager.duster.getRecipes()) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getOutput(), result)) {
-                arecipes.add(new CachedDustingRecipe(recipe.getInput(), recipe.getOutput()));
+            for (ItemStack stack : recipe.getInputs()) {
+                if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getOutput(stack), result)) {
+                    arecipes.add(new CachedDustingRecipe(stack, recipe.getOutput(stack)));
+                }
             }
         }
     }
@@ -65,10 +68,12 @@ public class DustingRecipeHandler extends TemplateRecipeHandler {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         for (IDusterRecipe recipe : BCARecipeManager.duster.getRecipes()) {
-            if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getInput(), ingredient)) {
-                CachedDustingRecipe cRecipe = new CachedDustingRecipe(recipe.getInput(), recipe.getOutput());
-                cRecipe.setIngredientPermutation(cRecipe.getIngredients(), ingredient);
-                arecipes.add(cRecipe);
+            for (ItemStack stack : recipe.getInputs()) {
+                if (NEIServerUtils.areStacksSameTypeCrafting(stack, ingredient)) {
+                    CachedDustingRecipe cRecipe = new CachedDustingRecipe(stack, recipe.getOutput(stack));
+                    cRecipe.setIngredientPermutation(cRecipe.getIngredients(), ingredient);
+                    arecipes.add(cRecipe);
+                }
             }
         }
     }

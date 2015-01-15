@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class Utils {
 
@@ -101,6 +102,10 @@ public class Utils {
 		if (status == EnumSideStatus.DISSABLED)
 			return 3;
 		return -1;
+	}
+
+	public static boolean areItemStacksEqualItem(ItemStack stack1, ItemStack stack2) {
+		return (stack1.getItem().equals(stack2.getItem()) && stack1.getItemDamage() == stack2.getItemDamage() || stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack1.getItem().isDamageable());
 	}
 
 }

@@ -101,7 +101,7 @@ public class TileBasicDuster extends TileBaseDuster {
 
 	@Override
 	public void dust() {
-		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput());
+		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput(getStackInSlot(0)));
 		setInventorySlotContents(0, null);
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}

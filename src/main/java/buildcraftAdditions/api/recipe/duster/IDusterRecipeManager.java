@@ -17,6 +17,8 @@ public interface IDusterRecipeManager {
 
 	void addRecipe(String oreInput, ItemStack output);
 
+	void addRecipe(IDusterRecipe recipe);
+
 	void removeRecipe(ItemStack input);
 
 	IDusterRecipe getRecipe(ItemStack input);

@@ -39,7 +39,7 @@ public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 
 	@Override
 	public void dust() {
-		ItemStack output = BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput();
+		ItemStack output = BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput(getStackInSlot(0));
 
 		//first try to put it intro a pipe
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {

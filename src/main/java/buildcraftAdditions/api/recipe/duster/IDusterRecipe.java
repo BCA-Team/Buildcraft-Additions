@@ -1,5 +1,7 @@
 package buildcraftAdditions.api.recipe.duster;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 
 /**
@@ -11,8 +13,8 @@ import net.minecraft.item.ItemStack;
  */
 public interface IDusterRecipe {
 
-	ItemStack getInput();
+	List<ItemStack> getInputs();
 
-	ItemStack getOutput();
+	ItemStack getOutput(ItemStack input);
 
 }

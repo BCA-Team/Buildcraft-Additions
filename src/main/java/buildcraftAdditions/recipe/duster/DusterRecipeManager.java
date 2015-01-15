@@ -8,7 +8,6 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StringUtils;
 
-
 import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
@@ -24,7 +23,7 @@ import buildcraftAdditions.core.Logger;
  */
 public class DusterRecipeManager implements IDusterRecipeManager {
 
-	List<IDusterRecipe> recipes = new ArrayList<IDusterRecipe>();
+	private List<IDusterRecipe> recipes = new ArrayList<IDusterRecipe>();
 
 	@Override
 	public void addRecipe(ItemStack input, ItemStack output) {
@@ -36,7 +35,7 @@ public class DusterRecipeManager implements IDusterRecipeManager {
 		if (recipe != null) {
 			Logger.error("Duster recipe with input  " + input + " is already registered! Skipping.");
 			Logger.error("Was trying to add: Input: " + input + " Output: " + output);
-			Logger.error("Found: Input: " + recipe.getInput() + " Output: " + recipe.getOutput());
+			Logger.error("Found: Input: " + input + " Output: " + recipe.getOutput(input));
 			return;
 		}
 		recipes.add(new DusterRecipe(input, output));
@@ -49,8 +48,13 @@ public class DusterRecipeManager implements IDusterRecipeManager {
 			return;
 		}
 		for (ItemStack input : OreDictionary.getOres(oreInput)) {
-			addRecipe(input, output);
+			recipes.add(new DusterRecipeOreDict(oreInput, output));
 		}
+	}
+
+	@Override
+	public void addRecipe(IDusterRecipe recipe) {
+		recipes.add(recipe);
 	}
 
 	@Override
@@ -58,11 +62,9 @@ public class DusterRecipeManager implements IDusterRecipeManager {
 		if (input != null) {
 			IDusterRecipe recipe = null;
 			for (Iterator<IDusterRecipe> iterator = recipes.iterator(); iterator.hasNext(); recipe = iterator.next()) {
-				if (recipe != null && recipe.getInput().getItem().equals(input.getItem())) {
-					if (recipe.getInput().getItemDamage() == input.getItemDamage() || recipe.getInput().getItemDamage() == OreDictionary.WILDCARD_VALUE || input.getItemDamage() == OreDictionary.WILDCARD_VALUE || recipe.getInput().getItem().isDamageable()) {
-						iterator.remove();
-						return;
-					}
+				if (recipe != null && recipe.getOutput(input) != null) {
+					iterator.remove();
+					return;
 				}
 			}
 		}
@@ -72,10 +74,8 @@ public class DusterRecipeManager implements IDusterRecipeManager {
 	public IDusterRecipe getRecipe(ItemStack input) {
 		if (input != null) {
 			for (IDusterRecipe recipe : recipes) {
-				if (recipe != null && recipe.getInput().getItem().equals(input.getItem())) {
-					if (recipe.getInput().getItemDamage() == input.getItemDamage() || recipe.getInput().getItemDamage() == OreDictionary.WILDCARD_VALUE || input.getItemDamage() == OreDictionary.WILDCARD_VALUE || recipe.getInput().getItem().isDamageable()) {
-						return recipe;
-					}
+				if (recipe != null && recipe.getOutput(input) != null) {
+					return recipe;
 				}
 			}
 		}
