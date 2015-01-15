@@ -1,14 +1,9 @@
 package buildcraftAdditions;
 
-import com.google.common.collect.ImmutableList;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.StringUtils;
-
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -20,10 +15,10 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.Constants;
 
 import buildcraftAdditions.ModIntegration.ModIntegration;
 import buildcraftAdditions.ModIntegration.imc.IMCHandler;
+import buildcraftAdditions.ModIntegration.imc.IMCSender;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
@@ -76,6 +71,16 @@ public class BuildcraftAdditions {
 	}
 
 	@Mod.EventHandler
+	public void load(FMLInitializationEvent event) {
+		proxy.registerRenderers();
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+		FMLCommonHandler.instance().bus().register(new EventListener.FML());
+		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
+
+		IMCSender.sendMessages();
+	}
+
+	@Mod.EventHandler
 	public void doneLoading(FMLLoadCompleteEvent event) {
 		ItemsAndBlocks.addRecipes();
 
@@ -103,14 +108,6 @@ public class BuildcraftAdditions {
 		}
 
 		IMCHandler.handleIMC(FMLInterModComms.fetchRuntimeMessages(this));
-	}
-
-	@Mod.EventHandler
-	public void load(FMLInitializationEvent event) {
-		proxy.registerRenderers();
-		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-		FMLCommonHandler.instance().bus().register(new EventListener.FML());
-		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
 	}
 
 	@Mod.EventHandler
