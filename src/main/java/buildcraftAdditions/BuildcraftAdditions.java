@@ -1,20 +1,26 @@
 package buildcraftAdditions;
 
+import com.google.common.collect.ImmutableList;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StringUtils;
 
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.Constants;
 
 import buildcraftAdditions.ModIntegration.ModIntegration;
 import buildcraftAdditions.api.item.BCAItemManager;
@@ -94,6 +100,8 @@ public class BuildcraftAdditions {
 				dust.getDustType().register(dust.getMeta(), dust.getName(), dust.getDustStack());
 			}
 		}
+
+		processIMC(FMLInterModComms.fetchRuntimeMessages(this));
 	}
 
 	@Mod.EventHandler
@@ -104,5 +112,39 @@ public class BuildcraftAdditions {
 		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
 	}
 
-}
+	@Mod.EventHandler
+	public void onIMC(FMLInterModComms.IMCEvent event) {
+		processIMC(event.getMessages());
+	}
 
+	private void processIMC(ImmutableList<FMLInterModComms.IMCMessage> messages) {
+		for (FMLInterModComms.IMCMessage message : messages) {
+			if ("addDusting".equalsIgnoreCase(message.key) && message.isNBTMessage() && message.getNBTValue().hasKey("output", Constants.NBT.TAG_COMPOUND)) {
+				NBTTagCompound nbt = message.getNBTValue().getCompoundTag("output");
+				if (nbt != null) {
+					ItemStack output = ItemStack.loadItemStackFromNBT(nbt);
+					if (output != null) {
+						if (message.getNBTValue().hasKey("input", Constants.NBT.TAG_COMPOUND)) {
+							nbt = message.getNBTValue().getCompoundTag("input");
+							if (nbt != null) {
+								ItemStack input = ItemStack.loadItemStackFromNBT(nbt);
+								if (input != null) {
+									BCARecipeManager.duster.addRecipe(input, output);
+									continue;
+								}
+							}
+						}
+						if (message.getNBTValue().hasKey("oreInput", Constants.NBT.TAG_STRING)) {
+							String oreInput = nbt.getString("oreInput");
+							if (!StringUtils.isNullOrEmpty(oreInput)) {
+								BCARecipeManager.duster.addRecipe(oreInput, output);
+								continue;
+							}
+						}
+					}
+				}
+			}
+			Logger.error("The mod '" + message.getSender() + "' send an invalid IMC message (" + message.key + ") ! Skipping.");
+		}
+	}
+}
