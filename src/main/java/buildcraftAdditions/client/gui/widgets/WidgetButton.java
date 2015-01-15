@@ -24,7 +24,7 @@ public class WidgetButton extends WidgetBase {
 
 	@Override
 	public void render(int mouseX, int mouseY) {
-		RenderUtils.drawImage(LEFT, x, y, 6, 20, gui.getZLevel());
+		RenderUtils.drawImage(LEFT, x, y, 6, 20);
 	}
 
 	@Override

@@ -206,8 +206,4 @@ public abstract class GuiBase extends GuiContainer {
 		buttonList.clear();
 		initialize();
 	}
-
-	public float getZLevel() {
-		return zLevel;
-	}
 }

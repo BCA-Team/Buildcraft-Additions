@@ -77,14 +77,14 @@ public class RenderUtils
 		return register.registerIcon(Variables.MOD.ID + ":" + name);
 	}
 
-	public static void drawImage(ResourceLocation image, int x, int y, int width, int height, float zLevel) {
+	public static void drawImage(ResourceLocation image, int x, int y, int width, int height) {
 		bindTexture(image);
 		Tessellator tess = Tessellator.instance;
 		tess.startDrawingQuads();
-		tess.addVertexWithUV(x, y + height, zLevel, 0, 1);
-		tess.addVertexWithUV(x + width, y + height, zLevel, 1, 1);
-		tess.addVertexWithUV(x + width, y, zLevel, 1, 0);
-		tess.addVertexWithUV(x, y, zLevel, 0, 0);
+		tess.addVertexWithUV(x, y + height, 0, 0, 1);
+		tess.addVertexWithUV(x + width, y + height, 0, 1, 1);
+		tess.addVertexWithUV(x + width, y, 0, 1, 0);
+		tess.addVertexWithUV(x, y, 0, 0, 0);
 		tess.draw();
 	}
 }
