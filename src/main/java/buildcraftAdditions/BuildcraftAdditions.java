@@ -23,6 +23,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants;
 
 import buildcraftAdditions.ModIntegration.ModIntegration;
+import buildcraftAdditions.ModIntegration.imc.IMCHandler;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
@@ -101,7 +102,7 @@ public class BuildcraftAdditions {
 			}
 		}
 
-		processIMC(FMLInterModComms.fetchRuntimeMessages(this));
+		IMCHandler.handleIMC(FMLInterModComms.fetchRuntimeMessages(this));
 	}
 
 	@Mod.EventHandler
@@ -114,37 +115,6 @@ public class BuildcraftAdditions {
 
 	@Mod.EventHandler
 	public void onIMC(FMLInterModComms.IMCEvent event) {
-		processIMC(event.getMessages());
-	}
-
-	private void processIMC(ImmutableList<FMLInterModComms.IMCMessage> messages) {
-		for (FMLInterModComms.IMCMessage message : messages) {
-			if ("addDusting".equalsIgnoreCase(message.key) && message.isNBTMessage() && message.getNBTValue().hasKey("output", Constants.NBT.TAG_COMPOUND)) {
-				NBTTagCompound nbt = message.getNBTValue().getCompoundTag("output");
-				if (nbt != null) {
-					ItemStack output = ItemStack.loadItemStackFromNBT(nbt);
-					if (output != null) {
-						if (message.getNBTValue().hasKey("input", Constants.NBT.TAG_COMPOUND)) {
-							nbt = message.getNBTValue().getCompoundTag("input");
-							if (nbt != null) {
-								ItemStack input = ItemStack.loadItemStackFromNBT(nbt);
-								if (input != null) {
-									BCARecipeManager.duster.addRecipe(input, output);
-									continue;
-								}
-							}
-						}
-						if (message.getNBTValue().hasKey("oreInput", Constants.NBT.TAG_STRING)) {
-							String oreInput = nbt.getString("oreInput");
-							if (!StringUtils.isNullOrEmpty(oreInput)) {
-								BCARecipeManager.duster.addRecipe(oreInput, output);
-								continue;
-							}
-						}
-					}
-				}
-			}
-			Logger.error("The mod '" + message.getSender() + "' send an invalid IMC message (" + message.key + ") ! Skipping.");
-		}
+		IMCHandler.handleIMC(event.getMessages());
 	}
 }
