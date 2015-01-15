@@ -93,6 +93,7 @@ gui.Input=Input
 gui.Output=Output
 gui.Disabled=Disabled
 gui.Both=Both
+gui.machineConfigurator.name=Machine Configurator
 
 gui.keb.dangerousButton=BIG RED BUTTONS ARE VERY DANGEROUS
 gui.keb.noPushing=DON'T PUSH IT

@@ -1,20 +1,22 @@
 package buildcraftAdditions.client.gui.gui;
 
-import buildcraftAdditions.client.gui.widgets.WidgetBase;
-import buildcraftAdditions.proxy.ClientProxy;
-import buildcraftAdditions.utils.RenderUtils;
-import eureka.utils.Utils;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.text.WordUtils;
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import org.apache.commons.lang3.text.WordUtils;
-import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.List;
+import buildcraftAdditions.client.gui.widgets.WidgetBase;
+import buildcraftAdditions.utils.RenderUtils;
+
+import eureka.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -203,5 +205,9 @@ public abstract class GuiBase extends GuiContainer {
 		widgets.clear();
 		buttonList.clear();
 		initialize();
+	}
+
+	public float getZLevel() {
+		return zLevel;
 	}
 }

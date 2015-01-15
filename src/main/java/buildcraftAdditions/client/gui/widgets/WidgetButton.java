@@ -14,9 +14,9 @@ import buildcraftAdditions.utils.RenderUtils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class WidgetButton extends WidgetBase {
-	public static final ResourceLocation LEFT = new ResourceLocation("bcadditions:textures/gui/Pieces/button1Left.png");
-	public static final ResourceLocation RIGHT = new ResourceLocation("bcadditions:textures/gui/Pieces/button1Right.png");
-	public static final ResourceLocation MIDDLE = new ResourceLocation("bcadditions:textures/gui/Pieces/button1CenterPart.png");
+	public static ResourceLocation LEFT = new ResourceLocation("bcadditions:textures/gui/button1Left.png");
+	public static ResourceLocation RIGHT = new ResourceLocation("bcadditions:textures/gui/button1Right.png");
+	public static ResourceLocation MIDDLE = new ResourceLocation("bcadditions:textures/gui/button1CenterPart.png");
 
 	public WidgetButton(int id, int x, int y, int width, GuiBase gui) {
 		super(id, x, y, width, 21, gui);
@@ -24,7 +24,7 @@ public class WidgetButton extends WidgetBase {
 
 	@Override
 	public void render(int mouseX, int mouseY) {
-		RenderUtils.drawImage(LEFT, x, y, 6, 20);
+		RenderUtils.drawImage(LEFT, x, y, 6, 20, gui.getZLevel());
 	}
 
 	@Override
