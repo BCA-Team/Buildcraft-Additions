@@ -17,14 +17,31 @@ public class WidgetButton extends WidgetBase {
 	public static ResourceLocation LEFT = new ResourceLocation("bcadditions:textures/gui/button1Left.png");
 	public static ResourceLocation RIGHT = new ResourceLocation("bcadditions:textures/gui/button1Right.png");
 	public static ResourceLocation MIDDLE = new ResourceLocation("bcadditions:textures/gui/button1CenterPart.png");
+	public static ResourceLocation MIDDLESIDEHOVER = new ResourceLocation("bcadditions:textures/gui/button1CenterSidesOnHover.png");
+	public static ResourceLocation MIDDLEHOVER = new ResourceLocation("bcadditions:textures/gui/button1CenterOnHover.png");
 
-	public WidgetButton(int id, int x, int y, int width, GuiBase gui) {
-		super(id, x, y, width, 21, gui);
+	public WidgetButton(int id, int x, int y, int width, int height, GuiBase gui) {
+		super(id, x, y, width, height, gui);
 	}
 
 	@Override
 	public void render(int mouseX, int mouseY) {
-		RenderUtils.drawImage(LEFT, x, y, 6, 20);
+
+		int t = 6;
+		ResourceLocation centerPiece = MIDDLE;
+		if (getBounds().contains(mouseX, mouseY)) {
+			centerPiece = MIDDLEHOVER;
+		}
+		while (t < width - 6) {
+			RenderUtils.drawImage(centerPiece, x + t, y, 1, height);
+			t++;
+		}
+		RenderUtils.drawImage(RIGHT, x + width - 6, y, 6, height);
+		RenderUtils.drawImage(LEFT, x, y, 6, height);
+		if (getBounds().contains(mouseX, mouseY)) {
+			RenderUtils.drawImage(MIDDLESIDEHOVER, x + 6, y, 1, height);
+			RenderUtils.drawImage(MIDDLESIDEHOVER, x + width - 6, y, 1, height);
+		}
 	}
 
 	@Override

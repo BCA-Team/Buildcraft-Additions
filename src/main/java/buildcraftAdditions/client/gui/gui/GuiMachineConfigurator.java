@@ -5,6 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import buildcraftAdditions.client.gui.containers.ContainerMachineConfigurator;
 import buildcraftAdditions.client.gui.widgets.WidgetButton;
 import buildcraftAdditions.utils.IConfigurableOutput;
+import buildcraftAdditions.utils.Utils;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -15,6 +16,7 @@ import buildcraftAdditions.utils.IConfigurableOutput;
 public class GuiMachineConfigurator extends GuiBase {
 	public ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/machineConfigurator.png");
 	private IConfigurableOutput configurableOutput;
+	private WidgetButton north, east, south, west, up, down;
 
 	public GuiMachineConfigurator(IConfigurableOutput configurableOutput) {
 		super(new ContainerMachineConfigurator());
@@ -40,7 +42,7 @@ public class GuiMachineConfigurator extends GuiBase {
 
 	@Override
 	public int getXSize() {
-		return 175;
+		return 224;
 	}
 
 	@Override
@@ -55,11 +57,16 @@ public class GuiMachineConfigurator extends GuiBase {
 
 	@Override
 	public void initialize() {
-		addWidget(new WidgetButton(0, 20, 20, 120, this));
+		north = new WidgetButton(0, guiLeft + 10, 67, 60, 15, this);
+		east = new WidgetButton(0, 240, 67, 60, 15, this);
+		addWidget(north);
+		addWidget(east);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		super.drawGuiContainerBackgroundLayer(f, x, y);
+		drawString(Utils.localize("gui.north") + ":", guiLeft + 10, guiTop + 30);
+		drawString(Utils.localize("gui.east") + ": ", 213, 70);
 	}
 }
