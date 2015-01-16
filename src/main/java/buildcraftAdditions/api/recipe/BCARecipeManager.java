@@ -1,6 +1,8 @@
 package buildcraftAdditions.api.recipe;
 
 import buildcraftAdditions.api.recipe.duster.IDusterRecipeManager;
+import buildcraftAdditions.api.recipe.refinery.ICoolingTowerRecipeManager;
+import buildcraftAdditions.api.recipe.refinery.IRefineryRecipeManager;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -12,6 +14,10 @@ import buildcraftAdditions.api.recipe.duster.IDusterRecipeManager;
 public final class BCARecipeManager {
 
 	public static IDusterRecipeManager duster;
+
+	public static IRefineryRecipeManager refinery;
+
+	public static ICoolingTowerRecipeManager cooling;
 
 	private BCARecipeManager() {
 	}
