@@ -36,6 +36,7 @@ public class BuildcraftIntegration {
 
 	public static void integrate() {
 		Triggers.register();
+		addBCRecipes();
 	}
 
 	private static void addBCRecipes() {
