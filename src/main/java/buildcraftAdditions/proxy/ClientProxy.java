@@ -13,6 +13,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -21,6 +22,7 @@ import net.minecraftforge.fluids.Fluid;
 import buildcraftAdditions.client.render.CanisterItemRender;
 import buildcraftAdditions.client.render.RendererDuster;
 import buildcraftAdditions.client.render.RendererDusterKinetic;
+import buildcraftAdditions.client.render.RendererItemSorter;
 import buildcraftAdditions.client.render.RendererKEBT2;
 import buildcraftAdditions.client.render.RendererKEBT3;
 import buildcraftAdditions.reference.ItemsAndBlocks;
@@ -45,6 +47,8 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileKineticDuster.class, new RendererDusterKinetic());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileKEBT2.class, new RendererKEBT2());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileKEBT3.class, new RendererKEBT3());
+		RendererItemSorter.RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(new RendererItemSorter());
 	}
 
 	@Override

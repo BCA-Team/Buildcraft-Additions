@@ -20,6 +20,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.tools.IToolWrench;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.client.render.RendererItemSorter;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.utils.RenderUtils;
@@ -61,6 +62,21 @@ public class BlockItemSorter extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public int getRenderType() {
+		return RendererItemSorter.RENDER_ID;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta) {
+		ForgeDirection direction = ForgeDirection.getOrientation(meta);
+		if (side == direction.ordinal() || side == direction.getOpposite().ordinal())
+			return textureUp;
+		return textureSide;
+	}
+
+	/*@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		switch (side) {
 			case 0:
@@ -81,6 +97,7 @@ public class BlockItemSorter extends BlockContainer {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) { //Terrible code but works
 		int meta = world.getBlockMetadata(x, y, z);
 
@@ -160,7 +177,7 @@ public class BlockItemSorter extends BlockContainer {
 			default:
 				return blockIcon;
 		}
-	}
+	}*/
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
