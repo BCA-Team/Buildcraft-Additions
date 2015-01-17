@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -16,18 +18,13 @@ import buildcraft.api.transport.IPipeConnection;
 import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.api.RecipeMananger;
-import buildcraftAdditions.api.RefineryRecipe;
+import buildcraftAdditions.api.recipe.BCARecipeManager;
+import buildcraftAdditions.api.recipe.refinery.IRefineryRecipe;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
-import buildcraftAdditions.utils.ITankHolder;
-import buildcraftAdditions.utils.Location;
-import buildcraftAdditions.utils.MultiBlockData;
-import buildcraftAdditions.utils.RotationUtils;
-import buildcraftAdditions.utils.Tank;
+import buildcraftAdditions.utils.*;
 
-import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -41,8 +38,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public TileRefinery master;
 	private Tank input = new Tank(3000, this, "Input");
 	private Tank output = new Tank(3000, this, "Output");
-	private Fluid outputFluid;
-	private int inputAmount, outputAmount;
+	private FluidStack outputFluidStack;
+	private FluidStack inputFluidStack;
 	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.REFINERY);
 
 	public TileRefinery() {
@@ -60,8 +57,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			data.afterMoveCheck(worldObj);
 			data.moved = false;
 		}
-		if (input.getFluid() != null && input.getFluid().amount == 0)
+		if (input.getFluid() != null && input.getFluid().amount <= 0)
 			input.setFluid(null);
+		if (output.getFluid() != null && output.getFluid().amount <= 0)
+			output.setFluid(null);
 		if (input.getFluid() == null)
 			updateRecipe();
 		updateHeat();
@@ -72,11 +71,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (currentHeat < requiredHeat) {
 			return;
 		}
-
-		if (energyCost == 0 || output.isFull() || input.isEmpty())
+		if (energyCost == 0 || input.isEmpty() || output.isFull() || !input.getFluid().isFluidEqual(inputFluidStack) || input.getFluidAmount() < inputFluidStack.amount || (!output.isEmpty() && !output.getFluid().isFluidEqual(outputFluidStack)) || output.getCapacity() - output.getFluidAmount() < outputFluidStack.amount)
 			return;
-		input.drain(inputAmount, true);
-		output.fill(new FluidStack(outputFluid, outputAmount), true);
+		input.drain(inputFluidStack.amount, true);
+		output.fill(outputFluidStack, true);
 	}
 
 	private void updateHeat() {
@@ -100,14 +98,14 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	private void updateRecipe() {
 		if (!input.isEmpty()) {
-			RefineryRecipe recipe = RecipeMananger.getRefineryRecipe(input.getFluid().getFluid());
+			IRefineryRecipe recipe = BCARecipeManager.refinery.getRecipe(input.getFluid());
 			requiredHeat = recipe.getRequiredHeat();
 			lastRequiredHeat = requiredHeat;
-			outputFluid = recipe.getOutput();
-			outputAmount = recipe.getOutputAmount();
-			inputAmount = recipe.getInputAmount();
-		} else
-		requiredHeat = 0;
+			outputFluidStack = recipe.getOutput();
+			inputFluidStack = recipe.getInput();
+		} else {
+			requiredHeat = 0;
+		}
 	}
 
 	@Override
