@@ -43,6 +43,8 @@ public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 
 		//first try to put it intro a pipe
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+			if (configuration[direction.ordinal()] == EnumSideStatus.DISSABLED || configuration[direction.ordinal()] == EnumSideStatus.INPUT)
+				continue;
 			int x = xCoord + direction.offsetX;
 			int y = yCoord + direction.offsetY;
 			int z = zCoord + direction.offsetZ;
@@ -59,6 +61,8 @@ public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 		}
 		//try to put it intro an inventory
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+			if (configuration[direction.ordinal()] == EnumSideStatus.DISSABLED || configuration[direction.ordinal()] == EnumSideStatus.INPUT)
+				continue;
 			int x = xCoord + direction.offsetX;
 			int y = yCoord + direction.offsetY;
 			int z = zCoord + direction.offsetZ;
@@ -74,7 +78,8 @@ public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 						int toMove;
 						if (stack == null) {
 							toMove = stackLimit - 1;
-							stack = new ItemStack(output.getItem(), 0);
+							stack = output.copy();
+							stack.stackSize = 0;
 						} else {
 							toMove = stackLimit - stack.stackSize;
 						}
