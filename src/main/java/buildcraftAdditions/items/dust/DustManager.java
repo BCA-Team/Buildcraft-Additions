@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import net.minecraft.item.Item;
 import net.minecraft.util.StringUtils;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -49,7 +50,7 @@ public class DustManager implements IDustManager {
 		if (dustType.isValid(meta, name, dust.getDustStack())) {
 			dusts[meta] = dust;
 			//add converters
-			ItemConverter converter = new ItemConverter(dust);
+			Item converter = new ItemConverter(dust).setUnlocalizedName("dustConverter");
 			GameRegistry.registerItem(converter, "converter" + name.toLowerCase());
 		}
 	}

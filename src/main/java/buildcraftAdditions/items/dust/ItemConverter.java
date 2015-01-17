@@ -1,6 +1,10 @@
 package buildcraftAdditions.items.dust;
 
+import java.util.List;
+
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import buildcraftAdditions.api.item.dust.IDust;
 /**
@@ -23,5 +27,11 @@ public class ItemConverter extends Item {
 
 	public IDust getDust() {
 		return dust;
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
+		list.add("Converter item, please drop this on the ground to retreive your dust");
+		list.add("My appologies for this and any issues this might have caused");
 	}
 }
