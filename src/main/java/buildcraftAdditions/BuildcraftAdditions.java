@@ -33,7 +33,6 @@ import buildcraftAdditions.creative.TabCanisters;
 import buildcraftAdditions.creative.TabDusts;
 import buildcraftAdditions.items.dust.DustManager;
 import buildcraftAdditions.items.dust.DustTypes;
-import buildcraftAdditions.items.dust.ItemConverter;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.recipe.duster.DusterRecipeManager;
@@ -122,10 +121,11 @@ public class BuildcraftAdditions {
 	public void remap(FMLMissingMappingsEvent event) {
 		for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
 			for (IDust dust : BCAItemManager.dusts.getDusts()) {
+				if (dust == null)
+					continue;
 				String name = dust.getName().toLowerCase();
 				if (mapping.name.toLowerCase().contains(name)) {
-					ItemConverter converter = new ItemConverter(dust);
-					GameRegistry.registerItem(converter, "converter" + name);
+					mapping.remap(GameRegistry.findItem(Variables.MOD.ID, "converter" + name));
 				}
 			}
 		}
