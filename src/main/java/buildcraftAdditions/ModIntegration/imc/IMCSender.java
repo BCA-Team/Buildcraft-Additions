@@ -12,7 +12,7 @@ public class IMCSender {
 		tinkersConstruct();
 	}
 
-	protected static void tinkersConstruct() {
+	private static void tinkersConstruct() {
 		FMLInterModComms.sendMessage("TConstruct", "addFluxBattery", new ItemStack(ItemsAndBlocks.powerCapsuleTier1));
 		FMLInterModComms.sendMessage("TConstruct", "addFluxBattery", new ItemStack(ItemsAndBlocks.powerCapsuleTier2));
 		FMLInterModComms.sendMessage("TConstruct", "addFluxBattery", new ItemStack(ItemsAndBlocks.powerCapsuleTier3));
