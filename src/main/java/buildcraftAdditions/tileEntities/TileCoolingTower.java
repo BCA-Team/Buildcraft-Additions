@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -13,11 +15,10 @@ import net.minecraftforge.fluids.IFluidHandler;
 import buildcraft.api.fuels.ICoolant;
 import buildcraft.api.transport.IPipeConnection;
 import buildcraft.api.transport.IPipeTile;
-import buildcraft.energy.fuels.CoolantManager;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.api.CoolingTowerRecipe;
-import buildcraftAdditions.api.RecipeMananger;
+import buildcraftAdditions.api.recipe.BCARecipeManager;
+import buildcraftAdditions.api.recipe.refinery.ICoolingTowerRecipe;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.networking.ISyncronizedTile;
 import buildcraftAdditions.reference.Variables;
@@ -26,7 +27,8 @@ import buildcraftAdditions.utils.ITankHolder;
 import buildcraftAdditions.utils.MultiBlockData;
 import buildcraftAdditions.utils.Tank;
 
-import io.netty.buffer.ByteBuf;
+import buildcraft.energy.fuels.CoolantManager;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -42,7 +44,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private Tank output = new Tank(2000, this, "output");
 	private Tank coolant = new Tank(10000, this, "coolant");
 	private TileCoolingTower master;
-	private CoolingTowerRecipe currentRecipe;
+	private ICoolingTowerRecipe recipe;
 	public float heat;
 
 
@@ -53,6 +55,10 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			data.afterMoveCheck(worldObj);
 		if (!isMaster())
 			return;
+		if (input.getFluid() != null && input.getFluid().amount <= 0)
+			input.setFluid(null);
+		if (output.getFluid() != null && output.getFluid().amount <= 0)
+			output.setFluid(null);
 		int max = 20;
 		while (!coolant.isEmpty() && heat > 0 && max > 0) {
 			ICoolant cooling = CoolantManager.INSTANCE.getCoolant(coolant.getFluid().getFluid());
@@ -62,18 +68,18 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			heat -= cooling.getDegreesCoolingPerMB(heat) * 1.5;
 			max--;
 		}
-		if (currentRecipe == null || output.isFull() || heat > 80)
+		if (heat > 80 || recipe == null || output.isFull() || input.isEmpty() || !input.getFluid().isFluidEqual(recipe.getInput()) || input.getFluidAmount() < recipe.getInput().amount || (!output.isEmpty() && !output.getFluid().isFluidEqual(recipe.getOutput())) || output.getCapacity() - output.getFluidAmount() < recipe.getOutput().amount)
 			return;
-		input.drain(1, true);
-		output.fill(new FluidStack(currentRecipe.getOutput(), 1), true);
-		heat += currentRecipe.getHeat();
+		input.drain(recipe.getInput().amount, true);
+		output.fill(recipe.getOutput(), true);
+		heat += recipe.getHeat();
 	}
 
 	private void updateRecipe() {
 		if (input.getFluid() == null || input.getFluidAmount() == 0)
-			currentRecipe = null;
+			recipe = null;
 		else
-			currentRecipe = RecipeMananger.getCoolingTowerRecipe(input.getFluid().getFluid());
+			recipe = BCARecipeManager.cooling.getRecipe(input.getFluid());
 	}
 
 	@Override
@@ -88,7 +94,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			data.patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
 		else
 			data.patern.destroyMultiblock(worldObj, data.masterX, data.masterY, data.masterZ, data.rotationIndex);
-		currentRecipe = null;
+		recipe = null;
 	}
 
 	@Override
@@ -143,7 +149,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		coolant.setFluid(null);
 		heat = 0;
 		sync();
-		currentRecipe = null;
+		recipe = null;
 	}
 
 	private void findMaster() {

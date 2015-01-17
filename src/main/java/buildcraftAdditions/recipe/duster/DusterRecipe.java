@@ -1,6 +1,6 @@
 package buildcraftAdditions.recipe.duster;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
@@ -27,14 +27,11 @@ public class DusterRecipe implements IDusterRecipe {
 
 	@Override
 	public List<ItemStack> getInputs() {
-		ArrayList<ItemStack> list = new ArrayList<ItemStack>();
-		list.add(input);
-		return list;
+		return Collections.singletonList(input.copy());
 	}
 
 	@Override
 	public ItemStack getOutput(ItemStack input) {
-		return Utils.areItemStacksEqualItem(input, this.input) ? output.copy() : null;
+		return Utils.areItemStacksEqualItem(this.input, input) ? output.copy() : null;
 	}
-
 }
