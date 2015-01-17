@@ -103,8 +103,9 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			lastRequiredHeat = requiredHeat;
 			outputFluidStack = recipe.getOutput();
 			inputFluidStack = recipe.getInput();
-		} else
+		} else {
 			requiredHeat = 0;
+		}
 	}
 
 	@Override
