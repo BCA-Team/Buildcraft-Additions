@@ -8,6 +8,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
 import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -20,8 +21,8 @@ public class DusterRecipeOreDict implements IDusterRecipe {
 	private ItemStack output;
 
 	public DusterRecipeOreDict(String input, ItemStack output) {
-		this.input = input;
-		this.output = output;
+		this.input = new String(input.toCharArray());
+		this.output = output.copy();
 	}
 
 	@Override
@@ -33,7 +34,7 @@ public class DusterRecipeOreDict implements IDusterRecipe {
 	public ItemStack getOutput(ItemStack input) {
 		for (ItemStack stack : OreDictionary.getOres(this.input)) {
 			if (Utils.areItemStacksEqualItem(stack, input))
-				return output;
+				return output.copy();
 		}
 		return null;
 	}
