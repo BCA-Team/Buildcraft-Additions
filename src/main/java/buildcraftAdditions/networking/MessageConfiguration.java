@@ -27,12 +27,11 @@ public class MessageConfiguration implements IMessage, IMessageHandler<MessageCo
 	public MessageConfiguration() {
 	}
 
-	public MessageConfiguration(TileEntity entity) {
-		x = entity.xCoord;
-		y = entity.yCoord;
-		z = entity.zCoord;
+	public MessageConfiguration(IConfigurableOutput configurableOutput) {
+		x = configurableOutput.getX();
+		y = configurableOutput.getY();
+		z = configurableOutput.getZ();
 		configuration = new EnumSideStatus[6];
-		IConfigurableOutput configurableOutput = (IConfigurableOutput) entity;
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
 			configuration[direction.ordinal()] = configurableOutput.getStatus(direction);
 	}

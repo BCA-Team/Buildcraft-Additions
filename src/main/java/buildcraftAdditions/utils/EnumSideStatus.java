@@ -8,18 +8,24 @@ package buildcraftAdditions.utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public enum EnumSideStatus {
-	INPUT("Input"),
-	OUTPUT("Output"),
-	DISSABLED("Disabled"),
-	BOTH("Both");
+	INPUT("Input", 0x0000ff),
+	OUTPUT("Output", 0xff0000),
+	DISSABLED("Disabled", 0xa6a6a6),
+	BOTH("Both", 0xFFA500);
 
 	private String text;
+	private int color;
 
-	EnumSideStatus(String text) {
+	EnumSideStatus(String text, int color) {
 		this.text = text;
+		this.color = color;
 	}
 
 	public String getText() {
 		return Utils.localize(text);
+	}
+
+	public int getColor() {
+		return color;
 	}
 }

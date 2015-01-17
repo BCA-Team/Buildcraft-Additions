@@ -1,6 +1,6 @@
 package buildcraftAdditions.client.gui.widgets;
 
-import java.util.List;
+import org.lwjgl.opengl.GL11;
 
 import net.minecraft.util.ResourceLocation;
 
@@ -19,6 +19,8 @@ public class WidgetButton extends WidgetBase {
 	public static ResourceLocation MIDDLE = new ResourceLocation("bcadditions:textures/gui/button1CenterPart.png");
 	public static ResourceLocation MIDDLESIDEHOVER = new ResourceLocation("bcadditions:textures/gui/button1CenterSidesOnHover.png");
 	public static ResourceLocation MIDDLEHOVER = new ResourceLocation("bcadditions:textures/gui/button1CenterOnHover.png");
+	private String text;
+	private int color;
 
 	public WidgetButton(int id, int x, int y, int width, int height, GuiBase gui) {
 		super(id, x, y, width, height, gui);
@@ -26,7 +28,6 @@ public class WidgetButton extends WidgetBase {
 
 	@Override
 	public void render(int mouseX, int mouseY) {
-
 		int t = 6;
 		ResourceLocation centerPiece = MIDDLE;
 		if (getBounds().contains(mouseX, mouseY)) {
@@ -42,15 +43,15 @@ public class WidgetButton extends WidgetBase {
 			RenderUtils.drawImage(MIDDLESIDEHOVER, x + 6, y, 1, height);
 			RenderUtils.drawImage(MIDDLESIDEHOVER, x + width - 6, y, 1, height);
 		}
+		gui.drawString(text, x + 8, y + 3, color);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	@Override
-	public void onWidgetClicked(int x, int y, int button) {
-		super.onWidgetClicked(x, y, button);
+	public void setText(String text) {
+		this.text = text;
 	}
 
-	@Override
-	public void addTooltip(int mouseX, int mouseY, List<String> tooltips, boolean shift) {
-		super.addTooltip(mouseX, mouseY, tooltips, shift);
+	public void setColor(int color) {
+		this.color = color;
 	}
 }

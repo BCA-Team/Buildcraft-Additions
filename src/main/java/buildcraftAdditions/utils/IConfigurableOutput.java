@@ -15,4 +15,10 @@ public interface IConfigurableOutput {
 	public void changeStatus(ForgeDirection side);
 
 	public void overrideConfiguration(EnumSideStatus newConfiguration[]);
+
+	public int getX();
+
+	public int getY();
+
+	public int getZ();
 }
