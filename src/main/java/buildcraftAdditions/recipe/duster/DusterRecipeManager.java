@@ -45,7 +45,7 @@ public class DusterRecipeManager implements IDusterRecipeManager {
 	@Override
 	public void addRecipe(String oreInput, ItemStack output) {
 		if (StringUtils.isNullOrEmpty(oreInput) || output == null || output.getItem() == null || output.stackSize <= 0) {
-			Logger.error("Tried to register invalid duster recipe! Skipping.");
+			Logger.error("Tried to register an invalid duster recipe! Skipping.");
 			Logger.error("Was trying to add: Input: " + oreInput + " Output: " + output);
 			return;
 		}
@@ -57,7 +57,7 @@ public class DusterRecipeManager implements IDusterRecipeManager {
 	@Override
 	public void addRecipe(IDusterRecipe recipe) {
 		if (recipe == null || recipe.getInputs() == null || recipe.getInputs().size() <= 0) {
-			Logger.error("Tried to register invalid duster recipe! Skipping.");
+			Logger.error("Tried to register an invalid duster recipe! Skipping.");
 			Logger.error("Was trying to add: " + recipe);
 		}
 		recipes.add(recipe);
