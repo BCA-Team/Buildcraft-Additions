@@ -8,8 +8,6 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StringUtils;
 
-import net.minecraftforge.oredict.OreDictionary;
-
 import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
 import buildcraftAdditions.api.recipe.duster.IDusterRecipeManager;
 import buildcraftAdditions.core.Logger;
@@ -47,9 +45,7 @@ public class DusterRecipeManager implements IDusterRecipeManager {
 			Logger.error("Tried to register invalid duster recipe! Skipping.");
 			return;
 		}
-		for (ItemStack input : OreDictionary.getOres(oreInput)) {
-			recipes.add(new DusterRecipeOreDict(oreInput, output));
-		}
+		recipes.add(new DusterRecipeOreDict(oreInput, output));
 	}
 
 	@Override

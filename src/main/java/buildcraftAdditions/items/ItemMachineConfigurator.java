@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.utils.IConfigurableOutput;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -22,6 +23,9 @@ public class ItemMachineConfigurator extends ItemBase {
 
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ) {
+		if (world.getTileEntity(x, y, z) instanceof TileBase)
+			((TileBase) world.getTileEntity(x, y, z)).sync();
+
 		if (world.getTileEntity(x, y, z) instanceof IConfigurableOutput) {
 			player.openGui(BuildcraftAdditions.instance, Variables.Gui.MACHINE_CONFIGURATOR, world, x, y, z);
 			return true;

@@ -101,4 +101,10 @@ public class GuiMachineConfigurator extends GuiBase {
 			((WidgetButton) widgets.get(t)).setColor(configurableOutput.getStatus(ForgeDirection.getOrientation(t)).getColor());
 		}
 	}
+
+	@Override
+	public void onGuiClosed() {
+		super.onGuiClosed();
+		PacketHandler.instance.sendToServer(new MessageConfiguration(configurableOutput));
+	}
 }

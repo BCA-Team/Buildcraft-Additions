@@ -8,7 +8,6 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.IConfigurableOutput;
 
@@ -58,7 +57,7 @@ public class MessageConfiguration implements IMessage, IMessageHandler<MessageCo
 	@Override
 	public IMessage onMessage(MessageConfiguration message, MessageContext ctx) {
 		TileEntity entity = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
-		if (entity != null && entity instanceof TileKineticEnergyBufferBase) {
+		if (entity != null && entity instanceof IConfigurableOutput) {
 			IConfigurableOutput configurableOutput = (IConfigurableOutput) entity;
 			configurableOutput.overrideConfiguration(message.configuration);
 		}

@@ -8,8 +8,8 @@ package buildcraftAdditions.utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public enum EnumSideStatus {
-	INPUT("Input", 0x0000ff),
-	OUTPUT("Output", 0xff0000),
+	INPUT("Input", 0x002B87),
+	OUTPUT("Output", 0x850000),
 	DISSABLED("Disabled", 0xa6a6a6),
 	BOTH("Both", 0xFFA500);
 
