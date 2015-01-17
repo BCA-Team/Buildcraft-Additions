@@ -280,7 +280,7 @@ public final class ItemsAndBlocks {
 		GameRegistry.registerBlock(itemSorter, "blockItemSorter");
 	}
 
-	public static void addRecipes() {
+	public static void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileFluidicCompressor.class, "TileFluidicCompressor");
 		GameRegistry.registerTileEntity(TileChargingStation.class, "TileChargingStation");
 		GameRegistry.registerTileEntity(TileHeatedFurnace.class, "TileHeatedFurnace");

@@ -82,7 +82,7 @@ public class BuildcraftAdditions {
 
 	@Mod.EventHandler
 	public void doneLoading(FMLLoadCompleteEvent event) {
-		ItemsAndBlocks.addRecipes();
+		ItemsAndBlocks.registerTileEntities();
 
 		int meta = 1;
 		BCAItemManager.dusts.addDust(meta++, "Iron", 0xD2CEC9, DustTypes.METAL_DUST);
