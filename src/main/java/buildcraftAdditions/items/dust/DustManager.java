@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import net.minecraft.item.Item;
 import net.minecraft.util.StringUtils;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.item.dust.IDustManager;
@@ -47,6 +49,9 @@ public class DustManager implements IDustManager {
 		dust = new Dust(meta, name, colorMultiplier, dustType);
 		if (dustType.isValid(meta, name, dust.getDustStack())) {
 			dusts[meta] = dust;
+			//add converters
+			Item converter = new ItemConverter(dust).setUnlocalizedName("dustConverter");
+			GameRegistry.registerItem(converter, "converter" + name.toLowerCase());
 		}
 	}
 

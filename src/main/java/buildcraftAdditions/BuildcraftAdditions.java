@@ -11,8 +11,10 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
 
@@ -82,7 +84,7 @@ public class BuildcraftAdditions {
 
 	@Mod.EventHandler
 	public void doneLoading(FMLLoadCompleteEvent event) {
-		ItemsAndBlocks.addRecipes();
+		ItemsAndBlocks.registerTileEntities();
 
 		int meta = 1;
 		BCAItemManager.dusts.addDust(meta++, "Iron", 0xD2CEC9, DustTypes.METAL_DUST);
@@ -113,5 +115,19 @@ public class BuildcraftAdditions {
 	@Mod.EventHandler
 	public void onIMC(FMLInterModComms.IMCEvent event) {
 		IMCHandler.handleIMC(event.getMessages());
+	}
+
+	@Mod.EventHandler
+	public void remap(FMLMissingMappingsEvent event) {
+		for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
+			for (IDust dust : BCAItemManager.dusts.getDusts()) {
+				if (dust == null)
+					continue;
+				String name = dust.getName().toLowerCase();
+				if (mapping.name.toLowerCase().contains(name)) {
+					mapping.remap(GameRegistry.findItem(Variables.MOD.ID, "converter" + name));
+				}
+			}
+		}
 	}
 }

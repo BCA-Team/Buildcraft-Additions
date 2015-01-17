@@ -13,12 +13,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.AchievementEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.items.dust.ItemConverter;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.RefineryRecipeConverter;
@@ -98,6 +100,15 @@ public class EventListener {
 					if (RefineryRecipeConverter.inputs[t] != null && RefineryRecipeConverter.outputs[t] != null)
 						BuildcraftAdditions.proxy.cloneFluidTextures(FluidRegistry.getFluid(RefineryRecipeConverter.outputs[t].getFluid().getName()), RefineryRecipeConverter.gas[t].getFluid());
 				}
+			}
+		}
+
+		@SubscribeEvent
+		public void onItemDrop(ItemTossEvent event) {
+			if (!(event.entityItem == null || event.entityItem.getEntityItem() == null || !(event.entityItem.getEntityItem().getItem() instanceof ItemConverter))) {
+				ItemStack stack = ((ItemConverter) event.entityItem.getEntityItem().getItem()).getDust().getDustStack();
+				stack.stackSize = event.entityItem.getEntityItem().stackSize;
+				event.entityItem.setEntityItemStack(stack);
 			}
 		}
 	}

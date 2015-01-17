@@ -29,7 +29,9 @@ public abstract class TileBase extends TileEntity implements ISyncronizedTile {
 	}
 
 	public void sync() {
-		PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
+		if (!worldObj.isRemote) {
+			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
+		}
 	}
 
 	@Override
