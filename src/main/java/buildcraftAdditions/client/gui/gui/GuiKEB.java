@@ -5,12 +5,9 @@ import java.util.ArrayList;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-
-import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.client.gui.containers.ContainerKEB;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
@@ -26,7 +23,6 @@ import buildcraftAdditions.utils.Utils;
 public class GuiKEB extends GuiContainer {
 	public ResourceLocation texture = new ResourceLocation("bcadditions","textures/gui/KineticEnergyBuffer.png");
 	private TileKineticEnergyBufferBase keb;
-	private GuiButton north, east, south, west, up, down;
 	private boolean primed, yellow, green;
 	private EntityPlayer player;
 	private int teller;
@@ -96,25 +92,6 @@ public class GuiKEB extends GuiContainer {
 
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void initGui() {
-		super.initGui();
-		north = new GuiButton(1, guiLeft + 38, guiTop + 92, 50, 20, "");
-		east = new GuiButton(1, guiLeft + 38, guiTop + 115, 50, 20, "");
-		south = new GuiButton(1, guiLeft + 38, guiTop + 138, 50, 20, "");
-		west = new GuiButton(1, guiLeft + 120, guiTop + 92, 50, 20, "");
-		up = new GuiButton(1, guiLeft + 120, guiTop + 115, 50, 20, "");
-		down = new GuiButton(1, guiLeft + 120, guiTop + 138, 50, 20, "");
-		buttonList.add(north);
-		buttonList.add(east);
-		buttonList.add(south);
-		buttonList.add(west);
-		buttonList.add(up);
-		buttonList.add(down);
-		updateStrings();
-	}
-
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
@@ -162,36 +139,6 @@ public class GuiKEB extends GuiContainer {
 
 	private boolean shouldDrawWarning(int mouseX, int mouseY) {
 		return mouseX > 66 && mouseX < 114 && mouseY > 28 && mouseY < 78;
-	}
-
-	@Override
-	protected void actionPerformed(GuiButton button) {
-		ForgeDirection direction = ForgeDirection.UNKNOWN;
-		if (button == north) {
-			direction = ForgeDirection.NORTH;
-		} else if (button == east) {
-			direction = ForgeDirection.EAST;
-		} else if (button == south) {
-			direction = ForgeDirection.SOUTH;
-		} else if (button == west) {
-			direction = ForgeDirection.WEST;
-		} else if (button == up) {
-			direction = ForgeDirection.UP;
-		} else if (button == down) {
-			direction = ForgeDirection.DOWN;
-		}
-		keb.changeStatus(direction);
-		updateStrings();
-		keb.sendConfigurationToSever();
-	}
-
-	private void updateStrings() {
-		north.displayString = keb.getStatus(ForgeDirection.NORTH).getText();
-		east.displayString = keb.getStatus(ForgeDirection.EAST).getText();
-		south.displayString = keb.getStatus(ForgeDirection.SOUTH).getText();
-		west.displayString = keb.getStatus(ForgeDirection.WEST).getText();
-		up.displayString = keb.getStatus(ForgeDirection.UP).getText();
-		down.displayString = keb.getStatus(ForgeDirection.DOWN).getText();
 	}
 
 	@Override
