@@ -51,6 +51,11 @@ public class WidgetButton extends WidgetBase {
 		this.text = text;
 	}
 
+	@Override
+	public void onWidgetClicked(int x, int y, int button) {
+		super.onWidgetClicked(x, y, button);
+	}
+
 	public void setColor(int color) {
 		this.color = color;
 	}

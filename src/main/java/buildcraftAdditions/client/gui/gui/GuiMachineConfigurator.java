@@ -62,18 +62,18 @@ public class GuiMachineConfigurator extends GuiBase {
 
 	@Override
 	public void initialize() {
-		north = new WidgetButton(0, guiLeft + 45, guiTop + 26, 60, 15, this);
-		east = new WidgetButton(1, guiLeft + 45, guiTop + 46, 60, 15, this);
-		south = new WidgetButton(2, guiLeft + 45, guiTop + 66, 60, 15, this);
-		west = new WidgetButton(3, guiLeft + 45, guiTop + 86, 60, 15, this);
-		up = new WidgetButton(4, guiLeft + 45, guiTop + 106, 60, 15, this);
-		down = new WidgetButton(5, guiLeft + 45, guiTop + 126, 60, 15, this);
+		north = new WidgetButton(2, guiLeft + 45, guiTop + 26, 60, 15, this);
+		east = new WidgetButton(5, guiLeft + 45, guiTop + 46, 60, 15, this);
+		south = new WidgetButton(3, guiLeft + 45, guiTop + 66, 60, 15, this);
+		west = new WidgetButton(4, guiLeft + 45, guiTop + 86, 60, 15, this);
+		up = new WidgetButton(1, guiLeft + 45, guiTop + 106, 60, 15, this);
+		down = new WidgetButton(0, guiLeft + 45, guiTop + 126, 60, 15, this);
+		addWidget(down);
+		addWidget(up);
 		addWidget(north);
-		addWidget(east);
 		addWidget(south);
 		addWidget(west);
-		addWidget(up);
-		addWidget(down);
+		addWidget(east);
 		updateButtons();
 	}
 
@@ -90,23 +90,15 @@ public class GuiMachineConfigurator extends GuiBase {
 
 	@Override
 	public void widgetActionPerformed(WidgetBase widget) {
+		configurableOutput.changeStatus(ForgeDirection.getOrientation(widget.id));
 		PacketHandler.instance.sendToServer(new MessageConfiguration(configurableOutput));
 		updateButtons();
 	}
 
 	private void updateButtons() {
-		north.setText(configurableOutput.getStatus(ForgeDirection.NORTH).getText());
-		east.setText(configurableOutput.getStatus(ForgeDirection.EAST).getText());
-		south.setText(configurableOutput.getStatus(ForgeDirection.SOUTH).getText());
-		west.setText(configurableOutput.getStatus(ForgeDirection.WEST).getText());
-		up.setText(configurableOutput.getStatus(ForgeDirection.UP).getText());
-		down.setText(configurableOutput.getStatus(ForgeDirection.DOWN).getText());
-
-		north.setColor(configurableOutput.getStatus(ForgeDirection.NORTH).getColor());
-		east.setColor(configurableOutput.getStatus(ForgeDirection.EAST).getColor());
-		south.setColor(configurableOutput.getStatus(ForgeDirection.SOUTH).getColor());
-		west.setColor(configurableOutput.getStatus(ForgeDirection.WEST).getColor());
-		up.setColor(configurableOutput.getStatus(ForgeDirection.UP).getColor());
-		down.setColor(configurableOutput.getStatus(ForgeDirection.DOWN).getColor());
+		for (int t = 0; t < 6; t++) {
+			((WidgetButton) widgets.get(t)).setText(configurableOutput.getStatus(ForgeDirection.getOrientation(t)).getText());
+			((WidgetButton) widgets.get(t)).setColor(configurableOutput.getStatus(ForgeDirection.getOrientation(t)).getColor());
+		}
 	}
 }
