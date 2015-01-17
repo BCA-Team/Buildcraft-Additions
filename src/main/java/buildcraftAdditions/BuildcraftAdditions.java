@@ -36,6 +36,8 @@ import buildcraftAdditions.items.dust.DustTypes;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.recipe.duster.DusterRecipeManager;
+import buildcraftAdditions.recipe.refinery.CoolingTowerRecipeManager;
+import buildcraftAdditions.recipe.refinery.RefineryRecipeManager;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.SpecialListMananger;
@@ -69,6 +71,9 @@ public class BuildcraftAdditions {
 		SpecialListMananger.init();
 
 		BCARecipeManager.duster = new DusterRecipeManager();
+		BCARecipeManager.cooling = new CoolingTowerRecipeManager();
+		BCARecipeManager.refinery = new RefineryRecipeManager();
+
 		BCAItemManager.dusts = new DustManager();
 	}
 

@@ -13,7 +13,7 @@ import net.minecraftforge.fluids.FluidStack;
  */
 public interface ICoolingTowerRecipeManager {
 
-	void addRecipe(FluidStack input, FluidStack output, double heat);
+	void addRecipe(FluidStack input, FluidStack output, float heat);
 
 	void removeRecipe(FluidStack input);
 

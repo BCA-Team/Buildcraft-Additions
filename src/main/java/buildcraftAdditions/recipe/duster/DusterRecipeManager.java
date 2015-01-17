@@ -23,17 +23,18 @@ import buildcraftAdditions.core.Logger;
  */
 public class DusterRecipeManager implements IDusterRecipeManager {
 
-	private List<IDusterRecipe> recipes = new ArrayList<IDusterRecipe>();
+	private final List<IDusterRecipe> recipes = new ArrayList<IDusterRecipe>();
 
 	@Override
 	public void addRecipe(ItemStack input, ItemStack output) {
 		if (input == null || input.getItem() == null || output == null || output.getItem() == null || output.stackSize <= 0) {
-			Logger.error("Tried to register invalid duster recipe! Skipping.");
+			Logger.error("Tried to register an invalid duster recipe! Skipping.");
+			Logger.error("Was trying to add: Input: " + input + " Output: " + output);
 			return;
 		}
 		IDusterRecipe recipe = getRecipe(input);
 		if (recipe != null) {
-			Logger.error("Duster recipe with input  " + input + " is already registered! Skipping.");
+			Logger.error("A duster recipe with input  " + input + " is already registered! Skipping.");
 			Logger.error("Was trying to add: Input: " + input + " Output: " + output);
 			Logger.error("Found: Input: " + input + " Output: " + recipe.getOutput(input));
 			return;
@@ -45,6 +46,7 @@ public class DusterRecipeManager implements IDusterRecipeManager {
 	public void addRecipe(String oreInput, ItemStack output) {
 		if (StringUtils.isNullOrEmpty(oreInput) || output == null || output.getItem() == null || output.stackSize <= 0) {
 			Logger.error("Tried to register invalid duster recipe! Skipping.");
+			Logger.error("Was trying to add: Input: " + oreInput + " Output: " + output);
 			return;
 		}
 		for (ItemStack input : OreDictionary.getOres(oreInput)) {
@@ -54,6 +56,10 @@ public class DusterRecipeManager implements IDusterRecipeManager {
 
 	@Override
 	public void addRecipe(IDusterRecipe recipe) {
+		if (recipe == null || recipe.getInputs() == null || recipe.getInputs().size() <= 0) {
+			Logger.error("Tried to register invalid duster recipe! Skipping.");
+			Logger.error("Was trying to add: " + recipe);
+		}
 		recipes.add(recipe);
 	}
 

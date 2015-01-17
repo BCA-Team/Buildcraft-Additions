@@ -1,7 +1,6 @@
 package buildcraftAdditions.utils;
 
 import java.util.Collection;
-import java.util.HashMap;
 
 import net.minecraft.block.Block;
 
@@ -15,11 +14,10 @@ import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 import buildcraft.api.recipes.CraftingResult;
 import buildcraft.api.recipes.IFlexibleRecipe;
 
-import buildcraftAdditions.api.CoolingTowerRecipe;
-import buildcraftAdditions.api.RecipeMananger;
-import buildcraftAdditions.api.RefineryRecipe;
+import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.blocks.FluidBlockBase;
 import buildcraftAdditions.core.Logger;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -32,7 +30,6 @@ public class RefineryRecipeConverter {
 	public static FluidStack inputs[] = new FluidStack[20];
 	public static FluidStack outputs[] = new FluidStack[20];
 	public static FluidStack gas[] = new FluidStack[20];
-	public static HashMap<Fluid, Fluid> coolingTowerRecipes = new HashMap<Fluid, Fluid>();
 
 	public static void doYourThing() {
 		int teller = 0;
@@ -48,9 +45,9 @@ public class RefineryRecipeConverter {
 					results[teller] = currentResult;
 					dummy.output.fill(currentResult.crafted.copy(), true);
 					outputs[teller] = dummy.output.getFluid();
-					inputs[teller] = dummy.input.getFluid();
+					inputs[teller] = new FluidStack(dummy.input.getFluid().fluidID, 1000 - dummy.input.getFluidAmount());
 					teller++;
-					Logger.info("Builcraft refinery recipe detected, input: " + dummy.input.getFluid().getLocalizedName() + ", output: " + dummy.output.getFluid().getLocalizedName());
+					Logger.info("Buildcraft refinery recipe detected, input: " + dummy.input.getFluid().getLocalizedName() + ", output: " + dummy.output.getFluid().getLocalizedName());
 				}
 			}
 		}
@@ -65,18 +62,18 @@ public class RefineryRecipeConverter {
 			FluidRegistry.registerFluid(fluid);
 			gas[t] = new FluidStack(fluid, outputs[t].amount);
 			Block fluidblock = new FluidBlockBase(fluid);
-			GameRegistry.registerBlock(fluidblock, fluid.getName()+"gasBlock");
+			GameRegistry.registerBlock(fluidblock, fluid.getName() + "gasBlock");
 			fluid.setBlock(fluidblock);
 			if (inputs[t].getFluid().getBlock() == null) {
 				fluidblock = new FluidBlockBase(inputs[t].getFluid());
-				GameRegistry.registerBlock(fluidblock, fluid.getName()+"Block");
+				GameRegistry.registerBlock(fluidblock, fluid.getName() + "Block");
 				inputs[t].getFluid().setBlock(fluidblock);
 			}
-			coolingTowerRecipes.put(gas[t].getFluid(), fluid);
+
 			BuildcraftRecipeRegistry.refinery.removeRecipe(results[t].recipe);
-			BuildcraftRecipeRegistry.refinery.addRecipe(results[t].recipe.getId() + "_GAS", new FluidStack(inputs[t].getFluid(), 1000 - inputs[t].amount), new FluidStack(fluid, outputs[t].amount), results[t].energyCost, 0);
-			RecipeMananger.registerRecipe(new CoolingTowerRecipe(fluid, outputs[t].getFluid(), ((float) results[t].energyCost) / 2000));
-			RecipeMananger.registerRecipe(new RefineryRecipe(inputs[t].getFluid(), 1000 - inputs[t].amount, fluid, outputs[t].amount, results[t].energyCost));
+			BuildcraftRecipeRegistry.refinery.addRecipe(results[t].recipe.getId() + "_GAS", inputs[t], new FluidStack(fluid, outputs[t].amount), results[t].energyCost, 0);
+			BCARecipeManager.cooling.addRecipe(new FluidStack(fluid.getID(), 1), new FluidStack(outputs[t].fluidID, 1), ((float) results[t].energyCost) / 2000);
+			BCARecipeManager.refinery.addRecipe(inputs[t], new FluidStack(fluid.getID(), outputs[t].amount), results[t].energyCost);
 		}
 	}
 

@@ -9,12 +9,12 @@ import net.minecraftforge.fluids.FluidStack;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public interface ICoolingTowerRecipe extends  IRefineryRecipe{
+public interface ICoolingTowerRecipe {
 
 	FluidStack getInput();
 
 	FluidStack getOutput();
 
-	double getHeat();
+	float getHeat();
 
 }
