@@ -2,17 +2,18 @@ package buildcraftAdditions.ModIntegration.imc;
 
 import java.util.List;
 
+import com.google.common.base.Strings;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import cpw.mods.fml.common.event.FMLInterModComms;
 
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fluids.FluidStack;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.core.Logger;
-
-import com.google.common.base.Strings;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -31,7 +32,7 @@ public class IMCHandler {
 			if (Strings.isNullOrEmpty(type))
 				continue;
 
-			if (type.equals("addDusting")) {
+			if (type.equals("addDustingRecipe")) {
 				if (!message.isNBTMessage()) {
 					logNotNBT(message);
 					continue;
@@ -41,39 +42,79 @@ public class IMCHandler {
 				if (!checkRequiredNBTTags("Dusting", tag, "Input", "Output"))
 					continue;
 
-				ItemStack output = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("Output"));
-				if (output == null)
-					return;
+				if (tag.hasKey("Output", Constants.NBT.TAG_COMPOUND)) {
+					ItemStack output = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("Output"));
+					if (output == null)
+						continue;
+					if (tag.hasKey("Input", Constants.NBT.TAG_STRING)) {
+						String oreInput = tag.getString("Input");
+						if (!Strings.isNullOrEmpty(oreInput))
+							BCARecipeManager.duster.addRecipe(oreInput, output);
+					} else if (tag.hasKey("Input", Constants.NBT.TAG_COMPOUND)) {
+						ItemStack input = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("Input"));
+						if (input != null)
+							BCARecipeManager.duster.addRecipe(input, output);
+					}
+				}
+			} else if (type.equals("addCoolingTowerRecipe")) {
+				if (!message.isNBTMessage()) {
+					logNotNBT(message);
+					continue;
+				}
 
-				if (tag.getCompoundTag("Input").hasKey("id", Constants.NBT.TAG_SHORT)) {
-					ItemStack input = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("Input"));
-					if (input != null)
-						BCARecipeManager.duster.addRecipe(input, output);
-				} else if (tag.hasKey("Input", Constants.NBT.TAG_STRING)) {
-					if (!Strings.isNullOrEmpty(tag.getString("Input")))
-						BCARecipeManager.duster.addRecipe(tag.getString("Input"), output);
+				NBTTagCompound tag = message.getNBTValue();
+				if (!checkRequiredNBTTags("Cooling Tower", tag, "Input", "Output", "Heat"))
+					continue;
+
+				if (tag.hasKey("Input", Constants.NBT.TAG_COMPOUND) && tag.hasKey("Output", Constants.NBT.TAG_COMPOUND) && tag.hasKey("Heat", Constants.NBT.TAG_FLOAT)) {
+					FluidStack input = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Input"));
+					if (input == null)
+						continue;
+					FluidStack output = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Output"));
+					if (output == null)
+						continue;
+					BCARecipeManager.cooling.addRecipe(input, output, tag.getFloat("Heat"));
+				}
+			} else if (type.equals("addRefineryRecipe")) {
+				if (!message.isNBTMessage()) {
+					logNotNBT(message);
+					continue;
+				}
+
+				NBTTagCompound tag = message.getNBTValue();
+				if (!checkRequiredNBTTags("Refinery", tag, "Input", "Output", "RequiredHeat"))
+					continue;
+
+				if (tag.hasKey("Input", Constants.NBT.TAG_COMPOUND) && tag.hasKey("Output", Constants.NBT.TAG_COMPOUND) && tag.hasKey("RequiredHeat", Constants.NBT.TAG_INT)) {
+					FluidStack input = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Input"));
+					if (input == null)
+						continue;
+					FluidStack output = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Output"));
+					if (output == null)
+						continue;
+					BCARecipeManager.refinery.addRecipe(input, output, tag.getInteger("RequiredHeat"));
 				}
 			}
 		}
 	}
 
-	protected static void logNotNBT(FMLInterModComms.IMCMessage message) {
+	private static void logNotNBT(FMLInterModComms.IMCMessage message) {
 		logInvalidMessage(message, "NBT");
 	}
 
-	protected static void logNotItemStack(FMLInterModComms.IMCMessage message) {
+	private static void logNotItemStack(FMLInterModComms.IMCMessage message) {
 		logInvalidMessage(message, "ItemStack");
 	}
 
-	protected static void logNotString(FMLInterModComms.IMCMessage message) {
+	private static void logNotString(FMLInterModComms.IMCMessage message) {
 		logInvalidMessage(message, "String");
 	}
 
-	protected static void logInvalidMessage(FMLInterModComms.IMCMessage message, String type) {
+	private static void logInvalidMessage(FMLInterModComms.IMCMessage message, String type) {
 		Logger.error(String.format("Received and invalid IMC message : '%s' from '%s'. This message is not of the '%s' type!", message.key, message.getSender(), type));
 	}
 
-	protected static boolean checkRequiredNBTTags(String key, NBTTagCompound tag, String... requiredArgs) {
+	private static boolean checkRequiredNBTTags(String key, NBTTagCompound tag, String... requiredArgs) {
 		boolean fine = true;
 		for (String arg : requiredArgs) {
 			if (!tag.hasKey(arg)) {
