@@ -98,6 +98,7 @@ gui.machineConfigurator.name=Machine Configurator
 gui.kebT1.name=Kinetic Energy Buffer
 gui.kebT2.name=Large Kinetic Energy Buffer
 gui.kebT3.name=Advanced Kinetic Energy Buffer
+gui.itemSorter.name=Sort-O-Tron
 
 gui.keb.dangerousButton=BIG RED BUTTONS ARE VERY DANGEROUS
 gui.keb.noPushing=DON'T PUSH IT
