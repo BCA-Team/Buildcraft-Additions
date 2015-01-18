@@ -95,6 +95,9 @@ gui.Output=Output
 gui.Disabled=Disabled
 gui.Both=Both
 gui.machineConfigurator.name=Machine Configurator
+gui.kebT1.name=Kinetic Energy Buffer
+gui.kebT2.name=Large Kinetic Energy Buffer
+gui.kebT3.name=Advanced Kinetic Energy Buffer
 
 gui.keb.dangerousButton=BIG RED BUTTONS ARE VERY DANGEROUS
 gui.keb.noPushing=DON'T PUSH IT

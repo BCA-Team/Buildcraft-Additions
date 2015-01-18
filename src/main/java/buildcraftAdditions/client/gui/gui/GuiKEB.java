@@ -2,10 +2,6 @@ package buildcraftAdditions.client.gui.gui;
 
 import java.util.ArrayList;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -20,7 +16,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class GuiKEB extends GuiContainer {
+public class GuiKEB extends GuiBase {
 	public ResourceLocation texture = new ResourceLocation("bcadditions","textures/gui/KineticEnergyBuffer.png");
 	private TileKineticEnergyBufferBase keb;
 	private boolean primed, yellow, green;
@@ -35,13 +31,37 @@ public class GuiKEB extends GuiContainer {
 		this.player = player;
 		teller = 30;
 		green = SpecialListMananger.greenButtonList.contains(player.getDisplayName());
+		setDrawPlayerInv(false);
+	}
+
+	@Override
+	public ResourceLocation texture() {
+		return texture;
+	}
+
+	@Override
+	public int getXSize() {
+		return 175;
+	}
+
+	@Override
+	public int getYSize() {
+		return 102;
+	}
+
+	@Override
+	public String getInventoryName() {
+		return "kebT" + keb.tier;
+	}
+
+	@Override
+	public void initialize() {
+
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		super.drawGuiContainerBackgroundLayer(f, x, y);
 		long percent = ((long) keb.energy * 248) / keb.maxEnergy;
 
 		drawTexturedModalRect(guiLeft + 67, guiTop + 30, 176, 162, 47, 47);
@@ -95,13 +115,6 @@ public class GuiKEB extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		fontRendererObj.drawString(Utils.localize("tile.blockKEBT" + keb.tier + ".name"), 5, 6, 0x404040);
-		fontRendererObj.drawString(Utils.localize("gui.north") + ": ", 5, 97, 0x404040);
-		fontRendererObj.drawString(Utils.localize("gui.east") + ": ", 5, 120, 0x404040);
-		fontRendererObj.drawString(Utils.localize("gui.south") + ": ", 5, 143, 0x404040);
-		fontRendererObj.drawString(Utils.localize("gui.west") + ": ", 93, 97, 0x404040);
-		fontRendererObj.drawString(Utils.localize("gui.up") + ": ", 93, 120, 0x404040);
-		fontRendererObj.drawString(Utils.localize("gui.down") + ": ", 93, 143, 0x404040);
 		if (shouldDrawEnergyNumber(mouseX - guiLeft, mouseY - guiTop)) {
 			ArrayList<String> list = new ArrayList<String>();
 			list.add(keb.energy + " / " + keb.maxEnergy + " RF");
