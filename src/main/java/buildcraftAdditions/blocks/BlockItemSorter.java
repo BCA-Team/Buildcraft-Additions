@@ -38,13 +38,9 @@ public class BlockItemSorter extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	IIcon textureSide;
 	@SideOnly(Side.CLIENT)
-	IIcon textureUp;
+	IIcon textureIn;
 	@SideOnly(Side.CLIENT)
-	IIcon textureDown;
-	@SideOnly(Side.CLIENT)
-	IIcon textureLeft;
-	@SideOnly(Side.CLIENT)
-	IIcon textureRight;
+	IIcon textureOut;
 
 	public BlockItemSorter() {
 		super(Material.iron);
@@ -54,10 +50,8 @@ public class BlockItemSorter extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		textureSide = RenderUtils.registerIcon(register, "itemSorterSide");
-		textureUp = RenderUtils.registerIcon(register, "itemSorterUp");
-		textureDown = RenderUtils.registerIcon(register, "itemSorterDown");
-		textureLeft = RenderUtils.registerIcon(register, "itemSorterLeft");
-		textureRight = RenderUtils.registerIcon(register, "itemSorterRight");
+		textureIn = RenderUtils.registerIcon(register, "itemSorterIn");
+		textureOut = RenderUtils.registerIcon(register, "itemSorterOu");
 	}
 
 	@Override
@@ -70,114 +64,12 @@ public class BlockItemSorter extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		ForgeDirection direction = ForgeDirection.getOrientation(meta);
-		if (side == direction.ordinal() || side == direction.getOpposite().ordinal())
-			return textureUp;
+		if (side == direction.ordinal())
+			return textureOut;
+		else if (side == direction.getOpposite().ordinal())
+			return textureIn;
 		return textureSide;
 	}
-
-	/*@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		switch (side) {
-			case 0:
-				return textureLeft;
-			case 1:
-				return textureLeft;
-			case 2:
-				return textureRight;
-			case 3:
-				return textureLeft;
-			case 4:
-				return textureSide;
-			case 5:
-				return blockIcon;
-			default:
-				return blockIcon;
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) { //Terrible code but works
-		int meta = world.getBlockMetadata(x, y, z);
-
-		switch (meta) {
-			case 0:
-				switch (side) {
-					case 0:
-					case 1:
-						return textureSide;
-					case 2:
-					case 3:
-					case 4:
-					case 5:
-						return textureDown;
-				}
-			case 1:
-				switch (side) {
-					case 0:
-					case 1:
-						return textureSide;
-					case 2:
-					case 3:
-					case 4:
-					case 5:
-						return textureUp;
-				}
-			case 2:
-				switch (side) {
-					case 0:
-					case 1:
-						return textureUp;
-					case 2:
-					case 3:
-						return textureSide;
-					case 4:
-						return textureLeft;
-					case 5:
-						return textureRight;
-				}
-			case 3:
-				switch (side) {
-					case 0:
-					case 1:
-						return textureDown;
-					case 2:
-					case 3:
-						return textureSide;
-					case 4:
-						return textureRight;
-					case 5:
-						return textureLeft;
-				}
-			case 4:
-				switch (side) {
-					case 0:
-					case 1:
-					case 3:
-						return textureLeft;
-					case 2:
-						return textureRight;
-					case 4:
-					case 5:
-						return textureSide;
-				}
-			case 5:
-				switch (side) {
-					case 0:
-					case 1:
-					case 3:
-						return textureRight;
-					case 2:
-						return textureLeft;
-					case 4:
-					case 5:
-						return textureSide;
-				}
-			default:
-				return blockIcon;
-		}
-	}*/
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {

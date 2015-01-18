@@ -3,13 +3,13 @@ package buildcraftAdditions.client.render;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
+import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 
 /**
@@ -23,18 +23,24 @@ public class RendererItemSorter implements ISimpleBlockRenderingHandler {
 
 	public static int RENDER_ID;
 
-	public Block currentBlock = Blocks.stone;
 	public final Block fakeBlock = new Block(Material.rock) {
 		@Override
 		public IIcon getIcon(int side, int meta) {
-			return currentBlock.getIcon(side, meta);
+			return ItemsAndBlocks.itemSorter.getIcon(side, meta);
 		}
 	};
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
-		currentBlock = block;
-		renderer.renderBlockAsItem(fakeBlock, 2, 1.0F);
+		renderer.uvRotateEast = 1;
+		renderer.uvRotateWest = 2;
+		renderer.uvRotateTop = 2;
+		renderer.uvRotateBottom = 1;
+		renderer.renderBlockAsItem(fakeBlock, 4, 1.0F);
+		renderer.uvRotateEast = 0;
+		renderer.uvRotateWest = 0;
+		renderer.uvRotateTop = 0;
+		renderer.uvRotateBottom = 0;
 	}
 
 	@Override
