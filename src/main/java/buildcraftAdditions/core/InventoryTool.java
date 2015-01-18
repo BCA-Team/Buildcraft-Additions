@@ -8,7 +8,6 @@ package buildcraftAdditions.core;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
@@ -20,13 +19,11 @@ import buildcraftAdditions.items.Tools.ItemPoweredBase;
 
 public class InventoryTool extends InventoryBasic {
 
-	EntityPlayer player;
 	ItemStack tool;
 	boolean reading;
 
-	public InventoryTool(EntityPlayer player, ItemStack stack) {
+	public InventoryTool(ItemStack stack) {
 		super("Tool Inventory", false, 3);
-		this.player = player;
 		tool = stack;
 		if (!hasInventory()) {
 			createInventory();
@@ -83,9 +80,8 @@ public class InventoryTool extends InventoryBasic {
 	}
 
 	protected void setNBT() {
-		ItemStack stack = player.getCurrentEquippedItem();
-		if (stack != null && stack.getItem() instanceof ItemPoweredBase) {
-			stack.setTagCompound(tool.getTagCompound());
+		if (tool != null && tool.getItem() instanceof ItemPoweredBase) {
+			tool.setTagCompound(tool.getTagCompound());
 		}
 	}
 

@@ -62,7 +62,7 @@ public class GuiKineticTool extends GuiContainer {
 
 	@Override
 	public void onGuiClosed() {
-		tool.readBateries(stack, player);
+		tool.readBateries(stack);
 		tool.writeUpgrades(stack);
 	}
 

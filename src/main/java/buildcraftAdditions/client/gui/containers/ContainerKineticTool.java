@@ -163,7 +163,7 @@ public class ContainerKineticTool extends ContainerBase {
 
 	@Override
 	public void onContainerClosed(EntityPlayer player) {
-		tool.readBateries(stack, player);
+		tool.readBateries(stack);
 	}
 
 }

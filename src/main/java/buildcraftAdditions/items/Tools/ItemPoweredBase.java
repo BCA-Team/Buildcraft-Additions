@@ -43,17 +43,17 @@ public abstract class ItemPoweredBase extends ItemSword {
 		tool = player.getCurrentEquippedItem();
 
 		if (tool != null && tool.getItem() instanceof ItemPoweredBase) {
-			toolInventory = new InventoryTool(player, tool);
+			toolInventory = new InventoryTool(tool);
 		}
 
 		return toolInventory;
 	}
 
-	public static IInventory getInventory(EntityPlayer player, ItemStack stack) {
+	public static IInventory getInventory(ItemStack stack) {
 		IInventory toolInventory = null;
 
 		if (stack != null && stack.getItem() instanceof ItemPoweredBase) {
-			toolInventory = new InventoryTool(player, stack);
+			toolInventory = new InventoryTool(stack);
 		}
 
 		return toolInventory;
@@ -64,7 +64,7 @@ public abstract class ItemPoweredBase extends ItemSword {
 		return true;
 	}
 
-	public void decreaseEnergy(ItemStack stack, double energy, EntityPlayer player) {
+	public void decreaseEnergy(ItemStack stack, int energy) {
 		if (energyB1 - energy <= 0) {
 			energy -= energyB1;
 			energyB1 = 0;
@@ -88,12 +88,11 @@ public abstract class ItemPoweredBase extends ItemSword {
 		if (energyB3 > energy) {
 			energyB3 -= energy;
 		}
-		writeBateries(stack, player);
-		readBateries(stack, player);
-
+		writeBateries(stack);
+		readBateries(stack);
 	}
 
-	public double getEnergy() {
+	public int getEnergy() {
 		return energyB1 + energyB2 + energyB3;
 	}
 
@@ -108,7 +107,7 @@ public abstract class ItemPoweredBase extends ItemSword {
 		this.z = z;
 		this.world = player.worldObj;
 		this.player = player;
-		readBateries(stack, player);
+		readBateries(stack);
 		if (getEnergy() <= world.getBlock(x, y, z).getBlockHardness(world, x, y, z)) {
 			player.addChatComponentMessage(new ChatComponentText(Utils.localize("kineticTool.outOfPower")));
 			return true;
@@ -118,13 +117,13 @@ public abstract class ItemPoweredBase extends ItemSword {
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entity) {
-		decreaseEnergy(stack, (block.getBlockHardness(world, x, y, z) * (ConfigurationHandler.powerDifficultyModifiers[world.difficultySetting.getDifficultyId()]) * ConfigurationHandler.basePowerModifier), player);
+		decreaseEnergy(stack, (int) (block.getBlockHardness(world, x, y, z) * (ConfigurationHandler.powerDifficultyModifiers[world.difficultySetting.getDifficultyId()]) * ConfigurationHandler.basePowerModifier));
 
 		return false;
 	}
 
-	public void readBateries(ItemStack stack, EntityPlayer player) {
-		IInventory inventory = getInventory(player, stack);
+	public void readBateries(ItemStack stack) {
+		IInventory inventory = getInventory(stack);
 		inventory.openInventory();
 		IEnergyContainerItem battery;
 		ItemStack batteryStack = inventory.getStackInSlot(0);
@@ -155,8 +154,8 @@ public abstract class ItemPoweredBase extends ItemSword {
 		stack.getItem().setDamage(stack, storageB1 + storageB2 + storageB3 - energyB1 - energyB2 - energyB3);
 	}
 
-	public void writeBateries(ItemStack stack, EntityPlayer player) {
-		IInventory inventory = getInventory(player, stack);
+	public void writeBateries(ItemStack stack) {
+		IInventory inventory = getInventory(stack);
 		inventory.openInventory();
 		BatteryBase battery = null;
 		ItemStack batteryStack = inventory.getStackInSlot(0);

@@ -18,6 +18,8 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import cofh.api.energy.IEnergyContainerItem;
+
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.Utils;
@@ -30,7 +32,7 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-public class ItemKineticTool extends ItemPoweredBase {
+public class ItemKineticTool extends ItemPoweredBase implements IEnergyContainerItem {
 	public boolean chainsaw, digger, drill, hoe, goldStick, diamondStick, emeraldStick;
 	public int upgradesAllowed;
 	public IIcon icon, iconAlt, overlayChainsaw, overlayDigger, overlayDrill, overlayHoe;
@@ -68,7 +70,7 @@ public class ItemKineticTool extends ItemPoweredBase {
 				player.openGui(BuildcraftAdditions.instance, Variables.Gui.KINETIC_TOOL, world, x, y, z);
 		}
 		readUpgrades(stack);
-		readBateries(stack, player);
+		readBateries(stack);
 		showDurabilityBar(stack);
 		return stack;
 	}
@@ -228,7 +230,9 @@ public class ItemKineticTool extends ItemPoweredBase {
 
 	@Override
 	public double getDurabilityForDisplay(ItemStack stack) {
-		readBateries(stack, player);
+		readBateries(stack);
+		if (getCapacity() == 0)
+			return 0;
 		return (getCapacity() - getEnergy()) / getCapacity();
 	}
 
@@ -242,7 +246,7 @@ public class ItemKineticTool extends ItemPoweredBase {
 			for (int j = z - 1; j <= z + 1; j++) {
 				if ((world.getBlock(i, y, j) == Blocks.dirt || world.getBlock(i, y, j) == Blocks.grass) && getEnergy() >= 5) {
 					world.setBlock(i, y, j, Blocks.farmland);
-					decreaseEnergy(stack, 5, player);
+					decreaseEnergy(stack, 5);
 					setLastUsedMode(stack, "hoe");
 					tilted = true;
 				}
@@ -254,9 +258,9 @@ public class ItemKineticTool extends ItemPoweredBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
-		readBateries(stack, player);
+		readBateries(stack);
 		readUpgrades(stack);
-		list.add(Integer.toString((int) getEnergy()) + "/" + Integer.toString(getCapacity()) + " RF");
+		list.add(Integer.toString(getEnergy()) + "/" + Integer.toString(getCapacity()) + " RF");
 		if (Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode())) {
 			if (chainsaw)
 				list.add(String.format(Utils.localize("tooltip.installed"), Utils.localize("item.toolUpgradeChainsaw.name")));
@@ -304,5 +308,57 @@ public class ItemKineticTool extends ItemPoweredBase {
 		if (lastMode.equals("hoe"))
 			return iconHoe;
 		return icon;
+	}
+
+	@Override
+	public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
+		int b1 = energyB1;
+		int b2 = energyB2;
+		int b3 = energyB3;
+		int received = 0;
+		if (maxReceive > storageB1 - b1) {
+			received += storageB1 - b1;
+			b1 = storageB1;
+		} else {
+			b1 += maxReceive;
+			received = maxReceive;
+		}
+		if (maxReceive - received > storageB2 - b2) {
+			received += storageB2 - b3;
+			b2 = storageB2;
+		} else {
+			b2 += maxReceive - received;
+			received = maxReceive;
+		}
+		if (maxReceive - received > storageB3 - b3) {
+			received += storageB3 - b3;
+			b3 = storageB3;
+		} else {
+			b3 += maxReceive - received;
+			received = maxReceive;
+		}
+		if (!simulate) {
+			energyB1 = b1;
+			energyB2 = b2;
+			energyB3 = b3;
+			writeBateries(container);
+		}
+		return received;
+	}
+
+	@Override
+	public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
+		return 0;
+	}
+
+	@Override
+	public int getEnergyStored(ItemStack container) {
+		readBateries(container);
+		return getEnergy();
+	}
+
+	@Override
+	public int getMaxEnergyStored(ItemStack container) {
+		return getCapacity();
 	}
 }
