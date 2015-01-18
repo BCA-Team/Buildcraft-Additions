@@ -13,6 +13,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+
 import cofh.api.energy.IEnergyContainerItem;
 
 import buildcraftAdditions.inventories.CustomInventory;
@@ -30,15 +32,31 @@ public class TileChargingStation extends TileMachineBase implements IInventory {
 	public void updateEntity() {
 		super.updateEntity();
 		int charge = 6000;
-		ItemStack stack = inventory.getStackInSlot(0);
-		if (stack == null)
-			return;
-		if (!(stack.getItem() instanceof IEnergyContainerItem))
-			return;
-		IEnergyContainerItem battery = (IEnergyContainerItem) stack.getItem();
-		if (energy < charge)
+		if (charge > energy)
 			charge = energy;
-		energy -= battery.receiveEnergy(stack, charge, false);
+		if (charge > 0) {
+			if (getRequiredEnergy() > 0) {
+				ItemStack stack = this.getStackInSlot(0);
+				IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
+				energy -= containerItem.receiveEnergy(stack, charge, false);
+				this.setInventorySlotContents(0, stack);
+			}
+		}
+	}
+
+	public int getRequiredEnergy() {
+		ItemStack stack = this.getStackInSlot(0);
+		if (stack != null && stack.getItem() != null && stack.getItem() instanceof IEnergyContainerItem) {
+			IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
+			return containerItem.getMaxEnergyStored(stack) - containerItem.getEnergyStored(stack);
+		}
+
+		return 0;
+	}
+
+	@Override
+	public boolean canUpdate() {
+		return !FMLCommonHandler.instance().getEffectiveSide().isClient();
 	}
 
 	@Override
