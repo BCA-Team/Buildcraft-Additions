@@ -68,8 +68,8 @@ public class GuiHandler implements IGuiHandler {
 			case Variables.Gui.MACHINE_CONFIGURATOR:
 				if (tile instanceof IMultiBlockTile) {
 					IMultiBlockTile multiblock = (IMultiBlockTile) tile;
-					//if (!multiblock.isPartOfMultiblock())
-					//return null;
+					if (!multiblock.isPartOfMultiblock())
+						return null;
 					if (!multiblock.isMaster())
 						tile = world.getTileEntity(multiblock.getMasterX(), multiblock.getMasterY(), multiblock.getMasterZ());
 				}
