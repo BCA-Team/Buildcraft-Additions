@@ -5,6 +5,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import buildcraftAdditions.client.gui.SlotPhantom;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -128,5 +131,42 @@ public class ContainerBase extends Container {
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
 		return true;
+	}
+
+	@Override
+	public ItemStack slotClick(int slotNum, int mouseButton, int modifier, EntityPlayer player) {
+		if (slotNum < 0 || inventorySlots.size() == 0 || inventorySlots == null)
+			return super.slotClick(slotNum, mouseButton, modifier, player);
+		Slot slot = (Slot) inventorySlots.get(slotNum);
+		if (slot instanceof SlotPhantom)
+			return clickPhantom(slot, mouseButton, player);
+		return super.slotClick(slotNum, mouseButton, modifier, player);
+	}
+
+	protected ItemStack clickPhantom(Slot slot, int mouseButton, EntityPlayer player) {
+		ItemStack playerStack = player.inventory.getItemStack();
+		ItemStack slotStack = slot.getStack();
+
+		if (mouseButton == 0 && playerStack != null && slot.isItemValid(playerStack)) {
+			if (slotStack != null)
+				slot.putStack(null);
+
+			fillPhantomStack(slot, playerStack);
+			slot.onSlotChanged();
+		}
+		else if (mouseButton == 1 || mouseButton == 2) {
+			if (slotStack != null) {
+				slot.putStack(null);
+				slot.onSlotChanged();
+			}
+		}
+
+		return null;
+	}
+
+	protected void fillPhantomStack(Slot slot, ItemStack stack) {
+		ItemStack phantomStack = stack.copy();
+		phantomStack.stackSize = 1;
+		slot.putStack(phantomStack);
 	}
 }
