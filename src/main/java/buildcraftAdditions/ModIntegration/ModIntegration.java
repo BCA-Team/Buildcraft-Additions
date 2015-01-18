@@ -1,13 +1,11 @@
 package buildcraftAdditions.ModIntegration;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -21,7 +19,6 @@ import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.blocks.BlockBasic;
 import buildcraftAdditions.config.ConfigurationHandler;
-import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.items.dust.DustTypes;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
@@ -41,8 +38,6 @@ import eureka.api.EurekaRegistry;
 public class ModIntegration {
 
 	public static void integrate() {
-		if (ConfigurationHandler.eurekaIntegration)
-			eurekaResearch();
 		railcraftIntegration();
 		metals();
 		if (Loader.isModLoaded("framez"))
@@ -52,6 +47,8 @@ public class ModIntegration {
 			MineTweakerIntegreation.integrate();
 		if (Loader.isModLoaded("BuildCraft|Transport")) {
 			BuildcraftIntegration.integrate();
+			if (ConfigurationHandler.eurekaIntegration)
+				eurekaResearch();
 		}
 	}
 
