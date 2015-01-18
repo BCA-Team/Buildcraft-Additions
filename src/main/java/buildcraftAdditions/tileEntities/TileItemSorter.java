@@ -4,7 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -12,6 +11,9 @@ import buildcraft.api.transport.IPipeConnection;
 import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.tileEntities.Bases.TileBase;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -20,7 +22,7 @@ import buildcraftAdditions.inventories.CustomInventory;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileItemSorter extends TileEntity implements ISidedInventory, IPipeConnection {
+public class TileItemSorter extends TileBase implements ISidedInventory, IPipeConnection {
 
 	protected ForgeDirection rotation = ForgeDirection.UP;
 	protected CustomInventory inventory = new CustomInventory("ItemSorter", 49, 64, this);
@@ -64,7 +66,7 @@ public class TileItemSorter extends TileEntity implements ISidedInventory, IPipe
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		rotation = ForgeDirection.getOrientation(tag.getInteger("Rotation"));
+		rotation = ForgeDirection.getOrientation(tag.getByte("Rotation"));
 		colors = tag.getIntArray("Colors");
 		inventory.readNBT(tag);
 	}
@@ -72,9 +74,21 @@ public class TileItemSorter extends TileEntity implements ISidedInventory, IPipe
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		tag.setInteger("Rotation", rotation.ordinal());
+		tag.setByte("Rotation", (byte) rotation.ordinal());
 		tag.setIntArray("Colors", colors);
 		inventory.writeNBT(tag);
+	}
+
+	@Override
+	public ByteBuf writeToByteBuff(ByteBuf buf) {
+		buf.writeByte(rotation.ordinal());
+		return buf;
+	}
+
+	@Override
+	public ByteBuf readFromByteBuff(ByteBuf buf) {
+		rotation = ForgeDirection.getOrientation(buf.readByte());
+		return buf;
 	}
 
 	@Override
