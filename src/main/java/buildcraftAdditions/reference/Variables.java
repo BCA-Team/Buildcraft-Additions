@@ -54,7 +54,7 @@ public final class Variables {
 
 	//multiblock paterns
 	public static final class Paterns {
-		public static final MultiBlockPatern KEBT2 = new MultiBlockPaternKEBT2();
+		public static final MultiBlockPatern KEBT2 = new MultiBlockPaternKEBT2().setRotatable(false);
 		public static final MultiBlockPatern KEBT3 = new MultiBlockPaternKEBT3();
 		public static final MultiBlockPatern REFINERY = new MultiBlockPaternRefinery();
 		public static final MultiBlockPatern COOLING_TOWER = new MultiBlockPaternCoolingTower();

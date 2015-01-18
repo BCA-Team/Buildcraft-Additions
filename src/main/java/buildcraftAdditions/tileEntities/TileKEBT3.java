@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -172,6 +173,11 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	public void destroyMultiblock() {
 		data.patern.destroyMultiblock(worldObj, data.masterX, data.masterY, data.masterZ, data.rotationIndex);
+	}
+
+	@Override
+	public AxisAlignedBB getRenderBoundingBox() {
+		return AxisAlignedBB.getBoundingBox(xCoord - 2, yCoord - 2, zCoord - 2, xCoord + 2, yCoord + 2, zCoord + 2);
 	}
 
 	private void findMaster() {

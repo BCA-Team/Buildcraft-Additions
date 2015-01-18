@@ -20,9 +20,11 @@ import buildcraftAdditions.utils.RotationUtils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MultiBlockPatern {
-	public ForgeDirection directions[], rotatedDirections[];
-	public char identifiers[];
-	public HashMap<String, String> replacements = new HashMap<String, String>(5);
+	protected ForgeDirection directions[], rotatedDirections[];
+	protected char identifiers[];
+	protected HashMap<String, String> replacements = new HashMap<String, String>(5);
+	protected boolean rotatable;
+
 
 	public MultiBlockPatern(ForgeDirection directions[], char identifier) {
 		int length = directions.length;
@@ -30,12 +32,14 @@ public class MultiBlockPatern {
 		this.identifiers = new char[length];
 		for (int t = 0; t < length; t++)
 			this.identifiers[t] = identifier;
+		rotatable = true;
 	}
 
 	public MultiBlockPatern(ForgeDirection directions[], char identifiers[], HashMap<String, String> replacements) {
 		this.directions = directions;
 		this.identifiers = identifiers;
 		this.replacements = replacements;
+		rotatable = true;
 	}
 
 	public MultiBlockPatern(ForgeDirection directions[], char identifier, HashMap<String, String> replacements) {
@@ -45,15 +49,19 @@ public class MultiBlockPatern {
 		for (int t = 0; t < length; t++)
 			this.identifiers[t] = identifier;
 		this.replacements = replacements;
+		rotatable = true;
 	}
 
 	public void checkPatern(World world, int x, int y, int z) {
 		int rotation = 0;
 		boolean valid = false;
 		for (int t = 0; t < 4; t++) {
+			if (t > 0 && !rotatable)
+				break;
 			if (isPaternValid(world, x, y, z, t)) {
 				rotation = t;
 				valid = true;
+				break;
 			}
 		}
 		if (valid) {
@@ -154,5 +162,14 @@ public class MultiBlockPatern {
 			location.move(direction);
 			location.neighbourUpdate();
 		}
+	}
+
+	public MultiBlockPatern setRotatable(boolean rotatable) {
+		this.rotatable = rotatable;
+		return this;
+	}
+
+	public boolean isRotatable() {
+		return rotatable;
 	}
 }
