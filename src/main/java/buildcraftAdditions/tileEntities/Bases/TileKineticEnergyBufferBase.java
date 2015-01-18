@@ -7,7 +7,7 @@ import net.minecraft.world.Explosion;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
 
 import buildcraftAdditions.config.ConfigurationHandler;
@@ -28,7 +28,7 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileKineticEnergyBufferBase extends TileBase implements IEnergyHandler, IConfigurableOutput, ISyncronizedTile {
+public abstract class TileKineticEnergyBufferBase extends TileBase implements IEnergyReceiver, IEnergyProvider, IConfigurableOutput, ISyncronizedTile {
 	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
 	public EnumSideStatus[] configuration = new EnumSideStatus[6];
 	public int tier;

@@ -2,6 +2,7 @@ package buildcraftAdditions.items;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.BuildcraftAdditions;
@@ -23,10 +24,12 @@ public class ItemMachineConfigurator extends ItemBase {
 
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ) {
-		if (world.getTileEntity(x, y, z) instanceof TileBase)
-			((TileBase) world.getTileEntity(x, y, z)).sync();
+		TileEntity entity = world.getTileEntity(x, y, z);
+		if (entity instanceof TileBase)
+			((TileBase) entity).sync();
 
-		if (world.getTileEntity(x, y, z) instanceof IConfigurableOutput) {
+
+		if (entity instanceof IConfigurableOutput) {
 			player.openGui(BuildcraftAdditions.instance, Variables.Gui.MACHINE_CONFIGURATOR, world, x, y, z);
 			return true;
 		}

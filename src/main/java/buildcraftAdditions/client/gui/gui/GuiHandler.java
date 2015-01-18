@@ -25,6 +25,7 @@ import buildcraftAdditions.client.gui.containers.ContainerMachineConfigurator;
 import buildcraftAdditions.client.gui.containers.ContainerRefinery;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ItemPoweredBase;
+import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
@@ -65,6 +66,13 @@ public class GuiHandler implements IGuiHandler {
 				if (tile instanceof TileKineticEnergyBufferBase)
 					return new GuiKEB((TileKineticEnergyBufferBase) tile, player);
 			case Variables.Gui.MACHINE_CONFIGURATOR:
+				if (tile instanceof IMultiBlockTile) {
+					IMultiBlockTile multiblock = (IMultiBlockTile) tile;
+					//if (!multiblock.isPartOfMultiblock())
+					//return null;
+					if (!multiblock.isMaster())
+						tile = world.getTileEntity(multiblock.getMasterX(), multiblock.getMasterY(), multiblock.getMasterZ());
+				}
 				if (tile instanceof IConfigurableOutput)
 					return new GuiMachineConfigurator((IConfigurableOutput) tile);
 			case Variables.Gui.REFINERY:

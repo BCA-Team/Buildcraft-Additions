@@ -105,6 +105,9 @@ public class MultiBlockData implements ISyncObject {
 	public ByteBuf writeToByteBuff(ByteBuf buf) {
 		buf.writeBoolean(isMaster);
 		buf.writeBoolean(partOfMultiBlock);
+		buf.writeInt(masterX);
+		buf.writeInt(masterY);
+		buf.writeInt(masterZ);
 		return buf;
 	}
 
@@ -112,6 +115,9 @@ public class MultiBlockData implements ISyncObject {
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		isMaster = buf.readBoolean();
 		partOfMultiBlock = buf.readBoolean();
+		masterX = buf.readInt();
+		masterY = buf.readInt();
+		masterZ = buf.readInt();
 		return null;
 	}
 }
