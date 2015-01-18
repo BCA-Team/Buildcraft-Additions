@@ -42,11 +42,12 @@ public class ModIntegration {
 		metals();
 		if (Loader.isModLoaded("framez"))
 			FramezIntegration.Framez();
-		RefineryRecipeConverter.doYourThing();
+
 		if (Loader.isModLoaded("MineTweaker3"))
 			MineTweakerIntegreation.integrate();
 		if (Loader.isModLoaded("BuildCraft|Transport")) {
 			BuildcraftIntegration.integrate();
+			RefineryRecipeConverter.doYourThing();
 			if (ConfigurationHandler.eurekaIntegration)
 				eurekaResearch();
 		}
