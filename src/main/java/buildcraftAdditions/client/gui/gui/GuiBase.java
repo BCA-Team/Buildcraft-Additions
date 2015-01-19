@@ -39,12 +39,16 @@ public abstract class GuiBase extends GuiContainer {
 	public boolean shouldDrawWidgets = true;
 	public int textColor = 0x404040;
 	public boolean centerTitle = false;
+	public int tileGuiYSize = 0;
 
 	public GuiBase(Container container) {
 		super(container);
-		this.texture = texture();
-		this.xSize = getXSize();
-		this.ySize = getYSize();
+		texture = texture();
+		xSize = getXSize();
+		//this.ySize = tileGuiYSize = getYSize();
+		ySize = drawPlayerInv ? getYSize()  + ySizePlayerInv : getYSize();
+		tileGuiYSize = getYSize();
+
 	}
 
 	public GuiBase setDrawPlayerInv(boolean draw) {
@@ -114,8 +118,10 @@ public abstract class GuiBase extends GuiContainer {
 	@Override
 	public void initGui() {
 		super.initGui();
-		if (drawPlayerInv)
-			this.guiTop = (this.height - (this.ySize + ySizePlayerInv)) / 2;
+		if (drawPlayerInv) {
+			//this.ySize += ySizePlayerInv;
+			this.guiTop = (this.height - this.ySize) / 2;
+		}
 		initialize();
 	}
 
@@ -123,11 +129,11 @@ public abstract class GuiBase extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		bindTexture(texture());
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, tileGuiYSize);
 
 		if (drawPlayerInv) {
 			bindTexture(PLAYER_INV_TEXTURE);
-			drawTexturedModalRect(guiLeft, guiTop + ySize, 0, 0, xSizePlayerInv, ySizePlayerInv);
+			drawTexturedModalRect(guiLeft, guiTop + tileGuiYSize, 0, 0, xSizePlayerInv, ySizePlayerInv);
 		}
 		bindTexture(texture());
 		drawBackgroundPreWidgets(f, x, y);
@@ -155,7 +161,7 @@ public abstract class GuiBase extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		if (drawPlayerInv)
-			drawString(StatCollector.translateToLocal("container.inventory"), 5, ySize + 6, textColor);
+			drawString(StatCollector.translateToLocal("container.inventory"), 5, tileGuiYSize + 6, textColor);
 		String name = Utils.localize(String.format("gui.%s.name", getInventoryName()));
 		drawString(name, centerTitle ? getXSize() / 2 - (name.length() * 2) : titleXoffset, titleYoffset, textColor);
 		drawForegroundExtra(x, y);
