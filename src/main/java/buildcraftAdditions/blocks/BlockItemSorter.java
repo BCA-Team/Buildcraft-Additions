@@ -71,6 +71,15 @@ public class BlockItemSorter extends BlockContainer {
 			return textureOut;
 		if (side == direction.getOpposite().ordinal())
 			return textureIn;
+		if (direction.ordinal() == 0 || direction.getOpposite().ordinal() == 0)
+			if (side == 2 || side == 3)
+				return textureSide2;
+		if (direction.ordinal() == 2 || direction.getOpposite().ordinal() == 2)
+			if (side == 4 || side == 5)
+				return textureSide2;
+		if (direction.ordinal() == 4 || direction.getOpposite().ordinal() == 4)
+			if (side == 2 || side == 3)
+				return textureSide2;
 		return textureSide;
 	}
 
