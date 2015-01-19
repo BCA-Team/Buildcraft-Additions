@@ -36,9 +36,11 @@ public abstract class TileMachineBase extends TileBase implements IEnergyReceive
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
+		if (energy >= maxEnergy)
+			return 0;
 		int energyRecieved = maxReceive;
 		if (energyRecieved > maxEnergy - energy)
-			energyRecieved = maxReceive - energy;
+			energyRecieved = maxEnergy - energy;
 		if (!simulate)
 			energy += energyRecieved;
 		return energyRecieved;
