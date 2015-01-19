@@ -45,7 +45,6 @@ public abstract class GuiBase extends GuiContainer {
 		super(container);
 		texture = texture();
 		xSize = getXSize();
-		//this.ySize = tileGuiYSize = getYSize();
 		ySize = drawPlayerInv ? getYSize()  + ySizePlayerInv : getYSize();
 		tileGuiYSize = getYSize();
 

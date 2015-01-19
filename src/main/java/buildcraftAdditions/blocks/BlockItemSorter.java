@@ -38,6 +38,8 @@ public class BlockItemSorter extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	IIcon textureSide;
 	@SideOnly(Side.CLIENT)
+	IIcon textureSide2;
+	@SideOnly(Side.CLIENT)
 	IIcon textureIn;
 	@SideOnly(Side.CLIENT)
 	IIcon textureOut;
@@ -50,8 +52,9 @@ public class BlockItemSorter extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		textureSide = RenderUtils.registerIcon(register, "itemSorterSide");
+		textureSide2 = RenderUtils.registerIcon(register, "itemSorterSide2");
 		textureIn = RenderUtils.registerIcon(register, "itemSorterIn");
-		textureOut = RenderUtils.registerIcon(register, "itemSorterOu");
+		textureOut = RenderUtils.registerIcon(register, "itemSorterOut");
 	}
 
 	@Override
@@ -66,7 +69,7 @@ public class BlockItemSorter extends BlockContainer {
 		ForgeDirection direction = ForgeDirection.getOrientation(meta);
 		if (side == direction.ordinal())
 			return textureOut;
-		else if (side == direction.getOpposite().ordinal())
+		if (side == direction.getOpposite().ordinal())
 			return textureIn;
 		return textureSide;
 	}
