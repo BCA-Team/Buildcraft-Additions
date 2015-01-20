@@ -83,7 +83,6 @@ gui.requiredHeat=Required Heat
 gui.powerUsage=Power Usage
 gui.empty=Empty
 gui.coolingTower.name=Cooling Tower
-gui.basicCoil.name=Basic Coil
 gui.north=North
 gui.east=East
 gui.south=South
@@ -98,11 +97,13 @@ gui.machineConfigurator.name=Machine Configurator
 gui.kebT1.name=Kinetic Energy Buffer
 gui.kebT2.name=Large Kinetic Energy Buffer
 gui.kebT3.name=Advanced Kinetic Energy Buffer
+gui.itemSorter.name=Sort-O-Tron
+gui.basicCoil.name=Basic Coil
+gui.chargingStation.name=Charging Station
 
 gui.keb.dangerousButton=BIG RED BUTTONS ARE VERY DANGEROUS
 gui.keb.noPushing=DON'T PUSH IT
 gui.keb.pressForBoom=PRESS HERE FOR A BIG BOOM
-
 
 gui.nei.dusting=Dusting
 

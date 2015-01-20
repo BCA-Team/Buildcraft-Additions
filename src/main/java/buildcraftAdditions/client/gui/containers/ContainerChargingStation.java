@@ -1,5 +1,12 @@
 package buildcraftAdditions.client.gui.containers;
 
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
+
+import buildcraftAdditions.tileEntities.TileChargingStation;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -7,33 +14,17 @@ package buildcraftAdditions.client.gui.containers;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
-
-import buildcraftAdditions.tileEntities.TileChargingStation;
-
 public class ContainerChargingStation extends ContainerBase {
-	IInventory playerIInventory;
-	TileChargingStation chargingStation;
+
+	private final TileChargingStation chargingStation;
 
 	public ContainerChargingStation(InventoryPlayer inventory, TileChargingStation tile) {
 		super();
-		playerIInventory = inventory;
 		chargingStation = tile;
 
-		this.addSlotToContainer(new Slot(tile, 0, 84, 28));
+		addSlotToContainer(new Slot(tile, 0, 80, 30));
 
-		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex) {
-			for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex) {
-				this.addSlotToContainer(new Slot(inventory, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 8 + inventoryColumnIndex * 18, 71 + inventoryRowIndex * 18));
-			}
-		}
-		for (int hotbbarIndex = 0; hotbbarIndex < 9; ++hotbbarIndex) {
-			this.addSlotToContainer(new Slot(inventory, hotbbarIndex, 8 + hotbbarIndex * 18, 129));
-		}
+		addPlayerInventory(inventory, 8, 71);
 	}
 
 	@Override

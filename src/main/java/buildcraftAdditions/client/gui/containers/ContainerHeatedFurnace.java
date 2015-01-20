@@ -39,9 +39,4 @@ public class ContainerHeatedFurnace extends ContainerBase {
 	public boolean canInteractWith(EntityPlayer player) {
 		return true;
 	}
-
-	@Override
-	public void onContainerClosed(EntityPlayer player) {
-		super.onContainerClosed(player);
-	}
 }

@@ -88,6 +88,7 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 	@Override
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		rotation = ForgeDirection.getOrientation(buf.readByte());
+		updateRender();
 		return buf;
 	}
 
