@@ -1,5 +1,9 @@
 package buildcraftAdditions.client.gui.containers;
 
+import net.minecraft.entity.player.InventoryPlayer;
+
+import buildcraftAdditions.tileEntities.TileRefinery;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -7,9 +11,9 @@ package buildcraftAdditions.client.gui.containers;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ContainerRefinery extends ContainerBase {
+public class ContainerRefinery extends ContainerBase<TileRefinery> {
 
-	public ContainerRefinery() {
-
+	public ContainerRefinery(InventoryPlayer inventoryPlayer, TileRefinery tile) {
+		super(inventoryPlayer, tile);
 	}
 }

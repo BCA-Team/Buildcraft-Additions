@@ -3,6 +3,9 @@ package buildcraftAdditions.client.gui.gui;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraftAdditions.client.gui.containers.ContainerItemSorter;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 
@@ -13,13 +16,15 @@ import buildcraftAdditions.tileEntities.TileItemSorter;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+@SideOnly(Side.CLIENT)
 public class GuiItemSorter extends GuiBase {
 
-	public ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/guiItemSorter.png");
-	private TileItemSorter tile;
+	private static final ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/guiItemSorter.png");
+	private final TileItemSorter tile;
 
 	public GuiItemSorter(InventoryPlayer playerInv, TileItemSorter tile) {
 		super(new ContainerItemSorter(playerInv, tile));
+		this.tile = tile;
 	}
 
 	@Override

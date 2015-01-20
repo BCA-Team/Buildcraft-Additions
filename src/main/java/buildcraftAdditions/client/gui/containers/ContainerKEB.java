@@ -3,6 +3,7 @@ package buildcraftAdditions.client.gui.containers;
 import net.minecraft.entity.player.EntityPlayer;
 
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -10,20 +11,13 @@ import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ContainerKEB extends ContainerBase {
-	private TileKineticEnergyBufferBase keb;
+public class ContainerKEB extends ContainerBase<TileKineticEnergyBufferBase> {
 
-	public ContainerKEB(TileKineticEnergyBufferBase keb, EntityPlayer player) {
-		super();
-		keb.sync();
-		this.keb = keb;
-		if (player.getDisplayName().equals(keb.owner))
-			keb.destroyer = player;
+	public ContainerKEB(EntityPlayer player, TileKineticEnergyBufferBase tile) {
+		super(player.inventory, tile);
+		tile.sync();
+		if (player.getDisplayName().equals(tile.owner))
+			tile.destroyer = player;
 	}
 
-	@Override
-	public void onContainerClosed(EntityPlayer player) {
-		super.onContainerClosed(player);
-
-	}
 }

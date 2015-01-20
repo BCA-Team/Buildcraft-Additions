@@ -1,5 +1,9 @@
 package buildcraftAdditions.client.gui.containers;
 
+import net.minecraft.entity.player.InventoryPlayer;
+
+import buildcraftAdditions.utils.IConfigurableOutput;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -7,5 +11,10 @@ package buildcraftAdditions.client.gui.containers;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ContainerMachineConfigurator extends ContainerBase {
+public class ContainerMachineConfigurator extends ContainerBase<IConfigurableOutput> {
+
+	public ContainerMachineConfigurator(InventoryPlayer inventoryPlayer, IConfigurableOutput tile) {
+		super(inventoryPlayer, tile);
+	}
+
 }

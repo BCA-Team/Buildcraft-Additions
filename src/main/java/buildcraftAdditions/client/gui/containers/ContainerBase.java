@@ -3,6 +3,7 @@ package buildcraftAdditions.client.gui.containers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
@@ -15,14 +16,22 @@ import buildcraftAdditions.client.gui.SlotPhantom;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ContainerBase extends Container {
+public class ContainerBase<T> extends Container {
 
-	public void addPlayerInventory(InventoryPlayer invPlayer, int x, int y) {
+	protected final InventoryPlayer inventoryPlayer;
+	protected final T inventory;
+
+	public ContainerBase(InventoryPlayer inventoryPlayer, T tile) {
+		this.inventoryPlayer = inventoryPlayer;
+		inventory = tile;
+	}
+
+	public void addPlayerInventory(int x, int y) {
 		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
 			for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex)
-				addSlotToContainer(new Slot(invPlayer, 9 + inventoryColumnIndex + inventoryRowIndex * 9, x + inventoryColumnIndex * 18, y + inventoryRowIndex * 18));
+				addSlotToContainer(new Slot(inventoryPlayer, 9 + inventoryColumnIndex + inventoryRowIndex * 9, x + inventoryColumnIndex * 18, y + inventoryRowIndex * 18));
 		for (int hotBarIndex = 0; hotBarIndex < 9; ++hotBarIndex)
-			addSlotToContainer(new Slot(invPlayer, hotBarIndex, 8 + hotBarIndex * 18, y + 58));
+			addSlotToContainer(new Slot(inventoryPlayer, hotBarIndex, 8 + hotBarIndex * 18, y + 58));
 	}
 
 	@Override
@@ -130,7 +139,7 @@ public class ContainerBase extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return true;
+		return inventory instanceof IInventory ? ((IInventory) inventory).isUseableByPlayer(player) : true;
 	}
 
 	@Override
@@ -153,8 +162,7 @@ public class ContainerBase extends Container {
 
 			fillPhantomStack(slot, playerStack);
 			slot.onSlotChanged();
-		}
-		else if (mouseButton == 1 || mouseButton == 2) {
+		} else if (mouseButton == 1 || mouseButton == 2) {
 			if (slotStack != null) {
 				slot.putStack(null);
 				slot.onSlotChanged();
