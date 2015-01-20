@@ -1,9 +1,5 @@
 package buildcraftAdditions.client.gui.gui;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -12,7 +8,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.client.gui.containers.ContainerBasicCoil;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
-import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -22,9 +17,10 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @SideOnly(Side.CLIENT)
-public class GuiBasicCoil extends GuiContainer {
-	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/BasicCoilGui.png");
-	TileBasicCoil coil;
+public class GuiBasicCoil extends GuiBase {
+
+	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiBasicCoil.png");
+	private final TileBasicCoil coil;
 
 	public GuiBasicCoil(InventoryPlayer inventoryplayer, TileBasicCoil coil) {
 		super(new ContainerBasicCoil(inventoryplayer, coil));
@@ -32,20 +28,31 @@ public class GuiBasicCoil extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-		int j = (width - xSize) / 2;
-		int k = (height - ySize) / 2;
-		drawTexturedModalRect(j + 79, k + 28 + (16 - coil.getBurnIconHeight()), 176, 16 - coil.getBurnIconHeight(), 16, coil.getBurnIconHeight());
+	public void drawBackgroundPreWidgets(float f, int x, int y) {
+		drawTexturedModalRect((width - xSize) / 2 + 79, (height - ySize) / 2 + 27 + (16 - coil.getBurnIconHeight()), 176, 16 - coil.getBurnIconHeight(), 16, coil.getBurnIconHeight());
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		super.drawGuiContainerForegroundLayer(par1, par2);
-		String title = Utils.localize("tile.blockCoilBasic.name");
-		fontRendererObj.drawString(title, 5, 6, 0x404040);
-		fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 96) + 2, 0x404040);
+	public ResourceLocation texture() {
+		return texture;
+	}
+
+	@Override
+	public int getXSize() {
+		return 176;
+	}
+
+	@Override
+	public int getYSize() {
+		return 66;
+	}
+
+	@Override
+	public String getInventoryName() {
+		return "basicCoil";
+	}
+
+	@Override
+	public void initialize() {
 	}
 }
