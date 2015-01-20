@@ -1,13 +1,5 @@
 package buildcraftAdditions.client.gui.gui;
 
-/**
- * Copyright (c) 2014, AEnterprise
- * http://buildcraftadditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
- * Please check the contents of the license located in
- * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
- */
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -19,6 +11,7 @@ import buildcraftAdditions.client.gui.containers.ContainerChargingStation;
 import buildcraftAdditions.client.gui.containers.ContainerCoolingTower;
 import buildcraftAdditions.client.gui.containers.ContainerFluidicCompressor;
 import buildcraftAdditions.client.gui.containers.ContainerHeatedFurnace;
+import buildcraftAdditions.client.gui.containers.ContainerItemSorter;
 import buildcraftAdditions.client.gui.containers.ContainerKEB;
 import buildcraftAdditions.client.gui.containers.ContainerKineticTool;
 import buildcraftAdditions.client.gui.containers.ContainerMachineConfigurator;
@@ -33,9 +26,17 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileCoolingTower;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
+import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.tileEntities.TileRefinery;
 import buildcraftAdditions.utils.IConfigurableOutput;
 
+/**
+ * Copyright (c) 2014, AEnterprise
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ */
 public class GuiHandler implements IGuiHandler {
 
 	@Override
@@ -81,6 +82,9 @@ public class GuiHandler implements IGuiHandler {
 			case Variables.Gui.COOLING_TOWER:
 				if (tile instanceof TileCoolingTower)
 					return new GuiCoolingTower((TileCoolingTower) tile);
+			case Variables.Gui.ITEM_SORTER:
+				if (tile instanceof TileItemSorter)
+					return new GuiItemSorter(player.inventory, (TileItemSorter) tile);
 		}
 		return null;
 	}
@@ -118,6 +122,8 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerRefinery();
 			case Variables.Gui.COOLING_TOWER:
 				return new ContainerCoolingTower();
+			case Variables.Gui.ITEM_SORTER:
+				return new ContainerItemSorter(player.inventory, (TileItemSorter) tile);
 		}
 		return null;
 	}
