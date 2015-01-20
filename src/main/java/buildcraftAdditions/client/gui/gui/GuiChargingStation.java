@@ -1,18 +1,5 @@
 package buildcraftAdditions.client.gui.gui;
 
-/**
- * Copyright (c) 2014, AEnterprise
- * http://buildcraftadditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
- * Please check the contents of the license located in
- * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
- */
-
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -21,42 +8,57 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.client.gui.containers.ContainerChargingStation;
 import buildcraftAdditions.tileEntities.TileChargingStation;
-import buildcraftAdditions.utils.Utils;
 
+/**
+ * Copyright (c) 2014, AEnterprise
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ */
 @SideOnly(Side.CLIENT)
-public class GuiChargingStation extends GuiContainer {
+public class GuiChargingStation extends GuiBase {
 
-	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/ChargingStation.png");
-	public ResourceLocation ITEM_TEXTURE = TextureMap.locationItemsTexture;
-	TileChargingStation chargingStation;
+	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiChargingStation.png");
+	private final TileChargingStation chargingStation;
 
 	public GuiChargingStation(InventoryPlayer inventoryPlayer, TileChargingStation tile) {
 		super(new ContainerChargingStation(inventoryPlayer, tile));
 		chargingStation = tile;
 	}
 
-	/*@Override
+	@Override
+	public ResourceLocation texture() {
+		return texture;
+	}
+
+	@Override
+	public int getXSize() {
+		return 176;
+	}
+
+	@Override
+	public int getYSize() {
+		return 53;
+	}
+
+	@Override
+	public String getInventoryName() {
+		return "chargingStation";
+	}
+
+	@Override
+	public void initialize() {
+	}
+
+	/*
+	@Override
 	protected void initLedgers(IInventory inventory) {
 		super.initLedgers(inventory);
 		ledgerManager.add(new ChargingStationLedger((TileChargingStation) tile));
-	}*/
-
-	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		super.drawGuiContainerForegroundLayer(par1, par2);
-		String title = Utils.localize("tile.blockChargingStation.name");
-		fontRendererObj.drawString(title, 5, 6, 0x404040);
-		fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 110) + 2, 0x404040);
 	}
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-	}
-
-	/*protected class ChargingStationLedger extends Ledger {
+	protected class ChargingStationLedger extends Ledger {
 
 		TileChargingStation chargingStation;
 		int headerColour = 0xe1c92f;
@@ -76,7 +78,7 @@ public class GuiChargingStation extends GuiContainer {
 			drawBackground(x, y);
 
 			// Draw icon
-			Minecraft.getMinecraft().renderEngine.bindTexture(ITEM_TEXTURE);
+			Minecraft.getMinecraft().renderEngine.bindTexture(RenderUtils.MC_ITEM_SHEET);
 			drawIcon(BuildCraftCore.iconProvider.getIcon(CoreIconProvider.ENERGY), x + 3, y + 4);
 
 			if (!isFullyOpened()) {
