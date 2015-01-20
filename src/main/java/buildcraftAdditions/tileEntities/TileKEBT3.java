@@ -134,8 +134,8 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 		if (energy == 0 || !isMaster())
 			return;
 		ArrayList<Location> list = data.patern.getLocations(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
-		for (Location from: list) {
-			for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS) {
+		for (Location from : list) {
+			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 				if (configuration[direction.ordinal()] != EnumSideStatus.OUTPUT && configuration[direction.ordinal()] != EnumSideStatus.BOTH)
 					continue;
 				Location location = from.copy();
@@ -143,14 +143,40 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 				if (location.getTileEntity() == null || !(location.getTileEntity() instanceof IEnergyReceiver))
 					continue;
 				IEnergyReceiver target = (IEnergyReceiver) location.getTileEntity();
-				if (target instanceof TileKEBT3)
+				if (target instanceof IMultiBlockTile && isPartOfSameMultiblock((IMultiBlockTile) target))
 					continue;
-				int output = maxOutput;
+				long output = maxOutput;
+				if (location.getTileEntity() instanceof TileKEBT3) {
+					TileKEBT3 keb = (TileKEBT3) location.getTileEntity();
+					TileKEBT3 keb2;
+					if (keb.isMaster()) {
+						keb2 = keb;
+					} else {
+						keb.findMaster();
+						if (keb.master == null)
+							continue;
+						keb2 = keb.master;
+					}
+					if (keb2.configuration[direction.getOpposite().ordinal()] == EnumSideStatus.BOTH) {
+						if (blocked[direction.ordinal()]) {
+							blocked[direction.ordinal()] = false;
+						} else {
+							output = ((energy + keb2.energy) / 2) - keb2.energy;
+							blocked[direction.ordinal()] = true;
+						}
+					}
+				}
+				if (output < 0)
+					output = 0;
 				if (output > energy)
 					output = energy;
-				energy -= target.receiveEnergy(direction.getOpposite(), output, false);
+				energy -= target.receiveEnergy(direction.getOpposite(), (int) output, false);
 			}
 		}
+	}
+
+	private boolean isPartOfSameMultiblock(IMultiBlockTile tile) {
+		return tile.getMasterX() == xCoord && tile.getMasterY() == yCoord && tile.getMasterZ() == zCoord;
 	}
 
 	@Override
@@ -309,7 +335,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public void setRotationIndex(int rotationIndex) {
-
+		data.rotationIndex = rotationIndex;
 	}
 
 	public void destruction() {

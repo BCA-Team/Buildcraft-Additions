@@ -2,6 +2,7 @@ package buildcraftAdditions.tileEntities.Bases;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.Explosion;
 
@@ -15,6 +16,7 @@ import buildcraftAdditions.networking.ISyncronizedTile;
 import buildcraftAdditions.networking.MessageConfiguration;
 import buildcraftAdditions.networking.MessageSelfDestruct;
 import buildcraftAdditions.networking.PacketHandler;
+import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
 import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Location;
@@ -31,10 +33,12 @@ import io.netty.buffer.ByteBuf;
 public abstract class TileKineticEnergyBufferBase extends TileBase implements IEnergyReceiver, IEnergyProvider, IConfigurableOutput, ISyncronizedTile {
 	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
 	public EnumSideStatus[] configuration = new EnumSideStatus[6];
+	protected boolean[] blocked = new boolean[6];
 	public int tier;
 	public boolean selfDestruct, engineControl;
 	public String owner = "";
 	public EntityPlayer destroyer;
+
 
 	public TileKineticEnergyBufferBase(int maxEnergy, int maxInput, int maxOutput, int loss, int tier) {
 		super();
@@ -57,8 +61,10 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 			recieved = maxEnergy - energy;
 		if (recieved > maxInput)
 			recieved = maxInput;
-		if (!simulate)
+		if (!simulate) {
 			energy += recieved;
+			blocked[from.ordinal()] = true;
+		}
 		return recieved;
 	}
 
@@ -152,11 +158,27 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 				energyHandler = (IEnergyReceiver) location.getTileEntity();
 			if (energyHandler != null) {
 				int sendEnergy = energy;
+				if (canSharePower(location.getTileEntity(), direction)) {
+					TileKineticEnergyBufferTier1 keb = (TileKineticEnergyBufferTier1) location.getTileEntity();
+					sendEnergy = ((energy + keb.energy) / 2) - keb.energy;
+				}
+				if (sendEnergy < 0)
+					sendEnergy = 0;
 				if (sendEnergy > maxOutput)
 					sendEnergy = maxOutput;
+
 				energy -= energyHandler.receiveEnergy(direction.getOpposite(), sendEnergy, false);
 			}
 		}
+	}
+
+	private boolean canSharePower(TileEntity target, ForgeDirection outputSide) {
+		if (configuration[outputSide.ordinal()] == EnumSideStatus.BOTH && target instanceof TileKineticEnergyBufferTier1) {
+			TileKineticEnergyBufferTier1 keb = (TileKineticEnergyBufferTier1) target;
+			if (keb.getStatus(outputSide.getOpposite()) == EnumSideStatus.BOTH)
+				return true;
+		}
+		return false;
 	}
 
 	@Override
