@@ -60,6 +60,8 @@ curse {
         releaseType = "release"
         changelog = """update to BC 6.3.0, no other changes as all efforts are currently focused on BCA 2.0 (and i didn't get any bug reports)
 """
+
+        additionalArtifact deobfJar
     }
 }
 
