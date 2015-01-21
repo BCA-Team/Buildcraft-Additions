@@ -84,4 +84,5 @@ public final class BCItems {
 
 	public static final Item CHIPSET_REDSTONE = GameRegistry.findItem("BuildCraft|Silicon", "redstoneChipset");
 	public static final Item CHIPSET_DIAMOND = GameRegistry.findItemStack("BuildCraft|Silicon", "redstone_diamond_chipset", 1).getItem();
+	public static final Item WRENCH = GameRegistry.findItem("BuildCraft|Core", "wrenchItem");
 }
