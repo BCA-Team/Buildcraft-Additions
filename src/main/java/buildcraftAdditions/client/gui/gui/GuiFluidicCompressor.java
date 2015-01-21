@@ -1,13 +1,5 @@
 package buildcraftAdditions.client.gui.gui;
 
-/**
- * Copyright (c) 2014, AEnterprise
- * http://buildcraftadditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
- * Please check the contents of the license located in
- * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
- */
-
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
@@ -29,8 +21,13 @@ import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.utils.Utils;
 
-
-
+/**
+ * Copyright (c) 2014, AEnterprise
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ */
 @SideOnly(Side.CLIENT)
 public class GuiFluidicCompressor extends GuiContainer {
 

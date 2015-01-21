@@ -5,6 +5,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.client.gui.containers.ContainerBasicCoil;
 import buildcraftAdditions.client.gui.containers.ContainerChargingStation;
@@ -37,6 +39,7 @@ import buildcraftAdditions.utils.IConfigurableOutput;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+@SideOnly(Side.CLIENT)
 public class GuiHandler implements IGuiHandler {
 
 	@Override
@@ -75,13 +78,13 @@ public class GuiHandler implements IGuiHandler {
 						tile = world.getTileEntity(multiblock.getMasterX(), multiblock.getMasterY(), multiblock.getMasterZ());
 				}
 				if (tile instanceof IConfigurableOutput)
-					return new GuiMachineConfigurator((IConfigurableOutput) tile);
+					return new GuiMachineConfigurator(player.inventory, (IConfigurableOutput) tile);
 			case Variables.Gui.REFINERY:
 				if (tile instanceof TileRefinery)
-					return new GuiRefinery((TileRefinery) tile);
+					return new GuiRefinery(player.inventory, (TileRefinery) tile);
 			case Variables.Gui.COOLING_TOWER:
 				if (tile instanceof TileCoolingTower)
-					return new GuiCoolingTower((TileCoolingTower) tile);
+					return new GuiCoolingTower(player.inventory, (TileCoolingTower) tile);
 			case Variables.Gui.ITEM_SORTER:
 				if (tile instanceof TileItemSorter)
 					return new GuiItemSorter(player.inventory, (TileItemSorter) tile);
@@ -91,7 +94,7 @@ public class GuiHandler implements IGuiHandler {
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
-									  int x, int y, int z) {
+	                                  int x, int y, int z) {
 
 		TileEntity tile = world.getTileEntity(x, y, z);
 
@@ -115,13 +118,13 @@ public class GuiHandler implements IGuiHandler {
 					return new ContainerBasicCoil(player.inventory, (TileBasicCoil) tile);
 			case Variables.Gui.KEB:
 				if (tile instanceof TileKineticEnergyBufferBase)
-					return new ContainerKEB((TileKineticEnergyBufferBase) tile, player);
+					return new ContainerKEB(player, (TileKineticEnergyBufferBase) tile);
 			case Variables.Gui.MACHINE_CONFIGURATOR:
-				return new ContainerMachineConfigurator();
+				return new ContainerMachineConfigurator(player.inventory, (IConfigurableOutput) tile);
 			case Variables.Gui.REFINERY:
-				return new ContainerRefinery();
+				return new ContainerRefinery(player.inventory, (TileRefinery) tile);
 			case Variables.Gui.COOLING_TOWER:
-				return new ContainerCoolingTower();
+				return new ContainerCoolingTower(player.inventory, (TileCoolingTower) tile);
 			case Variables.Gui.ITEM_SORTER:
 				return new ContainerItemSorter(player.inventory, (TileItemSorter) tile);
 		}

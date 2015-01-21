@@ -1,6 +1,5 @@
 package buildcraftAdditions.client.gui.containers;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 
@@ -15,20 +14,10 @@ import buildcraftAdditions.tileEntities.TileBasicCoil;
  */
 public class ContainerBasicCoil extends ContainerBase {
 
-	private final TileBasicCoil coil;
-
-	public ContainerBasicCoil(InventoryPlayer inventory, TileBasicCoil coil) {
-		super();
-		this.coil = coil;
-
-		this.addSlotToContainer(new Slot(coil, 0, 78, 43));
-
-		addPlayerInventory(inventory, 8, 84);
-	}
-
-	@Override
-	public boolean canInteractWith(EntityPlayer player) {
-		return coil.isUseableByPlayer(player);
+	public ContainerBasicCoil(InventoryPlayer inventoryPlayer, TileBasicCoil tile) {
+		super(inventoryPlayer, tile);
+		addSlotToContainer(new Slot(tile, 0, 78, 43));
+		addPlayerInventory(8, 84);
 	}
 
 }

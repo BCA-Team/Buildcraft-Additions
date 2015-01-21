@@ -102,6 +102,8 @@ gui.itemSorter.name=Sort-O-Tron
 gui.basicCoil.name=Basic Coil
 gui.chargingStation.name=Charging Station
 gui.priority=Priority
+gui.kineticTool.name=Kinetic Tool
+gui.heatedFurnace.name=Heated Furnace
 
 gui.keb.dangerousButton=BIG RED BUTTONS ARE VERY DANGEROUS
 gui.keb.noPushing=DON'T PUSH IT

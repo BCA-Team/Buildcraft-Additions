@@ -1,7 +1,6 @@
 package buildcraftAdditions.client.gui.containers;
 
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 
@@ -16,21 +15,10 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
  */
 public class ContainerChargingStation extends ContainerBase {
 
-	private final TileChargingStation chargingStation;
-
-	public ContainerChargingStation(InventoryPlayer inventory, TileChargingStation tile) {
-		super();
-		chargingStation = tile;
-
+	public ContainerChargingStation(InventoryPlayer inventoryPlayer, TileChargingStation tile) {
+		super(inventoryPlayer, tile);
 		addSlotToContainer(new Slot(tile, 0, 80, 30));
-
-		addPlayerInventory(inventory, 8, 71);
+		addPlayerInventory(8, 71);
 	}
-
-	@Override
-	public boolean canInteractWith(EntityPlayer var1) {
-		return chargingStation.isUseableByPlayer(var1);
-	}
-
 
 }

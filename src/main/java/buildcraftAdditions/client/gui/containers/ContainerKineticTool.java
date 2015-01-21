@@ -17,16 +17,15 @@ import net.minecraft.item.ItemStack;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 
-public class ContainerKineticTool extends ContainerBase {
+public class ContainerKineticTool extends ContainerBase<IInventory> {
 
-	IInventory playerIInventory;
-	ItemKineticTool tool;
-	ItemStack stack;
-	EntityPlayer player;
+	private final ItemKineticTool tool;
+	private final ItemStack stack;
+	private final EntityPlayer player;
 
-	public ContainerKineticTool(InventoryPlayer inventory, ItemKineticTool tool, IInventory toolInventory, ItemStack stack, EntityPlayer player) {
+	public ContainerKineticTool(InventoryPlayer inventoryPlayer, ItemKineticTool tool, IInventory toolInventory, ItemStack stack, EntityPlayer player) {
+		super(inventoryPlayer, toolInventory);
 		this.tool = tool;
-		this.playerIInventory = inventory;
 		this.stack = stack;
 		this.player = player;
 
@@ -34,15 +33,7 @@ public class ContainerKineticTool extends ContainerBase {
 		addSlotToContainer(new Slot(toolInventory, 0, 60, 29));
 		addSlotToContainer(new Slot(toolInventory, 1, 78, 29));
 		addSlotToContainer(new Slot(toolInventory, 2, 96, 29));
-
-		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex) {
-			for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex) {
-				this.addSlotToContainer(new Slot(inventory, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 8 + inventoryColumnIndex * 18, 71 + inventoryRowIndex * 18));
-			}
-		}
-		for (int hotbbarIndex = 0; hotbbarIndex < 9; ++hotbbarIndex) {
-			this.addSlotToContainer(new Slot(inventory, hotbbarIndex, 8 + hotbbarIndex * 18, 129));
-		}
+		addPlayerInventory(8, 71);
 	}
 
 
@@ -153,12 +144,6 @@ public class ContainerKineticTool extends ContainerBase {
 		}
 
 		return merged;
-	}
-
-
-	@Override
-	public boolean canInteractWith(EntityPlayer var1) {
-		return true;
 	}
 
 	@Override
