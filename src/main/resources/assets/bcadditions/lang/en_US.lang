@@ -60,8 +60,9 @@ item.wireDiamond.name=Diamond Wire
 item.wireDiamondUnhardened.name=Diamond Wire (Unhardened)
 item.heatPlatingRaw.name=Raw Heat Conducting Plating
 item.heatPlating.name=Heat Conducting Plating
-item.dustConverter.name=Dust Conveter
+item.dustConverter.name=Dust Converter
 item.machineConfigurator.name=Machine Configurator
+item.pipeColoringTool.name=Pipe Coloring Tool
 
 tooltip.installed=%s Installed
 tooltip.deactivated=Deactivated
