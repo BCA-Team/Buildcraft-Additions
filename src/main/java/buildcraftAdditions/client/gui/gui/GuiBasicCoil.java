@@ -24,6 +24,7 @@ public class GuiBasicCoil extends GuiBase {
 
 	public GuiBasicCoil(InventoryPlayer inventoryplayer, TileBasicCoil coil) {
 		super(new ContainerBasicCoil(inventoryplayer, coil));
+		setDrawPlayerInv(true);
 		this.coil = coil;
 	}
 

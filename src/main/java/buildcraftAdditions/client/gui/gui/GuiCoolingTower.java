@@ -26,7 +26,6 @@ public class GuiCoolingTower extends GuiBase {
 	public GuiCoolingTower(InventoryPlayer inventoryPlayer, TileCoolingTower tower) {
 		super(new ContainerCoolingTower(inventoryPlayer, tower));
 		this.tower = tower;
-		setDrawPlayerInv(false);
 		setTitleXOffset(70);
 		setTitleYOffset(3);
 		setTextColor(0xFFCC00);

@@ -37,7 +37,6 @@ public class GuiKEB extends GuiBase {
 		this.player = player;
 		teller = 30;
 		green = SpecialListMananger.greenButtonList.contains(player.getDisplayName());
-		setDrawPlayerInv(false);
 	}
 
 	@Override
