@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 import buildcraftAdditions.client.gui.gui.GuiBase;
 import buildcraftAdditions.utils.RenderUtils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -13,7 +14,7 @@ import buildcraftAdditions.utils.RenderUtils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class WidgetButton extends WidgetBase {
+public class WidgetButtonText extends WidgetBase {
 	public static ResourceLocation LEFT = new ResourceLocation("bcadditions:textures/gui/button1Left.png");
 	public static ResourceLocation RIGHT = new ResourceLocation("bcadditions:textures/gui/button1Right.png");
 	public static ResourceLocation MIDDLE = new ResourceLocation("bcadditions:textures/gui/button1CenterPart.png");
@@ -23,7 +24,7 @@ public class WidgetButton extends WidgetBase {
 	private int color;
 	private boolean shouldRender = true;
 
-	public WidgetButton(int id, int x, int y, int width, int height, GuiBase gui) {
+	public WidgetButtonText(int id, int x, int y, int width, int height, GuiBase gui) {
 		super(id, x, y, width, height, gui);
 	}
 
