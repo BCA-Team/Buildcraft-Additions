@@ -17,7 +17,9 @@ import buildcraftAdditions.client.gui.containers.ContainerItemSorter;
 import buildcraftAdditions.client.gui.containers.ContainerKEB;
 import buildcraftAdditions.client.gui.containers.ContainerKineticTool;
 import buildcraftAdditions.client.gui.containers.ContainerMachineConfigurator;
+import buildcraftAdditions.client.gui.containers.ContainerPipeColoringTool;
 import buildcraftAdditions.client.gui.containers.ContainerRefinery;
+import buildcraftAdditions.items.ItemPipeColoringTool;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ItemPoweredBase;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
@@ -88,6 +90,9 @@ public class GuiHandler implements IGuiHandler {
 			case Variables.Gui.ITEM_SORTER:
 				if (tile instanceof TileItemSorter)
 					return new GuiItemSorter(player.inventory, (TileItemSorter) tile);
+			case Variables.Gui.PIPE_COLORING_TOOL:
+				if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemPipeColoringTool)
+					return new GuiPipeColoringTool(player.getCurrentEquippedItem());
 		}
 		return null;
 	}
@@ -127,6 +132,9 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerCoolingTower(player.inventory, (TileCoolingTower) tile);
 			case Variables.Gui.ITEM_SORTER:
 				return new ContainerItemSorter(player.inventory, (TileItemSorter) tile);
+			case Variables.Gui.PIPE_COLORING_TOOL:
+				if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemPipeColoringTool)
+					return new ContainerPipeColoringTool();
 		}
 		return null;
 	}
