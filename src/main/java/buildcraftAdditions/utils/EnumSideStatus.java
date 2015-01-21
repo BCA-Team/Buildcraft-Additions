@@ -9,7 +9,7 @@ package buildcraftAdditions.utils;
  */
 public enum EnumSideStatus {
 	INPUT("Input", 0x002B87, true),
-	OUTPUT("Output", 0x850000, false),
+	OUTPUT("Output", 0x850000, true),
 	DISSABLED("Disabled", 0xa6a6a6, false),
 	BOTH("Both", 0xFFA500, true);
 
