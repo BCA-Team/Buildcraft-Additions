@@ -21,7 +21,8 @@ import buildcraftAdditions.utils.Utils;
 public class GuiMachineConfigurator extends GuiBase {
 	public ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/machineConfigurator.png");
 	private IConfigurableOutput configurableOutput;
-	private WidgetButton north, east, south, west, up, down;
+	private WidgetButton northConfiguration, eastConfiguration, southConfiguration, westConfiguration, upConfiguration, downConfiguration;
+	private WidgetButton northPriority, eastPriority, southPriority, westPriority, upPriority, downPriority;
 
 	public GuiMachineConfigurator(IConfigurableOutput configurableOutput) {
 		super(new ContainerMachineConfigurator());
@@ -62,18 +63,34 @@ public class GuiMachineConfigurator extends GuiBase {
 
 	@Override
 	public void initialize() {
-		north = new WidgetButton(2, guiLeft + 45, guiTop + 26, 60, 15, this);
-		east = new WidgetButton(5, guiLeft + 45, guiTop + 46, 60, 15, this);
-		south = new WidgetButton(3, guiLeft + 45, guiTop + 66, 60, 15, this);
-		west = new WidgetButton(4, guiLeft + 45, guiTop + 86, 60, 15, this);
-		up = new WidgetButton(1, guiLeft + 45, guiTop + 106, 60, 15, this);
-		down = new WidgetButton(0, guiLeft + 45, guiTop + 126, 60, 15, this);
-		addWidget(down);
-		addWidget(up);
-		addWidget(north);
-		addWidget(south);
-		addWidget(west);
-		addWidget(east);
+		northConfiguration = new WidgetButton(2, guiLeft + 45, guiTop + 26, 60, 15, this);
+		eastConfiguration = new WidgetButton(5, guiLeft + 45, guiTop + 46, 60, 15, this);
+		southConfiguration = new WidgetButton(3, guiLeft + 45, guiTop + 66, 60, 15, this);
+		westConfiguration = new WidgetButton(4, guiLeft + 45, guiTop + 86, 60, 15, this);
+		upConfiguration = new WidgetButton(1, guiLeft + 45, guiTop + 106, 60, 15, this);
+		downConfiguration = new WidgetButton(0, guiLeft + 45, guiTop + 126, 60, 15, this);
+
+		northPriority = new WidgetButton(8, guiLeft + 158, guiTop + 26, 62, 15, this);
+		eastPriority = new WidgetButton(11, guiLeft + 158, guiTop + 46, 62, 15, this);
+		southPriority = new WidgetButton(9, guiLeft + 158, guiTop + 66, 62, 15, this);
+		westPriority = new WidgetButton(10, guiLeft + 158, guiTop + 86, 62, 15, this);
+		upPriority = new WidgetButton(7, guiLeft + 158, guiTop + 106, 62, 15, this);
+		downPriority = new WidgetButton(6, guiLeft + 158, guiTop + 126, 62, 15, this);
+
+		addWidget(downConfiguration);
+		addWidget(upConfiguration);
+		addWidget(northConfiguration);
+		addWidget(southConfiguration);
+		addWidget(westConfiguration);
+		addWidget(eastConfiguration);
+
+		addWidget(downPriority);
+		addWidget(upPriority);
+		addWidget(northPriority);
+		addWidget(southPriority);
+		addWidget(westPriority);
+		addWidget(eastPriority);
+
 		updateButtons();
 	}
 
@@ -86,11 +103,27 @@ public class GuiMachineConfigurator extends GuiBase {
 		drawString(Utils.localize("gui.west") + ": ", guiLeft + 10, guiTop + 90);
 		drawString(Utils.localize("gui.up") + ": ", guiLeft + 10, guiTop + 110);
 		drawString(Utils.localize("gui.down") + ": ", guiLeft + 10, guiTop + 130);
+
+		if (configurableOutput.getStatus(ForgeDirection.NORTH).hasPriority())
+			drawString(Utils.localize("gui.priority") + ": ", guiLeft + 110, guiTop + 30);
+		if (configurableOutput.getStatus(ForgeDirection.EAST).hasPriority())
+			drawString(Utils.localize("gui.priority") + ": ", guiLeft + 110, guiTop + 50);
+		if (configurableOutput.getStatus(ForgeDirection.SOUTH).hasPriority())
+			drawString(Utils.localize("gui.priority") + ": ", guiLeft + 110, guiTop + 70);
+		if (configurableOutput.getStatus(ForgeDirection.WEST).hasPriority())
+			drawString(Utils.localize("gui.priority") + ": ", guiLeft + 110, guiTop + 90);
+		if (configurableOutput.getStatus(ForgeDirection.UP).hasPriority())
+			drawString(Utils.localize("gui.priority") + ": ", guiLeft + 110, guiTop + 110);
+		if (configurableOutput.getStatus(ForgeDirection.DOWN).hasPriority())
+			drawString(Utils.localize("gui.priority") + ": ", guiLeft + 110, guiTop + 130);
 	}
 
 	@Override
 	public void widgetActionPerformed(WidgetBase widget) {
-		configurableOutput.changeStatus(ForgeDirection.getOrientation(widget.id));
+		if (widget.id < 6)
+			configurableOutput.changeStatus(ForgeDirection.getOrientation(widget.id));
+		else
+			configurableOutput.changePriority(ForgeDirection.getOrientation(widget.id - 6));
 		PacketHandler.instance.sendToServer(new MessageConfiguration(configurableOutput));
 		updateButtons();
 	}
@@ -99,6 +132,9 @@ public class GuiMachineConfigurator extends GuiBase {
 		for (int t = 0; t < 6; t++) {
 			((WidgetButton) widgets.get(t)).setText(configurableOutput.getStatus(ForgeDirection.getOrientation(t)).getText());
 			((WidgetButton) widgets.get(t)).setColor(configurableOutput.getStatus(ForgeDirection.getOrientation(t)).getColor());
+			((WidgetButton) widgets.get(t + 6)).setText(configurableOutput.getPriority(ForgeDirection.getOrientation(t)).getName());
+			((WidgetButton) widgets.get(t + 6)).setColor(configurableOutput.getPriority(ForgeDirection.getOrientation(t)).getColor());
+			((WidgetButton) widgets.get(t + 6)).setShouldRender(configurableOutput.getStatus(ForgeDirection.getOrientation(t)).hasPriority());
 		}
 	}
 

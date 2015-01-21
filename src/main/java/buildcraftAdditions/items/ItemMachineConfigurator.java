@@ -19,7 +19,7 @@ import buildcraftAdditions.utils.IConfigurableOutput;
 public class ItemMachineConfigurator extends ItemBase {
 
 	public ItemMachineConfigurator() {
-		super("MachineConfigurator");
+		super("machineConfigurator");
 	}
 
 	@Override

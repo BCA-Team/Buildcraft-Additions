@@ -21,6 +21,7 @@ public class WidgetButton extends WidgetBase {
 	public static ResourceLocation MIDDLEHOVER = new ResourceLocation("bcadditions:textures/gui/button1CenterOnHover.png");
 	private String text;
 	private int color;
+	private boolean shouldRender = true;
 
 	public WidgetButton(int id, int x, int y, int width, int height, GuiBase gui) {
 		super(id, x, y, width, height, gui);
@@ -28,6 +29,8 @@ public class WidgetButton extends WidgetBase {
 
 	@Override
 	public void render(int mouseX, int mouseY) {
+		if (!shouldRender)
+			return;
 		int t = 6;
 		ResourceLocation centerPiece = MIDDLE;
 		if (getBounds().contains(mouseX, mouseY)) {
@@ -58,5 +61,9 @@ public class WidgetButton extends WidgetBase {
 
 	public void setColor(int color) {
 		this.color = color;
+	}
+
+	public void setShouldRender(boolean shouldRender) {
+		this.shouldRender = shouldRender;
 	}
 }

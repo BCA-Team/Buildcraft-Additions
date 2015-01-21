@@ -17,6 +17,7 @@ import buildcraftAdditions.networking.MessageConfiguration;
 import buildcraftAdditions.networking.MessageSelfDestruct;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
+import buildcraftAdditions.utils.EnumPriority;
 import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Location;
@@ -34,6 +35,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
 	public EnumSideStatus[] configuration = new EnumSideStatus[6];
 	protected boolean[] blocked = new boolean[6];
+	public EnumPriority[] priorities = new EnumPriority[6];
 	public int tier;
 	public boolean selfDestruct, engineControl;
 	public String owner = "";
@@ -47,8 +49,9 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 		this.maxOutput = maxOutput;
 		this.loss = loss;
 		this.tier = tier;
-		for (int teller = 0; teller < 6; teller++) {
-			configuration[teller] = EnumSideStatus.INPUT;
+		for (int t = 0; t < 6; t++) {
+			configuration[t] = EnumSideStatus.INPUT;
+			priorities[t] = EnumPriority.NORMAL;
 		}
 	}
 
@@ -102,8 +105,10 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 		loss = tag.getInteger("loss");
 		engineControl = tag.getBoolean("engineControl");
 		if (tag.hasKey("configuration")) {
-			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 				configuration[direction.ordinal()] = Utils.intToStatus(tag.getInteger("configuration" + direction.ordinal()));
+				priorities[direction.ordinal()] = EnumPriority.PRIORITIES[tag.getInteger("priority" + direction.ordinal())];
+			}
 		}
 		if (tag.hasKey("owner"))
 			owner = tag.getString("owner");
@@ -121,6 +126,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 		tag.setBoolean("engineControl", engineControl);
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 			tag.setInteger("configuration" + direction.ordinal(), Utils.statusToInt(configuration[direction.ordinal()]));
+			tag.setInteger("priority" + direction.ordinal(), priorities[direction.ordinal()].ordinal());
 		}
 		if (owner != null)
 			tag.setString("owner", owner);
@@ -148,26 +154,30 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	}
 
 	public void outputEnergy() {
-		for (ForgeDirection direction: ForgeDirection.VALID_DIRECTIONS){
-			if (configuration[direction.ordinal()] != EnumSideStatus.OUTPUT && configuration[direction.ordinal()] != EnumSideStatus.BOTH)
-				continue;
-			Location location = new Location(worldObj, xCoord, yCoord, zCoord);
-			location.move(direction);
-			IEnergyReceiver energyHandler = null;
-			if (location.getTileEntity() != null && location.getTileEntity() instanceof IEnergyReceiver)
-				energyHandler = (IEnergyReceiver) location.getTileEntity();
-			if (energyHandler != null) {
-				int sendEnergy = energy;
-				if (canSharePower(location.getTileEntity(), direction)) {
-					TileKineticEnergyBufferTier1 keb = (TileKineticEnergyBufferTier1) location.getTileEntity();
-					sendEnergy = ((energy + keb.energy) / 2) - keb.energy;
-				}
-				if (sendEnergy < 0)
-					sendEnergy = 0;
-				if (sendEnergy > maxOutput)
-					sendEnergy = maxOutput;
+		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+			for (EnumPriority priority : EnumPriority.PRIORITIES) {
+				if (priorities[direction.ordinal()] != priority)
+					continue;
+				if (configuration[direction.ordinal()] != EnumSideStatus.OUTPUT && configuration[direction.ordinal()] != EnumSideStatus.BOTH)
+					continue;
+				Location location = new Location(worldObj, xCoord, yCoord, zCoord);
+				location.move(direction);
+				IEnergyReceiver energyHandler = null;
+				if (location.getTileEntity() != null && location.getTileEntity() instanceof IEnergyReceiver)
+					energyHandler = (IEnergyReceiver) location.getTileEntity();
+				if (energyHandler != null) {
+					int sendEnergy = energy;
+					if (canSharePower(location.getTileEntity(), direction)) {
+						TileKineticEnergyBufferTier1 keb = (TileKineticEnergyBufferTier1) location.getTileEntity();
+						sendEnergy = ((energy + keb.energy) / 2) - keb.energy;
+					}
+					if (sendEnergy < 0)
+						sendEnergy = 0;
+					if (sendEnergy > maxOutput)
+						sendEnergy = maxOutput;
 
-				energy -= energyHandler.receiveEnergy(direction.getOpposite(), sendEnergy, false);
+					energy -= energyHandler.receiveEnergy(direction.getOpposite(), sendEnergy, false);
+				}
 			}
 		}
 	}
@@ -238,8 +248,10 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	@Override
 	public ByteBuf writeToByteBuff(ByteBuf buf) {
 		buf.writeInt(energy);
-		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 			buf.writeInt(Utils.statusToInt(configuration[direction.ordinal()]));
+			buf.writeInt(priorities[direction.ordinal()].ordinal());
+		}
 		int length = owner.length();
 		buf.writeInt(length);
 		char[] chars = owner.toCharArray();
@@ -251,8 +263,10 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	@Override
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		energy = buf.readInt();
-		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 			configuration[direction.ordinal()] = Utils.intToStatus(buf.readInt());
+			priorities[direction.ordinal()] = EnumPriority.PRIORITIES[buf.readInt()];
+		}
 		int length = buf.readInt();
 		owner = "";
 		for (int teller = 0; teller < length; teller++)
@@ -277,5 +291,20 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 
 	public int getEnergyLevel() {
 		return (energy * 100) / maxEnergy;
+	}
+
+	@Override
+	public EnumPriority getPriority(ForgeDirection side) {
+		return priorities[side.ordinal()];
+	}
+
+	@Override
+	public void overridePriority(EnumPriority[] newPriorities) {
+		priorities = newPriorities;
+	}
+
+	@Override
+	public void changePriority(ForgeDirection side) {
+		priorities[side.ordinal()] = priorities[side.ordinal()].getNextPriority();
 	}
 }

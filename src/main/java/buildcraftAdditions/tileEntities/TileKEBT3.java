@@ -19,6 +19,7 @@ import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
+import buildcraftAdditions.utils.EnumPriority;
 import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.MultiBlockData;
@@ -136,41 +137,45 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 		ArrayList<Location> list = data.patern.getLocations(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
 		for (Location from : list) {
 			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-				if (configuration[direction.ordinal()] != EnumSideStatus.OUTPUT && configuration[direction.ordinal()] != EnumSideStatus.BOTH)
-					continue;
-				Location location = from.copy();
-				location.move(direction);
-				if (location.getTileEntity() == null || !(location.getTileEntity() instanceof IEnergyReceiver))
-					continue;
-				IEnergyReceiver target = (IEnergyReceiver) location.getTileEntity();
-				if (target instanceof IMultiBlockTile && isPartOfSameMultiblock((IMultiBlockTile) target))
-					continue;
-				long output = maxOutput;
-				if (location.getTileEntity() instanceof TileKEBT3) {
-					TileKEBT3 keb = (TileKEBT3) location.getTileEntity();
-					TileKEBT3 keb2;
-					if (keb.isMaster()) {
-						keb2 = keb;
-					} else {
-						keb.findMaster();
-						if (keb.master == null)
-							continue;
-						keb2 = keb.master;
-					}
-					if (keb2.configuration[direction.getOpposite().ordinal()] == EnumSideStatus.BOTH) {
-						if (blocked[direction.ordinal()]) {
-							blocked[direction.ordinal()] = false;
+				for (EnumPriority priority : EnumPriority.PRIORITIES) {
+					if (priorities[direction.ordinal()] != priority)
+						continue;
+					if (configuration[direction.ordinal()] != EnumSideStatus.OUTPUT && configuration[direction.ordinal()] != EnumSideStatus.BOTH)
+						continue;
+					Location location = from.copy();
+					location.move(direction);
+					if (location.getTileEntity() == null || !(location.getTileEntity() instanceof IEnergyReceiver))
+						continue;
+					IEnergyReceiver target = (IEnergyReceiver) location.getTileEntity();
+					if (target instanceof IMultiBlockTile && isPartOfSameMultiblock((IMultiBlockTile) target))
+						continue;
+					long output = maxOutput;
+					if (location.getTileEntity() instanceof TileKEBT3) {
+						TileKEBT3 keb = (TileKEBT3) location.getTileEntity();
+						TileKEBT3 keb2;
+						if (keb.isMaster()) {
+							keb2 = keb;
 						} else {
-							output = ((energy + keb2.energy) / 2) - keb2.energy;
-							blocked[direction.ordinal()] = true;
+							keb.findMaster();
+							if (keb.master == null)
+								continue;
+							keb2 = keb.master;
+						}
+						if (keb2.configuration[direction.getOpposite().ordinal()] == EnumSideStatus.BOTH) {
+							if (blocked[direction.ordinal()]) {
+								blocked[direction.ordinal()] = false;
+							} else {
+								output = ((energy + keb2.energy) / 2) - keb2.energy;
+								blocked[direction.ordinal()] = true;
+							}
 						}
 					}
+					if (output < 0)
+						output = 0;
+					if (output > energy)
+						output = energy;
+					energy -= target.receiveEnergy(direction.getOpposite(), (int) output, false);
 				}
-				if (output < 0)
-					output = 0;
-				if (output > energy)
-					output = energy;
-				energy -= target.receiveEnergy(direction.getOpposite(), (int) output, false);
 			}
 		}
 	}

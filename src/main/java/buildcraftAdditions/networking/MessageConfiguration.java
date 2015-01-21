@@ -8,6 +8,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraftAdditions.utils.EnumPriority;
 import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.IConfigurableOutput;
 
@@ -22,6 +23,7 @@ import io.netty.buffer.ByteBuf;
 public class MessageConfiguration implements IMessage, IMessageHandler<MessageConfiguration, IMessage> {
 	public int x, y, z;
 	public EnumSideStatus configuration[];
+	public EnumPriority priorities[];
 
 	public MessageConfiguration() {
 	}
@@ -31,8 +33,11 @@ public class MessageConfiguration implements IMessage, IMessageHandler<MessageCo
 		y = configurableOutput.getY();
 		z = configurableOutput.getZ();
 		configuration = new EnumSideStatus[6];
-		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+		priorities = new EnumPriority[6];
+		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 			configuration[direction.ordinal()] = configurableOutput.getStatus(direction);
+			priorities[direction.ordinal()] = configurableOutput.getPriority(direction);
+		}
 	}
 
 	@Override
@@ -41,8 +46,11 @@ public class MessageConfiguration implements IMessage, IMessageHandler<MessageCo
 		y = buf.readInt();
 		z = buf.readInt();
 		configuration = new EnumSideStatus[6];
-		for (int teller = 0; teller < 6; teller++)
+		priorities = new EnumPriority[6];
+		for (int teller = 0; teller < 6; teller++) {
 			configuration[teller] = EnumSideStatus.values()[buf.readInt()];
+			priorities[teller] = EnumPriority.PRIORITIES[buf.readInt()];
+		}
 	}
 
 	@Override
@@ -50,8 +58,10 @@ public class MessageConfiguration implements IMessage, IMessageHandler<MessageCo
 		buf.writeInt(x);
 		buf.writeInt(y);
 		buf.writeInt(z);
-		for (int teller = 0; teller < 6; teller++)
+		for (int teller = 0; teller < 6; teller++) {
 			buf.writeInt(configuration[teller].ordinal());
+			buf.writeInt(priorities[teller].ordinal());
+		}
 	}
 
 	@Override
@@ -60,6 +70,7 @@ public class MessageConfiguration implements IMessage, IMessageHandler<MessageCo
 		if (entity != null && entity instanceof IConfigurableOutput) {
 			IConfigurableOutput configurableOutput = (IConfigurableOutput) entity;
 			configurableOutput.overrideConfiguration(message.configuration);
+			configurableOutput.overridePriority(message.priorities);
 		}
 		return null;
 	}

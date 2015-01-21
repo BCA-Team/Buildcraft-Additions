@@ -16,6 +16,12 @@ public interface IConfigurableOutput {
 
 	public void overrideConfiguration(EnumSideStatus newConfiguration[]);
 
+	public EnumPriority getPriority(ForgeDirection side);
+
+	public void overridePriority(EnumPriority newPriorities[]);
+
+	public void changePriority(ForgeDirection side);
+
 	public int getX();
 
 	public int getY();
