@@ -1,9 +1,14 @@
 package buildcraftAdditions.client.gui.gui;
 
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraftAdditions.client.gui.containers.ContainerCoolingTower;
 import buildcraftAdditions.client.gui.widgets.WidgetFluidTank;
 import buildcraftAdditions.tileEntities.TileCoolingTower;
-import net.minecraft.util.ResourceLocation;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -12,13 +17,14 @@ import net.minecraft.util.ResourceLocation;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+@SideOnly(Side.CLIENT)
 public class GuiCoolingTower extends GuiBase {
 
 	private TileCoolingTower tower;
-	public ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/coolingTower.png");
+	public ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/guiCoolingTower.png");
 
-	public GuiCoolingTower(TileCoolingTower tower) {
-		super(new ContainerCoolingTower());
+	public GuiCoolingTower(InventoryPlayer inventoryPlayer, TileCoolingTower tower) {
+		super(new ContainerCoolingTower(inventoryPlayer, tower));
 		this.tower = tower;
 		setDrawPlayerInv(false);
 		setTitleXOffset(70);

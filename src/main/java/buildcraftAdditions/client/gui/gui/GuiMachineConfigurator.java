@@ -1,6 +1,10 @@
 package buildcraftAdditions.client.gui.gui;
 
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -11,6 +15,7 @@ import buildcraftAdditions.networking.MessageConfiguration;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -18,13 +23,15 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+@SideOnly(Side.CLIENT)
 public class GuiMachineConfigurator extends GuiBase {
-	public ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/machineConfigurator.png");
-	private IConfigurableOutput configurableOutput;
+
+	private static final ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/guiMachineConfigurator.png");
+	private final IConfigurableOutput configurableOutput;
 	private WidgetButton north, east, south, west, up, down;
 
-	public GuiMachineConfigurator(IConfigurableOutput configurableOutput) {
-		super(new ContainerMachineConfigurator());
+	public GuiMachineConfigurator(InventoryPlayer inventoryPlayer, IConfigurableOutput configurableOutput) {
+		super(new ContainerMachineConfigurator(inventoryPlayer, configurableOutput));
 		this.configurableOutput = configurableOutput;
 		setCenterTitle(true);
 		setDrawPlayerInv(false);

@@ -1,5 +1,9 @@
 package buildcraftAdditions.client.gui.containers;
 
+import net.minecraft.entity.player.InventoryPlayer;
+
+import buildcraftAdditions.tileEntities.TileCoolingTower;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -9,7 +13,7 @@ package buildcraftAdditions.client.gui.containers;
  */
 public class ContainerCoolingTower extends ContainerBase {
 
-	public ContainerCoolingTower() {
-
+	public ContainerCoolingTower(InventoryPlayer inventoryPlayer, TileCoolingTower tile) {
+		super(inventoryPlayer, tile);
 	}
 }

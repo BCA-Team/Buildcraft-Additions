@@ -13,6 +13,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraftAdditions.client.gui.widgets.WidgetBase;
 import buildcraftAdditions.utils.RenderUtils;
 
@@ -25,6 +28,7 @@ import eureka.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+@SideOnly(Side.CLIENT)
 public abstract class GuiBase extends GuiContainer {
 
 	public static final ResourceLocation PLAYER_INV_TEXTURE = new ResourceLocation("bcadditions:textures/gui/guiPlayerInv.png");
@@ -45,7 +49,7 @@ public abstract class GuiBase extends GuiContainer {
 		super(container);
 		texture = texture();
 		xSize = getXSize();
-		ySize = drawPlayerInv ? getYSize()  + ySizePlayerInv : getYSize();
+		ySize = drawPlayerInv ? getYSize() + ySizePlayerInv : getYSize();
 		tileGuiYSize = getYSize();
 
 	}

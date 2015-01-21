@@ -1,9 +1,5 @@
 package buildcraftAdditions.client.gui.gui;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -12,7 +8,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.client.gui.containers.ContainerHeatedFurnace;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
-import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -22,9 +17,10 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @SideOnly(Side.CLIENT)
-public class GuiHeatedFurnace extends GuiContainer {
-	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/HeatedFurnaceGUI.png");
-	public TileHeatedFurnace furnace;
+public class GuiHeatedFurnace extends GuiBase {
+
+	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiHeatedFurnace.png");
+	private final TileHeatedFurnace furnace;
 
 	public GuiHeatedFurnace(InventoryPlayer inventoryplayer, TileHeatedFurnace furnace) {
 		super(new ContainerHeatedFurnace(inventoryplayer, furnace));
@@ -32,20 +28,31 @@ public class GuiHeatedFurnace extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-		int j = (width - xSize) / 2;
-		int k = (height - ySize) / 2;
-		drawTexturedModalRect(j + 79, k + 34, 176, 14, furnace.getScaledProgress(), 16);
+	public void drawBackgroundPreWidgets(float f, int x, int y) {
+		drawTexturedModalRect((width - xSize) / 2 + 79, (height - ySize) / 2 + 34, 176, 14, furnace.getScaledProgress(), 16);
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		super.drawGuiContainerForegroundLayer(par1, par2);
-		String title = Utils.localize("tile.blockHeatedFurnace.name");
-		fontRendererObj.drawString(title, 5, 6, 0x404040);
-		fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 96) + 2, 0x404040);
+	public ResourceLocation texture() {
+		return texture;
+	}
+
+	@Override
+	public int getXSize() {
+		return 176;
+	}
+
+	@Override
+	public int getYSize() {
+		return 66;
+	}
+
+	@Override
+	public String getInventoryName() {
+		return "heatedFurnace";
+	}
+
+	@Override
+	public void initialize() {
 	}
 }

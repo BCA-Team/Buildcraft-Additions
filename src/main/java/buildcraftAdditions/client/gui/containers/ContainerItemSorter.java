@@ -12,22 +12,18 @@ import buildcraftAdditions.tileEntities.TileItemSorter;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ContainerItemSorter extends ContainerBase {
+public class ContainerItemSorter extends ContainerBase<TileItemSorter> {
 
-	public TileItemSorter tile;
-
-	public ContainerItemSorter(InventoryPlayer playerInv, TileItemSorter tile) {
-		this.tile = tile;
-
+	public ContainerItemSorter(InventoryPlayer inventoryPlayer, TileItemSorter tile) {
+		super(inventoryPlayer, tile);
 		for (int i = 0; i < 8; i++)
 			addSorterSlotColumn(26 + i * 18, 18, i * 6);
-
-		addPlayerInventory(playerInv, 8, 160);
+		addPlayerInventory(8, 160);
 	}
 
 	public void addSorterSlotColumn(int x, int y, int id) {
 		for (int i = 0; i < 6; i++) {
-			addSlotToContainer(new SlotPhantom(tile, id, x, y + i * 18));
+			addSlotToContainer(new SlotPhantom(inventory, id, x, y + i * 18));
 			id++;
 		}
 	}

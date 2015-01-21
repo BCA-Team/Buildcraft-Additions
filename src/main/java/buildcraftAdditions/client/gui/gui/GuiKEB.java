@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraftAdditions.client.gui.containers.ContainerKEB;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.SpecialListMananger;
 import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -16,16 +20,18 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+@SideOnly(Side.CLIENT)
 public class GuiKEB extends GuiBase {
-	public ResourceLocation texture = new ResourceLocation("bcadditions","textures/gui/KineticEnergyBuffer.png");
-	private TileKineticEnergyBufferBase keb;
+
+	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiKineticEnergyBuffer.png");
+	private final TileKineticEnergyBufferBase keb;
 	private boolean primed, yellow, green;
-	private EntityPlayer player;
+	private final EntityPlayer player;
 	private int teller;
 
 
 	public GuiKEB(TileKineticEnergyBufferBase keb, EntityPlayer player) {
-		super(new ContainerKEB(keb, player));
+		super(new ContainerKEB(player, keb));
 		this.keb = keb;
 		primed = false;
 		this.player = player;
@@ -74,7 +80,7 @@ public class GuiKEB extends GuiBase {
 
 		if (yellow) {
 			if (!green)
-			drawTexturedModalRect(guiLeft + 67, guiTop + 30, 176, 115, 47, 47);
+				drawTexturedModalRect(guiLeft + 67, guiTop + 30, 176, 115, 47, 47);
 			else
 				drawTexturedModalRect(guiLeft + 67, guiTop + 30, 176, 209, 47, 47);
 		}
@@ -86,7 +92,7 @@ public class GuiKEB extends GuiBase {
 		percent -= 36;
 		if (percent <= 0)
 			return;
-		temp =(int) percent;
+		temp = (int) percent;
 		if (temp > 62)
 			temp = 62;
 		drawTexturedModalRect(guiLeft + 115, guiTop + 28, 241, 53, 11, temp);
@@ -96,7 +102,7 @@ public class GuiKEB extends GuiBase {
 		temp = (int) percent;
 		if (temp > 61)
 			temp = 61;
-		drawTexturedModalRect(guiLeft + 115 - temp, guiTop + 79, 241 - temp, 104, temp , 11);
+		drawTexturedModalRect(guiLeft + 115 - temp, guiTop + 79, 241 - temp, 104, temp, 11);
 		percent -= 61;
 		if (percent <= 0)
 			return;
@@ -104,7 +110,7 @@ public class GuiKEB extends GuiBase {
 		if (percent > 62)
 			temp = 62;
 		drawTexturedModalRect(guiLeft + 54, guiTop + 79 - temp, 180, 104 - temp, 11, temp);
-		percent -=62;
+		percent -= 62;
 		if (percent <= 0)
 			return;
 		drawTexturedModalRect(guiLeft + 65, guiTop + 17, 191, 42, (int) percent, 11);
@@ -123,14 +129,14 @@ public class GuiKEB extends GuiBase {
 		if (shouldDrawWarning(mouseX - guiLeft, mouseY - guiTop)) {
 			ArrayList<String> list = new ArrayList<String>();
 			if (!primed) {
-				if (SpecialListMananger.specialTexts.containsKey(player.getDisplayName())){
+				if (SpecialListMananger.specialTexts.containsKey(player.getDisplayName())) {
 					list.add(SpecialListMananger.specialTexts.get(player.getDisplayName()) + "?");
 				} else {
 					list.add(Utils.localize("gui.keb.dangerousButton"));
 					list.add(Utils.localize("gui.keb.noPushing"));
 				}
 			} else {
-				if (SpecialListMananger.specialTexts.containsKey(player.getDisplayName())){
+				if (SpecialListMananger.specialTexts.containsKey(player.getDisplayName())) {
 					list.add(SpecialListMananger.specialTexts.get(player.getDisplayName()) + "!!!");
 				} else {
 					list.add(Utils.localize("gui.keb.pressForBoom"));
