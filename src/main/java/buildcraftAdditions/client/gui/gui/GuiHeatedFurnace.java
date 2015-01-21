@@ -24,6 +24,7 @@ public class GuiHeatedFurnace extends GuiBase {
 
 	public GuiHeatedFurnace(InventoryPlayer inventoryplayer, TileHeatedFurnace furnace) {
 		super(new ContainerHeatedFurnace(inventoryplayer, furnace));
+		setDrawPlayerInv(false);
 		this.furnace = furnace;
 	}
 

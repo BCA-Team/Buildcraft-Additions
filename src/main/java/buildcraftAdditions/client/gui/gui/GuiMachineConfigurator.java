@@ -35,7 +35,6 @@ public class GuiMachineConfigurator extends GuiBase {
 		super(new ContainerMachineConfigurator(inventoryPlayer, configurableOutput));
 		this.configurableOutput = configurableOutput;
 		setCenterTitle(true);
-		setDrawPlayerInv(false);
 	}
 
 	@Override

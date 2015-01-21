@@ -24,6 +24,7 @@ public class GuiItemSorter extends GuiBase {
 
 	public GuiItemSorter(InventoryPlayer playerInv, TileItemSorter tile) {
 		super(new ContainerItemSorter(playerInv, tile));
+		setDrawPlayerInv(true);
 		this.tile = tile;
 	}
 

@@ -33,6 +33,7 @@ public class GuiKineticTool extends GuiBase {
 		this.stack = stack;
 		this.player = player;
 		tool.setPlayer(player);
+		setDrawPlayerInv(true);
 	}
 
 	@Override

@@ -33,8 +33,8 @@ public abstract class GuiBase extends GuiContainer {
 
 	public static final ResourceLocation PLAYER_INV_TEXTURE = new ResourceLocation("bcadditions:textures/gui/guiPlayerInv.png");
 
-	public final ResourceLocation texture;
-	public boolean drawPlayerInv = true;
+	private final ResourceLocation texture;
+	private boolean drawPlayerInv = false;
 	public List<WidgetBase> widgets = new ArrayList<WidgetBase>();
 	public int xSizePlayerInv = 175;
 	public int ySizePlayerInv = 99;
@@ -49,38 +49,39 @@ public abstract class GuiBase extends GuiContainer {
 		super(container);
 		texture = texture();
 		xSize = getXSize();
-		ySize = drawPlayerInv ? getYSize() + ySizePlayerInv : getYSize();
+		ySize = getYSize();
 		tileGuiYSize = getYSize();
-
 	}
 
 	public GuiBase setDrawPlayerInv(boolean draw) {
-		this.drawPlayerInv = draw;
+		drawPlayerInv = draw;
+		if (draw)
+			ySize = getYSize() + ySizePlayerInv;
 		return this;
 	}
 
 	public GuiBase setTitleXOffset(int offset) {
-		this.titleXoffset = offset;
+		titleXoffset = offset;
 		return this;
 	}
 
 	public GuiBase setTitleYOffset(int offset) {
-		this.titleYoffset = offset;
+		titleYoffset = offset;
 		return this;
 	}
 
 	public GuiBase setTextColor(int color) {
-		this.textColor = color;
+		textColor = color;
 		return this;
 	}
 
 	public GuiBase setCenterTitle(boolean value) {
-		this.centerTitle = value;
+		centerTitle = value;
 		return this;
 	}
 
 	public GuiBase setDrawWidgets(boolean value) {
-		this.shouldDrawWidgets = value;
+		shouldDrawWidgets = value;
 		return this;
 	}
 
@@ -121,10 +122,8 @@ public abstract class GuiBase extends GuiContainer {
 	@Override
 	public void initGui() {
 		super.initGui();
-		if (drawPlayerInv) {
-			//this.ySize += ySizePlayerInv;
+		if (drawPlayerInv)
 			this.guiTop = (this.height - this.ySize) / 2;
-		}
 		initialize();
 	}
 

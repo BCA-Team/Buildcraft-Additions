@@ -24,6 +24,7 @@ public class GuiChargingStation extends GuiBase {
 
 	public GuiChargingStation(InventoryPlayer inventoryPlayer, TileChargingStation tile) {
 		super(new ContainerChargingStation(inventoryPlayer, tile));
+		setDrawPlayerInv(true);
 		chargingStation = tile;
 	}
 

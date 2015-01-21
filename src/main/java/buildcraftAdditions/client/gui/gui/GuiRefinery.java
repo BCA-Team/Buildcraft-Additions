@@ -26,7 +26,6 @@ public class GuiRefinery extends GuiBase {
 
 	public GuiRefinery(InventoryPlayer inventoryPlayer, TileRefinery refinery) {
 		super(new ContainerRefinery(inventoryPlayer, refinery));
-		setDrawPlayerInv(false);
 		setTitleXOffset(70);
 		setTitleYOffset(3);
 		setTextColor(0xFFCC00);
