@@ -24,13 +24,13 @@ public class GuiHeatedFurnace extends GuiBase {
 
 	public GuiHeatedFurnace(InventoryPlayer inventoryplayer, TileHeatedFurnace furnace) {
 		super(new ContainerHeatedFurnace(inventoryplayer, furnace));
-		setDrawPlayerInv(false);
+		setDrawPlayerInv(true);
 		this.furnace = furnace;
 	}
 
 	@Override
 	public void drawBackgroundPreWidgets(float f, int x, int y) {
-		drawTexturedModalRect((width - xSize) / 2 + 79, (height - ySize) / 2 + 34, 176, 14, furnace.getScaledProgress(), 16);
+		drawTexturedModalRect(guiLeft + 79, guiTop + 34, 176, 14, furnace.getScaledProgress(), 16);
 	}
 
 	@Override

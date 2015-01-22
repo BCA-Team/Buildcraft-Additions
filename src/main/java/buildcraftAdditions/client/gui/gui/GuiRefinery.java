@@ -58,8 +58,7 @@ public class GuiRefinery extends GuiBase {
 		drawTexturedModalRect(guiLeft + 53, guiTop + 150, 0, 186, 80, 7);
 		drawTexturedModalRect(guiLeft + 22, guiTop + 70, 190, 70, 20, 50);
 		drawTexturedModalRect(guiLeft + 148, guiTop + 70, 190, 70, 20, 50);
-		int width = (refinery.currentHeat * 68) / refinery.lastRequiredHeat;
-		drawTexturedModalRect(guiLeft + 59, guiTop + 151, 6, 198, width, 5);
+		drawTexturedModalRect(guiLeft + 59, guiTop + 151, 6, 198, (refinery.currentHeat * 68) / refinery.lastRequiredHeat, 5);
 		drawTexturedModalRect(guiLeft + 59, guiTop + 151, 6, 193, 80, 5);
 	}
 

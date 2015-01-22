@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -23,7 +24,11 @@ import buildcraftAdditions.api.recipe.refinery.IRefineryRecipe;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
-import buildcraftAdditions.utils.*;
+import buildcraftAdditions.utils.ITankHolder;
+import buildcraftAdditions.utils.Location;
+import buildcraftAdditions.utils.MultiBlockData;
+import buildcraftAdditions.utils.RotationUtils;
+import buildcraftAdditions.utils.Tank;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -183,8 +188,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		requiredHeat = tag.getInteger("requiredHeat");
 		lastRequiredHeat = tag.getInteger("lastRequiredHeat");
 		data.readFromNBT(tag);
-		input.readFromNBT(tag);
-		output.readFromNBT(tag);
+		if (tag.hasKey("input", Constants.NBT.TAG_COMPOUND))
+			input.readFromNBT(tag.getCompoundTag("input"));
+		if (tag.hasKey("output", Constants.NBT.TAG_COMPOUND))
+			output.readFromNBT(tag.getCompoundTag("output"));
 		updateRecipe();
 	}
 
@@ -197,8 +204,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		tag.setInteger("currentHeat", currentHeat);
 		tag.setInteger("requiredHeat", requiredHeat);
 		tag.setInteger("lastRequiredHeat", lastRequiredHeat);
-		input.saveToNBT(tag);
-		output.saveToNBT(tag);
+		tag.setTag("input", input.writeToNBT(new NBTTagCompound()));
+		tag.setTag("output", output.writeToNBT(new NBTTagCompound()));
 	}
 
 	@Override

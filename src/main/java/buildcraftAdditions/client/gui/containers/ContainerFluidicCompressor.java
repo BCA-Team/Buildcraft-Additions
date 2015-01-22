@@ -24,7 +24,7 @@ public class ContainerFluidicCompressor extends ContainerBase<TileFluidicCompres
 		PacketHandler.instance.sendToAllAround(new MessageByteBuff(tile), new NetworkRegistry.TargetPoint(tile.getWorldObj().provider.dimensionId, tile.xCoord, tile.yCoord, tile.zCoord, 5));
 		addSlotToContainer(new Slot(tile, 0, 89, 31));
 		addSlotToContainer(new Slot(tile, 1, 126, 35));
-		addPlayerInventory(8, 84);
+		addPlayerInventory(8, 87);
 	}
 
 }

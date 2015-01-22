@@ -8,12 +8,15 @@ package buildcraftAdditions.tileEntities;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -27,12 +30,9 @@ import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
 
-import io.netty.buffer.ByteBuf;
-
 public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler {
 
-	public final int maxLiquid = FluidContainerRegistry.BUCKET_VOLUME * 10;
-	public Tank tank = new Tank(maxLiquid, this, "");
+	public Tank tank = new Tank(FluidContainerRegistry.BUCKET_VOLUME * 10, this, "Tank");
 	private final CustomInventory inventory = new CustomInventory("FluidicCompressor", 2, 1, this);
 	public boolean fill;
 
@@ -104,17 +104,18 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
-		inventory.readNBT(nbtTagCompound);
-		tank.readFromNBT(nbtTagCompound);
 		fill = nbtTagCompound.getBoolean("fill");
+		inventory.readNBT(nbtTagCompound);
+		if (nbtTagCompound.hasKey("tank", Constants.NBT.TAG_COMPOUND))
+			tank.readFromNBT(nbtTagCompound.getCompoundTag("tank"));
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
-		inventory.writeNBT(nbtTagCompound);
-		tank.saveToNBT(nbtTagCompound);
 		nbtTagCompound.setBoolean("fill", fill);
+		inventory.writeNBT(nbtTagCompound);
+		nbtTagCompound.setTag("tank", tank.writeToNBT(new NBTTagCompound()));
 	}
 
 	@Override
@@ -196,7 +197,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
 		FluidStack fluid = tank.drain(maxDrain, doDrain);
-		return  fluid;
+		return fluid;
 	}
 
 	@Override
@@ -216,11 +217,6 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 
 	public FluidStack getFluid() {
 		return tank.getFluid();
-	}
-
-	public int getScaledLiquid(int i) {
-		return tank.getFluid() != null ? (int) (((float) this.tank.getFluid().amount / (float) (maxLiquid)) * i)
-				: 0;
 	}
 
 	public int getProgress() {

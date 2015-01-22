@@ -30,7 +30,7 @@ public class GuiBasicCoil extends GuiBase {
 
 	@Override
 	public void drawBackgroundPreWidgets(float f, int x, int y) {
-		drawTexturedModalRect((width - xSize) / 2 + 79, (height - ySize) / 2 + 27 + (16 - coil.getBurnIconHeight()), 176, 16 - coil.getBurnIconHeight(), 16, coil.getBurnIconHeight());
+		drawTexturedModalRect(guiLeft + 79, guiTop + 27 + (16 - coil.getBurnIconHeight()), 176, 16 - coil.getBurnIconHeight(), 16, coil.getBurnIconHeight());
 	}
 
 	@Override

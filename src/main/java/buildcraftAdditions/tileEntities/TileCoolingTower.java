@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -117,26 +118,29 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		data.readFromNBT(tag);
-		input.readFromNBT(tag);
-		output.readFromNBT(tag);
-		coolant.readFromNBT(tag);
 		valve = tag.getBoolean("valve");
 		heat = tag.getFloat("heat");
 		tank = tag.getInteger("tank");
+		data.readFromNBT(tag);
+		if (tag.hasKey("input", Constants.NBT.TAG_COMPOUND))
+			input.readFromNBT(tag.getCompoundTag("input"));
+		if (tag.hasKey("output", Constants.NBT.TAG_COMPOUND))
+			output.readFromNBT(tag.getCompoundTag("output"));
+		if (tag.hasKey("coolant", Constants.NBT.TAG_COMPOUND))
+			coolant.readFromNBT(tag.getCompoundTag("coolant"));
 		updateRecipe();
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		data.writeToNBT(tag);
-		input.saveToNBT(tag);
-		output.saveToNBT(tag);
-		coolant.saveToNBT(tag);
 		tag.setFloat("heat", heat);
 		tag.setBoolean("valve", valve);
 		tag.setInteger("tank", tank);
+		data.writeToNBT(tag);
+		tag.setTag("input", input.writeToNBT(new NBTTagCompound()));
+		tag.setTag("output", output.writeToNBT(new NBTTagCompound()));
+		tag.setTag("coolant", coolant.writeToNBT(new NBTTagCompound()));
 	}
 
 	@Override
