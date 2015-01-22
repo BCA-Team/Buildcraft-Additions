@@ -178,13 +178,13 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 					}
 				}
 			}
-
-			//drop it on the ground
-			if (output != null)
-				Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, output);
-
-			setInventorySlotContents(0, null);
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
+
+		//drop it on the ground
+		if (output != null)
+			Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, output);
+
+		setInventorySlotContents(0, null);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 }
