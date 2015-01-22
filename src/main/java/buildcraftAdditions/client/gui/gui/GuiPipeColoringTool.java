@@ -37,7 +37,7 @@ public class GuiPipeColoringTool extends GuiBase {
 
 	@Override
 	public String getInventoryName() {
-		return "pipeColorSelector";
+		return "pipeColorTool";
 	}
 
 	@Override
