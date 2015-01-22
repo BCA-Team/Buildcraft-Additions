@@ -25,20 +25,17 @@ public class WidgetFluidTank extends WidgetBase {
 
 	@Override
 	public void render(int mouseX, int mouseY) {
-		if (tank.getFluid() != null)
-			RenderUtils.drawFluid(tank.getFluid(), tank.getFluidAmount() * height / tank.getMaxCapacity(), x, y, width, height);
+		if (tank.getFluidAmount() > 0)
+			RenderUtils.drawFluid(tank.getFluid(), (int) ((tank.getFluidAmount() / (float) tank.getCapacity()) * height), x, y, width, height);
 	}
 
 	@Override
 	public void addTooltip(int mouseX, int mouseY, List<String> tooltips, boolean shift) {
-		String fluid = Utils.localize("gui.empty");
-
-		if (tank.getFluid() != null && tank.getFluidAmount() > 0)
-			fluid = tank.getFluid().getLocalizedName();
-
-		tooltips.add(fluid);
-
-		if (!fluid.equals(Utils.localize("gui.empty")))
-			tooltips.add(tank.getFluidAmount() + "mB");
+		if (tank.getFluidAmount() > 0) {
+			tooltips.add(tank.getFluid().getLocalizedName());
+		} else {
+			tooltips.add(Utils.localize("gui.empty"));
+		}
+		tooltips.add(tank.getFluidAmount() + " / " + tank.getCapacity() + " mB");
 	}
 }

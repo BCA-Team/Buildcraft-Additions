@@ -19,8 +19,7 @@ import buildcraftAdditions.reference.Variables;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class RenderUtils
-{
+public class RenderUtils {
 	public static final ResourceLocation MC_BLOCK_SHEET = TextureMap.locationBlocksTexture;
 	public static final ResourceLocation MC_ITEM_SHEET = TextureMap.locationItemsTexture;
 
@@ -32,7 +31,7 @@ public class RenderUtils
 		textureManager().bindTexture(texture);
 	}
 
-	public static void drawFluid(FluidStack fluid, float level, int x, int y, int width, int height) {
+	public static void drawFluid(FluidStack fluid, int level, int x, int y, int width, int height) {
 		if (fluid == null || fluid.getFluid() == null) {
 			return;
 		}
@@ -43,8 +42,8 @@ public class RenderUtils
 		int fullY = height / 16;
 		int lastX = width - fullX * 16;
 		int lastY = height - fullY * 16;
-		float fullLvl = (height - level) / 16;
-		float lastLvl = (height - level) - fullLvl * 16;
+		int fullLvl = (height - level) / 16;
+		int lastLvl = (height - level) - fullLvl * 16;
 		for (int i = 0; i < fullX; i++) {
 			for (int j = 0; j < fullY; j++) {
 				if (j >= fullLvl) {

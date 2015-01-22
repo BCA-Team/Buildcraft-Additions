@@ -25,10 +25,10 @@ import buildcraftAdditions.utils.Utils;
  */
 @SideOnly(Side.CLIENT)
 public class GuiMachineConfigurator extends GuiBase {
-	private WidgetButtonText northConfiguration, eastConfiguration, southConfiguration, westConfiguration, upConfiguration, downConfiguration;
-	private WidgetButtonText northPriority, eastPriority, southPriority, westPriority, upPriority, downPriority;
 
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/guiMachineConfigurator.png");
+	private WidgetButtonText northConfiguration, eastConfiguration, southConfiguration, westConfiguration, upConfiguration, downConfiguration;
+	private WidgetButtonText northPriority, eastPriority, southPriority, westPriority, upPriority, downPriority;
 	private final IConfigurableOutput configurableOutput;
 
 	public GuiMachineConfigurator(InventoryPlayer inventoryPlayer, IConfigurableOutput configurableOutput) {
@@ -40,16 +40,6 @@ public class GuiMachineConfigurator extends GuiBase {
 	@Override
 	public ResourceLocation texture() {
 		return texture;
-	}
-
-	@Override
-	public void drawBackgroundPreWidgets(float f, int x, int y) {
-		super.drawBackgroundPreWidgets(f, x, y);
-	}
-
-	@Override
-	public void drawBackgroundPostWidgets(float f, int x, int y) {
-		super.drawBackgroundPostWidgets(f, x, y);
 	}
 
 	@Override

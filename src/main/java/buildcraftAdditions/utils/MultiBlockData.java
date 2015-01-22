@@ -1,5 +1,7 @@
 package buildcraftAdditions.utils;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -8,7 +10,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
 import buildcraftAdditions.networking.ISyncObject;
 
-import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -48,13 +49,14 @@ public class MultiBlockData implements ISyncObject {
 		return this;
 	}
 
-	public void writeToNBT(NBTTagCompound tag) {
+	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
 		tag.setInteger("masterX", masterX);
 		tag.setInteger("masterY", masterY);
 		tag.setInteger("masterZ", masterZ);
 		tag.setInteger("rotationIndex", rotationIndex);
 		tag.setBoolean("isMaster", isMaster);
 		tag.setBoolean("partOfMultiBlock", partOfMultiBlock);
+		return tag;
 	}
 
 	public MultiBlockData readFromNBT(NBTTagCompound tag) {

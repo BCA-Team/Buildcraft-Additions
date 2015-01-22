@@ -1,25 +1,16 @@
 package buildcraftAdditions.client.gui.gui;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraftforge.fluids.FluidStack;
-
 import buildcraftAdditions.client.gui.containers.ContainerFluidicCompressor;
+import buildcraftAdditions.client.gui.widgets.WidgetFluidTank;
 import buildcraftAdditions.networking.MessageFluidicCompressorA;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
-import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -29,16 +20,15 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @SideOnly(Side.CLIENT)
-public class GuiFluidicCompressor extends GuiContainer {
+public class GuiFluidicCompressor extends GuiBase {
 
-	public static ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/fluidicCompressorGUI.png");
-	public ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
-	public ResourceLocation ITEM_TEXTURE = TextureMap.locationItemsTexture;
-	TileFluidicCompressor fluidicCompressor;
+	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiFluidicCompressor.png");
+	private final TileFluidicCompressor fluidicCompressor;
 
-	public GuiFluidicCompressor(InventoryPlayer inventoryplayer, TileFluidicCompressor canner) {
-		super(new ContainerFluidicCompressor(inventoryplayer, canner));
-		this.fluidicCompressor = canner;
+	public GuiFluidicCompressor(InventoryPlayer inventoryPlayer, TileFluidicCompressor fluidicCompressor) {
+		super(new ContainerFluidicCompressor(inventoryPlayer, fluidicCompressor));
+		setDrawPlayerInv(true);
+		this.fluidicCompressor = fluidicCompressor;
 	}
 
 	@Override
@@ -58,73 +48,45 @@ public class GuiFluidicCompressor extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-		int j = (width - xSize) / 2;
-		int k = (height - ySize) / 2;
-		drawFluid(fluidicCompressor.getFluid(), fluidicCompressor.getScaledLiquid(52), j + 53, k + 16, 16, 52);
-		mc.renderEngine.bindTexture(texture);
-		drawTexturedModalRect(j + 52, k + 21, 176, 21, 16, 58);
+	public void drawBackgroundPreWidgets(float f, int x, int y) {
 		if (fluidicCompressor.fill) {
-			drawTexturedModalRect(j + 20, k + 25, 195, 83, 19, 16);
-			drawTexturedModalRect(j + 20, k + 45, 176, 99, 19, 16);
+			drawTexturedModalRect(guiLeft + 20, guiTop + 25, 195, 83, 19, 16);
+			drawTexturedModalRect(guiLeft + 20, guiTop + 45, 176, 99, 19, 16);
 		} else {
-			drawTexturedModalRect(j + 20, k + 45, 195, 99, 19, 16);
-			drawTexturedModalRect(j + 20, k + 25, 176, 83, 19, 16);
+			drawTexturedModalRect(guiLeft + 20, guiTop + 45, 195, 99, 19, 16);
+			drawTexturedModalRect(guiLeft + 20, guiTop + 25, 176, 83, 19, 16);
 		}
-		drawTexturedModalRect(j + 89, k + 53, 176, 3, fluidicCompressor.getProgress(), 4);
-
+		drawTexturedModalRect(guiLeft + 89, guiTop + 53, 176, 3, fluidicCompressor.getProgress(), 4);
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		super.drawGuiContainerForegroundLayer(par1, par2);
-		String title = Utils.localize("tile.blockFluidicCompressor.name");
-		fontRendererObj.drawString(title, 5, 6, 0x404040);
-		fontRendererObj.drawString(Utils.localize("gui.inventory"), 8, (ySize - 96) + 2, 0x404040);
+	public void drawBackgroundPostWidgets(float f, int x, int y) {
+		drawTexturedModalRect(guiLeft + 52, guiTop + 21, 176, 21, 16, 58);
 	}
 
-	private void drawFluid(FluidStack fluid, int level, int x, int y, int width, int height) {
-		if (fluid == null || fluid.getFluid() == null) {
-			return;
-		}
-		IIcon icon = fluid.getFluid().getIcon(fluid);
-		mc.renderEngine.bindTexture(BLOCK_TEXTURE);
-		Utils.setGLColorFromInt(fluid.getFluid().getColor(fluid));
-		int fullX = width / 16;
-		int fullY = height / 16;
-		int lastX = width - fullX * 16;
-		int lastY = height - fullY * 16;
-		int fullLvl = (height - level) / 16;
-		int lastLvl = (height - level) - fullLvl * 16;
-		for (int i = 0; i < fullX; i++) {
-			for (int j = 0; j < fullY; j++) {
-				if (j >= fullLvl) {
-					drawCutIcon(icon, x + i * 16, y + j * 16, 16, 16, j == fullLvl ? lastLvl : 0);
-				}
-			}
-		}
-		for (int i = 0; i < fullX; i++) {
-			drawCutIcon(icon, x + i * 16, y + fullY * 16, 16, lastY, fullLvl == fullY ? lastLvl : 0);
-		}
-		for (int i = 0; i < fullY; i++) {
-			if (i >= fullLvl) {
-				drawCutIcon(icon, x + fullX * 16, y + i * 16, lastX, 16, i == fullLvl ? lastLvl : 0);
-			}
-		}
-		drawCutIcon(icon, x + fullX * 16, y + fullY * 16, lastX, lastY, fullLvl == fullY ? lastLvl : 0);
+	@Override
+	public ResourceLocation texture() {
+		return texture;
 	}
 
-	private void drawCutIcon(IIcon icon, int x, int y, int width, int height, int cut) {
-		Tessellator tess = Tessellator.instance;
-		tess.startDrawingQuads();
-		tess.addVertexWithUV(x, y + height, zLevel, icon.getMinU(), icon.getInterpolatedV(height));
-		tess.addVertexWithUV(x + width, y + height, zLevel, icon.getInterpolatedU(width), icon.getInterpolatedV(height));
-		tess.addVertexWithUV(x + width, y + cut, zLevel, icon.getInterpolatedU(width), icon.getInterpolatedV(cut));
-		tess.addVertexWithUV(x, y + cut, zLevel, icon.getMinU(), icon.getInterpolatedV(cut));
-		tess.draw();
+	@Override
+	public int getXSize() {
+		return 176;
+	}
+
+	@Override
+	public int getYSize() {
+		return 69;
+	}
+
+	@Override
+	public String getInventoryName() {
+		return "fluidicCompressor";
+	}
+
+	@Override
+	public void initialize() {
+		addWidget(new WidgetFluidTank(0, (width - xSize) / 2 + 53, (height - ySize) / 2 + 16, 16, 52, this, fluidicCompressor.tank));
 	}
 
 	/*@Override
