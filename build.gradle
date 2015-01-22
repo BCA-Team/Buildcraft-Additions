@@ -67,8 +67,6 @@ rewrote dusts
 added KEB gate triggers
 minetweaker integration
 """
-
-        additionalArtifact deobfJar
     }
 }
 
