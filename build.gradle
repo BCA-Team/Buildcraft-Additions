@@ -58,7 +58,14 @@ curse {
         projectId = "${curseProps.project_id}"
 
         releaseType = "release"
-        changelog = """update to BC 6.3.0, no other changes as all efforts are currently focused on BCA 2.0 (and i didn't get any bug reports)
+        changelog = """gui rewrite
+added machine configurator tool to configur input/output setting and priorities
+made kinetic multi tool chargable
+TiC integration
+more work on the refinery and cooling tower
+rewrote dusts
+added KEB gate triggers
+minetweaker integration
 """
 
         additionalArtifact deobfJar
