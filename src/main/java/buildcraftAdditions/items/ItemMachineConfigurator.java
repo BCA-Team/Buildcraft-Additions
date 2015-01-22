@@ -20,7 +20,6 @@ public class ItemMachineConfigurator extends ItemBase {
 
 	public ItemMachineConfigurator() {
 		super("machineConfigurator");
-		setHarvestLevel("wrench", 0);
 		setFull3D();
 	}
 
