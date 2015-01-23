@@ -1,5 +1,6 @@
 package buildcraftAdditions.items;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
@@ -24,6 +25,7 @@ public class ItemBucketBCA extends ItemBucket {
 	public ItemBucketBCA(Fluid fluid) {
 		super(fluid.getBlock());
 		this.fluid = new FluidStack(fluid.getID(), FluidContainerRegistry.BUCKET_VOLUME);
+		setContainerItem(Items.bucket);
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		setUnlocalizedName("bcaBucket." + fluid.getName());
 		setTextureName("bcadditions:bucket." + fluid.getName());
