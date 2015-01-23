@@ -3,6 +3,8 @@ package buildcraftAdditions.utils;
 import java.util.Collection;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -16,7 +18,9 @@ import buildcraft.api.recipes.IFlexibleRecipe;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.blocks.FluidBlockBase;
+import buildcraftAdditions.core.BucketHandler;
 import buildcraftAdditions.core.Logger;
+import buildcraftAdditions.items.ItemBucketBCA;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -26,14 +30,18 @@ import buildcraftAdditions.core.Logger;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class RefineryRecipeConverter {
-	public static CraftingResult<FluidStack> results[] = new CraftingResult[20];
-	public static FluidStack inputs[] = new FluidStack[20];
-	public static FluidStack outputs[] = new FluidStack[20];
-	public static FluidStack gas[] = new FluidStack[20];
+	private static CraftingResult<FluidStack>[] results;
+	public static FluidStack[] inputs, outputs, gasses;
 
 	public static void doYourThing() {
 		int teller = 0;
 		int fluids = FluidRegistry.getRegisteredFluids().size();
+
+		results = new CraftingResult[fluids];
+		inputs = new FluidStack[fluids];
+		outputs = new FluidStack[fluids];
+		gasses = new FluidStack[fluids];
+
 		Collection<IFlexibleRecipe<FluidStack>> recipes = BuildcraftRecipeRegistry.refinery.getRecipes();
 		for (IFlexibleRecipe<FluidStack> recipe : recipes) {
 			DummyFlexibleCrafter dummy = new DummyFlexibleCrafter();
@@ -57,17 +65,19 @@ public class RefineryRecipeConverter {
 			fluid.setGaseous(true);
 			fluid.setIcons(results[t].crafted.getFluid().getStillIcon(), results[t].crafted.getFluid().getFlowingIcon());
 			fluid.setTemperature(results[t].energyCost);
-			fluid.setUnlocalizedName("fluid.gas");
+			fluid.setUnlocalizedName(results[t].crafted.getFluid().getUnlocalizedName().replaceFirst("fluid\\.", "") + ".gas");
 			fluid.setViscosity(5);
 			FluidRegistry.registerFluid(fluid);
-			gas[t] = new FluidStack(fluid, outputs[t].amount);
-			Block fluidblock = new FluidBlockBase(fluid);
-			GameRegistry.registerBlock(fluidblock, fluid.getName() + "gasBlock");
-			fluid.setBlock(fluidblock);
+			gasses[t] = new FluidStack(fluid, outputs[t].amount);
+			Block fluidBlock = new FluidBlockBase(fluid);
+			GameRegistry.registerBlock(fluidBlock, fluid.getName() + "Block");
+			fluid.setBlock(fluidBlock);
+			Item bucket = new ItemBucketBCA(fluid);
+			GameRegistry.registerItem(bucket, fluid.getName() + "Bucket");
+			BucketHandler.registerBucket(fluid, new ItemStack(bucket));
 			if (inputs[t].getFluid().getBlock() == null) {
-				fluidblock = new FluidBlockBase(inputs[t].getFluid());
-				GameRegistry.registerBlock(fluidblock, fluid.getName() + "Block");
-				inputs[t].getFluid().setBlock(fluidblock);
+				fluidBlock = new FluidBlockBase(inputs[t].getFluid());
+				GameRegistry.registerBlock(fluidBlock, inputs[t].getFluid().getName() + "Block");
 			}
 
 			BuildcraftRecipeRegistry.refinery.removeRecipe(results[t].recipe);

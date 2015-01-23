@@ -6,6 +6,7 @@ import net.minecraft.world.IBlockAccess;
 
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -19,6 +20,7 @@ public class FluidBlockBase extends BlockFluidClassic {
 	public FluidBlockBase(Fluid fluid) {
 		super(fluid, Material.water);
 		this.fluid = fluid;
+		setBlockName(fluid.getUnlocalizedName());
 	}
 
 	@Override
