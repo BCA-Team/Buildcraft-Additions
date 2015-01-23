@@ -5,10 +5,12 @@ import java.util.Collection;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -60,7 +62,7 @@ public class RefineryRecipeConverter {
 			}
 		}
 		for (int t = 0; t < teller; t++) {
-			BCAFluid fluid = new BCAFluid(results[t].crafted.getFluid().getName() + "Gas");
+			BCAGasFluid fluid = new BCAGasFluid(results[t].crafted.getFluid().getName() + "Gas", results[t].crafted.getFluid());
 			fluid.setDensity(-50);
 			fluid.setGaseous(true);
 			fluid.setIcons(results[t].crafted.getFluid().getStillIcon(), results[t].crafted.getFluid().getFlowingIcon());
@@ -87,10 +89,13 @@ public class RefineryRecipeConverter {
 		}
 	}
 
-	public static class BCAFluid extends Fluid {
+	public static class BCAGasFluid extends Fluid {
 
-		public BCAFluid(String fluidName) {
+		private final FluidStack fluid;
+
+		public BCAGasFluid(String fluidName, Fluid fluid) {
 			super(fluidName);
+			this.fluid = new FluidStack(fluid.getID(), FluidContainerRegistry.BUCKET_VOLUME);
 		}
 
 		@Override
@@ -101,6 +106,11 @@ public class RefineryRecipeConverter {
 		@Override
 		public int getColor(FluidStack stack) {
 			return getColor();
+		}
+
+		@Override
+		public String getLocalizedName(FluidStack stack) {
+			return ("" + StatCollector.translateToLocalFormatted("fluid.gas.name", fluid.getLocalizedName())).trim();
 		}
 	}
 }

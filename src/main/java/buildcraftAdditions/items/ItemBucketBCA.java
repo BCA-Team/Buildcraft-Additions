@@ -1,8 +1,12 @@
 package buildcraftAdditions.items;
 
 import net.minecraft.item.ItemBucket;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 import buildcraftAdditions.BuildcraftAdditions;
 
@@ -15,11 +19,18 @@ import buildcraftAdditions.BuildcraftAdditions;
  */
 public class ItemBucketBCA extends ItemBucket {
 
+	private final FluidStack fluid;
+
 	public ItemBucketBCA(Fluid fluid) {
 		super(fluid.getBlock());
+		this.fluid = new FluidStack(fluid.getID(), FluidContainerRegistry.BUCKET_VOLUME);
 		setCreativeTab(BuildcraftAdditions.bcadditions);
-		setUnlocalizedName("bucket." + fluid.getUnlocalizedName());
+		setUnlocalizedName("bcaBucket." + fluid.getName());
 		setTextureName("bcadditions:bucket." + fluid.getName());
 	}
 
+	@Override
+	public String getItemStackDisplayName(ItemStack stack) {
+		return ("" + StatCollector.translateToLocalFormatted("item.bcaBucket.name", fluid.getLocalizedName())).trim();
+	}
 }

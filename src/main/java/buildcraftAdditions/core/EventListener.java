@@ -77,7 +77,7 @@ public class EventListener {
 		}
 
 		@SubscribeEvent
-		public void onInteraction(PlayerInteractEvent event){
+		public void onInteraction(PlayerInteractEvent event) {
 			Block block = event.world.getBlock(event.x, event.y, event.z);
 			if (block != ItemsAndBlocks.kebT1)
 				return;

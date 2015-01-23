@@ -62,6 +62,7 @@ item.heatPlatingRaw.name=Raw Heat Conducting Plating
 item.heatPlating.name=Heat Conducting Plating
 item.dustConverter.name=Dust Conveter
 item.machineConfigurator.name=Machine Configurator
+item.bcaBucket.name=%s Bucket
 
 tooltip.installed=%s Installed
 tooltip.deactivated=Deactivated
@@ -70,7 +71,7 @@ tooltip.holdShiftForMoreInfo=Hold Shift for more info
 tooltip.FluidCapacity=Can hold %s buckets of fluid
 tooltip.storedFluid=Currently stores %s mb of %s
 
-fluid.fluid.gas=Gas
+fluid.gas.name=%s Gas
 
 gui.progress=Progress
 gui.fluid=Fluid
