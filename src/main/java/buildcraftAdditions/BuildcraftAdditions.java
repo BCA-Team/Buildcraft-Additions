@@ -128,22 +128,25 @@ public class BuildcraftAdditions {
 	@Mod.EventHandler
 	public void remap(FMLMissingMappingsEvent event) {
 		for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
+			if (mapping.name.toLowerCase().contains("fuelgas")) {
+				if (mapping.type == GameRegistry.Type.ITEM)
+					mapping.remap(Item.getItemFromBlock(FluidRegistry.getFluid("fuelgas").getBlock()));
+				if (mapping.type == GameRegistry.Type.BLOCK)
+					mapping.remap(FluidRegistry.getFluid("fuelgas").getBlock());
+				continue;
+			} else if (mapping.name.toLowerCase().contains("bioethanolgas")) {
+				if (mapping.type == GameRegistry.Type.ITEM)
+					mapping.remap(Item.getItemFromBlock(FluidRegistry.getFluid("bioethanolgas").getBlock()));
+				if (mapping.type == GameRegistry.Type.BLOCK)
+					mapping.remap(FluidRegistry.getFluid("bioethanolgas").getBlock());
+				continue;
+			}
 			for (IDust dust : BCAItemManager.dusts.getDusts()) {
 				if (dust == null)
 					continue;
 				String name = dust.getName().toLowerCase();
 				if (mapping.name.toLowerCase().contains(name)) {
 					mapping.remap(GameRegistry.findItem(Variables.MOD.ID, "converter" + name));
-				} else if (mapping.name.toLowerCase().contains("fuelgas")) {
-					if (mapping.type == GameRegistry.Type.ITEM)
-						mapping.remap(Item.getItemFromBlock(FluidRegistry.getFluid("fuelgas").getBlock()));
-					if (mapping.type == GameRegistry.Type.BLOCK)
-						mapping.remap(FluidRegistry.getFluid("fuelgas").getBlock());
-				} else if (mapping.name.toLowerCase().contains("bioethanolgas")) {
-					if (mapping.type == GameRegistry.Type.ITEM)
-						mapping.remap(Item.getItemFromBlock(FluidRegistry.getFluid("bioethanolgas").getBlock()));
-					if (mapping.type == GameRegistry.Type.BLOCK)
-						mapping.remap(FluidRegistry.getFluid("bioethanolgas").getBlock());
 				}
 			}
 		}
