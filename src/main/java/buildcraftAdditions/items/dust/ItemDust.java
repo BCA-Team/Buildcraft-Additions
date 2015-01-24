@@ -6,10 +6,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
+import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -43,6 +43,15 @@ public class ItemDust extends Item {
 			return "item.dust" + dust.getName();
 		}
 		return super.getUnlocalizedName(stack);
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack stack) {
+		IDust dust = BCAItemManager.dusts.getDust(stack.getItemDamage());
+		if (dust != null) {
+			return String.format(Utils.localize("item.dust.name"), dust.getName());
+		}
+		return super.getItemStackDisplayName(stack);
 	}
 
 	@Override
