@@ -32,7 +32,6 @@ import buildcraftAdditions.tileEntities.TileKEBT3;
 import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
-import org.lwjgl.input.Keyboard;
 
 public class ClientProxy extends CommonProxy {
 
@@ -60,6 +59,11 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public EntityPlayer getPlayer(String name) {
 		return null;
+	}
+
+	@Override
+	public EntityPlayer getPlayer() {
+		return Minecraft.getMinecraft().thePlayer;
 	}
 
 	@Override

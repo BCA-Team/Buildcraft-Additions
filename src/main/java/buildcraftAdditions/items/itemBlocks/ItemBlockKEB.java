@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
+import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.utils.Utils;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -20,6 +21,11 @@ public class ItemBlockKEB extends ItemBlock {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
+		if (BuildcraftAdditions.proxy.getPlayer().getDisplayName().equals("corjaantje")) {
+			if (stack.stackTagCompound != null && stack.stackTagCompound.getBoolean("creative"))
+				return "Creative Kebab Extreme Bakery";
+			return "Kebab Extreme Bakery";
+		}
 		if (stack.stackTagCompound != null && stack.stackTagCompound.getBoolean("creative"))
 			return Utils.localize("tile.blockKEBT1Creative.name");
 		return super.getItemStackDisplayName(stack);

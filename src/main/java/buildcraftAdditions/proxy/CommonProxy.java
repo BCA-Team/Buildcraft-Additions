@@ -41,6 +41,10 @@ public class CommonProxy {
 		return FMLServerHandler.instance().getServer().getEntityWorld().getPlayerEntityByName(name);
 	}
 
+	public EntityPlayer getPlayer() {
+		return null;
+	}
+
 	public void cloneFluidTextures(Fluid source, Fluid target) {
 
 	}
