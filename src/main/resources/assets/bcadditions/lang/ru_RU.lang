@@ -17,6 +17,7 @@ tile.blockRefineryWalls.name=Покрытие нефтеперегонной в�
 tile.blockRefineryValve.name=Клапан нефтеперегонной вышки
 tile.blockCoolingTowerWalls.name=Стены градирни
 tile.blockCoolingTowerValve.name=Клапан градирни
+tile.blockItemSorter.name=Сортинатор
 
 item.ironCanister.name=Железная канистра
 item.goldCanister.name=Золотая канистра
@@ -39,15 +40,7 @@ item.toolUpgradeDigger.name=Штык копалки
 item.toolUpgradeChainsaw.name=Лезвие пилы
 item.toolUpgradeHoe.name=Рукоятка
 item.kineticMultiTool.name=Кинетический мультиинструмент
-item.dustGold.name=Золотая пыль
-item.dustIron.name=Железная пыль
-item.dustCopper.name=Медная пыль
-item.dustLead.name=Свинцовая пыль
-item.dustNickel.name=Никелевая пыль
-item.dustPlatinum.name=Платиновая пыль
-item.dustTin.name=Оловянная пыль
-item.dustSilver.name=Серебряная пыль
-item.dustDiamond.name=Алмазная пыль
+item.dust.name=%s пыль
 item.grindingWheel.name=Измельчающее колесо
 item.engineeringDiary.name=Инженерный дневник
 item.wireIron.name=Железная проволока
@@ -58,6 +51,9 @@ item.wireDiamond.name=Алмазная проволока
 item.wireDiamondUnhardened.name=Алмазная проволока (Незакалённая)
 item.heatPlatingRaw.name=Необработанное теплопроводящее покрытие
 item.heatPlating.name=Теплопроводящее покрытие
+item.dustConverter.name=Преобразователь пыли
+item.machineConfigurator.name=Настройщик механизмов
+item.bcaBucket.name=Ведро %s
 
 tooltip.installed=Установлено: %s
 tooltip.deactivated=Деактивировано
@@ -66,7 +62,7 @@ tooltip.holdShiftForMoreInfo=Зажмите Shift для большей инфо
 tooltip.FluidCapacity=Может содержать вёдер жидкости: %s
 tooltip.storedFluid=Содержит %s мВ %s
 
-fluid.fluid.gas=Газ
+fluid.gas.name=%s газ
 
 gui.progress=Прогресс
 gui.fluid=Жидкость
@@ -80,7 +76,6 @@ gui.requiredHeat=Требуется нагрев
 gui.powerUsage=Потребление энергии
 gui.empty=Пусто
 gui.coolingTower.name=Градирня
-gui.basicCoil.name=Основная катушка
 gui.north=Север
 gui.east=Восток
 gui.south=Юг
@@ -91,11 +86,21 @@ gui.Input=Вход
 gui.Output=Выход
 gui.Disabled=Отключено
 gui.Both=Оба
+gui.machineConfigurator.name=Настройщик механизмов
+gui.kebT1.name=Кинетическое энергохранилище
+gui.kebT2.name=Большое кинетическое энергохранилище
+gui.kebT3.name=Продвинутое кинетическое энергохранилище
+gui.itemSorter.name=Сортинатор
+gui.basicCoil.name=Основная катушка
+gui.chargingStation.name=Зарядная станция
+gui.priority=Приоритет
+gui.kineticTool.name=Кинетический инструмент
+gui.heatedFurnace.name=Нагревательная печь
+gui.fluidicCompressor.name=Жидкостный компрессор
 
 gui.keb.dangerousButton=БОЛЬШИЕ КРАСНЫЕ КНОПКИ ОЧЕНЬ ОПАСНЫ
 gui.keb.noPushing=НЕ НАЖИМАЙТЕ
 gui.keb.pressForBoom=НАЖМИТЕ ДЛЯ БОЛЬШОГО ВЗРЫВА
-
 
 gui.nei.dusting=Дробление
 
@@ -104,8 +109,22 @@ trigger.hasEmptyCanister=Есть пустая канистра
 trigger.hasFullCanister=Есть полная канистра
 trigger.doneCharging=Зарядка завершена
 trigger.readyToCharge=Готово к подзарядке
+trigger.KEBCharged=Полностью заряжено
+trigger.KEBUnder25=Заряд менее 25%
+trigger.KEBUnder50=Заряд менее 50%
+trigger.KEBUnder75=Заряд менее 75%
+trigger.KEBUnder100=Заряд менее 100%
+trigger.KEBEngineControl=Умное управление двигателем
+
+priority.veryLow=Очень низкий
+priority.low=Низкий
+priority.normal=Нормальный
+priority.high=Высокий
+priority.veryHigh=Очень высокий
 
 itemGroup.BuildcraftAdditions=Buildcraft Additions
+itemGroup.bcaCanisters=Канистры с жидкостями
+itemGroup.bcaDusts=Пыль
 
 Eureka=ЭВРИКА!
 eureka.dusterTier0Finished=Вы начинаете планировать Ваши будущие механизмы, но понимаете, что Вам нужна целая гора ресурсов. Вы также начинаете думать над тем, как сделать их проще.
