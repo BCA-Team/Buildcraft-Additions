@@ -3,6 +3,7 @@ package buildcraftAdditions;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -17,6 +18,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
 
 import buildcraftAdditions.ModIntegration.ModIntegration;
 import buildcraftAdditions.ModIntegration.imc.IMCHandler;
@@ -132,6 +134,16 @@ public class BuildcraftAdditions {
 				String name = dust.getName().toLowerCase();
 				if (mapping.name.toLowerCase().contains(name)) {
 					mapping.remap(GameRegistry.findItem(Variables.MOD.ID, "converter" + name));
+				} else if (mapping.name.toLowerCase().contains("fuelgas")) {
+					if (mapping.type == GameRegistry.Type.ITEM)
+						mapping.remap(Item.getItemFromBlock(FluidRegistry.getFluid("fuelgas").getBlock()));
+					if (mapping.type == GameRegistry.Type.BLOCK)
+						mapping.remap(FluidRegistry.getFluid("fuelgas").getBlock());
+				} else if (mapping.name.toLowerCase().contains("bioethanolgas")) {
+					if (mapping.type == GameRegistry.Type.ITEM)
+						mapping.remap(Item.getItemFromBlock(FluidRegistry.getFluid("bioethanolgas").getBlock()));
+					if (mapping.type == GameRegistry.Type.BLOCK)
+						mapping.remap(FluidRegistry.getFluid("bioethanolgas").getBlock());
 				}
 			}
 		}

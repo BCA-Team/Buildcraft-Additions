@@ -25,6 +25,7 @@ import buildcraftAdditions.items.Tools.UpgradeRecipeSawBlade;
 import buildcraftAdditions.items.Tools.UpgradeRecipeTiller;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.utils.BCItems;
+import buildcraftAdditions.utils.RefineryRecipeConverter;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -37,6 +38,7 @@ public class BuildcraftIntegration {
 	public static void integrate() {
 		Triggers.register();
 		addBCRecipes();
+		RefineryRecipeConverter.doYourThing();
 	}
 
 	private static void addBCRecipes() {

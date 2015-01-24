@@ -23,7 +23,6 @@ import buildcraftAdditions.items.dust.DustTypes;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.BCItems;
-import buildcraftAdditions.utils.RefineryRecipeConverter;
 
 import eureka.api.EurekaInfo;
 import eureka.api.EurekaRegistry;
@@ -47,7 +46,6 @@ public class ModIntegration {
 			MineTweakerIntegreation.integrate();
 		if (Loader.isModLoaded("BuildCraft|Transport")) {
 			BuildcraftIntegration.integrate();
-			RefineryRecipeConverter.doYourThing();
 			if (ConfigurationHandler.eurekaIntegration)
 				eurekaResearch();
 		}
