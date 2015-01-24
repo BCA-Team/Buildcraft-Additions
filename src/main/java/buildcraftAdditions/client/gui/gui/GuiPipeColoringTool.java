@@ -1,12 +1,17 @@
 package buildcraftAdditions.client.gui.gui;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
 import buildcraftAdditions.client.gui.containers.ContainerPipeColoringTool;
 import buildcraftAdditions.client.gui.widgets.WidgetBase;
 import buildcraftAdditions.client.gui.widgets.WidgetButtonText;
 import buildcraftAdditions.client.gui.widgets.WidgetButtonUpdate;
+import buildcraftAdditions.networking.MessagePipeColoringTool;
+import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
@@ -23,7 +28,7 @@ public class GuiPipeColoringTool extends GuiBase {
 	public static final ResourceLocation TEXTURE = new ResourceLocation("bcadditions", "textures/gui/guiPipeColoringTool.png");
 
 	private int activeWidget;
-	private boolean sortMode;
+	public boolean sortMode = false;
 
 	public GuiPipeColoringTool(ItemStack stack) {
 		super(new ContainerPipeColoringTool());
@@ -59,7 +64,19 @@ public class GuiPipeColoringTool extends GuiBase {
 			addWidget(new PaintWidget(i, guiLeft + 7 + i * 20 - (i > 7 ? 160 : 0), guiTop + (i > 7 ? 37 :17), 176, 0, 20, 20, this));
 		((PaintWidget) widgets.get(activeWidget)).setActive(true);
 
-		addWidget(new WidgetButtonText(16, guiLeft() + 88, guiTop + 63, 80, 15, this));
+		addWidget(new WidgetButtonText(16, guiLeft() + 88, guiTop + 63, 80, 15, this) {
+			@Override
+			public void addTooltip(int mouseX, int mouseY, List<String> tooltips, boolean shift) {
+				if (!((GuiPipeColoringTool) gui).sortMode) {
+					tooltips.add(Utils.localize("tooltip.colorPipeMode"));
+					tooltips.add(Utils.localize("tooltip.colorPipeMode.info"));
+				} else {
+					tooltips.add(Utils.localize("tooltip.colorSortingMode"));
+					tooltips.add(Utils.localize("tooltip.colorSortingMode.info"));
+				}
+			}
+		});
+
 		updateTextButton();
 	}
 
@@ -70,15 +87,15 @@ public class GuiPipeColoringTool extends GuiBase {
 
 	@Override
 	public void widgetActionPerformed(WidgetBase widget) {
-		if (widget.id >= 0 && widget.id <= 15) {
+		if (widget.id >= 0 && widget.id < 16) {
 			((PaintWidget) widgets.get(activeWidget)).setActive(false);
 			activeWidget = widget.id;
-		}
-
-		if (widget.id == 16) {
+		} else if (widget.id == 16) {
 			sortMode = !sortMode;
 			updateTextButton();
 		}
+
+		PacketHandler.instance.sendToServer(new MessagePipeColoringTool((byte) widget.id, sortMode));
 	}
 
 	public void updateTextButton() {

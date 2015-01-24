@@ -34,7 +34,7 @@ public class ItemPipeColoringTool extends Item {
 
 	public static final String[] names = new String[] {"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
 	@SideOnly(Side.CLIENT)
-	IIcon[] icons = new IIcon[names.length];
+	IIcon[] icons = new IIcon[names.length + 1]; //TODO: fix
 
 	public ItemPipeColoringTool() {
 		setMaxStackSize(1);
@@ -55,7 +55,7 @@ public class ItemPipeColoringTool extends Item {
 		TileEntity tile = world.getTileEntity(x, y, z);
 		if (!(tile instanceof IPipeTile))
 			return false;
-		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("SortingColor") && stack.getTagCompound().getBoolean("SortingColor")) {
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("SortMode") && stack.getTagCompound().getBoolean("SortMode")) {
 			IPipeTile pipeTile = (IPipeTile) tile;
 			return setColor(stack.getItemDamage(), pipeTile);
 		}
@@ -79,6 +79,7 @@ public class ItemPipeColoringTool extends Item {
 	public void registerIcons(IIconRegister register) {
 		for (int i = 0; i < names.length; i++)
 			icons[i] = register.registerIcon("buildcraft:triggers/color_" + names[i]);
+		icons[16] = register.registerIcon("buildcraft:triggers/color_white"); //TODO remove
 	}
 
 	@Override

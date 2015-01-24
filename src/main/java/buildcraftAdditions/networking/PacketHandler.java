@@ -21,6 +21,6 @@ public class PacketHandler {
 		instance.registerMessage(MessageConfiguration.class, MessageConfiguration.class, 2, Side.SERVER);
 		instance.registerMessage(MessageSelfDestruct.class, MessageSelfDestruct.class, 3, Side.SERVER);
 		instance.registerMessage(MessageWidgetUpdate.class, MessageWidgetUpdate.class, 4, Side.SERVER);
-
+		instance.registerMessage(MessagePipeColoringTool.class, MessagePipeColoringTool.class, 5, Side.SERVER);
 	}
 }
