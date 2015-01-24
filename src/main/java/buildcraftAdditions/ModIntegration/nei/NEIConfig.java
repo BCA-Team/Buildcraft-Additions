@@ -29,6 +29,8 @@ public class NEIConfig implements IConfigureNEI {
         API.registerRecipeHandler(dustingRecipeHandler);
         API.registerUsageHandler(dustingRecipeHandler);
 
+        API.addItemListEntry(ItemsAndBlocks.kebT1.createCreativeKEB());
+
         API.addItemListEntry(new ItemStack(ItemsAndBlocks.powerCapsuleTier1));
         API.addItemListEntry(new ItemStack(ItemsAndBlocks.powerCapsuleTier2));
         API.addItemListEntry(new ItemStack(ItemsAndBlocks.powerCapsuleTier3));

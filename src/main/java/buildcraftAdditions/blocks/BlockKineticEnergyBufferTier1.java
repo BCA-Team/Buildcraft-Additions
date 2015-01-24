@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
@@ -35,10 +36,11 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-		icons = new IIcon[9];
+		icons = new IIcon[10];
 		for (int teller = 0; teller < 9; teller++){
 			icons[teller] = RenderUtils.registerIcon(register, "kineticEnergyBuffer" + teller);
 		}
+		icons[9] = RenderUtils.registerIcon(register, "kineticEnergyBufferCreative");
 	}
 
 	@Override
@@ -50,7 +52,7 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		if (meta > 8)
+		if (meta > 9)
 			return icons[8];
 		return icons[meta];
 	}
@@ -81,4 +83,17 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileKineticEnergyBufferTier1();
 	}
+
+	public ItemStack createCreativeKEB() {
+		ItemStack stack = new ItemStack(this, 1, 9);
+		stack.stackTagCompound = new NBTTagCompound();
+		stack.stackTagCompound.setBoolean("creative", true);
+		stack.stackTagCompound.setInteger("energy", 3000000);
+		stack.stackTagCompound.setInteger("maxEnergy", 3000000);
+		stack.stackTagCompound.setInteger("maxInput", 30000);
+		stack.stackTagCompound.setInteger("maxOutput", 30000);
+		return stack;
+	}
+
+
 }

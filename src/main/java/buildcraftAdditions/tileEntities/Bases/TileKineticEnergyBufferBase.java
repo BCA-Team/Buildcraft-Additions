@@ -20,7 +20,6 @@ import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
 import buildcraftAdditions.utils.EnumPriority;
 import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.IConfigurableOutput;
-import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
 
 import io.netty.buffer.ByteBuf;
@@ -153,36 +152,9 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 		outputEnergy();
 	}
 
-	public void outputEnergy() {
-		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-			for (EnumPriority priority : EnumPriority.PRIORITIES) {
-				if (priorities[direction.ordinal()] != priority)
-					continue;
-				if (configuration[direction.ordinal()] != EnumSideStatus.OUTPUT && configuration[direction.ordinal()] != EnumSideStatus.BOTH)
-					continue;
-				Location location = new Location(worldObj, xCoord, yCoord, zCoord);
-				location.move(direction);
-				IEnergyReceiver energyHandler = null;
-				if (location.getTileEntity() != null && location.getTileEntity() instanceof IEnergyReceiver)
-					energyHandler = (IEnergyReceiver) location.getTileEntity();
-				if (energyHandler != null) {
-					int sendEnergy = energy;
-					if (canSharePower(location.getTileEntity(), direction)) {
-						TileKineticEnergyBufferTier1 keb = (TileKineticEnergyBufferTier1) location.getTileEntity();
-						sendEnergy = ((energy + keb.energy) / 2) - keb.energy;
-					}
-					if (sendEnergy < 0)
-						sendEnergy = 0;
-					if (sendEnergy > maxOutput)
-						sendEnergy = maxOutput;
+	public abstract void outputEnergy();
 
-					energy -= energyHandler.receiveEnergy(direction.getOpposite(), sendEnergy, false);
-				}
-			}
-		}
-	}
-
-	private boolean canSharePower(TileEntity target, ForgeDirection outputSide) {
+	protected boolean canSharePower(TileEntity target, ForgeDirection outputSide) {
 		if (configuration[outputSide.ordinal()] == EnumSideStatus.BOTH && target instanceof TileKineticEnergyBufferTier1) {
 			TileKineticEnergyBufferTier1 keb = (TileKineticEnergyBufferTier1) target;
 			if (keb.getStatus(outputSide.getOpposite()) == EnumSideStatus.BOTH)

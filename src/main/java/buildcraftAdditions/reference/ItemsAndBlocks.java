@@ -34,6 +34,7 @@ import buildcraftAdditions.items.ItemPipeColoringTool;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ToolUpgrade;
 import buildcraftAdditions.items.dust.ItemDust;
+import buildcraftAdditions.items.itemBlocks.ItemBlockKEB;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileChargingStation;
@@ -250,7 +251,7 @@ public final class ItemsAndBlocks {
 
 		kebT1 = new BlockKineticEnergyBufferTier1();
 		kebT1.setBlockName("blockKEBT1").setCreativeTab(BuildcraftAdditions.bcadditions);
-		GameRegistry.registerBlock(kebT1, "KEBT1");
+		GameRegistry.registerBlock(kebT1, ItemBlockKEB.class, "KEBT1");
 
 		kebT2 = new MultiBlockKEBT2();
 		kebT2.setBlockName("blockKEBT2").setCreativeTab(BuildcraftAdditions.bcadditions);

@@ -9,6 +9,7 @@ tile.blockDusterKinetic.name=Kinetic Duster
 tile.blockCoilLava.name=Lava Coil
 tile.blockCoilKinetic.name=Kinetic Coil
 tile.blockKEBT1.name=Kinetic Energy Buffer
+tile.blockKEBT1Creative.name=Creative Kinetic Energy Buffer
 tile.blockKEBT2.name=Large Kinetic Energy Buffer
 tile.blockKEBT3Core.name=Advanced Kinetic Energy Buffer Core
 tile.blockKEBT3Plating.name=Advanced Kinetic Energy Buffer Plating
