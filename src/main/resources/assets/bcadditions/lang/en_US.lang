@@ -74,7 +74,7 @@ tooltip.storedFluid=Currently stores %s mb of %s
 tooltip.colorPipeMode=Pipe Color
 tooltip.colorPipeMode.info=Colors standard BC pipes
 tooltip.colorSortingMode=Sorting Color
-tooltip.colorSortingMode.info=Colors the sorting part \nof the DaiZuli and Lapis pipes
+tooltip.colorSortingMode.info=Colors the sorting part of the DaiZuli and Lapis pipes
 
 fluid.gas.name=%s Gas
 

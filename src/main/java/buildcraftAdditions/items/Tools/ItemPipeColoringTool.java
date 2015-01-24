@@ -34,7 +34,7 @@ public class ItemPipeColoringTool extends Item {
 
 	public static final String[] names = new String[] {"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
 	@SideOnly(Side.CLIENT)
-	IIcon[] icons = new IIcon[names.length + 1]; //TODO: fix
+	IIcon[] icons = new IIcon[names.length];
 
 	public ItemPipeColoringTool() {
 		setMaxStackSize(1);
@@ -79,7 +79,6 @@ public class ItemPipeColoringTool extends Item {
 	public void registerIcons(IIconRegister register) {
 		for (int i = 0; i < names.length; i++)
 			icons[i] = register.registerIcon("buildcraft:triggers/color_" + names[i]);
-		icons[16] = register.registerIcon("buildcraft:triggers/color_white"); //TODO remove
 	}
 
 	@Override

@@ -6,6 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraftAdditions.client.gui.containers.ContainerPipeColoringTool;
 import buildcraftAdditions.client.gui.widgets.WidgetBase;
 import buildcraftAdditions.client.gui.widgets.WidgetButtonText;
@@ -23,6 +26,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+@SideOnly(Side.CLIENT)
 public class GuiPipeColoringTool extends GuiBase {
 
 	public static final ResourceLocation TEXTURE = new ResourceLocation("bcadditions", "textures/gui/guiPipeColoringTool.png");

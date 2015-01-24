@@ -200,12 +200,12 @@ public abstract class GuiBase extends GuiContainer {
 		if (!tooltips.isEmpty()) {
 			List<String> finalLines = new ArrayList<String>();
 			for (String line : tooltips) {
-				String[] lines = WordUtils.wrap(line, 50).split(System.getProperty("line.separator"));
+				String[] lines = WordUtils.wrap(line, 30).split(System.getProperty("line.separator"));
 				for (String wrappedLine : lines) {
 					finalLines.add(wrappedLine);
 				}
 			}
-			drawHoveringText(tooltips, x, y, fontRendererObj);
+			drawHoveringText(finalLines, x, y, fontRendererObj);
 		}
 	}
 
