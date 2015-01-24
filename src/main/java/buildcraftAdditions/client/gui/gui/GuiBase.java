@@ -11,7 +11,6 @@ import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -163,7 +162,7 @@ public abstract class GuiBase extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		if (drawPlayerInv)
-			drawString(StatCollector.translateToLocal("container.inventory"), 5, tileGuiYSize + 6, textColor);
+			drawString(Utils.localize("container.inventory"), 5, tileGuiYSize + 6, textColor);
 		String name = Utils.localize(String.format("gui.%s.name", getInventoryName()));
 		drawString(name, centerTitle ? getXSize() / 2 - (name.length() * 2) : titleXoffset, titleYoffset, textColor);
 		drawForegroundExtra(x, y);

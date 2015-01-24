@@ -57,7 +57,11 @@ public class Utils {
 	}
 
 	public static String localize(String key) {
-		return StatCollector.translateToLocal(key);
+		return ("" + StatCollector.translateToLocal(key)).trim();
+	}
+
+	public static String localizeFormatted(String key, Object... objects) {
+		return ("" + StatCollector.translateToLocalFormatted(key, objects)).trim();
 	}
 
 	public static void dropItemstack(World world, int x, int y, int z, ItemStack stack) {

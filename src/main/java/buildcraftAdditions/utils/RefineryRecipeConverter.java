@@ -5,7 +5,6 @@ import java.util.Collection;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -110,7 +109,7 @@ public class RefineryRecipeConverter {
 
 		@Override
 		public String getLocalizedName(FluidStack stack) {
-			return ("" + StatCollector.translateToLocalFormatted("fluid.gas.name", fluid.getLocalizedName())).trim();
+			return Utils.localizeFormatted("fluid.gas.name", fluid.getLocalizedName());
 		}
 	}
 }

@@ -1,6 +1,6 @@
 package buildcraftAdditions.ModIntegration.nei;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -9,10 +9,10 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
+import buildcraftAdditions.utils.Utils;
 
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
@@ -87,7 +87,7 @@ public class DustingRecipeHandler extends TemplateRecipeHandler {
 
 	@Override
 	public String getRecipeName() {
-		return StatCollector.translateToLocal("gui.nei.dusting");
+		return Utils.localize("gui.nei.dusting");
 	}
 
 	public String getRecipeID() {

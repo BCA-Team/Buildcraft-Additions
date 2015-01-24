@@ -3,13 +3,13 @@ package buildcraftAdditions.items;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -33,6 +33,6 @@ public class ItemBucketBCA extends ItemBucket {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		return ("" + StatCollector.translateToLocalFormatted("item.bcaBucket.name", fluid.getLocalizedName())).trim();
+		return Utils.localizeFormatted("item.bcaBucket.name", fluid.getLocalizedName());
 	}
 }
