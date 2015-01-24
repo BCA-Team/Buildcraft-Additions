@@ -26,6 +26,7 @@ import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.client.gui.gui.GuiHandler;
 import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.core.BucketHandler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.creative.TabBCAdditions;
@@ -83,7 +84,7 @@ public class BuildcraftAdditions {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		FMLCommonHandler.instance().bus().register(new EventListener.FML());
 		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
-
+		BucketHandler.register();
 		IMCSender.sendMessages();
 	}
 
