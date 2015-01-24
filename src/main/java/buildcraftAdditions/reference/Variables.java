@@ -32,6 +32,7 @@ public final class Variables {
 		public static final int REFINERY = 77;
 		public static final int COOLING_TOWER = 88;
 		public static final int ITEM_SORTER = 89;
+		public static final int PIPE_COLORING_TOOL = 90;
 	}
 
 	//EUREKA NBT names

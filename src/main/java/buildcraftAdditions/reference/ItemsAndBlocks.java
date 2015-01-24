@@ -30,6 +30,7 @@ import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemMachineConfigurator;
+import buildcraftAdditions.items.ItemPipeColoringTool;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ToolUpgrade;
 import buildcraftAdditions.items.dust.ItemDust;
@@ -107,6 +108,7 @@ public final class ItemsAndBlocks {
 	public static Item heatPlating;
 	public static Item heatPlatingRaw;
 	public static Item dust;
+	public static Item pipeColoringTool;
 
 	public static void init() {
 		ironCanister = new ItemCanister("ironCanister", 2000);
@@ -192,6 +194,9 @@ public final class ItemsAndBlocks {
 
 		dust = new ItemDust();
 		GameRegistry.registerItem(dust, "dust");
+
+		pipeColoringTool = new ItemPipeColoringTool();
+		GameRegistry.registerItem(pipeColoringTool, "pipeColoringTool");
 
 		//START BLOCKS
 
