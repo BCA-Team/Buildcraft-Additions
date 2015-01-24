@@ -106,6 +106,10 @@ gui.priority=Priority
 gui.kineticTool.name=Kinetic Tool
 gui.heatedFurnace.name=Heated Furnace
 gui.fluidicCompressor.name=Fluidic Compressor
+gui.coloringMode=Coloring Mode
+gui.pipeColorTool.name=Pipe Coloring Tool
+gui.colorPipeMode=Pipe Color
+gui.colorSortingMode=Sorting Color
 
 gui.keb.dangerousButton=BIG RED BUTTONS ARE VERY DANGEROUS
 gui.keb.noPushing=DON'T PUSH IT

@@ -214,4 +214,12 @@ public abstract class GuiBase extends GuiContainer {
 		buttonList.clear();
 		initialize();
 	}
+
+	public int guiLeft() {
+		return guiLeft;
+	}
+
+	public int guiTop() {
+		return guiTop;
+	}
 }

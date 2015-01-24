@@ -63,12 +63,12 @@ public class WidgetBase {
 	}
 
 	public void render(int mouseX, int mouseY) {
-
 		float shade = enabled ? 1.0F : 0.2F;
 		GL11.glColor4f(shade, shade, shade, shade);
-		if (textureIndex != 0 && textures[textureIndex] != null)
+		if (textures[textureIndex] != null)
 			gui.bindTexture(textures[textureIndex]);
 		gui.drawTexturedModalRect(x, y, u, v, width, height);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	public void onWidgetClicked(int x, int y, int button) {
