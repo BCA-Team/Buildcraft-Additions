@@ -33,8 +33,8 @@ import buildcraftAdditions.reference.Variables;
 public class ItemPipeColoringTool extends Item {
 
 	public static final String[] names = new String[] {"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
-	@SideOnly(Side.CLIENT)
-	IIcon[] icons = new IIcon[names.length];
+
+	private IIcon[] icons = new IIcon[names.length];
 
 	public ItemPipeColoringTool() {
 		setMaxStackSize(1);
@@ -82,6 +82,7 @@ public class ItemPipeColoringTool extends Item {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int meta) {
 		return icons[meta];
 	}

@@ -41,7 +41,6 @@ import buildcraftAdditions.utils.IConfigurableOutput;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-@SideOnly(Side.CLIENT)
 public class GuiHandler implements IGuiHandler {
 
 	@Override
