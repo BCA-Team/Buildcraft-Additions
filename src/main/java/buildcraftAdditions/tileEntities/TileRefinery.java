@@ -1,7 +1,5 @@
 package buildcraftAdditions.tileEntities;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -29,6 +27,8 @@ import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.MultiBlockData;
 import buildcraftAdditions.utils.RotationUtils;
 import buildcraftAdditions.utils.Tank;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -229,6 +229,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void moved(ForgeDirection direction) {
+		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 		data.onMove(direction);
 		master = null;
 	}

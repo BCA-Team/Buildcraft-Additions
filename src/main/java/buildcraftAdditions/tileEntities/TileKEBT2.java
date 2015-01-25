@@ -271,6 +271,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 
 	@Override
 	public void moved(ForgeDirection direction) {
+		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 		data.onMove(direction);
 		master = null;
 	}
