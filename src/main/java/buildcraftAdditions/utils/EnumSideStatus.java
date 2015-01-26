@@ -8,19 +8,22 @@ package buildcraftAdditions.utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public enum EnumSideStatus {
-	INPUT("Input", 0x002B87, true),
-	OUTPUT("Output", 0x850000, true),
-	DISSABLED("Disabled", 0xa6a6a6, false),
-	BOTH("Both", 0xFFA500, true);
 
-	private String text;
-	private int color;
-	private boolean hasPriority;
+	DISABLED("Disabled", 0xA6A6A6, false, false, false),
+	BOTH("Both", 0xFFA500, true, true, true),
+	OUTPUT("Output", 0x850000, true, false, true),
+	INPUT("Input", 0x002B87, true, true, false);
 
-	EnumSideStatus(String text, int color, boolean hasPriority) {
+	private final String text;
+	private final int color;
+	private final boolean hasPriority, canReceive, canSend;
+
+	EnumSideStatus(String text, int color, boolean hasPriority, boolean canReceive, boolean canSend) {
 		this.text = text;
 		this.color = color;
 		this.hasPriority = hasPriority;
+		this.canReceive = canReceive;
+		this.canSend = canSend;
 	}
 
 	public String getText() {
@@ -33,5 +36,19 @@ public enum EnumSideStatus {
 
 	public boolean hasPriority() {
 		return hasPriority;
+	}
+
+	public boolean canReceive() {
+		return canReceive;
+	}
+
+	public boolean canSend() {
+		return canSend;
+	}
+
+	public EnumSideStatus getNextStatus() {
+		if (ordinal() > 0)
+			return values()[ordinal() - 1];
+		return INPUT;
 	}
 }

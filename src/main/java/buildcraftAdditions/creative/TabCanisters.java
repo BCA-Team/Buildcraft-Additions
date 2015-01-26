@@ -23,6 +23,7 @@ public class TabCanisters extends CreativeTabs {
 
 	public TabCanisters() {
 		super("bcaCanisters");
+		setBackgroundImageName("item_search.png");
 	}
 
 	@Override
@@ -37,4 +38,8 @@ public class TabCanisters extends CreativeTabs {
 		return ItemsAndBlocks.diamondCanister.getFilledItemStack(new FluidStack(FluidRegistry.getFluid("fuel"), ItemsAndBlocks.diamondCanister.getCapacity()));
 	}
 
+	@Override
+	public boolean hasSearchBar() {
+		return true;
+	}
 }

@@ -1,18 +1,16 @@
 package buildcraftAdditions.networking;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.tileentity.TileEntity;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
-import buildcraftAdditions.utils.EnumPriority;
-import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.IConfigurableOutput;
+import buildcraftAdditions.utils.SideConfiguration;
 
-import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -21,23 +19,20 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageConfiguration implements IMessage, IMessageHandler<MessageConfiguration, IMessage> {
-	public int x, y, z;
-	public EnumSideStatus configuration[];
-	public EnumPriority priorities[];
+
+	private int x, y, z;
+	private SideConfiguration configuration;
 
 	public MessageConfiguration() {
+		configuration = new SideConfiguration();
 	}
 
 	public MessageConfiguration(IConfigurableOutput configurableOutput) {
+		this();
 		x = configurableOutput.getX();
 		y = configurableOutput.getY();
 		z = configurableOutput.getZ();
-		configuration = new EnumSideStatus[6];
-		priorities = new EnumPriority[6];
-		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-			configuration[direction.ordinal()] = configurableOutput.getStatus(direction);
-			priorities[direction.ordinal()] = configurableOutput.getPriority(direction);
-		}
+		configuration.load(configurableOutput);
 	}
 
 	@Override
@@ -45,12 +40,7 @@ public class MessageConfiguration implements IMessage, IMessageHandler<MessageCo
 		x = buf.readInt();
 		y = buf.readInt();
 		z = buf.readInt();
-		configuration = new EnumSideStatus[6];
-		priorities = new EnumPriority[6];
-		for (int teller = 0; teller < 6; teller++) {
-			configuration[teller] = EnumSideStatus.values()[buf.readInt()];
-			priorities[teller] = EnumPriority.PRIORITIES[buf.readInt()];
-		}
+		configuration.readFromByteBuff(buf);
 	}
 
 	@Override
@@ -58,19 +48,14 @@ public class MessageConfiguration implements IMessage, IMessageHandler<MessageCo
 		buf.writeInt(x);
 		buf.writeInt(y);
 		buf.writeInt(z);
-		for (int teller = 0; teller < 6; teller++) {
-			buf.writeInt(configuration[teller].ordinal());
-			buf.writeInt(priorities[teller].ordinal());
-		}
+		configuration.writeToByteBuff(buf);
 	}
 
 	@Override
 	public IMessage onMessage(MessageConfiguration message, MessageContext ctx) {
 		TileEntity entity = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
 		if (entity != null && entity instanceof IConfigurableOutput) {
-			IConfigurableOutput configurableOutput = (IConfigurableOutput) entity;
-			configurableOutput.overrideConfiguration(message.configuration);
-			configurableOutput.overridePriority(message.priorities);
+			((IConfigurableOutput) entity).setSideConfiguration(message.configuration);
 		}
 		return null;
 	}

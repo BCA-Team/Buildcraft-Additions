@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities.Bases;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -20,9 +22,9 @@ import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
 import buildcraftAdditions.utils.EnumPriority;
 import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.IConfigurableOutput;
+import buildcraftAdditions.utils.SideConfiguration;
 import buildcraftAdditions.utils.Utils;
 
-import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -32,9 +34,8 @@ import io.netty.buffer.ByteBuf;
  */
 public abstract class TileKineticEnergyBufferBase extends TileBase implements IEnergyReceiver, IEnergyProvider, IConfigurableOutput, ISyncronizedTile {
 	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
-	public EnumSideStatus[] configuration = new EnumSideStatus[6];
 	protected boolean[] blocked = new boolean[6];
-	public EnumPriority[] priorities = new EnumPriority[6];
+	protected final SideConfiguration configuration = new SideConfiguration();
 	public int tier;
 	public boolean selfDestruct, engineControl;
 	public String owner = "";
@@ -48,15 +49,11 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 		this.maxOutput = maxOutput;
 		this.loss = loss;
 		this.tier = tier;
-		for (int t = 0; t < 6; t++) {
-			configuration[t] = EnumSideStatus.INPUT;
-			priorities[t] = EnumPriority.NORMAL;
-		}
 	}
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		if (configuration[from.ordinal()] != EnumSideStatus.INPUT && configuration[from.ordinal()] != EnumSideStatus.BOTH)
+		if (!configuration.canReceive(from))
 			return 0;
 		int recieved = maxReceive;
 		if (recieved > maxEnergy - energy)
@@ -72,7 +69,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 
 	@Override
 	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-		if (configuration[from.ordinal()] != EnumSideStatus.OUTPUT && configuration[from.ordinal()] != EnumSideStatus.BOTH)
+		if (!configuration.canSend(from))
 			return 0;
 		int extracted = maxExtract;
 		if (extracted > energy)
@@ -103,12 +100,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 		maxOutput = tag.getInteger("maxOutput");
 		loss = tag.getInteger("loss");
 		engineControl = tag.getBoolean("engineControl");
-		if (tag.hasKey("configuration")) {
-			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-				configuration[direction.ordinal()] = Utils.intToStatus(tag.getInteger("configuration" + direction.ordinal()));
-				priorities[direction.ordinal()] = EnumPriority.PRIORITIES[tag.getInteger("priority" + direction.ordinal())];
-			}
-		}
+		configuration.readFromNBT(tag);
 		if (tag.hasKey("owner"))
 			owner = tag.getString("owner");
 	}
@@ -121,12 +113,8 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 		tag.setInteger("maxInput", maxInput);
 		tag.setInteger("maxOutput", maxOutput);
 		tag.setInteger("loss", loss);
-		tag.setBoolean("configuration", true);
 		tag.setBoolean("engineControl", engineControl);
-		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-			tag.setInteger("configuration" + direction.ordinal(), Utils.statusToInt(configuration[direction.ordinal()]));
-			tag.setInteger("priority" + direction.ordinal(), priorities[direction.ordinal()].ordinal());
-		}
+		configuration.writeToNBT(tag);
 		if (owner != null)
 			tag.setString("owner", owner);
 	}
@@ -155,7 +143,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	public abstract void outputEnergy();
 
 	protected boolean canSharePower(TileEntity target, ForgeDirection outputSide) {
-		if (configuration[outputSide.ordinal()] == EnumSideStatus.BOTH && target instanceof TileKineticEnergyBufferTier1) {
+		if (configuration.canReceive(outputSide) && configuration.canSend(outputSide) && target instanceof TileKineticEnergyBufferTier1) {
 			TileKineticEnergyBufferTier1 keb = (TileKineticEnergyBufferTier1) target;
 			if (keb.getStatus(outputSide.getOpposite()) == EnumSideStatus.BOTH)
 				return true;
@@ -165,7 +153,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
-		return configuration[from.ordinal()] != EnumSideStatus.DISSABLED;
+		return configuration.canReceive(from) || configuration.canSend(from);
 	}
 
 	public void sendConfigurationToSever() {
@@ -195,35 +183,23 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 
 	@Override
 	public EnumSideStatus getStatus(ForgeDirection side) {
-		return configuration[side.ordinal()];
+		return configuration.getStatus(side);
 	}
 
 	@Override
 	public void changeStatus(ForgeDirection side) {
-		EnumSideStatus status = configuration[side.ordinal()];
-		if (status == EnumSideStatus.INPUT)
-			status = EnumSideStatus.OUTPUT;
-		else if (status == EnumSideStatus.OUTPUT)
-			status = EnumSideStatus.BOTH;
-		else if (status == EnumSideStatus.BOTH)
-			status = EnumSideStatus.DISSABLED;
-		else if (status == EnumSideStatus.DISSABLED)
-			status = EnumSideStatus.INPUT;
-		configuration[side.ordinal()] = status;
+		configuration.changeStatus(side);
 	}
 
 	@Override
-	public void overrideConfiguration(EnumSideStatus[] newConfiguration) {
-		configuration = newConfiguration;
+	public void setSideConfiguration(SideConfiguration configuration) {
+		this.configuration.load(configuration);
 	}
 
 	@Override
 	public ByteBuf writeToByteBuff(ByteBuf buf) {
 		buf.writeInt(energy);
-		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-			buf.writeInt(Utils.statusToInt(configuration[direction.ordinal()]));
-			buf.writeInt(priorities[direction.ordinal()].ordinal());
-		}
+		configuration.writeToByteBuff(buf);
 		int length = owner.length();
 		buf.writeInt(length);
 		char[] chars = owner.toCharArray();
@@ -235,10 +211,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	@Override
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		energy = buf.readInt();
-		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-			configuration[direction.ordinal()] = Utils.intToStatus(buf.readInt());
-			priorities[direction.ordinal()] = EnumPriority.PRIORITIES[buf.readInt()];
-		}
+		configuration.readFromByteBuff(buf);
 		int length = buf.readInt();
 		owner = "";
 		for (int teller = 0; teller < length; teller++)
@@ -267,16 +240,16 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 
 	@Override
 	public EnumPriority getPriority(ForgeDirection side) {
-		return priorities[side.ordinal()];
-	}
-
-	@Override
-	public void overridePriority(EnumPriority[] newPriorities) {
-		priorities = newPriorities;
+		return configuration.getPriority(side);
 	}
 
 	@Override
 	public void changePriority(ForgeDirection side) {
-		priorities[side.ordinal()] = priorities[side.ordinal()].getNextPriority();
+		configuration.changePriority(side);
+	}
+
+	@Override
+	public SideConfiguration getSideConfiguration() {
+		return configuration;
 	}
 }

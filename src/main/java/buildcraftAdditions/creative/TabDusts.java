@@ -5,7 +5,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
 
@@ -14,6 +13,7 @@ public class TabDusts extends CreativeTabs {
 
 	public TabDusts() {
 		super("bcaDusts");
+		setBackgroundImageName("item_search.png");
 	}
 
 	@Override
@@ -31,5 +31,10 @@ public class TabDusts extends CreativeTabs {
 			}
 		}
 		return new ItemStack(Items.diamond);
+	}
+
+	@Override
+	public boolean hasSearchBar() {
+		return true;
 	}
 }

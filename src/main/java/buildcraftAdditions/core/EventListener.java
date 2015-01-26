@@ -1,9 +1,12 @@
 package buildcraftAdditions.core;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -15,6 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.AchievementEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 
@@ -71,6 +75,12 @@ public class EventListener {
 	public static class Forge {
 
 		@SubscribeEvent
+		public void onItemTooltip(ItemTooltipEvent event) {
+			if (event.itemStack != null && event.itemStack.getItem() == Item.getItemFromBlock(ItemsAndBlocks.kebT1) && event.itemStack.stackTagCompound != null)
+				event.toolTip.add("" + EnumChatFormatting.GRAY + EnumChatFormatting.ITALIC + Utils.localize("configured"));
+		}
+
+		@SubscribeEvent
 		public void onGettingAchievement(AchievementEvent event) {
 			//unlock basic duster
 			EurekaKnowledge.makeProgress(event.entityPlayer, Variables.DustT0Key, 1);
@@ -81,14 +91,23 @@ public class EventListener {
 			Block block = event.world.getBlock(event.x, event.y, event.z);
 			if (block != ItemsAndBlocks.kebT1)
 				return;
-			if (event.entityPlayer != null && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem().getToolClasses(event.entityPlayer.getCurrentEquippedItem()).contains("wrench") && event.entityPlayer.isSneaking() && event.world.getTileEntity(event.x, event.y, event.z) != null) {
-				NBTTagCompound tag = new NBTTagCompound();
-				event.world.getTileEntity(event.x, event.y, event.z).writeToNBT(tag);
-				ItemStack stack = new ItemStack(ItemsAndBlocks.kebT1, 1, event.world.getBlockMetadata(event.x, event.y, event.z));
-				stack.stackTagCompound = tag;
-				Utils.dropItemstack(event.world, event.x, event.y, event.z, stack);
-				event.world.setBlockToAir(event.x, event.y, event.z);
-				event.world.removeTileEntity(event.x, event.y, event.z);
+			if (event.entityPlayer != null && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem().getToolClasses(event.entityPlayer.getCurrentEquippedItem()).contains("wrench") && event.entityPlayer.isSneaking()) {
+				TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
+				if (tile != null) {
+					NBTTagCompound tag = new NBTTagCompound();
+					tile.writeToNBT(tag);
+					ItemStack stack = new ItemStack(ItemsAndBlocks.kebT1, 1, event.world.getBlockMetadata(event.x, event.y, event.z));
+					tag.removeTag("x");
+					tag.removeTag("y");
+					tag.removeTag("z");
+					tag.removeTag("id");
+					stack.stackTagCompound = tag;
+					event.world.removeTileEntity(event.x, event.y, event.z);
+					event.world.setBlockToAir(event.x, event.y, event.z);
+					if (event.world.isRemote)
+						event.entityPlayer.swingItem();
+					Utils.dropItemstack(event.world, event.x, event.y, event.z, stack);
+				}
 			}
 		}
 

@@ -15,10 +15,8 @@ public enum EnumPriority {
 	LOW("low", 0x99FF33),
 	VERY_LOW("veryLow", 0x0099FF);
 
-	public static final EnumPriority[] PRIORITIES = {VERY_HIGH, HIGH, NORMAL, LOW, VERY_LOW};
-
-	private String name;
-	private int color;
+	private final String name;
+	private final int color;
 
 	private EnumPriority(String name, int color) {
 		this.name = name;
@@ -35,7 +33,7 @@ public enum EnumPriority {
 
 	public EnumPriority getNextPriority() {
 		if (ordinal() > 0)
-			return PRIORITIES[ordinal() - 1];
+			return values()[ordinal() - 1];
 		return VERY_LOW;
 	}
 }

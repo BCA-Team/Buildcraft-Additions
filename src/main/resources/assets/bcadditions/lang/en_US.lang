@@ -133,7 +133,7 @@ priority.high=High
 priority.veryHigh=Very High
 
 itemGroup.BuildcraftAdditions=Buildcraft Additions
-itemGroup.bcaCanisters=Fluid Canisters
+itemGroup.bcaCanisters=Canisters
 itemGroup.bcaDusts=Dusts
 
 Eureka=EUREKA!
@@ -292,3 +292,5 @@ changelogNotification=Changelog
 
 selfdestructCountdouwn=SELF DESTUCTION IN
 selfdestructActivated=SELF DESTRUCT ACTIVATED
+
+configured=Configured

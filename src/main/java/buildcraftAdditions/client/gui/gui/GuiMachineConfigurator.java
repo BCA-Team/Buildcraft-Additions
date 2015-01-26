@@ -125,12 +125,16 @@ public class GuiMachineConfigurator extends GuiBase {
 	}
 
 	private void updateButtons() {
-		for (int t = 0; t < 6; t++) {
-			((WidgetButtonText) widgets.get(t)).setText(configurableOutput.getStatus(ForgeDirection.getOrientation(t)).getText());
-			((WidgetButtonText) widgets.get(t)).setColor(configurableOutput.getStatus(ForgeDirection.getOrientation(t)).getColor());
-			((WidgetButtonText) widgets.get(t + 6)).setText(configurableOutput.getPriority(ForgeDirection.getOrientation(t)).getName());
-			((WidgetButtonText) widgets.get(t + 6)).setColor(configurableOutput.getPriority(ForgeDirection.getOrientation(t)).getColor());
-			((WidgetButtonText) widgets.get(t + 6)).setShouldRender(configurableOutput.getStatus(ForgeDirection.getOrientation(t)).hasPriority());
+		WidgetButtonText button;
+		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+			button = ((WidgetButtonText) widgets.get(direction.ordinal()));
+			button.setText(configurableOutput.getStatus(direction).getText());
+			button.setColor(configurableOutput.getStatus(direction).getColor());
+
+			button = ((WidgetButtonText) widgets.get(direction.ordinal() + 6));
+			button.setText(configurableOutput.getPriority(direction).getName());
+			button.setColor(configurableOutput.getPriority(direction).getColor());
+			button.setShouldRender(configurableOutput.getStatus(direction).hasPriority());
 		}
 	}
 

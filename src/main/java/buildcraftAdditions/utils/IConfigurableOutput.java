@@ -1,6 +1,7 @@
 package buildcraftAdditions.utils;
 
 import net.minecraftforge.common.util.ForgeDirection;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -10,21 +11,21 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public interface IConfigurableOutput {
 
-	public EnumSideStatus getStatus(ForgeDirection side);
+	SideConfiguration getSideConfiguration();
 
-	public void changeStatus(ForgeDirection side);
+	void setSideConfiguration(SideConfiguration configuration);
 
-	public void overrideConfiguration(EnumSideStatus newConfiguration[]);
+	EnumSideStatus getStatus(ForgeDirection side);
 
-	public EnumPriority getPriority(ForgeDirection side);
+	void changeStatus(ForgeDirection side);
 
-	public void overridePriority(EnumPriority newPriorities[]);
+	EnumPriority getPriority(ForgeDirection side);
 
-	public void changePriority(ForgeDirection side);
+	void changePriority(ForgeDirection side);
 
-	public int getX();
+	int getX();
 
-	public int getY();
+	int getY();
 
-	public int getZ();
+	int getZ();
 }

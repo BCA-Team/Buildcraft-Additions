@@ -10,8 +10,8 @@ import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.EnumPriority;
-import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.Location;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -72,10 +72,10 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 	@Override
 	public void outputEnergy() {
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-			for (EnumPriority priority : EnumPriority.PRIORITIES) {
-				if (priorities[direction.ordinal()] != priority)
+			for (EnumPriority priority : EnumPriority.values()) {
+				if (configuration.getPriority(direction) != priority)
 					continue;
-				if (configuration[direction.ordinal()] != EnumSideStatus.OUTPUT && configuration[direction.ordinal()] != EnumSideStatus.BOTH)
+				if (!configuration.canSend(direction))
 					continue;
 				Location location = new Location(worldObj, xCoord, yCoord, zCoord);
 				location.move(direction);
@@ -100,5 +100,9 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 				}
 			}
 		}
+	}
+
+	public boolean isCreative() {
+		return creative;
 	}
 }

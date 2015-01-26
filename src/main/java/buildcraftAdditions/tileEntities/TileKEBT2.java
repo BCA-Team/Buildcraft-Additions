@@ -2,6 +2,8 @@ package buildcraftAdditions.tileEntities;
 
 import java.util.ArrayList;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -19,12 +21,11 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.EnumPriority;
-import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.MultiBlockData;
 
 import eureka.api.EurekaKnowledge;
-import io.netty.buffer.ByteBuf;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -139,10 +140,10 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 		ArrayList<Location> list = data.patern.getLocations(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
 		for (Location from : list) {
 			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-				for (EnumPriority priority : EnumPriority.PRIORITIES) {
-					if (priorities[direction.ordinal()] != priority)
+				for (EnumPriority priority : EnumPriority.values()) {
+					if (configuration.getPriority(direction) != priority)
 						continue;
-					if (configuration[direction.ordinal()] != EnumSideStatus.OUTPUT && configuration[direction.ordinal()] != EnumSideStatus.BOTH)
+					if (!configuration.canSend(direction))
 						continue;
 					Location location = from.copy();
 					location.move(direction);
@@ -163,7 +164,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 								continue;
 							keb2 = keb.master;
 						}
-						if (keb2.configuration[direction.getOpposite().ordinal()] == EnumSideStatus.BOTH) {
+						if (keb2.configuration.canSend(direction.getOpposite()) && keb2.configuration.canReceive(direction.getOpposite())) {
 							if (blocked[direction.ordinal()]) {
 								blocked[direction.ordinal()] = false;
 							} else {
@@ -193,8 +194,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 			sync();
 		if (data.isMaster)
 			player.openGui(BuildcraftAdditions.instance, Variables.Gui.KEB, worldObj, xCoord, yCoord, zCoord);
-		else
-		if (master == null)
+		else if (master == null)
 			findMaster();
 		if (master != null)
 			master.onBlockActivated(player);
@@ -260,9 +260,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public void invalidateBlock() {
 		data.invalidate();
 		energy = 0;
-		for (int teller = 0; teller < 6; teller++) {
-			configuration[teller] = EnumSideStatus.INPUT;
-		}
+		configuration.invalidate();
 		energyState = 0;
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, ItemsAndBlocks.kebT2, 80);

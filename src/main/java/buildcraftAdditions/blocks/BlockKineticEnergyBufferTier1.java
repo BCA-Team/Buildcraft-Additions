@@ -13,10 +13,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-
-import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
@@ -25,7 +24,7 @@ import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
 import buildcraftAdditions.utils.EnumPriority;
 import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.RenderUtils;
-import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.utils.SideConfiguration;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -102,10 +101,10 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 		stack.stackTagCompound.setInteger("maxEnergy", 3000000);
 		stack.stackTagCompound.setInteger("maxInput", 30000);
 		stack.stackTagCompound.setInteger("maxOutput", 30000);
-		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-			stack.stackTagCompound.setInteger("configuration" + direction.ordinal(), Utils.statusToInt(EnumSideStatus.OUTPUT));
-			stack.stackTagCompound.setInteger("priority" + direction.ordinal(), EnumPriority.NORMAL.ordinal());
-		}
+		SideConfiguration configuration = new SideConfiguration();
+		configuration.setAllStatus(EnumSideStatus.OUTPUT);
+		configuration.setAllPriority(EnumPriority.NORMAL);
+		configuration.writeToNBT(stack.stackTagCompound);
 		return stack;
 	}
 
@@ -113,5 +112,13 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
 		super.getSubBlocks(item, tab, list);
 		list.add(createCreativeKEB());
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+		if (world.getBlockMetadata(x, y, z) == 9) {
+			return createCreativeKEB();
+		}
+		return super.getPickBlock(target, world, x, y, z);
 	}
 }
