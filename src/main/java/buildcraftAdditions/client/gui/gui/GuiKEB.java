@@ -9,9 +9,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.client.gui.containers.ContainerKEB;
+import buildcraftAdditions.client.gui.widgets.WidgedSelfDestruct;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
-import buildcraftAdditions.utils.SpecialListMananger;
-import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -22,21 +21,15 @@ import buildcraftAdditions.utils.Utils;
  */
 @SideOnly(Side.CLIENT)
 public class GuiKEB extends GuiBase {
-
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiKineticEnergyBuffer.png");
 	private final TileKineticEnergyBufferBase keb;
-	private boolean primed, yellow, green;
 	private final EntityPlayer player;
-	private int teller;
 
 
 	public GuiKEB(TileKineticEnergyBufferBase keb, EntityPlayer player) {
 		super(new ContainerKEB(player, keb));
 		this.keb = keb;
-		primed = false;
 		this.player = player;
-		teller = 30;
-		green = SpecialListMananger.greenButtonList.contains(player.getDisplayName());
 	}
 
 	@Override
@@ -61,29 +54,13 @@ public class GuiKEB extends GuiBase {
 
 	@Override
 	public void initialize() {
-
+		addWidget(new WidgedSelfDestruct(0, guiLeft + 67, guiTop + 30, 46, 47, this, player.getDisplayName(), player.getDisplayName().equals(keb.owner), keb));
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		super.drawGuiContainerBackgroundLayer(f, x, y);
 		long percent = ((long) keb.energy * 248) / keb.maxEnergy;
-
-		drawTexturedModalRect(guiLeft + 67, guiTop + 30, 176, 162, 47, 47);
-		if (primed)
-			teller--;
-		if (teller <= 0) {
-			teller = 30;
-			yellow = !yellow;
-		}
-
-		if (yellow) {
-			if (!green)
-				drawTexturedModalRect(guiLeft + 67, guiTop + 30, 176, 115, 47, 47);
-			else
-				drawTexturedModalRect(guiLeft + 67, guiTop + 30, 176, 209, 47, 47);
-		}
-
 		int temp = (int) percent;
 		if (temp > 36)
 			temp = 36;
@@ -113,8 +90,6 @@ public class GuiKEB extends GuiBase {
 		if (percent <= 0)
 			return;
 		drawTexturedModalRect(guiLeft + 65, guiTop + 17, 191, 42, (int) percent, 11);
-
-
 	}
 
 	@Override
@@ -124,24 +99,6 @@ public class GuiKEB extends GuiBase {
 			ArrayList<String> list = new ArrayList<String>();
 			list.add(keb.energy + " / " + keb.maxEnergy + " RF");
 			this.drawHoveringText(list, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
-		}
-		if (shouldDrawWarning(mouseX - guiLeft, mouseY - guiTop)) {
-			ArrayList<String> list = new ArrayList<String>();
-			if (!primed) {
-				if (SpecialListMananger.specialTexts.containsKey(player.getDisplayName())) {
-					list.add(SpecialListMananger.specialTexts.get(player.getDisplayName()) + "?");
-				} else {
-					list.add(Utils.localize("gui.keb.dangerousButton"));
-					list.add(Utils.localize("gui.keb.noPushing"));
-				}
-			} else {
-				if (SpecialListMananger.specialTexts.containsKey(player.getDisplayName())) {
-					list.add(SpecialListMananger.specialTexts.get(player.getDisplayName()) + "!!!");
-				} else {
-					list.add(Utils.localize("gui.keb.pressForBoom"));
-				}
-			}
-			drawHoveringText(list, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
 		}
 	}
 
@@ -154,22 +111,4 @@ public class GuiKEB extends GuiBase {
 			return true;
 		return mouseX > 110 && mouseX < 125 && mouseY > 13 && mouseY < 90;
 	}
-
-	private boolean shouldDrawWarning(int mouseX, int mouseY) {
-		return mouseX > 66 && mouseX < 114 && mouseY > 28 && mouseY < 78;
-	}
-
-	@Override
-	protected void mouseClicked(int x, int y, int state) {
-		super.mouseClicked(x, y, state);
-		if (!player.getDisplayName().equals(keb.owner))
-			return;
-		if (x > 191 && x < 239 && y > 66 && y < 115) {
-			if (primed)
-				keb.activateSelfDestruct();
-			else
-				primed = true;
-		}
-	}
-
 }
