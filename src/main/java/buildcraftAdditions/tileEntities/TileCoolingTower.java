@@ -51,8 +51,10 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if (data.moved)
+		if (data.moved) {
 			data.afterMoveCheck(worldObj);
+			worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
+		}
 		if (!isMaster())
 			return;
 		if (input.getFluid() != null && input.getFluid().amount <= 0)
@@ -165,7 +167,6 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 
 	@Override
 	public void moved(ForgeDirection direction) {
-		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 		data.onMove(direction);
 	}
 

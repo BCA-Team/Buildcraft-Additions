@@ -45,6 +45,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public void updateEntity() {
 		if (data.moved) {
 			data.afterMoveCheck(worldObj);
+			worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 		}
 		if (!data.isMaster || worldObj.isRemote) {
 			return;

@@ -60,7 +60,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			return;
 		if (data.moved) {
 			data.afterMoveCheck(worldObj);
-			data.moved = false;
+			worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 		}
 		if (input.getFluid() != null && input.getFluid().amount <= 0)
 			input.setFluid(null);
@@ -229,7 +229,6 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public void moved(ForgeDirection direction) {
-		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 		data.onMove(direction);
 		master = null;
 	}
