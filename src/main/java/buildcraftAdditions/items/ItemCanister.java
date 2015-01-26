@@ -91,10 +91,8 @@ public class ItemCanister extends ItemFluidContainer {
 	@Override
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
 		super.getSubItems(item, tab, list);
-		for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
+		for (Fluid fluid : FluidRegistry.getRegisteredFluids().values())
 			if (fluid != null)
-				list.add(
-						getFilledItemStack(new FluidStack(fluid, getCapacity())));
-		}
+				list.add(getFilledItemStack(new FluidStack(fluid, getCapacity())));
 	}
 }
