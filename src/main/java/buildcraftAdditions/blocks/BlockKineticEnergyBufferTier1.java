@@ -1,10 +1,14 @@
 package buildcraftAdditions.blocks;
 
+import java.util.List;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -12,11 +16,17 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+import net.minecraftforge.common.util.ForgeDirection;
+
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
+import buildcraftAdditions.utils.EnumPriority;
+import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.RenderUtils;
+import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -37,7 +47,7 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
 		icons = new IIcon[10];
-		for (int teller = 0; teller < 9; teller++){
+		for (int teller = 0; teller < 9; teller++) {
 			icons[teller] = RenderUtils.registerIcon(register, "kineticEnergyBuffer" + teller);
 		}
 		icons[9] = RenderUtils.registerIcon(register, "kineticEnergyBufferCreative");
@@ -92,8 +102,16 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 		stack.stackTagCompound.setInteger("maxEnergy", 3000000);
 		stack.stackTagCompound.setInteger("maxInput", 30000);
 		stack.stackTagCompound.setInteger("maxOutput", 30000);
+		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+			stack.stackTagCompound.setInteger("configuration" + direction.ordinal(), Utils.statusToInt(EnumSideStatus.OUTPUT));
+			stack.stackTagCompound.setInteger("priority" + direction.ordinal(), EnumPriority.NORMAL.ordinal());
+		}
 		return stack;
 	}
 
-
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+		super.getSubBlocks(item, tab, list);
+		list.add(createCreativeKEB());
+	}
 }

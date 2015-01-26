@@ -11,7 +11,9 @@ package buildcraftAdditions.items;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
@@ -19,6 +21,8 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.ItemFluidContainer;
 
@@ -34,7 +38,7 @@ public class ItemCanister extends ItemFluidContainer {
 	public ItemCanister(String name, int canisterCapacity) {
 		super(0);
 		this.setMaxStackSize(4);
-		this.setCreativeTab(BuildcraftAdditions.bcadditions);
+		this.setCreativeTab(BuildcraftAdditions.bcaCannisters);
 		this.setUnlocalizedName(name);
 		this.setCapacity(canisterCapacity);
 		this.name = name;
@@ -67,16 +71,9 @@ public class ItemCanister extends ItemFluidContainer {
 		overlay = RenderUtils.registerIcon(register, "fluidOverlay");
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int damage) {
-		return itemIcon;
-	}
-
 	public ItemStack getFilledItemStack(FluidStack fluidStack) {
 		ItemStack itemStack = new ItemStack(this);
-		if (itemStack.getTagCompound() == null)
-			itemStack.setTagCompound(new NBTTagCompound());
+		itemStack.stackTagCompound = new NBTTagCompound();
 		NBTTagCompound fluidTag = fluidStack.writeToNBT(new NBTTagCompound());
 
 		if (fluidStack.amount > capacity)
@@ -89,5 +86,15 @@ public class ItemCanister extends ItemFluidContainer {
 
 	public int getCapacity() {
 		return capacity;
+	}
+
+	@Override
+	public void getSubItems(Item item, CreativeTabs tab, List list) {
+		super.getSubItems(item, tab, list);
+		for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
+			if (fluid != null)
+				list.add(
+						getFilledItemStack(new FluidStack(fluid, getCapacity())));
+		}
 	}
 }

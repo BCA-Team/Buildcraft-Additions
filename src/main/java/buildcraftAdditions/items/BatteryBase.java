@@ -11,6 +11,7 @@ package buildcraftAdditions.items;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -53,7 +54,7 @@ public class BatteryBase extends Item implements IEnergyContainerItem {
 
 	@Override
 	public double getDurabilityForDisplay(ItemStack stack) {
-		return (((double)maxEnergy - getEnergyStored(stack))) / maxEnergy;
+		return (((double) maxEnergy - getEnergyStored(stack))) / maxEnergy;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -122,10 +123,16 @@ public class BatteryBase extends Item implements IEnergyContainerItem {
 	}
 
 	public ItemStack createdFilledBattery() {
-		ItemStack stack = new ItemStack (this);
+		ItemStack stack = new ItemStack(this);
 		if (stack.getTagCompound() == null)
 			stack.setTagCompound(new NBTTagCompound());
 		stack.getTagCompound().setInteger("energy", maxEnergy);
 		return stack;
+	}
+
+	@Override
+	public void getSubItems(Item item, CreativeTabs tab, List list) {
+		super.getSubItems(item, tab, list);
+		list.add(createdFilledBattery());
 	}
 }

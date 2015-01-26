@@ -1,7 +1,5 @@
 package buildcraftAdditions.creative;
 
-import java.util.List;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -29,12 +27,4 @@ public class TabBCAdditions extends CreativeTabs {
 		return Item.getItemFromBlock(ItemsAndBlocks.fluidicCompressorBlock);
 	}
 
-	@Override
-	public void displayAllReleventItems(List list) {
-		super.displayAllReleventItems(list);
-		list.add(ItemsAndBlocks.powerCapsuleTier1.createdFilledBattery());
-		list.add(ItemsAndBlocks.powerCapsuleTier2.createdFilledBattery());
-		list.add(ItemsAndBlocks.powerCapsuleTier3.createdFilledBattery());
-		list.add(ItemsAndBlocks.kebT1.createCreativeKEB());
-	}
 }
