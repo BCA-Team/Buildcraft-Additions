@@ -1,8 +1,5 @@
 package buildcraftAdditions.ModIntegration.nei;
 
-import codechicken.nei.api.IConfigureNEI;
-<<<<<<< HEAD
-=======
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -17,7 +14,6 @@ import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 
->>>>>>> hid some stuff in NEI
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 
