@@ -49,7 +49,7 @@ public class ItemDust extends Item {
 	public String getItemStackDisplayName(ItemStack stack) {
 		IDust dust = BCAItemManager.dusts.getDust(stack.getItemDamage());
 		if (dust != null) {
-			return Utils.localizeFormatted("item.dust.name", dust.getName());
+			return Utils.localizeFormatted("item.dust.name", Utils.localize(dust.getName()));
 		}
 		return super.getItemStackDisplayName(stack);
 	}
