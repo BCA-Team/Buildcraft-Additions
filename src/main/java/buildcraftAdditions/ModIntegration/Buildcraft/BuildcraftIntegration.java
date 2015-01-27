@@ -14,6 +14,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 
+import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.ModIntegration.Buildcraft.Triggers.Triggers;
 import buildcraftAdditions.items.Tools.ToolCoreRecipe;
 import buildcraftAdditions.items.Tools.UpgradeRecipeDiamondStick;
@@ -39,6 +40,7 @@ public class BuildcraftIntegration {
 		Triggers.register();
 		addBCRecipes();
 		RefineryRecipeConverter.doYourThing();
+		BuildcraftAdditions.proxy.addPowerplant();
 	}
 
 	private static void addBCRecipes() {
