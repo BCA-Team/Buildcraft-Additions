@@ -147,31 +147,17 @@ public class BucketItemRenderer implements IItemRenderer {
 	}
 
 	private void preRenderInvIcon(IIcon icon, double z, boolean flip) {
-		if (flip) {
-			Tessellator.instance.addVertexWithUV(16, 1, z, icon.getMinU(), icon.getMaxV());
-			Tessellator.instance.addVertexWithUV(0, 1, z, icon.getMaxU(), icon.getMaxV());
-			Tessellator.instance.addVertexWithUV(0, 17, z, icon.getMaxU(), icon.getMinV());
-			Tessellator.instance.addVertexWithUV(16, 17, z, icon.getMinU(), icon.getMinV());
-		} else {
-			Tessellator.instance.addVertexWithUV(16, 0, z, icon.getMinU(), icon.getMaxV());
-			Tessellator.instance.addVertexWithUV(0, 0, z, icon.getMaxU(), icon.getMaxV());
-			Tessellator.instance.addVertexWithUV(0, 16, z, icon.getMaxU(), icon.getMinV());
-			Tessellator.instance.addVertexWithUV(16, 16, z, icon.getMinU(), icon.getMinV());
-		}
+		Tessellator.instance.addVertexWithUV(16, 0 + (flip ? 1 : 0), z, icon.getMinU(), icon.getMaxV());
+		Tessellator.instance.addVertexWithUV(0, 0 + (flip ? 1 : 0), z, icon.getMaxU(), icon.getMaxV());
+		Tessellator.instance.addVertexWithUV(0, 16 + (flip ? 1 : 0), z, icon.getMaxU(), icon.getMinV());
+		Tessellator.instance.addVertexWithUV(16, 16 + (flip ? 1 : 0), z, icon.getMinU(), icon.getMinV());
 	}
 
 	private void preRenderWorldIcon(IIcon icon, double z, boolean flip) {
-		if (flip) {
-			Tessellator.instance.addVertexWithUV(1, 0, z, icon.getMinU(), icon.getMaxV());
-			Tessellator.instance.addVertexWithUV(0, 0, z, icon.getMaxU(), icon.getMaxV());
-			Tessellator.instance.addVertexWithUV(0, 1, z, icon.getMaxU(), icon.getMinV());
-			Tessellator.instance.addVertexWithUV(1, 1, z, icon.getMinU(), icon.getMinV());
-		} else {
-			Tessellator.instance.addVertexWithUV(1, 0, z, icon.getMinU(), icon.getMaxV());
-			Tessellator.instance.addVertexWithUV(0, 0, z, icon.getMaxU(), icon.getMaxV());
-			Tessellator.instance.addVertexWithUV(0, 1, z, icon.getMaxU(), icon.getMinV());
-			Tessellator.instance.addVertexWithUV(1, 1, z, icon.getMinU(), icon.getMinV());
-		}
+		Tessellator.instance.addVertexWithUV(1, 0, z, icon.getMinU(), icon.getMaxV());
+		Tessellator.instance.addVertexWithUV(0, 0, z, icon.getMaxU(), icon.getMaxV());
+		Tessellator.instance.addVertexWithUV(0, 1, z, icon.getMaxU(), icon.getMinV());
+		Tessellator.instance.addVertexWithUV(1, 1, z, icon.getMinU(), icon.getMinV());
 	}
 
 	private void renderIcon(IIcon icon, double z, boolean flip) {
