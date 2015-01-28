@@ -1,14 +1,19 @@
 package buildcraftAdditions.items;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.client.render.BucketItemRenderer;
+import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -21,6 +26,7 @@ import buildcraftAdditions.utils.Utils;
 public class ItemBucketBCA extends ItemBucket {
 
 	private final FluidStack fluid;
+	private IIcon overlay;
 
 	public ItemBucketBCA(Fluid fluid) {
 		super(fluid.getBlock());
@@ -28,11 +34,24 @@ public class ItemBucketBCA extends ItemBucket {
 		setContainerItem(Items.bucket);
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		setUnlocalizedName("bcaBucket." + fluid.getName());
-		setTextureName("bcadditions:bucket." + fluid.getName());
+		MinecraftForgeClient.registerItemRenderer(this, BucketItemRenderer.INSTANCE);
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
 		return Utils.localizeFormatted("item.bcaBucket.name", fluid.getLocalizedName());
+	}
+
+	public FluidStack getFluid() {
+		return fluid;
+	}
+
+	public IIcon getOverlay() {
+		return overlay;
+	}
+
+	@Override
+	public void registerIcons(IIconRegister register) {
+		overlay = RenderUtils.registerIcon(register, "bucketOverlay");
 	}
 }

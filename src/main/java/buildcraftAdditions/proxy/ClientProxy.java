@@ -37,9 +37,9 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenderers() {
-		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.ironCanister, new CanisterItemRender(ItemsAndBlocks.ironCanister));
-		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.goldCanister, new CanisterItemRender(ItemsAndBlocks.goldCanister));
-		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.diamondCanister, new CanisterItemRender(ItemsAndBlocks.diamondCanister));
+		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.ironCanister, CanisterItemRender.INSTANCE);
+		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.goldCanister, CanisterItemRender.INSTANCE);
+		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.diamondCanister, CanisterItemRender.INSTANCE);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileBasicDuster.class, new RendererDuster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileSemiAutomaticDuster.class, new RendererDuster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileMechanicalDuster.class, new RendererDuster());

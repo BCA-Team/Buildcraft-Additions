@@ -13,11 +13,11 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -25,12 +25,9 @@ import net.minecraftforge.oredict.OreDictionary;
 public class Utils {
 
 	public static FluidStack getFluidStackFromItemStack(ItemStack itemStack) {
-		if (itemStack.stackTagCompound == null || !itemStack.getTagCompound().hasKey("Fluid"))
+		if (itemStack.stackTagCompound == null || !itemStack.getTagCompound().hasKey("Fluid", Constants.NBT.TAG_COMPOUND))
 			return null;
-
-		NBTTagCompound fluidTag = itemStack.getTagCompound().getCompoundTag("Fluid");
-
-		return FluidStack.loadFluidStackFromNBT(fluidTag);
+		return FluidStack.loadFluidStackFromNBT(itemStack.getTagCompound().getCompoundTag("Fluid"));
 	}
 
 	public static ForgeDirection get2dOrientation(EntityLivingBase entityliving) {

@@ -37,11 +37,11 @@ public class ItemCanister extends ItemFluidContainer {
 
 	public ItemCanister(String name, int canisterCapacity) {
 		super(0);
-		this.setMaxStackSize(4);
-		this.setCreativeTab(BuildcraftAdditions.bcaCannisters);
-		this.setUnlocalizedName(name);
-		this.setCapacity(canisterCapacity);
-		this.name = name;
+		setMaxStackSize(4);
+		setCreativeTab(BuildcraftAdditions.bcaCannisters);
+		setUnlocalizedName(name);
+		setCapacity(canisterCapacity);
+		setTextureName("bcadditions:" + name);
 	}
 
 	public void setFluid(ItemStack stack, FluidStack fStack) {
@@ -67,7 +67,7 @@ public class ItemCanister extends ItemFluidContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
-		itemIcon = RenderUtils.registerIcon(register, name);
+		super.registerIcons(register);
 		overlay = RenderUtils.registerIcon(register, "fluidOverlay");
 	}
 
