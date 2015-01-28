@@ -52,6 +52,7 @@ public class CanisterItemRender implements IItemRenderer {
 		IIcon canisterIcon = canister.getIconFromDamage(0);
 
 		GL11.glPushMatrix();
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		if (type.equals(ItemRenderType.EQUIPPED)) {
 			GL11.glRotated(180, 0, 0, 1);
 			GL11.glTranslated(-1, -1, 0);
@@ -60,7 +61,7 @@ public class CanisterItemRender implements IItemRenderer {
 			GL11.glRotated(90, 0, 1, 0);
 			GL11.glTranslated(-0.5, -0.9, 0);
 			if (item.isOnItemFrame()) {
-				GL11.glTranslated(0.1, 0.4, 0);
+				GL11.glTranslated(0.075, 0.475, 0);
 				GL11.glScaled(0.85, 0.85, 0.85);
 			}
 		} else if (type.equals(ItemRenderType.EQUIPPED_FIRST_PERSON)) {
@@ -78,10 +79,11 @@ public class CanisterItemRender implements IItemRenderer {
 		}
 		Minecraft.getMinecraft().renderEngine.bindTexture(RenderUtils.MC_ITEM_SHEET);
 
-		if (!type.equals(ItemRenderType.INVENTORY))
-			ItemRenderer.renderItemIn2D(Tessellator.instance, canisterIcon.getMinU(), canisterIcon.getMaxV(), canisterIcon.getMaxU(), canisterIcon.getMinV(), canisterIcon.getIconWidth(), canisterIcon.getIconHeight(), 0.0625F);
-		else
+		if (type.equals(ItemRenderType.INVENTORY))
 			renderIcon(canisterIcon, 0);
+		else
+			ItemRenderer.renderItemIn2D(Tessellator.instance, canisterIcon.getMinU(), canisterIcon.getMaxV(), canisterIcon.getMaxU(), canisterIcon.getMinV(), canisterIcon.getIconWidth(), canisterIcon.getIconHeight(), 0.0625F);
+
 
 		GL11.glColor4f(1, 1, 1, 1);
 		GL11.glPopMatrix();
@@ -94,7 +96,6 @@ public class CanisterItemRender implements IItemRenderer {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glDisable(GL11.GL_CULL_FACE);
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		Tessellator tessellator = Tessellator.instance;
 
 		tessellator.startDrawingQuads();

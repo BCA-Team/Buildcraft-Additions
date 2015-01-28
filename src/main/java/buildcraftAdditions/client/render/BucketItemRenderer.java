@@ -67,7 +67,7 @@ public class BucketItemRenderer implements IItemRenderer {
 			GL11.glRotated(90, 0, 1, 0);
 			GL11.glTranslated(-0.5, -0.9, 0);
 			if (item.isOnItemFrame()) {
-				GL11.glTranslated(0.1, 0.4, 0);
+				GL11.glTranslated(0.075, 0.475, 0);
 				GL11.glScaled(0.85, 0.85, 0.85);
 			}
 		} else if (type.equals(ItemRenderType.EQUIPPED_FIRST_PERSON)) {
