@@ -5,7 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import buildcraftAdditions.tileEntities.TileBCKinesisPipeCobblePlacer;
+import buildcraftAdditions.tileEntities.TileBCKinesisPipeStonePlacer;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -13,14 +13,14 @@ import buildcraftAdditions.tileEntities.TileBCKinesisPipeCobblePlacer;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockBCKinisisPipeCobble extends BlockContainer {
+public class BlockBCKinisisPipeStone extends BlockContainer {
 
-	public BlockBCKinisisPipeCobble(){
+	public BlockBCKinisisPipeStone() {
 		super(Material.air);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int data) {
-		return new TileBCKinesisPipeCobblePlacer();
+		return new TileBCKinesisPipeStonePlacer();
 	}
 }

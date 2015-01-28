@@ -11,9 +11,9 @@ import buildcraft.BuildCraftTransport;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileBCKinesisPipeCobblePlacer extends TileEntity {
+public class TileBCKinesisPipeStonePlacer extends TileEntity {
 	@Override
 	public void updateEntity() {
-		BuildCraftTransport.pipePowerCobblestone.onItemUse(new ItemStack(BuildCraftTransport.pipePowerCobblestone), null, worldObj, xCoord, yCoord, zCoord, 0, 0, 0, 0);
+		BuildCraftTransport.pipePowerStone.onItemUse(new ItemStack(BuildCraftTransport.pipePowerStone), null, worldObj, xCoord, yCoord, zCoord, 0, 0, 0, 0);
 	}
 }

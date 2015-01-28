@@ -6,7 +6,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.blocks.BlockBCKinesisPipeWood;
-import buildcraftAdditions.blocks.BlockBCKinisisPipeCobble;
+import buildcraftAdditions.blocks.BlockBCKinisisPipeStone;
 import buildcraftAdditions.blocks.BlockBasicCoil;
 import buildcraftAdditions.blocks.BlockBasicDuster;
 import buildcraftAdditions.blocks.BlockChargingStation;
@@ -74,7 +74,7 @@ public final class ItemsAndBlocks {
 	public static BlockLavaCoil lavaCoilBlock;
 	public static BlockKineticCoil kineticCoil;
 	public static BlockBCKinesisPipeWood kinesisPipeWood;
-	public static BlockBCKinisisPipeCobble kinisisPipeCobble;
+	public static BlockBCKinisisPipeStone kinisisPipeCobble;
 	public static BlockKineticEnergyBufferTier1 kebT1;
 	public static MultiBlockKEBT2 kebT2;
 	public static MultiBlockKEBT3Core kebT3Core;
@@ -205,7 +205,7 @@ public final class ItemsAndBlocks {
 		kinesisPipeWood.setBlockName("kinesisPipeWood");
 		GameRegistry.registerBlock(kinesisPipeWood, "kinesisPipeWood");
 
-		kinisisPipeCobble = new BlockBCKinisisPipeCobble();
+		kinisisPipeCobble = new BlockBCKinisisPipeStone();
 		kinisisPipeCobble.setBlockName("kinesisPipeCobble");
 		GameRegistry.registerBlock(kinisisPipeCobble, "kinesisPipeCobble");
 
