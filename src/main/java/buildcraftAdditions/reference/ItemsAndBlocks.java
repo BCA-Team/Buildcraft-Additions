@@ -74,7 +74,7 @@ public final class ItemsAndBlocks {
 	public static BlockLavaCoil lavaCoilBlock;
 	public static BlockKineticCoil kineticCoil;
 	public static BlockBCKinesisPipeWood kinesisPipeWood;
-	public static BlockBCKinisisPipeStone kinisisPipeCobble;
+	public static BlockBCKinisisPipeStone kinisisPipeStone;
 	public static BlockKineticEnergyBufferTier1 kebT1;
 	public static MultiBlockKEBT2 kebT2;
 	public static MultiBlockKEBT3Core kebT3Core;
@@ -205,9 +205,9 @@ public final class ItemsAndBlocks {
 		kinesisPipeWood.setBlockName("kinesisPipeWood");
 		GameRegistry.registerBlock(kinesisPipeWood, "kinesisPipeWood");
 
-		kinisisPipeCobble = new BlockBCKinisisPipeStone();
-		kinisisPipeCobble.setBlockName("kinesisPipeCobble");
-		GameRegistry.registerBlock(kinisisPipeCobble, "kinesisPipeCobble");
+		kinisisPipeStone = new BlockBCKinisisPipeStone();
+		kinisisPipeStone.setBlockName("kinesisPipeCobble");
+		GameRegistry.registerBlock(kinisisPipeStone, "kinesisPipeCobble");
 
 		fluidicCompressorBlock = new BlockFluidicCompressor();
 		fluidicCompressorBlock.setBlockName("blockFluidicCompressor").setCreativeTab(BuildcraftAdditions.bcadditions);
