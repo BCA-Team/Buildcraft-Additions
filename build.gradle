@@ -108,7 +108,8 @@ dependencies {
 	compile "mcp.mobius.waila:Waila:${config.version.waila}_${config.version.mc}"
 	compile "com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev"
 	compile "framez:Framez:${config.version.framez}:deobf"
-    compile name: 'MineTweaker3', version: config.version.minetweaker, ext: 'jar'
+	compile name: 'MineTweaker3', version: config.version.minetweaker, ext: 'jar'
+	compile fileTree(dir: 'libs', include: '*.jar')
 }
  
 processResources
