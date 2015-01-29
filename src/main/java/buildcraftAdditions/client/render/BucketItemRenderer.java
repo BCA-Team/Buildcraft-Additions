@@ -58,7 +58,7 @@ public class BucketItemRenderer implements IItemRenderer {
 		IIcon bucketIcon = Items.bucket.getIconFromDamage(0);
 
 		GL11.glPushMatrix();
-
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		if (type.equals(ItemRenderType.EQUIPPED)) {
 			GL11.glRotated(180, 0, 0, 1);
 			GL11.glTranslated(-1, -1, 0);
@@ -100,7 +100,6 @@ public class BucketItemRenderer implements IItemRenderer {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glDisable(GL11.GL_CULL_FACE);
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		Tessellator tessellator = Tessellator.instance;
 
 		tessellator.startDrawingQuads();
