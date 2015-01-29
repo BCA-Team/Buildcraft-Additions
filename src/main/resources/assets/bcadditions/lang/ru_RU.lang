@@ -9,6 +9,7 @@ tile.blockDusterKinetic.name=Кинетический дробитель
 tile.blockCoilLava.name=Лавовая катушка
 tile.blockCoilKinetic.name=Кинетическая катушка
 tile.blockKEBT1.name=Кинетическое энергохранилище
+tile.blockKEBT1Creative.name=Творческое кинетическое энергохранилище
 tile.blockKEBT2.name=Большое кинетическое энергохранилище
 tile.blockKEBT3Core.name=Основа продвинутого кинетического энергохранилища
 tile.blockKEBT3Plating.name=Обшивка продвинутого кинетического энергохранилища
@@ -54,13 +55,18 @@ item.heatPlating.name=Теплопроводящее покрытие
 item.dustConverter.name=Преобразователь пыли
 item.machineConfigurator.name=Настройщик механизмов
 item.bcaBucket.name=Ведро %s
+item.pipeColoringTool.name=Инструмент для покраски труб
 
 tooltip.installed=Установлено: %s
 tooltip.deactivated=Деактивировано
 tooltip.upgradesPossible=Возможны улучшения
 tooltip.holdShiftForMoreInfo=Зажмите Shift для большей информации
 tooltip.FluidCapacity=Может содержать вёдер жидкости: %s
-tooltip.storedFluid=Содержит %s мВ %s
+tooltip.storedFluid=Содержит: %s мВ %s
+tooltip.colorPipeMode=Покраска труб
+tooltip.colorPipeMode.info=Красит обычные BC трубы
+tooltip.colorSortingMode=Сортирующая покраска
+tooltip.colorSortingMode.info=Красит сортирующую часть алмазуритовой и лазуритовой труб
 
 fluid.gas.name=%s газ
 
@@ -97,6 +103,10 @@ gui.priority=Приоритет
 gui.kineticTool.name=Кинетический инструмент
 gui.heatedFurnace.name=Нагревательная печь
 gui.fluidicCompressor.name=Жидкостный компрессор
+gui.coloringMode=Режим покраски
+gui.pipeColorTool.name=Инструмент для покраски труб
+gui.colorPipeMode=Покраска труб
+gui.colorSortingMode=Сортирующая покраска
 
 gui.keb.dangerousButton=БОЛЬШИЕ КРАСНЫЕ КНОПКИ ОЧЕНЬ ОПАСНЫ
 gui.keb.noPushing=НЕ НАЖИМАЙТЕ
@@ -282,3 +292,5 @@ changelogNotification=Изменения
 
 selfdestructCountdouwn=САМОУНИЧТОЖЕНИЕ ЧЕРЕЗ
 selfdestructActivated=САМОУНИЧТОЖЕНИЕ АКТИВИРОВАНО
+
+configured=Настроено
