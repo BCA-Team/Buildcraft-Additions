@@ -19,8 +19,8 @@ import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.enums.EnumPriority;
 import buildcraftAdditions.reference.enums.EnumSideStatus;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
+import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.utils.IConfigurableOutput;
-import buildcraftAdditions.utils.SideConfiguration;
 import buildcraftAdditions.utils.Utils;
 
 import io.netty.buffer.ByteBuf;

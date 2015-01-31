@@ -54,7 +54,7 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 
 	@Override
 	public int getEnergyLevel() {
-		return maxEnergy;
+		return creative ? 100 : super.getEnergyLevel();
 	}
 
 	@Override
