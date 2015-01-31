@@ -1,4 +1,4 @@
-package buildcraftAdditions.tileEntities.implement;
+package buildcraftAdditions.tileEntities.interfaces;
 
 /**
  * Copyright (c) 2014, AEnterprise
