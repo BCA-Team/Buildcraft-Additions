@@ -12,6 +12,7 @@ import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
+import buildcraftAdditions.tileEntities.implement.IWidgetListener;
 
 import io.netty.buffer.ByteBuf;
 
@@ -22,12 +23,12 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileItemSorter extends TileBase implements ISidedInventory, IPipeConnection {
+public class TileItemSorter extends TileBase implements ISidedInventory, IPipeConnection, IWidgetListener {
 
 	protected ForgeDirection rotation = ForgeDirection.UP;
 	protected CustomInventory inventory = new CustomInventory("ItemSorter", 49, 64, this);
 
-	public int[] colors = new int[] {0, 0, 0, 0, 0, 0, 0, 0};
+	public byte[] colors = new byte[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 	public void setRotation(ForgeDirection dir) {
 		rotation = dir;
@@ -64,10 +65,15 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 	}
 
 	@Override
+	public void onWidgetPressed(int id, int value) {
+		colors[id] = (byte) value;
+	}
+
+	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		rotation = ForgeDirection.getOrientation(tag.getByte("Rotation"));
-		colors = tag.getIntArray("Colors");
+		colors = tag.getByteArray("Colors");
 		inventory.readNBT(tag);
 	}
 
@@ -75,19 +81,21 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		tag.setByte("Rotation", (byte) rotation.ordinal());
-		tag.setIntArray("Colors", colors);
+		tag.setByteArray("Colors", colors);
 		inventory.writeNBT(tag);
 	}
 
 	@Override
 	public ByteBuf writeToByteBuff(ByteBuf buf) {
 		buf.writeByte(rotation.ordinal());
+		buf.writeBytes(colors);
 		return buf;
 	}
 
 	@Override
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		rotation = ForgeDirection.getOrientation(buf.readByte());
+		buf.readBytes(colors);
 		updateRender();
 		return buf;
 	}

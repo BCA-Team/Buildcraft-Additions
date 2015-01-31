@@ -48,6 +48,23 @@ public class WidgetBase {
 			this.textures[i] = new ResourceLocation(textures[i]);
 	}
 
+	public WidgetBase(int id, int x, int y, int u, int v, int width, int height, GuiBase gui, ResourceLocation... textures) {
+		this.id = id;
+		this.x = x;
+		this.y = y;
+		this.u = u;
+		this.v = v;
+		this.width = width;
+		this.height = height;
+		this.gui = gui;
+		this.textures = textures;
+	}
+
+	public WidgetBase(int id, int x, int y, int u, int v, int width, int height, GuiBase gui, int value, ResourceLocation... textures) {
+		this (id, x, y, u, v, width, height, gui, textures);
+		this.value = value;
+	}
+
 	public WidgetBase(int id, int x, int y, int u, int v, int width, int height, GuiBase gui, int value, String... textures) {
 		this(id, x, y, u, v, width, height, gui, textures);
 		this.value = value;

@@ -7,6 +7,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.client.gui.containers.ContainerItemSorter;
+import buildcraftAdditions.client.gui.widgets.WidgetBase;
+import buildcraftAdditions.client.gui.widgets.WidgetColor;
+import buildcraftAdditions.networking.MessageWidgetUpdate;
+import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 
 /**
@@ -50,6 +54,13 @@ public class GuiItemSorter extends GuiBase {
 
 	@Override
 	public void initialize() {
+		for (int i = 0; i < 9; i++)
+			addWidget(new WidgetColor(i, guiLeft + 7 + i * 18, guiTop +  125, 176, 0, 18, 18, this, tile.colors[i], texture));
+	}
 
+	@Override
+	public void widgetActionPerformed(WidgetBase widget) {
+		if (widget.id >= 0 && widget.id <= 8)
+			PacketHandler.instance.sendToServer(new MessageWidgetUpdate(tile, widget.id, widget.value));
 	}
 }

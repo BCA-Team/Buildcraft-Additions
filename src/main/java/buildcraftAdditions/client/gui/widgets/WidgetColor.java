@@ -1,0 +1,50 @@
+package buildcraftAdditions.client.gui.widgets;
+
+import net.minecraft.util.ResourceLocation;
+
+import buildcraftAdditions.client.gui.gui.GuiBase;
+import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.utils.RenderUtils;
+
+/**
+ * Copyright (c) 2014, AEnterprise
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ */
+public class WidgetColor extends WidgetBase {
+
+	public WidgetColor(int id, int x, int y, int u, int v, int width, int height, GuiBase gui, int value, String... textures) {
+		super(id, x, y, u, v, width, height, gui, value, textures);
+	}
+
+	public WidgetColor(int id, int x, int y, int u, int v, int width, int height, GuiBase gui, int value, ResourceLocation... textures) {
+		super (id, x, y, u, v, width, height, gui, value, textures);
+	}
+
+	@Override
+	public void render(int mouseX, int mouseY) {
+		super.render(mouseX, mouseY);
+		gui.bindTexture(RenderUtils.MC_ITEM_SHEET);
+		gui.drawTexturedModelRectFromIcon(x + ((width - 16) / 2), y + ((height - 16) / 2), ItemsAndBlocks.pipeColoringTool.getIconFromDamage(value), 16, 16);
+	}
+
+	@Override
+	public void onWidgetClicked(int x, int y, int button) {
+		if (button == 0) {
+			if (value >= 15)
+				value = 0;
+			else
+				value++;
+		}
+		else if (button == 1) {
+				if (value <= 0)
+					value = 15;
+				else
+					value--;
+		}
+
+		super.onWidgetClicked(x, y, button);
+	}
+}

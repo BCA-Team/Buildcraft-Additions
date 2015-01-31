@@ -68,7 +68,7 @@ public class GuiPipeColoringTool extends GuiBase {
 			addWidget(new PaintWidget(i, guiLeft + 7 + i * 20 - (i > 7 ? 160 : 0), guiTop + (i > 7 ? 37 :17), 176, 0, 20, 20, this));
 		((PaintWidget) widgets.get(activeWidget)).setActive(true);
 
-		addWidget(new WidgetButtonText(16, guiLeft() + 88, guiTop + 63, 80, 15, this) {
+		addWidget(new WidgetButtonText(16, guiLeft + 88, guiTop + 63, 80, 15, this) {
 			@Override
 			public void addTooltip(int mouseX, int mouseY, List<String> tooltips, boolean shift) {
 				if (!((GuiPipeColoringTool) gui).sortMode) {
