@@ -1,7 +1,6 @@
 package buildcraftAdditions.tileEntities;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -26,7 +25,7 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileHeatedFurnace extends TileBase implements ISidedInventory, IInventory {
+public class TileHeatedFurnace extends TileBase implements ISidedInventory {
 	private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64, this);
 	public int progress;
 	public boolean isCooking, shouldUpdateCoils;
