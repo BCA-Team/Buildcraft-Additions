@@ -439,6 +439,6 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public ConnectOverride overridePipeConnection(IPipeTile.PipeType type, ForgeDirection with) {
-		return valve && type == IPipeTile.PipeType.FLUID ? ConnectOverride.CONNECT : ConnectOverride.DISCONNECT;
+		return (valve && type == IPipeTile.PipeType.FLUID) || type == IPipeTile.PipeType.POWER ? ConnectOverride.CONNECT : ConnectOverride.DISCONNECT;
 	}
 }
