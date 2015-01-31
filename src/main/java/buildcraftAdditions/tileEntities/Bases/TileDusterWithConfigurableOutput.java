@@ -12,8 +12,8 @@ import buildcraft.api.transport.IPipeTile;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.reference.enums.EnumPriority;
 import buildcraftAdditions.reference.enums.EnumSideStatus;
+import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.utils.IConfigurableOutput;
-import buildcraftAdditions.utils.SideConfiguration;
 import buildcraftAdditions.utils.Utils;
 
 import io.netty.buffer.ByteBuf;

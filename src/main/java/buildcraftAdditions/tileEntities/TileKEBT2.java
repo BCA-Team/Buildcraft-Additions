@@ -19,8 +19,8 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.reference.enums.EnumPriority;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
+import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
 import buildcraftAdditions.utils.Location;
-import buildcraftAdditions.utils.MultiBlockData;
 
 import eureka.api.EurekaKnowledge;
 import io.netty.buffer.ByteBuf;

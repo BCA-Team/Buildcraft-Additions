@@ -22,9 +22,9 @@ import buildcraftAdditions.api.recipe.refinery.IRefineryRecipe;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
+import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
 import buildcraftAdditions.utils.ITankHolder;
 import buildcraftAdditions.utils.Location;
-import buildcraftAdditions.utils.MultiBlockData;
 import buildcraftAdditions.utils.RotationUtils;
 import buildcraftAdditions.utils.Tank;
 

@@ -1,15 +1,15 @@
 package buildcraftAdditions.networking;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.tileentity.TileEntity;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
+import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.utils.IConfigurableOutput;
-import buildcraftAdditions.utils.SideConfiguration;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise

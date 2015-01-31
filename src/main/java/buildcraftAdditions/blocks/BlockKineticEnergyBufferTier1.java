@@ -23,8 +23,8 @@ import buildcraftAdditions.reference.enums.EnumPriority;
 import buildcraftAdditions.reference.enums.EnumSideStatus;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
+import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.utils.RenderUtils;
-import buildcraftAdditions.utils.SideConfiguration;
 
 /**
  * Copyright (c) 2014, AEnterprise

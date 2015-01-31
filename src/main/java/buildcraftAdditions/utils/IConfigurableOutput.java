@@ -4,6 +4,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.reference.enums.EnumPriority;
 import buildcraftAdditions.reference.enums.EnumSideStatus;
+import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 
 /**
  * Copyright (c) 2014, AEnterprise

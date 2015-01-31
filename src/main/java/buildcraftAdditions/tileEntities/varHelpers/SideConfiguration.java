@@ -1,4 +1,4 @@
-package buildcraftAdditions.utils;
+package buildcraftAdditions.tileEntities.varHelpers;
 
 import java.util.Arrays;
 
@@ -10,6 +10,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.networking.ISyncObject;
 import buildcraftAdditions.reference.enums.EnumPriority;
 import buildcraftAdditions.reference.enums.EnumSideStatus;
+import buildcraftAdditions.utils.IConfigurableOutput;
 
 import io.netty.buffer.ByteBuf;
 

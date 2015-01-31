@@ -23,8 +23,8 @@ import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.networking.ISyncronizedTile;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
+import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
 import buildcraftAdditions.utils.ITankHolder;
-import buildcraftAdditions.utils.MultiBlockData;
 import buildcraftAdditions.utils.Tank;
 
 import io.netty.buffer.ByteBuf;
