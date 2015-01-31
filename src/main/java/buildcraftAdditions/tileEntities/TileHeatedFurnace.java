@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -11,8 +13,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
+import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
 
@@ -25,7 +29,7 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileHeatedFurnace extends TileBase implements ISidedInventory {
+public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpgradableMachine {
 	private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64, this);
 	public int progress;
 	public boolean isCooking, shouldUpdateCoils;
@@ -227,6 +231,21 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory {
 	@Override
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		progress = buf.readInt();
+		return null;
+	}
+
+	@Override
+	public boolean canAcceptUpgrade(EnumMachineUpgrades upgrades) {
+		return false;
+	}
+
+	@Override
+	public void installUpgrade(EnumMachineUpgrades upgrade) {
+
+	}
+
+	@Override
+	public List<EnumMachineUpgrades> getIntalledUpgrades() {
 		return null;
 	}
 }
