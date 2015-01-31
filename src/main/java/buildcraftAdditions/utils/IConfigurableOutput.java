@@ -2,6 +2,9 @@ package buildcraftAdditions.utils;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraftAdditions.reference.enums.EnumPriority;
+import buildcraftAdditions.reference.enums.EnumSideStatus;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

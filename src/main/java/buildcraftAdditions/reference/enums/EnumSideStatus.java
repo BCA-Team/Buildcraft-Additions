@@ -1,5 +1,6 @@
-package buildcraftAdditions.utils;
+package buildcraftAdditions.reference.enums;
 
+import buildcraftAdditions.utils.Utils;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

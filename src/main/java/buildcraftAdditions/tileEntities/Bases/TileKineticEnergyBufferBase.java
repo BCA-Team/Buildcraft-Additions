@@ -1,7 +1,5 @@
 package buildcraftAdditions.tileEntities.Bases;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -18,12 +16,14 @@ import buildcraftAdditions.networking.ISyncronizedTile;
 import buildcraftAdditions.networking.MessageConfiguration;
 import buildcraftAdditions.networking.MessageSelfDestruct;
 import buildcraftAdditions.networking.PacketHandler;
+import buildcraftAdditions.reference.enums.EnumPriority;
+import buildcraftAdditions.reference.enums.EnumSideStatus;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
-import buildcraftAdditions.utils.EnumPriority;
-import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.SideConfiguration;
 import buildcraftAdditions.utils.Utils;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise

@@ -8,8 +8,8 @@ import cofh.api.energy.IEnergyReceiver;
 
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.enums.EnumPriority;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
-import buildcraftAdditions.utils.EnumPriority;
 import buildcraftAdditions.utils.Location;
 
 /**

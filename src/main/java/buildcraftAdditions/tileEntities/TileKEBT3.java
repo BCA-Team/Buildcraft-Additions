@@ -2,8 +2,6 @@ package buildcraftAdditions.tileEntities;
 
 import java.util.ArrayList;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -20,10 +18,12 @@ import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.reference.enums.EnumPriority;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
-import buildcraftAdditions.utils.EnumPriority;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.MultiBlockData;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise

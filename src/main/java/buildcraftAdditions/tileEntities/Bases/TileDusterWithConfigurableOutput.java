@@ -1,7 +1,5 @@
 package buildcraftAdditions.tileEntities.Bases;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,11 +10,13 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
-import buildcraftAdditions.utils.EnumPriority;
-import buildcraftAdditions.utils.EnumSideStatus;
+import buildcraftAdditions.reference.enums.EnumPriority;
+import buildcraftAdditions.reference.enums.EnumSideStatus;
 import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.SideConfiguration;
 import buildcraftAdditions.utils.Utils;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise

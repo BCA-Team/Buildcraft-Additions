@@ -19,10 +19,10 @@ import net.minecraft.world.World;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.reference.enums.EnumPriority;
+import buildcraftAdditions.reference.enums.EnumSideStatus;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
-import buildcraftAdditions.utils.EnumPriority;
-import buildcraftAdditions.utils.EnumSideStatus;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.SideConfiguration;
 
