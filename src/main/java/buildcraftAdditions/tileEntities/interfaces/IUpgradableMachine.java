@@ -12,9 +12,11 @@ import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
  */
 public interface IUpgradableMachine {
 
-	boolean canAcceptUpgrade(EnumMachineUpgrades upgrades);
+	boolean canAcceptUpgrade(EnumMachineUpgrades upgrade);
 
 	void installUpgrade(EnumMachineUpgrades upgrade);
 
 	List<EnumMachineUpgrades> getIntalledUpgrades();
+
+	void removeUpgrade();
 }

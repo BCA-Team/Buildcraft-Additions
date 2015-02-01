@@ -48,16 +48,8 @@ public class BlockHeatedFurnace extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
-		super.onBlockActivated(world, x, y, z, entityplayer, par6, par7, par8, par9);
-
-		// Drop through if the player is sneaking
-		if (entityplayer.isSneaking())
-			return false;
-
-
 		if (!world.isRemote)
 			entityplayer.openGui(BuildcraftAdditions.instance, Variables.Gui.HEATED_FURNACE, world, x, y, z);
-
 		return true;
 	}
 
@@ -161,6 +153,4 @@ public class BlockHeatedFurnace extends BlockContainer {
 		bottom = RenderUtils.registerIcon(register, "furnaceBottom");
 		sides = RenderUtils.registerIcon(register, "furnaceSide");
 	}
-
-
 }

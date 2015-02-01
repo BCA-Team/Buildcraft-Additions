@@ -30,11 +30,13 @@ import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemMachineConfigurator;
+import buildcraftAdditions.items.ItemMachineUpgrade;
 import buildcraftAdditions.items.ItemPipeColoringTool;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ToolUpgrade;
 import buildcraftAdditions.items.dust.ItemDust;
 import buildcraftAdditions.items.itemBlocks.ItemBlockKEB;
+import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileChargingStation;
@@ -110,6 +112,7 @@ public final class ItemsAndBlocks {
 	public static Item heatPlatingRaw;
 	public static Item dust;
 	public static Item pipeColoringTool;
+	public static Item upgradeAutoEject;
 
 	public static void init() {
 		ironCanister = new ItemCanister("ironCanister", 2000);
@@ -198,6 +201,9 @@ public final class ItemsAndBlocks {
 
 		pipeColoringTool = new ItemPipeColoringTool();
 		GameRegistry.registerItem(pipeColoringTool, "pipeColoringTool");
+
+		upgradeAutoEject = new ItemMachineUpgrade("AUTO_OUTPUT", EnumMachineUpgrades.AUTO_OUTPUT);
+		GameRegistry.registerItem(upgradeAutoEject, "AUTO_OUTPUT");
 
 		//START BLOCKS
 

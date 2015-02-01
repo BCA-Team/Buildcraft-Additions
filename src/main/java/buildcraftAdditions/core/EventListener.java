@@ -27,6 +27,7 @@ import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.items.dust.ItemConverter;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.utils.RefineryRecipeConverter;
 import buildcraftAdditions.utils.Utils;
 
@@ -89,25 +90,30 @@ public class EventListener {
 		@SubscribeEvent
 		public void onInteraction(PlayerInteractEvent event) {
 			Block block = event.world.getBlock(event.x, event.y, event.z);
-			if (block != ItemsAndBlocks.kebT1)
-				return;
-			if (event.entityPlayer != null && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem().getToolClasses(event.entityPlayer.getCurrentEquippedItem()).contains("wrench") && event.entityPlayer.isSneaking()) {
-				TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
-				if (tile != null) {
-					NBTTagCompound tag = new NBTTagCompound();
-					tile.writeToNBT(tag);
-					ItemStack stack = new ItemStack(ItemsAndBlocks.kebT1, 1, event.world.getBlockMetadata(event.x, event.y, event.z));
-					tag.removeTag("x");
-					tag.removeTag("y");
-					tag.removeTag("z");
-					tag.removeTag("id");
-					stack.stackTagCompound = tag;
-					event.world.removeTileEntity(event.x, event.y, event.z);
-					event.world.setBlockToAir(event.x, event.y, event.z);
-					if (event.world.isRemote)
-						event.entityPlayer.swingItem();
-					Utils.dropItemstack(event.world, event.x, event.y, event.z, stack);
+			if (block == ItemsAndBlocks.kebT1) {
+				if (event.entityPlayer != null && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem().getToolClasses(event.entityPlayer.getCurrentEquippedItem()).contains("wrench") && event.entityPlayer.isSneaking()) {
+					TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
+					if (tile != null) {
+						NBTTagCompound tag = new NBTTagCompound();
+						tile.writeToNBT(tag);
+						ItemStack stack = new ItemStack(ItemsAndBlocks.kebT1, 1, event.world.getBlockMetadata(event.x, event.y, event.z));
+						tag.removeTag("x");
+						tag.removeTag("y");
+						tag.removeTag("z");
+						tag.removeTag("id");
+						stack.stackTagCompound = tag;
+						event.world.removeTileEntity(event.x, event.y, event.z);
+						event.world.setBlockToAir(event.x, event.y, event.z);
+						if (event.world.isRemote)
+							event.entityPlayer.swingItem();
+						Utils.dropItemstack(event.world, event.x, event.y, event.z, stack);
+					}
 				}
+			} else if (event.entityPlayer != null && event.action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem() == ItemsAndBlocks.machineConfigurator) {
+
+				TileEntity entity = event.world.getTileEntity(event.x, event.y, event.z);
+				if (entity != null && entity instanceof IUpgradableMachine)
+					((IUpgradableMachine) entity).removeUpgrade();
 			}
 		}
 

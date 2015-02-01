@@ -17,6 +17,7 @@ import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
+import buildcraftAdditions.tileEntities.varHelpers.Upgrades;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
 
@@ -34,6 +35,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	public int progress;
 	public boolean isCooking, shouldUpdateCoils;
 	public TileCoilBase[] coils;
+	private Upgrades upgrades = new Upgrades(1);
 
 	public TileHeatedFurnace() {
 		progress = 0;
@@ -132,7 +134,6 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 		progress = nbtTagCompound.getInteger("progress");
 		isCooking = nbtTagCompound.getBoolean("isCooking");
 		shouldUpdateCoils = true;
-
 	}
 
 	@Override
@@ -225,27 +226,38 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	@Override
 	public ByteBuf writeToByteBuff(ByteBuf buf) {
 		buf.writeInt(progress);
-		return null;
+		buf = upgrades.writeToByteBuff(buf);
+		return buf;
 	}
 
 	@Override
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		progress = buf.readInt();
-		return null;
+		buf = upgrades.readFromByteBuff(buf);
+		return buf;
 	}
 
 	@Override
-	public boolean canAcceptUpgrade(EnumMachineUpgrades upgrades) {
-		return false;
+	public boolean canAcceptUpgrade(EnumMachineUpgrades upgrade) {
+		return upgrades.canInstallUpgrade(upgrade);
 	}
 
 	@Override
 	public void installUpgrade(EnumMachineUpgrades upgrade) {
-
+		upgrades.installUpgrade(upgrade);
 	}
 
 	@Override
 	public List<EnumMachineUpgrades> getIntalledUpgrades() {
-		return null;
+		return upgrades.getUpgrades();
+	}
+
+	@Override
+	public void removeUpgrade() {
+		EnumMachineUpgrades upgrade = upgrades.removeUpgrade();
+		if (upgrade == null)
+			return;
+		ItemStack stack = upgrade.getItemStack();
+		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, stack);
 	}
 }
