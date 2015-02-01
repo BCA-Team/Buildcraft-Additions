@@ -1,11 +1,13 @@
 package buildcraftAdditions.blocks;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -15,33 +17,44 @@ import net.minecraftforge.fluids.Fluid;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class FluidBlockBase extends BlockFluidClassic {
-	Fluid fluid;
 
 	public FluidBlockBase(Fluid fluid) {
 		super(fluid, Material.water);
-		this.fluid = fluid;
 		setBlockName(fluid.getUnlocalizedName());
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
 		if (side == 0 || side == 1)
-			return fluid.getStillIcon();
-		return fluid.getFlowingIcon();
+			return stack.getFluid().getStillIcon();
+		return stack.getFluid().getFlowingIcon();
 	}
 
 	@Override
-	public int getRenderColor(int p_149741_1_) {
-		return fluid.getColor();
+	public String getLocalizedName() {
+		return stack.getLocalizedName();
+	}
+
+	@Override
+	public int getRenderColor(int meta) {
+		return stack.getFluid().getColor();
 	}
 
 	@Override
 	public int getBlockColor() {
-		return fluid.getColor();
+		return stack.getFluid().getColor();
 	}
 
 	@Override
-	public int colorMultiplier(IBlockAccess p_149720_1_, int p_149720_2_, int p_149720_3_, int p_149720_4_) {
-		return fluid.getColor();
+	public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
+		return stack.getFluid().getColor();
+	}
+
+	public FluidStack getFluidStack() {
+		return stack;
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
 	}
 }

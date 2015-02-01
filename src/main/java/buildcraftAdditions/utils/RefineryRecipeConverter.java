@@ -22,6 +22,7 @@ import buildcraftAdditions.blocks.FluidBlockBase;
 import buildcraftAdditions.core.BucketHandler;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.items.ItemBucketBCA;
+import buildcraftAdditions.items.itemBlocks.ItemBlockFluid;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -71,7 +72,7 @@ public class RefineryRecipeConverter {
 			FluidRegistry.registerFluid(fluid);
 			gasses[t] = new FluidStack(fluid, outputs[t].amount);
 			Block fluidBlock = new FluidBlockBase(fluid);
-			GameRegistry.registerBlock(fluidBlock, fluid.getName() + "Block");
+			GameRegistry.registerBlock(fluidBlock, ItemBlockFluid.class, fluid.getName() + "Block");
 			fluid.setBlock(fluidBlock);
 			Item bucket = new ItemBucketBCA(fluid);
 			GameRegistry.registerItem(bucket, fluid.getName() + "Bucket");
@@ -100,11 +101,6 @@ public class RefineryRecipeConverter {
 		@Override
 		public int getColor() {
 			return 0xb0b3b6;
-		}
-
-		@Override
-		public int getColor(FluidStack stack) {
-			return getColor();
 		}
 
 		@Override
