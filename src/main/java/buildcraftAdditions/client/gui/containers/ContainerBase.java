@@ -21,24 +21,28 @@ public class ContainerBase<T> extends Container {
 	protected final InventoryPlayer inventoryPlayer;
 	protected final T inventory;
 
-	public ContainerBase(InventoryPlayer inventoryPlayer, T tile) {
+	public ContainerBase(InventoryPlayer inventoryPlayer, T inventory) {
 		this.inventoryPlayer = inventoryPlayer;
-		inventory = tile;
+		this.inventory = inventory;
 	}
 
-	public void addPlayerInventory(int x, int y) {
-		for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
-			for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex)
-				addSlotToContainer(new Slot(inventoryPlayer, 9 + inventoryColumnIndex + inventoryRowIndex * 9, x + inventoryColumnIndex * 18, y + inventoryRowIndex * 18));
-		for (int hotBarIndex = 0; hotBarIndex < 9; ++hotBarIndex)
-			addSlotToContainer(new Slot(inventoryPlayer, hotBarIndex, 8 + hotBarIndex * 18, y + 58));
+	protected void addPlayerInventory(int x, int y) {
+		if (inventoryPlayer != null) {
+			for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
+				for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex)
+					addSlotToContainer(new Slot(inventoryPlayer, 9 + inventoryColumnIndex + inventoryRowIndex * 9, x + inventoryColumnIndex * 18, y + inventoryRowIndex * 18));
+			for (int hotBarIndex = 0; hotBarIndex < 9; ++hotBarIndex)
+				addSlotToContainer(new Slot(inventoryPlayer, hotBarIndex, 8 + hotBarIndex * 18, y + 58));
+		}
 	}
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
-		ItemStack originalStack = null;
-		Slot slot = (Slot) inventorySlots.get(slotIndex);
 		int numSlots = inventorySlots.size();
+		if (slotIndex < 0 || slotIndex >= numSlots)
+			return null;
+		Slot slot = (Slot) inventorySlots.get(slotIndex);
+		ItemStack originalStack = null;
 		if (slot != null && slot.getHasStack()) {
 			ItemStack stackInSlot = slot.getStack();
 			originalStack = stackInSlot.copy();
@@ -82,7 +86,7 @@ public class ContainerBase<T> extends Container {
 		return false;
 	}
 
-	protected boolean shiftItemStack(ItemStack stackToShift, int start, int end) {
+	private boolean shiftItemStack(ItemStack stackToShift, int start, int end) {
 		boolean changed = false;
 		if (stackToShift.isStackable()) {
 			for (int slotIndex = start; stackToShift.stackSize > 0 && slotIndex < end; slotIndex++) {
@@ -144,37 +148,12 @@ public class ContainerBase<T> extends Container {
 
 	@Override
 	public ItemStack slotClick(int slotNum, int mouseButton, int modifier, EntityPlayer player) {
-		if (slotNum < 0 || inventorySlots.size() == 0 || inventorySlots == null)
+		if (slotNum < 0 || slotNum >= inventorySlots.size())
 			return super.slotClick(slotNum, mouseButton, modifier, player);
 		Slot slot = (Slot) inventorySlots.get(slotNum);
 		if (slot instanceof SlotPhantom)
-			return clickPhantom(slot, mouseButton, player);
+			return ((SlotPhantom) slot).onClick(mouseButton, player);
 		return super.slotClick(slotNum, mouseButton, modifier, player);
 	}
 
-	protected ItemStack clickPhantom(Slot slot, int mouseButton, EntityPlayer player) {
-		ItemStack playerStack = player.inventory.getItemStack();
-		ItemStack slotStack = slot.getStack();
-
-		if (mouseButton == 0 && playerStack != null && slot.isItemValid(playerStack)) {
-			if (slotStack != null)
-				slot.putStack(null);
-
-			fillPhantomStack(slot, playerStack);
-			slot.onSlotChanged();
-		} else if (mouseButton == 1 || mouseButton == 2) {
-			if (slotStack != null) {
-				slot.putStack(null);
-				slot.onSlotChanged();
-			}
-		}
-
-		return null;
-	}
-
-	protected void fillPhantomStack(Slot slot, ItemStack stack) {
-		ItemStack phantomStack = stack.copy();
-		phantomStack.stackSize = 1;
-		slot.putStack(phantomStack);
-	}
 }

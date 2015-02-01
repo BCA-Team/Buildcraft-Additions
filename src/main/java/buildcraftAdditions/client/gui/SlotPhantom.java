@@ -3,6 +3,7 @@ package buildcraftAdditions.client.gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -20,5 +21,40 @@ public class SlotPhantom extends Slot {
 	@Override
 	public boolean canTakeStack(EntityPlayer player) {
 		return false;
+	}
+
+	public ItemStack onLeftClick(ItemStack playerStack) {
+		if (playerStack != null && isItemValid(playerStack)) {
+			ItemStack phantomStack = playerStack.copy();
+			phantomStack.stackSize = 1;
+			putStack(phantomStack);
+			onSlotChanged();
+		}
+		return null;
+	}
+
+	public ItemStack onRightClick(ItemStack playerStack) {
+		if (getHasStack()) {
+			putStack(null);
+			onSlotChanged();
+		}
+		return null;
+	}
+
+	public ItemStack onMiddleClick(ItemStack playerStack) {
+		return null;
+	}
+
+	public ItemStack onClick(int mouseButton, EntityPlayer player) {
+		switch (mouseButton) {
+			case 0:
+				return onLeftClick(player.inventory.getItemStack());
+			case 1:
+				return onRightClick(player.inventory.getItemStack());
+			case 2:
+				return onMiddleClick(player.inventory.getItemStack());
+			default:
+				return null;
+		}
 	}
 }
