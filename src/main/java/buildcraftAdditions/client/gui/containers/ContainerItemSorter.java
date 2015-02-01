@@ -17,7 +17,7 @@ public class ContainerItemSorter extends ContainerBase<TileItemSorter> {
 	public ContainerItemSorter(InventoryPlayer inventoryPlayer, TileItemSorter tile) {
 		super(inventoryPlayer, tile);
 		for (int i = 0; i < 8; i++)
-			addSorterSlotColumn(26 + i * 18, 18, i * 6);
+			addSorterSlotColumn(26 + i * 18, 18, 1 + i * 6);
 		addPlayerInventory(8, 160);
 	}
 

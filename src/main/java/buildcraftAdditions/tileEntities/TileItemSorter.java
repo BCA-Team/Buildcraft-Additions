@@ -4,9 +4,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraft.api.core.EnumColor;
 import buildcraft.api.transport.IPipeConnection;
 import buildcraft.api.transport.IPipeTile;
 
@@ -37,6 +39,43 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 			notifyNeighborBlockUpdate();
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, dir.ordinal(), 3);
 		}
+	}
+
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		TileEntity outputTile = getTileFromDirection(getExitSide());
+		if (outputTile == null || !(outputTile instanceof IPipeTile))
+			return;
+		IPipeTile pipe = (IPipeTile) outputTile;
+		if (pipe.getPipeType() != IPipeTile.PipeType.ITEM)
+			return;
+		if (inventory.getStackInSlot(0) == null)
+			return;
+		ItemStack stack = inventory.getStackInSlot(0);
+		EnumColor color = null;
+		for (int i = 1; i < inventory.getSizeInventory() - 1; i++) {
+			if (areStackEqual(inventory.getStackInSlot(i), stack)) {
+				color = EnumColor.values()[15 - colors[1 + (i - 1) / 6]];
+				break;
+			}
+		}
+		if (color == null)
+			color = EnumColor.values()[15 - colors[0]];
+		pipe.injectItem(stack, true, getExitSide().getOpposite(), color);
+		setInventorySlotContents(0, null);
+		markDirty();
+	}
+
+	public boolean areStackEqual(ItemStack stack1, ItemStack stack2) {
+		return stack1 == null && stack2 == null || !(stack1 == null || stack2 == null) && stack1.getItem() == stack2.getItem() && stack1.getItemDamage() == stack2.getItemDamage() && !(stack1.stackTagCompound == null && stack2.stackTagCompound != null) && (stack1.stackTagCompound == null || stack1.stackTagCompound.equals(stack2.stackTagCompound));
+	}
+
+	private TileEntity getTileFromDirection(ForgeDirection dir) {
+		TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+		if (tile == null)
+			return null;
+		return tile;
 	}
 
 	public ForgeDirection getRotation() {
@@ -102,12 +141,12 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {
-		return new int[] {};
+		return side == getEnterSide().ordinal() ? new int[] {0} : new int[] {};
 	}
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack item, int side) {
-		return ForgeDirection.getOrientation(side).equals(getEnterSide()) && slot == 0;
+		return side == getEnterSide().ordinal() && slot == 0;
 	}
 
 	@Override
