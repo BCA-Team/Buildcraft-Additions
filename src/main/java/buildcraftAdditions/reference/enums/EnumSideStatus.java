@@ -13,7 +13,7 @@ public enum EnumSideStatus {
 	DISABLED("Disabled", 0xA6A6A6, false, false, false),
 	BOTH("Both", 0xFFA500, true, true, true),
 	OUTPUT("Output", 0x850000, true, false, true),
-	INPUT("Input", 0x002B87, true, true, false);
+	INPUT("Input", 0x002B87, false, true, false);
 
 	private final String text;
 	private final int color;
