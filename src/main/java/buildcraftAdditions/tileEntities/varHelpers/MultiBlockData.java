@@ -120,6 +120,6 @@ public class MultiBlockData implements ISyncObject {
 		masterX = buf.readInt();
 		masterY = buf.readInt();
 		masterZ = buf.readInt();
-		return null;
+		return buf;
 	}
 }

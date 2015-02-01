@@ -12,7 +12,9 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -21,6 +23,11 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import buildcraft.api.transport.IPipeTile;
+
+import buildcraftAdditions.reference.enums.EnumPriority;
+import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 
 public class Utils {
 
@@ -83,4 +90,66 @@ public class Utils {
 		return stack1 != null && stack2 != null && stack1.getItem() == stack2.getItem() && (stack1.getItemDamage() == stack2.getItemDamage() || stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack1.getItem().isDamageable());
 	}
 
+	public static ItemStack outputStack(Location from, ItemStack output, SideConfiguration configuration) {
+		for (EnumPriority priority : EnumPriority.values()) {
+
+			//first try to put it intro a pipe
+			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+				Location location = from.copy();
+				if (configuration.getPriority(direction) != priority)
+					continue;
+				if (!configuration.canSend(direction))
+					continue;
+				location.move(direction);
+				TileEntity entity = location.getTileEntity();
+				if (entity instanceof IPipeTile) {
+					IPipeTile pipe = (IPipeTile) entity;
+					if (output != null && pipe.isPipeConnected(direction.getOpposite()) && pipe.getPipeType() == IPipeTile.PipeType.ITEM) {
+						int leftOver = pipe.injectItem(output.copy(), true, direction.getOpposite(), null);
+						output.stackSize -= leftOver;
+						if (output.stackSize == 0)
+							output = null;
+					}
+				}
+			}
+			//try to put it intro an inventory
+			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+				Location location = from.copy();
+				if (configuration.getPriority(direction) != priority)
+					continue;
+				if (!configuration.canSend(direction))
+					continue;
+				location.move(direction);
+				TileEntity entity = location.getTileEntity();
+				if (entity != null && entity instanceof IInventory) {
+					IInventory outputInventory = (IInventory) entity;
+					for (int slot = 0; slot < outputInventory.getSizeInventory(); slot++) {
+						int stackLimit = outputInventory.getInventoryStackLimit();
+						ItemStack testStack = outputInventory.getStackInSlot(slot);
+						if (output != null &&
+								(testStack == null || (testStack.stackSize + output.stackSize <= testStack.getMaxStackSize() && testStack.getItem() == output.getItem() && testStack.getItemDamage() == output.getItemDamage()))) {
+							ItemStack stack = outputInventory.getStackInSlot(slot);
+							int toMove;
+							if (stack == null) {
+								toMove = stackLimit - 1;
+								stack = output.copy();
+								stack.stackSize = 0;
+							} else {
+								toMove = stackLimit - stack.stackSize;
+							}
+							if (toMove > output.stackSize)
+								toMove = output.stackSize;
+							stack.stackSize += toMove;
+							output.stackSize -= toMove;
+							outputInventory.setInventorySlotContents(slot, stack);
+							outputInventory.markDirty();
+							if (output.stackSize == 0)
+								output = null;
+						}
+					}
+				}
+			}
+		}
+		return output;
+	}
 }

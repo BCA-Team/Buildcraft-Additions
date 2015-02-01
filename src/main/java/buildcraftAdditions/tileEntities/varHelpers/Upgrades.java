@@ -80,4 +80,18 @@ public class Upgrades implements ISyncObject {
 				tag.setInteger("upgrade" + t, upgrades.get(t).ordinal());
 		}
 	}
+
+	public void readFromNBT(NBTTagCompound tag) {
+		if (!tag.hasKey("maxUpgrades"))
+			return;
+		maxUpgrades = tag.getInteger("maxUpgrades");
+		installedUpgrades = tag.getInteger("installedUpgrades");
+		for (int t = 0; t < installedUpgrades; t++) {
+			int number = tag.getInteger("upgrade" + t);
+			if (number == -1)
+				upgrades.add(t, null);
+			else
+				upgrades.add(t, EnumMachineUpgrades.values()[number]);
+		}
+	}
 }

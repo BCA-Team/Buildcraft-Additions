@@ -1,6 +1,9 @@
 package buildcraftAdditions.tileEntities;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -22,10 +25,15 @@ import buildcraftAdditions.api.recipe.refinery.ICoolingTowerRecipe;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.networking.ISyncronizedTile;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
+import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
+import buildcraftAdditions.tileEntities.varHelpers.Upgrades;
 import buildcraftAdditions.utils.ITankHolder;
+import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Tank;
+import buildcraftAdditions.utils.Utils;
 
 import io.netty.buffer.ByteBuf;
 
@@ -36,7 +44,7 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFluidHandler, ITankHolder, ISyncronizedTile, IPipeConnection {
+public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFluidHandler, ITankHolder, ISyncronizedTile, IPipeConnection, IUpgradableMachine {
 	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.COOLING_TOWER);
 	public int tank;
 	public boolean valve;
@@ -46,6 +54,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private TileCoolingTower master;
 	private ICoolingTowerRecipe recipe;
 	public float heat;
+	private Upgrades upgrades = new Upgrades(1);
 
 
 	@Override
@@ -54,6 +63,20 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		if (data.moved) {
 			data.afterMoveCheck(worldObj);
 			worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
+		}
+		if (master == null && !isMaster())
+			findMaster();
+		if (master == null && !isMaster())
+			return;
+		if (getIntalledUpgrades().contains(EnumMachineUpgrades.AUTO_OUTPUT)) {
+			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+				Location location = new Location(this).move(direction);
+				TileEntity entity = location.getTileEntity();
+				if (entity != null && entity instanceof IFluidHandler && !(entity instanceof TileCoolingTower)) {
+					IFluidHandler tank = (IFluidHandler) entity;
+					master.drain(direction, tank.fill(direction.getOpposite(), new FluidStack(master.output.getFluidType(), 100), true), true);
+				}
+			}
 		}
 		if (!isMaster())
 			return;
@@ -130,6 +153,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		if (tag.hasKey("coolant", Constants.NBT.TAG_COMPOUND))
 			coolant.readFromNBT(tag.getCompoundTag("coolant"));
 		updateRecipe();
+		upgrades.readFromNBT(tag);
 	}
 
 	@Override
@@ -142,6 +166,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		tag.setTag("input", input.writeToNBT(new NBTTagCompound()));
 		tag.setTag("output", output.writeToNBT(new NBTTagCompound()));
 		tag.setTag("coolant", coolant.writeToNBT(new NBTTagCompound()));
+		upgrades.writeToNBT(tag);
 	}
 
 	@Override
@@ -310,6 +335,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		output.writeToByteBuff(buf);
 		coolant.writeToByteBuff(buf);
 		data.writeToByteBuff(buf);
+		upgrades.writeToByteBuff(buf);
 		return buf;
 	}
 
@@ -321,6 +347,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		buf = output.readFromByteBuff(buf);
 		buf = coolant.readFromByteBuff(buf);
 		buf = data.readFromByteBuff(buf);
+		buf = upgrades.readFromByteBuff(buf);
 		return buf;
 	}
 
@@ -342,5 +369,29 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	@Override
 	public ConnectOverride overridePipeConnection(IPipeTile.PipeType type, ForgeDirection with) {
 		return valve && type == IPipeTile.PipeType.FLUID ? ConnectOverride.CONNECT : ConnectOverride.DISCONNECT;
+	}
+
+	@Override
+	public boolean canAcceptUpgrade(EnumMachineUpgrades upgrade) {
+		return valve && upgrades.canInstallUpgrade(upgrade);
+	}
+
+	@Override
+	public void installUpgrade(EnumMachineUpgrades upgrade) {
+		upgrades.installUpgrade(upgrade);
+	}
+
+	@Override
+	public List<EnumMachineUpgrades> getIntalledUpgrades() {
+		return upgrades.getUpgrades();
+	}
+
+	@Override
+	public void removeUpgrade() {
+		EnumMachineUpgrades upgrade = upgrades.removeUpgrade();
+		if (upgrade == null)
+			return;
+		ItemStack stack = upgrade.getItemStack();
+		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, stack);
 	}
 }

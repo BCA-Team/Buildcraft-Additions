@@ -14,10 +14,14 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
+import buildcraftAdditions.reference.enums.EnumPriority;
+import buildcraftAdditions.reference.enums.EnumSideStatus;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
+import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.tileEntities.varHelpers.Upgrades;
+import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
 
@@ -30,12 +34,13 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpgradableMachine {
+public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpgradableMachine, IConfigurableOutput {
 	private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64, this);
 	public int progress;
 	public boolean isCooking, shouldUpdateCoils;
 	public TileCoilBase[] coils;
 	private Upgrades upgrades = new Upgrades(1);
+	private SideConfiguration configuration = new SideConfiguration();
 
 	public TileHeatedFurnace() {
 		progress = 0;
@@ -77,7 +82,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 				if (getStackInSlot(0).stackSize <= 1)
 					setInventorySlotContents(0, null);
 				else
-				getStackInSlot(0).stackSize--;
+					getStackInSlot(0).stackSize--;
 				progress = 0;
 			} else {
 				for (TileCoilBase coil : coils)
@@ -88,6 +93,8 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 		} else {
 			stop();
 		}
+		if (upgrades.getUpgrades().contains(EnumMachineUpgrades.AUTO_OUTPUT))
+			output();
 	}
 
 	public void stop() {
@@ -98,6 +105,12 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 			if (coil != null)
 				coil.stopHeating();
 		}
+	}
+
+	private void output() {
+		if (getStackInSlot(1) == null)
+			return;
+		setInventorySlotContents(1, Utils.outputStack(new Location(this), getStackInSlot(1), configuration));
 	}
 
 	public void doBlockUpdate() {
@@ -134,6 +147,8 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 		progress = nbtTagCompound.getInteger("progress");
 		isCooking = nbtTagCompound.getBoolean("isCooking");
 		shouldUpdateCoils = true;
+		configuration.readFromNBT(nbtTagCompound);
+		upgrades.readFromNBT(nbtTagCompound);
 	}
 
 	@Override
@@ -142,6 +157,8 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 		inventory.writeNBT(nbtTagCompound);
 		nbtTagCompound.setInteger("progress", progress);
 		nbtTagCompound.setBoolean("isCooking", isCooking);
+		configuration.writeToNBT(nbtTagCompound);
+		upgrades.writeToNBT(nbtTagCompound);
 	}
 
 	@Override
@@ -220,13 +237,14 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack stack, int side) {
-		return slot == 1;
+		return slot == 1 && getStatus(ForgeDirection.getOrientation(side)).canReceive();
 	}
 
 	@Override
 	public ByteBuf writeToByteBuff(ByteBuf buf) {
 		buf.writeInt(progress);
 		buf = upgrades.writeToByteBuff(buf);
+		buf = configuration.writeToByteBuff(buf);
 		return buf;
 	}
 
@@ -234,6 +252,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		progress = buf.readInt();
 		buf = upgrades.readFromByteBuff(buf);
+		buf = configuration.readFromByteBuff(buf);
 		return buf;
 	}
 
@@ -259,5 +278,35 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 			return;
 		ItemStack stack = upgrade.getItemStack();
 		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, stack);
+	}
+
+	@Override
+	public SideConfiguration getSideConfiguration() {
+		return configuration;
+	}
+
+	@Override
+	public void setSideConfiguration(SideConfiguration configuration) {
+		this.configuration = configuration;
+	}
+
+	@Override
+	public EnumSideStatus getStatus(ForgeDirection side) {
+		return configuration.getStatus(side);
+	}
+
+	@Override
+	public void changeStatus(ForgeDirection side) {
+		configuration.changeStatus(side);
+	}
+
+	@Override
+	public EnumPriority getPriority(ForgeDirection side) {
+		return configuration.getPriority(side);
+	}
+
+	@Override
+	public void changePriority(ForgeDirection side) {
+		configuration.changePriority(side);
 	}
 }

@@ -1,6 +1,9 @@
 package buildcraftAdditions.tileEntities;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -21,12 +24,16 @@ import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.recipe.refinery.IRefineryRecipe;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
+import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
+import buildcraftAdditions.tileEntities.varHelpers.Upgrades;
 import buildcraftAdditions.utils.ITankHolder;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.RotationUtils;
 import buildcraftAdditions.utils.Tank;
+import buildcraftAdditions.utils.Utils;
 
 import io.netty.buffer.ByteBuf;
 
@@ -37,7 +44,7 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IEnergyReceiver, ITankHolder, IPipeConnection {
+public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IEnergyReceiver, ITankHolder, IPipeConnection, IUpgradableMachine {
 	public int energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer, lastRequiredHeat;
 	public boolean init, valve, isCooling, moved;
 	public TileRefinery master;
@@ -46,6 +53,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	private FluidStack outputFluidStack;
 	private FluidStack inputFluidStack;
 	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.REFINERY);
+	private Upgrades upgrades = new Upgrades(1);
 
 	public TileRefinery() {
 		maxEnergy = 50000;
@@ -62,6 +70,22 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			data.afterMoveCheck(worldObj);
 			worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 		}
+		if (master == null && !isMaster())
+			findMaster();
+		if (master == null && !isMaster())
+			return;
+		if (getIntalledUpgrades().contains(EnumMachineUpgrades.AUTO_OUTPUT)) {
+			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+				Location location = new Location(this).move(direction);
+				TileEntity entity = location.getTileEntity();
+				if (entity != null && entity instanceof IFluidHandler && !(entity instanceof TileRefinery)) {
+					IFluidHandler tank = (IFluidHandler) entity;
+					master.drain(direction, tank.fill(direction.getOpposite(), new FluidStack(master.output.getFluidType(), 100), true), true);
+				}
+			}
+		}
+		if (!data.isMaster)
+			return;
 		if (input.getFluid() != null && input.getFluid().amount <= 0)
 			input.setFluid(null);
 		if (output.getFluid() != null && output.getFluid().amount <= 0)
@@ -69,8 +93,6 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (input.getFluid() == null)
 			updateRecipe();
 		updateHeat();
-		if (!data.isMaster)
-			return;
 		energyCost = (input.getFluid() == null || isCooling || energy < (int) (50 + (50 * ((double) currentHeat / 100)))) ? 0 : (int) (50 + (50 * ((double) currentHeat / 100)));
 		energy -= energyCost;
 		if (currentHeat < requiredHeat) {
@@ -193,6 +215,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (tag.hasKey("output", Constants.NBT.TAG_COMPOUND))
 			output.readFromNBT(tag.getCompoundTag("output"));
 		updateRecipe();
+		upgrades.readFromNBT(tag);
 	}
 
 	@Override
@@ -206,6 +229,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		tag.setInteger("lastRequiredHeat", lastRequiredHeat);
 		tag.setTag("input", input.writeToNBT(new NBTTagCompound()));
 		tag.setTag("output", output.writeToNBT(new NBTTagCompound()));
+		upgrades.writeToNBT(tag);
 	}
 
 	@Override
@@ -421,6 +445,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		input.writeToByteBuff(buf);
 		output.writeToByteBuff(buf);
 		data.writeToByteBuff(buf);
+		upgrades.writeToByteBuff(buf);
 		return buf;
 	}
 
@@ -433,12 +458,37 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		requiredHeat = buf.readInt();
 		buf = input.readFromByteBuff(buf);
 		buf = output.readFromByteBuff(buf);
-		data.readFromByteBuff(buf);
+		buf = data.readFromByteBuff(buf);
+		buf = upgrades.readFromByteBuff(buf);
 		return buf;
 	}
 
 	@Override
 	public ConnectOverride overridePipeConnection(IPipeTile.PipeType type, ForgeDirection with) {
 		return (valve && type == IPipeTile.PipeType.FLUID) || type == IPipeTile.PipeType.POWER ? ConnectOverride.CONNECT : ConnectOverride.DISCONNECT;
+	}
+
+	@Override
+	public boolean canAcceptUpgrade(EnumMachineUpgrades upgrade) {
+		return valve && upgrades.canInstallUpgrade(upgrade);
+	}
+
+	@Override
+	public void installUpgrade(EnumMachineUpgrades upgrade) {
+		upgrades.installUpgrade(upgrade);
+	}
+
+	@Override
+	public List<EnumMachineUpgrades> getIntalledUpgrades() {
+		return upgrades.getUpgrades();
+	}
+
+	@Override
+	public void removeUpgrade() {
+		EnumMachineUpgrades upgrade = upgrades.removeUpgrade();
+		if (upgrade == null)
+			return;
+		ItemStack stack = upgrade.getItemStack();
+		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, stack);
 	}
 }
