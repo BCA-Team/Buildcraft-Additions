@@ -232,12 +232,12 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack stack, int side) {
-		return slot == 0;
+		return slot == 0 && getStatus(ForgeDirection.getOrientation(side)).canReceive();
 	}
 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack stack, int side) {
-		return slot == 1 && getStatus(ForgeDirection.getOrientation(side)).canReceive();
+		return slot == 1 && getStatus(ForgeDirection.getOrientation(side)).canSend();
 	}
 
 	@Override
