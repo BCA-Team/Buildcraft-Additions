@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -53,9 +55,7 @@ public class ItemPipeColoringTool extends Item {
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		TileEntity tile = world.getTileEntity(x, y, z);
-		if (!(tile instanceof IPipeTile))
-			return false;
-		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("SortMode") && stack.getTagCompound().getBoolean("SortMode")) {
+		if (tile instanceof IPipeTile && stack.hasTagCompound() && stack.getTagCompound().hasKey("SortMode") && stack.getTagCompound().getBoolean("SortMode")) {
 			IPipeTile pipeTile = (IPipeTile) tile;
 			return setColor(stack.getItemDamage(), pipeTile);
 		}
@@ -72,6 +72,18 @@ public class ItemPipeColoringTool extends Item {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@Override
+	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entity) {
+		if (!(entity instanceof EntitySheep))
+			return false;
+		EntitySheep sheep = (EntitySheep) entity;
+		if (!sheep.getSheared() && sheep.getFleeceColor() != stack.getItemDamage()) {
+			sheep.setFleeceColor(stack.getItemDamage());
+			return true;
+		}
+		return false;
 	}
 
 	@Override
