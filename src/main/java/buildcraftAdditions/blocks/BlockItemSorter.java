@@ -95,11 +95,6 @@ public class BlockItemSorter extends BlockContainer {
 		if (player.isSneaking())
 			return false;
 
-		if (!world.isRemote && (player.getCurrentEquippedItem() == null || !(player.getCurrentEquippedItem().getItem() instanceof IToolWrench))) {
-			player.openGui(BuildcraftAdditions.instance, Variables.Gui.ITEM_SORTER, world, x, y, z);
-			return true;
-		}
-
 		Item equipped = player.getCurrentEquippedItem() != null ? player.getCurrentEquippedItem().getItem() : null;
 		if (equipped != null && equipped instanceof IToolWrench && ((IToolWrench) equipped).canWrench(player, x, y, z)) {
 			getSorterTile(world, x, y, z).setRotation(ForgeDirection.getOrientation(rotate(world.getBlockMetadata(x, y, z))));
@@ -107,7 +102,10 @@ public class BlockItemSorter extends BlockContainer {
 			return true;
 		}
 
-		return false;
+		if (!world.isRemote)
+			player.openGui(BuildcraftAdditions.instance, Variables.Gui.ITEM_SORTER, world, x, y, z);
+
+		return true;
 	}
 
 	@Override
