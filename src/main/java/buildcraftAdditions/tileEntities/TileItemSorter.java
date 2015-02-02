@@ -14,7 +14,7 @@ import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
-import buildcraftAdditions.tileEntities.implement.IWidgetListener;
+import buildcraftAdditions.tileEntities.interfaces.IWidgetListener;
 
 import io.netty.buffer.ByteBuf;
 

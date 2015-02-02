@@ -14,7 +14,7 @@ public class WidgetButtonUpdate extends WidgetBase  {
 	private boolean active = false;
 
 	public WidgetButtonUpdate(int id, int x, int y, int u, int v, int width, int height, GuiBase gui) {
-		super(id, x, y, u, v, width, height, gui);
+		super(id, x, y, u, v, width, height, gui, "");
 	}
 
 	public WidgetButtonUpdate(int id, int x, int y, int u, int v, int width, int height, GuiBase gui, String... textures) {

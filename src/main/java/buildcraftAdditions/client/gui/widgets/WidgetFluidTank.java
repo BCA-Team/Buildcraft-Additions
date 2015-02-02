@@ -18,7 +18,7 @@ public class WidgetFluidTank extends WidgetBase {
 	private Tank tank;
 
 	public WidgetFluidTank(int id, int x, int y, int width, int height, GuiBase gui, Tank tank) {
-		super(id, x, y, 0, 0, width, height, gui);
+		super(id, x, y, 0, 0, width, height, gui, "");
 		setEnableClockSound(false);
 		this.tank = tank;
 	}
