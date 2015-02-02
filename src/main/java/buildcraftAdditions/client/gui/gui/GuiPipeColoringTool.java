@@ -72,10 +72,10 @@ public class GuiPipeColoringTool extends GuiBase {
 			@Override
 			public void addTooltip(int mouseX, int mouseY, List<String> tooltips, boolean shift) {
 				if (!((GuiPipeColoringTool) gui).sortMode) {
-					tooltips.add(Utils.localize("tooltip.colorPipeMode"));
-					tooltips.add(Utils.localize("tooltip.colorPipeMode.info"));
+					tooltips.add(Utils.localize("tooltip.colorNormalMode") + ":");
+					tooltips.add(Utils.localize("tooltip.colorNormalMode.info"));
 				} else {
-					tooltips.add(Utils.localize("tooltip.colorSortingMode"));
+					tooltips.add(Utils.localize("tooltip.colorSortingMode") + ":");
 					tooltips.add(Utils.localize("tooltip.colorSortingMode.info"));
 				}
 			}
@@ -106,7 +106,7 @@ public class GuiPipeColoringTool extends GuiBase {
 		if (sortMode)
 			((WidgetButtonText) widgets.get(16)).setText(Utils.localize("gui.colorSortingMode"));
 		else
-			((WidgetButtonText) widgets.get(16)).setText(Utils.localize("gui.colorPipeMode"));
+			((WidgetButtonText) widgets.get(16)).setText(Utils.localize("gui.colorNormalMode"));
 	}
 
 	public static class PaintWidget extends WidgetButtonUpdate {
@@ -120,6 +120,11 @@ public class GuiPipeColoringTool extends GuiBase {
 			super.render(mouseX, mouseY);
 			gui.bindTexture(RenderUtils.MC_ITEM_SHEET);
 			gui.drawTexturedModelRectFromIcon(x + 2, y + 2, ItemsAndBlocks.pipeColoringTool.getIconFromDamage(id), 16, 16);
+		}
+
+		@Override
+		public void addTooltip(int mouseX, int mouseY, List<String> tooltips, boolean shift) {
+			tooltips.add(Utils.localize("gui.color." + Utils.COLOR_NAMES[id]));
 		}
 	}
 }

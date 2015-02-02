@@ -1,7 +1,9 @@
 package buildcraftAdditions.items;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
+import buildcraftAdditions.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -84,6 +86,15 @@ public class ItemPipeColoringTool extends Item {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("SortMode") && stack.getTagCompound().getBoolean("SortMode"))
+			list.add(Utils.localize("tooltip.colorSortingMode"));
+		else
+			list.add(Utils.localize("tooltip.colorNormalMode"));
+		list.add(Utils.localize("gui.color." + Utils.COLOR_NAMES[stack.getItemDamage()]));
 	}
 
 	@Override
