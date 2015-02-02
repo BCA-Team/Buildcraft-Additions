@@ -21,18 +21,22 @@ import buildcraftAdditions.reference.Variables;
  * to do things like that
  */
 public enum EnumMachineUpgrades {
-	AUTO_OUTPUT("AUTO_OUTPUT", false, "upgradeAutoEject"),
-	EFFICIENTY1("EFFICIENTY1", false, "upgradeEfficienty1");
+	AUTO_OUTPUT("upgradeAutoEject", false),
+	EFFICIENTY1("upgradeEfficienty1", false),
+	EFFICIENTY2("upgradeEfficienty2", false),
+	EFFICIENTY3("upgradeEfficienty3", false),
+	SPEED1("upgradeSpeed1", false),
+	SPEED2("upgradeSpeed2", false),
+	SPEED3("upgradeSpeed3", false);
 
-	private String tag, textureName;
+	private String tag;
 	private boolean multipleInstalls;
 	private ResourceLocation texture;
 
-	private EnumMachineUpgrades(String tag, boolean canBeDouble, String texture) {
+	private EnumMachineUpgrades(String tag, boolean canBeDouble) {
 		this.tag = tag;
 		this.multipleInstalls = canBeDouble;
-		textureName = texture;
-		this.texture = new ResourceLocation(Variables.MOD.ID, "textures/items/" + texture + ".png");
+		this.texture = new ResourceLocation(Variables.MOD.ID, "textures/items/" + tag + ".png");
 	}
 
 	public String getTag() {
@@ -52,7 +56,7 @@ public enum EnumMachineUpgrades {
 	}
 
 	public String getTextureName() {
-		return textureName;
+		return tag;
 	}
 
 

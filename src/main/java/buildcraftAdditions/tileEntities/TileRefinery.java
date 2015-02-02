@@ -77,7 +77,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			findMaster();
 		if (master == null && !isMaster())
 			return;
-		if (getIntalledUpgrades().contains(EnumMachineUpgrades.AUTO_OUTPUT)) {
+		if (getIntalledUpgrades().contains(EnumMachineUpgrades.AUTO_OUTPUT) && !output.isEmpty()) {
 			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 				Location location = new Location(this).move(direction);
 				TileEntity entity = location.getTileEntity();
@@ -127,14 +127,18 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	private void updateRecipe() {
+		if (!isPartOfMultiblock())
+			return;
 		if (!input.isEmpty()) {
 			IRefineryRecipe recipe = BCARecipeManager.refinery.getRecipe(input.getFluid());
-			requiredHeat = recipe.getRequiredHeat();
-			lastRequiredHeat = requiredHeat;
-			outputFluidStack = recipe.getOutput();
-			inputFluidStack = recipe.getInput();
-			inputFluid = inputFluidStack.getLocalizedName();
-			outputFluid = outputFluidStack.getLocalizedName();
+			if (recipe != null) {
+				requiredHeat = recipe.getRequiredHeat();
+				lastRequiredHeat = requiredHeat;
+				outputFluidStack = recipe.getOutput();
+				inputFluidStack = recipe.getInput();
+				inputFluid = inputFluidStack.getLocalizedName();
+				outputFluid = outputFluidStack.getLocalizedName();
+			}
 		} else {
 			requiredHeat = 0;
 		}
@@ -253,6 +257,9 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		output.setFluid(null);
 		requiredHeat = 0;
 		data.invalidate();
+		int num = getIntalledUpgrades().size();
+		for (int t = 0; t < num; t++)
+			removeUpgrade();
 		sync();
 	}
 

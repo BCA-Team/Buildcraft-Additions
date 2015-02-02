@@ -17,7 +17,7 @@ import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 public class ItemMachineUpgrade extends ItemBase {
 	private EnumMachineUpgrades upgrade;
 
-	public ItemMachineUpgrade(String name, EnumMachineUpgrades upgrade) {
+	public ItemMachineUpgrade(EnumMachineUpgrades upgrade) {
 		super(upgrade.getTextureName());
 		this.upgrade = upgrade;
 	}

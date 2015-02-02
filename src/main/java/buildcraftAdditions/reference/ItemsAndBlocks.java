@@ -113,6 +113,12 @@ public final class ItemsAndBlocks {
 	public static Item dust;
 	public static Item pipeColoringTool;
 	public static Item upgradeAutoEject;
+	public static Item upgradeEfficienty1;
+	public static Item upgradeEfficienty2;
+	public static Item upgradeEfficienty3;
+	public static Item upgradeSpeed1;
+	public static Item upgradeSpeed2;
+	public static Item upgradeSpeed3;
 
 	public static void init() {
 		ironCanister = new ItemCanister("ironCanister", 2000);
@@ -202,8 +208,26 @@ public final class ItemsAndBlocks {
 		pipeColoringTool = new ItemPipeColoringTool();
 		GameRegistry.registerItem(pipeColoringTool, "pipeColoringTool");
 
-		upgradeAutoEject = new ItemMachineUpgrade("AUTO_OUTPUT", EnumMachineUpgrades.AUTO_OUTPUT);
-		GameRegistry.registerItem(upgradeAutoEject, "AUTO_OUTPUT");
+		upgradeAutoEject = new ItemMachineUpgrade(EnumMachineUpgrades.AUTO_OUTPUT);
+		GameRegistry.registerItem(upgradeAutoEject, EnumMachineUpgrades.AUTO_OUTPUT.getTextureName());
+
+		upgradeEfficienty1 = new ItemMachineUpgrade(EnumMachineUpgrades.EFFICIENTY1);
+		GameRegistry.registerItem(upgradeEfficienty1, EnumMachineUpgrades.EFFICIENTY1.getTextureName());
+
+		upgradeEfficienty2 = new ItemMachineUpgrade(EnumMachineUpgrades.EFFICIENTY2);
+		GameRegistry.registerItem(upgradeEfficienty2, EnumMachineUpgrades.EFFICIENTY2.getTextureName());
+
+		upgradeEfficienty3 = new ItemMachineUpgrade(EnumMachineUpgrades.EFFICIENTY3);
+		GameRegistry.registerItem(upgradeEfficienty3, EnumMachineUpgrades.EFFICIENTY3.getTextureName());
+
+		upgradeSpeed1 = new ItemMachineUpgrade(EnumMachineUpgrades.SPEED1);
+		GameRegistry.registerItem(upgradeSpeed1, EnumMachineUpgrades.SPEED1.getTextureName());
+
+		upgradeSpeed2 = new ItemMachineUpgrade(EnumMachineUpgrades.SPEED2);
+		GameRegistry.registerItem(upgradeSpeed2, EnumMachineUpgrades.SPEED2.getTextureName());
+
+		upgradeSpeed3 = new ItemMachineUpgrade(EnumMachineUpgrades.SPEED3);
+		GameRegistry.registerItem(upgradeSpeed3, EnumMachineUpgrades.SPEED3.getTextureName());
 
 		//START BLOCKS
 
