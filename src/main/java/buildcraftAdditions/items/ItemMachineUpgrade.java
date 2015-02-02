@@ -18,7 +18,7 @@ public class ItemMachineUpgrade extends ItemBase {
 	private EnumMachineUpgrades upgrade;
 
 	public ItemMachineUpgrade(String name, EnumMachineUpgrades upgrade) {
-		super(name);
+		super(upgrade.getTextureName());
 		this.upgrade = upgrade;
 	}
 

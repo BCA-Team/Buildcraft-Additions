@@ -1,5 +1,7 @@
 package buildcraftAdditions.utils;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -78,6 +80,7 @@ public class RenderUtils {
 
 	public static void drawImage(ResourceLocation image, int x, int y, int width, int height) {
 		bindTexture(image);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		Tessellator tess = Tessellator.instance;
 		tess.startDrawingQuads();
 		tess.addVertexWithUV(x, y + height, 0, 0, 1);

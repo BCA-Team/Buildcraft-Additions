@@ -15,5 +15,6 @@ public class WailaIntegration {
 	public static void integrate() {
 		ModuleRegistrar.instance().registerBodyProvider(new RefineryDataProvider(), TileRefinery.class);
 		ModuleRegistrar.instance().registerNBTProvider(new RefineryDataProvider(), TileRefinery.class);
+		ModuleRegistrar.instance().registerTooltipRenderer("BCA.upgradeRenderer", new TooltipUpgradeRenderer());
 	}
 }

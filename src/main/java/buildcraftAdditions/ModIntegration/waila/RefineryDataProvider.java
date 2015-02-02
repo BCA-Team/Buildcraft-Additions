@@ -13,6 +13,7 @@ import buildcraftAdditions.tileEntities.TileRefinery;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
+import mcp.mobius.waila.api.SpecialChars;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -50,6 +51,11 @@ public class RefineryDataProvider implements IWailaDataProvider {
 			if (master.getOutput() != "") {
 				currenttip.add("Required heat: " + master.requiredHeat);
 				currenttip.add("Refining " + master.getInput() + " into " + master.getOutput());
+			}
+			if (!refinery.getIntalledUpgrades().isEmpty()) {
+				currenttip.add(" ");
+				currenttip.add("Installed upgrades:");
+				currenttip.add(SpecialChars.getRenderString("BCA.upgradeRenderer", String.valueOf(refinery.getIntalledUpgrades().get(0).ordinal())));
 			}
 		}
 		return currenttip;

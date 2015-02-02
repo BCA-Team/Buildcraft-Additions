@@ -8,12 +8,11 @@ package buildcraftAdditions.reference.enums;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 /**
  * This is no part of the api and will probably never be part of it.
@@ -22,16 +21,18 @@ import buildcraftAdditions.reference.Variables;
  * to do things like that
  */
 public enum EnumMachineUpgrades {
-	AUTO_OUTPUT("AUTO_OUTPUT", false, ItemsAndBlocks.upgradeAutoEject);
+	AUTO_OUTPUT("AUTO_OUTPUT", false, "upgradeAutoEject"),
+	EFFICIENTY1("EFFICIENTY1", false, "upgradeEfficienty1");
 
-	private String tag;
+	private String tag, textureName;
 	private boolean multipleInstalls;
-	private Item item;
+	private ResourceLocation texture;
 
-	private EnumMachineUpgrades(String tag, boolean canBeDouble, Item item) {
+	private EnumMachineUpgrades(String tag, boolean canBeDouble, String texture) {
 		this.tag = tag;
 		this.multipleInstalls = canBeDouble;
-		this.item = item;
+		textureName = texture;
+		this.texture = new ResourceLocation(Variables.MOD.ID, "textures/items/" + texture + ".png");
 	}
 
 	public String getTag() {
@@ -44,6 +45,14 @@ public enum EnumMachineUpgrades {
 
 	public ItemStack getItemStack() {
 		return GameRegistry.findItemStack(Variables.MOD.ID, tag, 1);
+	}
+
+	public ResourceLocation getTexture() {
+		return texture;
+	}
+
+	public String getTextureName() {
+		return textureName;
 	}
 
 
