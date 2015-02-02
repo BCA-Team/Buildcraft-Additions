@@ -15,6 +15,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import buildcraftAdditions.ModIntegration.Buildcraft.BuildcraftIntegration;
 import buildcraftAdditions.ModIntegration.Framez.FramezIntegration;
 import buildcraftAdditions.ModIntegration.MineTweaker.MineTweakerIntegreation;
+import buildcraftAdditions.ModIntegration.waila.WailaIntegration;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.blocks.BlockBasic;
@@ -49,6 +50,8 @@ public class ModIntegration {
 			if (ConfigurationHandler.eurekaIntegration)
 				eurekaResearch();
 		}
+		if (Loader.isModLoaded("Waila"))
+			WailaIntegration.integrate();
 	}
 
 	private static void railcraftIntegration() {

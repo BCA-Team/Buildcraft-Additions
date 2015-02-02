@@ -54,12 +54,15 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	private FluidStack inputFluidStack;
 	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.REFINERY);
 	private Upgrades upgrades = new Upgrades(1);
+	private String inputFluid, outputFluid;
 
 	public TileRefinery() {
 		maxEnergy = 50000;
 		init = false;
 		lastRequiredHeat = 20;
 		currentHeat = 20;
+		inputFluid = "";
+		outputFluid = "";
 	}
 
 	public void updateEntity() {
@@ -130,6 +133,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			lastRequiredHeat = requiredHeat;
 			outputFluidStack = recipe.getOutput();
 			inputFluidStack = recipe.getInput();
+			inputFluid = inputFluidStack.getLocalizedName();
+			outputFluid = outputFluidStack.getLocalizedName();
 		} else {
 			requiredHeat = 0;
 		}
@@ -442,6 +447,14 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		buf.writeInt(lastRequiredHeat);
 		buf.writeInt(energyCost);
 		buf.writeInt(requiredHeat);
+		char[] chars = inputFluid.toCharArray();
+		buf.writeInt(chars.length);
+		for (int t = 0; t < chars.length; t++)
+			buf.writeChar(chars[t]);
+		chars = outputFluid.toCharArray();
+		buf.writeInt(chars.length);
+		for (int t = 0; t < chars.length; t++)
+			buf.writeChar(chars[t]);
 		input.writeToByteBuff(buf);
 		output.writeToByteBuff(buf);
 		data.writeToByteBuff(buf);
@@ -456,6 +469,16 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		lastRequiredHeat = buf.readInt();
 		energyCost = buf.readInt();
 		requiredHeat = buf.readInt();
+		int num = buf.readInt();
+		inputFluid = "";
+		for (int t = 0; t < num; t++)
+			inputFluid += buf.readChar();
+		inputFluid = inputFluid.trim();
+		num = buf.readInt();
+		outputFluid = "";
+		for (int t = 0; t < num; t++)
+			outputFluid += buf.readChar();
+		outputFluid = outputFluid.trim();
 		buf = input.readFromByteBuff(buf);
 		buf = output.readFromByteBuff(buf);
 		buf = data.readFromByteBuff(buf);
@@ -490,5 +513,13 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			return;
 		ItemStack stack = upgrade.getItemStack();
 		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, stack);
+	}
+
+	public String getOutput() {
+		return outputFluid;
+	}
+
+	public String getInput() {
+		return inputFluid;
 	}
 }
