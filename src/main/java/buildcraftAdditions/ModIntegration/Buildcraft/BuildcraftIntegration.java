@@ -10,6 +10,7 @@ import net.minecraft.item.crafting.IRecipe;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
@@ -99,6 +100,8 @@ public class BuildcraftIntegration {
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.toolUpgradeDrill), "U", 'U', ItemsAndBlocks.toolUpgradeHoe);
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.toolUpgradeHoe), "U", 'U', ItemsAndBlocks.toolUpgradeChainsaw);
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemsAndBlocks.machineConfigurator), "BIR", " W ", "YIY", 'B', "dyeBlue", 'I', "ingotIron", 'R', "dyeRed", 'W', BCItems.WRENCH, 'Y', "dyeYellow"));
+		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.itemSorter), "SUS", "PCP", "SGS", 'S', Blocks.stone, 'U', ItemsAndBlocks.upgradeAutoEject, 'P', BCItems.PIPE_ITEMS_LAPIS, 'C', Blocks.chest, 'G', BCItems.PIPE_ITEMS_GOLD);
+		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.pipeColoringTool), "  S", " S ", "W  ", 'W', new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 'S', Items.stick);
 
 		//remove BC refinery recipe
 		ItemStack stack = new ItemStack(BCItems.REFINERY);
