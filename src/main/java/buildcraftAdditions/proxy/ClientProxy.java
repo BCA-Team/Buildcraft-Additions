@@ -25,6 +25,7 @@ import buildcraftAdditions.client.render.RendererDusterKinetic;
 import buildcraftAdditions.client.render.RendererItemSorter;
 import buildcraftAdditions.client.render.RendererKEBT2;
 import buildcraftAdditions.client.render.RendererKEBT3;
+import buildcraftAdditions.core.BucketHandler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileKEBT2;
@@ -48,6 +49,11 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileKEBT3.class, new RendererKEBT3());
 		RendererItemSorter.RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(new RendererItemSorter());
+	}
+
+	@Override
+	public void registerBucketRenderer() {
+		BucketHandler.registerRenderers();
 	}
 
 	@Override

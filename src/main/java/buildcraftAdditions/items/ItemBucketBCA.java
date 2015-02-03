@@ -6,16 +6,11 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.client.render.BucketItemRenderer;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
@@ -37,8 +32,6 @@ public class ItemBucketBCA extends ItemBucket {
 		setContainerItem(Items.bucket);
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		setUnlocalizedName("bcaBucket." + fluid.getName());
-		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
-			MinecraftForgeClient.registerItemRenderer(this, BucketItemRenderer.INSTANCE);
 	}
 
 	@Override

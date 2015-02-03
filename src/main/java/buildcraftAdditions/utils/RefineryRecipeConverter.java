@@ -17,6 +17,7 @@ import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 import buildcraft.api.recipes.CraftingResult;
 import buildcraft.api.recipes.IFlexibleRecipe;
 
+import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.blocks.FluidBlockBase;
 import buildcraftAdditions.core.BucketHandler;
@@ -87,6 +88,9 @@ public class RefineryRecipeConverter {
 			BCARecipeManager.cooling.addRecipe(new FluidStack(fluid.getID(), 1), new FluidStack(outputs[t].fluidID, 1), ((float) results[t].energyCost) / 2000);
 			BCARecipeManager.refinery.addRecipe(inputs[t], new FluidStack(fluid.getID(), outputs[t].amount), results[t].energyCost);
 		}
+
+		BuildcraftAdditions.proxy.registerBucketRenderer();
+
 	}
 
 	public static class BCAGasFluid extends Fluid {

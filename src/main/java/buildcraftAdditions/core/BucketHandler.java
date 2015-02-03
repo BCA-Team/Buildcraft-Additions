@@ -8,10 +8,14 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+
+import buildcraftAdditions.client.render.BucketItemRenderer;
+import buildcraftAdditions.items.ItemBucketBCA;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -35,6 +39,12 @@ public class BucketHandler {
 
 	public static void register() {
 		MinecraftForge.EVENT_BUS.register(INSTANCE);
+	}
+
+	public static void registerRenderers() {
+		for (ItemStack stack : INSTANCE.bucketMap.values())
+			if (stack != null && stack.getItem() != null && stack.getItem() instanceof ItemBucketBCA)
+				MinecraftForgeClient.registerItemRenderer(stack.getItem(), BucketItemRenderer.INSTANCE);
 	}
 
 	@SubscribeEvent

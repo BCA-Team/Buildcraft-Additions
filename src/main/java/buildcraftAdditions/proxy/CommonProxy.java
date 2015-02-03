@@ -12,6 +12,7 @@ import net.minecraftforge.fluids.Fluid;
 import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
 import buildcraftAdditions.villager.VillagerTradeHandler;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -24,6 +25,9 @@ public class CommonProxy {
 	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
 
 	public void registerRenderers() {
+	}
+
+	public void registerBucketRenderer() {
 	}
 
 	public void addPowerplant() {
