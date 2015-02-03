@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.TileRefinery;
 
 import mcp.mobius.waila.api.IWailaConfigHandler;
@@ -48,15 +49,17 @@ public class RefineryDataProvider implements IWailaDataProvider {
 			if (!refinery.isMaster())
 				master = refinery.master;
 			currenttip.add("Current heat: " + master.currentHeat);
-			if (master.getOutput() != "") {
+			if (!master.getOutput().equals("")) {
 				currenttip.add("Required heat: " + master.requiredHeat);
 				currenttip.add("Refining " + master.getInput() + " into " + master.getOutput());
 			}
-			if (!refinery.getIntalledUpgrades().isEmpty()) {
-				currenttip.add(" ");
-				currenttip.add("Installed upgrades:");
-				currenttip.add(SpecialChars.getRenderString("BCA.upgradeRenderer", String.valueOf(refinery.getIntalledUpgrades().get(0).ordinal())));
+			String upgrades = "";
+
+			if (!master.getIntalledUpgrades().isEmpty()) {
+				for (EnumMachineUpgrades upgrade : refinery.getIntalledUpgrades())
+					upgrades += SpecialChars.getRenderString("BCA.upgradeRenderer", String.valueOf(upgrade.ordinal()));
 			}
+			currenttip.add(upgrades);
 		}
 		return currenttip;
 	}

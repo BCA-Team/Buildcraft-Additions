@@ -45,7 +45,8 @@ public class Upgrades implements ISyncObject {
 			return null;
 		EnumMachineUpgrades upgrade = upgrades.get(installedUpgrades - 1);
 		upgrades.remove(installedUpgrades - 1);
-		installedUpgrades--;
+		upgrades.trimToSize();
+		installedUpgrades = upgrades.size();
 		return upgrade;
 	}
 
@@ -93,5 +94,9 @@ public class Upgrades implements ISyncObject {
 			else
 				upgrades.add(t, EnumMachineUpgrades.values()[number]);
 		}
+	}
+
+	public void setMaxUpgrades(int max) {
+		maxUpgrades = max;
 	}
 }

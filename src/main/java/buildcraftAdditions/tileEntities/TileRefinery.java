@@ -1,5 +1,6 @@
 package buildcraftAdditions.tileEntities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,6 +36,7 @@ import buildcraftAdditions.utils.RotationUtils;
 import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
 
+import com.google.common.collect.ImmutableList;
 import io.netty.buffer.ByteBuf;
 
 /**
@@ -53,7 +55,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	private FluidStack outputFluidStack;
 	private FluidStack inputFluidStack;
 	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.REFINERY);
-	private Upgrades upgrades = new Upgrades(1);
+	protected Upgrades upgrades = new Upgrades(0);
 	private String inputFluid, outputFluid;
 
 	public TileRefinery() {
@@ -149,6 +151,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		data.isMaster = true;
 		data.partOfMultiBlock = true;
 		data.rotationIndex = rotationIndex;
+		upgrades.setMaxUpgrades(6);
 	}
 
 	public void findMaster() {
@@ -244,6 +247,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public void formMultiblock(int masterX, int masterY, int masterZ, int rotationIndex) {
 		data.formMultiBlock(masterX, masterY, masterZ, rotationIndex);
+		if (valve)
+			upgrades.setMaxUpgrades(1);
 		sync();
 	}
 
@@ -500,26 +505,66 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public boolean canAcceptUpgrade(EnumMachineUpgrades upgrade) {
-		return valve && upgrades.canInstallUpgrade(upgrade);
+		if (valve || isMaster()) {
+			return upgrades.canInstallUpgrade(upgrade);
+		} else {
+			if (master == null)
+				findMaster();
+			if (master == null)
+				return false;
+			return master.canAcceptUpgrade(upgrade);
+		}
 	}
 
 	@Override
 	public void installUpgrade(EnumMachineUpgrades upgrade) {
-		upgrades.installUpgrade(upgrade);
+		if (valve || isMaster()) {
+			upgrades.installUpgrade(upgrade);
+		} else {
+			if (master == null)
+				findMaster();
+			if (master == null)
+				return;
+			master.installUpgrade(upgrade);
+		}
 	}
 
 	@Override
 	public List<EnumMachineUpgrades> getIntalledUpgrades() {
-		return upgrades.getUpgrades();
+		if (isMaster()) {
+			return upgrades.getUpgrades();
+		} else {
+			if (master == null)
+				findMaster();
+			if (master == null)
+				return new ArrayList<EnumMachineUpgrades>();
+			List<EnumMachineUpgrades> list = new ArrayList<EnumMachineUpgrades>();
+			list.addAll(master.getIntalledUpgrades());
+			if (valve)
+				list.addAll(upgrades.getUpgrades());
+			return ImmutableList.copyOf(list);
+		}
 	}
 
 	@Override
 	public void removeUpgrade() {
-		EnumMachineUpgrades upgrade = upgrades.removeUpgrade();
-		if (upgrade == null)
-			return;
-		ItemStack stack = upgrade.getItemStack();
-		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, stack);
+		if (valve || isMaster()) {
+			EnumMachineUpgrades upgrade = upgrades.removeUpgrade();
+			if (upgrade == null)
+				return;
+			ItemStack stack = upgrade.getItemStack();
+			Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, stack);
+		} else {
+			if (master == null)
+				findMaster();
+			if (master == null)
+				return;
+			EnumMachineUpgrades upgrade = master.upgrades.removeUpgrade();
+			if (upgrade == null)
+				return;
+			ItemStack stack = upgrade.getItemStack();
+			Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, stack);
+		}
 	}
 
 	public String getOutput() {
