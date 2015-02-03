@@ -31,6 +31,8 @@ import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 
 public class Utils {
 
+	public static final String[] COLOR_NAMES = {"white", "orange", "magenta", "lightBlue", "yellow", "lime", "pink", "gray", "lightGray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
+
 	public static FluidStack getFluidStackFromItemStack(ItemStack itemStack) {
 		if (itemStack.stackTagCompound == null || !itemStack.getTagCompound().hasKey("Fluid", Constants.NBT.TAG_COMPOUND))
 			return null;

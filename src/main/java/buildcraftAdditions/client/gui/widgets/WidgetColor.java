@@ -1,10 +1,13 @@
 package buildcraftAdditions.client.gui.widgets;
 
+import buildcraftAdditions.utils.Utils;
 import net.minecraft.util.ResourceLocation;
 
 import buildcraftAdditions.client.gui.gui.GuiBase;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.utils.RenderUtils;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -46,5 +49,10 @@ public class WidgetColor extends WidgetBase {
 		}
 
 		super.onWidgetClicked(x, y, button);
+	}
+
+	@Override
+	public void addTooltip(int mouseX, int mouseY, List<String> tooltips, boolean shift) {
+		tooltips.add(Utils.localize("gui.color." + Utils.COLOR_NAMES[value]));
 	}
 }

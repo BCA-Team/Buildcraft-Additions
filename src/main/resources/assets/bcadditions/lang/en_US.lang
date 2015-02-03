@@ -55,7 +55,7 @@ item.heatPlating.name=Heat Conducting Plating
 item.dustConverter.name=Dust Conveter
 item.machineConfigurator.name=Machine Configurator
 item.bcaBucket.name=%s Bucket
-item.pipeColoringTool.name=Pipe Coloring Tool
+item.pipeColoringTool.name=Coloring Tool
 
 tooltip.installed=%s Installed
 tooltip.deactivated=Deactivated
@@ -63,9 +63,9 @@ tooltip.upgradesPossible=Upgrades Possible
 tooltip.holdShiftForMoreInfo=Hold Shift for more info
 tooltip.FluidCapacity=Can hold %s buckets of fluid
 tooltip.storedFluid=Currently stores %s mb of %s
-tooltip.colorPipeMode=Pipe Color
-tooltip.colorPipeMode.info=Colors standard BC pipes
-tooltip.colorSortingMode=Sorting Color
+tooltip.colorNormalMode=Normal Mode
+tooltip.colorNormalMode.info=Colors standard colorable blocks, sheep and BC pipes
+tooltip.colorSortingMode=Sorting Mode
 tooltip.colorSortingMode.info=Colors the sorting part of the DaiZuli and Lapis pipes
 
 fluid.gas.name=%s Gas
@@ -104,15 +104,33 @@ gui.kineticTool.name=Kinetic Tool
 gui.heatedFurnace.name=Heated Furnace
 gui.fluidicCompressor.name=Fluidic Compressor
 gui.coloringMode=Coloring Mode
-gui.pipeColorTool.name=Pipe Coloring Tool
-gui.colorPipeMode=Pipe Color
-gui.colorSortingMode=Sorting Color
+gui.pipeColorTool.name=Coloring Tool
+gui.colorNormalMode=Normal Mode
+gui.colorSortingMode=Sorting Mode
 
 gui.keb.dangerousButton=BIG RED BUTTONS ARE VERY DANGEROUS
 gui.keb.noPushing=DON'T PUSH IT
 gui.keb.pressForBoom=PRESS HERE FOR A BIG BOOM
 
 gui.nei.dusting=Dusting
+
+gui.color.none=None
+gui.color.white=White
+gui.color.orange=Orange
+gui.color.magenta=Magenta
+gui.color.lightBlue=Light Blue
+gui.color.yellow=Yellow
+gui.color.lime=Lime
+gui.color.pink=Pink
+gui.color.gray=Grey
+gui.color.silver=Light Grey
+gui.color.cyan=Cyan
+gui.color.purple=Purple
+gui.color.blue=Blue
+gui.color.brown=Brown
+gui.color.green=Green
+gui.color.red=Red
+gui.color.black=Black
 
 trigger.canisterRequested=Canister requested
 trigger.hasEmptyCanister=Has Empty Canister
