@@ -55,7 +55,7 @@ public class RefineryDataProvider implements IWailaDataProvider {
 			}
 			String upgrades = "";
 
-			if (!master.getIntalledUpgrades().isEmpty()) {
+			if (!refinery.getIntalledUpgrades().isEmpty()) {
 				for (EnumMachineUpgrades upgrade : refinery.getIntalledUpgrades())
 					upgrades += SpecialChars.getRenderString("BCA.upgradeRenderer", String.valueOf(upgrade.ordinal()));
 			}
