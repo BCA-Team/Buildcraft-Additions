@@ -8,11 +8,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import buildcraftAdditions.tileEntities.TileRefinery;
+import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
+import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
+import mcp.mobius.waila.api.SpecialChars;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -20,7 +22,7 @@ import mcp.mobius.waila.api.IWailaDataProvider;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class RefineryDataProvider implements IWailaDataProvider {
+public class UpgradableMachineDataProvider implements IWailaDataProvider {
 
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
@@ -29,35 +31,25 @@ public class RefineryDataProvider implements IWailaDataProvider {
 
 	@Override
 	public List<String> getWailaHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-		return currenttip;
+		return null;
 	}
 
 	@Override
 	public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-		TileRefinery refinery = (TileRefinery) accessor.getTileEntity();
-		if (!refinery.isPartOfMultiblock()) {
-			currenttip.add("Not part of a multiblock");
-		} else {
-			if (refinery.master == null && (!refinery.isMaster())) {
-				refinery.findMaster();
-				if (refinery.master == null)
-					return currenttip;
-			}
-			TileRefinery master = refinery;
-			if (!refinery.isMaster())
-				master = refinery.master;
-			currenttip.add("Current heat: " + master.currentHeat);
-			if (!master.getOutput().equals("")) {
-				currenttip.add("Required heat: " + master.requiredHeat);
-				currenttip.add("Refining " + master.getInput() + " into " + master.getOutput());
-			}
+		String upgrades = "";
+		IUpgradableMachine machine = (IUpgradableMachine) accessor.getTileEntity();
+		if (!machine.getIntalledUpgrades().isEmpty()) {
+			currenttip.add("Installed upgrades: ");
+			for (EnumMachineUpgrades upgrade : machine.getIntalledUpgrades())
+				upgrades += SpecialChars.getRenderString("BCA.upgradeRenderer", String.valueOf(upgrade.ordinal()));
 		}
+		currenttip.add(upgrades);
 		return currenttip;
 	}
 
 	@Override
 	public List<String> getWailaTail(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-		return currenttip;
+		return null;
 	}
 
 	@Override

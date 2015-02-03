@@ -77,6 +77,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		}
 		sync();
 		if (valve && upgrades.getUpgrades().contains(EnumMachineUpgrades.AUTO_OUTPUT)) {
+			if (master == null)
+				findMaster();
+			if (master == null)
+				return;
 			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 				Location location = new Location(this).move(direction);
 				TileEntity entity = location.getTileEntity();
