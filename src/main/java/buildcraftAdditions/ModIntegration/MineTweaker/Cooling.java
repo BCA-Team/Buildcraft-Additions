@@ -21,93 +21,93 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ModOnly("bcadditions")
 public class Cooling {
 
-    @ZenMethod
-    public static void addCoolingRecipe(ILiquidStack input, ILiquidStack output, int heat) {
-        MineTweakerAPI.apply(new AddRecipeAction(input, output, heat));
-    }
+	@ZenMethod
+	public static void addCoolingRecipe(ILiquidStack input, ILiquidStack output, float heat) {
+		MineTweakerAPI.apply(new AddRecipeAction(input, output, heat));
+	}
 
-    @ZenMethod
-    public static void removeCoolingRecipe(ILiquidStack input) {
-        MineTweakerAPI.apply(new RemoveRecipeAction(input));
-    }
+	@ZenMethod
+	public static void removeCoolingRecipe(ILiquidStack input) {
+		MineTweakerAPI.apply(new RemoveRecipeAction(input));
+	}
 
-    private static class AddRecipeAction implements IUndoableAction {
-        private final ILiquidStack input;
-        private final ILiquidStack output;
-        private final int heat;
+	private static class AddRecipeAction implements IUndoableAction {
+		private final ILiquidStack input;
+		private final ILiquidStack output;
+		private final float heat;
 
-        public AddRecipeAction(ILiquidStack input, ILiquidStack output, int heat) {
-            this.input = input;
-            this.output = output;
-            this.heat = heat;
-        }
+		public AddRecipeAction(ILiquidStack input, ILiquidStack output, float heat) {
+			this.input = input;
+			this.output = output;
+			this.heat = heat;
+		}
 
-        @Override
-        public void apply() {
-            BCARecipeManager.cooling.addRecipe(MineTweakerMC.getLiquidStack(input), MineTweakerMC.getLiquidStack(output), heat);
-        }
+		@Override
+		public void apply() {
+			BCARecipeManager.cooling.addRecipe(MineTweakerMC.getLiquidStack(input), MineTweakerMC.getLiquidStack(output), heat);
+		}
 
-        @Override
-        public boolean canUndo() {
-            return true;
-        }
+		@Override
+		public boolean canUndo() {
+			return true;
+		}
 
-        @Override
-        public void undo() {
-            BCARecipeManager.cooling.removeRecipe(MineTweakerMC.getLiquidStack(input));
-        }
+		@Override
+		public void undo() {
+			BCARecipeManager.cooling.removeRecipe(MineTweakerMC.getLiquidStack(input));
+		}
 
-        @Override
-        public String describe() {
-            return String.format("Adding BCA Cooling Tower recipe for %s -> %s", input, output);
-        }
+		@Override
+		public String describe() {
+			return String.format("Adding BCA Cooling Tower recipe for %s -> %s", input, output);
+		}
 
-        @Override
-        public String describeUndo() {
-            return String.format("Removing BCA Cooling Tower recipe for %s -> %s", input, output);
-        }
+		@Override
+		public String describeUndo() {
+			return String.format("Removing BCA Cooling Tower recipe for %s -> %s", input, output);
+		}
 
-        @Override
-        public Object getOverrideKey() {
-            return null;
-        }
-    }
+		@Override
+		public Object getOverrideKey() {
+			return null;
+		}
+	}
 
-    private static class RemoveRecipeAction implements IUndoableAction {
-        private final ILiquidStack input;
+	private static class RemoveRecipeAction implements IUndoableAction {
+		private final ILiquidStack input;
 
-        public RemoveRecipeAction(ILiquidStack input) {
-            this.input = input;
-        }
+		public RemoveRecipeAction(ILiquidStack input) {
+			this.input = input;
+		}
 
-        @Override
-        public void apply() {
-            BCARecipeManager.cooling.removeRecipe(MineTweakerMC.getLiquidStack(input));
-        }
+		@Override
+		public void apply() {
+			BCARecipeManager.cooling.removeRecipe(MineTweakerMC.getLiquidStack(input));
+		}
 
-        @Override
-        public boolean canUndo() {
-            return false;
-        }
+		@Override
+		public boolean canUndo() {
+			return false;
+		}
 
-        @Override
-        public void undo() {
+		@Override
+		public void undo() {
 
-        }
+		}
 
-        @Override
-        public String describe() {
-            return String.format("Removing BCA Cooling Tower recipe for %s -> %s", input, BCARecipeManager.cooling.getRecipe(MineTweakerMC.getLiquidStack(input)).getOutput().getLocalizedName());
-        }
+		@Override
+		public String describe() {
+			return String.format("Removing BCA Cooling Tower recipe for %s -> %s", input, BCARecipeManager.cooling.getRecipe(MineTweakerMC.getLiquidStack(input)).getOutput().getLocalizedName());
+		}
 
-        @Override
-        public String describeUndo() {
-            return null;
-        }
+		@Override
+		public String describeUndo() {
+			return null;
+		}
 
-        @Override
-        public Object getOverrideKey() {
-            return null;
-        }
-    }
+		@Override
+		public Object getOverrideKey() {
+			return null;
+		}
+	}
 }
