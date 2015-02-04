@@ -44,7 +44,7 @@ public class RefineryRecipeManager implements IRefineryRecipeManager {
 		if (input != null) {
 			IRefineryRecipe recipe = null;
 			for (Iterator<IRefineryRecipe> iterator = recipes.iterator(); iterator.hasNext(); recipe = iterator.next()) {
-				if (recipe != null && input.isFluidEqual(input)) {
+				if (recipe != null && input.isFluidEqual(recipe.getInput())) {
 					iterator.remove();
 					return;
 				}
