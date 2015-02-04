@@ -2,8 +2,10 @@ package buildcraftAdditions.tileEntities;
 
 import net.minecraft.nbt.NBTTagCompound;
 
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -11,6 +13,8 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
+import buildcraftAdditions.utils.RestrictedTank;
+import buildcraftAdditions.utils.WhitelistedTank;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -20,44 +24,50 @@ import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
-	public static int lavaVar;
-	public int lava;
+
+	private final RestrictedTank tank = new WhitelistedTank("LavaTank", 3 * FluidContainerRegistry.BUCKET_VOLUME, this, FluidRegistry.LAVA);
 
 	public TileLavaCoil() {
 		super();
 		burnTime = 0;
 		fullBurnTime = 0;
-		lava = 0;
 		shouldHeat = false;
 		burning = false;
 	}
 
-	public static int getLavaAmount() {
-		return lavaVar;
+	public int getLavaAmount() {
+		return tank.getFluidAmount();
+	}
+
+	public int getLavaCapaity() {
+		return tank.getCapacity();
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		lava = tag.getInteger("lava");
+		if (tag.hasKey("LavaTank", Constants.NBT.TAG_COMPOUND))
+			tank.readFromNBT(tag.getCompoundTag("LavaTank"));
+		// TODO: Remove once everybody has updated
+		if (tag.hasKey("lava", Constants.NBT.TAG_INT))
+			tank.setFluid(new FluidStack(FluidRegistry.LAVA, tag.getInteger("lava")));
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		tag.setInteger("lava", lava);
+		tag.setTag("LavaTank", tank.writeToNBT(new NBTTagCompound()));
 	}
 
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		lavaVar = lava;
 		if (isBurning() && burnTime > 0)
 			burnTime--;
 		if (burnTime == 0)
 			burning = false;
-		if (!isBurning() && shouldHeat && lava >= 100) {
-			lava = lava - 100;
+		if (!isBurning() && shouldHeat && tank.getFluidAmount() >= 100) {
+			tank.drain(100, true);
 			burnTime = 10000;
 			increment = ConfigurationHandler.lavaCoilHeat;
 			burning = true;
@@ -68,50 +78,30 @@ public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		if (resource.getFluid().getID() == FluidRegistry.LAVA.getID()) {
-			int amount = 3000;
-			if (doFill) {
-				if (resource.amount > 3000 - lava)
-					amount = 3000 - lava;
-				else if (resource.amount < 3000 - lava)
-					amount = resource.amount;
-				lava = lava + amount;
-				return amount;
-			} else {
-				if (resource.amount > 3000 - lava)
-					amount = 3000 - lava;
-				else if (resource.amount < 3000 - lava)
-					amount = resource.amount;
-				return amount;
-			}
-		}
-		return 0;
+		return tank.fill(resource, doFill);
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+		if (resource != null) {
+			Fluid f = resource.getFluid();
+			if (f != null) {
+				Fluid fluid = tank.getFluidType();
+				if (fluid != null && f.getID() == fluid.getID())
+					return tank.drain(resource.amount, doDrain);
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		if (doDrain) {
-			int amount = maxDrain;
-			if (maxDrain > lava)
-				amount = lava;
-			lava = lava - amount;
-			return new FluidStack(FluidRegistry.LAVA, amount);
-		} else {
-			int amount = maxDrain;
-			if (maxDrain > lava)
-				amount = lava;
-			return new FluidStack(FluidRegistry.LAVA, amount);
-		}
+		return tank.drain(maxDrain, doDrain);
 	}
 
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		return fluid == FluidRegistry.LAVA;
+		return tank.canFill(fluid);
 	}
 
 	@Override
@@ -121,6 +111,6 @@ public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		return new FluidTankInfo[]{new FluidTankInfo(new FluidStack(FluidRegistry.LAVA, lava), 3000)};
+		return new FluidTankInfo[]{tank.getInfo()};
 	}
 }

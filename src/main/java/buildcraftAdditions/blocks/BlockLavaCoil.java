@@ -3,7 +3,7 @@ package buildcraftAdditions.blocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.tileEntities.TileLavaCoil;
 import buildcraftAdditions.utils.RenderUtils;
+import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -21,34 +22,37 @@ import buildcraftAdditions.utils.RenderUtils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockLavaCoil extends BlockCoilBase {
-	public IIcon sides, top, bottom;
+
+	@SideOnly(Side.CLIENT)
+	private IIcon sides, top, bottom;
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
-		super.onBlockActivated(world, x, y, z, entityplayer, par6, par7, par8, par9);
-
-		// Drop through if the player is sneaking
-		if (entityplayer.isSneaking())
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+		if (player.isSneaking())
 			return false;
 
-
-		if (!world.isRemote)
-			entityplayer.addChatComponentMessage(new ChatComponentText("Lava Stored: " + ((TileLavaCoil) world.getTileEntity(x, y, z)).getLavaAmount() + "/3000 mb"));
+		if (!world.isRemote) {
+			TileEntity tile = world.getTileEntity(x, y, z);
+			if (tile instanceof TileLavaCoil) {
+				TileLavaCoil coil = (TileLavaCoil) tile;
+				player.addChatComponentMessage(new ChatComponentTranslation("lavaCoil.info", Utils.localizeFormatted("fluids.info", coil.getLavaAmount(), coil.getLavaCapaity())));
+			}
+		}
 
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
+
 	@Override
-	public IIcon getIcon(int i, int j) {
-		// If no metadata is set, then this is an icon.
-		if (j == 0 && i == 3)
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta) {
+		if (meta == 0 && side == 3)
 			return sides;
 
-		if (i == j && i > 1)
+		if (side == meta && side > 1)
 			return sides;
 
-		switch (i) {
+		switch (side) {
 			case 0:
 				return bottom;
 			case 1:

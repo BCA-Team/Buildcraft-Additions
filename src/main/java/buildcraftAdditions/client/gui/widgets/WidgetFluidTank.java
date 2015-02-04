@@ -2,6 +2,8 @@ package buildcraftAdditions.client.gui.widgets;
 
 import java.util.List;
 
+import net.minecraft.item.EnumRarity;
+
 import buildcraftAdditions.client.gui.gui.GuiBase;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Tank;
@@ -31,11 +33,12 @@ public class WidgetFluidTank extends WidgetBase {
 
 	@Override
 	public void addTooltip(int mouseX, int mouseY, List<String> tooltips, boolean shift) {
-		if (tank.getFluidAmount() > 0) {
-			tooltips.add(tank.getFluid().getLocalizedName());
+		if (tank.getFluid() != null && tank.getFluidType() != null) {
+			EnumRarity r = tank.getFluidType().getRarity(tank.getFluid());
+			tooltips.add((r != null && r.rarityColor != null ? r.rarityColor : EnumRarity.common.rarityColor) + tank.getFluid().getLocalizedName());
 		} else {
 			tooltips.add(Utils.localize("gui.empty"));
 		}
-		tooltips.add(tank.getFluidAmount() + " / " + tank.getCapacity() + " mB");
+		tooltips.add(Utils.localizeFormatted("fluids.info", tank.getFluidAmount(), tank.getCapacity()));
 	}
 }

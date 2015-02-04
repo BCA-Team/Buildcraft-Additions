@@ -312,3 +312,6 @@ selfdestructCountdouwn=SELF DESTUCTION IN
 selfdestructActivated=SELF DESTRUCT ACTIVATED
 
 configured=Configured
+
+fluids.info=%d / %d mB
+lavaCoil.info=Lava stored: %s
