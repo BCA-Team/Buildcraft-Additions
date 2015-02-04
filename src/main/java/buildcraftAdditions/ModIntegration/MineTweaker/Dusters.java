@@ -1,15 +1,15 @@
 package buildcraftAdditions.ModIntegration.MineTweaker;
 
-import net.minecraft.item.ItemStack;
-
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
 import minetweaker.annotations.ModOnly;
 import minetweaker.api.item.IItemStack;
+import minetweaker.api.minecraft.MineTweakerMC;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -21,100 +21,91 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ModOnly("bcadditions")
 public class Dusters {
 
-	@ZenMethod
-	public static void addDusting(IItemStack input, IItemStack output) {
-		MineTweakerAPI.apply(new AddRecipeAction(input, output));
-	}
-	
-	@ZenMethod
-	public static void removeDusting(IItemStack input) {
-		MineTweakerAPI.apply(new RemoveRecipeAction( input));
-	}
+    @ZenMethod
+    public static void addDusting(IItemStack input, IItemStack output) {
+        MineTweakerAPI.apply(new AddRecipeAction(input, output));
+    }
 
-	public static ItemStack toStack(IItemStack iStack) {
-		if (iStack == null)
-			return null;
-		else {
-			Object internal = iStack.getInternal();
-			return (ItemStack) internal;
-		}
-	}
+    @ZenMethod
+    public static void removeDusting(IItemStack input) {
+        MineTweakerAPI.apply(new RemoveRecipeAction(input));
+    }
 
-	private static class AddRecipeAction implements IUndoableAction {
-		public IItemStack input;
-		public IItemStack output;
+    private static class AddRecipeAction implements IUndoableAction {
+        public IItemStack input;
+        public IItemStack output;
 
-		public AddRecipeAction(IItemStack input, IItemStack output) {
-			this.input = input;
-			this.output = output;
-		}
+        public AddRecipeAction(IItemStack input, IItemStack output) {
+            this.input = input;
+            this.output = output;
+        }
 
-		@Override
-		public void apply() {
-			BCARecipeManager.duster.addRecipe(toStack(input), toStack(output));
-		}
+        @Override
+        public void apply() {
+            BCARecipeManager.duster.addRecipe(MineTweakerMC.getItemStack(input), MineTweakerMC.getItemStack(output));
+        }
 
-		@Override
-		public boolean canUndo() {
-			return true;
-		}
+        @Override
+        public boolean canUndo() {
+            return true;
+        }
 
-		@Override
-		public void undo() {
-			BCARecipeManager.duster.removeRecipe(toStack(input));
-		}
+        @Override
+        public void undo() {
+            BCARecipeManager.duster.removeRecipe(MineTweakerMC.getItemStack(input));
+        }
 
-		@Override
-		public String describe() {
-			return "Adding duster recipe for " + input.getDisplayName() + "with an output of " + output.getDisplayName() + "* " + output.getAmount();
-		}
+        @Override
+        public String describe() {
+            return String.format("Adding BCA Duster recipe for %s -> %s * %s", input, output, output.getAmount());
+        }
 
-		@Override
-		public String describeUndo() {
-			return "Removing duster recipe with as input " + input.getDisplayName();
-		}
+        @Override
+        public String describeUndo() {
+            return String.format("Removing BCA Duster recipe for %s -> %s", input, BCARecipeManager.duster.getRecipe(MineTweakerMC.getItemStack(input)).getOutput(MineTweakerMC.getItemStack(input)));
+        }
 
-		@Override
-		public Object getOverrideKey() {
-			return null;
-		}
-	}
+        @Override
+        public Object getOverrideKey() {
+            return null;
+        }
+    }
 
-	private static class RemoveRecipeAction implements IUndoableAction {
-		IItemStack input;
+    private static class RemoveRecipeAction implements IUndoableAction {
+        IItemStack input;
 
-		public RemoveRecipeAction(IItemStack input) {
-			this.input = input;
-		}
+        public RemoveRecipeAction(IItemStack input) {
+            this.input = input;
+        }
 
-		@Override
-		public void apply() {
-			BCARecipeManager.duster.removeRecipe(toStack(input));
-		}
+        @Override
+        public void apply() {
+            BCARecipeManager.duster.removeRecipe(MineTweakerMC.getItemStack(input));
+        }
 
-		@Override
-		public boolean canUndo() {
-			return false;
-		}
+        @Override
+        public boolean canUndo() {
+            return false;
+        }
 
-		@Override
-		public void undo() {
+        @Override
+        public void undo() {
 
-		}
+        }
 
-		@Override
-		public String describe() {
-			return "Removing dusting recipe with input " + input.getDisplayName();
-		}
+        @Override
+        public String describe() {
+            return String.format("Removing BCA Duster recipe for %s -> %s", input, BCARecipeManager.duster.getRecipe(MineTweakerMC.getItemStack(input)).getOutput(MineTweakerMC.getItemStack(input)));
+        }
 
-		@Override
-		public String describeUndo() {
-			return null;
-		}
+        @Override
+        public String describeUndo() {
+            return null;
+        }
 
-		@Override
-		public Object getOverrideKey() {
-			return null;
-		}
-	}
+        @Override
+        public Object getOverrideKey() {
+            return null;
+        }
+    }
 }
