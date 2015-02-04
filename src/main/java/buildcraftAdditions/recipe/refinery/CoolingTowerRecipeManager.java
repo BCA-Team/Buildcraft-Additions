@@ -44,7 +44,7 @@ public class CoolingTowerRecipeManager implements ICoolingTowerRecipeManager {
 		if (input != null) {
 			ICoolingTowerRecipe recipe = null;
 			for (Iterator<ICoolingTowerRecipe> iterator = recipes.iterator(); iterator.hasNext(); recipe = iterator.next()) {
-				if (recipe != null && input.isFluidEqual(input)) {
+				if (recipe != null && input.isFluidEqual(recipe.getInput())) {
 					iterator.remove();
 					return;
 				}
