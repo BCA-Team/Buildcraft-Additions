@@ -10,6 +10,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.common.event.FMLInterModComms;
 
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
@@ -93,6 +95,22 @@ public class IMCHandler {
 					if (output == null)
 						continue;
 					BCARecipeManager.refinery.addRecipe(input, output, tag.getInteger("RequiredHeat"));
+				}
+			} else if (type.equals("removeCoolingRecipe")) {
+				if (message.isNBTMessage()) {
+					logNotNBT(message);
+					continue;
+				}
+
+				NBTTagCompound tag = message.getNBTValue();
+				if (checkRequiredNBTTags("Cooling Tower", tag, "Input"))
+					continue;
+
+				if (tag.hasKey("Input", Constants.NBT.TAG_COMPOUND)) {
+					FluidStack input = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Input"));
+					if (input == null)
+						continue;
+					BCARecipeManager.cooling.removeRecipe(input);
 				}
 			}
 		}
