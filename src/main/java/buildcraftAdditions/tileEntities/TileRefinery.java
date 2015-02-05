@@ -34,6 +34,7 @@ import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.RotationUtils;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.utils.fluids.ITankHolder;
+import buildcraftAdditions.utils.fluids.RefineryRecipeTank;
 import buildcraftAdditions.utils.fluids.Tank;
 
 import com.google.common.collect.ImmutableList;
@@ -50,7 +51,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public int energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer, lastRequiredHeat;
 	public boolean init, valve, isCooling, moved;
 	public TileRefinery master;
-	private Tank input = new Tank(3000, this, "Input");
+	private Tank input = new RefineryRecipeTank("Input", 3000, this);
 	private Tank output = new Tank(3000, this, "Output");
 	private FluidStack outputFluidStack;
 	private FluidStack inputFluidStack;
@@ -84,9 +85,11 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 				Location location = new Location(this).move(direction);
 				TileEntity entity = location.getTileEntity();
-				if (entity != null && entity instanceof IFluidHandler && !(entity instanceof TileRefinery)) {
+				if (entity != null && entity instanceof IFluidHandler && !(entity instanceof TileRefinery) && master.output.getFluidType() != null) {
 					IFluidHandler tank = (IFluidHandler) entity;
-					master.drain(direction, tank.fill(direction.getOpposite(), new FluidStack(master.output.getFluidType(), 100), true), true);
+					int drain = tank.fill(direction.getOpposite(), new FluidStack(master.output.getFluidType(), 100), false);
+					FluidStack stack = master.drain(direction, drain, true);
+					tank.fill(direction.getOpposite(), stack, true);
 				}
 			}
 		}
@@ -354,11 +357,15 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-		return null;
+		if (!isMaster())
+			return null;
+		return output.drain(resource, doDrain);
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+		if (isMaster())
+			return realDrain(maxDrain, doDrain);
 		if (!valve)
 			return null;
 		if (master == null)

@@ -45,6 +45,12 @@ public class BlacklistedTank extends RestrictedTank {
 				return "Blacklist: " + list.toString();
 			}
 
+			@Override
+			public String toString() {
+				//for easier debugging
+				return getDescription();
+			}
+
 		});
 	}
 }

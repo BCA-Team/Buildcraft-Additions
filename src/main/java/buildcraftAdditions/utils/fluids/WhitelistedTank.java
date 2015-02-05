@@ -44,6 +44,11 @@ public class WhitelistedTank extends RestrictedTank {
 				return "Whitelist: " + list.toString();
 			}
 
+			@Override
+			public String toString() {
+				//for easier debugging
+				return getDescription();
+			}
 		});
 	}
 }
