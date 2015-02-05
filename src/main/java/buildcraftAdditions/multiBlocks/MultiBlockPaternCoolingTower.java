@@ -19,21 +19,18 @@ import buildcraftAdditions.utils.RotationUtils;
 public class MultiBlockPaternCoolingTower extends MultiBlockPatern {
 
 	public MultiBlockPaternCoolingTower() {
-		super(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.EAST,
-				ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.WEST, ForgeDirection.UP,
-				ForgeDirection.EAST, ForgeDirection.EAST, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.WEST,
-				ForgeDirection.WEST, ForgeDirection.SOUTH, ForgeDirection.UP, ForgeDirection.SOUTH, ForgeDirection.EAST,
-				ForgeDirection.EAST, ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.WEST, ForgeDirection.WEST,
-				ForgeDirection.UP, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.EAST, ForgeDirection.EAST,
-				ForgeDirection.NORTH, ForgeDirection.NORTH, ForgeDirection.WEST, ForgeDirection.UP, ForgeDirection.WEST,
-				ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.EAST, ForgeDirection.EAST, ForgeDirection.NORTH,
-				ForgeDirection.NORTH, ForgeDirection.WEST, ForgeDirection.SOUTH, ForgeDirection.DOWN, ForgeDirection.DOWN,
-				ForgeDirection.DOWN, ForgeDirection.DOWN}, Variables.Identifiers.COOLING_TOWER_WALLS);
-		identifiers[16] = Variables.Identifiers.COOLING_TOWER_VALVE;
-		identifiers[41] = Variables.Identifiers.COOLING_TOWER_VALVE;
-		for (int t = 42; t < 45; t++)
+		super(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.UP, ForgeDirection.UP, ForgeDirection.UP, ForgeDirection.UP,
+						ForgeDirection.SOUTH, ForgeDirection.DOWN, ForgeDirection.DOWN, ForgeDirection.DOWN, ForgeDirection.DOWN, ForgeDirection.WEST, ForgeDirection.UP, ForgeDirection.NORTH,
+						ForgeDirection.UP, ForgeDirection.SOUTH, ForgeDirection.UP, ForgeDirection.NORTH, ForgeDirection.UP, ForgeDirection.SOUTH, ForgeDirection.SOUTH, ForgeDirection.DOWN,
+						ForgeDirection.DOWN, ForgeDirection.DOWN, ForgeDirection.DOWN, ForgeDirection.EAST, ForgeDirection.UP, ForgeDirection.UP, ForgeDirection.UP, ForgeDirection.UP,
+						ForgeDirection.EAST, ForgeDirection.DOWN, ForgeDirection.DOWN, ForgeDirection.DOWN, ForgeDirection.DOWN, ForgeDirection.NORTH, ForgeDirection.UP, ForgeDirection.UP,
+						ForgeDirection.UP, ForgeDirection.UP, ForgeDirection.NORTH, ForgeDirection.DOWN, ForgeDirection.DOWN, ForgeDirection.DOWN, ForgeDirection.DOWN},
+				Variables.Identifiers.COOLING_TOWER_WALLS);
+		identifiers[3] = Variables.Identifiers.COOLING_TOWER_VALVE;
+		identifiers[6] = Variables.Identifiers.COOLING_TOWER_VALVE;
+		for (int t = 7; t < 10; t++)
 			identifiers[t] = '\n';
-		identifiers[45] = Variables.Identifiers.COOLING_TOWER_VALVE;
+		identifiers[10] = Variables.Identifiers.COOLING_TOWER_VALVE;
 	}
 
 	@Override
@@ -57,11 +54,11 @@ public class MultiBlockPaternCoolingTower extends MultiBlockPatern {
 					IMultiBlockTile slave = (IMultiBlockTile) location.getTileEntity();
 					slave.formMultiblock(x, y, z, rotation);
 					TileCoolingTower tower = (TileCoolingTower) location.getTileEntity();
-					if (t == 16)
+					if (t == 3)
 						tower.tank = 2;
-					if (t == 41)
+					if (t == 6)
 						tower.tank = 1;
-					if (t == 45)
+					if (t == 10)
 						tower.tank = 0;
 				}
 				t++;

@@ -47,7 +47,7 @@ public class RotationUtils {
 				if (direction == ForgeDirection.SOUTH)
 					return ForgeDirection.EAST;
 				if (direction == ForgeDirection.WEST)
-					return ForgeDirection.EAST;
+					return ForgeDirection.SOUTH;
 				return direction;
 		}
 		return direction;

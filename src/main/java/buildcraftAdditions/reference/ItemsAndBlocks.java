@@ -1,5 +1,6 @@
 package buildcraftAdditions.reference;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -26,6 +27,8 @@ import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Core;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Plating;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryValve;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryWalls;
+import buildcraftAdditions.blocks.multiBlocks.PaternTestingBlock;
+import buildcraftAdditions.core.VersionCheck;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
@@ -85,6 +88,7 @@ public final class ItemsAndBlocks {
 	public static MultiBlockCoolingTowerWalls coolingTowerWalls;
 	public static MultiBlockCoolingTowerValve coolingTowerValve;
 	public static BlockItemSorter itemSorter;
+	public static Block testBlock;
 
 	public static BatteryBase powerCapsuleTier1;
 	public static BatteryBase powerCapsuleTier2;
@@ -289,6 +293,13 @@ public final class ItemsAndBlocks {
 		itemSorter = new BlockItemSorter();
 		itemSorter.setBlockName("blockItemSorter").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(itemSorter, "blockItemSorter");
+
+		if (VersionCheck.currentVersion.contains("@")) {
+			//only register testblock in dev environments
+			testBlock = new PaternTestingBlock();
+			testBlock.setBlockName("testBlock").setCreativeTab(BuildcraftAdditions.bcadditions);
+			GameRegistry.registerBlock(testBlock, "testingBlock");
+		}
 	}
 
 	public static void registerTileEntities() {
