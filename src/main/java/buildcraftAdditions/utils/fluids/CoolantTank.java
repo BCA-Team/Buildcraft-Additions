@@ -23,7 +23,7 @@ public class CoolantTank extends RestrictedTank {
 
 			@Override
 			public String getDescription() {
-				return null;
+				return "Only accepts fluids that are registered as coolants in the BC api";
 			}
 		});
 	}

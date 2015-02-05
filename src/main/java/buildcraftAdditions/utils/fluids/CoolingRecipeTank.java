@@ -23,7 +23,7 @@ public class CoolingRecipeTank extends RestrictedTank {
 
 			@Override
 			public String getDescription() {
-				return null;
+				return "Only accept fluids that are part of a cooling tower recipe";
 			}
 		});
 	}

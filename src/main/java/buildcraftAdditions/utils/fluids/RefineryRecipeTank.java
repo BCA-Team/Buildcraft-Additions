@@ -23,7 +23,7 @@ public class RefineryRecipeTank extends RestrictedTank {
 
 			@Override
 			public String getDescription() {
-				return null;
+				return "Only accepts fluids that are part of a refinery recipe";
 			}
 		});
 	}
