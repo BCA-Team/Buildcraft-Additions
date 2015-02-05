@@ -1,6 +1,4 @@
-package buildcraftAdditions.utils;
-
-import io.netty.buffer.ByteBuf;
+package buildcraftAdditions.utils.fluids;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -12,6 +10,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 import buildcraftAdditions.networking.ISyncObject;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise

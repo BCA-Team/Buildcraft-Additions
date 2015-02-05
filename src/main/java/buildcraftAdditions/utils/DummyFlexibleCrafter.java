@@ -5,6 +5,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import buildcraft.api.recipes.IFlexibleCrafter;
+
+import buildcraftAdditions.utils.fluids.Tank;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

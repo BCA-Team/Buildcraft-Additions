@@ -1,4 +1,4 @@
-package buildcraftAdditions.utils;
+package buildcraftAdditions.utils.fluids;
 
 import java.util.Collection;
 
@@ -24,6 +24,8 @@ import buildcraftAdditions.core.BucketHandler;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.items.ItemBucketBCA;
 import buildcraftAdditions.items.itemBlocks.ItemBlockFluid;
+import buildcraftAdditions.utils.DummyFlexibleCrafter;
+import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise

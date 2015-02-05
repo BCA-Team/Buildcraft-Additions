@@ -13,8 +13,8 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
-import buildcraftAdditions.utils.RestrictedTank;
-import buildcraftAdditions.utils.WhitelistedTank;
+import buildcraftAdditions.utils.fluids.RestrictedTank;
+import buildcraftAdditions.utils.fluids.WhitelistedTank;
 
 /**
  * Copyright (c) 2014, AEnterprise

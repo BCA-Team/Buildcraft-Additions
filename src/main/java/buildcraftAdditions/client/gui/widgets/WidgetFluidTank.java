@@ -6,8 +6,8 @@ import net.minecraft.item.EnumRarity;
 
 import buildcraftAdditions.client.gui.gui.GuiBase;
 import buildcraftAdditions.utils.RenderUtils;
-import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.utils.fluids.Tank;
 
 /**
  * Copyright (c) 2014, AEnterprise

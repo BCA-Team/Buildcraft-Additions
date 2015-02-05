@@ -8,8 +8,6 @@ package buildcraftAdditions.tileEntities;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -27,8 +25,10 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
-import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.utils.fluids.Tank;
+
+import io.netty.buffer.ByteBuf;
 
 public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler {
 

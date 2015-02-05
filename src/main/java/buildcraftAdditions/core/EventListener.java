@@ -28,8 +28,8 @@ import buildcraftAdditions.items.dust.ItemConverter;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
-import buildcraftAdditions.utils.RefineryRecipeConverter;
 import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
 
 import eureka.api.EurekaKnowledge;
 

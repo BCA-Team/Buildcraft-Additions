@@ -1,4 +1,4 @@
-package buildcraftAdditions.utils;
+package buildcraftAdditions.utils.fluids;
 
 /**
  * Copyright (c) 2014, AEnterprise

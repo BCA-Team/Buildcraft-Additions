@@ -27,7 +27,7 @@ import buildcraftAdditions.items.Tools.UpgradeRecipeSawBlade;
 import buildcraftAdditions.items.Tools.UpgradeRecipeTiller;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.utils.BCItems;
-import buildcraftAdditions.utils.RefineryRecipeConverter;
+import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

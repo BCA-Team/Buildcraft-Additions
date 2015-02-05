@@ -1,4 +1,4 @@
-package buildcraftAdditions.utils;
+package buildcraftAdditions.utils.fluids;
 
 import net.minecraftforge.fluids.FluidStack;
 

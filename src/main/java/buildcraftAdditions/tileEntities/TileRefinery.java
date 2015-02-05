@@ -30,11 +30,11 @@ import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
 import buildcraftAdditions.tileEntities.varHelpers.Upgrades;
-import buildcraftAdditions.utils.ITankHolder;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.RotationUtils;
-import buildcraftAdditions.utils.Tank;
 import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.utils.fluids.ITankHolder;
+import buildcraftAdditions.utils.fluids.Tank;
 
 import com.google.common.collect.ImmutableList;
 import io.netty.buffer.ByteBuf;

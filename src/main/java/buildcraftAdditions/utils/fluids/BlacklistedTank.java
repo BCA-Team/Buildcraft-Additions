@@ -1,4 +1,4 @@
-package buildcraftAdditions.utils;
+package buildcraftAdditions.utils.fluids;
 
 import java.util.ArrayList;
 
@@ -14,21 +14,22 @@ import net.minecraftforge.fluids.FluidStack;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class WhitelistedTank extends RestrictedTank {
+public class BlacklistedTank extends RestrictedTank {
 
-	public WhitelistedTank(String name, int capacity, TileEntity tile, final Fluid... fluids) {
+	public BlacklistedTank(String name, int capacity, TileEntity tile, final Fluid... fluids) {
 		super(name, capacity, tile, new IFluidAcceptor() {
 
 			@Override
 			public boolean accepts(FluidStack fluidStack) {
-
-				if (fluids == null || fluidStack == null)
+				if (fluidStack == null)
 					return false;
 				Fluid fluid = fluidStack.getFluid();
 				if (fluid == null)
 					return false;
+				if (fluids == null)
+					return true;
 				for (Fluid f : fluids)
-					if (f != null && f.getID() != fluid.getID())
+					if (f != null && f.getID() == fluid.getID())
 						return false;
 				return true;
 			}
@@ -41,7 +42,7 @@ public class WhitelistedTank extends RestrictedTank {
 						if (f != null)
 							list.add(f.getName());
 				list.trimToSize();
-				return "Whitelist: " + list.toString();
+				return "Blacklist: " + list.toString();
 			}
 
 		});
