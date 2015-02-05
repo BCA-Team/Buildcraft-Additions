@@ -97,13 +97,13 @@ public class IMCHandler {
 					BCARecipeManager.refinery.addRecipe(input, output, tag.getInteger("RequiredHeat"));
 				}
 			} else if (type.equals("removeCoolingRecipe")) {
-				if (message.isNBTMessage()) {
+				if (!message.isNBTMessage()) {
 					logNotNBT(message);
 					continue;
 				}
 
 				NBTTagCompound tag = message.getNBTValue();
-				if (checkRequiredNBTTags("Cooling Tower", tag, "Input"))
+				if (!checkRequiredNBTTags("Cooling Tower", tag, "Input"))
 					continue;
 
 				if (tag.hasKey("Input", Constants.NBT.TAG_COMPOUND)) {
@@ -111,6 +111,22 @@ public class IMCHandler {
 					if (input == null)
 						continue;
 					BCARecipeManager.cooling.removeRecipe(input);
+				}
+			} else if (type.equals("removeRefineryRecipe")) {
+				if (!message.isNBTMessage()) {
+					logNotNBT(message);
+					continue;
+				}
+
+				NBTTagCompound tag = message.getNBTValue();
+				if (!checkRequiredNBTTags("Refinery", tag, "Input"))
+					continue;
+
+				if (tag.hasKey("Input", Constants.NBT.TAG_COMPOUND)) {
+					FluidStack input = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Input"));
+					if (input == null)
+						continue;
+					BCARecipeManager.refinery.removeRecipe(input);
 				}
 			}
 		}
