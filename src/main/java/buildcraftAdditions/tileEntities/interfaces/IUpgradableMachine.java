@@ -1,8 +1,9 @@
 package buildcraftAdditions.tileEntities.interfaces;
 
-import java.util.List;
+import java.util.Set;
 
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -16,7 +17,7 @@ public interface IUpgradableMachine {
 
 	void installUpgrade(EnumMachineUpgrades upgrade);
 
-	List<EnumMachineUpgrades> getIntalledUpgrades();
+	Set<EnumMachineUpgrades> getInstalledUpgrades();
 
 	void removeUpgrade();
 }

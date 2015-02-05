@@ -1,7 +1,11 @@
 package buildcraftAdditions.tileEntities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.EnumSet;
+import java.util.Set;
+
+import com.google.common.collect.ImmutableSet;
+
+import io.netty.buffer.ByteBuf;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -36,9 +40,6 @@ import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.utils.fluids.ITankHolder;
 import buildcraftAdditions.utils.fluids.RefineryRecipeTank;
 import buildcraftAdditions.utils.fluids.Tank;
-
-import com.google.common.collect.ImmutableList;
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -266,9 +267,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		output.setFluid(null);
 		requiredHeat = 0;
 		data.invalidate();
-		int num = getIntalledUpgrades().size();
-		for (int t = 0; t < num; t++)
-			removeUpgrade();
+		upgrades.invalidate();
 		sync();
 	}
 
@@ -538,19 +537,19 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	@Override
-	public List<EnumMachineUpgrades> getIntalledUpgrades() {
+	public Set<EnumMachineUpgrades> getInstalledUpgrades() {
 		if (isMaster()) {
 			return upgrades.getUpgrades();
 		} else {
 			if (master == null)
 				findMaster();
 			if (master == null)
-				return new ArrayList<EnumMachineUpgrades>();
-			List<EnumMachineUpgrades> list = new ArrayList<EnumMachineUpgrades>();
-			list.addAll(master.getIntalledUpgrades());
+				return EnumSet.noneOf(EnumMachineUpgrades.class);
+			Set<EnumMachineUpgrades> set = EnumSet.noneOf(EnumMachineUpgrades.class);
+			set.addAll(master.getInstalledUpgrades());
 			if (valve)
-				list.addAll(upgrades.getUpgrades());
-			return ImmutableList.copyOf(list);
+				set.addAll(upgrades.getUpgrades());
+			return ImmutableSet.copyOf(set);
 		}
 	}
 

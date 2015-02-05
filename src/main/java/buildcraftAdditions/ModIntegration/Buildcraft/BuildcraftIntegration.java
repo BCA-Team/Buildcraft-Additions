@@ -26,8 +26,10 @@ import buildcraftAdditions.items.Tools.UpgradeRecipeGoldStick;
 import buildcraftAdditions.items.Tools.UpgradeRecipeSawBlade;
 import buildcraftAdditions.items.Tools.UpgradeRecipeTiller;
 import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.utils.BCItems;
 import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -100,7 +102,7 @@ public class BuildcraftIntegration {
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.toolUpgradeDrill), "U", 'U', ItemsAndBlocks.toolUpgradeHoe);
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.toolUpgradeHoe), "U", 'U', ItemsAndBlocks.toolUpgradeChainsaw);
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemsAndBlocks.machineConfigurator), "BIR", " W ", "YIY", 'B', "dyeBlue", 'I', "ingotIron", 'R', "dyeRed", 'W', BCItems.WRENCH, 'Y', "dyeYellow"));
-		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.itemSorter), "SUS", "PCP", "SGS", 'S', Blocks.stone, 'U', ItemsAndBlocks.upgradeAutoEject, 'P', BCItems.PIPE_ITEMS_LAPIS, 'C', Blocks.chest, 'G', BCItems.PIPE_ITEMS_GOLD);
+		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.itemSorter), "SUS", "PCP", "SGS", 'S', Blocks.stone, 'U', EnumMachineUpgrades.AUTO_OUTPUT.getItemStack(), 'P', BCItems.PIPE_ITEMS_LAPIS, 'C', Blocks.chest, 'G', BCItems.PIPE_ITEMS_GOLD);
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.pipeColoringTool), "  S", " S ", "W  ", 'W', new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 'S', Items.stick);
 
 		//remove BC refinery recipe

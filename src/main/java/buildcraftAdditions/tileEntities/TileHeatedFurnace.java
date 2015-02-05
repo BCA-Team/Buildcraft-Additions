@@ -1,6 +1,8 @@
 package buildcraftAdditions.tileEntities;
 
-import java.util.List;
+import java.util.Set;
+
+import io.netty.buffer.ByteBuf;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -24,8 +26,6 @@ import buildcraftAdditions.tileEntities.varHelpers.Upgrades;
 import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
-
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -93,7 +93,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 		} else {
 			stop();
 		}
-		if (upgrades.getUpgrades().contains(EnumMachineUpgrades.AUTO_OUTPUT))
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.AUTO_OUTPUT))
 			output();
 	}
 
@@ -267,7 +267,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	}
 
 	@Override
-	public List<EnumMachineUpgrades> getIntalledUpgrades() {
+	public Set<EnumMachineUpgrades> getInstalledUpgrades() {
 		return upgrades.getUpgrades();
 	}
 
