@@ -17,7 +17,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class BlacklistedTank extends RestrictedTank {
 
 	public BlacklistedTank(String name, int capacity, TileEntity tile, final Fluid... fluids) {
-		super(name, capacity, tile, new FluidAcceptor() {
+		super(name, capacity, tile, new IFluidAcceptor() {
 
 			@Override
 			public boolean accepts(FluidStack fluidStack) {

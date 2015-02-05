@@ -48,6 +48,12 @@ public class Tank extends FluidTank implements ISyncObject {
 		return fluid.getFluid();
 	}
 
+	public FluidStack drain(FluidStack resource, boolean doDrain) {
+		if (fluid != null && fluid.isFluidEqual(resource))
+			return drain(resource.amount, doDrain);
+		return null;
+	}
+
 	@Override
 	public String toString() {
 		return name + ": " + getFluidAmount() + " / " + capacity + " mB" + (fluid != null ? (" of " + fluid.getLocalizedName()) : "");

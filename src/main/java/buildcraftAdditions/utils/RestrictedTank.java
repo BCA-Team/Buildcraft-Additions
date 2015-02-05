@@ -14,9 +14,9 @@ import net.minecraftforge.fluids.FluidStack;
  */
 public class RestrictedTank extends Tank {
 
-	protected final FluidAcceptor acceptor;
+	protected final IFluidAcceptor acceptor;
 
-	public RestrictedTank(String name, int capacity, TileEntity tile, FluidAcceptor acceptor) {
+	public RestrictedTank(String name, int capacity, TileEntity tile, IFluidAcceptor acceptor) {
 		super(capacity, tile, name);
 		this.acceptor = acceptor;
 	}
@@ -43,11 +43,4 @@ public class RestrictedTank extends Tank {
 		return super.toString() + ", Restrictions: [" + acceptor.getDescription() + "]";
 	}
 
-	public static interface FluidAcceptor {
-
-		boolean accepts(FluidStack fluidStack);
-
-		String getDescription();
-
-	}
 }

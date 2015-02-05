@@ -83,15 +83,7 @@ public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-		if (resource != null) {
-			Fluid f = resource.getFluid();
-			if (f != null) {
-				Fluid fluid = tank.getFluidType();
-				if (fluid != null && f.getID() == fluid.getID())
-					return tank.drain(resource.amount, doDrain);
-			}
-		}
-		return null;
+		return tank.drain(resource, doDrain);
 	}
 
 	@Override
