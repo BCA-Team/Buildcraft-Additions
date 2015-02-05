@@ -32,6 +32,7 @@ import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
 import buildcraftAdditions.tileEntities.varHelpers.Upgrades;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.utils.fluids.CoolingRecipeTank;
 import buildcraftAdditions.utils.fluids.ITankHolder;
 import buildcraftAdditions.utils.fluids.Tank;
 
@@ -48,7 +49,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.COOLING_TOWER);
 	public int tank;
 	public boolean valve;
-	private Tank input = new Tank(2000, this, "input");
+	private Tank input = new CoolingRecipeTank("input", 2000, this);
 	private Tank output = new Tank(2000, this, "output");
 	private Tank coolant = new Tank(10000, this, "coolant");
 	private TileCoolingTower master;
@@ -72,9 +73,11 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 				Location location = new Location(this).move(direction);
 				TileEntity entity = location.getTileEntity();
-				if (entity != null && entity instanceof IFluidHandler && !(entity instanceof TileCoolingTower)) {
+				if (entity != null && entity instanceof IFluidHandler && !(entity instanceof TileCoolingTower) && master.output.getFluidType() != null) {
 					IFluidHandler tank = (IFluidHandler) entity;
-					master.drain(direction, tank.fill(direction.getOpposite(), new FluidStack(master.output.getFluidType(), 100), true), true);
+					int drain = tank.fill(direction.getOpposite(), new FluidStack(master.output.getFluidType(), 100), false);
+					FluidStack stack = master.drain(direction, drain, true);
+					tank.fill(direction.getOpposite(), stack, true);
 				}
 			}
 		}
@@ -278,6 +281,8 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+		if (isMaster())
+			return drain(maxDrain, doDrain, tank);
 		if (isPartOfMultiblock() && valve) {
 			if (masterCheck())
 				return master.drain(maxDrain, doDrain, tank);

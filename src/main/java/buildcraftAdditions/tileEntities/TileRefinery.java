@@ -408,7 +408,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		if (data.isMaster) {
+		if (isMaster()) {
 			int recieved = maxReceive;
 			if (recieved > maxEnergy - energy)
 				recieved = maxEnergy - energy;
