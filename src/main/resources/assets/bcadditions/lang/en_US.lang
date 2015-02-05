@@ -67,6 +67,7 @@ tooltip.colorNormalMode=Normal Mode
 tooltip.colorNormalMode.info=Colors standard colorable blocks, sheep and BC pipes
 tooltip.colorSortingMode=Sorting Mode
 tooltip.colorSortingMode.info=Colors the sorting part of the DaiZuli and Lapis pipes
+tooltip.defaultColor=Default Item Color
 
 fluid.gas.name=%s Gas
 
@@ -122,8 +123,8 @@ gui.color.lightBlue=Light Blue
 gui.color.yellow=Yellow
 gui.color.lime=Lime
 gui.color.pink=Pink
-gui.color.gray=Grey
-gui.color.silver=Light Grey
+gui.color.gray=Gray
+gui.color.lightGray=Light Gray
 gui.color.cyan=Cyan
 gui.color.purple=Purple
 gui.color.blue=Blue
