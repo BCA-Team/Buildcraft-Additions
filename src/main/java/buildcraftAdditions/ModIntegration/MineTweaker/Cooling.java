@@ -5,7 +5,7 @@ import buildcraftAdditions.api.recipe.BCARecipeManager;
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
 import minetweaker.annotations.ModOnly;
-import minetweaker.api.item.IItemStack;
+import minetweaker.api.liquid.ILiquidStack;
 import minetweaker.api.minecraft.MineTweakerMC;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -17,32 +17,34 @@ import stanhebben.zenscript.annotations.ZenMethod;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-@ZenClass("mods.bcadditions.dusters")
+@ZenClass("mods.bcadditions.Cooling")
 @ModOnly("bcadditions")
-public class Dusters {
+public class Cooling {
 
 	@ZenMethod
-	public static void addDusting(IItemStack input, IItemStack output) {
-		MineTweakerAPI.apply(new AddRecipeAction(input, output));
+	public static void addCoolingRecipe(ILiquidStack input, ILiquidStack output, float heat) {
+		MineTweakerAPI.apply(new AddRecipeAction(input, output, heat));
 	}
 
 	@ZenMethod
-	public static void removeDusting(IItemStack input) {
+	public static void removeCoolingRecipe(ILiquidStack input) {
 		MineTweakerAPI.apply(new RemoveRecipeAction(input));
 	}
 
 	private static class AddRecipeAction implements IUndoableAction {
-		public IItemStack input;
-		public IItemStack output;
+		private final ILiquidStack input;
+		private final ILiquidStack output;
+		private final float heat;
 
-		public AddRecipeAction(IItemStack input, IItemStack output) {
+		public AddRecipeAction(ILiquidStack input, ILiquidStack output, float heat) {
 			this.input = input;
 			this.output = output;
+			this.heat = heat;
 		}
 
 		@Override
 		public void apply() {
-			BCARecipeManager.duster.addRecipe(MineTweakerMC.getItemStack(input), MineTweakerMC.getItemStack(output));
+			BCARecipeManager.cooling.addRecipe(MineTweakerMC.getLiquidStack(input), MineTweakerMC.getLiquidStack(output), heat);
 		}
 
 		@Override
@@ -52,17 +54,17 @@ public class Dusters {
 
 		@Override
 		public void undo() {
-			BCARecipeManager.duster.removeRecipe(MineTweakerMC.getItemStack(input));
+			BCARecipeManager.cooling.removeRecipe(MineTweakerMC.getLiquidStack(input));
 		}
 
 		@Override
 		public String describe() {
-			return String.format("Adding BCA Duster recipe for %s -> %s * %s", input, output, output.getAmount());
+			return String.format("Adding BCA Cooling Tower recipe for %s -> %s", input, output);
 		}
 
 		@Override
 		public String describeUndo() {
-			return String.format("Removing BCA Duster recipe for %s -> %s", input, BCARecipeManager.duster.getRecipe(MineTweakerMC.getItemStack(input)).getOutput(MineTweakerMC.getItemStack(input)));
+			return String.format("Removing BCA Cooling Tower recipe for %s -> %s", input, output);
 		}
 
 		@Override
@@ -72,15 +74,15 @@ public class Dusters {
 	}
 
 	private static class RemoveRecipeAction implements IUndoableAction {
-		IItemStack input;
+		private final ILiquidStack input;
 
-		public RemoveRecipeAction(IItemStack input) {
+		public RemoveRecipeAction(ILiquidStack input) {
 			this.input = input;
 		}
 
 		@Override
 		public void apply() {
-			BCARecipeManager.duster.removeRecipe(MineTweakerMC.getItemStack(input));
+			BCARecipeManager.cooling.removeRecipe(MineTweakerMC.getLiquidStack(input));
 		}
 
 		@Override
@@ -95,7 +97,7 @@ public class Dusters {
 
 		@Override
 		public String describe() {
-			return String.format("Removing BCA Duster recipe for %s -> %s", input, BCARecipeManager.duster.getRecipe(MineTweakerMC.getItemStack(input)).getOutput(MineTweakerMC.getItemStack(input)));
+			return String.format("Removing BCA Cooling Tower recipe for %s -> %s", input, BCARecipeManager.cooling.getRecipe(MineTweakerMC.getLiquidStack(input)).getOutput().getLocalizedName());
 		}
 
 		@Override

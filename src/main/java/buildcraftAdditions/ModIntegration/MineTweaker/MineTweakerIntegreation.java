@@ -1,6 +1,7 @@
 package buildcraftAdditions.ModIntegration.MineTweaker;
 
 import minetweaker.MineTweakerAPI;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -12,5 +13,7 @@ public class MineTweakerIntegreation {
 
 	public static void integrate() {
 		MineTweakerAPI.registerClass(Dusters.class);
+		MineTweakerAPI.registerClass(Refinery.class);
+		MineTweakerAPI.registerClass(Cooling.class);
 	}
 }
