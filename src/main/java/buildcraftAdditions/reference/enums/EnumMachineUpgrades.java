@@ -4,6 +4,9 @@ package buildcraftAdditions.reference.enums;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 
@@ -30,7 +33,10 @@ public enum EnumMachineUpgrades {
 	private EnumMachineUpgrades(String tag, boolean canBeDouble) {
 		this.tag = tag;
 		this.multipleInstalls = canBeDouble;
-		this.texture = new ResourceLocation(Variables.MOD.ID, "textures/items/" + tag + ".png");
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
+			//DON'T REGISTER ICONS ON THE SERVER SIDE
+			this.texture = new ResourceLocation(Variables.MOD.ID, "textures/items/" + tag + ".png");
+		}
 	}
 
 	public String getTag() {
