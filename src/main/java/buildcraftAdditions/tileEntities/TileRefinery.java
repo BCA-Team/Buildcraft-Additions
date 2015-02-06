@@ -3,10 +3,6 @@ package buildcraftAdditions.tileEntities;
 import java.util.EnumSet;
 import java.util.Set;
 
-import com.google.common.collect.ImmutableSet;
-
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -40,6 +36,9 @@ import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.utils.fluids.ITankHolder;
 import buildcraftAdditions.utils.fluids.RefineryRecipeTank;
 import buildcraftAdditions.utils.fluids.Tank;
+
+import com.google.common.collect.ImmutableSet;
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -156,7 +155,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		data.isMaster = true;
 		data.partOfMultiBlock = true;
 		data.rotationIndex = rotationIndex;
-		upgrades.setMaxUpgrades(6);
+		upgrades.blacklistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).setMaxUpgrades(6);
 	}
 
 	public void findMaster() {
@@ -253,7 +252,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public void formMultiblock(int masterX, int masterY, int masterZ, int rotationIndex) {
 		data.formMultiBlock(masterX, masterY, masterZ, rotationIndex);
 		if (valve)
-			upgrades.setMaxUpgrades(1);
+			upgrades.whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).setMaxUpgrades(1);
 		sync();
 	}
 
