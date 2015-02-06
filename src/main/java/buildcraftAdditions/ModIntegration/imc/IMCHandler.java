@@ -2,8 +2,6 @@ package buildcraftAdditions.ModIntegration.imc;
 
 import java.util.List;
 
-import com.google.common.base.Strings;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -14,6 +12,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.core.Logger;
+
+import com.google.common.base.Strings;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -93,6 +93,54 @@ public class IMCHandler {
 					if (output == null)
 						continue;
 					BCARecipeManager.refinery.addRecipe(input, output, tag.getInteger("RequiredHeat"));
+				}
+			} else if (type.equals("removeDustingRecipe")) {
+				if (!message.isNBTMessage()) {
+					logNotNBT(message);
+					continue;
+				}
+
+				NBTTagCompound tag = message.getNBTValue();
+				if (!checkRequiredNBTTags("Dusting", tag, "Input"))
+					continue;
+
+				if (tag.hasKey("Input", Constants.NBT.TAG_COMPOUND)) {
+					ItemStack input = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("Input"));
+					if (input == null)
+						continue;
+					BCARecipeManager.duster.removeRecipe(input);
+				}
+			} else if (type.equals("removeCoolingRecipe")) {
+				if (!message.isNBTMessage()) {
+					logNotNBT(message);
+					continue;
+				}
+
+				NBTTagCompound tag = message.getNBTValue();
+				if (!checkRequiredNBTTags("Cooling Tower", tag, "Input"))
+					continue;
+
+				if (tag.hasKey("Input", Constants.NBT.TAG_COMPOUND)) {
+					FluidStack input = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Input"));
+					if (input == null)
+						continue;
+					BCARecipeManager.cooling.removeRecipe(input);
+				}
+			} else if (type.equals("removeRefineryRecipe")) {
+				if (!message.isNBTMessage()) {
+					logNotNBT(message);
+					continue;
+				}
+
+				NBTTagCompound tag = message.getNBTValue();
+				if (!checkRequiredNBTTags("Refinery", tag, "Input"))
+					continue;
+
+				if (tag.hasKey("Input", Constants.NBT.TAG_COMPOUND)) {
+					FluidStack input = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Input"));
+					if (input == null)
+						continue;
+					BCARecipeManager.refinery.removeRecipe(input);
 				}
 			}
 		}
