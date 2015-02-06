@@ -76,7 +76,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 				if (entity != null && entity instanceof IFluidHandler && !(entity instanceof TileCoolingTower) && master.output.getFluidType() != null) {
 					IFluidHandler tank = (IFluidHandler) entity;
 					int drain = tank.fill(direction.getOpposite(), new FluidStack(master.output.getFluidType(), 100), false);
-					FluidStack stack = master.drain(direction, drain, true);
+					FluidStack stack = master.drain(drain, true, 1);
 					tank.fill(direction.getOpposite(), stack, true);
 				}
 			}
