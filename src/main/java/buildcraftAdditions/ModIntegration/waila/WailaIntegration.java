@@ -1,5 +1,6 @@
 package buildcraftAdditions.ModIntegration.waila;
 
+import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
 import buildcraftAdditions.tileEntities.TileRefinery;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 
@@ -14,6 +15,8 @@ import mcp.mobius.waila.api.impl.ModuleRegistrar;
 public class WailaIntegration {
 
 	public static void integrate() {
+		ModuleRegistrar.instance().registerStackProvider(new UpgradableMachineDataProvider(), IUpgradableMachine.class);
+		ModuleRegistrar.instance().registerStackProvider(new KEBT1DataProvider(), TileKineticEnergyBufferTier1.class);
 		ModuleRegistrar.instance().registerBodyProvider(new RefineryDataProvider(), TileRefinery.class);
 		ModuleRegistrar.instance().registerNBTProvider(new RefineryDataProvider(), TileRefinery.class);
 		ModuleRegistrar.instance().registerTooltipRenderer("BCA.upgradeRenderer", new TooltipUpgradeRenderer());
