@@ -29,7 +29,7 @@ import buildcraftAdditions.utils.RenderUtils;
 public class ItemMachineUpgrade extends Item {
 
 	@SideOnly(Side.CLIENT)
-	private final IIcon[] icons = new IIcon[EnumMachineUpgrades.values().length];
+	private IIcon[] icons;
 
 	public ItemMachineUpgrade() {
 		setUnlocalizedName("upgrade");
@@ -56,13 +56,16 @@ public class ItemMachineUpgrade extends Item {
 		return super.getUnlocalizedName(stack) + "." + EnumMachineUpgrades.values()[stack.getItemDamage()].getTextureName();
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamage(int damage) {
 		return icons[damage];
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister register) {
+		icons = new IIcon[EnumMachineUpgrades.values().length];
 		for (int i = 0; i < icons.length; i++) {
 			icons[i] = RenderUtils.registerIcon(register, EnumMachineUpgrades.values()[i].getTextureName());
 		}
