@@ -2,8 +2,6 @@ package buildcraftAdditions.tileEntities;
 
 import java.util.Set;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -27,6 +25,8 @@ import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
 
+import io.netty.buffer.ByteBuf;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -39,7 +39,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	public int progress;
 	public boolean isCooking, shouldUpdateCoils;
 	public TileCoilBase[] coils;
-	private Upgrades upgrades = new Upgrades(1);
+	private Upgrades upgrades = new Upgrades(1).whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT);
 	private SideConfiguration configuration = new SideConfiguration();
 
 	public TileHeatedFurnace() {

@@ -55,7 +55,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private TileCoolingTower master;
 	private ICoolingTowerRecipe recipe;
 	public float heat;
-	private Upgrades upgrades = new Upgrades(1);
+	private Upgrades upgrades = new Upgrades(0);
 
 
 	@Override
@@ -114,6 +114,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	public void makeMaster(int rotationIndex) {
 		data.isMaster = true;
 		data.rotationIndex = rotationIndex;
+		upgrades.blacklistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).setMaxUpgrades(5);
 	}
 
 	@Override
@@ -139,6 +140,8 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	@Override
 	public void formMultiblock(int masterX, int masterY, int masterZ, int rotationIndex) {
 		data.formMultiBlock(masterX, masterY, masterZ, rotationIndex);
+		if (valve)
+			upgrades.whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).setMaxUpgrades(1);
 		sync();
 	}
 
