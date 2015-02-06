@@ -2,11 +2,16 @@ package buildcraftAdditions.items.dust;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraftAdditions.api.item.dust.IDust;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -15,14 +20,12 @@ import buildcraftAdditions.api.item.dust.IDust;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class ItemConverter extends Item {
-	private IDust dust;
 
-	public ItemConverter() {
-
-	}
+	private final IDust dust;
 
 	public ItemConverter(IDust dust) {
 		this.dust = dust;
+		setUnlocalizedName("dustConverter");
 	}
 
 	public IDust getDust() {
@@ -30,8 +33,14 @@ public class ItemConverter extends Item {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister register) {
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
-		list.add("Converter item, please drop this on the ground to retreive your dust");
-		list.add("My appologies for this and any issues this might have caused");
+		list.add("Converter item, please drop this on the ground to retrieve your dust");
+		list.add("My apologies for this and any issues this might have caused");
 	}
 }

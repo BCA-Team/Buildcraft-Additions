@@ -32,11 +32,8 @@ import buildcraftAdditions.utils.Utils;
 
 public class BlockFluidicCompressor extends BlockContainer {
 
-	IIcon textureFront;
-	IIcon textureTop;
-	IIcon textureSide;
-	IIcon textureBack;
-	IIcon textureBottom;
+	@SideOnly(Side.CLIENT)
+	private IIcon textureFront, textureBack, textureTop, textureBottom, textureSide;
 
 	public BlockFluidicCompressor() {
 		super(Material.iron);
@@ -90,8 +87,8 @@ public class BlockFluidicCompressor extends BlockContainer {
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int i, int j) {
 		// If no metadata is set, then this is an icon.
 		if (j == 0 && i == 3)

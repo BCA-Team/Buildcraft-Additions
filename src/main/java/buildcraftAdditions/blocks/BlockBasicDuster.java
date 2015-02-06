@@ -28,7 +28,9 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockBasicDuster extends BlockBase {
-	public IIcon front, back, sides, top, bottom;
+
+	@SideOnly(Side.CLIENT)
+	private IIcon front, back, sides, top, bottom;
 
 	public BlockBasicDuster() {
 		super(Material.iron);
@@ -89,8 +91,8 @@ public class BlockBasicDuster extends BlockBase {
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		// If no metadata is set, then this is an icon.
 		if (meta == 0 && side == 3)
@@ -111,8 +113,8 @@ public class BlockBasicDuster extends BlockBase {
 		return sides;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		front = RenderUtils.registerIcon(register, "dusterFront");
 		back = RenderUtils.registerIcon(register, "dusterBack");

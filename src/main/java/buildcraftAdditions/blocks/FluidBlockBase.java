@@ -5,6 +5,9 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -24,6 +27,7 @@ public class FluidBlockBase extends BlockFluidClassic {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		if (side == 0 || side == 1)
 			return stack.getFluid().getStillIcon();
@@ -36,16 +40,19 @@ public class FluidBlockBase extends BlockFluidClassic {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public int getRenderColor(int meta) {
 		return stack.getFluid().getColor();
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public int getBlockColor() {
 		return stack.getFluid().getColor();
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
 		return stack.getFluid().getColor();
 	}
@@ -55,6 +62,7 @@ public class FluidBlockBase extends BlockFluidClassic {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 	}
 }

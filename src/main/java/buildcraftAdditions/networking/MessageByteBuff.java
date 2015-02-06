@@ -1,5 +1,7 @@
 package buildcraftAdditions.networking;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.tileentity.TileEntity;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -7,7 +9,6 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -16,14 +17,15 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MessageByteBuff implements IMessage, IMessageHandler<MessageByteBuff, IMessage> {
-	public ISyncronizedTile object;
+
+	public ISyncronizedTile tile;
 	public int x, y, z;
 
 	public MessageByteBuff() {
 	}
 
 	public MessageByteBuff(ISyncronizedTile tile) {
-		this.object = tile;
+		this.tile = tile;
 		x = tile.getX();
 		y = tile.getY();
 		z = tile.getZ();
@@ -36,7 +38,8 @@ public class MessageByteBuff implements IMessage, IMessageHandler<MessageByteBuf
 		z = buf.readInt();
 		TileEntity entity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(x, y, z);
 		if (entity instanceof ISyncronizedTile) {
-			((ISyncronizedTile) entity).readFromByteBuff(buf);
+			tile = (ISyncronizedTile) entity;
+			tile.readFromByteBuff(buf);
 		}
 	}
 
@@ -45,7 +48,7 @@ public class MessageByteBuff implements IMessage, IMessageHandler<MessageByteBuf
 		buf.writeInt(x);
 		buf.writeInt(y);
 		buf.writeInt(z);
-		object.writeToByteBuff(buf);
+		tile.writeToByteBuff(buf);
 	}
 
 	@Override

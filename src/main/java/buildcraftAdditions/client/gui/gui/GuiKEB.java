@@ -98,7 +98,7 @@ public class GuiKEB extends GuiBase {
 		if (shouldDrawEnergyNumber(mouseX - guiLeft, mouseY - guiTop)) {
 			ArrayList<String> list = new ArrayList<String>();
 			list.add(keb.energy + " / " + keb.maxEnergy + " RF");
-			this.drawHoveringText(list, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
+			drawHoveringText(list, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
 		}
 	}
 

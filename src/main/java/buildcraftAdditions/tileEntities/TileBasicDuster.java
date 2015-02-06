@@ -59,7 +59,7 @@ public class TileBasicDuster extends TileBaseDuster {
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		inventory.setInventorySlotContents(slot, stack);
-		this.markDirty();
+		markDirty();
 	}
 
 	@Override

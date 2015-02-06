@@ -6,6 +6,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
@@ -28,6 +31,7 @@ public class ItemDust extends Item {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int pass) {
 		IDust dust = BCAItemManager.dusts.getDust(stack.getItemDamage());
 		if (dust != null) {
@@ -55,6 +59,7 @@ public class ItemDust extends Item {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
 		for (IDust dust : BCAItemManager.dusts.getDusts()) {
 			if (dust != null) {

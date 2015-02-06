@@ -1,9 +1,8 @@
-package buildcraftAdditions.items;
+package buildcraftAdditions.items.Tools;
 
 import java.lang.reflect.Method;
 import java.util.List;
 
-import buildcraftAdditions.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,7 +17,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.core.EnumColor;
@@ -26,6 +24,7 @@ import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -36,9 +35,10 @@ import buildcraftAdditions.reference.Variables;
  */
 public class ItemPipeColoringTool extends Item {
 
-	public static final String[] names = new String[] {"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
+	public static final String[] names = new String[]{"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
 
-	private IIcon[] icons = new IIcon[names.length];
+	@SideOnly(Side.CLIENT)
+	private IIcon[] icons;
 
 	public ItemPipeColoringTool() {
 		setMaxStackSize(1);
@@ -89,6 +89,7 @@ public class ItemPipeColoringTool extends Item {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("SortMode") && stack.getTagCompound().getBoolean("SortMode"))
 			list.add(Utils.localize("tooltip.colorSortingMode"));
@@ -100,6 +101,7 @@ public class ItemPipeColoringTool extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
+		icons = new IIcon[names.length];
 		for (int i = 0; i < names.length; i++)
 			icons[i] = register.registerIcon("buildcraft:triggers/color_" + names[i]);
 	}

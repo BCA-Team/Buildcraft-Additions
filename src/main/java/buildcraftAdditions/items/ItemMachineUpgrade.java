@@ -44,7 +44,8 @@ public class ItemMachineUpgrade extends Item {
 			IUpgradableMachine machine = (IUpgradableMachine) entity;
 			if (machine.canAcceptUpgrade(EnumMachineUpgrades.values()[stack.getItemDamage()])) {
 				machine.installUpgrade(EnumMachineUpgrades.values()[stack.getItemDamage()]);
-				player.getCurrentEquippedItem().stackSize--;
+				if (!player.capabilities.isCreativeMode)
+					player.getCurrentEquippedItem().stackSize--;
 				return false;
 			}
 		}
@@ -56,14 +57,16 @@ public class ItemMachineUpgrade extends Item {
 		return super.getUnlocalizedName(stack) + "." + EnumMachineUpgrades.values()[stack.getItemDamage()].getTextureName();
 	}
 
-	@SideOnly(Side.CLIENT)
+
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int damage) {
 		return icons[damage];
 	}
 
-	@SideOnly(Side.CLIENT)
+
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
 		icons = new IIcon[EnumMachineUpgrades.values().length];
 		for (int i = 0; i < icons.length; i++) {
@@ -72,6 +75,7 @@ public class ItemMachineUpgrade extends Item {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tabs, List list) {
 		for (EnumMachineUpgrades upgrade : EnumMachineUpgrades.values())
 			list.add(new ItemStack(item, 1, upgrade.ordinal()));

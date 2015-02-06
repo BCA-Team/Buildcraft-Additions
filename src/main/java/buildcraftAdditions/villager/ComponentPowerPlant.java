@@ -27,10 +27,10 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 	public ComponentPowerPlant() {
 	}
 
-	public ComponentPowerPlant(Start villagePiece, int par2, Random par3Random, StructureBoundingBox par4StructureBoundingBox, int par5) {
+	public ComponentPowerPlant(Start villagePiece, int par2, Random par3Random, StructureBoundingBox boundingBox, int coordBaseMode) {
 		super();
-		this.coordBaseMode = par5;
-		this.boundingBox = par4StructureBoundingBox;
+		this.coordBaseMode = coordBaseMode;
+		this.boundingBox = boundingBox;
 
 	}
 
@@ -41,21 +41,21 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 
 	@Override
 	public boolean addComponentParts(World world, Random random, StructureBoundingBox sbb) {
-		if (this.averageGroundLevel < 0) {
-			this.averageGroundLevel = this.getAverageGroundLevel(world, sbb);
+		if (averageGroundLevel < 0) {
+			averageGroundLevel = getAverageGroundLevel(world, sbb);
 
-			if (this.averageGroundLevel < 0) {
+			if (averageGroundLevel < 0) {
 				return true;
 			}
 
-			this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.maxY + 5, 0);
+			boundingBox.offset(0, averageGroundLevel - boundingBox.maxY + 5, 0);
 		}
 
 		fillWithAir(world, sbb, 0, -3, 0, 10, -3, 10);
 		fillWithMetadataBlocks(world, sbb, 0, -3, 0, 10, 3, 10, Blocks.stained_hardened_clay, 9, Blocks.stained_hardened_clay, 9, false);
 		fillWithMetadataBlocks(world, sbb, 0, 0, 0, 10, 0, 10, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
 		fillWithAir(world, sbb, 5, -2, 0, 5, -1, 0);
-		placeDoorAtCurrentPosition(world, sbb, random, 5, -2, 0, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		placeDoorAtCurrentPosition(world, sbb, random, 5, -2, 0, getMetadataWithOffset(Blocks.wooden_door, 1));
 		fillWithAir(world, sbb, 1, -2, 1, 9, 2, 9);
 
 		fillWithMetadataBlocks(world, sbb, 3, 4, 3, 7, 7, 7, Blocks.stained_hardened_clay, 15, Blocks.stained_hardened_clay, 15, false);
@@ -82,7 +82,7 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 
 		fillWithMetadataBlocks(world, sbb, 8, -2, 1, 8, -2, 7, Blocks.unpowered_repeater, 0, Blocks.unpowered_repeater, 0, false);
 		fillWithMetadataBlocks(world, sbb, 2, -2, 2, 2, -2, 7, Blocks.unpowered_repeater, 2, Blocks.unpowered_repeater, 2, false);
-		fillWithMetadataBlocks(world, sbb, 4, -2, 8 , 6, -2, 8, Blocks.unpowered_repeater, 1, Blocks.unpowered_repeater, 1, false);
+		fillWithMetadataBlocks(world, sbb, 4, -2, 8, 6, -2, 8, Blocks.unpowered_repeater, 1, Blocks.unpowered_repeater, 1, false);
 
 		fillWithBlocks(world, sbb, 7, -1, 1, 7, -1, 7, ItemsAndBlocks.kinesisPipeWood, ItemsAndBlocks.kinesisPipeWood, false);
 		fillWithBlocks(world, sbb, 7, 0, 1, 7, 0, 7, ItemsAndBlocks.kinisisPipeStone, ItemsAndBlocks.kinisisPipeStone, false);

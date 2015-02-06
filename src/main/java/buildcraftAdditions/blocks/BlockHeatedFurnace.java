@@ -31,14 +31,14 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockHeatedFurnace extends BlockContainer {
-	public IIcon front, back, sides, top, bottom, frontActivated;
-	public boolean isActivated;
+
+	@SideOnly(Side.CLIENT)
+	private IIcon front, back, sides, top, bottom, frontActivated;
 
 	public BlockHeatedFurnace() {
 		super(Material.iron);
 		setHardness(5F);
 		setResistance(10F);
-		isActivated = false;
 	}
 
 	@Override
@@ -94,8 +94,8 @@ public class BlockHeatedFurnace extends BlockContainer {
 
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side) {
 		int meta = access.getBlockMetadata(x, y, z);
 		if (meta == 0 && side == 3)
@@ -121,8 +121,8 @@ public class BlockHeatedFurnace extends BlockContainer {
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		// If no metadata is set, then this is an icon.
 		if (meta == 0 && side == 3)

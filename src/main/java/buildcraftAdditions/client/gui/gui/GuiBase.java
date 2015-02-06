@@ -122,7 +122,7 @@ public abstract class GuiBase extends GuiContainer {
 	public void initGui() {
 		super.initGui();
 		if (drawPlayerInv)
-			this.guiTop = (this.height - this.ySize) / 2;
+			guiTop = (height - ySize) / 2;
 		initialize();
 	}
 

@@ -17,6 +17,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.reference.enums.EnumPriority;
@@ -34,16 +37,19 @@ import buildcraftAdditions.utils.RenderUtils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockKineticEnergyBufferTier1 extends BlockContainer {
-	public IIcon icons[];
+
+	@SideOnly(Side.CLIENT)
+	private IIcon icons[];
 
 	public BlockKineticEnergyBufferTier1() {
 		super(Material.iron);
-		this.setResistance(2f);
-		this.setHardness(2f);
-		this.setHarvestLevel(null, 0);
+		setResistance(2);
+		setHardness(2);
+		setHarvestLevel(null, 0);
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		icons = new IIcon[10];
 		for (int teller = 0; teller < 9; teller++) {
@@ -60,6 +66,7 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		if (meta > 9)
 			return icons[8];
@@ -109,6 +116,7 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
 		super.getSubBlocks(item, tab, list);
 		list.add(createCreativeKEB());

@@ -29,7 +29,9 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockKineticDuster extends BlockBase implements ILaserTargetBlock {
-	public IIcon bottom, sides[], top;
+
+	@SideOnly(Side.CLIENT)
+	private IIcon bottom, sides[], top;
 
 	public BlockKineticDuster() {
 		super(Material.iron);
@@ -77,8 +79,8 @@ public class BlockKineticDuster extends BlockBase implements ILaserTargetBlock {
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side) {
 		switch (side) {
 			case 0:
@@ -90,12 +92,10 @@ public class BlockKineticDuster extends BlockBase implements ILaserTargetBlock {
 		return sides[duster.progressStage];
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		// If no metadata is set, then this is an icon.
-
-
 		switch (side) {
 			case 0:
 				return bottom;

@@ -85,11 +85,11 @@ public class CustomInventory implements IInventory {
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
-		if (this.itemStacks[slot] == null) {
+		if (itemStacks[slot] == null) {
 			return null;
 		}
 
-		ItemStack stack = this.itemStacks[slot];
+		ItemStack stack = itemStacks[slot];
 		setInventorySlotContents(slot, null);
 		return stack;
 	}

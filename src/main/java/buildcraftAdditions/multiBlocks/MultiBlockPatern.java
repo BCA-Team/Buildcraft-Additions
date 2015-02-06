@@ -12,6 +12,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockBase;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.RotationUtils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -29,9 +30,9 @@ public class MultiBlockPatern {
 	public MultiBlockPatern(ForgeDirection directions[], char identifier) {
 		int length = directions.length;
 		this.directions = directions;
-		this.identifiers = new char[length];
+		identifiers = new char[length];
 		for (int t = 0; t < length; t++)
-			this.identifiers[t] = identifier;
+			identifiers[t] = identifier;
 		rotatable = true;
 	}
 
@@ -45,9 +46,9 @@ public class MultiBlockPatern {
 	public MultiBlockPatern(ForgeDirection directions[], char identifier, HashMap<String, String> replacements) {
 		int length = directions.length;
 		this.directions = directions;
-		this.identifiers = new char[length];
+		identifiers = new char[length];
 		for (int t = 0; t < length; t++)
-			this.identifiers[t] = identifier;
+			identifiers[t] = identifier;
 		this.replacements = replacements;
 		rotatable = true;
 	}

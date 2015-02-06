@@ -32,8 +32,8 @@ import buildcraftAdditions.utils.Utils;
 
 public class ItemCanister extends ItemFluidContainer {
 
-	public IIcon overlay;
-	public String name;
+	@SideOnly(Side.CLIENT)
+	private IIcon overlay;
 
 	public ItemCanister(String name, int canisterCapacity) {
 		super(0);
@@ -89,10 +89,16 @@ public class ItemCanister extends ItemFluidContainer {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
 		super.getSubItems(item, tab, list);
 		for (Fluid fluid : FluidRegistry.getRegisteredFluids().values())
 			if (fluid != null)
 				list.add(getFilledItemStack(new FluidStack(fluid, getCapacity())));
+	}
+
+	@SideOnly(Side.CLIENT)
+	public IIcon getOverlay() {
+		return overlay;
 	}
 }

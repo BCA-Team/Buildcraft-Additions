@@ -31,7 +31,9 @@ import eureka.api.EurekaKnowledge;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockSemiAutomaticDuster extends BlockBase {
-	public IIcon front, sides, top, bottom;
+
+	@SideOnly(Side.CLIENT)
+	private IIcon front, sides, top, bottom;
 
 	public BlockSemiAutomaticDuster() {
 		super(Material.iron);
@@ -92,8 +94,8 @@ public class BlockSemiAutomaticDuster extends BlockBase {
 
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		// If no metadata is set, then this is an icon.
 		if (meta == 0 && side == 3)
@@ -111,8 +113,8 @@ public class BlockSemiAutomaticDuster extends BlockBase {
 		return sides;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		front = RenderUtils.registerIcon(register, "dusterSemiAutomaticFront");
 		sides = RenderUtils.registerIcon(register, "dusterSemiAutomaticSides");

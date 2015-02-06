@@ -8,40 +8,25 @@ package buildcraftAdditions.items.Tools;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 
 public class ToolUpgrade extends Item {
-	public String type;
-	public IIcon icon;
+
+	private final String type;
 
 	public ToolUpgrade(String upgrade) {
-		this.setMaxStackSize(16);
-		this.setCreativeTab(BuildcraftAdditions.bcadditions);
-		this.setUnlocalizedName("toolUpgrade" + upgrade);
-		this.type = upgrade;
+		setMaxStackSize(16);
+		setCreativeTab(BuildcraftAdditions.bcadditions);
+		setUnlocalizedName("toolUpgrade" + upgrade);
+		setTextureName(Variables.MOD.ID + ":" + upgrade + "Upgrade");
+		type = upgrade;
 	}
 
 	public String getType() {
 		return type;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister) {
-		icon = par1IconRegister.registerIcon(Variables.MOD.ID + ":" + getType() + "Upgrade");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int damage) {
-		return icon;
-	}
 }

@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -36,13 +35,7 @@ import buildcraftAdditions.utils.Utils;
 public class BlockItemSorter extends BlockContainer {
 
 	@SideOnly(Side.CLIENT)
-	IIcon textureSide;
-	@SideOnly(Side.CLIENT)
-	IIcon textureSide2;
-	@SideOnly(Side.CLIENT)
-	IIcon textureIn;
-	@SideOnly(Side.CLIENT)
-	IIcon textureOut;
+	private IIcon textureIn, textureOut, textureSide, textureSide2;
 
 	public BlockItemSorter() {
 		super(Material.iron);
