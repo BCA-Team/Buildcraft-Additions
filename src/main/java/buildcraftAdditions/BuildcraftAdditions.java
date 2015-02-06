@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -134,10 +135,10 @@ public class BuildcraftAdditions {
 				if (mapping.type == GameRegistry.Type.BLOCK)
 					mapping.remap(FluidRegistry.getFluid("fuelgas").getBlock());
 				continue;
-			} else if (mapping.name.toLowerCase().contains("bioethanolgas")) {
+			} else if (mapping.name.toLowerCase().contains("bioethanolgas") && Loader.isModLoaded("Forestry")) {
 				if (mapping.type == GameRegistry.Type.ITEM)
 					mapping.remap(Item.getItemFromBlock(FluidRegistry.getFluid("bioethanolgas").getBlock()));
-				if (mapping.type == GameRegistry.Type.BLOCK)
+				else if (mapping.type == GameRegistry.Type.BLOCK)
 					mapping.remap(FluidRegistry.getFluid("bioethanolgas").getBlock());
 				continue;
 			}
