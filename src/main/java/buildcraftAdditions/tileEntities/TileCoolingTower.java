@@ -1,6 +1,8 @@
 package buildcraftAdditions.tileEntities;
 
-import java.util.List;
+import java.util.Set;
+
+import io.netty.buffer.ByteBuf;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -36,8 +38,6 @@ import buildcraftAdditions.utils.fluids.CoolingRecipeTank;
 import buildcraftAdditions.utils.fluids.ITankHolder;
 import buildcraftAdditions.utils.fluids.Tank;
 
-import io.netty.buffer.ByteBuf;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -69,7 +69,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			findMaster();
 		if (master == null && !isMaster())
 			return;
-		if (getIntalledUpgrades().contains(EnumMachineUpgrades.AUTO_OUTPUT)) {
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.AUTO_OUTPUT)) {
 			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 				Location location = new Location(this).move(direction);
 				TileEntity entity = location.getTileEntity();
@@ -387,7 +387,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	}
 
 	@Override
-	public List<EnumMachineUpgrades> getIntalledUpgrades() {
+	public Set<EnumMachineUpgrades> getInstalledUpgrades() {
 		return upgrades.getUpgrades();
 	}
 

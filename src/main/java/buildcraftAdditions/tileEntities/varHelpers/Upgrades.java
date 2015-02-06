@@ -1,15 +1,20 @@
 package buildcraftAdditions.tileEntities.varHelpers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import com.google.common.collect.ImmutableSet;
+
+import io.netty.buffer.ByteBuf;
 
 import net.minecraft.nbt.NBTTagCompound;
+
+import net.minecraftforge.common.util.Constants;
 
 import buildcraftAdditions.networking.ISyncObject;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 
-import com.google.common.collect.ImmutableList;
-import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -18,85 +23,90 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class Upgrades implements ISyncObject {
-	private ArrayList<EnumMachineUpgrades> upgrades;
-	private int maxUpgrades, installedUpgrades;
+	private EnumSet<EnumMachineUpgrades> upgrades;
+	private int maxUpgrades;
 
 	public Upgrades(int maxUpgrades) {
 		this.maxUpgrades = maxUpgrades;
-		upgrades = new ArrayList<EnumMachineUpgrades>(maxUpgrades);
+		upgrades = EnumSet.noneOf(EnumMachineUpgrades.class);
 	}
 
 	public Upgrades installUpgrade(EnumMachineUpgrades upgrade) {
-		upgrades.add(installedUpgrades, upgrade);
-		installedUpgrades++;
+		upgrades.add(upgrade);
 		return this;
 	}
 
 	public boolean canInstallUpgrade(EnumMachineUpgrades upgrade) {
-		return installedUpgrades < maxUpgrades && (upgrade.canBeInstalledMultipleTimes() || !upgrades.contains(upgrade));
+		return upgrades.size() < maxUpgrades && (upgrade.canBeInstalledMultipleTimes() || !upgrades.contains(upgrade));
 	}
 
-	public List<EnumMachineUpgrades> getUpgrades() {
-		return ImmutableList.copyOf(upgrades);
+	public Set<EnumMachineUpgrades> getUpgrades() {
+		return ImmutableSet.copyOf(upgrades);
+	}
+
+	public boolean hasUpgrade(EnumMachineUpgrades upgrade) {
+		return upgrades.contains(upgrade);
 	}
 
 	public EnumMachineUpgrades removeUpgrade() {
-		if (installedUpgrades == 0)
+		if (upgrades.size() == 0)
 			return null;
-		EnumMachineUpgrades upgrade = upgrades.get(installedUpgrades - 1);
-		upgrades.remove(installedUpgrades - 1);
-		upgrades.trimToSize();
-		installedUpgrades = upgrades.size();
+		EnumMachineUpgrades upgrade = null;
+		Iterator<EnumMachineUpgrades> it = upgrades.iterator();
+		while (it.hasNext())
+			upgrade = it.next();
+		it.remove();
 		return upgrade;
 	}
 
 	@Override
 	public ByteBuf writeToByteBuff(ByteBuf buf) {
 		buf.writeInt(maxUpgrades);
-		buf.writeInt(installedUpgrades);
-		for (int t = 0; t < installedUpgrades; t++) {
-			buf.writeInt(upgrades.get(t).ordinal());
-		}
+		buf.writeInt(upgrades.size());
+		for (Iterator<EnumMachineUpgrades> it = upgrades.iterator(); it.hasNext(); )
+			buf.writeInt(it.next().ordinal());
 		return buf;
 	}
 
 	@Override
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		maxUpgrades = buf.readInt();
-		installedUpgrades = buf.readInt();
+		int installedUpgrades = buf.readInt();
 		upgrades.clear();
-		for (int t = 0; t < installedUpgrades; t++) {
-			upgrades.add(t, EnumMachineUpgrades.values()[buf.readInt()]);
-		}
+		for (int i = 0; i < installedUpgrades; i++)
+			upgrades.add(EnumMachineUpgrades.values()[buf.readInt()]);
 		return buf;
 	}
 
 	public void writeToNBT(NBTTagCompound tag) {
 		tag.setInteger("maxUpgrades", maxUpgrades);
-		tag.setInteger("installedUpgrades", installedUpgrades);
-		for (int t = 0; t < installedUpgrades; t++) {
-			if (upgrades.get(t) == null)
-				tag.setInteger("upgrade" + t, -1);
-			else
-				tag.setInteger("upgrade" + t, upgrades.get(t).ordinal());
+		int[] upgradeIDs = new int[upgrades.size()];
+		EnumMachineUpgrades[] upgradeArray = upgrades.toArray(new EnumMachineUpgrades[upgrades.size()]);
+		for (int i = 0; i < upgradeIDs.length; i++) {
+			upgradeIDs[i] = upgradeArray[i].ordinal();
 		}
+		tag.setIntArray("upgrades", upgradeIDs);
 	}
 
 	public void readFromNBT(NBTTagCompound tag) {
-		if (!tag.hasKey("maxUpgrades"))
-			return;
 		maxUpgrades = tag.getInteger("maxUpgrades");
-		installedUpgrades = tag.getInteger("installedUpgrades");
-		for (int t = 0; t < installedUpgrades; t++) {
-			int number = tag.getInteger("upgrade" + t);
-			if (number == -1)
-				upgrades.add(t, null);
-			else
-				upgrades.add(t, EnumMachineUpgrades.values()[number]);
+		if (tag.hasKey("upgrades", Constants.NBT.TAG_INT_ARRAY)) {
+			int[] upgradeIDs = tag.getIntArray("upgrades");
+			for (int i : upgradeIDs)
+				upgrades.add(EnumMachineUpgrades.values()[i]);
 		}
 	}
 
 	public void setMaxUpgrades(int max) {
 		maxUpgrades = max;
+	}
+
+	public void invalidate() {
+		upgrades.clear();
+	}
+
+	@Override
+	public String toString() {
+		return "Upgrades: " + upgrades;
 	}
 }

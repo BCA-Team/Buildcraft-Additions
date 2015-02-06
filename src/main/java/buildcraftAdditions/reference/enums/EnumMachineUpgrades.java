@@ -1,5 +1,12 @@
 package buildcraftAdditions.reference.enums;
 
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
+import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.Variables;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -7,27 +14,14 @@ package buildcraftAdditions.reference.enums;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-
-import buildcraftAdditions.reference.Variables;
-/**
- * This is no part of the api and will probably never be part of it.
- * I might make some other upgrades later but as each upgrade does different
- * things and is handled differently it would be more trouble then it's worth
- * to do things like that
- */
 public enum EnumMachineUpgrades {
 	AUTO_OUTPUT("upgradeAutoEject", false),
-	EFFICIENTY1("upgradeEfficienty1", false),
-	EFFICIENTY2("upgradeEfficienty2", false),
-	EFFICIENTY3("upgradeEfficienty3", false),
-	SPEED1("upgradeSpeed1", false),
-	SPEED2("upgradeSpeed2", false),
-	SPEED3("upgradeSpeed3", false);
+	EFFICIENCY_1("upgradeEfficiency1", false),
+	EFFICIENCY_2("upgradeEfficiency2", false),
+	EFFICIENCY_3("upgradeEfficiency3", false),
+	SPEED_1("upgradeSpeed1", false),
+	SPEED_2("upgradeSpeed2", false),
+	SPEED_3("upgradeSpeed3", false);
 
 	private String tag;
 	private boolean multipleInstalls;
@@ -48,7 +42,7 @@ public enum EnumMachineUpgrades {
 	}
 
 	public ItemStack getItemStack() {
-		return GameRegistry.findItemStack(Variables.MOD.ID, tag, 1);
+		return new ItemStack(ItemsAndBlocks.upgrade, 1, ordinal());
 	}
 
 	public ResourceLocation getTexture() {
@@ -58,7 +52,6 @@ public enum EnumMachineUpgrades {
 	public String getTextureName() {
 		return tag;
 	}
-
 
 
 }

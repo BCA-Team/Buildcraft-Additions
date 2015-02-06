@@ -1,12 +1,24 @@
 package buildcraftAdditions.items;
 
+import java.util.List;
+
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
+import buildcraftAdditions.utils.RenderUtils;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -14,12 +26,15 @@ import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemMachineUpgrade extends ItemBase {
-	private EnumMachineUpgrades upgrade;
+public class ItemMachineUpgrade extends Item {
 
-	public ItemMachineUpgrade(EnumMachineUpgrades upgrade) {
-		super(upgrade.getTextureName());
-		this.upgrade = upgrade;
+	@SideOnly(Side.CLIENT)
+	private final IIcon[] icons = new IIcon[EnumMachineUpgrades.values().length];
+
+	public ItemMachineUpgrade() {
+		setUnlocalizedName("upgrade");
+		setCreativeTab(BuildcraftAdditions.bcadditions);
+		setHasSubtypes(true);
 	}
 
 	@Override
@@ -27,12 +42,35 @@ public class ItemMachineUpgrade extends ItemBase {
 		TileEntity entity = world.getTileEntity(x, y, z);
 		if (entity != null && entity instanceof IUpgradableMachine) {
 			IUpgradableMachine machine = (IUpgradableMachine) entity;
-			if (machine.canAcceptUpgrade(upgrade)) {
-				machine.installUpgrade(upgrade);
+			if (machine.canAcceptUpgrade(EnumMachineUpgrades.values()[stack.getItemDamage()])) {
+				machine.installUpgrade(EnumMachineUpgrades.values()[stack.getItemDamage()]);
 				player.getCurrentEquippedItem().stackSize--;
 				return false;
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public String getUnlocalizedName(ItemStack stack) {
+		return super.getUnlocalizedName(stack) + "." + EnumMachineUpgrades.values()[stack.getItemDamage()].getTextureName();
+	}
+
+	@Override
+	public IIcon getIconFromDamage(int damage) {
+		return icons[damage];
+	}
+
+	@Override
+	public void registerIcons(IIconRegister register) {
+		for (int i = 0; i < icons.length; i++) {
+			icons[i] = RenderUtils.registerIcon(register, EnumMachineUpgrades.values()[i].getTextureName());
+		}
+	}
+
+	@Override
+	public void getSubItems(Item item, CreativeTabs tabs, List list) {
+		for (EnumMachineUpgrades upgrade : EnumMachineUpgrades.values())
+			list.add(new ItemStack(item, 1, upgrade.ordinal()));
 	}
 }

@@ -38,9 +38,9 @@ public class UpgradableMachineDataProvider implements IWailaDataProvider {
 	public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
 		String upgrades = "";
 		IUpgradableMachine machine = (IUpgradableMachine) accessor.getTileEntity();
-		if (!machine.getIntalledUpgrades().isEmpty()) {
+		if (!machine.getInstalledUpgrades().isEmpty()) {
 			currenttip.add("Installed upgrades: ");
-			for (EnumMachineUpgrades upgrade : machine.getIntalledUpgrades())
+			for (EnumMachineUpgrades upgrade : machine.getInstalledUpgrades())
 				upgrades += SpecialChars.getRenderString("BCA.upgradeRenderer", String.valueOf(upgrade.ordinal()));
 		}
 		currenttip.add(upgrades);
