@@ -116,6 +116,7 @@ public final class ItemsAndBlocks {
 	public static Item dust;
 	public static Item pipeColoringTool;
 	public static Item upgrade;
+	public static Item blankUpgrade;
 
 	public static void init() {
 		ironCanister = new ItemCanister("ironCanister", 2000);
@@ -207,6 +208,9 @@ public final class ItemsAndBlocks {
 
 		upgrade = new ItemMachineUpgrade();
 		GameRegistry.registerItem(upgrade, "upgrade");
+
+		blankUpgrade = new ItemBase("baseUpgrade");
+		GameRegistry.registerItem(blankUpgrade, "blankUpgrade");
 
 		//START BLOCKS
 
