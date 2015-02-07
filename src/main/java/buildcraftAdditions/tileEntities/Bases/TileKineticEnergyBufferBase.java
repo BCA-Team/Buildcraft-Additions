@@ -235,7 +235,9 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	}
 
 	public int getEnergyLevel() {
-		return (energy * 100) / maxEnergy;
+		if (getMaxEnergyStored(ForgeDirection.UNKNOWN) == 0)
+			return 0;
+		return (int) (((float) getEnergyStored(ForgeDirection.UNKNOWN)) / getMaxEnergyStored(ForgeDirection.UNKNOWN)) * 100;
 	}
 
 	@Override
