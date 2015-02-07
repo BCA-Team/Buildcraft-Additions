@@ -107,23 +107,20 @@ public class BuildcraftAdditions {
 		BCARecipeManager.duster.addRecipe("oreEmerald", new ItemStack(Items.emerald, 2));
 		BCARecipeManager.duster.addRecipe(new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_powder, 4));
 
-
-
-		for (IDust dust : BCAItemManager.dusts.getDusts()) {
-			if (dust != null) {
-				dust.getDustType().register(dust.getMeta(), dust.getName(), dust.getDustStack());
-			}
-		}
+		ModIntegration.integrateBCBuilders();
 	}
 
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		ModIntegration.integrate();
 	}
 
 	@Mod.EventHandler
 	public void doneLoading(FMLLoadCompleteEvent event) {
+		ModIntegration.integrate();
 		IMCHandler.handleIMC(FMLInterModComms.fetchRuntimeMessages(this));
+		for (IDust dust : BCAItemManager.dusts.getDusts())
+			if (dust != null)
+				dust.getDustType().register(dust.getMeta(), dust.getName(), dust.getDustStack());
 	}
 
 	@Mod.EventHandler

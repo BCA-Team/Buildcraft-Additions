@@ -49,6 +49,9 @@ public class BuildcraftIntegration {
 		addBCRecipes();
 		RefineryRecipeConverter.doYourThing();
 		BuildcraftAdditions.proxy.addPowerplant();
+	}
+
+	public static void registerSchematics() {
 		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kebT1, SchematicBCABase.class);
 		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kineticCoil, SchematicBCABase.class);
 		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kineticDusterBlock, SchematicBCABase.class);
@@ -71,7 +74,6 @@ public class BuildcraftIntegration {
 		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kebT3Plating, SchematicMulitblock.class);
 
 		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.itemSorter, SchematicSorter.class);
-
 	}
 
 	private static void addBCRecipes() {

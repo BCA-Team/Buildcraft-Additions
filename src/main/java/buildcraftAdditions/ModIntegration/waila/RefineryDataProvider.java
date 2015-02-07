@@ -9,10 +9,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.tileEntities.TileRefinery;
+import buildcraftAdditions.utils.Utils;
 
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -36,7 +38,7 @@ public class RefineryDataProvider implements IWailaDataProvider {
 	public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
 		TileRefinery refinery = (TileRefinery) accessor.getTileEntity();
 		if (!refinery.isPartOfMultiblock()) {
-			currenttip.add("Not part of a multiblock");
+			currenttip.add(Utils.localize("waila.refinery.noMultiBlock"));
 		} else {
 			if (refinery.master == null && (!refinery.isMaster())) {
 				refinery.findMaster();
@@ -46,10 +48,10 @@ public class RefineryDataProvider implements IWailaDataProvider {
 			TileRefinery master = refinery;
 			if (!refinery.isMaster())
 				master = refinery.master;
-			currenttip.add("Current heat: " + master.currentHeat);
+			currenttip.add(Utils.localizeFormatted("waila.refinery.currentHeat", master.currentHeat));
 			if (!master.getOutput().equals("")) {
-				currenttip.add("Required heat: " + master.requiredHeat);
-				currenttip.add("Refining " + master.getInput() + " into " + master.getOutput());
+				currenttip.add(Utils.localizeFormatted("waila.refinery.requiredHeat", master.requiredHeat));
+				currenttip.add(Utils.localizeFormatted("waila.refinery.processing", master.getInput(), master.getOutput()));
 			}
 		}
 		return currenttip;

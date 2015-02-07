@@ -264,7 +264,7 @@ public class ItemKineticTool extends ItemPoweredBase implements IEnergyContainer
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
 		readBateries(stack);
 		readUpgrades(stack);
-		list.add(Integer.toString(getEnergy()) + "/" + Integer.toString(getCapacity()) + " RF");
+		list.add(Utils.localizeFormatted("rf.info", getEnergy(), getCapacity()));
 		if (Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode())) {
 			if (chainsaw)
 				list.add(String.format(Utils.localize("tooltip.installed"), Utils.localize("item.toolUpgradeChainsaw.name")));

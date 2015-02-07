@@ -56,6 +56,14 @@ item.dustConverter.name=Dust Conveter
 item.machineConfigurator.name=Machine Configurator
 item.bcaBucket.name=%s Bucket
 item.pipeColoringTool.name=Coloring Tool
+item.upgrade.upgradeAutoEject.name=Machine Upgrade: Auto-Eject
+item.upgrade.upgradeEfficiency1.name=Machine Upgrade: Efficiency I
+item.upgrade.upgradeEfficiency2.name=Machine Upgrade: Efficiency II
+item.upgrade.upgradeEfficiency3.name=Machine Upgrade: Efficiency III
+item.upgrade.upgradeSpeed1.name=Machine Upgrade: Speed I
+item.upgrade.upgradeSpeed2.name=Machine Upgrade: Speed II
+item.upgrade.upgradeSpeed3.name=Machine Upgrade: Speed III
+
 
 tooltip.installed=%s Installed
 tooltip.deactivated=Deactivated
@@ -317,4 +325,15 @@ selfdestructActivated=SELF DESTRUCT ACTIVATED
 configured=Configured
 
 fluids.info=%d / %d mB
+fluids.change.info=%d / %d mB/t
+rf.info=%d / %d RF
+rf.change.info=%d / %d RF/t
+
 lavaCoil.info=Lava stored: %s
+
+waila.refinery.noMultiBlock=Not part of a multiblock
+waila.refinery.currentHeat=Current heat: %d
+waila.refinery.requiredHeat=Required heat: %d
+waila.refinery.processing=Refining %s into %s
+
+waila.upgrades.installed=Installed upgrades:
