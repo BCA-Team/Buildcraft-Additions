@@ -5,6 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
 
 import buildcraft.energy.fuels.CoolantManager;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -18,7 +19,9 @@ public class CoolantTank extends RestrictedTank {
 		super(name, capacity, tile, new IFluidAcceptor() {
 			@Override
 			public boolean accepts(FluidStack fluidStack) {
-				return CoolantManager.INSTANCE.getCoolant(fluidStack.getFluid()) != null;
+				if (fluidStack != null)
+					return CoolantManager.INSTANCE.getCoolant(fluidStack.getFluid()) != null;
+				return false;
 			}
 
 			@Override

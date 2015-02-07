@@ -4,15 +4,16 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableSet;
+
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.Constants;
 
 import buildcraftAdditions.networking.ISyncObject;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
-
-import com.google.common.collect.ImmutableSet;
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -38,7 +39,16 @@ public class Upgrades implements ISyncObject {
 	}
 
 	public boolean canInstallUpgrade(EnumMachineUpgrades upgrade) {
-		return upgrades.size() < maxUpgrades && (upgrade.canBeInstalledMultipleTimes() || !upgrades.contains(upgrade)) && (whitelist.contains(upgrade) || whitelist.isEmpty()) && !blacklist.contains(upgrade);
+		System.out.println("Trying to insert [" + upgrade + "] into " + toString());
+		if (upgrades.size() >= maxUpgrades)
+			return false;
+		if (upgrades.contains(upgrade) && !upgrade.canBeInstalledMultipleTimes())
+			return false;
+		if (blacklist.contains(upgrade))
+			return false;
+		if (!whitelist.isEmpty() && !whitelist.contains(upgrade))
+			return false;
+		return true;
 	}
 
 	public Upgrades blacklistUpgrade(EnumMachineUpgrades upgrade) {
@@ -118,6 +128,6 @@ public class Upgrades implements ISyncObject {
 
 	@Override
 	public String toString() {
-		return "Upgrades: " + upgrades;
+		return "Upgrades: maxUpgrades = [" + maxUpgrades + "], upgrades = " + upgrades + ", whitelist = " + whitelist + ", blacklist = " + blacklist;
 	}
 }

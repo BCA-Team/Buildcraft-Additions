@@ -1,6 +1,11 @@
 package buildcraftAdditions.tileEntities;
 
+import java.util.EnumSet;
 import java.util.Set;
+
+import com.google.common.collect.ImmutableSet;
+
+import io.netty.buffer.ByteBuf;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -32,11 +37,10 @@ import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
 import buildcraftAdditions.tileEntities.varHelpers.Upgrades;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
+import buildcraftAdditions.utils.fluids.CoolantTank;
 import buildcraftAdditions.utils.fluids.CoolingRecipeTank;
 import buildcraftAdditions.utils.fluids.ITankHolder;
 import buildcraftAdditions.utils.fluids.Tank;
-
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -51,7 +55,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	public boolean valve;
 	private Tank input = new CoolingRecipeTank("input", 2000, this);
 	private Tank output = new Tank(2000, this, "output");
-	private Tank coolant = new Tank(10000, this, "coolant");
+	private Tank coolant = new CoolantTank("coolant", 10000, this);
 	private TileCoolingTower master;
 	private ICoolingTowerRecipe recipe;
 	public float heat;
@@ -93,14 +97,30 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			if (cooling == null)
 				break;
 			coolant.drain(1, true);
-			heat -= cooling.getDegreesCoolingPerMB(heat) * 1.5;
+			float factor = 1;
+			if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_1))
+				factor += 0.25;
+			if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_2))
+				factor += 0.5;
+			if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_3))
+				factor += 1;
+			heat -= cooling.getDegreesCoolingPerMB(heat) * factor;
 			max--;
 		}
-		if (heat > 80 || recipe == null || output.isFull() || input.isEmpty() || !input.getFluid().isFluidEqual(recipe.getInput()) || input.getFluidAmount() < recipe.getInput().amount || (!output.isEmpty() && !output.getFluid().isFluidEqual(recipe.getOutput())) || output.getCapacity() - output.getFluidAmount() < recipe.getOutput().amount)
-			return;
-		input.drain(recipe.getInput().amount, true);
-		output.fill(recipe.getOutput(), true);
-		heat += recipe.getHeat();
+		int count = 1;
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_1))
+			count++;
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_2))
+			count += 2;
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_3))
+			count += 3;
+		for (int i = 0; i < count; i++) {
+			if (heat > 80 || recipe == null || output.isFull() || input.isEmpty() || !input.getFluid().isFluidEqual(recipe.getInput()) || input.getFluidAmount() < recipe.getInput().amount || (!output.isEmpty() && !output.getFluid().isFluidEqual(recipe.getOutput())) || output.getCapacity() - output.getFluidAmount() < recipe.getOutput().amount)
+				return;
+			input.drain(recipe.getInput().amount, true);
+			output.fill(recipe.getOutput(), true);
+			heat += recipe.getHeat();
+		}
 	}
 
 	private void updateRecipe() {
@@ -381,25 +401,65 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 
 	@Override
 	public boolean canAcceptUpgrade(EnumMachineUpgrades upgrade) {
-		return valve && upgrades.canInstallUpgrade(upgrade);
+		if (valve || isMaster()) {
+			return upgrades.canInstallUpgrade(upgrade);
+		} else {
+			if (master == null)
+				findMaster();
+			if (master == null)
+				return false;
+			return master.canAcceptUpgrade(upgrade);
+		}
 	}
 
 	@Override
 	public void installUpgrade(EnumMachineUpgrades upgrade) {
-		upgrades.installUpgrade(upgrade);
+		if (valve || isMaster()) {
+			upgrades.installUpgrade(upgrade);
+		} else {
+			if (master == null)
+				findMaster();
+			if (master == null)
+				return;
+			master.installUpgrade(upgrade);
+		}
 	}
 
 	@Override
 	public Set<EnumMachineUpgrades> getInstalledUpgrades() {
-		return upgrades.getUpgrades();
+		if (isMaster()) {
+			return upgrades.getUpgrades();
+		} else {
+			if (master == null)
+				findMaster();
+			if (master == null)
+				return EnumSet.noneOf(EnumMachineUpgrades.class);
+			Set<EnumMachineUpgrades> set = EnumSet.noneOf(EnumMachineUpgrades.class);
+			set.addAll(master.getInstalledUpgrades());
+			if (valve)
+				set.addAll(upgrades.getUpgrades());
+			return ImmutableSet.copyOf(set);
+		}
 	}
 
 	@Override
 	public void removeUpgrade() {
-		EnumMachineUpgrades upgrade = upgrades.removeUpgrade();
-		if (upgrade == null)
-			return;
-		ItemStack stack = upgrade.getItemStack();
-		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, stack);
+		if (valve || isMaster()) {
+			EnumMachineUpgrades upgrade = upgrades.removeUpgrade();
+			if (upgrade == null)
+				return;
+			ItemStack stack = upgrade.getItemStack();
+			Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, stack);
+		} else {
+			if (master == null)
+				findMaster();
+			if (master == null)
+				return;
+			EnumMachineUpgrades upgrade = master.upgrades.removeUpgrade();
+			if (upgrade == null)
+				return;
+			ItemStack stack = upgrade.getItemStack();
+			Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, stack);
+		}
 	}
 }

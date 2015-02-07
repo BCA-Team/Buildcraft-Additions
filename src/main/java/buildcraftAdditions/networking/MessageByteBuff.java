@@ -36,10 +36,12 @@ public class MessageByteBuff implements IMessage, IMessageHandler<MessageByteBuf
 		x = buf.readInt();
 		y = buf.readInt();
 		z = buf.readInt();
-		TileEntity entity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(x, y, z);
-		if (entity instanceof ISyncronizedTile) {
-			tile = (ISyncronizedTile) entity;
-			tile.readFromByteBuff(buf);
+		if (FMLClientHandler.instance().getClient().theWorld != null) {
+			TileEntity entity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(x, y, z);
+			if (entity instanceof ISyncronizedTile) {
+				tile = (ISyncronizedTile) entity;
+				tile.readFromByteBuff(buf);
+			}
 		}
 	}
 
