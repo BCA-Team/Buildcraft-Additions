@@ -23,6 +23,7 @@ import cofh.api.energy.IEnergyContainerItem;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.utils.Utils;
 
 public class BatteryBase extends Item implements IEnergyContainerItem {
 
@@ -58,7 +59,7 @@ public class BatteryBase extends Item implements IEnergyContainerItem {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
-		list.add(Integer.toString(getEnergyStored(stack)) + "/" + Integer.toString(maxEnergy) + " RF");
+		list.add(Utils.localizeFormatted("rf.info", getEnergyStored(stack), maxEnergy));
 	}
 
 	@Override

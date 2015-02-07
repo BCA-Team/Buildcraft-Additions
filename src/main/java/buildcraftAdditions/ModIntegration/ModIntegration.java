@@ -45,13 +45,18 @@ public class ModIntegration {
 
 		if (Loader.isModLoaded("MineTweaker3"))
 			MineTweakerIntegreation.integrate();
-		if (Loader.isModLoaded("BuildCraft|Transport")) {
+		if (Loader.isModLoaded("BuildCraft|Core")) {
 			BuildcraftIntegration.integrate();
 			if (ConfigurationHandler.eurekaIntegration)
 				eurekaResearch();
 		}
 		if (Loader.isModLoaded("Waila"))
 			WailaIntegration.integrate();
+	}
+
+	public static void integrateBCBuilders() {
+		if (Loader.isModLoaded("BuildCraft|Core"))
+			BuildcraftIntegration.registerSchematics();
 	}
 
 	private static void railcraftIntegration() {

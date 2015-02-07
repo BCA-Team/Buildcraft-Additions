@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
+import buildcraftAdditions.utils.Utils;
 
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
@@ -39,7 +40,7 @@ public class UpgradableMachineDataProvider implements IWailaDataProvider {
 		String upgrades = "";
 		IUpgradableMachine machine = (IUpgradableMachine) accessor.getTileEntity();
 		if (!machine.getInstalledUpgrades().isEmpty()) {
-			currenttip.add("Installed upgrades: ");
+			currenttip.add(Utils.localize("waila.upgrades.installed"));
 			for (EnumMachineUpgrades upgrade : machine.getInstalledUpgrades())
 				upgrades += SpecialChars.getRenderString("BCA.upgradeRenderer", String.valueOf(upgrade.ordinal()));
 		}

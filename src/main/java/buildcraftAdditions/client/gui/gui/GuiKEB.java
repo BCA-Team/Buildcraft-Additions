@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import buildcraftAdditions.client.gui.containers.ContainerKEB;
 import buildcraftAdditions.client.gui.widgets.WidgedSelfDestruct;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
+import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -93,12 +94,12 @@ public class GuiKEB extends GuiBase {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		if (shouldDrawEnergyNumber(mouseX - guiLeft, mouseY - guiTop)) {
+	public void drawScreen(int x, int y, float f) {
+		super.drawScreen(x, y, f);
+		if (shouldDrawEnergyNumber(x - guiLeft, y - guiTop)) {
 			ArrayList<String> list = new ArrayList<String>();
-			list.add(keb.energy + " / " + keb.maxEnergy + " RF");
-			drawHoveringText(list, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
+			list.add(Utils.localizeFormatted("rf.info", keb.energy, keb.maxEnergy));
+			drawHoveringText(list, x, y, fontRendererObj);
 		}
 	}
 
