@@ -24,9 +24,9 @@ public class Tank extends FluidTank implements ISyncObject {
 
 	protected String name;
 
-	public Tank(int capacity, TileEntity entity, String name) {
+	public Tank(int capacity, TileEntity tile, String name) {
 		super(capacity);
-		this.tile = entity;
+		this.tile = tile;
 		this.name = name;
 	}
 

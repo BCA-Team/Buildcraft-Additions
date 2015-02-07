@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities.Bases;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -22,8 +24,6 @@ import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
 import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Utils;
-
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise

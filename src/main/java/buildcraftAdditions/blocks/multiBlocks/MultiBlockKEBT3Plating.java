@@ -4,13 +4,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT3;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKEBT3;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -19,15 +19,9 @@ import buildcraftAdditions.tileEntities.TileKEBT3;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MultiBlockKEBT3Plating extends MultiBlockBase {
-	public IIcon icon[];
 
 	public MultiBlockKEBT3Plating() {
 		super(Variables.Identifiers.KEBT3_PLATING, new MultiBlockPaternKEBT3(), "energyBufferMultiblockPlating");
-	}
-
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
-		return super.onBlockActivated(world, x, y, z, player, meta, hitX, hitY, hitZ);
 	}
 
 	@Override

@@ -48,7 +48,7 @@ public class CanisterItemRender implements IItemRenderer {
 
 		ItemCanister canister = (ItemCanister) item.getItem();
 
-		IIcon overlay = canister.overlay;
+		IIcon overlay = canister.getOverlay();
 		IIcon canisterIcon = canister.getIconFromDamage(0);
 
 		GL11.glPushMatrix();

@@ -19,7 +19,7 @@ import buildcraftAdditions.client.gui.containers.ContainerKineticTool;
 import buildcraftAdditions.client.gui.containers.ContainerMachineConfigurator;
 import buildcraftAdditions.client.gui.containers.ContainerPipeColoringTool;
 import buildcraftAdditions.client.gui.containers.ContainerRefinery;
-import buildcraftAdditions.items.ItemPipeColoringTool;
+import buildcraftAdditions.items.Tools.ItemPipeColoringTool;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ItemPoweredBase;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;

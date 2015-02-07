@@ -1,7 +1,6 @@
 package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -18,7 +17,6 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TriggerReadyToCharge extends BasicTrigger {
-	public IIcon icon;
 
 	public TriggerReadyToCharge() {
 		super("readyToCharge", "TriggerReadyToCharge");

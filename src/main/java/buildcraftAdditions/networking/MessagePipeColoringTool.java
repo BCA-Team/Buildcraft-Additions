@@ -1,5 +1,7 @@
 package buildcraftAdditions.networking;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,9 +10,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-import buildcraftAdditions.items.ItemPipeColoringTool;
-
-import io.netty.buffer.ByteBuf;
+import buildcraftAdditions.items.Tools.ItemPipeColoringTool;
 
 /**
  * Copyright (c) 2014, AEnterprise

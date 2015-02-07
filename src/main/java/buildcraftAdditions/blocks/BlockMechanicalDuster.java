@@ -27,8 +27,9 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockMechanicalDuster extends BlockBase {
-	public IIcon front, sides, bottom;
-	public IIcon top[] = new IIcon[4];
+
+	@SideOnly(Side.CLIENT)
+	private IIcon front, sides, bottom, top[];
 
 	public BlockMechanicalDuster() {
 		super(Material.iron);
@@ -78,8 +79,8 @@ public class BlockMechanicalDuster extends BlockBase {
 
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side) {
 		int meta = access.getBlockMetadata(x, y, z);
 		if (meta == 0 && side == 3)
@@ -102,8 +103,8 @@ public class BlockMechanicalDuster extends BlockBase {
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		// If no metadata is set, then this is an icon.
 		if (meta == 0 && side == 3)
@@ -128,6 +129,7 @@ public class BlockMechanicalDuster extends BlockBase {
 		front = RenderUtils.registerIcon(register, "dusterMechanicalFront");
 		sides = RenderUtils.registerIcon(register, "dusterMechanicalSides");
 		bottom = RenderUtils.registerIcon(register, "dusterMechanicalBottom");
+		top = new IIcon[4];
 		top[0] = RenderUtils.registerIcon(register, "dusterMechanicalTop0");
 		top[1] = RenderUtils.registerIcon(register, "dusterMechanicalTop1");
 		top[2] = RenderUtils.registerIcon(register, "dusterMechanicalTop2");

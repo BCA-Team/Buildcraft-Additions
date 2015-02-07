@@ -27,9 +27,9 @@ public class GuiKineticTool extends GuiBase {
 	private final ItemStack stack;
 	private final EntityPlayer player;
 
-	public GuiKineticTool(InventoryPlayer inventoryplayer, ItemKineticTool Tool, IInventory inventory, ItemStack stack, EntityPlayer player) {
-		super(new ContainerKineticTool(inventoryplayer, Tool, inventory, stack, player));
-		this.tool = Tool;
+	public GuiKineticTool(InventoryPlayer inventoryplayer, ItemKineticTool tool, IInventory inventory, ItemStack stack, EntityPlayer player) {
+		super(new ContainerKineticTool(inventoryplayer, tool, inventory, stack, player));
+		this.tool = tool;
 		this.stack = stack;
 		this.player = player;
 		tool.setPlayer(player);

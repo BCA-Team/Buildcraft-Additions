@@ -21,15 +21,17 @@ import buildcraftAdditions.utils.RenderUtils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockKineticCoil extends BlockCoilBase implements ILaserTargetBlock {
-	public IIcon sides, top, bottom;
+
+	@SideOnly(Side.CLIENT)
+	private IIcon sides, top, bottom;
 
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
 		return new TileKineticCoil();
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int i, int j) {
 		// If no metadata is set, then this is an icon.
 		if (j == 0 && i == 3)

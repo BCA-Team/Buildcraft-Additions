@@ -3,6 +3,9 @@ package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraft.api.statements.IStatement;
 import buildcraft.api.statements.IStatementParameter;
 import buildcraft.api.statements.ITriggerExternal;
@@ -10,6 +13,7 @@ import buildcraft.api.statements.ITriggerExternal;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -18,7 +22,8 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class BasicTrigger implements ITriggerExternal {
-	public IIcon icon;
+	@SideOnly(Side.CLIENT)
+	private IIcon icon;
 	private String name, iconName;
 
 	public BasicTrigger(String name) {
@@ -36,11 +41,13 @@ public abstract class BasicTrigger implements ITriggerExternal {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon() {
 		return icon;
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
 		icon = RenderUtils.registerIcon(register, iconName);
 	}

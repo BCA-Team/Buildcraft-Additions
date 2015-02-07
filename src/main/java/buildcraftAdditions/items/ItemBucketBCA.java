@@ -6,6 +6,9 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -23,8 +26,9 @@ import buildcraftAdditions.utils.Utils;
  */
 public class ItemBucketBCA extends ItemBucket {
 
-	private final FluidStack fluid;
+	@SideOnly(Side.CLIENT)
 	private IIcon overlay;
+	private final FluidStack fluid;
 
 	public ItemBucketBCA(Fluid fluid) {
 		super(fluid.getBlock());
@@ -48,6 +52,7 @@ public class ItemBucketBCA extends ItemBucket {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
 		overlay = RenderUtils.registerIcon(register, "bucketOverlay");
 	}

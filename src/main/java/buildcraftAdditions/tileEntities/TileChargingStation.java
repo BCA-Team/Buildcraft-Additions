@@ -36,16 +36,16 @@ public class TileChargingStation extends TileMachineBase implements IInventory {
 			charge = energy;
 		if (charge > 0) {
 			if (getRequiredEnergy() > 0) {
-				ItemStack stack = this.getStackInSlot(0);
+				ItemStack stack = getStackInSlot(0);
 				IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
 				energy -= containerItem.receiveEnergy(stack, charge, false);
-				this.setInventorySlotContents(0, stack);
+				setInventorySlotContents(0, stack);
 			}
 		}
 	}
 
 	public int getRequiredEnergy() {
-		ItemStack stack = this.getStackInSlot(0);
+		ItemStack stack = getStackInSlot(0);
 		if (stack != null && stack.getItem() != null && stack.getItem() instanceof IEnergyContainerItem) {
 			IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
 			return containerItem.getMaxEnergyStored(stack) - containerItem.getEnergyStored(stack);

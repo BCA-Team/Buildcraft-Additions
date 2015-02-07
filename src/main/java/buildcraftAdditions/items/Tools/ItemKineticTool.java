@@ -33,18 +33,22 @@ import buildcraftAdditions.utils.Utils;
  */
 
 public class ItemKineticTool extends ItemPoweredBase implements IEnergyContainerItem {
+
+	@SideOnly(Side.CLIENT)
+	public IIcon iconAlt, overlayChainsaw, overlayDigger, overlayDrill, overlayHoe;
+	@SideOnly(Side.CLIENT)
+	private IIcon iconChainsaw, iconDigger, iconDrill, iconHoe;
 	public boolean chainsaw, digger, drill, hoe, goldStick, diamondStick, emeraldStick;
 	public int upgradesAllowed;
-	public IIcon icon, iconAlt, overlayChainsaw, overlayDigger, overlayDrill, overlayHoe;
-	public IIcon iconChainsaw, iconDigger, iconDrill, iconHoe;
 	String lastMode;
+
 
 	public ItemKineticTool() {
 		super();
-		this.setUnlocalizedName("kineticMultiTool");
-		this.setCreativeTab(BuildcraftAdditions.bcadditions);
-		this.setMaxStackSize(1);
-		this.setFull3D();
+		setUnlocalizedName("kineticMultiTool");
+		setCreativeTab(BuildcraftAdditions.bcadditions);
+		setMaxStackSize(1);
+		setFull3D();
 		chainsaw = false;
 		digger = false;
 		drill = false;
@@ -283,17 +287,17 @@ public class ItemKineticTool extends ItemPoweredBase implements IEnergyContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister) {
-		overlayChainsaw = par1IconRegister.registerIcon("bcadditions:bit_chainsaw");
-		overlayDigger = par1IconRegister.registerIcon("bcadditions:bit_digger");
-		overlayDrill = par1IconRegister.registerIcon("bcadditions:bit_drill");
-		overlayHoe = par1IconRegister.registerIcon("bcadditions:bit_hoe");
-		icon = par1IconRegister.registerIcon("bcadditions:base_tool");
-		iconAlt = par1IconRegister.registerIcon("bcadditions:base_tool_alt");
-		iconChainsaw = par1IconRegister.registerIcon("bcadditions:Chainsaw");
-		iconDigger = par1IconRegister.registerIcon("bcadditions:Digger");
-		iconDrill = par1IconRegister.registerIcon("bcadditions:Drill");
-		iconHoe = par1IconRegister.registerIcon("bcadditions:Hoe");
+	public void registerIcons(IIconRegister register) {
+		overlayChainsaw = register.registerIcon("bcadditions:bit_chainsaw");
+		overlayDigger = register.registerIcon("bcadditions:bit_digger");
+		overlayDrill = register.registerIcon("bcadditions:bit_drill");
+		overlayHoe = register.registerIcon("bcadditions:bit_hoe");
+		itemIcon = register.registerIcon("bcadditions:base_tool");
+		iconAlt = register.registerIcon("bcadditions:base_tool_alt");
+		iconChainsaw = register.registerIcon("bcadditions:Chainsaw");
+		iconDigger = register.registerIcon("bcadditions:Digger");
+		iconDrill = register.registerIcon("bcadditions:Drill");
+		iconHoe = register.registerIcon("bcadditions:Hoe");
 	}
 
 	@Override
@@ -307,7 +311,7 @@ public class ItemKineticTool extends ItemPoweredBase implements IEnergyContainer
 			return iconDigger;
 		if (lastMode.equals("hoe"))
 			return iconHoe;
-		return icon;
+		return itemIcon;
 	}
 
 	@Override

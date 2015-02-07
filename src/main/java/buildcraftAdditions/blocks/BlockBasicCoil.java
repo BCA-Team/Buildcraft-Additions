@@ -22,7 +22,9 @@ import buildcraftAdditions.utils.RenderUtils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockBasicCoil extends BlockCoilBase {
-	public IIcon sides, top, bottom;
+
+	@SideOnly(Side.CLIENT)
+	private IIcon sides, top, bottom;
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
@@ -43,8 +45,8 @@ public class BlockBasicCoil extends BlockCoilBase {
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int i, int j) {
 		// If no metadata is set, then this is an icon.
 		if (j == 0 && i == 3)

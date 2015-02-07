@@ -32,12 +32,8 @@ import buildcraftAdditions.utils.Utils;
 
 public class BlockChargingStation extends BlockContainer {
 
-	public IIcon textureFront;
-	public IIcon textureBack;
-	public IIcon textureLeft;
-	public IIcon textureRight;
-	public IIcon textureTop;
-	public IIcon textureBottom;
+	@SideOnly(Side.CLIENT)
+	private IIcon textureFront, textureBack, textureLeft, textureRight, textureTop, textureBottom;
 
 	public BlockChargingStation() {
 		super(Material.iron);
@@ -73,8 +69,8 @@ public class BlockChargingStation extends BlockContainer {
 		world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(), 1);
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int i, int j) {
 		// If no metadata is set, then this is an icon.
 		if (j == 0 && i == 3)

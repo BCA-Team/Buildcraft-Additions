@@ -10,9 +10,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
 import buildcraftAdditions.utils.RenderUtils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -21,10 +25,12 @@ import buildcraftAdditions.utils.RenderUtils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class MultiBlockBase extends BlockContainer {
+
+	@SideOnly(Side.CLIENT)
+	private IIcon icon[];
 	public char identifier;
 	public MultiBlockPatern patern;
 	public String textureName, secondTexture;
-	public IIcon icon[];
 
 	public MultiBlockBase(char identifier, MultiBlockPatern patern, String textureName) {
 		this(identifier, patern, textureName, "multiBlockSeeInvisible");
@@ -69,7 +75,6 @@ public abstract class MultiBlockBase extends BlockContainer {
 	public boolean hasTileEntity(int metadata) {
 		return true;
 	}
-
 
 
 	@Override

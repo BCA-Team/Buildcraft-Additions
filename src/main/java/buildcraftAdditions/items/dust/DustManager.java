@@ -50,7 +50,7 @@ public class DustManager implements IDustManager {
 		if (dustType.isValid(meta, name, dust.getDustStack())) {
 			dusts[meta] = dust;
 			//add converters
-			Item converter = new ItemConverter(dust).setUnlocalizedName("dustConverter");
+			Item converter = new ItemConverter(dust);
 			GameRegistry.registerItem(converter, "converter" + name.toLowerCase());
 		}
 	}

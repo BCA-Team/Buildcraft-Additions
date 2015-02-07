@@ -10,13 +10,11 @@ package buildcraftAdditions.items;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.IIcon;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,18 +25,17 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 
 public class BatteryBase extends Item implements IEnergyContainerItem {
+
 	protected int maxEnergy, maxExtract, maxInput, tier;
-	private String texture;
-	public IIcon icon;
 
 	public BatteryBase(int maxEnergy, int maxExtract, int maxInput, int tier, String texture) {
-		this.maxStackSize = 1;
+		setMaxStackSize(1);
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		this.maxEnergy = maxEnergy;
 		this.maxExtract = maxExtract;
 		this.maxInput = maxInput;
 		this.tier = tier;
-		this.texture = texture;
+		setTextureName(Variables.MOD.ID + ":" + texture);
 	}
 
 	public void setEnergy(ItemStack stack, int energy) {
@@ -110,18 +107,6 @@ public class BatteryBase extends Item implements IEnergyContainerItem {
 		return "(Tier " + tier + "): ";
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister) {
-		icon = par1IconRegister.registerIcon(Variables.MOD.ID + ":" + texture);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int damage) {
-		return icon;
-	}
-
 	public ItemStack createdFilledBattery() {
 		ItemStack stack = new ItemStack(this);
 		if (stack.getTagCompound() == null)
@@ -131,6 +116,7 @@ public class BatteryBase extends Item implements IEnergyContainerItem {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
 		super.getSubItems(item, tab, list);
 		list.add(createdFilledBattery());

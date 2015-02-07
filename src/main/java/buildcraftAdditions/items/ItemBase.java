@@ -1,11 +1,6 @@
 package buildcraftAdditions.items;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
@@ -19,25 +14,11 @@ import buildcraftAdditions.reference.Variables;
  */
 
 public class ItemBase extends Item {
-	public IIcon icon;
-	public String name;
 
 	public ItemBase(String name) {
-		super();
-		this.name = name;
-		this.setUnlocalizedName(name);
-		this.setCreativeTab(BuildcraftAdditions.bcadditions);
+		setUnlocalizedName(name);
+		setTextureName(Variables.MOD.ID + ":" + name);
+		setCreativeTab(BuildcraftAdditions.bcadditions);
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
-		icon = iconRegister.registerIcon(Variables.MOD.ID + ":" + name);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int damage) {
-		return icon;
-	}
 }

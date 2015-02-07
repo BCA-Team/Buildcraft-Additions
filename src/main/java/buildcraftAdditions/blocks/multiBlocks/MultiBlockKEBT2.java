@@ -4,7 +4,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
@@ -12,6 +11,7 @@ import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT2;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKEBT2;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -20,7 +20,6 @@ import buildcraftAdditions.tileEntities.TileKEBT2;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MultiBlockKEBT2 extends MultiBlockBase {
-	public IIcon icon[];
 
 	public MultiBlockKEBT2() {
 		super(Variables.Identifiers.KEBT2, new MultiBlockPaternKEBT2(), "energyBufferMultiblockRaw");

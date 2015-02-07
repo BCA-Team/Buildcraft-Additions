@@ -4,9 +4,6 @@ package buildcraftAdditions.reference.enums;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 
@@ -18,6 +15,7 @@ import buildcraftAdditions.reference.Variables;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public enum EnumMachineUpgrades {
+
 	AUTO_OUTPUT("upgradeAutoEject", false),
 	EFFICIENCY_1("upgradeEfficiency1", false),
 	EFFICIENCY_2("upgradeEfficiency2", false),
@@ -26,17 +24,14 @@ public enum EnumMachineUpgrades {
 	SPEED_2("upgradeSpeed2", false),
 	SPEED_3("upgradeSpeed3", false);
 
-	private String tag;
-	private boolean multipleInstalls;
-	private ResourceLocation texture;
+	private final String tag;
+	private final boolean multipleInstalls;
+	private final ResourceLocation texture;
 
-	private EnumMachineUpgrades(String tag, boolean canBeDouble) {
+	private EnumMachineUpgrades(String tag, boolean multipleInstalls) {
 		this.tag = tag;
-		this.multipleInstalls = canBeDouble;
-		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-			//DON'T REGISTER ICONS ON THE SERVER SIDE
-			this.texture = new ResourceLocation(Variables.MOD.ID, "textures/items/" + tag + ".png");
-		}
+		this.multipleInstalls = multipleInstalls;
+		texture = new ResourceLocation(Variables.MOD.ID, "textures/items/" + tag + ".png");
 	}
 
 	public String getTag() {

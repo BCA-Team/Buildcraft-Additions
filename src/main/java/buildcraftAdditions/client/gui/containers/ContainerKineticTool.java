@@ -41,17 +41,17 @@ public class ContainerKineticTool extends ContainerBase<IInventory> {
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
 
 		ItemStack stack = null;
-		Slot slot = (Slot) this.inventorySlots.get(slotIndex);
+		Slot slot = (Slot) inventorySlots.get(slotIndex);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			stack = itemstack1.copy();
 
 			if (slotIndex < 3) {
-				if (!this.mergeItemStack(itemstack1, 3, 39, true)) {
+				if (!mergeItemStack(itemstack1, 3, 39, true)) {
 					return null;
 				}
-			} else if (!this.mergeItemStack(itemstack1, 0, 3, false)) {
+			} else if (!mergeItemStack(itemstack1, 0, 3, false)) {
 				return null;
 			}
 
@@ -87,7 +87,7 @@ public class ContainerKineticTool extends ContainerBase<IInventory> {
 
 		if (inputStack.isStackable()) {
 			while (inputStack.stackSize > 0 && (!doMerge && k < par3 || doMerge && k >= par2)) {
-				slot = (Slot) this.inventorySlots.get(k);
+				slot = (Slot) inventorySlots.get(k);
 				itemstack1 = slot.getStack();
 
 				if (itemstack1 != null && itemstack1.getItem() == inputStack.getItem()
@@ -124,7 +124,7 @@ public class ContainerKineticTool extends ContainerBase<IInventory> {
 			}
 
 			while (!doMerge && k < par3 || doMerge && k >= par2) {
-				slot = (Slot) this.inventorySlots.get(k);
+				slot = (Slot) inventorySlots.get(k);
 				itemstack1 = slot.getStack();
 
 				if (itemstack1 == null) {

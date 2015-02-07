@@ -25,6 +25,9 @@ import buildcraftAdditions.utils.Location;
 
 import io.netty.buffer.ByteBuf;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -207,6 +210,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox() {
 		return AxisAlignedBB.getBoundingBox(xCoord - 2, yCoord - 2, zCoord - 2, xCoord + 2, yCoord + 2, zCoord + 2);
 	}
