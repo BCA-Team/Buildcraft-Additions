@@ -14,6 +14,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -89,10 +90,6 @@ public class BuildcraftAdditions {
 		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
 		BucketHandler.register();
 		IMCSender.sendMessages();
-	}
-
-	@Mod.EventHandler
-	public void doneLoading(FMLLoadCompleteEvent event) {
 		ItemsAndBlocks.registerTileEntities();
 
 		int meta = 1;
@@ -110,14 +107,22 @@ public class BuildcraftAdditions {
 		BCARecipeManager.duster.addRecipe("oreEmerald", new ItemStack(Items.emerald, 2));
 		BCARecipeManager.duster.addRecipe(new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_powder, 4));
 
-		ModIntegration.integrate();
+
 
 		for (IDust dust : BCAItemManager.dusts.getDusts()) {
 			if (dust != null) {
 				dust.getDustType().register(dust.getMeta(), dust.getName(), dust.getDustStack());
 			}
 		}
+	}
 
+	@Mod.EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		ModIntegration.integrate();
+	}
+
+	@Mod.EventHandler
+	public void doneLoading(FMLLoadCompleteEvent event) {
 		IMCHandler.handleIMC(FMLInterModComms.fetchRuntimeMessages(this));
 	}
 

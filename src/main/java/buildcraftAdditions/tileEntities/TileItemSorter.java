@@ -29,6 +29,7 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 
 	protected ForgeDirection rotation = ForgeDirection.UP;
 	protected CustomInventory inventory = new CustomInventory("ItemSorter", 49, 64, this);
+	protected boolean reloadRotation = false;
 
 	public byte[] colors = new byte[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -44,6 +45,10 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
+		if (reloadRotation) {
+			setRotation(ForgeDirection.getOrientation(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)));
+			reloadRotation = false;
+		}
 		TileEntity outputTile = getTileFromDirection(getExitSide());
 		if (outputTile == null || !(outputTile instanceof IPipeTile))
 			return;
@@ -114,6 +119,8 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 		rotation = ForgeDirection.getOrientation(tag.getByte("Rotation"));
 		colors = tag.getByteArray("Colors");
 		inventory.readNBT(tag);
+		if (tag.hasKey("reloadRotation"))
+			reloadRotation = true;
 	}
 
 	@Override

@@ -13,10 +13,15 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
+import buildcraft.api.blueprints.BuilderAPI;
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.ModIntegration.Buildcraft.Triggers.Triggers;
+import buildcraftAdditions.ModIntegration.Buildcraft.schematics.SchematicBCABase;
+import buildcraftAdditions.ModIntegration.Buildcraft.schematics.SchematicMulitblock;
+import buildcraftAdditions.ModIntegration.Buildcraft.schematics.SchematicRotatableBCABlock;
+import buildcraftAdditions.ModIntegration.Buildcraft.schematics.SchematicSorter;
 import buildcraftAdditions.items.Tools.ToolCoreRecipe;
 import buildcraftAdditions.items.Tools.UpgradeRecipeDiamondStick;
 import buildcraftAdditions.items.Tools.UpgradeRecipeDrillHead;
@@ -44,6 +49,29 @@ public class BuildcraftIntegration {
 		addBCRecipes();
 		RefineryRecipeConverter.doYourThing();
 		BuildcraftAdditions.proxy.addPowerplant();
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kebT1, SchematicBCABase.class);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kineticCoil, SchematicBCABase.class);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kineticDusterBlock, SchematicBCABase.class);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.lavaCoilBlock, SchematicBCABase.class);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.basicCoilBlock, SchematicBCABase.class);
+
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.basicDusterBlock, SchematicRotatableBCABlock.class, new int[]{2, 5, 3, 4}, true);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.heatedFurnaceBlock, SchematicRotatableBCABlock.class, new int[]{2, 5, 3, 4}, true);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.chargingStationBlock, SchematicRotatableBCABlock.class, new int[]{2, 5, 3, 4}, true);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.fluidicCompressorBlock, SchematicRotatableBCABlock.class, new int[]{2, 5, 3, 4}, true);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.mechanicalDusterBlock, SchematicRotatableBCABlock.class, new int[]{2, 5, 3, 4}, true);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.semiAutomaticDusterBlock, SchematicRotatableBCABlock.class, new int[]{2, 5, 3, 4}, true);
+
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.refineryWalls, SchematicMulitblock.class);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.refineryValve, SchematicMulitblock.class);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.coolingTowerWalls, SchematicMulitblock.class);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.coolingTowerValve, SchematicMulitblock.class);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kebT2, SchematicMulitblock.class);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kebT3Core, SchematicMulitblock.class);
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kebT3Plating, SchematicMulitblock.class);
+
+		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.itemSorter, SchematicSorter.class);
+
 	}
 
 	private static void addBCRecipes() {
