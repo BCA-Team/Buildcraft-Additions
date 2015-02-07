@@ -31,8 +31,9 @@ public class NEIConfig implements IConfigureNEI {
 		DustingRecipeHandler dustingRecipeHandler = new DustingRecipeHandler();
 		API.registerRecipeHandler(dustingRecipeHandler);
 		API.registerUsageHandler(dustingRecipeHandler);
-        API.hideItem(GameRegistry.findItemStack(Variables.MOD.ID, "test", 1));
-        API.hideItem(new ItemStack(ItemsAndBlocks.kinesisPipeWood));
+		API.hideItem(GameRegistry.findItemStack(Variables.MOD.ID, "kebT2DisplayItem", 1));
+		API.hideItem(GameRegistry.findItemStack(Variables.MOD.ID, "kebT3DisplayItem", 1));
+		API.hideItem(new ItemStack(ItemsAndBlocks.kinesisPipeWood));
         API.hideItem(new ItemStack(ItemsAndBlocks.kinisisPipeStone));
         for (IDust dust : BCAItemManager.dusts.getDusts()) {
             if (dust == null)

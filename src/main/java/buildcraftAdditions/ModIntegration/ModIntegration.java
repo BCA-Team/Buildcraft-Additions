@@ -115,16 +115,19 @@ public class ModIntegration {
 		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT1, "KEBT1");
 
 		Block temp = new BlockBasic("energyBufferMultiblockSides5");
-		GameRegistry.registerBlock(temp, "test");
+		GameRegistry.registerBlock(temp, "kebT2DisplayItem");
 
 		EurekaRegistry.register(new EurekaInfo("KEBT2", "BCA", 4, new ItemStack(temp), "KEBT1"));
 		EurekaRegistry.registerDrops("KEBT2", new ItemStack(Items.iron_ingot, 6), new ItemStack(BCItems.PIPE_POWER_GOLD, 2), new ItemStack(ItemsAndBlocks.powerCapsuleTier2));
 		EurekaRegistry.addPlaceBlockProgress(ItemsAndBlocks.kebT1, "KEBT2");
 		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT2, "KEBT2");
 
-		//EurekaRegistry.register(new EurekaInfo("KEBT3", "BCA", 2, new ItemStack(temp), "KEBT2"));
-		//EurekaRegistry.registerDrops("KEBT3", new ItemStack(BCItems.PIPE_POWER_DIAMOND, 2), new ItemStack(Items.gold_ingot, 4), new ItemStack(Items.iron_ingot, 3));
-		//EurekaRegistry.bindToKey(ItemsAndBlocks.kebT3Plating, "KEBT3");
+		temp = new BlockBasic("energyBufferT3MultiblockSides4");
+		GameRegistry.registerBlock(temp, "kebT3DisplayItem");
+
+		EurekaRegistry.register(new EurekaInfo("KEBT3", "BCA", 2, new ItemStack(temp), "KEBT2"));
+		EurekaRegistry.registerDrops("KEBT3", new ItemStack(BCItems.PIPE_POWER_DIAMOND, 2), new ItemStack(Items.gold_ingot, 4), new ItemStack(Items.iron_ingot, 3));
+		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT3Plating, "KEBT3");
 	}
 
 	private static void metals() {
