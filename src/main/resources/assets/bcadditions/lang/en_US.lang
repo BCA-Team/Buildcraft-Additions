@@ -68,6 +68,8 @@ tooltip.colorNormalMode.info=Colors standard colorable blocks, sheep and BC pipe
 tooltip.colorSortingMode=Sorting Mode
 tooltip.colorSortingMode.info=Colors the sorting part of the DaiZuli and Lapis pipes
 tooltip.defaultColor=Default Item Color
+tooltip.compressor.fill=Fill
+tooltip.compressor.empty=Empty
 
 fluid.gas.name=%s Gas
 

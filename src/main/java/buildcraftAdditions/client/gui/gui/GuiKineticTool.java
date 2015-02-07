@@ -64,5 +64,6 @@ public class GuiKineticTool extends GuiBase {
 
 	@Override
 	public void initialize() {
+
 	}
 }

@@ -1,12 +1,3 @@
-/**
- * Copyright (c) 2014, big_Xplosion and the UniversalTeam
- *
- * UniversalTeam's mods are distributed under the terms of GNU LGPL v3.0
- * Please check the contents of the license located in
- * https://www.gnu.org/licenses/lgpl.html
- *
- * @author big_Xplosion
- */
 package buildcraftAdditions.networking;
 
 import net.minecraft.tileentity.TileEntity;
@@ -19,6 +10,13 @@ import buildcraftAdditions.tileEntities.interfaces.IWidgetListener;
 
 import io.netty.buffer.ByteBuf;
 
+/**
+ * Copyright (c) 2014, AEnterprise
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ */
 public class MessageWidgetUpdate implements IMessage, IMessageHandler<MessageWidgetUpdate, IMessage> {
 
 	public int x;

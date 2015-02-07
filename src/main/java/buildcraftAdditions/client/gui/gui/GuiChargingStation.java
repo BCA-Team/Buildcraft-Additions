@@ -50,58 +50,6 @@ public class GuiChargingStation extends GuiBase {
 
 	@Override
 	public void initialize() {
+
 	}
-
-	/*
-	@Override
-	protected void initLedgers(IInventory inventory) {
-		super.initLedgers(inventory);
-		ledgerManager.add(new ChargingStationLedger((TileChargingStation) tile));
-	}
-
-	protected class ChargingStationLedger extends Ledger {
-
-		TileChargingStation chargingStation;
-		int headerColour = 0xe1c92f;
-		int subheaderColour = 0xaaafb8;
-		int textColour = 0x000000;
-
-		public ChargingStationLedger(TileChargingStation chargingStation) {
-			this.chargingStation = chargingStation;
-			maxHeight = 94;
-			overlayColor = 0xd46c1f;
-		}
-
-		@Override
-		public void draw(int x, int y) {
-
-			// Draw background
-			drawBackground(x, y);
-
-			// Draw icon
-			Minecraft.getMinecraft().renderEngine.bindTexture(RenderUtils.MC_ITEM_SHEET);
-			drawIcon(BuildCraftCore.iconProvider.getIcon(CoreIconProvider.ENERGY), x + 3, y + 4);
-
-			if (!isFullyOpened()) {
-				return;
-			}
-
-			fontRendererObj.drawStringWithShadow(Utils.localize("gui.progress"), x + 22, y + 8, headerColour);
-
-			fontRendererObj.drawStringWithShadow(Utils.localize("gui.progress") + ":", x + 22, y + 20, subheaderColour);
-			fontRendererObj.drawString(String.format("%.1f ", chargingStation.getProgress() * 100) + "%", x + 22, y + 32, textColour);
-
-			fontRendererObj.drawStringWithShadow(Utils.localize("gui.energyInTool") + ":", x + 22, y + 44, subheaderColour);
-			fontRendererObj.drawString(Integer.toString(chargingStation.getToolEnergy()) + " MJ", x + 22, y + 56, textColour);
-
-			fontRendererObj.drawStringWithShadow(Utils.localize("gui.maxEnergy") + ":", x + 22, y + 68, subheaderColour);
-			fontRendererObj.drawString(Integer.toString(chargingStation.getToolMaxEnergy()) + " MJ", x + 22, y + 80, textColour);
-
-		}
-
-		@Override
-		public String getTooltip() {
-			return String.format("%.1f", chargingStation.getProgress() * 100) + "%";
-		}
-	}*/
 }

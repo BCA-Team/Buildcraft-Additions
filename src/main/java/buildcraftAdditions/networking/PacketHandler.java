@@ -17,10 +17,9 @@ public class PacketHandler {
 
 	public static void init() {
 		instance.registerMessage(MessageByteBuff.class, MessageByteBuff.class, 0, Side.CLIENT);
-		instance.registerMessage(MessageFluidicCompressorA.class, MessageFluidicCompressorA.class, 1, Side.SERVER);
-		instance.registerMessage(MessageConfiguration.class, MessageConfiguration.class, 2, Side.SERVER);
-		instance.registerMessage(MessageSelfDestruct.class, MessageSelfDestruct.class, 3, Side.SERVER);
-		instance.registerMessage(MessageWidgetUpdate.class, MessageWidgetUpdate.class, 4, Side.SERVER);
-		instance.registerMessage(MessagePipeColoringTool.class, MessagePipeColoringTool.class, 5, Side.SERVER);
+		instance.registerMessage(MessageConfiguration.class, MessageConfiguration.class, 1, Side.SERVER);
+		instance.registerMessage(MessageSelfDestruct.class, MessageSelfDestruct.class, 2, Side.SERVER);
+		instance.registerMessage(MessageWidgetUpdate.class, MessageWidgetUpdate.class, 3, Side.SERVER);
+		instance.registerMessage(MessagePipeColoringTool.class, MessagePipeColoringTool.class, 4, Side.SERVER);
 	}
 }

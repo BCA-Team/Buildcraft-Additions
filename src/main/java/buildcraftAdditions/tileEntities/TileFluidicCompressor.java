@@ -1,13 +1,5 @@
 package buildcraftAdditions.tileEntities;
 
-/**
- * Copyright (c) 2014, AEnterprise
- * http://buildcraftadditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
- * Please check the contents of the license located in
- * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
- */
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -16,21 +8,24 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidContainerItem;
-import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fluids.*;
 
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
+import buildcraftAdditions.tileEntities.interfaces.IWidgetListener;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.utils.fluids.Tank;
 
 import io.netty.buffer.ByteBuf;
 
-public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler {
+/**
+ * Copyright (c) 2014, AEnterprise
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ */
+public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler, IWidgetListener {
 
 	public Tank tank = new Tank(FluidContainerRegistry.BUCKET_VOLUME * 10, this, "Tank");
 	private final CustomInventory inventory = new CustomInventory("FluidicCompressor", 2, 1, this);
@@ -279,5 +274,10 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 		buf = super.readFromByteBuff(buf);
 		buf = tank.readFromByteBuff(buf);
 		return null;
+	}
+
+	@Override
+	public void onWidgetPressed(int id, int value) {
+		fill = value == 1;
 	}
 }
