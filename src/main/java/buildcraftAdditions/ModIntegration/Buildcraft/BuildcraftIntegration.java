@@ -135,7 +135,13 @@ public class BuildcraftIntegration {
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.itemSorter), "SUS", "PCP", "SGS", 'S', Blocks.stone, 'U', EnumMachineUpgrades.AUTO_OUTPUT.getItemStack(), 'P', BCItems.PIPE_ITEMS_LAPIS, 'C', Blocks.chest, 'G', BCItems.PIPE_ITEMS_GOLD);
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.pipeColoringTool), "  S", " S ", "W  ", 'W', new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 'S', Items.stick);
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.blankUpgrade, 2), "GGG", "GPG", "GGG", 'G', Items.gold_ingot, 'P', ItemsAndBlocks.heatPlating);
-		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.upgrade, EnumMachineUpgrades.AUTO_OUTPUT.ordinal()), "IEI", "PBP", "IEI", 'I', Items.iron_ingot, 'E', Items.ender_pearl, 'P', Blocks.piston, 'B', ItemsAndBlocks.blankUpgrade);
+		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.upgrade, 1, EnumMachineUpgrades.AUTO_OUTPUT.ordinal()), "IEI", "PBP", "IEI", 'I', Items.iron_ingot, 'E', Items.ender_pearl, 'P', Blocks.piston, 'B', ItemsAndBlocks.blankUpgrade);
+		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.upgrade, 1, EnumMachineUpgrades.EFFICIENCY_1.ordinal()), "CIC", "IBI", "CIC", 'C', ItemsAndBlocks.powerCapsuleTier1, 'I', Items.iron_ingot, 'B', ItemsAndBlocks.blankUpgrade);
+		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.upgrade, 1, EnumMachineUpgrades.EFFICIENCY_2.ordinal()), "GCG", "UGU", "GCG", 'G', Items.gold_ingot, 'C', ItemsAndBlocks.powerCapsuleTier2, 'U', new ItemStack(ItemsAndBlocks.upgrade, 1, EnumMachineUpgrades.EFFICIENCY_1.ordinal()));
+		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.upgrade, 1, EnumMachineUpgrades.EFFICIENCY_3.ordinal()), "CDC", "UGU", "CDC", 'C', ItemsAndBlocks.powerCapsuleTier3, 'D', Items.diamond, 'U', new ItemStack(ItemsAndBlocks.upgrade, 1, EnumMachineUpgrades.EFFICIENCY_2.ordinal()), 'G', Items.gold_ingot);
+		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.upgrade, 1, EnumMachineUpgrades.SPEED_1.ordinal()), "IGI", "IBI", "IGI", 'I', Items.iron_ingot, 'G', Items.glowstone_dust, 'B', ItemsAndBlocks.blankUpgrade);
+		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.upgrade, 1, EnumMachineUpgrades.SPEED_2.ordinal()), "GBG", "GUG", "GBG", 'G', Items.gold_ingot, 'B', Blocks.glowstone, 'U', new ItemStack(ItemsAndBlocks.upgrade, 1, EnumMachineUpgrades.SPEED_1.ordinal()));
+		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.upgrade, 1, EnumMachineUpgrades.SPEED_3.ordinal()), "GBG", "DUD", "GBG", 'G', Items.gold_ingot, 'B', Blocks.glowstone, 'D', Items.diamond, 'U', new ItemStack(ItemsAndBlocks.upgrade, 1, EnumMachineUpgrades.SPEED_2.ordinal()));
 
 		//remove BC refinery recipe
 		ItemStack stack = new ItemStack(BCItems.REFINERY);
