@@ -4,16 +4,15 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.google.common.collect.ImmutableSet;
-
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.Constants;
 
 import buildcraftAdditions.networking.ISyncObject;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
+
+import com.google.common.collect.ImmutableSet;
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -39,7 +38,6 @@ public class Upgrades implements ISyncObject {
 	}
 
 	public boolean canInstallUpgrade(EnumMachineUpgrades upgrade) {
-		System.out.println("Trying to insert [" + upgrade + "] into " + toString());
 		if (upgrades.size() >= maxUpgrades)
 			return false;
 		if (upgrades.contains(upgrade) && !upgrade.canBeInstalledMultipleTimes())

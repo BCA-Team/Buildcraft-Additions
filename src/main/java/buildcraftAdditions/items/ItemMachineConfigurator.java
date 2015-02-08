@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
+import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.utils.IConfigurableOutput;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -30,7 +31,7 @@ public class ItemMachineConfigurator extends ItemBase {
 			((TileBase) entity).sync();
 
 
-		if (entity instanceof IConfigurableOutput) {
+		if (entity instanceof IConfigurableOutput || entity instanceof IUpgradableMachine) {
 			player.openGui(BuildcraftAdditions.instance, Variables.Gui.MACHINE_CONFIGURATOR, world, x, y, z);
 			return true;
 		}

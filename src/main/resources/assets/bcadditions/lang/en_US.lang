@@ -118,6 +118,10 @@ gui.coloringMode=Coloring Mode
 gui.pipeColorTool.name=Coloring Tool
 gui.colorNormalMode=Normal Mode
 gui.colorSortingMode=Sorting Mode
+gui.installedUpgrades=Installed Upgrades:
+gui.configureIO=Configure Input/Output
+gui.showUpgrades=Installed Upgrades
+
 
 gui.keb.dangerousButton=BIG RED BUTTONS ARE VERY DANGEROUS
 gui.keb.noPushing=DON'T PUSH IT

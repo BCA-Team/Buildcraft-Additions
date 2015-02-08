@@ -51,8 +51,9 @@ public class WidgetButtonText extends WidgetBase {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	public void setText(String text) {
+	public WidgetButtonText setText(String text) {
 		this.text = text;
+		return this;
 	}
 
 	public void setColor(int color) {

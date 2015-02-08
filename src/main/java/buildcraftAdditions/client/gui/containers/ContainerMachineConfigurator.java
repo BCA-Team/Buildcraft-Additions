@@ -1,8 +1,7 @@
 package buildcraftAdditions.client.gui.containers;
 
 import net.minecraft.entity.player.InventoryPlayer;
-
-import buildcraftAdditions.utils.IConfigurableOutput;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -11,9 +10,9 @@ import buildcraftAdditions.utils.IConfigurableOutput;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ContainerMachineConfigurator extends ContainerBase<IConfigurableOutput> {
+public class ContainerMachineConfigurator extends ContainerBase<TileEntity> {
 
-	public ContainerMachineConfigurator(InventoryPlayer inventoryPlayer, IConfigurableOutput tile) {
+	public ContainerMachineConfigurator(InventoryPlayer inventoryPlayer, TileEntity tile) {
 		super(inventoryPlayer, tile);
 	}
 

@@ -5,8 +5,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.client.gui.containers.ContainerBasicCoil;
 import buildcraftAdditions.client.gui.containers.ContainerChargingStation;
@@ -19,8 +17,8 @@ import buildcraftAdditions.client.gui.containers.ContainerKineticTool;
 import buildcraftAdditions.client.gui.containers.ContainerMachineConfigurator;
 import buildcraftAdditions.client.gui.containers.ContainerPipeColoringTool;
 import buildcraftAdditions.client.gui.containers.ContainerRefinery;
-import buildcraftAdditions.items.Tools.ItemPipeColoringTool;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
+import buildcraftAdditions.items.Tools.ItemPipeColoringTool;
 import buildcraftAdditions.items.Tools.ItemPoweredBase;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.reference.Variables;
@@ -32,6 +30,7 @@ import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.tileEntities.TileRefinery;
+import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.utils.IConfigurableOutput;
 
 /**
@@ -78,8 +77,8 @@ public class GuiHandler implements IGuiHandler {
 					if (!multiblock.isMaster())
 						tile = world.getTileEntity(multiblock.getMasterX(), multiblock.getMasterY(), multiblock.getMasterZ());
 				}
-				if (tile instanceof IConfigurableOutput)
-					return new GuiMachineConfigurator(player.inventory, (IConfigurableOutput) tile);
+				if (tile instanceof IConfigurableOutput || tile instanceof IUpgradableMachine)
+					return new GuiMachineConfigurator(player.inventory, tile);
 			case Variables.Gui.REFINERY:
 				if (tile instanceof TileRefinery)
 					return new GuiRefinery(player.inventory, (TileRefinery) tile);
@@ -124,7 +123,7 @@ public class GuiHandler implements IGuiHandler {
 				if (tile instanceof TileKineticEnergyBufferBase)
 					return new ContainerKEB(player, (TileKineticEnergyBufferBase) tile);
 			case Variables.Gui.MACHINE_CONFIGURATOR:
-				return new ContainerMachineConfigurator(player.inventory, (IConfigurableOutput) tile);
+				return new ContainerMachineConfigurator(player.inventory, tile);
 			case Variables.Gui.REFINERY:
 				return new ContainerRefinery(player.inventory, (TileRefinery) tile);
 			case Variables.Gui.COOLING_TOWER:

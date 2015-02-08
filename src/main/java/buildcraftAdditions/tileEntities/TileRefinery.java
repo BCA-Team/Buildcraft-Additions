@@ -3,10 +3,6 @@ package buildcraftAdditions.tileEntities;
 import java.util.EnumSet;
 import java.util.Set;
 
-import com.google.common.collect.ImmutableSet;
-
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -40,6 +36,9 @@ import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.utils.fluids.ITankHolder;
 import buildcraftAdditions.utils.fluids.RefineryRecipeTank;
 import buildcraftAdditions.utils.fluids.Tank;
+
+import com.google.common.collect.ImmutableSet;
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -179,7 +178,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		data.isMaster = true;
 		data.partOfMultiBlock = true;
 		data.rotationIndex = rotationIndex;
-		upgrades.blacklistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).setMaxUpgrades(6);
+		upgrades.blacklistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).setMaxUpgrades(4);
 	}
 
 	public void findMaster() {
@@ -207,7 +206,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		ForgeDirection[] directions = RotationUtils.rotateDirections(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.UP}, data.rotationIndex);
 		Location location = new Location(this);
 		location.move(directions);
-		while (input.getFluid().amount > 1000) {
+		while (input.getFluid().amount >= 1000) {
 			if (input.getFluidType().getBlock() != null)
 				location.setBlock(input.getFluidType().getBlock());
 			input.drain(1000, true);
@@ -216,7 +215,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, data.rotationIndex));
 		if (output.getFluid() == null || output.getFluid().amount < 1000 || output.getFluidType() == null)
 			return;
-		while (output.getFluid().amount > 1000) {
+		while (output.getFluid().amount >= 1000) {
 			location.setBlock(output.getFluidType().getBlock());
 			output.drain(1000, true);
 			location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, data.rotationIndex));
@@ -256,6 +255,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			output.readFromNBT(tag.getCompoundTag("output"));
 		updateRecipe();
 		upgrades.readFromNBT(tag);
+		if (valve)
+			upgrades.whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT);
+		if (isMaster())
+			upgrades.blacklistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT);
 	}
 
 	@Override
