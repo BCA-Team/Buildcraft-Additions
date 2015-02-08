@@ -20,10 +20,16 @@ public class ContainerBase<T> extends Container {
 
 	protected final InventoryPlayer inventoryPlayer;
 	protected final T inventory;
+	private boolean canShift = true;
 
 	public ContainerBase(InventoryPlayer inventoryPlayer, T inventory) {
 		this.inventoryPlayer = inventoryPlayer;
 		this.inventory = inventory;
+	}
+
+	public ContainerBase setCanShift(boolean canShift) {
+		this.canShift = canShift;
+		return this;
 	}
 
 	protected void addPlayerInventory(int x, int y) {
@@ -87,6 +93,9 @@ public class ContainerBase<T> extends Container {
 	}
 
 	private boolean shiftItemStack(ItemStack stackToShift, int start, int end) {
+		if (!canShift)
+			return false;
+
 		boolean changed = false;
 		if (stackToShift.isStackable()) {
 			for (int slotIndex = start; stackToShift.stackSize > 0 && slotIndex < end; slotIndex++) {

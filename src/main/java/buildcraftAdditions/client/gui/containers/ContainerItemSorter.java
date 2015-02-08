@@ -19,6 +19,7 @@ public class ContainerItemSorter extends ContainerBase<TileItemSorter> {
 		for (int i = 0; i < 8; i++)
 			addSorterSlotColumn(26 + i * 18, 18, 1 + i * 6);
 		addPlayerInventory(8, 160);
+		setCanShift(false);
 	}
 
 	public void addSorterSlotColumn(int x, int y, int id) {
