@@ -3,6 +3,10 @@ package buildcraftAdditions.tileEntities;
 import java.util.EnumSet;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableSet;
+
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -36,9 +40,6 @@ import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.utils.fluids.ITankHolder;
 import buildcraftAdditions.utils.fluids.RefineryRecipeTank;
 import buildcraftAdditions.utils.fluids.Tank;
-
-import com.google.common.collect.ImmutableSet;
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -77,7 +78,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 		}
 		sync();
-		if (valve && upgrades.getUpgrades().contains(EnumMachineUpgrades.AUTO_OUTPUT)) {
+		if (valve && upgrades.hasUpgrade(EnumMachineUpgrades.AUTO_OUTPUT)) {
 			if (master == null)
 				findMaster();
 			if (master == null)
@@ -103,14 +104,37 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			updateRecipe();
 		updateHeat();
 		energyCost = (input.getFluid() == null || isCooling || energy < (int) (50 + (50 * ((double) currentHeat / 100)))) ? 0 : (int) (50 + (50 * ((double) currentHeat / 100)));
+		double factor = 0;
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_1))
+			factor += 0.1;
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_2))
+			factor += 0.15;
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_3))
+			factor += 0.25;
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_1))
+			factor -= 0.2;
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_2))
+			factor -= 0.3;
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_3))
+			factor -= 0.5;
+		energyCost = (int) (energyCost - (energyCost * factor));
 		energy -= energyCost;
 		if (currentHeat < requiredHeat) {
 			return;
 		}
-		if (energyCost == 0 || input.isEmpty() || output.isFull() || !input.getFluid().isFluidEqual(inputFluidStack) || input.getFluidAmount() < inputFluidStack.amount || (!output.isEmpty() && !output.getFluid().isFluidEqual(outputFluidStack)) || output.getCapacity() - output.getFluidAmount() < outputFluidStack.amount)
-			return;
-		input.drain(inputFluidStack.amount, true);
-		output.fill(outputFluidStack, true);
+		int count = 1;
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_1))
+			count++;
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_2))
+			count += 2;
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_3))
+			count += 3;
+		for (int i = 0; i < count; i++) {
+			if (energyCost == 0 || input.isEmpty() || output.isFull() || !input.getFluid().isFluidEqual(inputFluidStack) || input.getFluidAmount() < inputFluidStack.amount || (!output.isEmpty() && !output.getFluid().isFluidEqual(outputFluidStack)) || output.getCapacity() - output.getFluidAmount() < outputFluidStack.amount)
+				return;
+			input.drain(inputFluidStack.amount, true);
+			output.fill(outputFluidStack, true);
+		}
 	}
 
 	private void updateHeat() {
