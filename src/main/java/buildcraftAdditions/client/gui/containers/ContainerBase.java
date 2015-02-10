@@ -158,7 +158,7 @@ public class ContainerBase<T> extends Container {
 	@Override
 	public ItemStack slotClick(int slotNum, int mouseButton, int modifier, EntityPlayer player) {
 		if (slotNum < 0 || slotNum >= inventorySlots.size())
-			return super.slotClick(slotNum, mouseButton, modifier, player);
+			return null;
 		Slot slot = (Slot) inventorySlots.get(slotNum);
 		if (slot instanceof SlotPhantom)
 			return ((SlotPhantom) slot).onClick(mouseButton, player);
