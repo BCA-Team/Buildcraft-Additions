@@ -37,13 +37,13 @@ public class VersionCheck {
 			Logger.info("Buildcraft Additions version check initiated, current version: @VERSION@");
 			try {
 
-				URL version = new URL("https://raw.githubusercontent.com/AEnterprise/Buildcraft-Additions/master/src/main/resources/changelogs/version.txt");
+				URL version = new URL("https://raw.githubusercontent.com/BCA-Team/Buildcraft-Additions/master/src/main/resources/changelogs/version.txt");
 				BufferedReader reader = new BufferedReader(new InputStreamReader(version.openStream()));
 				newerVersionNumber = reader.readLine();
 				if (!currentVersion.equals(newerVersionNumber)) {
 					newerVersionAvailable = true;
 					Logger.info("There is a newer version of Buildcraft Additions available (" + newerVersionNumber + ") please considder updating");
-					URL changelogURL = new URL("https://raw.githubusercontent.com/AEnterprise/Buildcraft-Additions/master/src/main/resources/changelogs/" + newerVersionNumber);
+					URL changelogURL = new URL("https://raw.githubusercontent.com/BCA-Team/Buildcraft-Additions/master/src/main/resources/changelogs/" + newerVersionNumber);
 					BufferedReader changelogReader = new BufferedReader((new InputStreamReader(changelogURL.openStream())));
 					String line;
 					ArrayList<String> changelogList = new ArrayList<String>();
