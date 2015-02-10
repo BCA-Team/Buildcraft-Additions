@@ -63,6 +63,7 @@ item.upgrade.upgradeEfficiency3.name=Machine Upgrade: Efficiency III
 item.upgrade.upgradeSpeed1.name=Machine Upgrade: Speed I
 item.upgrade.upgradeSpeed2.name=Machine Upgrade: Speed II
 item.upgrade.upgradeSpeed3.name=Machine Upgrade: Speed III
+item.baseUpgrade.name=Blank Upgrade
 
 
 tooltip.installed=%s Installed
