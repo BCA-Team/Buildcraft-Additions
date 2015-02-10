@@ -23,6 +23,7 @@ import buildcraft.api.transport.IPipeTile;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.recipe.refinery.IRefineryRecipe;
+import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
@@ -206,19 +207,31 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		ForgeDirection[] directions = RotationUtils.rotateDirections(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.UP}, data.rotationIndex);
 		Location location = new Location(this);
 		location.move(directions);
-		while (input.getFluid().amount >= 1000) {
-			if (input.getFluidType().getBlock() != null)
-				location.setBlock(input.getFluidType().getBlock());
-			input.drain(1000, true);
-			location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, data.rotationIndex));
+		try {
+			while (input.getFluid().amount >= 1000) {
+				if (input.getFluidType().getBlock() != null)
+					location.setBlock(input.getFluidType().getBlock());
+				input.drain(1000, true);
+				location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, data.rotationIndex));
+			}
+		} catch (Exception e) {
+			Logger.error("Error while trying to empty the tank of a refinery");
+		} finally {
+			input.setFluid(null);
 		}
 		location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, data.rotationIndex));
 		if (output.getFluid() == null || output.getFluid().amount < 1000 || output.getFluidType() == null)
 			return;
-		while (output.getFluid().amount >= 1000) {
-			location.setBlock(output.getFluidType().getBlock());
-			output.drain(1000, true);
-			location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, data.rotationIndex));
+		try {
+			while (output.getFluid().amount >= 1000) {
+				location.setBlock(output.getFluidType().getBlock());
+				output.drain(1000, true);
+				location.move(RotationUtils.rotatateDirection(ForgeDirection.NORTH, data.rotationIndex));
+			}
+		} catch (Exception e) {
+			Logger.error("Error while trying to empty the tank of a refinery");
+		} finally {
+			input.setFluid(null);
 		}
 	}
 
