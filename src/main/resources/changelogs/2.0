@@ -1,0 +1,36 @@
+Added:
+  - multiblock refinery (disables BC refinery recipe, BC refineries already in the world will produce the same as the multiblock refinery)
+  - multiblock cooling tower
+  - sort-o-tron
+  - 3rd tier of KEB
+  - framez integration: multiblocks now properly update when (partially) moved
+  - machine configurator, configures input/output and priority of KEB's, heated furnace, and 2 dusters
+  - config option to disable eureka research (eureka is still required to run though)
+  - minetweaker integration for dusting, refinery and cooling tower (adding and removing of recipes)
+  - TiC integration: kinetic capsules can be used to add the 'flux' modifier to your tools (tool uses power and is chargable)
+  - dusting, refinery and cooling tower recipes can be added by other mods using IMC messages
+  - WAILA integration for some of the machines, others will folow in a future update
+  - machine upgrades: auto-eject, efficiency I, efficiency II, efficiency III, speed I, speed II, speed III (not usable in all machines yet)
+  - coloring tool to recolor BC pipes, sheeps and other blocks/entities that support it
+  - BC blueprint support
+Changes:
+  - fluidic compressor now fills fluid canisters from other mods
+  - canisters now store more fluids
+  - removed configuration buttons from KEB gui, use machine configurator instead
+  - heated furnace and coils speed can be configured in the config
+  - complete network rewrite (alot less spammy)
+  - complete gui rewrite
+  - lots of localization tweaks and fixes
+  - rewrite of the dusts (old dusts are no longer valid dusts, drop them on the ground to convert them to the new system)
+  - moved dusts and canisters to seperate creative tabs
+  - kinetic multi-tool is chargeable now, it'll charge the internal batteries when put in a charging station
+  - touching KEB's of the same tier with the touching side set to 'BOTH' will balance out the stored energy
+  - hide some behind the scene blocks from NEI
+Bugfixes:
+  - fix keb selfdestruct button
+  - fix sync issues
+  - fix large KEB not rendering if masterblock isn't visible
+  - fix odd bug where some RF chargeable items wouldn't get charged in the charging station
+  - fix some machines requesting power but not accepting it when there internal buffer is full
+  - powerplant is generating again
+  - alot of other bugs
