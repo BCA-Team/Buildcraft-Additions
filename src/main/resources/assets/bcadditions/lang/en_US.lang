@@ -65,7 +65,6 @@ item.upgrade.upgradeSpeed2.name=Machine Upgrade: Speed II
 item.upgrade.upgradeSpeed3.name=Machine Upgrade: Speed III
 item.baseUpgrade.name=Blank Upgrade
 
-
 tooltip.installed=%s Installed
 tooltip.deactivated=Deactivated
 tooltip.upgradesPossible=Upgrades Possible
@@ -122,7 +121,6 @@ gui.colorSortingMode=Sorting Mode
 gui.installedUpgrades=Installed Upgrades:
 gui.configureIO=Configure Input/Output
 gui.showUpgrades=Installed Upgrades
-
 
 gui.keb.dangerousButton=BIG RED BUTTONS ARE VERY DANGEROUS
 gui.keb.noPushing=DON'T PUSH IT
@@ -189,7 +187,6 @@ engineeringDiary.dusterTier0.page2=they covered entire continents. Good times. A
 engineeringDiary.dusterTier0.page3=You start to wonder if you could somehow increase your Ore output, and you come up with the Basic Duster, a simple machine created using Stone and Slimeballs, with grindy-bits on top.
 engineeringDiary.dusterTier0.page4=It works by placing ore on the top and jumping on it, something you’re not so keen about doing, but double ore is double ore. You wonder how you could improve this machine...
 engineeringDiary.dusterTier0.howToMakeProgress=Plan future builds
-
 
 engineeringDiary.dusterTier1.title=Semi Automatic Duster
 engineeringDiary.dusterTier1.page0=This improved Duster can interact with inventories
