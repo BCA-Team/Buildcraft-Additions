@@ -55,7 +55,15 @@ item.heatPlating.name=Теплопроводящее покрытие
 item.dustConverter.name=Преобразователь пыли
 item.machineConfigurator.name=Настройщик механизмов
 item.bcaBucket.name=Ведро %s
-item.pipeColoringTool.name=Инструмент для покраски труб
+item.pipeColoringTool.name=Покрасочный инструмент
+item.upgrade.upgradeAutoEject.name=Улучшение механизма: Авто-выброс
+item.upgrade.upgradeEfficiency1.name=Улучшение механизма: Эффективность I
+item.upgrade.upgradeEfficiency2.name=Улучшение механизма: Эффективность II
+item.upgrade.upgradeEfficiency3.name=Улучшение механизма: Эффективность III
+item.upgrade.upgradeSpeed1.name=Улучшение механизма: Скорость I
+item.upgrade.upgradeSpeed2.name=Улучшение механизма: Скорость II
+item.upgrade.upgradeSpeed3.name=Улучшение механизма: Скорость III
+item.baseUpgrade.name=Пустое улучшение
 
 tooltip.installed=Установлено: %s
 tooltip.deactivated=Деактивировано
@@ -63,10 +71,13 @@ tooltip.upgradesPossible=Возможны улучшения
 tooltip.holdShiftForMoreInfo=Зажмите Shift для большей информации
 tooltip.FluidCapacity=Может содержать вёдер жидкости: %s
 tooltip.storedFluid=Содержит: %s мВ %s
-tooltip.colorPipeMode=Покраска труб
-tooltip.colorPipeMode.info=Красит обычные BC трубы
+tooltip.colorNormalMode=Обычная покраска
+tooltip.colorNormalMode.info=Красит обычные окрашиваемые блоки, овец и BC-трубы
 tooltip.colorSortingMode=Сортирующая покраска
 tooltip.colorSortingMode.info=Красит сортирующую часть алмазуритовой и лазуритовой труб
+tooltip.defaultColor=Цвет предмета по-умолчанию
+tooltip.compressor.fill=Заполнено
+tooltip.compressor.empty=Пусто
 
 fluid.gas.name=%s газ
 
@@ -104,15 +115,36 @@ gui.kineticTool.name=Кинетический инструмент
 gui.heatedFurnace.name=Нагревательная печь
 gui.fluidicCompressor.name=Жидкостный компрессор
 gui.coloringMode=Режим покраски
-gui.pipeColorTool.name=Инструмент для покраски труб
-gui.colorPipeMode=Покраска труб
+gui.pipeColorTool.name=Покрасочный инструмент
+gui.colorNormalMode=Обычная покраска
 gui.colorSortingMode=Сортирующая покраска
+gui.installedUpgrades=Установленные улучшения:
+gui.configureIO=Настроить вход/выход
+gui.showUpgrades=Установленные улучшения
 
 gui.keb.dangerousButton=БОЛЬШИЕ КРАСНЫЕ КНОПКИ ОЧЕНЬ ОПАСНЫ
 gui.keb.noPushing=НЕ НАЖИМАЙТЕ
 gui.keb.pressForBoom=НАЖМИТЕ ДЛЯ БОЛЬШОГО ВЗРЫВА
 
 gui.nei.dusting=Дробление
+
+gui.color.none=Нет
+gui.color.white=Белый
+gui.color.orange=Оранжевый
+gui.color.magenta=Сиреневый
+gui.color.lightBlue=Светло-синий
+gui.color.yellow=Жёлтый
+gui.color.lime=Лаймовый
+gui.color.pink=Розовый
+gui.color.gray=Серый
+gui.color.lightGray=Светло-серый
+gui.color.cyan=Бирюзовый
+gui.color.purple=Фиолетовый
+gui.color.blue=Синий
+gui.color.brown=Коричневый
+gui.color.green=Зелёный
+gui.color.red=Красный
+gui.color.black=Чёрный
 
 trigger.canisterRequested=Запрошена канистра
 trigger.hasEmptyCanister=Есть пустая канистра
@@ -155,7 +187,6 @@ engineeringDiary.dusterTier0.page2=которые покрывали целые 
 engineeringDiary.dusterTier0.page3=Вы начинаете задумываться над тем как бы Вам увеличить объём добычи руды и придумываете основной дробитель, простой механизм, созданный из камня и слизи.
 engineeringDiary.dusterTier0.page4=Он работает так: Вы кладёте сверху руду, а затем прыгаете на ней, правда делаете Вы это не совсем хорошо, но удвоение руды - это хорошо. Вы думаете над тем как бы улучшить этот механизм...
 engineeringDiary.dusterTier0.howToMakeProgress=Спланируйте будущие механизмы
-
 
 engineeringDiary.dusterTier1.title=Полуавтоматический дробитель
 engineeringDiary.dusterTier1.page0=Этот улучшенный дробитель может взаимодействовать с инвентарями
@@ -294,3 +325,17 @@ selfdestructCountdouwn=САМОУНИЧТОЖЕНИЕ ЧЕРЕЗ
 selfdestructActivated=САМОУНИЧТОЖЕНИЕ АКТИВИРОВАНО
 
 configured=Настроено
+
+fluids.info=%d / %d мВ
+fluids.change.info=%d / %d мВ/такт
+rf.info=%d / %d RF
+rf.change.info=%d / %d RF/такт
+
+lavaCoil.info=Накоплено лавы: %s
+
+waila.refinery.noMultiBlock=Не часть мульти-блока
+waila.refinery.currentHeat=Текущий нагрев: %d
+waila.refinery.requiredHeat=Требуется нагрев: %d
+waila.refinery.processing=Обработка %s в %s
+
+waila.upgrades.installed=Установленные улучшения:
