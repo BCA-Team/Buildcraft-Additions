@@ -19,6 +19,7 @@ import buildcraftAdditions.items.Tools.ItemKineticTool;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+@Deprecated
 @SideOnly(Side.CLIENT)
 public class GuiKineticTool extends GuiBase {
 

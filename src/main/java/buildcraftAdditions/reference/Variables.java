@@ -5,6 +5,7 @@ import buildcraftAdditions.multiBlocks.MultiBlockPaternCoolingTower;
 import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT2;
 import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT3;
 import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -28,7 +29,9 @@ public final class Variables {
 	public static final class Gui {
 		public static final int FLUIDIC_COMPRESSOR = 70;
 		public static final int CHARGING_STATION = 71;
+		@Deprecated
 		public static final int KINETIC_TOOL = 72;
+		public static final int KINETIC_MULTI_TOOL = 78;
 		public static final int HEATED_FURNACE = 73;
 		public static final int BASIC_COIL = 74;
 		public static final int KEB = 75;

@@ -14,10 +14,13 @@ import buildcraftAdditions.client.gui.containers.ContainerFluidicCompressor;
 import buildcraftAdditions.client.gui.containers.ContainerHeatedFurnace;
 import buildcraftAdditions.client.gui.containers.ContainerItemSorter;
 import buildcraftAdditions.client.gui.containers.ContainerKEB;
+import buildcraftAdditions.client.gui.containers.ContainerKineticMultiTool;
 import buildcraftAdditions.client.gui.containers.ContainerKineticTool;
 import buildcraftAdditions.client.gui.containers.ContainerMachineConfigurator;
 import buildcraftAdditions.client.gui.containers.ContainerPipeColoringTool;
 import buildcraftAdditions.client.gui.containers.ContainerRefinery;
+import buildcraftAdditions.inventories.InventoryKineticMultiTool;
+import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ItemPipeColoringTool;
 import buildcraftAdditions.items.Tools.ItemPoweredBase;
@@ -60,6 +63,9 @@ public class GuiHandler implements IGuiHandler {
 					ItemKineticTool tool = (ItemKineticTool) player.getCurrentEquippedItem().getItem();
 					return new GuiKineticTool(player.inventory, tool, ItemPoweredBase.getInventory(player), player.getCurrentEquippedItem(), player);
 				}
+			case Variables.Gui.KINETIC_MULTI_TOOL:
+				if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKineticMultiTool)
+					return new GuiKineticMultiTool(player.inventory, new InventoryKineticMultiTool(player.getHeldItem()));
 			case Variables.Gui.HEATED_FURNACE:
 				if (tile instanceof TileHeatedFurnace)
 					return new GuiHeatedFurnace(player.inventory, (TileHeatedFurnace) tile);
@@ -113,6 +119,9 @@ public class GuiHandler implements IGuiHandler {
 					ItemKineticTool tool = (ItemKineticTool) player.getCurrentEquippedItem().getItem();
 					return new ContainerKineticTool(player.inventory, tool, ItemPoweredBase.getInventory(player), player.getCurrentEquippedItem(), player);
 				}
+			case Variables.Gui.KINETIC_MULTI_TOOL:
+				if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKineticMultiTool)
+					return new ContainerKineticMultiTool(player.inventory, new InventoryKineticMultiTool(player.getHeldItem()));
 			case Variables.Gui.HEATED_FURNACE:
 				if (tile instanceof TileHeatedFurnace)
 					return new ContainerHeatedFurnace(player.inventory, (TileHeatedFurnace) tile);
