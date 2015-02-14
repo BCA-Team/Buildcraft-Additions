@@ -24,6 +24,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
+import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.dust.ItemConverter;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
@@ -70,6 +72,14 @@ public class EventListener {
 		public void onCrafted(PlayerEvent.ItemCraftedEvent event) {
 			if (event.crafting.getItem().isItemTool(event.crafting))
 				EurekaKnowledge.makeProgress(event.player, Variables.KineticToolKey, 1);
+			if (event.craftMatrix != null && event.crafting != null && event.crafting.getItem() != null && event.crafting.getItem() instanceof ItemKineticMultiTool) {
+				for (int i = 0; i < event.craftMatrix.getSizeInventory(); i++) {
+					ItemStack stack = event.craftMatrix.getStackInSlot(i);
+					if (stack != null && stack.getItem() != null && stack.getItem() instanceof ItemKineticTool) {
+						event.crafting.stackTagCompound = stack.stackTagCompound;
+					}
+				}
+			}
 		}
 	}
 

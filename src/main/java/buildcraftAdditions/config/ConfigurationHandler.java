@@ -17,7 +17,7 @@ public class ConfigurationHandler {
 	public static Configuration configFile;
 	public static boolean shouldPrintChangelog, shouldRegisterDusts, powerloss, eurekaIntegration;
 	public static int[] powerDifficultyModifiers = new int[4];
-	public static int basePowerModifier, KEB1powerloss, KEB2powerloss, KEB3powerloss, heatedFurnaceHeatRequired,
+	public static int basePowerModifier, entityHitModifier, KEB1powerloss, KEB2powerloss, KEB3powerloss, heatedFurnaceHeatRequired,
 			basicCoilHeat, lavaCoilHeat, kineticCoilHeatModifier;
 
 	public static void init(File file) {
@@ -37,6 +37,7 @@ public class ConfigurationHandler {
 		powerDifficultyModifiers[2] = configFile.get("Power Usage", "NormalDifficultyModifier", 3).getInt();
 		powerDifficultyModifiers[3] = configFile.get("Power Usage", "HardDifficultyModifier", 4).getInt();
 		basePowerModifier = configFile.get("Power Usage", "BaseModifier", 10).getInt();
+		entityHitModifier = configFile.get("Power Usage", "EntityHitModifier", 10).getInt();
 
 		configFile.addCustomCategoryComment("KEB", "Configuration stuff for your Kinetic Energy Buffers");
 		powerloss = configFile.get("KEB", "powerloss", false).getBoolean();
