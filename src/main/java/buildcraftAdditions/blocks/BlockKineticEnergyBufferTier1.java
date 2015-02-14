@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -82,17 +83,21 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if (tile == null || !(tile instanceof TileKineticEnergyBufferBase))
+			return;
 		if (stack.stackTagCompound != null) {
-			stack.stackTagCompound.setInteger("x", x);
-			stack.stackTagCompound.setInteger("y", y);
-			stack.stackTagCompound.setInteger("z", z);
-			world.getTileEntity(x, y, z).readFromNBT(stack.stackTagCompound);
+			NBTBase nbtBase = stack.stackTagCompound.copy();
+			if (nbtBase instanceof NBTTagCompound) {
+				NBTTagCompound tag = (NBTTagCompound) nbtBase;
+				tag.setInteger("x", x);
+				tag.setInteger("y", y);
+				tag.setInteger("z", z);
+				tile.readFromNBT(tag);
+			}
 		}
-		if (entity instanceof EntityPlayer) {
-			TileEntity tileEntity = world.getTileEntity(x, y, z);
-			if (tileEntity instanceof TileKineticEnergyBufferBase)
-				((TileKineticEnergyBufferBase) tileEntity).setOwner(((EntityPlayer) entity).getDisplayName());
-		}
+		if (entity instanceof EntityPlayer)
+			((TileKineticEnergyBufferBase) tile).setOwner(((EntityPlayer) entity).getDisplayName());
 	}
 
 	@Override
