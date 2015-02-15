@@ -17,6 +17,7 @@ import net.minecraft.nbt.NBTTagList;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.Tools.ItemPoweredBase;
 
+@Deprecated
 public class InventoryTool extends InventoryBasic {
 
 	ItemStack tool;

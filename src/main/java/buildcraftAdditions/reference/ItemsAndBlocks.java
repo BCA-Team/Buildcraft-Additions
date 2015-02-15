@@ -34,6 +34,7 @@ import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemMachineConfigurator;
 import buildcraftAdditions.items.ItemMachineUpgrade;
+import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ItemPipeColoringTool;
 import buildcraftAdditions.items.Tools.ToolUpgrade;
@@ -109,7 +110,9 @@ public final class ItemsAndBlocks {
 	public static Item goldWire;
 	public static Item diamondWireUnhardened;
 	public static Item diamondWire;
+	@Deprecated
 	public static ItemKineticTool kineticTool;
+	public static Item itemKineticMultiTool;
 	public static Item machineConfigurator;
 	public static Item heatPlating;
 	public static Item heatPlatingRaw;
@@ -155,20 +158,23 @@ public final class ItemsAndBlocks {
 		toolCore = new ItemBase("toolCore");
 		GameRegistry.registerItem(toolCore, "toolCore");
 
-		toolUpgradeHoe = new ToolUpgrade("Hoe");
+		toolUpgradeHoe = new ToolUpgrade("hoe");
 		GameRegistry.registerItem(toolUpgradeHoe, "toolUpgradeHoe");
 
-		toolUpgradeDigger = new ToolUpgrade("Digger");
+		toolUpgradeDigger = new ToolUpgrade("digger");
 		GameRegistry.registerItem(toolUpgradeDigger, "toolUpgradeDigger");
 
-		toolUpgradeDrill = new ToolUpgrade("Drill");
+		toolUpgradeDrill = new ToolUpgrade("drill");
 		GameRegistry.registerItem(toolUpgradeDrill, "toolUpgradeDrill");
 
-		toolUpgradeChainsaw = new ToolUpgrade("Chainsaw");
+		toolUpgradeChainsaw = new ToolUpgrade("chainsaw");
 		GameRegistry.registerItem(toolUpgradeChainsaw, "toolUpgradeChaisaw");
 
 		kineticTool = new ItemKineticTool();
 		GameRegistry.registerItem(kineticTool, "kineticMultiTool");
+
+		itemKineticMultiTool = new ItemKineticMultiTool();
+		GameRegistry.registerItem(itemKineticMultiTool, "itemKineticMultiTool");
 
 		itemGrindingWheel = new ItemBase("grindingWheel");
 		GameRegistry.registerItem(itemGrindingWheel, "grindingWheel");

@@ -19,15 +19,13 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
 public class UpgradeRecipeEmeraldStick extends IntegrationTableRecipe {
 
 	public UpgradeRecipeEmeraldStick() {
-		setContents("emeraldStick", ItemsAndBlocks.kineticTool, 10000, 60, ItemRedstoneChipset.Chipset.DIAMOND.getStack());
+		setContents("emeraldStick", ItemsAndBlocks.itemKineticMultiTool, 10000, 60, ItemRedstoneChipset.Chipset.DIAMOND.getStack());
 	}
 
 	@Override
 	public boolean isValidInputA(ItemStack inputA) {
-		if (inputA != null && inputA.getItem() instanceof ItemKineticTool) {
-			ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
-			return !tool.isStickInstalled(inputA, "emeraldStick") && tool.isStickInstalled(inputA, "diamondStick");
-		}
+		if (inputA != null && inputA.getItem() instanceof ItemKineticMultiTool)
+			return !ItemKineticMultiTool.isStickInstalled(inputA, "emeraldStick") && ItemKineticMultiTool.isStickInstalled(inputA, "diamondStick");
 		return false;
 	}
 
@@ -42,9 +40,7 @@ public class UpgradeRecipeEmeraldStick extends IntegrationTableRecipe {
 		if (result == null)
 			return null;
 		ItemStack outputStack = inputA.copy();
-		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
-		output.installStick(outputStack, "emeraldStick");
-		output.writeUpgrades(outputStack);
+		ItemKineticMultiTool.installStick(outputStack, "emeraldStick");
 		result.crafted = outputStack;
 		return result;
 	}

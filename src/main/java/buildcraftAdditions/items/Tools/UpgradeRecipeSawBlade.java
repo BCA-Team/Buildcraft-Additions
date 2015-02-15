@@ -18,29 +18,24 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
 public class UpgradeRecipeSawBlade extends IntegrationTableRecipe {
 
 	public UpgradeRecipeSawBlade() {
-		setContents("sawblade", ItemsAndBlocks.kineticTool, 10000, 600);
+		setContents("sawblade", ItemsAndBlocks.itemKineticMultiTool, 10000, 600);
 	}
 
 	public boolean isValidInputA(ItemStack inputA) {
-		if (inputA != null && inputA.getItem() instanceof ItemKineticTool) {
-			ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
-			return tool.canInstallUpgrade(inputA) && !tool.isUpgradeInstalled(inputA, "Chainsaw");
-		}
+		if (inputA != null && inputA.getItem() instanceof ItemKineticMultiTool)
+			return ItemKineticMultiTool.canInstallUpgrade(inputA) && !ItemKineticMultiTool.isUpgradeInstalled(inputA, "chainsaw");
 		return false;
 	}
 
 	public boolean isValidInputB(ItemStack inputB) {
-		return inputB != null && inputB.getItem() instanceof ToolUpgrade && ((ToolUpgrade) inputB.getItem()).getType() == "Chainsaw";
+		return inputB != null && inputB.getItem() instanceof ToolUpgrade && ((ToolUpgrade) inputB.getItem()).getType() == "chainsaw";
 	}
 
 	@Override
 	public CraftingResult<ItemStack> craft(TileIntegrationTable crafter, boolean preview, ItemStack inputA, ItemStack inputB) {
-		CraftingResult<ItemStack> result =  super.craft(crafter, preview, inputA, inputB);
+		CraftingResult<ItemStack> result = super.craft(crafter, preview, inputA, inputB);
 		ItemStack outputStack = inputA.copy();
-		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
-		output.readUpgrades(outputStack);
-		output.installUpgrade("Chainsaw", outputStack);
-		output.writeUpgrades(outputStack);
+		ItemKineticMultiTool.installUpgrade("chainsaw", outputStack);
 		result.crafted = outputStack;
 		return result;
 	}
