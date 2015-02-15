@@ -4,13 +4,8 @@ import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
-import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 
@@ -34,27 +29,20 @@ public class NEIConfig implements IConfigureNEI {
 		API.hideItem(GameRegistry.findItemStack(Variables.MOD.ID, "kebT2DisplayItem", 1));
 		API.hideItem(GameRegistry.findItemStack(Variables.MOD.ID, "kebT3DisplayItem", 1));
 		API.hideItem(new ItemStack(ItemsAndBlocks.kinesisPipeWood));
-        API.hideItem(new ItemStack(ItemsAndBlocks.kinisisPipeStone));
+		API.hideItem(new ItemStack(ItemsAndBlocks.kinisisPipeStone));
 		API.hideItem(new ItemStack(ItemsAndBlocks.kineticTool));
-		for (IDust dust : BCAItemManager.dusts.getDusts()) {
-            if (dust == null)
-                continue;
-            String name = dust.getName().toLowerCase();
-            API.hideItem(GameRegistry.findItemStack(Variables.MOD.ID, "converter" + name, 1));
-        }
+		for (IDust dust : BCAItemManager.dusts.getDusts())
+			if (dust != null && dust.getName() != null)
+				API.hideItem(GameRegistry.findItemStack(Variables.MOD.ID, "converter" + dust.getName().toLowerCase(), 1));
 	}
 
-    public void addFullCanisters(ItemCanister canister) {
-        for (Fluid fluid : FluidRegistry.getRegisteredFluids().values())
-            API.addItemListEntry(canister.getFilledItemStack(new FluidStack(fluid, canister.getCapacity())));
-    }
-    @Override
-    public String getName() {
-        return "Buildcraft Additions";
-    }
+	@Override
+	public String getName() {
+		return "Buildcraft Additions";
+	}
 
-    @Override
-    public String getVersion() {
-        return "@MODVERSION@";
-    }
+	@Override
+	public String getVersion() {
+		return "@MODVERSION@";
+	}
 }
