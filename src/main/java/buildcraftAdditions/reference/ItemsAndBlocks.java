@@ -40,6 +40,8 @@ import buildcraftAdditions.items.Tools.ItemPipeColoringTool;
 import buildcraftAdditions.items.Tools.ToolUpgrade;
 import buildcraftAdditions.items.dust.ItemDust;
 import buildcraftAdditions.items.itemBlocks.ItemBlockKEB;
+import buildcraftAdditions.tileEntities.TileBCKinesisPipeStonePlacer;
+import buildcraftAdditions.tileEntities.TileBCKinesisPipeWoodPlacer;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileChargingStation;
@@ -329,5 +331,7 @@ public final class ItemsAndBlocks {
 		GameRegistry.registerTileEntity(TileRefinery.class, "TileRefinery");
 		GameRegistry.registerTileEntity(TileCoolingTower.class, "CoolingTower");
 		GameRegistry.registerTileEntity(TileItemSorter.class, "ItemSorter");
+		GameRegistry.registerTileEntity(TileBCKinesisPipeStonePlacer.class, "BCKinesisPipeStonePlacer");
+		GameRegistry.registerTileEntity(TileBCKinesisPipeWoodPlacer.class, "BCKinesisPipeWoodPlacer");
 	}
 }
