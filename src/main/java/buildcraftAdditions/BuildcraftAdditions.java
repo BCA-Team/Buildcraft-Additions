@@ -144,12 +144,15 @@ public class BuildcraftAdditions {
 					mapping.remap(FluidRegistry.getFluid("bioethanolgas").getBlock());
 				continue;
 			}
+			if (!ConfigurationHandler.shouldRegisterDusts)
+				return;
 			for (IDust dust : BCAItemManager.dusts.getDusts()) {
 				if (dust == null)
 					continue;
 				String name = dust.getName().toLowerCase();
 				if (mapping.name.toLowerCase().contains(name)) {
 					mapping.remap(GameRegistry.findItem(Variables.MOD.ID, "converter" + name));
+					continue;
 				}
 			}
 		}
