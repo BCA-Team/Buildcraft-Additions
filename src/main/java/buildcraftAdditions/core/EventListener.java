@@ -112,7 +112,6 @@ public class EventListener {
 						tag.removeTag("z");
 						tag.removeTag("id");
 						stack.stackTagCompound = tag;
-						event.world.removeTileEntity(event.x, event.y, event.z);
 						event.world.setBlockToAir(event.x, event.y, event.z);
 						if (event.world.isRemote)
 							event.entityPlayer.swingItem();

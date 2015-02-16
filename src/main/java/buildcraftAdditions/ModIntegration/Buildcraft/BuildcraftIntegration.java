@@ -46,6 +46,7 @@ public class BuildcraftIntegration {
 
 	public static void integrate() {
 		Triggers.register();
+		StripesHandler.register();
 		addBCRecipes();
 		RefineryRecipeConverter.doYourThing();
 		BuildcraftAdditions.proxy.addPowerplant();
