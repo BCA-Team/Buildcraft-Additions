@@ -5,10 +5,11 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import buildcraftAdditions.core.Logger;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import buildcraftAdditions.core.Logger;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -29,7 +30,7 @@ public class SpecialListMananger {
 	public static void readFile(File file) {
 		try {
 			SpecialList specialList = gson.fromJson(new FileReader(file), SpecialList.class);
-			for (String name: specialList.greenButton)
+			for (String name : specialList.greenButton)
 				greenButtonList.add(name);
 			int max = specialList.specialTextNames.length;
 			for (int teller = 0; teller < max; teller++)

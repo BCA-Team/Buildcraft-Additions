@@ -10,6 +10,7 @@ import buildcraftAdditions.multiBlocks.MultiBlockPaternKEBT3;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKEBT3;
+import buildcraftAdditions.utils.PlayerUtils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -34,7 +35,7 @@ public class MultiBlockKEBT3Plating extends MultiBlockBase {
 		if (entity instanceof EntityPlayer) {
 			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof TileKineticEnergyBufferBase)
-				((TileKineticEnergyBufferBase) tileEntity).setOwner(((EntityPlayer) entity).getDisplayName());
+				((TileKineticEnergyBufferBase) tileEntity).setOwner(PlayerUtils.getPlayerUUID((EntityPlayer) entity));
 		}
 	}
 }

@@ -5,6 +5,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.utils.PlayerUtils;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -22,7 +24,7 @@ public class ItemBlockKEB extends ItemBlock {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		if (BuildcraftAdditions.proxy.getPlayer() != null && BuildcraftAdditions.proxy.getPlayer().getDisplayName() != null && BuildcraftAdditions.proxy.getPlayer().getDisplayName().equals("corjaantje")) {
+		if (PlayerUtils.playerMatches(Variables.UUIDs.CORJAANTJE, BuildcraftAdditions.proxy.getClientPlayer())) {
 			if (stack.stackTagCompound != null && stack.stackTagCompound.getBoolean("creative"))
 				return "Creative Kebab Extreme Bakery";
 			return "Kebab Extreme Bakery";

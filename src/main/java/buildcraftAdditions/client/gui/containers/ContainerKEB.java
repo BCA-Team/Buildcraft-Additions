@@ -3,6 +3,7 @@ package buildcraftAdditions.client.gui.containers;
 import net.minecraft.entity.player.EntityPlayer;
 
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
+import buildcraftAdditions.utils.PlayerUtils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -16,7 +17,7 @@ public class ContainerKEB extends ContainerBase<TileKineticEnergyBufferBase> {
 	public ContainerKEB(EntityPlayer player, TileKineticEnergyBufferBase tile) {
 		super(player.inventory, tile);
 		tile.sync();
-		if (player.getDisplayName().equals(tile.owner))
+		if (PlayerUtils.playerMatches(tile, player))
 			tile.destroyer = player;
 	}
 
