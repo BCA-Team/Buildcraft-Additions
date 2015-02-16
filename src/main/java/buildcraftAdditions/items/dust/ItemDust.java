@@ -44,7 +44,7 @@ public class ItemDust extends Item {
 	public String getUnlocalizedName(ItemStack stack) {
 		IDust dust = BCAItemManager.dusts.getDust(stack.getItemDamage());
 		if (dust != null) {
-			return "item.dust" + dust.getName();
+			return ("item.dust" + dust.getName()).replace(" ", ".");
 		}
 		return super.getUnlocalizedName(stack);
 	}
