@@ -7,6 +7,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
@@ -24,9 +27,6 @@ import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
 import buildcraftAdditions.utils.Location;
 
 import io.netty.buffer.ByteBuf;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -80,7 +80,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 			findMaster();
 		if (master == null)
 			return 0;
-		return master.receiveEnergy(from, maxExtract, simulate);
+		return master.extractEnergy(from, maxExtract, simulate);
 	}
 
 	@Override
@@ -94,6 +94,19 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 		if (master == null)
 			return 0;
 		return master.getEnergyStored(from);
+	}
+
+	@Override
+	public int getEnergyLevel() {
+		if (!data.partOfMultiBlock)
+			return 0;
+		if (data.isMaster)
+			return super.getEnergyLevel();
+		if (master == null)
+			findMaster();
+		if (master == null)
+			return 0;
+		return master.getEnergyLevel();
 	}
 
 	@Override

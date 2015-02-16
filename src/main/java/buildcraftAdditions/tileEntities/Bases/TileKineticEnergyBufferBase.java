@@ -1,7 +1,5 @@
 package buildcraftAdditions.tileEntities.Bases;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -24,6 +22,8 @@ import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
 import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Utils;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -237,7 +237,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	public int getEnergyLevel() {
 		if (getMaxEnergyStored(ForgeDirection.UNKNOWN) == 0)
 			return 0;
-		return (int) (((float) getEnergyStored(ForgeDirection.UNKNOWN)) / getMaxEnergyStored(ForgeDirection.UNKNOWN)) * 100;
+		return (int) ((float) getEnergyStored(ForgeDirection.UNKNOWN) / getMaxEnergyStored(ForgeDirection.UNKNOWN) * 100);
 	}
 
 	@Override
