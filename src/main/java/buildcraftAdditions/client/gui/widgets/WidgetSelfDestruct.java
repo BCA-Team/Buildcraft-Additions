@@ -4,11 +4,14 @@ import java.util.List;
 
 import net.minecraft.util.ResourceLocation;
 
+import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.client.gui.gui.GuiBase;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
+import buildcraftAdditions.utils.PlayerUtils;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.SpecialListMananger;
 import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -16,39 +19,40 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class WidgedSelfDestruct extends WidgetBase {
+public class WidgetSelfDestruct extends WidgetBase {
 	private static final ResourceLocation RED_BUTTON = new ResourceLocation("bcadditions:textures/gui/Pieces/RedButton.png");
 	private static final ResourceLocation YELLOW_BUTTON = new ResourceLocation("bcadditions:textures/gui/Pieces/YellowButton.png");
 	private static final ResourceLocation GREEN_BUTTON = new ResourceLocation("bcadditions:textures/gui/Pieces/GreenButton.png");
-	private boolean primed, isOwner;
-	private String playerName;
-	private TileKineticEnergyBufferBase keb;
-	private int teller;
+	private final boolean isOwner;
+	private final String uuidString;
+	private final TileKineticEnergyBufferBase keb;
+	private boolean primed;
+	private int counter;
 
-	public WidgedSelfDestruct(int id, int x, int y, int width, int height, GuiBase gui, String playerName, boolean isOwner, TileKineticEnergyBufferBase keb) {
+	public WidgetSelfDestruct(int id, int x, int y, int width, int height, GuiBase gui, TileKineticEnergyBufferBase keb) {
 		super(id, x, y, width, height, gui);
-		this.playerName = playerName;
 		primed = false;
-		this.isOwner = isOwner;
+		isOwner = PlayerUtils.playerMatches(keb, BuildcraftAdditions.proxy.getClientPlayer());
+		uuidString = PlayerUtils.getPlayerUUIDString(BuildcraftAdditions.proxy.getClientPlayer());
 		this.keb = keb;
-		teller = 80;
+		counter = 80;
 	}
 
 	@Override
 	public void render(int mouseX, int mouseY) {
 		ResourceLocation button = RED_BUTTON;
 		if (primed) {
-			if (teller < 40) {
-				if (SpecialListMananger.greenButtonList.contains(playerName)) {
+			if (counter < 40) {
+				if (SpecialListMananger.greenButtonList.contains(uuidString)) {
 					button = GREEN_BUTTON;
 				} else {
 					button = YELLOW_BUTTON;
 				}
 			}
-			if (teller <= 0) {
-				teller = 80;
+			if (counter <= 0) {
+				counter = 80;
 			}
-			teller--;
+			counter--;
 		}
 		RenderUtils.drawImage(button, x, y, width, height);
 	}
@@ -66,14 +70,14 @@ public class WidgedSelfDestruct extends WidgetBase {
 	@Override
 	public void addTooltip(int mouseX, int mouseY, List<String> list, boolean shift) {
 		if (primed) {
-			if (SpecialListMananger.specialTexts.containsKey(playerName)) {
-				list.add(SpecialListMananger.specialTexts.get(playerName) + "!!!");
+			if (SpecialListMananger.specialTexts.containsKey(uuidString)) {
+				list.add(SpecialListMananger.specialTexts.get(uuidString) + "!!!");
 			} else {
 				list.add(Utils.localize("gui.keb.pressForBoom"));
 			}
 		} else {
-			if (SpecialListMananger.specialTexts.containsKey(playerName)) {
-				list.add(SpecialListMananger.specialTexts.get(playerName) + "?");
+			if (SpecialListMananger.specialTexts.containsKey(uuidString)) {
+				list.add(SpecialListMananger.specialTexts.get(uuidString) + "?");
 			} else {
 				list.add(Utils.localize("gui.keb.dangerousButton"));
 				list.add(Utils.localize("gui.keb.noPushing"));

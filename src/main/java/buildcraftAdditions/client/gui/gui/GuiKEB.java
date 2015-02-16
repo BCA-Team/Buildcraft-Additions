@@ -9,7 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.client.gui.containers.ContainerKEB;
-import buildcraftAdditions.client.gui.widgets.WidgedSelfDestruct;
+import buildcraftAdditions.client.gui.widgets.WidgetSelfDestruct;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.Utils;
 
@@ -55,7 +55,7 @@ public class GuiKEB extends GuiBase {
 
 	@Override
 	public void initialize() {
-		addWidget(new WidgedSelfDestruct(0, guiLeft + 67, guiTop + 30, 46, 47, this, player.getDisplayName(), player.getDisplayName().equals(keb.owner), keb));
+		addWidget(new WidgetSelfDestruct(0, guiLeft + 67, guiTop + 30, 46, 47, this, keb));
 	}
 
 	@Override

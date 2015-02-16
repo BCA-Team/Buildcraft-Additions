@@ -2,12 +2,14 @@ package buildcraftAdditions.blocks.multiBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.multiBlocks.TestingPatern;
 import buildcraftAdditions.utils.Location;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -24,5 +26,9 @@ public class PaternTestingBlock extends Block {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
 		TestingPatern.build(new Location(world, x, y, z));
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
 	}
 }

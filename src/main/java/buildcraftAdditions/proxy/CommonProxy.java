@@ -2,10 +2,10 @@ package buildcraftAdditions.proxy;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.server.FMLServerHandler;
 
 import net.minecraftforge.fluids.Fluid;
 
@@ -41,16 +41,15 @@ public class CommonProxy {
 		}
 	}
 
-	public EntityPlayer getPlayer(String name) {
-		return FMLServerHandler.instance().getServer().getEntityWorld().getPlayerEntityByName(name);
+	public void cloneFluidTextures(Fluid source, Fluid target) {
 	}
 
-	public EntityPlayer getPlayer() {
+	public EntityPlayer getClientPlayer() {
 		return null;
 	}
 
-	public void cloneFluidTextures(Fluid source, Fluid target) {
-
+	public World getClientWorld() {
+		return null;
 	}
 
 }

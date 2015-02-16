@@ -1,5 +1,9 @@
 package buildcraftAdditions.tileEntities.Bases;
 
+import java.util.UUID;
+
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -19,11 +23,11 @@ import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.enums.EnumPriority;
 import buildcraftAdditions.reference.enums.EnumSideStatus;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
+import buildcraftAdditions.tileEntities.interfaces.IOwnableMachine;
 import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.utils.IConfigurableOutput;
+import buildcraftAdditions.utils.PlayerUtils;
 import buildcraftAdditions.utils.Utils;
-
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -32,13 +36,14 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileKineticEnergyBufferBase extends TileBase implements IEnergyReceiver, IEnergyProvider, IConfigurableOutput, ISyncronizedTile {
+public abstract class TileKineticEnergyBufferBase extends TileBase implements IEnergyReceiver, IEnergyProvider, IConfigurableOutput, ISyncronizedTile, IOwnableMachine {
+
 	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
 	protected boolean[] blocked = new boolean[6];
 	protected final SideConfiguration configuration = new SideConfiguration();
 	public int tier;
 	public boolean selfDestruct, engineControl;
-	public String owner = "";
+	private UUID owner;
 	public EntityPlayer destroyer;
 
 
@@ -101,8 +106,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 		loss = tag.getInteger("loss");
 		engineControl = tag.getBoolean("engineControl");
 		configuration.readFromNBT(tag);
-		if (tag.hasKey("owner"))
-			owner = tag.getString("owner");
+		owner = PlayerUtils.readFromNBT(tag);
 	}
 
 	@Override
@@ -115,8 +119,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 		tag.setInteger("loss", loss);
 		tag.setBoolean("engineControl", engineControl);
 		configuration.writeToNBT(tag);
-		if (owner != null)
-			tag.setString("owner", owner);
+		PlayerUtils.writeToNBT(tag, owner);
 	}
 
 	@Override
@@ -160,8 +163,19 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 		PacketHandler.instance.sendToServer(new MessageConfiguration(this));
 	}
 
-	public void setOwner(String owner) {
+	@Override
+	public void setOwner(UUID owner) {
 		this.owner = owner;
+	}
+
+	@Override
+	public UUID getOwner() {
+		return owner;
+	}
+
+	@Override
+	public boolean hasOwner() {
+		return owner != null;
 	}
 
 	public void activateSelfDestruct() {
@@ -200,11 +214,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	public ByteBuf writeToByteBuff(ByteBuf buf) {
 		buf.writeInt(energy);
 		configuration.writeToByteBuff(buf);
-		int length = owner.length();
-		buf.writeInt(length);
-		char[] chars = owner.toCharArray();
-		for (int t = 0; t < length; t++)
-			buf.writeChar(chars[t]);
+		PlayerUtils.writeToByteBuff(buf, owner);
 		return buf;
 	}
 
@@ -212,10 +222,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		energy = buf.readInt();
 		configuration.readFromByteBuff(buf);
-		int length = buf.readInt();
-		owner = "";
-		for (int teller = 0; teller < length; teller++)
-			owner += buf.readChar();
+		owner = PlayerUtils.readFromByteBuff(buf);
 		return buf;
 	}
 

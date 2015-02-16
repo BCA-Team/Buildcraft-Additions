@@ -8,10 +8,10 @@ package buildcraftAdditions.proxy;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -63,21 +63,17 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public EntityPlayer getPlayer(String name) {
-		return null;
-	}
-
-	@Override
-	public EntityPlayer getPlayer() {
-		return Minecraft.getMinecraft().thePlayer;
-	}
-
-	@Override
 	public void cloneFluidTextures(Fluid source, Fluid target) {
 		target.setIcons(source.getStillIcon(), source.getFlowingIcon());
 	}
 
-	public static GuiScreen getCurrentOpenedScreen() {
-		return Minecraft.getMinecraft().currentScreen;
+	@Override
+	public EntityPlayer getClientPlayer() {
+		return FMLClientHandler.instance().getClientPlayerEntity();
+	}
+
+	@Override
+	public World getClientWorld() {
+		return FMLClientHandler.instance().getWorldClient();
 	}
 }

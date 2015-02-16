@@ -28,6 +28,7 @@ import buildcraftAdditions.reference.enums.EnumSideStatus;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
 import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
+import buildcraftAdditions.utils.PlayerUtils;
 import buildcraftAdditions.utils.RenderUtils;
 
 /**
@@ -97,7 +98,7 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 			}
 		}
 		if (entity instanceof EntityPlayer)
-			((TileKineticEnergyBufferBase) tile).setOwner(((EntityPlayer) entity).getDisplayName());
+			((TileKineticEnergyBufferBase) tile).setOwner(PlayerUtils.getPlayerUUID((EntityPlayer) entity));
 	}
 
 	@Override

@@ -1,5 +1,21 @@
 {
-	"greenButton": ["rikbberkelder", "corjaantje", "alexbilb"],
-	"specialTextNames": ["rikbberkelder", "corjaantje", "AEnterprise", "alexbilb", "big_Xplosion"],
-	"specialTexts": ["Kittens", "HissssssssBOOOM", "KABOOM", "I have no idea what i’m doing", "big_Xplosion, huh? I bet I can be a bigger one"]
+  "greenButton": [
+    "271e3234-25b0-45fd-a797-17adf1289bd3",
+    "209f3364-0042-4d2a-b539-8640e6bbd6c1",
+    "41fb2701-ae7a-420f-a322-deff163014b9"
+  ],
+  "specialTextNames": [
+    "271e3234-25b0-45fd-a797-17adf1289bd3",
+    "209f3364-0042-4d2a-b539-8640e6bbd6c1",
+    "ed48627b-0e75-4b7f-a6b6-0bd7ab5aabe9",
+    "41fb2701-ae7a-420f-a322-deff163014b9",
+    "d6465bfd-6e74-46a7-92db-3cde77b12740"
+  ],
+  "specialTexts": [
+    "Kittens",
+    "HissssssssBOOOM",
+    "KABOOM",
+    "I have no idea what I’m doing",
+    "big_Xplosion, huh? I bet I can be a bigger one"
+  ]
 }

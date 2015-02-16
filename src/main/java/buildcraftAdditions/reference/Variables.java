@@ -21,6 +21,10 @@ public final class Variables {
 		public static final String NAME = "Buildcraft Additions";
 	}
 
+	public static final class UUIDs {
+		public static final String CORJAANTJE = "209f3364-0042-4d2a-b539-8640e6bbd6c1";
+	}
+
 	//GUI ID's
 	public static final class Gui {
 		public static final int FLUIDIC_COMPRESSOR = 70;
