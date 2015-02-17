@@ -54,7 +54,7 @@ import buildcraftAdditions.utils.SpecialListMananger;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-@Mod(modid = Variables.MOD.ID, name = Variables.MOD.NAME, version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "after:BuildCraft|Energy;required-after:eureka;required-after:Forge@[10.13.2.1230,)", acceptedMinecraftVersions = "1.7.10")
+@Mod(modid = Variables.MOD.ID, name = Variables.MOD.NAME, version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "after:BuildCraft|Energy;required-after:eureka;before:zCraftingManager;required-after:Forge@[10.13.2.1230,)", acceptedMinecraftVersions = "1.7.10")
 public class BuildcraftAdditions {
 
 	@Mod.Instance(Variables.MOD.ID)
