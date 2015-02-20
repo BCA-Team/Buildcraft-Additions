@@ -5,8 +5,8 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraftAdditions.api.networking.ISyncObject;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
-import buildcraftAdditions.networking.ISyncObject;
 
 import io.netty.buffer.ByteBuf;
 

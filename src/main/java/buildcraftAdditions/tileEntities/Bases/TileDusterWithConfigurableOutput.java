@@ -9,11 +9,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.transport.IPipeTile;
 
+import buildcraftAdditions.api.configurableOutput.EnumPriority;
+import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
+import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
-import buildcraftAdditions.reference.enums.EnumPriority;
-import buildcraftAdditions.reference.enums.EnumSideStatus;
 import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
-import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Utils;
 
 import io.netty.buffer.ByteBuf;

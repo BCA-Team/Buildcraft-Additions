@@ -9,7 +9,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-import buildcraftAdditions.networking.ISyncObject;
+import buildcraftAdditions.api.networking.ISyncObject;
 
 import io.netty.buffer.ByteBuf;
 

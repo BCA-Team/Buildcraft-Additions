@@ -4,8 +4,8 @@ import net.minecraft.tileentity.TileEntity;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-import buildcraftAdditions.networking.ISyncronizedTile;
-import buildcraftAdditions.networking.MessageByteBuff;
+import buildcraftAdditions.api.networking.ISyncronizedTile;
+import buildcraftAdditions.api.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandler;
 
 /**

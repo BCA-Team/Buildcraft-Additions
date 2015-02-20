@@ -26,7 +26,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraft.api.transport.IPipeTile;
 
-import buildcraftAdditions.reference.enums.EnumPriority;
+import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 
 public class Utils {

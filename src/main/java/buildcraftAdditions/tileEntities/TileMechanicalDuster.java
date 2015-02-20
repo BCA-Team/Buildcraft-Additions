@@ -11,9 +11,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
 
+import buildcraftAdditions.api.networking.MessageByteBuff;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;

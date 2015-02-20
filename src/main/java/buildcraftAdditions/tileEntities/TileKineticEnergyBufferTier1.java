@@ -6,9 +6,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
 
+import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
-import buildcraftAdditions.reference.enums.EnumPriority;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.Location;
 
