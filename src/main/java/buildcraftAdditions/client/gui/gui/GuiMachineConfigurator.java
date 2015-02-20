@@ -157,7 +157,8 @@ public class GuiMachineConfigurator extends GuiBase {
 			configurableOutput.changePriority(ForgeDirection.getOrientation(widget.id - 6));
 		else if (widget.id == 30)
 			configurationMode = !configurationMode;
-		PacketHandler.instance.sendToServer(new MessageConfiguration(configurableOutput));
+		if (configurableOutput != null)
+			PacketHandler.instance.sendToServer(new MessageConfiguration(configurableOutput));
 	}
 
 	@Override
