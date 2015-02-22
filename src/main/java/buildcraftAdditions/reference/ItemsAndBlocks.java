@@ -304,7 +304,6 @@ public final class ItemsAndBlocks {
 
 		itemSorter = new BlockItemSorter();
 		itemSorter.setBlockName("blockItemSorter").setCreativeTab(BuildcraftAdditions.bcadditions);
-		GameRegistry.registerBlock(itemSorter, "blockItemSorter");
 
 		if (VersionCheck.currentVersion.contains("@")) {
 			//only register testblock in dev environments
@@ -330,7 +329,6 @@ public final class ItemsAndBlocks {
 		GameRegistry.registerTileEntity(TileKEBT3.class, "TileKineticEnergyBufferTier3");
 		GameRegistry.registerTileEntity(TileRefinery.class, "TileRefinery");
 		GameRegistry.registerTileEntity(TileCoolingTower.class, "CoolingTower");
-		GameRegistry.registerTileEntity(TileItemSorter.class, "ItemSorter");
 		GameRegistry.registerTileEntity(TileBCKinesisPipeStonePlacer.class, "BCKinesisPipeStonePlacer");
 		GameRegistry.registerTileEntity(TileBCKinesisPipeWoodPlacer.class, "BCKinesisPipeWoodPlacer");
 	}
