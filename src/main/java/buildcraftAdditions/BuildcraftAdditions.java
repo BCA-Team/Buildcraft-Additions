@@ -107,7 +107,7 @@ public class BuildcraftAdditions {
 		BCARecipeManager.duster.addRecipe("oreEmerald", new ItemStack(Items.emerald, 2));
 		BCARecipeManager.duster.addRecipe(new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_powder, 4));
 
-		ModIntegration.integrateBCBuilders();
+		ModIntegration.integrateInit();
 	}
 
 	@Mod.EventHandler

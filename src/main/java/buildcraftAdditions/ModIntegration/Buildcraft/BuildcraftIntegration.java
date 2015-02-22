@@ -159,7 +159,7 @@ public class BuildcraftIntegration {
 		}
 	}
 
-	private static void addItemSorter() {
+	public static void addItemSorter() {
 		GameRegistry.registerBlock(ItemsAndBlocks.itemSorter, "blockItemSorter");
 		GameRegistry.registerTileEntity(TileItemSorter.class, "ItemSorter");
 	}
