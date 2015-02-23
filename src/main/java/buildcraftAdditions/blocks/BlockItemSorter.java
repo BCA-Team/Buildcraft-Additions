@@ -1,5 +1,9 @@
 package buildcraftAdditions.blocks;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -17,6 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.tools.IToolWrench;
+import buildcraft.core.ItemList;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.client.render.RendererItemSorter;
@@ -99,6 +104,20 @@ public class BlockItemSorter extends BlockContainer {
 			player.openGui(BuildcraftAdditions.instance, Variables.Gui.ITEM_SORTER, world, x, y, z);
 
 		return true;
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+		TileItemSorter tile = (TileItemSorter) world.getTileEntity(x, y, z);
+		ItemStack stack = tile.getStackInSlot(0);
+		if (stack != null)
+			Utils.dropItemstack(world, x, y, z, stack);
+		for (int i = 1; i < tile.getSizeInventory(); ++i) {
+			ItemStack list = tile.getStackInSlot(i);
+			if (list != null && list.getItem() instanceof ItemList)
+				Utils.dropItemstack(world, x, y, z, list);
+		}
+		super.breakBlock(world, x, y, z, block, meta);
 	}
 
 	@Override

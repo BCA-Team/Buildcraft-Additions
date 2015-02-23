@@ -17,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 
-@Deprecated
 public class ContainerKineticTool extends ContainerBase<IInventory> {
 
 	private final ItemKineticTool tool;

@@ -32,6 +32,7 @@ import buildcraftAdditions.items.Tools.UpgradeRecipeSawBlade;
 import buildcraftAdditions.items.Tools.UpgradeRecipeTiller;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
+import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.utils.BCItems;
 import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
 
@@ -81,7 +82,7 @@ public class BuildcraftIntegration {
 		BuildcraftRecipeRegistry.assemblyTable.addRecipe("ironStick", 1000, new ItemStack(ItemsAndBlocks.ironStick), Items.iron_ingot);
 		BuildcraftRecipeRegistry.assemblyTable.addRecipe("goldStick", 2000, new ItemStack(ItemsAndBlocks.goldStick), new ItemStack(Items.gold_ingot, 4));
 		BuildcraftRecipeRegistry.assemblyTable.addRecipe("diamondStick", 3000, new ItemStack(ItemsAndBlocks.diamondStick), new ItemStack(Items.diamond, 2));
-		BuildcraftRecipeRegistry.assemblyTable.addRecipe("kineticTool", 8000, new ItemStack(ItemsAndBlocks.itemKineticMultiTool), new ItemStack(Items.diamond, 3), ItemsAndBlocks.ironStick, ItemsAndBlocks.toolCore);
+		BuildcraftRecipeRegistry.assemblyTable.addRecipe("kineticTool", 8000, new ItemStack(ItemsAndBlocks.kineticTool), new ItemStack(Items.diamond, 3), ItemsAndBlocks.ironStick, ItemsAndBlocks.toolCore);
 		BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeChainsaw", 1000, new ItemStack(ItemsAndBlocks.toolUpgradeChainsaw), ItemsAndBlocks.toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
 		BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeDrill", 1000, new ItemStack(ItemsAndBlocks.toolUpgradeDrill), ItemsAndBlocks.toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
 		BuildcraftRecipeRegistry.assemblyTable.addRecipe("toolUpgradeDigger", 1000, new ItemStack(ItemsAndBlocks.toolUpgradeDigger), ItemsAndBlocks.toolCore, new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
@@ -94,8 +95,6 @@ public class BuildcraftIntegration {
 		BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeGoldStick());
 		BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeDiamondStick());
 		BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeEmeraldStick());
-
-		GameRegistry.addShapelessRecipe(new ItemStack(ItemsAndBlocks.itemKineticMultiTool), new ItemStack(ItemsAndBlocks.kineticTool, 1, OreDictionary.WILDCARD_VALUE));
 
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.ironCanister, 4), "PIP", "IGI", "PIP", 'P', BCItems.SEALANT, 'I', Items.iron_ingot, 'G', Blocks.glass_pane);
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.goldCanister), "PGP", "GIG", "PGP", 'P', BCItems.SEALANT, 'G', Items.gold_ingot, 'I', ItemsAndBlocks.ironCanister);
@@ -157,5 +156,10 @@ public class BuildcraftIntegration {
 				break;
 			}
 		}
+	}
+
+	public static void addItemSorter() {
+		GameRegistry.registerBlock(ItemsAndBlocks.itemSorter, "blockItemSorter");
+		GameRegistry.registerTileEntity(TileItemSorter.class, "ItemSorter");
 	}
 }

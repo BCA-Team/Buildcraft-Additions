@@ -54,9 +54,11 @@ public class ModIntegration {
 			WailaIntegration.integrate();
 	}
 
-	public static void integrateBCBuilders() {
-		if (Loader.isModLoaded("BuildCraft|Core"))
+	public static void integrateInit() {
+		if (Loader.isModLoaded("BuildCraft|Core")) {
+			BuildcraftIntegration.addItemSorter();
 			BuildcraftIntegration.registerSchematics();
+		}
 	}
 
 	private static void railcraftIntegration() {
@@ -85,9 +87,9 @@ public class ModIntegration {
 		EurekaRegistry.registerDrops(Variables.DustT2Key2, new ItemStack(Blocks.glass, 3), new ItemStack(BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(BCItems.GOLD_GEAR, 2), new ItemStack(BCItems.DIAMOND_GEAR));
 		EurekaRegistry.bindToKey(ItemsAndBlocks.kineticDusterBlock, Variables.DustT2Key2);
 
-		EurekaRegistry.register(new EurekaInfo(Variables.KineticToolKey, "BCA", 25, new ItemStack(ItemsAndBlocks.itemKineticMultiTool)));
+		EurekaRegistry.register(new EurekaInfo(Variables.KineticToolKey, "BCA", 25, new ItemStack(ItemsAndBlocks.kineticTool)));
 		EurekaRegistry.registerDrops(Variables.KineticToolKey, new ItemStack(Items.diamond, 3), new ItemStack(ItemsAndBlocks.ironStick), new ItemStack(ItemsAndBlocks.toolCore));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.itemKineticMultiTool, Variables.KineticToolKey);
+		EurekaRegistry.bindToKey(ItemsAndBlocks.kineticTool, Variables.KineticToolKey);
 
 		EurekaRegistry.register(new EurekaInfo("heatedFurnace", "BCA", 5, new ItemStack(ItemsAndBlocks.heatedFurnaceBlock)));
 		EurekaRegistry.registerDrops("heatedFurnace", new ItemStack(Blocks.furnace), new ItemStack(Items.iron_ingot, 8));
