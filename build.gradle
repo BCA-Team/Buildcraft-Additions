@@ -58,14 +58,12 @@ curse {
         projectId = "${curseProps.project_id}"
 
         releaseType = "release"
-        changelog = """gui rewrite
-added machine configurator tool to configur input/output setting and priorities
-made kinetic multi tool chargable
-TiC integration
-more work on the refinery and cooling tower
-rewrote dusts
-added KEB gate triggers
-minetweaker integration
+        changelog = """fix id remapping bug
+fix advanced KEB gate triggers
+try to fix recipe bug with crafting mananger
+moved some things to the api
+fix refinery upgrades crash
+sort-o-tron can now read BC lists for sorting
 """
     }
 }
