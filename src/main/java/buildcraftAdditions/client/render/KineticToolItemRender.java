@@ -21,7 +21,6 @@ import buildcraftAdditions.items.Tools.ItemKineticTool;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-@Deprecated
 public class KineticToolItemRender implements IItemRenderer {
 
 	private static final ResourceLocation ITEM_TEXTURE = TextureMap.locationItemsTexture;

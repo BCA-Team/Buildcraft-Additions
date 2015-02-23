@@ -2,8 +2,11 @@ package buildcraftAdditions.items.Tools;
 
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -19,6 +22,7 @@ import cofh.api.energy.IEnergyContainerItem;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -27,7 +31,7 @@ import buildcraftAdditions.reference.Variables;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-@Deprecated
+
 public class ItemKineticTool extends ItemPoweredBase implements IEnergyContainerItem {
 
 	@SideOnly(Side.CLIENT)
@@ -258,9 +262,23 @@ public class ItemKineticTool extends ItemPoweredBase implements IEnergyContainer
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
-		list.add("Deprecated item, please place this in a crafting grid to convert this to the new tool.");
-		list.add("All settings will be saved.");
-		list.add("My apologies for this and any issues this might have caused");
+		readBateries(stack);
+		readUpgrades(stack);
+		list.add(Utils.localizeFormatted("rf.info", getEnergy(), getCapacity()));
+		if (Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode())) {
+			if (chainsaw)
+				list.add(String.format(Utils.localize("tooltip.installed"), Utils.localize("item.toolUpgradeChainsaw.name")));
+			if (digger)
+				list.add(String.format(Utils.localize("tooltip.installed"), Utils.localize("item.toolUpgradeDigger.name")));
+			if (drill)
+				list.add(String.format(Utils.localize("tooltip.installed"), Utils.localize("item.toolUpgradeDrill.name")));
+			if (hoe)
+				list.add(String.format(Utils.localize("tooltip.installed"), Utils.localize("item.toolUpgradeHoe.name")));
+
+			if (!(chainsaw && digger && drill && hoe))
+				list.add(Utils.localize("tooltip.upgradesPossible") + ": " + upgradesAllowed);
+		} else
+			list.add("<" + Utils.localize("tooltip.holdShiftForMoreInfo") + ">");
 	}
 
 	public void setPlayer(EntityPlayer player) {
