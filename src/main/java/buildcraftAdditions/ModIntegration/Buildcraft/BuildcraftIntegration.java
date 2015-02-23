@@ -32,6 +32,7 @@ import buildcraftAdditions.items.Tools.UpgradeRecipeSawBlade;
 import buildcraftAdditions.items.Tools.UpgradeRecipeTiller;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
+import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.utils.BCItems;
 import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
 
@@ -156,5 +157,10 @@ public class BuildcraftIntegration {
 				break;
 			}
 		}
+	}
+
+	public static void addItemSorter() {
+		GameRegistry.registerBlock(ItemsAndBlocks.itemSorter, "blockItemSorter");
+		GameRegistry.registerTileEntity(TileItemSorter.class, "ItemSorter");
 	}
 }

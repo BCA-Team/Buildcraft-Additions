@@ -54,9 +54,11 @@ public class ModIntegration {
 			WailaIntegration.integrate();
 	}
 
-	public static void integrateBCBuilders() {
-		if (Loader.isModLoaded("BuildCraft|Core"))
+	public static void integrateInit() {
+		if (Loader.isModLoaded("BuildCraft|Core")) {
+			BuildcraftIntegration.addItemSorter();
 			BuildcraftIntegration.registerSchematics();
+		}
 	}
 
 	private static void railcraftIntegration() {

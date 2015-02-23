@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -11,6 +13,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.core.EnumColor;
 import buildcraft.api.transport.IPipeConnection;
 import buildcraft.api.transport.IPipeTile;
+import buildcraft.core.ItemList;
 
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
@@ -72,7 +75,9 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 		markDirty();
 	}
 
-	public boolean areStackEqual(ItemStack stack1, ItemStack stack2) {
+	private boolean areStackEqual(ItemStack stack1, ItemStack stack2) {
+		if (stack1 != null && stack1.getItem() instanceof ItemList && ItemList.matches(stack1, stack2))
+			return true;
 		return stack1 == null && stack2 == null || !(stack1 == null || stack2 == null) && stack1.getItem() == stack2.getItem() && stack1.getItemDamage() == stack2.getItemDamage() && !(stack1.stackTagCompound == null && stack2.stackTagCompound != null) && (stack1.stackTagCompound == null || stack1.stackTagCompound.equals(stack2.stackTagCompound));
 	}
 
@@ -81,6 +86,11 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 		if (tile == null)
 			return null;
 		return tile;
+	}
+
+	public void addDrops(ArrayList<ItemStack> drops) {
+		if (inventory.getStackInSlot(0) != null)
+			drops.add(inventory.getStackInSlot(0));
 	}
 
 	public ForgeDirection getRotation() {

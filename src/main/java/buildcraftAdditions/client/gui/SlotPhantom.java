@@ -23,7 +23,8 @@ public class SlotPhantom extends Slot {
 		return false;
 	}
 
-	public ItemStack onLeftClick(ItemStack playerStack) {
+	public ItemStack onLeftClick(EntityPlayer player) {
+		ItemStack playerStack = player.inventory.getItemStack();
 		if (playerStack != null && isItemValid(playerStack)) {
 			ItemStack phantomStack = playerStack.copy();
 			phantomStack.stackSize = 1;
@@ -33,7 +34,7 @@ public class SlotPhantom extends Slot {
 		return null;
 	}
 
-	public ItemStack onRightClick(ItemStack playerStack) {
+	public ItemStack onRightClick(EntityPlayer player) {
 		if (getHasStack()) {
 			putStack(null);
 			onSlotChanged();
@@ -41,18 +42,18 @@ public class SlotPhantom extends Slot {
 		return null;
 	}
 
-	public ItemStack onMiddleClick(ItemStack playerStack) {
+	public ItemStack onMiddleClick(EntityPlayer player) {
 		return null;
 	}
 
 	public ItemStack onClick(int mouseButton, EntityPlayer player) {
 		switch (mouseButton) {
 			case 0:
-				return onLeftClick(player.inventory.getItemStack());
+				return onLeftClick(player);
 			case 1:
-				return onRightClick(player.inventory.getItemStack());
+				return onRightClick(player);
 			case 2:
-				return onMiddleClick(player.inventory.getItemStack());
+				return onMiddleClick(player);
 			default:
 				return null;
 		}
