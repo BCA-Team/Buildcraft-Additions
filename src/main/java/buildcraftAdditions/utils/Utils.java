@@ -70,13 +70,6 @@ public class Utils {
 		return ("" + StatCollector.translateToLocalFormatted(key, objects)).trim();
 	}
 
-	public static String localizeAllFormatted(String key, String... strings) {
-		Object[] objects = new Object[strings != null ? strings.length : 0];
-		for (int i = 0; i < objects.length; i++)
-			objects[i] = localize(strings[i]);
-		return localizeFormatted(key, objects);
-	}
-
 	public static void dropItemstack(World world, int x, int y, int z, ItemStack stack) {
 		float f1 = 0.7F;
 		double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;

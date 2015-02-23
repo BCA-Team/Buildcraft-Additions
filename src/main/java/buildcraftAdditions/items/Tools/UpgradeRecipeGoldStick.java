@@ -19,13 +19,15 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
 public class UpgradeRecipeGoldStick extends IntegrationTableRecipe {
 
 	public UpgradeRecipeGoldStick() {
-		setContents("goldStick", ItemsAndBlocks.itemKineticMultiTool, 10000, 600, ItemRedstoneChipset.Chipset.QUARTZ.getStack());
+		setContents("goldStick", ItemsAndBlocks.kineticTool, 10000, 600, ItemRedstoneChipset.Chipset.QUARTZ.getStack());
 	}
 
 	@Override
 	public boolean isValidInputA(ItemStack inputA) {
-		if (inputA != null && inputA.getItem() instanceof ItemKineticMultiTool)
-			return !ItemKineticMultiTool.isStickInstalled(inputA, "goldStick");
+		if (inputA != null && inputA.getItem() instanceof ItemKineticTool) {
+			ItemKineticTool tool = (ItemKineticTool) inputA.getItem();
+			return !tool.isStickInstalled(inputA, "goldStick");
+		}
 		return false;
 	}
 
@@ -36,11 +38,13 @@ public class UpgradeRecipeGoldStick extends IntegrationTableRecipe {
 
 	@Override
 	public CraftingResult<ItemStack> craft(TileIntegrationTable crafter, boolean preview, ItemStack inputA, ItemStack inputB) {
-		CraftingResult<ItemStack> result = super.craft(crafter, preview, inputA, inputB);
+		CraftingResult<ItemStack> result =  super.craft(crafter, preview, inputA, inputB);
 		if (result == null)
 			return null;
 		ItemStack outputStack = inputA.copy();
-		ItemKineticMultiTool.installStick(outputStack, "goldStick");
+		ItemKineticTool output = (ItemKineticTool) outputStack.getItem();
+		output.installStick(outputStack, "goldStick");
+		output.writeUpgrades(outputStack);
 		result.crafted = outputStack;
 		return result;
 	}
