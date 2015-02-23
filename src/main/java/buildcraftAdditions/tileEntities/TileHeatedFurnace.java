@@ -11,17 +11,17 @@ import net.minecraft.tileentity.TileEntity;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraftAdditions.api.configurableOutput.EnumPriority;
+import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
+import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
-import buildcraftAdditions.reference.enums.EnumPriority;
-import buildcraftAdditions.reference.enums.EnumSideStatus;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.tileEntities.varHelpers.Upgrades;
-import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
 

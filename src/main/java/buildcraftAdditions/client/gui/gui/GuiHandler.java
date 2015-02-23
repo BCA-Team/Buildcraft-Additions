@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 
+import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import buildcraftAdditions.client.gui.containers.ContainerBasicCoil;
 import buildcraftAdditions.client.gui.containers.ContainerChargingStation;
 import buildcraftAdditions.client.gui.containers.ContainerCoolingTower;
@@ -34,7 +35,6 @@ import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.tileEntities.TileRefinery;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
-import buildcraftAdditions.utils.IConfigurableOutput;
 
 /**
  * Copyright (c) 2014, AEnterprise

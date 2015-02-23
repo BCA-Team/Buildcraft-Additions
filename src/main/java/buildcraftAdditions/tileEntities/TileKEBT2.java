@@ -7,26 +7,26 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockBase;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
-import buildcraftAdditions.reference.enums.EnumPriority;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
 import buildcraftAdditions.utils.Location;
 
 import eureka.api.EurekaKnowledge;
 import io.netty.buffer.ByteBuf;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Copyright (c) 2014, AEnterprise

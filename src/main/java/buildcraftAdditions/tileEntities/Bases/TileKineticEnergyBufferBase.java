@@ -15,17 +15,17 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
 
+import buildcraftAdditions.api.configurableOutput.EnumPriority;
+import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
+import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
+import buildcraftAdditions.api.networking.ISyncronizedTile;
 import buildcraftAdditions.config.ConfigurationHandler;
-import buildcraftAdditions.networking.ISyncronizedTile;
 import buildcraftAdditions.networking.MessageConfiguration;
 import buildcraftAdditions.networking.MessageSelfDestruct;
 import buildcraftAdditions.networking.PacketHandler;
-import buildcraftAdditions.reference.enums.EnumPriority;
-import buildcraftAdditions.reference.enums.EnumSideStatus;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
 import buildcraftAdditions.tileEntities.interfaces.IOwnableMachine;
 import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
-import buildcraftAdditions.utils.IConfigurableOutput;
 import buildcraftAdditions.utils.PlayerUtils;
 import buildcraftAdditions.utils.Utils;
 

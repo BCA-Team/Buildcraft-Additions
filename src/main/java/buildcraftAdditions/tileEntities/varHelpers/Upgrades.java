@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.Constants;
 
-import buildcraftAdditions.networking.ISyncObject;
+import buildcraftAdditions.api.networking.ISyncObject;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 
 import com.google.common.collect.ImmutableSet;

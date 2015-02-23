@@ -1,4 +1,4 @@
-package buildcraftAdditions.reference.enums;
+package buildcraftAdditions.api.configurableOutput;
 
 import buildcraftAdditions.utils.Utils;
 /**

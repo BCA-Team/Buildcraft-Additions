@@ -13,7 +13,7 @@ import net.minecraft.inventory.Slot;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-import buildcraftAdditions.networking.MessageByteBuff;
+import buildcraftAdditions.api.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 

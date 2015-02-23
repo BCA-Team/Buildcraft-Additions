@@ -6,8 +6,8 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
+import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
-import buildcraftAdditions.utils.IConfigurableOutput;
 
 import io.netty.buffer.ByteBuf;
 

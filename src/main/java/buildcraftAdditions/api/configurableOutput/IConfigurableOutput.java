@@ -1,9 +1,7 @@
-package buildcraftAdditions.utils;
+package buildcraftAdditions.api.configurableOutput;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraftAdditions.reference.enums.EnumPriority;
-import buildcraftAdditions.reference.enums.EnumSideStatus;
 import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 
 /**

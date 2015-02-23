@@ -21,10 +21,10 @@ import buildcraft.api.transport.IPipeTile;
 import buildcraft.energy.fuels.CoolantManager;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.api.networking.ISyncronizedTile;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.recipe.refinery.ICoolingTowerRecipe;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
-import buildcraftAdditions.networking.ISyncronizedTile;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
