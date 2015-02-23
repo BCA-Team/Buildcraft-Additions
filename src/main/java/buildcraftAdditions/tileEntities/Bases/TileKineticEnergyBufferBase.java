@@ -2,8 +2,6 @@ package buildcraftAdditions.tileEntities.Bases;
 
 import java.util.UUID;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -29,6 +27,8 @@ import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.utils.PlayerUtils;
 import buildcraftAdditions.utils.Utils;
 
+import io.netty.buffer.ByteBuf;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -38,13 +38,13 @@ import buildcraftAdditions.utils.Utils;
  */
 public abstract class TileKineticEnergyBufferBase extends TileBase implements IEnergyReceiver, IEnergyProvider, IConfigurableOutput, ISyncronizedTile, IOwnableMachine {
 
-	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
-	protected boolean[] blocked = new boolean[6];
 	protected final SideConfiguration configuration = new SideConfiguration();
+	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
 	public int tier;
 	public boolean selfDestruct, engineControl;
-	private UUID owner;
 	public EntityPlayer destroyer;
+	protected boolean[] blocked = new boolean[6];
+	private UUID owner;
 
 
 	public TileKineticEnergyBufferBase(int maxEnergy, int maxInput, int maxOutput, int loss, int tier) {
@@ -164,13 +164,13 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	}
 
 	@Override
-	public void setOwner(UUID owner) {
-		this.owner = owner;
+	public UUID getOwner() {
+		return owner;
 	}
 
 	@Override
-	public UUID getOwner() {
-		return owner;
+	public void setOwner(UUID owner) {
+		this.owner = owner;
 	}
 
 	@Override
@@ -203,11 +203,6 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	@Override
 	public void changeStatus(ForgeDirection side) {
 		configuration.changeStatus(side);
-	}
-
-	@Override
-	public void setSideConfiguration(SideConfiguration configuration) {
-		this.configuration.load(configuration);
 	}
 
 	@Override
@@ -260,5 +255,10 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	@Override
 	public SideConfiguration getSideConfiguration() {
 		return configuration;
+	}
+
+	@Override
+	public void setSideConfiguration(SideConfiguration configuration) {
+		this.configuration.load(configuration);
 	}
 }
