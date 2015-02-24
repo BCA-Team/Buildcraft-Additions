@@ -17,20 +17,18 @@ import buildcraftAdditions.tileEntities.TileHeatedFurnace;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @SideOnly(Side.CLIENT)
-public class GuiHeatedFurnace extends GuiBase {
+public class GuiHeatedFurnace extends GuiInventory<TileHeatedFurnace> {
 
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiHeatedFurnace.png");
-	private final TileHeatedFurnace furnace;
 
 	public GuiHeatedFurnace(InventoryPlayer inventoryplayer, TileHeatedFurnace furnace) {
-		super(new ContainerHeatedFurnace(inventoryplayer, furnace));
+		super(new ContainerHeatedFurnace(inventoryplayer, furnace), furnace);
 		setDrawPlayerInv(true);
-		this.furnace = furnace;
 	}
 
 	@Override
 	public void drawBackgroundPreWidgets(float f, int x, int y) {
-		drawTexturedModalRect(guiLeft + 79, guiTop + 34, 176, 14, furnace.getScaledProgress(), 16);
+		drawTexturedModalRect(guiLeft + 79, guiTop + 34, 176, 14, inventory.getScaledProgress(), 16);
 	}
 
 	@Override
@@ -53,7 +51,4 @@ public class GuiHeatedFurnace extends GuiBase {
 		return "heatedFurnace";
 	}
 
-	@Override
-	public void initialize() {
-	}
 }

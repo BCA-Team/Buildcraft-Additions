@@ -3,9 +3,7 @@ package buildcraftAdditions.client.gui;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import cofh.api.energy.IEnergyContainerItem;
-
-import buildcraftAdditions.inventories.InventoryKineticMultiTool;
+import buildcraftAdditions.inventories.InventoryItem;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -14,10 +12,10 @@ import buildcraftAdditions.inventories.InventoryKineticMultiTool;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class SlotKineticMultiTool extends Slot {
+public class SlotItemInventory extends Slot {
 
-	public SlotKineticMultiTool(InventoryKineticMultiTool inventoryKineticMultiTool, int id, int x, int y) {
-		super(inventoryKineticMultiTool, id, x, y);
+	public SlotItemInventory(InventoryItem inventory, int id, int x, int y) {
+		super(inventory, id, x, y);
 	}
 
 	@Override
@@ -32,13 +30,9 @@ public class SlotKineticMultiTool extends Slot {
 		save();
 	}
 
-	@Override
-	public boolean isItemValid(ItemStack stack) {
-		return stack != null && stack.getItem() != null && stack.getItem() instanceof IEnergyContainerItem;
+	private void save() {
+		if (inventory != null && inventory instanceof InventoryItem)
+			((InventoryItem) inventory).writeToNBT();
 	}
 
-	private void save() {
-		if (inventory != null && inventory instanceof InventoryKineticMultiTool)
-			((InventoryKineticMultiTool) inventory).writeToNBT();
-	}
 }

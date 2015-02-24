@@ -10,6 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraftforge.client.IItemRenderer;
 
 import buildcraftAdditions.items.Tools.ItemKineticTool;
@@ -22,6 +25,7 @@ import buildcraftAdditions.items.Tools.ItemKineticTool;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @Deprecated
+@SideOnly(Side.CLIENT)
 public class KineticToolItemRender implements IItemRenderer {
 
 	private static final ResourceLocation ITEM_TEXTURE = TextureMap.locationItemsTexture;

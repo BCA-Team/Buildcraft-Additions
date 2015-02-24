@@ -24,15 +24,13 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @SideOnly(Side.CLIENT)
-public class GuiItemSorter extends GuiBase {
+public class GuiItemSorter extends GuiInventory<TileItemSorter> {
 
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/guiItemSorter.png");
-	private final TileItemSorter tile;
 
 	public GuiItemSorter(InventoryPlayer playerInv, TileItemSorter tile) {
-		super(new ContainerItemSorter(playerInv, tile));
+		super(new ContainerItemSorter(playerInv, tile), tile);
 		setDrawPlayerInv(true);
-		this.tile = tile;
 	}
 
 	@Override
@@ -58,14 +56,14 @@ public class GuiItemSorter extends GuiBase {
 	@Override
 	public void initialize() {
 		for (int i = 0; i < 9; i++) {
-			addWidget(new WidgetSortingColor(i, guiLeft + 7 + i * 18, guiTop + 125, 176, 0, 18, 18, this, tile.colors[i], texture));
+			addWidget(new WidgetSortingColor(i, guiLeft + 7 + i * 18, guiTop + 125, 176, 0, 18, 18, this, inventory.colors[i], texture));
 		}
 	}
 
 	@Override
 	public void widgetActionPerformed(WidgetBase widget) {
 		if (widget.id >= 0 && widget.id <= 8)
-			PacketHandler.instance.sendToServer(new MessageWidgetUpdate(tile, widget.id, widget.value));
+			PacketHandler.instance.sendToServer(new MessageWidgetUpdate(inventory, widget.id, widget.value));
 	}
 
 	public static class WidgetSortingColor extends WidgetColor {

@@ -16,6 +16,9 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -24,6 +27,7 @@ import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
+@SideOnly(Side.CLIENT)
 public class CanisterItemRender implements IItemRenderer {
 
 	public static final CanisterItemRender INSTANCE = new CanisterItemRender();

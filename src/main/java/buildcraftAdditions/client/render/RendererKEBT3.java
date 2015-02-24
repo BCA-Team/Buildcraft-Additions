@@ -8,6 +8,9 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraftAdditions.tileEntities.TileKEBT3;
 /**
  * Copyright (c) 2014, AEnterprise
@@ -16,6 +19,7 @@ import buildcraftAdditions.tileEntities.TileKEBT3;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+@SideOnly(Side.CLIENT)
 public class RendererKEBT3 extends TileEntitySpecialRenderer {
 	public ResourceLocation sides[] = {new ResourceLocation("bcadditions", "textures/blocks/energyBufferT3MultiblockSides0.png"),
 			new ResourceLocation("bcadditions", "textures/blocks/energyBufferT3MultiblockSides1.png"),

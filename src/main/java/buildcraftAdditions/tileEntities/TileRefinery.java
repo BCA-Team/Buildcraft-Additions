@@ -240,7 +240,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (data.isMaster) {
 			sync();
 			if (!worldObj.isRemote) {
-				player.openGui(BuildcraftAdditions.instance, Variables.Gui.REFINERY, worldObj, xCoord, yCoord, zCoord);
+				player.openGui(BuildcraftAdditions.instance, Variables.Gui.REFINERY.ordinal(), worldObj, xCoord, yCoord, zCoord);
 			}
 			return true;
 		}

@@ -18,6 +18,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.utils.RenderUtils;
+import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -55,6 +56,12 @@ public class ItemMachineUpgrade extends Item {
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		return super.getUnlocalizedName(stack) + "." + EnumMachineUpgrades.values()[stack.getItemDamage()].getTextureName();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advancedItemTooltips) {
+		list.add(Utils.localize("tooltip.forUpgradableMachines"));
 	}
 
 

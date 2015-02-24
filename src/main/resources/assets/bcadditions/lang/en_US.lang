@@ -35,12 +35,27 @@ item.stickIron.name=Iron Stick
 item.stickGold.name=Gold Stick
 item.stickDiamond.name=Diamond Stick
 item.stickEmerald.name=Emerald Stick
+item.stickQuartz.name=Quartz Stick
+item.stickNetherStar.name=Nether Star Stick
+item.stickEnder.name=Ender Stick
+item.stickRedstone.name=Redstone Stick
+item.stickGlowstone.name=Glowstone Stick
+item.stickSlime.name=Slime Stick
+item.stickBone.name=Bone Stick
+item.stickFlint.name=Flint Stick
+item.stickBlaze.name=Blaze Stick
 item.toolCore.name=Tool Core
-item.toolUpgradedrill.name=Drill Head
-item.toolUpgradedigger.name=Excavation Attachment
-item.toolUpgradechainsaw.name=Saw Blade
-item.toolUpgradehoe.name=Tiller
+item.toolUpgradeDrill.name=Drill Head
+item.toolUpgradeDigger.name=Excavation Attachment
+item.toolUpgradeChainsaw.name=Saw Blade
+item.toolUpgradeHoe.name=Tiller
+item.toolUpgradeArea.name=Area Augment
+item.toolUpgradeSilky.name=Silky Upgrade
+item.toolUpgradeFortune1.name=Fortune I Upgrade
+item.toolUpgradeFortune2.name=Fortune II Upgrade
+item.toolUpgradeFortune3.name=Fortune III Upgrade
 item.kineticMultiTool.name=Kinetic Multi-Tool
+item.portableLaser.name=Portable Laser
 item.dust.name=%s Dust
 item.grindingWheel.name=Grinding Wheel
 item.engineeringDiary.name=Engineering Diary
@@ -52,7 +67,7 @@ item.wireDiamond.name=Diamond Wire
 item.wireDiamondUnhardened.name=Diamond Wire (Unhardened)
 item.heatPlatingRaw.name=Raw Heat Conducting Plating
 item.heatPlating.name=Heat Conducting Plating
-item.dustConverter.name=Dust Conveter
+item.dustConverter.name=Dust Converter
 item.machineConfigurator.name=Machine Configurator
 item.bcaBucket.name=%s Bucket
 item.pipeColoringTool.name=Coloring Tool
@@ -65,7 +80,9 @@ item.upgrade.upgradeSpeed2.name=Machine Upgrade: Speed II
 item.upgrade.upgradeSpeed3.name=Machine Upgrade: Speed III
 item.baseUpgrade.name=Blank Upgrade
 
-tooltip.installed=%s Installed
+entity.bcadditions.bcaLaserShot=Laser Shot
+
+tooltip.installed=Installed upgrades:
 tooltip.deactivated=Deactivated
 tooltip.upgradesPossible=Upgrades Possible
 tooltip.holdShiftForMoreInfo=Hold Shift for more info
@@ -78,6 +95,9 @@ tooltip.colorSortingMode.info=Colors the sorting part of the Daizuli and Lapis p
 tooltip.defaultColor=Default Item Color
 tooltip.compressor.fill=Fill
 tooltip.compressor.empty=Empty
+tooltip.none=None
+tooltip.forKineticMultiTool=Usable with the Kinetic Multi-Tool
+tooltip.forUpgradableMachines=Usable with upgradable machines
 
 fluid.gas.name=%s Gas
 
@@ -112,6 +132,7 @@ gui.basicCoil.name=Basic Coil
 gui.chargingStation.name=Charging Station
 gui.priority=Priority
 gui.kineticMultiTool.name=Kinetic Multi-Tool
+gui.portableLaser.name=Portable Laser
 gui.heatedFurnace.name=Heated Furnace
 gui.fluidicCompressor.name=Fluidic Compressor
 gui.coloringMode=Coloring Mode
@@ -297,31 +318,58 @@ config.title=Buildcraft Additions Configuration
 updates=Updates
 updates.tooltip=Configure if BCA should check for updates or not
 shouldCheckForUpdates=Check for updates
-shouldCheckForUpdates.tooltip=True = check for updates, false = do not check for updates
+shouldCheckForUpdates.tooltip=Set to false to disable update checking
 shouldPrintOutChangelog=Print out changelog
 shouldPrintOutChangelog.tooltip=If set to true, you will also see the changelog of the newer version
 
+keb=Kinetic Energy Buffer
+
+heated furnace=Heated Furnace
+
+power usage=Kinetic Multi-Tool
 BaseModifier=Base Modifier
-BaseModifier.tooltip=Base energy the tools use
+BaseModifier.tooltip=Base energy the multi-tool uses for breaking a block
+EntityHitModifier=Entity Base Modifier
+EntityHitModifier.tooltip=Base energy the multi-tool uses for damaging an entity
+HoeCost=Tilling power cost
+HoeCost.tooltip=Energy the multi-tool uses for tilling a block of dirt or grass
 EasyDifficultyModifier=Easy Modifier
 EasyDifficultyModifier.tooltip=The energy consumption is multiplied with this on Easy
 HardDifficultyModifier=Hard Modifier
 HardDifficultyModifier.tooltip=The energy consumption is multiplied with this on Hard
 NormalDifficultyModifier=Normal Modifier
 NormalDifficultyModifier.tooltip=The energy consumption is multiplied with this on Normal
-PeacefullDifficultyModifier=Peaceful Modifier
-PeacefullDifficultyModifier.tooltip=The energy consumption is multiplied with this on Peaceful
+PeacefulDifficultyModifier=Peaceful Modifier
+PeacefulDifficultyModifier.tooltip=The energy consumption is multiplied with this on Peaceful
+ToolEfficiencyPickaxe=Pickaxe efficiency
+ToolEfficiencyPickaxe.tooltip=Efficiency (mining speed) on blocks that can be broken by a pickaxe
+ToolEfficiencyShovel=Shovel efficiency
+ToolEfficiencyShovel.tooltip=Efficiency (mining speed) on blocks that can be broken by a shovel
+ToolEfficiencyAxe=Axe efficiency
+ToolEfficiencyAxe.tooltip=Efficiency (mining speed) on blocks that can be broken by an axe
 
-Misc=Misc
+portable laser=Portable Laser
+PortableLaserPowerUse=Power use
+PortableLaserPowerUse.tooltip=Power use of the Portable Laser per shoot
+PortableLaserLaserPower=Laser power
+PortableLaserLaserPower.tooltip=Laser power transferred to the laser target per shoot
+PortableLaserEntityDamage=Entity damage
+PortableLaserEntityDamage.tooltip=Damage dealt by the Portable Laser in entity mode
+PortableLaserEntityBurnTime=Entity burn time
+PortableLaserEntityBurnTime.tooltip=Number of seconds entities will be set on fire by the Portable Laser in entity mode
+
+misc=Misc
+eurekaIntegration=Eureka Integration
+eurekaIntegration.tooltip=Set to false to prevent BCA from using Eureka progressing
 shouldRegisterDusts=Register Dusts
-shouldRegisterDusts.tooltip=Set to false to prevent BCA from registering new dusts
+shouldRegisterDusts.tooltip=Set to false to prevent BCA from registering its dusts
 
-kineticTool.outOfPower=OUT OF POWER, BLOCK BREAKING ABORTED
+kineticTool.outOfPower=OUT OF POWER, BLOCK BREAKING ABORTED!
 
-updatenotification=There is a newer version of Buildcraft Additions available (%s). Please consider updating
+updatenotification=There is a newer version of Buildcraft Additions available (%s). Please consider updating.
 changelogNotification=Changelog
 
-selfdestructCountdouwn=SELF DESTUCTION IN
+selfdestructCountdouwn=SELF DESTRUCTION IN
 selfdestructActivated=SELF DESTRUCT ACTIVATED
 
 configured=Configured

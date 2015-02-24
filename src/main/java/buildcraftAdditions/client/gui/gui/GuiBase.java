@@ -35,8 +35,8 @@ public abstract class GuiBase extends GuiContainer {
 	private final ResourceLocation texture;
 	private boolean drawPlayerInv = false;
 	public List<WidgetBase> widgets = new ArrayList<WidgetBase>();
-	public int xSizePlayerInv = 175;
-	public int ySizePlayerInv = 99;
+	public int xSizePlayerInv = 176;
+	public int ySizePlayerInv = 100;
 	public int titleXoffset = 5;
 	public int titleYoffset = 6;
 	public boolean shouldDrawWidgets = true;
@@ -114,6 +114,14 @@ public abstract class GuiBase extends GuiContainer {
 
 	}
 
+	public boolean hasCustomName() {
+		return false;
+	}
+
+	public String getCustomName() {
+		return null;
+	}
+
 	public void addWidget(WidgetBase widget) {
 		widgets.add(widget);
 	}
@@ -163,7 +171,7 @@ public abstract class GuiBase extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		if (drawPlayerInv)
 			drawString(Utils.localize("container.inventory"), 5, tileGuiYSize + 6, textColor);
-		String name = Utils.localize(String.format("gui.%s.name", getInventoryName()));
+		String name = hasCustomName() && getCustomName() != null ? getCustomName() : Utils.localize(String.format("gui.%s.name", getInventoryName()));
 		drawString(name, centerTitle ? getXSize() / 2 - (name.length() * 2) : titleXoffset, titleYoffset, textColor);
 		drawForegroundExtra(x, y);
 	}

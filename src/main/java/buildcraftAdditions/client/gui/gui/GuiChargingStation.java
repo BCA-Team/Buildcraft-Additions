@@ -17,15 +17,13 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @SideOnly(Side.CLIENT)
-public class GuiChargingStation extends GuiBase {
+public class GuiChargingStation extends GuiInventory<TileChargingStation> {
 
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiChargingStation.png");
-	private final TileChargingStation chargingStation;
 
 	public GuiChargingStation(InventoryPlayer inventoryPlayer, TileChargingStation tile) {
-		super(new ContainerChargingStation(inventoryPlayer, tile));
+		super(new ContainerChargingStation(inventoryPlayer, tile), tile);
 		setDrawPlayerInv(true);
-		chargingStation = tile;
 	}
 
 	@Override
@@ -48,8 +46,4 @@ public class GuiChargingStation extends GuiBase {
 		return "chargingStation";
 	}
 
-	@Override
-	public void initialize() {
-
-	}
 }

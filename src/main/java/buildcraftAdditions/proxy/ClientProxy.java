@@ -20,12 +20,14 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fluids.Fluid;
 
 import buildcraftAdditions.client.render.CanisterItemRender;
+import buildcraftAdditions.client.render.EntityLaserShotRenderer;
 import buildcraftAdditions.client.render.RendererDuster;
 import buildcraftAdditions.client.render.RendererDusterKinetic;
 import buildcraftAdditions.client.render.RendererItemSorter;
 import buildcraftAdditions.client.render.RendererKEBT2;
 import buildcraftAdditions.client.render.RendererKEBT3;
 import buildcraftAdditions.core.BucketHandler;
+import buildcraftAdditions.entities.EntityLaserShot;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileKEBT2;
@@ -49,6 +51,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileKEBT3.class, new RendererKEBT3());
 		RendererItemSorter.RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(new RendererItemSorter());
+		RenderingRegistry.registerEntityRenderingHandler(EntityLaserShot.class, new EntityLaserShotRenderer());
 	}
 
 	@Override

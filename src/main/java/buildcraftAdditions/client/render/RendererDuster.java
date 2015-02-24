@@ -9,6 +9,9 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 
 /**
@@ -18,6 +21,7 @@ import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+@SideOnly(Side.CLIENT)
 public class RendererDuster extends TileEntitySpecialRenderer {
 
 	@Override

@@ -3,7 +3,6 @@ package buildcraftAdditions.items.Tools;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
@@ -17,6 +16,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.core.EnumColor;
@@ -50,19 +50,21 @@ public class ItemPipeColoringTool extends Item {
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (player.isSneaking())
-			player.openGui(BuildcraftAdditions.instance, Variables.Gui.PIPE_COLORING_TOOL, world, (int) player.posX, (int) player.posY, (int) player.posZ);
+			player.openGui(BuildcraftAdditions.instance, Variables.Gui.PIPE_COLORING_TOOL.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
 		return stack;
 	}
 
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		TileEntity tile = world.getTileEntity(x, y, z);
-		if (tile instanceof IPipeTile && stack.hasTagCompound() && stack.getTagCompound().hasKey("SortMode") && stack.getTagCompound().getBoolean("SortMode")) {
-			IPipeTile pipeTile = (IPipeTile) tile;
-			return setColor(stack.getItemDamage(), pipeTile);
+		if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("SortMode", Constants.NBT.TAG_BYTE) && stack.stackTagCompound.getBoolean("SortMode")) {
+			TileEntity tile = world.getTileEntity(x, y, z);
+			if (tile instanceof IPipeTile) {
+				return setColor(stack.getItemDamage(), (IPipeTile) tile);
+			}
+		} else {
+			return world.getBlock(x, y, z).recolourBlock(world, x, y, z, ForgeDirection.UNKNOWN, stack.getItemDamage());
 		}
-		Block pipe = world.getBlock(x, y, z);
-		return pipe.recolourBlock(world, x, y, z, ForgeDirection.UNKNOWN, stack.getItemDamage());
+		return false;
 	}
 
 	//TODO: Find something better for this!
@@ -78,12 +80,13 @@ public class ItemPipeColoringTool extends Item {
 
 	@Override
 	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entity) {
-		if (!(entity instanceof EntitySheep))
-			return false;
-		EntitySheep sheep = (EntitySheep) entity;
-		if (!sheep.getSheared() && sheep.getFleeceColor() != stack.getItemDamage()) {
-			sheep.setFleeceColor(stack.getItemDamage());
-			return true;
+		if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("SortMode", Constants.NBT.TAG_BYTE) && !stack.stackTagCompound.getBoolean("SortMode") && entity instanceof EntitySheep) {
+			EntitySheep sheep = (EntitySheep) entity;
+			if (!sheep.getSheared() && sheep.getFleeceColor() != stack.getItemDamage()) {
+				sheep.setFleeceColor(stack.getItemDamage());
+				player.swingItem();
+				return true;
+			}
 		}
 		return false;
 	}

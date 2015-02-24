@@ -9,6 +9,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.fluids.Fluid;
 
@@ -22,6 +25,7 @@ import buildcraftAdditions.utils.RenderUtils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+@SideOnly(Side.CLIENT)
 public class BucketItemRenderer implements IItemRenderer {
 
 	public static final BucketItemRenderer INSTANCE = new BucketItemRenderer();

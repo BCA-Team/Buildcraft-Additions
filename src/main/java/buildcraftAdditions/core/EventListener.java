@@ -113,8 +113,7 @@ public class EventListener {
 						tag.removeTag("id");
 						stack.stackTagCompound = tag;
 						event.world.setBlockToAir(event.x, event.y, event.z);
-						if (event.world.isRemote)
-							event.entityPlayer.swingItem();
+						event.entityPlayer.swingItem();
 						Utils.dropItemstack(event.world, event.x, event.y, event.z, stack);
 					}
 				}

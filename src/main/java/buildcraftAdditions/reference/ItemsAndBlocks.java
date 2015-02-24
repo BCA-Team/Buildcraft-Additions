@@ -2,8 +2,11 @@ package buildcraftAdditions.reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+
+import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.blocks.BlockBCKinesisPipeWood;
@@ -37,7 +40,8 @@ import buildcraftAdditions.items.ItemMachineUpgrade;
 import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ItemPipeColoringTool;
-import buildcraftAdditions.items.Tools.ToolUpgrade;
+import buildcraftAdditions.items.Tools.ItemPortableLaser;
+import buildcraftAdditions.items.Tools.ItemToolUpgrade;
 import buildcraftAdditions.items.dust.ItemDust;
 import buildcraftAdditions.items.itemBlocks.ItemBlockKEB;
 import buildcraftAdditions.tileEntities.TileBCKinesisPipeStonePlacer;
@@ -48,7 +52,6 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.tileEntities.TileCoolingTower;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
-import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.tileEntities.TileKEBT2;
 import buildcraftAdditions.tileEntities.TileKEBT3;
 import buildcraftAdditions.tileEntities.TileKineticCoil;
@@ -96,15 +99,29 @@ public final class ItemsAndBlocks {
 	public static BatteryBase powerCapsuleTier1;
 	public static BatteryBase powerCapsuleTier2;
 	public static BatteryBase powerCapsuleTier3;
-	public static Item ironStick;
-	public static Item goldStick;
-	public static Item diamondStick;
-	public static Item emeraldStick;
+	public static ItemBase ironStick;
+	public static ItemBase goldStick;
+	public static ItemBase diamondStick;
+	public static ItemBase emeraldStick;
+	public static ItemBase netherStarStick;
+	public static ItemBase quartzStick;
+	public static ItemBase enderStick;
+	public static ItemBase redstoneStick;
+	public static ItemBase glowstoneStick;
+	public static ItemBase slimeStick;
+	public static ItemBase boneStick;
+	public static ItemBase flintStick;
+	public static ItemBase blazeStick;
 	public static Item toolCore;
-	public static Item toolUpgradeHoe;
-	public static Item toolUpgradeDigger;
-	public static Item toolUpgradeDrill;
-	public static Item toolUpgradeChainsaw;
+	public static ItemToolUpgrade toolUpgradeHoe;
+	public static ItemToolUpgrade toolUpgradeDigger;
+	public static ItemToolUpgrade toolUpgradeDrill;
+	public static ItemToolUpgrade toolUpgradeChainsaw;
+	public static ItemToolUpgrade toolUpgradeArea;
+	public static ItemToolUpgrade toolUpgradeSilky;
+	public static ItemToolUpgrade toolUpgradeFortune1;
+	public static ItemToolUpgrade toolUpgradeFortune2;
+	public static ItemToolUpgrade toolUpgradeFortune3;
 	public static Item itemGrindingWheel;
 	public static Item itemIronWireUnhardened;
 	public static Item itemIronWire;
@@ -122,6 +139,7 @@ public final class ItemsAndBlocks {
 	public static Item pipeColoringTool;
 	public static Item upgrade;
 	public static Item blankUpgrade;
+	public static Item portableLaser;
 
 	public static void init() {
 		ironCanister = new ItemCanister("ironCanister", 2000);
@@ -147,30 +165,85 @@ public final class ItemsAndBlocks {
 
 		ironStick = new ItemBase("stickIron");
 		GameRegistry.registerItem(ironStick, "stickIron");
+		OreDictionary.registerOre("stickIron", new ItemStack(ironStick));
 
 		goldStick = new ItemBase("stickGold");
 		GameRegistry.registerItem(goldStick, "stickGold");
+		OreDictionary.registerOre("stickGold", new ItemStack(goldStick));
 
 		diamondStick = new ItemBase("stickDiamond");
 		GameRegistry.registerItem(diamondStick, "stickDiamond");
+		OreDictionary.registerOre("stickDiamond", new ItemStack(diamondStick));
 
 		emeraldStick = new ItemBase("stickEmerald");
 		GameRegistry.registerItem(emeraldStick, "stickEmerald");
+		OreDictionary.registerOre("stickEmerald", new ItemStack(emeraldStick));
+
+		netherStarStick = new ItemBase("stickNetherStar");
+		GameRegistry.registerItem(netherStarStick, "stickNetherStar");
+		OreDictionary.registerOre("stickNetherStar", new ItemStack(netherStarStick));
+
+		quartzStick = new ItemBase("stickQuartz");
+		GameRegistry.registerItem(quartzStick, "stickQuartz");
+		OreDictionary.registerOre("stickQuartz", new ItemStack(quartzStick));
+
+		enderStick = new ItemBase("stickEnder");
+		GameRegistry.registerItem(enderStick, "stickEnder");
+		OreDictionary.registerOre("stickEnder", new ItemStack(enderStick));
+
+		redstoneStick = new ItemBase("stickRedstone");
+		GameRegistry.registerItem(redstoneStick, "stickRedstone");
+		OreDictionary.registerOre("stickRedstone", new ItemStack(redstoneStick));
+
+		glowstoneStick = new ItemBase("stickGlowstone");
+		GameRegistry.registerItem(glowstoneStick, "stickGlowstone");
+		OreDictionary.registerOre("stickGlowstone", new ItemStack(glowstoneStick));
+
+		slimeStick = new ItemBase("stickSlime");
+		GameRegistry.registerItem(slimeStick, "stickSlime");
+		OreDictionary.registerOre("stickSlime", new ItemStack(slimeStick));
+
+		boneStick = new ItemBase("stickBone");
+		GameRegistry.registerItem(boneStick, "stickBone");
+		OreDictionary.registerOre("stickBone", new ItemStack(boneStick));
+
+		flintStick = new ItemBase("stickFlint");
+		GameRegistry.registerItem(flintStick, "stickFlint");
+		OreDictionary.registerOre("stickFlint", new ItemStack(flintStick));
+
+		blazeStick = new ItemBase("stickBlaze");
+		GameRegistry.registerItem(blazeStick, "stickBlaze");
+		OreDictionary.registerOre("stickBlaze", new ItemStack(blazeStick));
 
 		toolCore = new ItemBase("toolCore");
 		GameRegistry.registerItem(toolCore, "toolCore");
 
-		toolUpgradeHoe = new ToolUpgrade("hoe");
+		toolUpgradeHoe = new ItemToolUpgrade("Hoe");
 		GameRegistry.registerItem(toolUpgradeHoe, "toolUpgradeHoe");
 
-		toolUpgradeDigger = new ToolUpgrade("digger");
+		toolUpgradeDigger = new ItemToolUpgrade("Digger");
 		GameRegistry.registerItem(toolUpgradeDigger, "toolUpgradeDigger");
 
-		toolUpgradeDrill = new ToolUpgrade("drill");
+		toolUpgradeDrill = new ItemToolUpgrade("Drill");
 		GameRegistry.registerItem(toolUpgradeDrill, "toolUpgradeDrill");
 
-		toolUpgradeChainsaw = new ToolUpgrade("chainsaw");
+		toolUpgradeChainsaw = new ItemToolUpgrade("Chainsaw");
 		GameRegistry.registerItem(toolUpgradeChainsaw, "toolUpgradeChaisaw");
+
+		toolUpgradeArea = new ItemToolUpgrade("Area");
+		GameRegistry.registerItem(toolUpgradeArea, "toolUpgradeArea");
+
+		toolUpgradeSilky = new ItemToolUpgrade("Silky");
+		GameRegistry.registerItem(toolUpgradeSilky, "toolUpgradeSilky");
+
+		toolUpgradeFortune1 = new ItemToolUpgrade("Fortune1");
+		GameRegistry.registerItem(toolUpgradeFortune1, "toolUpgradeFortune1");
+
+		toolUpgradeFortune2 = new ItemToolUpgrade("Fortune2");
+		GameRegistry.registerItem(toolUpgradeFortune2, "toolUpgradeFortune2");
+
+		toolUpgradeFortune3 = new ItemToolUpgrade("Fortune3");
+		GameRegistry.registerItem(toolUpgradeFortune3, "toolUpgradeFortune3");
 
 		kineticTool = new ItemKineticTool();
 		GameRegistry.registerItem(kineticTool, "kineticMultiTool");
@@ -219,6 +292,9 @@ public final class ItemsAndBlocks {
 
 		blankUpgrade = new ItemBase("baseUpgrade");
 		GameRegistry.registerItem(blankUpgrade, "blankUpgrade");
+
+		portableLaser = new ItemPortableLaser();
+		GameRegistry.registerItem(portableLaser, "portableLaser");
 
 		//START BLOCKS
 
