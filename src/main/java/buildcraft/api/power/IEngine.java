@@ -19,7 +19,6 @@ public interface IEngine {
     /**
      * Returns true if the engine wants to receive power from
      * another engine on this side.
-     *
      * @param side
      * @return
      */

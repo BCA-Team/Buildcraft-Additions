@@ -19,10 +19,6 @@ import buildcraft.api.core.EnumColor;
 import buildcraft.api.transport.pluggable.PipePluggable;
 
 public interface IPipeTile extends IInjectable {
-	enum PipeType {
-		ITEM, FLUID, POWER, STRUCTURE
-	}
-
 	PipeType getPipeType();
 
 	World getWorldObj();
@@ -35,21 +31,26 @@ public interface IPipeTile extends IInjectable {
 
 	/**
 	 * True if the pipe is connected to the block/pipe in the specific direction
-	 * 
+	 *
 	 * @param with
 	 * @return true if connect
 	 */
 	boolean isPipeConnected(ForgeDirection with);
 
 	Block getNeighborBlock(ForgeDirection dir);
+
 	TileEntity getNeighborTile(ForgeDirection dir);
+
 	IPipe getNeighborPipe(ForgeDirection dir);
-	
+
 	IPipe getPipe();
+
 	int getPipeColor();
 
-	PipePluggable getPipePluggable(ForgeDirection direction);
-	boolean hasPipePluggable(ForgeDirection direction);
+	PipePluggable getPipePluggable(ForgeDirection direction); // Now in IPluggableProvider
+
+	boolean hasPipePluggable(ForgeDirection direction); // Now in IPluggableProvider
+
 	boolean hasBlockingPluggable(ForgeDirection direction);
 
 	void scheduleNeighborChange();
@@ -58,5 +59,10 @@ public interface IPipeTile extends IInjectable {
 	int injectItem(ItemStack stack, boolean doAdd, ForgeDirection from, EnumColor color);
 
 	@Deprecated
+		// Now in IInjectable
 	int injectItem(ItemStack stack, boolean doAdd, ForgeDirection from);
+
+	enum PipeType {
+		ITEM, FLUID, POWER, STRUCTURE
+	}
 }

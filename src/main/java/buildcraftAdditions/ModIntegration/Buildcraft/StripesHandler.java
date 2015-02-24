@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraft.api.transport.IStripesActivator;
 import buildcraft.api.transport.IStripesHandler;
-import buildcraft.api.transport.IStripesPipe;
 import buildcraft.api.transport.PipeManager;
 
 import buildcraftAdditions.items.itemBlocks.ItemBlockKEB;
@@ -44,7 +44,7 @@ public class StripesHandler {
 		}
 
 		@Override
-		public boolean handle(World world, int x, int y, int z, ForgeDirection direction, ItemStack stack, EntityPlayer player, IStripesPipe pipe) {
+		public boolean handle(World world, int x, int y, int z, ForgeDirection direction, ItemStack stack, EntityPlayer player, IStripesActivator activator) {
 			NBTTagCompound tag = new NBTTagCompound();
 			TileEntity tile = world.getTileEntity(x, y, z);
 			if (tile != null)
@@ -55,7 +55,7 @@ public class StripesHandler {
 			tag.removeTag("z");
 			tag.removeTag("id");
 			stack1.stackTagCompound = tag;
-			pipe.sendItem(stack1, direction.getOpposite());
+			activator.sendItem(stack1, direction.getOpposite());
 			world.setBlockToAir(x, y, z);
 			return true;
 		}
@@ -75,7 +75,7 @@ public class StripesHandler {
 		}
 
 		@Override
-		public boolean handle(World world, int x, int y, int z, ForgeDirection direction, ItemStack stack, EntityPlayer player, IStripesPipe pipe) {
+		public boolean handle(World world, int x, int y, int z, ForgeDirection direction, ItemStack stack, EntityPlayer player, IStripesActivator activator) {
 			if (world.isAirBlock(x, y, z)) {
 				stack.stackSize--;
 				world.setBlock(x, y, z, ItemsAndBlocks.kebT1, stack.getItemDamage(), 3);

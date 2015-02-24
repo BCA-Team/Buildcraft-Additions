@@ -2,6 +2,7 @@ package buildcraftAdditions.reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -9,6 +10,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.armour.KineticBackpack;
 import buildcraftAdditions.blocks.BlockBCKinesisPipeWood;
 import buildcraftAdditions.blocks.BlockBCKinisisPipeStone;
 import buildcraftAdditions.blocks.BlockBasicCoil;
@@ -140,6 +142,9 @@ public final class ItemsAndBlocks {
 	public static Item upgrade;
 	public static Item blankUpgrade;
 	public static Item portableLaser;
+
+	public static ItemArmor kineticBackpack;
+
 
 	public static void init() {
 		ironCanister = new ItemCanister("ironCanister", 2000);
@@ -380,6 +385,9 @@ public final class ItemsAndBlocks {
 
 		itemSorter = new BlockItemSorter();
 		itemSorter.setBlockName("blockItemSorter").setCreativeTab(BuildcraftAdditions.bcadditions);
+
+		kineticBackpack = new KineticBackpack();
+		GameRegistry.registerItem(kineticBackpack, "test");
 
 		if (VersionCheck.currentVersion.contains("@")) {
 			//only register testblock in dev environments

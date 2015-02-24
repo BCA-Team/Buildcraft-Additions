@@ -59,4 +59,8 @@ public class CommonProxy {
 		return null;
 	}
 
+	public int addArmor(String name) {
+		return 0;
+	}
+
 }

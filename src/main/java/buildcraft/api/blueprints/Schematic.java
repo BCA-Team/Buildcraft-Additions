@@ -22,54 +22,30 @@ import buildcraft.api.core.IInvSlot;
  * to a world referential. Although default schematic behavior will be OK for a
  * lot of objects, specific blocks and entities may be associated with a
  * dedicated schematic class, which will be instantiated automatically.
- * <p/>
+ *
  * Schematic perform "id translation" in case the block ids between a blueprint
  * and the world installation are different. Mapping is done through the builder
  * context.
- * <p/>
+ *
  * Detailed documentation on the schematic behavior can be found on
  * http://www.mod-buildcraft.com/wiki/doku.php?id=builder_support
- * <p/>
+ *
  * Example of schematics for minecraft blocks are available in the package
  * buildcraft.core.schematics.
  */
 public abstract class Schematic {
 	/**
-	 * Blocks are build in various stages, in order to make sure that a block
-	 * can indeed be placed, and that it's unlikely to disturb other blocks.
-	 */
-	public static enum BuildingStage {
-		/**
-		 * Standalone blocks can be placed in the air, and they don't change
-		 * once placed.
-		 */
-		STANDALONE,
-
-		/**
-		 * Supported blocks may require to be placed on a standalone block,
-		 * e.g. a torch.
-		 */
-		SUPPORTED,
-
-		/**
-		 * Expanding blocks will grow and may disturb other block locations,
-		 * like e.g. water
-		 */
-		EXPANDING
-	}
-
-	/**
 	 * This is called each time an item matches a requirement. By default, it
 	 * will increase damage of items that can be damaged by the amount of the
 	 * requirement, and remove the intended amount of items that can't be
 	 * damaged.
-	 * <p/>
+	 *
 	 * Client may override this behavior. Note that this subprogram may be
 	 * called twice with the same parameters, once with a copy of requirements
 	 * and stack to check if the entire requirements can be fulfilled, and once
 	 * with the real inventory. Implementer is responsible for updating req
 	 * (with the remaining requirements if any) and slot (after usage).
-	 * <p/>
+	 *
 	 * returns what was used (similar to req, but created from slot, so that any
 	 * NBT based differences are drawn from the correct source)
 	 */
@@ -215,7 +191,7 @@ public abstract class Schematic {
 	 * Return true if the block on the world correspond to the block stored in
 	 * the blueprint at the location given by the slot. By default, this
 	 * subprogram is permissive and doesn't take into account metadata.
-	 * <p/>
+	 *
 	 * Post processing will be called on these blocks.
 	 */
 	public boolean isAlreadyBuilt(IBuilderContext context, int x, int y, int z) {
@@ -225,7 +201,7 @@ public abstract class Schematic {
 	/**
 	 * Return true if the block should not be placed to the world. Requirements
 	 * will not be asked on such a block, and building will not be called.
-	 * <p/>
+	 *
 	 * Post processing will be called on these blocks.
 	 */
 	public boolean doNotBuild() {
@@ -237,7 +213,7 @@ public abstract class Schematic {
 	 * straight after readFromNBT can be used to deactivate schematics in which
 	 * an inconsistency is detected. It will be considered as a block of air
 	 * instead.
-	 * <p/>
+	 *
 	 * Post processing will *not* be called on these blocks.
 	 */
 	public boolean doNotUse() {
@@ -281,5 +257,29 @@ public abstract class Schematic {
 	 */
 	public int buildTime() {
 		return 1;
+	}
+
+	/**
+	 * Blocks are build in various stages, in order to make sure that a block
+	 * can indeed be placed, and that it's unlikely to disturb other blocks.
+	 */
+	public static enum BuildingStage {
+		/**
+		 * Standalone blocks can be placed in the air, and they don't change
+		 * once placed.
+		 */
+		STANDALONE,
+
+		/**
+		 * Supported blocks may require to be placed on a standalone block,
+		 * e.g. a torch.
+		 */
+		SUPPORTED,
+
+		/**
+		 * Expanding blocks will grow and may disturb other block locations,
+		 * like e.g. water
+		 */
+		EXPANDING
 	}
 }

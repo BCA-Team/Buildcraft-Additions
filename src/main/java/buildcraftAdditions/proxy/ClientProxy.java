@@ -79,4 +79,9 @@ public class ClientProxy extends CommonProxy {
 	public World getClientWorld() {
 		return FMLClientHandler.instance().getWorldClient();
 	}
+
+	@Override
+	public int addArmor(String name) {
+		return RenderingRegistry.addNewArmourRendererPrefix(name);
+	}
 }
