@@ -26,20 +26,21 @@ public final class Variables {
 	}
 
 	//GUI ID's
-	public static final class Gui {
-		public static final int FLUIDIC_COMPRESSOR = 70;
-		public static final int CHARGING_STATION = 71;
+	public static enum Gui {
+		FLUIDIC_COMPRESSOR,
+		CHARGING_STATION,
 		@Deprecated
-		public static final int KINETIC_TOOL = 72;
-		public static final int KINETIC_MULTI_TOOL = 78;
-		public static final int HEATED_FURNACE = 73;
-		public static final int BASIC_COIL = 74;
-		public static final int KEB = 75;
-		public static final int MACHINE_CONFIGURATOR = 76;
-		public static final int REFINERY = 77;
-		public static final int COOLING_TOWER = 88;
-		public static final int ITEM_SORTER = 89;
-		public static final int PIPE_COLORING_TOOL = 90;
+		KINETIC_TOOL,
+		KINETIC_MULTI_TOOL,
+		PORTABLE_LASER,
+		HEATED_FURNACE,
+		BASIC_COIL,
+		KEB,
+		MACHINE_CONFIGURATOR,
+		REFINERY,
+		COOLING_TOWER,
+		ITEM_SORTER,
+		PIPE_COLORING_TOOL;
 	}
 
 	//EUREKA NBT names

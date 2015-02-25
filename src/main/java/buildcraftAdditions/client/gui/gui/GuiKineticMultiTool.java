@@ -14,15 +14,12 @@ import buildcraftAdditions.reference.Variables;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class GuiKineticMultiTool extends GuiBase {
+public class GuiKineticMultiTool extends GuiInventory<InventoryKineticMultiTool> {
 
 	private static final ResourceLocation texture = new ResourceLocation(Variables.MOD.ID, "textures/gui/guiKineticTool.png");
 
-	private final InventoryKineticMultiTool inventory;
-
 	public GuiKineticMultiTool(InventoryPlayer inventoryPlayer, InventoryKineticMultiTool inventory) {
-		super(new ContainerKineticMultiTool(inventoryPlayer, inventory));
-		this.inventory = inventory;
+		super(new ContainerKineticMultiTool(inventoryPlayer, inventory), inventory);
 		setDrawPlayerInv(true);
 	}
 
@@ -46,7 +43,4 @@ public class GuiKineticMultiTool extends GuiBase {
 		return "kineticMultiTool";
 	}
 
-	@Override
-	public void initialize() {
-	}
 }

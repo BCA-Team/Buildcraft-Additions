@@ -101,7 +101,7 @@ public class BlockItemSorter extends BlockContainer {
 		}
 
 		if (!world.isRemote)
-			player.openGui(BuildcraftAdditions.instance, Variables.Gui.ITEM_SORTER, world, x, y, z);
+			player.openGui(BuildcraftAdditions.instance, Variables.Gui.ITEM_SORTER.ordinal(), world, x, y, z);
 
 		return true;
 	}

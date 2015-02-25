@@ -25,20 +25,18 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @SideOnly(Side.CLIENT)
-public class GuiFluidicCompressor extends GuiBase {
+public class GuiFluidicCompressor extends GuiInventory<TileFluidicCompressor> {
 
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiFluidicCompressor.png");
-	private final TileFluidicCompressor fluidicCompressor;
 
 	public GuiFluidicCompressor(InventoryPlayer inventoryPlayer, TileFluidicCompressor fluidicCompressor) {
-		super(new ContainerFluidicCompressor(inventoryPlayer, fluidicCompressor));
+		super(new ContainerFluidicCompressor(inventoryPlayer, fluidicCompressor), fluidicCompressor);
 		setDrawPlayerInv(true);
-		this.fluidicCompressor = fluidicCompressor;
 	}
 
 	@Override
 	public void drawBackgroundPreWidgets(float f, int x, int y) {
-		drawTexturedModalRect(guiLeft + 89, guiTop + 53, 176, 3, fluidicCompressor.getProgress(), 4);
+		drawTexturedModalRect(guiLeft + 89, guiTop + 53, 176, 3, inventory.getProgress(), 4);
 	}
 
 	@Override
@@ -68,7 +66,7 @@ public class GuiFluidicCompressor extends GuiBase {
 
 	@Override
 	public void initialize() {
-		addWidget(new WidgetFluidTank(0, guiLeft + 53, guiTop + 16, 16, 52, this, fluidicCompressor.tank));
+		addWidget(new WidgetFluidTank(0, guiLeft + 53, guiTop + 16, 16, 52, this, inventory.tank));
 
 		WidgetButtonUpdate buttonFill = new WidgetButtonUpdate(1, guiLeft + 20, guiTop + 25, 191, 0, 19, 16, this, texture) {
 			@Override
@@ -76,7 +74,7 @@ public class GuiFluidicCompressor extends GuiBase {
 				tooltips.add(Utils.localize("tooltip.compressor.fill"));
 			}
 		};
-		buttonFill.setActive(fluidicCompressor.fill);
+		buttonFill.setActive(inventory.fill);
 
 		WidgetButtonUpdate buttonEmpty = new WidgetButtonUpdate(2, guiLeft + 20, guiTop + 45, 210, 0, 19, 16, this, texture) {
 			@Override
@@ -84,7 +82,7 @@ public class GuiFluidicCompressor extends GuiBase {
 				tooltips.add(Utils.localize("tooltip.compressor.empty"));
 			}
 		};
-		buttonEmpty.setActive(!fluidicCompressor.fill);
+		buttonEmpty.setActive(!inventory.fill);
 
 		addWidget(buttonFill);
 		addWidget(buttonEmpty);
@@ -94,12 +92,12 @@ public class GuiFluidicCompressor extends GuiBase {
 	public void widgetActionPerformed(WidgetBase widget) {
 		if (widget.id == 1) {
 			((WidgetButtonUpdate) widgets.get(2)).setActive(false);
-			fluidicCompressor.fill = true;
-			PacketHandler.instance.sendToServer(new MessageWidgetUpdate(fluidicCompressor, widget.id, 1));
+			inventory.fill = true;
+			PacketHandler.instance.sendToServer(new MessageWidgetUpdate(inventory, widget.id, 1));
 		} else if (widget.id == 2) {
 			((WidgetButtonUpdate) widgets.get(1)).setActive(false);
-			fluidicCompressor.fill = false;
-			PacketHandler.instance.sendToServer(new MessageWidgetUpdate(fluidicCompressor, widget.id, 0));
+			inventory.fill = false;
+			PacketHandler.instance.sendToServer(new MessageWidgetUpdate(inventory, widget.id, 0));
 		}
 	}
 }

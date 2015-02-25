@@ -63,7 +63,7 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		if (world.getTileEntity(x, y, z) instanceof TileKineticEnergyBufferBase)
-			player.openGui(BuildcraftAdditions.instance, Variables.Gui.KEB, world, x, y, z);
+			player.openGui(BuildcraftAdditions.instance, Variables.Gui.KEB.ordinal(), world, x, y, z);
 		return true;
 	}
 
@@ -129,10 +129,10 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 	}
 
 	@Override
-	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
 		if (world.getBlockMetadata(x, y, z) == 9) {
 			return createCreativeKEB();
 		}
-		return super.getPickBlock(target, world, x, y, z);
+		return super.getPickBlock(target, world, x, y, z, player);
 	}
 }

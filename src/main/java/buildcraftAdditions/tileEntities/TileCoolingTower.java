@@ -148,7 +148,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	@Override
 	public boolean onBlockActivated(EntityPlayer player) {
 		if (isMaster()) {
-			player.openGui(BuildcraftAdditions.instance, Variables.Gui.COOLING_TOWER, worldObj, xCoord, yCoord, zCoord);
+			player.openGui(BuildcraftAdditions.instance, Variables.Gui.COOLING_TOWER.ordinal(), worldObj, xCoord, yCoord, zCoord);
 			return true;
 		}
 		if (masterCheck())

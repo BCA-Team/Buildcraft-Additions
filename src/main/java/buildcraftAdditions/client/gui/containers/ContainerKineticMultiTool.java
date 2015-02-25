@@ -1,9 +1,8 @@
 package buildcraftAdditions.client.gui.containers;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 
-import buildcraftAdditions.client.gui.SlotKineticMultiTool;
+import buildcraftAdditions.client.gui.SlotBattery;
 import buildcraftAdditions.inventories.InventoryKineticMultiTool;
 
 /**
@@ -17,16 +16,10 @@ public class ContainerKineticMultiTool extends ContainerBase<InventoryKineticMul
 
 	public ContainerKineticMultiTool(InventoryPlayer inventoryPlayer, InventoryKineticMultiTool inventory) {
 		super(inventoryPlayer, inventory);
-		addSlotToContainer(new SlotKineticMultiTool(inventory, 0, 60, 29));
-		addSlotToContainer(new SlotKineticMultiTool(inventory, 1, 78, 29));
-		addSlotToContainer(new SlotKineticMultiTool(inventory, 2, 96, 29));
+		addSlotToContainer(new SlotBattery(inventory, 0, 60, 29));
+		addSlotToContainer(new SlotBattery(inventory, 1, 78, 29));
+		addSlotToContainer(new SlotBattery(inventory, 2, 96, 29));
 		addPlayerInventory(8, 71);
 	}
 
-	@Override
-	public void onContainerClosed(EntityPlayer player) {
-		super.onContainerClosed(player);
-		if (player != null && player.worldObj != null && !player.worldObj.isRemote)
-			inventory.writeToNBT();
-	}
 }

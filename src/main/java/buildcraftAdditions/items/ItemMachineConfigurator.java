@@ -32,7 +32,7 @@ public class ItemMachineConfigurator extends ItemBase {
 
 
 		if (entity instanceof IConfigurableOutput || entity instanceof IUpgradableMachine) {
-			player.openGui(BuildcraftAdditions.instance, Variables.Gui.MACHINE_CONFIGURATOR, world, x, y, z);
+			player.openGui(BuildcraftAdditions.instance, Variables.Gui.MACHINE_CONFIGURATOR.ordinal(), world, x, y, z);
 			return true;
 		}
 		return false;

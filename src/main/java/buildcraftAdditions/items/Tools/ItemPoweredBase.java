@@ -25,6 +25,7 @@ import buildcraftAdditions.core.InventoryTool;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.utils.Utils;
 
+@Deprecated
 public abstract class ItemPoweredBase extends ItemSword {
 
 	public int x, y, z;

@@ -15,10 +15,16 @@ import buildcraftAdditions.reference.Variables;
 
 public class ItemBase extends Item {
 
+	private final String name;
+
 	public ItemBase(String name) {
+		this.name = name;
 		setUnlocalizedName(name);
 		setTextureName(Variables.MOD.ID + ":" + name);
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 	}
 
+	public String getName() {
+		return name;
+	}
 }

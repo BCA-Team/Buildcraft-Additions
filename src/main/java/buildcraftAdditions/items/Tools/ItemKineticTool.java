@@ -67,7 +67,7 @@ public class ItemKineticTool extends ItemPoweredBase implements IEnergyContainer
 			stack.setTagCompound(new NBTTagCompound());
 		if (player.isSneaking()) {
 			if (!world.isRemote)
-				player.openGui(BuildcraftAdditions.instance, Variables.Gui.KINETIC_TOOL, world, x, y, z);
+				player.openGui(BuildcraftAdditions.instance, Variables.Gui.KINETIC_TOOL.ordinal(), world, x, y, z);
 		}
 		readUpgrades(stack);
 		readBateries(stack);
@@ -259,7 +259,7 @@ public class ItemKineticTool extends ItemPoweredBase implements IEnergyContainer
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
 		list.add("Deprecated item, please place this in a crafting grid to convert this to the new tool.");
-		list.add("All settings will be saved.");
+		list.add("All upgrades and the inventory will be saved.");
 		list.add("My apologies for this and any issues this might have caused");
 	}
 

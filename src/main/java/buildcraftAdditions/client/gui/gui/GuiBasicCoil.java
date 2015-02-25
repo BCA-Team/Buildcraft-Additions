@@ -17,13 +17,13 @@ import buildcraftAdditions.tileEntities.TileBasicCoil;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @SideOnly(Side.CLIENT)
-public class GuiBasicCoil extends GuiBase {
+public class GuiBasicCoil extends GuiInventory<TileBasicCoil> {
 
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiBasicCoil.png");
 	private final TileBasicCoil coil;
 
 	public GuiBasicCoil(InventoryPlayer inventoryplayer, TileBasicCoil coil) {
-		super(new ContainerBasicCoil(inventoryplayer, coil));
+		super(new ContainerBasicCoil(inventoryplayer, coil), coil);
 		setDrawPlayerInv(true);
 		this.coil = coil;
 	}
@@ -53,7 +53,4 @@ public class GuiBasicCoil extends GuiBase {
 		return "basicCoil";
 	}
 
-	@Override
-	public void initialize() {
-	}
 }

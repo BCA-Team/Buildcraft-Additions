@@ -25,12 +25,10 @@ public class GuiKEB extends GuiBase {
 
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiKineticEnergyBuffer.png");
 	private final TileKineticEnergyBufferBase keb;
-	private final EntityPlayer player;
 
 	public GuiKEB(TileKineticEnergyBufferBase keb, EntityPlayer player) {
 		super(new ContainerKEB(player, keb));
 		this.keb = keb;
-		this.player = player;
 	}
 
 	@Override

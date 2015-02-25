@@ -105,9 +105,7 @@ public class CustomInventory implements IInventory {
 
 	@Override
 	public String getInventoryName() {
-		if (name != null)
-			return name;
-		return null;
+		return name;
 	}
 
 	@Override

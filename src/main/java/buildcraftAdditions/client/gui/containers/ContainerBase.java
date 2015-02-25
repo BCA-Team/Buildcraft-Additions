@@ -165,4 +165,10 @@ public class ContainerBase<T> extends Container {
 		return super.slotClick(slotNum, mouseButton, modifier, player);
 	}
 
+	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+		if (player.worldObj != null && !player.worldObj.isRemote && inventory instanceof IInventory)
+			((IInventory) inventory).closeInventory();
+	}
 }

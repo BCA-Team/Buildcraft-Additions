@@ -73,6 +73,7 @@ public class BuildcraftAdditions {
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		PacketHandler.init();
 		ItemsAndBlocks.init();
+		proxy.registerEntities();
 		SpecialListMananger.init();
 
 		BCARecipeManager.duster = new DusterRecipeManager();

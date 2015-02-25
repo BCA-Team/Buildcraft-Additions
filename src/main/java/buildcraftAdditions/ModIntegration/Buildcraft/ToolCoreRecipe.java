@@ -1,14 +1,15 @@
-package buildcraftAdditions.items.Tools;
+package buildcraftAdditions.ModIntegration.Buildcraft;
 
 import net.minecraft.item.ItemStack;
 
 import buildcraft.BuildCraftCore;
 import buildcraft.api.recipes.CraftingResult;
+import buildcraft.silicon.ItemRedstoneChipset;
 import buildcraft.silicon.TileIntegrationTable;
 import buildcraft.transport.recipes.IntegrationTableRecipe;
 
 import buildcraftAdditions.reference.ItemsAndBlocks;
-import buildcraftAdditions.utils.BCItems;
+import buildcraftAdditions.reference.Variables;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -19,8 +20,8 @@ import buildcraftAdditions.utils.BCItems;
  */
 public class ToolCoreRecipe extends IntegrationTableRecipe {
 
-	public ToolCoreRecipe(){
-		setContents("toolCore", ItemsAndBlocks.toolCore, 30000, 100000);
+	public ToolCoreRecipe() {
+		setContents(Variables.MOD.ID + ":toolCore", ItemsAndBlocks.toolCore, 30000, 100000);
 	}
 
 	@Override
@@ -38,11 +39,6 @@ public class ToolCoreRecipe extends IntegrationTableRecipe {
 
 	@Override
 	public boolean isValidInputB(ItemStack inputB) {
-		return inputB != null && inputB.getItem() == BCItems.CHIPSET_DIAMOND;
-	}
-
-	@Override
-	public String getId() {
-		return "toolcore";
+		return inputB != null && inputB.getItem() == ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem();
 	}
 }

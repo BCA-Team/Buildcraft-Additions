@@ -5,10 +5,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 
 import net.minecraftforge.fluids.Fluid;
 
+import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.entities.EntityLaserShot;
 import buildcraftAdditions.villager.ComponentPowerPlant;
 import buildcraftAdditions.villager.PowerPlantCreationHandeler;
 import buildcraftAdditions.villager.VillagerTradeHandler;
@@ -23,6 +26,10 @@ import buildcraftAdditions.villager.VillagerTradeHandler;
 
 public class CommonProxy {
 	public static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/villagers/Engineer.png");
+
+	public void registerEntities() {
+		EntityRegistry.registerModEntity(EntityLaserShot.class, "bcaLaserShot", EntityRegistry.findGlobalUniqueEntityId(), BuildcraftAdditions.instance, 64, 10, true);
+	}
 
 	public void registerRenderers() {
 	}
