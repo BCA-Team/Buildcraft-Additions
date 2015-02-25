@@ -387,6 +387,7 @@ public final class ItemsAndBlocks {
 		itemSorter.setBlockName("blockItemSorter").setCreativeTab(BuildcraftAdditions.bcadditions);
 
 		kineticBackpack = new KineticBackpack();
+		kineticBackpack.setUnlocalizedName("kineticBackpack");
 		GameRegistry.registerItem(kineticBackpack, "test");
 
 		if (VersionCheck.currentVersion.contains("@")) {
