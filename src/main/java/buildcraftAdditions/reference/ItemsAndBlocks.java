@@ -13,6 +13,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.armour.KineticBackpack;
 import buildcraftAdditions.blocks.BlockBCKinesisPipeWood;
 import buildcraftAdditions.blocks.BlockBCKinisisPipeStone;
+import buildcraftAdditions.blocks.BlockBackpackStand;
 import buildcraftAdditions.blocks.BlockBasicCoil;
 import buildcraftAdditions.blocks.BlockBasicDuster;
 import buildcraftAdditions.blocks.BlockChargingStation;
@@ -97,6 +98,7 @@ public final class ItemsAndBlocks {
 	public static MultiBlockCoolingTowerValve coolingTowerValve;
 	public static BlockItemSorter itemSorter;
 	public static Block testBlock;
+	public static Block backpackStand;
 
 	public static BatteryBase powerCapsuleTier1;
 	public static BatteryBase powerCapsuleTier2;
@@ -301,6 +303,10 @@ public final class ItemsAndBlocks {
 		portableLaser = new ItemPortableLaser();
 		GameRegistry.registerItem(portableLaser, "portableLaser");
 
+		kineticBackpack = new KineticBackpack();
+		kineticBackpack.setUnlocalizedName("kineticBackpack");
+		GameRegistry.registerItem(kineticBackpack, "kineticBackpack");
+
 		//START BLOCKS
 
 		kinesisPipeWood = new BlockBCKinesisPipeWood();
@@ -386,9 +392,8 @@ public final class ItemsAndBlocks {
 		itemSorter = new BlockItemSorter();
 		itemSorter.setBlockName("blockItemSorter").setCreativeTab(BuildcraftAdditions.bcadditions);
 
-		kineticBackpack = new KineticBackpack();
-		kineticBackpack.setUnlocalizedName("kineticBackpack");
-		GameRegistry.registerItem(kineticBackpack, "test");
+		backpackStand = new BlockBackpackStand();
+		GameRegistry.registerBlock(backpackStand, "backpackStand");
 
 		if (VersionCheck.currentVersion.contains("@")) {
 			//only register testblock in dev environments

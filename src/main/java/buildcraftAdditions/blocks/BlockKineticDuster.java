@@ -1,6 +1,5 @@
 package buildcraftAdditions.blocks;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,10 +31,6 @@ public class BlockKineticDuster extends BlockBase implements ILaserTargetBlock {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon bottom, sides[], top;
-
-	public BlockKineticDuster() {
-		super(Material.iron);
-	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int getal) {

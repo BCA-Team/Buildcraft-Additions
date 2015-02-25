@@ -1,6 +1,5 @@
 package buildcraftAdditions.blocks;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -31,12 +30,6 @@ public class BlockBasicDuster extends BlockBase {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon front, back, sides, top, bottom;
-
-	public BlockBasicDuster() {
-		super(Material.iron);
-		setHardness(5F);
-		setResistance(10F);
-	}
 
 	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack stack) {

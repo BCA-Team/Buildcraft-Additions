@@ -1,6 +1,5 @@
 package buildcraftAdditions.blocks;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,10 +29,6 @@ public class BlockMechanicalDuster extends BlockBase {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon front, sides, bottom, top[];
-
-	public BlockMechanicalDuster() {
-		super(Material.iron);
-	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int getal) {

@@ -7,6 +7,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -18,10 +19,11 @@ import buildcraftAdditions.utils.Utils;
  */
 public abstract class BlockBase extends BlockContainer {
 
-	public BlockBase(Material material) {
-		super(material);
+	public BlockBase() {
+		super(Material.iron);
 		setHardness(5F);
 		setResistance(10F);
+		setCreativeTab(BuildcraftAdditions.bcadditions);
 	}
 
 	@Override

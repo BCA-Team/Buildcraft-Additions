@@ -1,6 +1,5 @@
 package buildcraftAdditions.blocks;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -34,10 +33,6 @@ public class BlockSemiAutomaticDuster extends BlockBase {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon front, sides, top, bottom;
-
-	public BlockSemiAutomaticDuster() {
-		super(Material.iron);
-	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
