@@ -3,6 +3,7 @@ package buildcraftAdditions.client.gui.widgets;
 import java.util.List;
 
 import net.minecraft.item.EnumRarity;
+import net.minecraft.util.ResourceLocation;
 
 import buildcraftAdditions.client.gui.gui.GuiBase;
 import buildcraftAdditions.utils.RenderUtils;
@@ -17,6 +18,7 @@ import buildcraftAdditions.utils.fluids.Tank;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class WidgetFluidTank extends WidgetBase {
+	private static final ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/Pieces/tankStripes.png");
 	private Tank tank;
 
 	public WidgetFluidTank(int id, int x, int y, int width, int height, GuiBase gui, Tank tank) {
@@ -29,6 +31,7 @@ public class WidgetFluidTank extends WidgetBase {
 	public void render(int mouseX, int mouseY) {
 		if (tank.getFluidAmount() > 0)
 			RenderUtils.drawFluid(tank.getFluid(), (int) ((tank.getFluidAmount() / (float) tank.getCapacity()) * height), x, y, width, height);
+		RenderUtils.drawImage(texture, x, y + height / 10, width, height - height / 5);
 	}
 
 	@Override

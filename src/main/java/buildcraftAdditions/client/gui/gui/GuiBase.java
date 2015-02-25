@@ -33,16 +33,16 @@ public abstract class GuiBase extends GuiContainer {
 	public static final ResourceLocation PLAYER_INV_TEXTURE = new ResourceLocation("bcadditions:textures/gui/guiPlayerInv.png");
 
 	private final ResourceLocation texture;
-	private boolean drawPlayerInv = false;
 	public List<WidgetBase> widgets = new ArrayList<WidgetBase>();
 	public int xSizePlayerInv = 176;
 	public int ySizePlayerInv = 100;
 	public int titleXoffset = 5;
-	public int titleYoffset = 6;
+	public int titleYoffset = 8;
 	public boolean shouldDrawWidgets = true;
-	public int textColor = 0x404040;
-	public boolean centerTitle = false;
+	public int textColor = 0xFFCC00;
+	public boolean centerTitle = true;
 	public int tileGuiYSize = 0;
+	private boolean drawPlayerInv = false;
 
 	public GuiBase(Container container) {
 		super(container);
@@ -163,16 +163,18 @@ public abstract class GuiBase extends GuiContainer {
 	}
 
 	protected void drawWidgets(int x, int y) {
-		for (WidgetBase widget : widgets)
+		for (WidgetBase widget : widgets) {
 			widget.render(x, y);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		}
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		if (drawPlayerInv)
-			drawString(Utils.localize("container.inventory"), 5, tileGuiYSize + 6, textColor);
+			drawString(Utils.localize("container.inventory"), 8, tileGuiYSize + 6, textColor);
 		String name = hasCustomName() && getCustomName() != null ? getCustomName() : Utils.localize(String.format("gui.%s.name", getInventoryName()));
-		drawString(name, centerTitle ? getXSize() / 2 - (name.length() * 2) : titleXoffset, titleYoffset, textColor);
+		drawString(name, centerTitle ? (int) (getXSize() / 2 - name.length() * 2.5) : titleXoffset, titleYoffset, textColor);
 		drawForegroundExtra(x, y);
 	}
 

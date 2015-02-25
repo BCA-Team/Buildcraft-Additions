@@ -36,12 +36,7 @@ public class GuiFluidicCompressor extends GuiInventory<TileFluidicCompressor> {
 
 	@Override
 	public void drawBackgroundPreWidgets(float f, int x, int y) {
-		drawTexturedModalRect(guiLeft + 89, guiTop + 53, 176, 3, inventory.getProgress(), 4);
-	}
-
-	@Override
-	public void drawBackgroundPostWidgets(float f, int x, int y) {
-		drawTexturedModalRect(guiLeft + 52, guiTop + 21, 176, 21, 15, 58);
+		drawTexturedModalRect(guiLeft + 86, guiTop + 61, 172, 3, inventory.getProgress() + 3, 4);
 	}
 
 	@Override
@@ -56,7 +51,7 @@ public class GuiFluidicCompressor extends GuiInventory<TileFluidicCompressor> {
 
 	@Override
 	public int getYSize() {
-		return 69;
+		return 85;
 	}
 
 	@Override
@@ -66,9 +61,9 @@ public class GuiFluidicCompressor extends GuiInventory<TileFluidicCompressor> {
 
 	@Override
 	public void initialize() {
-		addWidget(new WidgetFluidTank(0, guiLeft + 53, guiTop + 16, 16, 52, this, inventory.tank));
+		addWidget(new WidgetFluidTank(0, guiLeft + 53, guiTop + 24, 16, 51, this, inventory.tank));
 
-		WidgetButtonUpdate buttonFill = new WidgetButtonUpdate(1, guiLeft + 20, guiTop + 25, 191, 0, 19, 16, this, texture) {
+		WidgetButtonUpdate buttonFill = new WidgetButtonUpdate(1, guiLeft + 20, guiTop + 33, 191, 0, 19, 16, this, texture) {
 			@Override
 			public void addTooltip(int mouseX, int mouseY, List<String> tooltips, boolean shift) {
 				tooltips.add(Utils.localize("tooltip.compressor.fill"));
@@ -76,7 +71,7 @@ public class GuiFluidicCompressor extends GuiInventory<TileFluidicCompressor> {
 		};
 		buttonFill.setActive(inventory.fill);
 
-		WidgetButtonUpdate buttonEmpty = new WidgetButtonUpdate(2, guiLeft + 20, guiTop + 45, 210, 0, 19, 16, this, texture) {
+		WidgetButtonUpdate buttonEmpty = new WidgetButtonUpdate(2, guiLeft + 20, guiTop + 53, 210, 0, 19, 16, this, texture) {
 			@Override
 			public void addTooltip(int mouseX, int mouseY, List<String> tooltips, boolean shift) {
 				tooltips.add(Utils.localize("tooltip.compressor.empty"));

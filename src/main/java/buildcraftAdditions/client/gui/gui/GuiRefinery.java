@@ -28,8 +28,6 @@ public class GuiRefinery extends GuiBase {
 		super(new ContainerRefinery(inventoryPlayer, refinery));
 		setTitleXOffset(70);
 		setTitleYOffset(3);
-		setTextColor(0xFFCC00);
-		setCenterTitle(true);
 		this.refinery = refinery;
 	}
 
@@ -56,8 +54,6 @@ public class GuiRefinery extends GuiBase {
 	@Override
 	public void drawBackgroundPostWidgets(float f, int x, int y) {
 		drawTexturedModalRect(guiLeft + 53, guiTop + 150, 0, 186, 80, 7);
-		drawTexturedModalRect(guiLeft + 22, guiTop + 70, 190, 70, 20, 50);
-		drawTexturedModalRect(guiLeft + 148, guiTop + 70, 190, 70, 20, 50);
 		drawTexturedModalRect(guiLeft + 59, guiTop + 151, 6, 198, (refinery.currentHeat * 68) / refinery.lastRequiredHeat, 5);
 		drawTexturedModalRect(guiLeft + 59, guiTop + 151, 6, 193, 80, 5);
 	}
