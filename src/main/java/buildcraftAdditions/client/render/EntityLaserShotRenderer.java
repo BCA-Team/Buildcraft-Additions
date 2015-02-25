@@ -30,7 +30,7 @@ public class EntityLaserShotRenderer extends Render {
 	private void doRender(EntityLaserShot entity, double x, double y, double z, float rotation, float partialTicks) {
 		bindEntityTexture(entity);
 		GL11.glPushMatrix();
-		float sin = MathHelper.sin((float) Math.toRadians((entity.ticksExisted + entity.getEntityId()) * 9));
+		float sin = MathHelper.sin((float) Math.toRadians(((entity.ticksExisted + entity.getEntityId()) % 360) * 9));
 		GL11.glColor3f(sin < 0 ? 0 : sin, 0, -sin < 0 ? 0 : -sin);
 		GL11.glTranslated(x, y, z);
 		GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks - 90, 0, 1, 0);

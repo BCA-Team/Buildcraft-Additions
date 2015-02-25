@@ -37,11 +37,8 @@ public class EntityLaserShot extends EntityThrowable {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		for (int i = 0; i < 4; i++) {
 			worldObj.spawnParticle("smoke", posX + rand.nextDouble() / 4 - 0.125, posY + rand.nextDouble() / 4 - 0.125, posZ + rand.nextDouble() / 4 - 0.125, 0, 0, 0);
 			worldObj.spawnParticle("flame", posX + rand.nextDouble() / 4 - 0.125, posY + rand.nextDouble() / 4 - 0.125, posZ + rand.nextDouble() / 4 - 0.125, 0, 0, 0);
-		}
-		setFire(1);
 		if (ticksExisted > 6000)
 			setDead();
 	}
