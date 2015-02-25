@@ -40,7 +40,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	public boolean isCooking, shouldUpdateCoils;
 	public TileCoilBase[] coils;
 	private Upgrades upgrades = new Upgrades(1).whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT); //for now only allow that one as the others don't work yet
-	private SideConfiguration configuration = new SideConfiguration();
+	private SideConfiguration configuration = new SideConfiguration(EnumSideStatus.BOTH);
 
 	public TileHeatedFurnace() {
 		progress = 0;

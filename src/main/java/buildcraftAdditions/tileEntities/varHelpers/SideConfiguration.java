@@ -27,7 +27,11 @@ public class SideConfiguration implements ISyncObject {
 	private final EnumPriority[] priorities = new EnumPriority[ForgeDirection.VALID_DIRECTIONS.length];
 
 	public SideConfiguration() {
-		Arrays.fill(configurations, EnumSideStatus.INPUT);
+		this(EnumSideStatus.INPUT);
+	}
+
+	public SideConfiguration(EnumSideStatus status) {
+		Arrays.fill(configurations, status);
 		Arrays.fill(priorities, EnumPriority.NORMAL);
 	}
 
