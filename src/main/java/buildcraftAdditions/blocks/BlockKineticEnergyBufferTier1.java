@@ -129,10 +129,10 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 	}
 
 	@Override
-	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
 		if (world.getBlockMetadata(x, y, z) == 9) {
 			return createCreativeKEB();
 		}
-		return super.getPickBlock(target, world, x, y, z, player);
+		return super.getPickBlock(target, world, x, y, z);
 	}
 }
