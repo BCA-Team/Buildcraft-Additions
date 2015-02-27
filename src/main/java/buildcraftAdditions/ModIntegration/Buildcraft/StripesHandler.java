@@ -88,10 +88,11 @@ public class StripesHandler {
 						tag.setInteger("y", y);
 						tag.setInteger("z", z);
 						tile.readFromNBT(tag);
+						return true;
 					}
 				}
 			}
-			return true;
+			return false;
 		}
 
 	}
