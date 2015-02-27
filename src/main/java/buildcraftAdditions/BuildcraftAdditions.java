@@ -1,5 +1,7 @@
 package buildcraftAdditions;
 
+import java.util.Iterator;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -130,6 +132,7 @@ public class BuildcraftAdditions {
 
 	@Mod.EventHandler
 	public void remap(FMLMissingMappingsEvent event) {
+		Iterator<? extends IDust> iterator = BCAItemManager.dusts.getDusts().iterator();
 		for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
 			if (mapping.name.toLowerCase().contains("fuelgas")) {
 				if (mapping.type == GameRegistry.Type.ITEM)
@@ -146,12 +149,14 @@ public class BuildcraftAdditions {
 			}
 			if (!ConfigurationHandler.shouldRegisterDusts)
 				return;
-			for (IDust dust : BCAItemManager.dusts.getDusts()) {
+			while (iterator.hasNext()) {
+				IDust dust = iterator.next();
 				if (dust == null)
 					continue;
 				String name = dust.getName().toLowerCase();
 				if (mapping.name.toLowerCase().contains(name)) {
 					mapping.remap(GameRegistry.findItem(Variables.MOD.ID, "converter" + name));
+					iterator.remove();
 					continue;
 				}
 			}
