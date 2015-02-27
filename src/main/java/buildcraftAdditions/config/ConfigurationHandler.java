@@ -17,8 +17,8 @@ public class ConfigurationHandler {
 	public static Configuration configFile;
 	public static boolean shouldPrintChangelog, shouldRegisterDusts, powerloss, eurekaIntegration;
 	public static int[] powerDifficultyModifiers = new int[4];
-	public static int basePowerModifier, entityHitModifier, hoeCost, KEB1powerloss, KEB2powerloss, KEB3powerloss, heatedFurnaceHeatRequired, basicCoilHeat, lavaCoilHeat, kineticCoilHeatModifier, portableLaserPowerUse, portableLaserLaserPower, portableLaserEntityBurnTime;
-	public static float portableLaserEntityDamage, toolEfficiencyPickaxe, toolEfficiencyShovel, toolEfficiencyAxe;
+	public static int basePowerModifier, entityHitModifier, hoeCost, toolHarvestLevel, KEB1powerloss, KEB2powerloss, KEB3powerloss, heatedFurnaceHeatRequired, basicCoilHeat, lavaCoilHeat, kineticCoilHeatModifier, portableLaserPowerUse, portableLaserLaserPower, portableLaserEntityBurnTime;
+	public static float portableLaserEntityDamage, toolEfficiencyPickaxe, toolEfficiencyShovel, toolEfficiencyAxe, toolEfficiencyAreaMultiplier, entityDamage;
 
 	public static void init(File file) {
 		configFile = new Configuration(file);
@@ -38,10 +38,13 @@ public class ConfigurationHandler {
 		powerDifficultyModifiers[3] = configFile.get("Power Usage", "HardDifficultyModifier", 4).setMinValue(0).getInt();
 		basePowerModifier = configFile.get("Power Usage", "BaseModifier", 10).setMinValue(0).getInt();
 		entityHitModifier = configFile.get("Power Usage", "EntityHitModifier", 10).setMinValue(0).getInt();
+		entityDamage = (float) configFile.get("Power Usage", "EntityDamage", 7D).setMinValue(0).setMaxValue(Float.MAX_VALUE).getDouble();
 		hoeCost = configFile.get("Power Usage", "HoeCost", 5).setMinValue(0).getInt();
 		toolEfficiencyPickaxe = (float) configFile.get("Power Usage", "ToolEfficiencyPickaxe", 40D).setMinValue(1.1).setMaxValue(Float.MAX_VALUE).getDouble();
 		toolEfficiencyShovel = (float) configFile.get("Power Usage", "ToolEfficiencyShovel", 10D).setMinValue(1.1).setMaxValue(Float.MAX_VALUE).getDouble();
 		toolEfficiencyAxe = (float) configFile.get("Power Usage", "ToolEfficiencyAxe", 30D).setMinValue(1.1).setMaxValue(Float.MAX_VALUE).getDouble();
+		toolHarvestLevel = configFile.get("Power Usage", "ToolHarvestLevel", Integer.MAX_VALUE).setMinValue(0).getInt();
+		toolEfficiencyAreaMultiplier = (float) configFile.get("Power Usage", "ToolEfficiencyAreaMultiplier", 0.25).setMinValue(0).setMaxValue(Float.MAX_VALUE).getDouble();
 
 		configFile.addCustomCategoryComment("KEB", "Configuration stuff for your Kinetic Energy Buffers");
 		powerloss = configFile.get("KEB", "powerloss", false).getBoolean();
