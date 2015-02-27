@@ -26,4 +26,8 @@ public class Logger {
 		logger.error(message);
 	}
 
+	public static void debug(String message) {
+		logger.debug(message);
+	}
+
 }
