@@ -88,7 +88,8 @@ public class BuildcraftIntegration {
 		addStickRecipe(ItemsAndBlocks.boneStick, 2000, "stickIron", Items.bone);
 		addStickRecipe(ItemsAndBlocks.flintStick, 2000, "stickIron", Items.flint);
 		addStickRecipe(ItemsAndBlocks.blazeStick, 4000, "stickQuartz", Items.blaze_rod);
-		BuildcraftRecipeRegistry.assemblyTable.addRecipe(Variables.MOD.ID + ":kineticTool", 8000, new ItemStack(ItemsAndBlocks.itemKineticMultiTool), new ItemStack(Items.diamond, 3), ItemsAndBlocks.ironStick, ItemsAndBlocks.toolCore);
+		addAssemblyRecipe("kineticTool", ItemsAndBlocks.itemKineticMultiTool, 8000, "gemDiamond", "gemDiamond", "gemDiamond", "stickIron", ItemsAndBlocks.toolCore);
+		addAssemblyRecipe("portableLaser", ItemsAndBlocks.portableLaser, 8000, "blockGlass", "gemDiamond", "stickBlaze", "stickBlaze", BCItems.LASER, ItemsAndBlocks.toolCore);
 		addUpgradeRecipe(ItemsAndBlocks.toolUpgradeChainsaw);
 		addUpgradeRecipe(ItemsAndBlocks.toolUpgradeDrill);
 		addUpgradeRecipe(ItemsAndBlocks.toolUpgradeDigger);
@@ -199,7 +200,7 @@ public class BuildcraftIntegration {
 	}
 
 	private static void addUpgradeRecipe(ItemToolUpgrade upgrade) {
-		addAssemblyRecipe("toolUpgrade" + upgrade.getType(), upgrade, 1000, new ItemStack(ItemsAndBlocks.toolCore), new ItemStack(Items.iron_ingot, 3), new ItemStack(Items.gold_ingot, 2));
+		addAssemblyRecipe("toolUpgrade" + upgrade.getType(), upgrade, 1000, ItemsAndBlocks.toolCore, "ingotIron", "ingotIron", "ingotIron", "ingotGold", "ingotGold");
 	}
 
 	private static void addAssemblyRecipe(String name, Item output, int power, Object... inputs) {

@@ -18,13 +18,13 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.server.S23PacketBlockChange;
@@ -49,6 +49,7 @@ import cofh.api.energy.IEnergyContainerItem;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.InventoryKineticMultiTool;
+import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.Utils;
@@ -60,7 +61,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemKineticMultiTool extends ItemSword implements IEnergyContainerItem {
+public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerItem {
 
 	private static final Set<Material> effectiveMaterialsDrill = Sets.newHashSet(Material.rock, Material.iron, Material.ice, Material.glass, Material.piston, Material.anvil);
 	private static final Set<Block> effectiveBlocksDrill = Sets.newHashSet(Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab, Blocks.stone, Blocks.sandstone, Blocks.mossy_cobblestone, Blocks.iron_ore, Blocks.iron_block, Blocks.coal_ore, Blocks.gold_block, Blocks.gold_ore, Blocks.diamond_ore, Blocks.diamond_block, Blocks.ice, Blocks.netherrack, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.lit_redstone_ore, Blocks.rail, Blocks.detector_rail, Blocks.golden_rail, Blocks.activator_rail);
@@ -73,11 +74,8 @@ public class ItemKineticMultiTool extends ItemSword implements IEnergyContainerI
 	private IIcon iconChainsaw, iconDigger, iconDrill, iconHoe;
 
 	public ItemKineticMultiTool() {
-		super(ToolMaterial.EMERALD);
-		setUnlocalizedName("kineticMultiTool");
-		setCreativeTab(BuildcraftAdditions.bcadditions);
+		super("kineticMultiTool");
 		setMaxStackSize(1);
-		setMaxDamage(0);
 		setFull3D();
 		setNoRepair();
 	}
@@ -113,16 +111,16 @@ public class ItemKineticMultiTool extends ItemSword implements IEnergyContainerI
 			player.addChatComponentMessage(new ChatComponentTranslation("kineticTool.outOfPower"));
 			return true;
 		}
-		if (isUpgradeInstalled(stack, "area")) {
+		if (!player.isSneaking() && isUpgradeInstalled(stack, "area")) {
 			int range = 1;
 			Block block = player.worldObj.getBlock(x, y, z);
-			if (block.getBlockHardness(player.worldObj, x, y, z) < 0)
+			if (block.getBlockHardness(player.worldObj, x, y, z) == 0)
 				return false;
-			if (getEffectiveMaterials(stack).contains(block.getMaterial()) || getEffectiveBlocks(stack).contains(block)) {
+			if (getEfficiency(stack, block) > 1) {
 				MovingObjectPosition mop = getMovingObjectPositionFromPlayer(player.worldObj, player, true);
-				if (mop == null || mop.sideHit < 0 || mop.sideHit >= ForgeDirection.VALID_DIRECTIONS.length)
+				if (mop == null)
 					return false;
-				switch (ForgeDirection.VALID_DIRECTIONS[mop.sideHit]) {
+				switch (ForgeDirection.getOrientation(mop.sideHit)) {
 					case UP:
 					case DOWN:
 						for (int xx = x - range; xx <= x + range; xx++) {
@@ -130,10 +128,8 @@ public class ItemKineticMultiTool extends ItemSword implements IEnergyContainerI
 								if (xx == x && zz == z)
 									continue;
 								block = player.worldObj.getBlock(xx, y, zz);
-								if (block.getBlockHardness(player.worldObj, xx, y, zz) >= 0)
-									if (canHarvestBlock(block, stack))
-										if (harvestBlock(player.worldObj, xx, y, zz, player))
-											onBlockDestroyed(stack, player.worldObj, block, xx, y, zz, player);
+								if (isToolEffective(stack, block, player.worldObj.getBlockMetadata(xx, y, zz)) && getEfficiency(stack, block) > 1 && onBlockDestroyed(stack, player.worldObj, block, xx, y, zz, player))
+									harvestBlock(player.worldObj, xx, y, zz, player);
 							}
 						}
 						break;
@@ -144,10 +140,8 @@ public class ItemKineticMultiTool extends ItemSword implements IEnergyContainerI
 								if (xx == x && yy == y)
 									continue;
 								block = player.worldObj.getBlock(xx, yy, z);
-								if (block.getBlockHardness(player.worldObj, xx, yy, z) >= 0)
-									if (canHarvestBlock(block, stack))
-										if (harvestBlock(player.worldObj, xx, yy, z, player))
-											onBlockDestroyed(stack, player.worldObj, block, xx, yy, z, player);
+								if (isToolEffective(stack, block, player.worldObj.getBlockMetadata(xx, yy, z)) && getEfficiency(stack, block) > 1 && onBlockDestroyed(stack, player.worldObj, block, xx, yy, z, player))
+									harvestBlock(player.worldObj, xx, yy, z, player);
 							}
 						}
 						break;
@@ -158,10 +152,8 @@ public class ItemKineticMultiTool extends ItemSword implements IEnergyContainerI
 								if (yy == y && zz == z)
 									continue;
 								block = player.worldObj.getBlock(x, yy, zz);
-								if (block.getBlockHardness(player.worldObj, x, yy, zz) >= 0)
-									if (canHarvestBlock(block, stack))
-										if (harvestBlock(player.worldObj, x, yy, zz, player))
-											onBlockDestroyed(stack, player.worldObj, block, x, yy, zz, player);
+								if (isToolEffective(stack, block, player.worldObj.getBlockMetadata(x, yy, zz)) && getEfficiency(stack, block) > 1 && onBlockDestroyed(stack, player.worldObj, block, x, yy, zz, player))
+									harvestBlock(player.worldObj, x, yy, zz, player);
 							}
 						}
 						break;
@@ -173,8 +165,9 @@ public class ItemKineticMultiTool extends ItemSword implements IEnergyContainerI
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entity) {
-		if ((entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode) || isUpgradeInstalled(stack, "digger") || isUpgradeInstalled(stack, "drill") || isUpgradeInstalled(stack, "chainsaw")) {
-			extractEnergy(stack, (int) (block.getBlockHardness(world, x, y, z) * ConfigurationHandler.powerDifficultyModifiers[world.difficultySetting.getDifficultyId()] * ConfigurationHandler.basePowerModifier), false);
+		if (getEffectiveMaterials(stack).contains(block.getMaterial()) || getEffectiveBlocks(stack).contains(block)) {
+			if (!(entity instanceof EntityPlayer) || !((EntityPlayer) entity).capabilities.isCreativeMode)
+				extractEnergy(stack, (int) (block.getBlockHardness(world, x, y, z) * ConfigurationHandler.powerDifficultyModifiers[world.difficultySetting.getDifficultyId()] * ConfigurationHandler.basePowerModifier), false);
 			return true;
 		}
 		return false;
@@ -191,13 +184,13 @@ public class ItemKineticMultiTool extends ItemSword implements IEnergyContainerI
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.none;
+	public int getMaxItemUseDuration(ItemStack stack) {
+		return 1;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack par1ItemStack, int pass) {
+	public boolean hasEffect(ItemStack stack, int pass) {
 		return false;
 	}
 
@@ -213,14 +206,7 @@ public class ItemKineticMultiTool extends ItemSword implements IEnergyContainerI
 
 	@Override
 	public float getDigSpeed(ItemStack stack, Block block, int meta) {
-		for (String type : getToolClasses(stack)) {
-			int level = getHarvestLevel(stack, type);
-			String requiredTool = block.getHarvestTool(meta);
-			if (requiredTool == null || requiredTool.equalsIgnoreCase(type))
-				if (block.getHarvestLevel(meta) < level)
-					return getEfficiency(stack, block);
-		}
-		return super.getDigSpeed(stack, block, meta);
+		return isToolEffective(stack, block, meta) ? getEfficiency(stack, block) : super.getDigSpeed(stack, block, meta);
 	}
 
 	@Override
@@ -277,9 +263,27 @@ public class ItemKineticMultiTool extends ItemSword implements IEnergyContainerI
 
 	@Override
 	public Multimap getAttributeModifiers(ItemStack stack) {
+		Multimap map = HashMultimap.create();
 		if (isUpgradeInstalled(stack, "chainsaw"))
-			return super.getAttributeModifiers(stack);
-		return HashMultimap.create();
+			map.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", ConfigurationHandler.entityDamage, 0));
+		return map;
+	}
+
+	@Override
+	public int getHarvestLevel(ItemStack stack, String toolClass) {
+		return isUpgradeInstalled(stack, getUpgrade(toolClass)) ? ConfigurationHandler.toolHarvestLevel : -1;
+	}
+
+	@Override
+	public Set<String> getToolClasses(ItemStack stack) {
+		Set<String> set = Sets.newHashSet();
+		if (isUpgradeInstalled(stack, "drill"))
+			set.add(getHarvestTool("drill"));
+		if (isUpgradeInstalled(stack, "digger"))
+			set.add(getHarvestTool("digger"));
+		if (isUpgradeInstalled(stack, "chainsaw"))
+			set.add(getHarvestTool("chainsaw"));
+		return set;
 	}
 
 	@Override
@@ -488,11 +492,6 @@ public class ItemKineticMultiTool extends ItemSword implements IEnergyContainerI
 			if (stack.stackTagCompound == null)
 				stack.stackTagCompound = new NBTTagCompound();
 			stack.stackTagCompound.setBoolean(upgrade, true);
-			if (stack.getItem() != null) {
-				String harvestTool = getHarvestTool(upgrade);
-				if (harvestTool != null)
-					stack.getItem().setHarvestLevel(harvestTool, Integer.MAX_VALUE);
-			}
 			if ("silky".equalsIgnoreCase(upgrade)) {
 				Map map = EnchantmentHelper.getEnchantments(stack);
 				if (map == null)
@@ -542,6 +541,18 @@ public class ItemKineticMultiTool extends ItemSword implements IEnergyContainerI
 		return null;
 	}
 
+	public static String getUpgrade(String harvestTool) {
+		if (harvestTool != null) {
+			if (harvestTool.equalsIgnoreCase("pickaxe"))
+				return "drill";
+			if (harvestTool.equalsIgnoreCase("shovel"))
+				return "digger";
+			if (harvestTool.equalsIgnoreCase("axe"))
+				return "chainsaw";
+		}
+		return null;
+	}
+
 	public static Set<Material> getEffectiveMaterials(ItemStack stack) {
 		Set<Material> set = Sets.newHashSet();
 		if (isUpgradeInstalled(stack, "drill"))
@@ -565,13 +576,22 @@ public class ItemKineticMultiTool extends ItemSword implements IEnergyContainerI
 	}
 
 	public static float getEfficiency(ItemStack stack, Block block) {
-		if (isUpgradeInstalled(stack, "drill") && (effectiveMaterialsDrill.contains(block.getMaterial()) || effectiveBlocksDrill.contains(block)))
-			return ConfigurationHandler.toolEfficiencyPickaxe;
-		if (isUpgradeInstalled(stack, "chainsaw") && (effectiveMaterialsChainsaw.contains(block.getMaterial()) || effectiveBlocksChainsaw.contains(block)))
-			return ConfigurationHandler.toolEfficiencyAxe;
-		if (isUpgradeInstalled(stack, "digger") && (effectiveBlocksDigger.contains(block.getMaterial()) || effectiveBlocksDigger.contains(block)))
-			return ConfigurationHandler.toolEfficiencyShovel;
-		return 1;
+		float f = 1;
+		if (isUpgradeInstalled(stack, "drill") && (effectiveMaterialsDrill.contains(block.getMaterial()) || effectiveBlocksDrill.contains(block))) {
+			setLastUsedMode(stack, "pickaxe");
+			f = ConfigurationHandler.toolEfficiencyPickaxe;
+		} else if (isUpgradeInstalled(stack, "chainsaw") && (effectiveMaterialsChainsaw.contains(block.getMaterial()) || effectiveBlocksChainsaw.contains(block))) {
+			setLastUsedMode(stack, "axe");
+			f = ConfigurationHandler.toolEfficiencyAxe;
+		} else if (isUpgradeInstalled(stack, "digger") && (effectiveBlocksDigger.contains(block.getMaterial()) || effectiveBlocksDigger.contains(block))) {
+			setLastUsedMode(stack, "shovel");
+			f = ConfigurationHandler.toolEfficiencyShovel;
+		}
+		return f * (isUpgradeInstalled(stack, "area") ? ConfigurationHandler.toolEfficiencyAreaMultiplier : 1);
+	}
+
+	public static boolean isToolEffective(ItemStack stack, Block block, int meta) {
+		return stack != null && stack.getItem() != null && stack.getItem().getHarvestLevel(stack, block.getHarvestTool(meta)) > block.getHarvestLevel(meta);
 	}
 
 	public boolean harvestBlock(World world, int x, int y, int z, EntityPlayer player) {

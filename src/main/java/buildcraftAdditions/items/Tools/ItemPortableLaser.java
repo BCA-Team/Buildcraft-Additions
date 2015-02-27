@@ -3,7 +3,9 @@ package buildcraftAdditions.items.Tools;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -36,22 +38,59 @@ public class ItemPortableLaser extends ItemBase implements IEnergyContainerItem 
 	}
 
 	@Override
+	public EnumAction getItemUseAction(ItemStack stack) {
+		return EnumAction.bow;
+	}
+
+	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
-		return 1;
+		return Integer.MAX_VALUE;
 	}
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (!world.isRemote && player.isSneaking())
-			player.openGui(BuildcraftAdditions.instance, Variables.Gui.PORTABLE_LASER.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
-		if (!player.isSneaking() && getEnergyStored(stack) >= ConfigurationHandler.portableLaserPowerUse) {
-			world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-			if (!world.isRemote) {
-				extractEnergy(stack, ConfigurationHandler.portableLaserPowerUse, false);
-				world.spawnEntityInWorld(new EntityLaserShot(player.worldObj, player));
+		if (!world.isRemote && player.isSneaking()) {
+			MovingObjectPosition mop = getMovingObjectPositionFromPlayer(world, player, true);
+			if (mop == null || mop.typeOfHit == MovingObjectPosition.MovingObjectType.MISS || mop.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
+				player.openGui(BuildcraftAdditions.instance, Variables.Gui.PORTABLE_LASER.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
+				return stack;
 			}
 		}
+		if (getEnergyStored(stack) > 0)
+			player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		return stack;
+	}
+
+	@Override
+	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int count) {
+		float j = getMaxItemUseDuration(stack) - count;
+		float f = j / 20;
+		f = (f * f + f * 2) / 3;
+		if (f < 0.1)
+			return;
+		if (f > 1)
+			f = 1;
+		f *= 2;
+		if (getEnergyStored(stack) < (int) (f * ConfigurationHandler.portableLaserPowerUse))
+			return;
+		extractEnergy(stack, (int) (f * ConfigurationHandler.portableLaserPowerUse), false);
+		world.playSoundAtEntity(player, "random.bow", 1, 1 / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.25F);
+		if (!world.isRemote)
+			world.spawnEntityInWorld(new EntityLaserShot(world, player, f));
+	}
+
+	@Override
+	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
+		float j = getMaxItemUseDuration(stack) - (count + 1);
+		float f = j / 20;
+		f = (f * f + f * 2) / 3;
+		if (f < 0.1)
+			return;
+		if (f > 1)
+			f = 1;
+		f *= 2;
+		if (getEnergyStored(stack) < f * ConfigurationHandler.portableLaserPowerUse)
+			player.stopUsingItem();
 	}
 
 	@Override

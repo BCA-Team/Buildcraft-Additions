@@ -42,7 +42,6 @@ public class ItemKineticTool extends ItemPoweredBase implements IEnergyContainer
 	public ItemKineticTool() {
 		super();
 		setUnlocalizedName("kineticMultiTool");
-		setCreativeTab(BuildcraftAdditions.bcadditions);
 		setMaxStackSize(1);
 		setFull3D();
 		chainsaw = false;
