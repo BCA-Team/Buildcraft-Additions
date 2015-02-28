@@ -43,17 +43,18 @@ public class ItemDust extends Item {
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		IDust dust = BCAItemManager.dusts.getDust(stack.getItemDamage());
-		if (dust != null) {
-			return ("item.dust" + dust.getName()).replace(" ", ".");
-		}
-		return super.getUnlocalizedName(stack);
+		return dust != null ? "item.dust" + dust.getName() : super.getUnlocalizedName(stack);
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
 		IDust dust = BCAItemManager.dusts.getDust(stack.getItemDamage());
 		if (dust != null) {
-			return Utils.localizeFormatted("item.dust.name", Utils.localize(dust.getName()));
+			String s = "item.dust" + dust.getName();
+			String tS = Utils.localize(s);
+			if (!s.equalsIgnoreCase(tS))
+				return tS;
+			return Utils.localizeAllFormatted("item.dust.name", "material." + Utils.decapitalizeFirstChar(dust.getName()) + ".name");
 		}
 		return super.getItemStackDisplayName(stack);
 	}
@@ -61,10 +62,8 @@ public class ItemDust extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
-		for (IDust dust : BCAItemManager.dusts.getDusts()) {
-			if (dust != null) {
+		for (IDust dust : BCAItemManager.dusts.getDusts())
+			if (dust != null)
 				list.add(dust.getDustStack());
-			}
-		}
 	}
 }
