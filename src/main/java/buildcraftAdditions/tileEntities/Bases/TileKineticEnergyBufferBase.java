@@ -203,6 +203,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	@Override
 	public void changeStatus(ForgeDirection side) {
 		configuration.changeStatus(side);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
