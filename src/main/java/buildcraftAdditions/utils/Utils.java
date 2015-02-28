@@ -8,6 +8,8 @@ package buildcraftAdditions.utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import com.google.common.base.Strings;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.entity.EntityLivingBase;
