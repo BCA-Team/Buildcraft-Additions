@@ -1,6 +1,7 @@
 package buildcraftAdditions.config;
 
 import java.io.File;
+import java.util.HashSet;
 
 import net.minecraftforge.common.config.Configuration;
 
@@ -14,6 +15,7 @@ import buildcraftAdditions.core.VersionCheck;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class ConfigurationHandler {
+	private static final HashSet<String> enabledFeatures = new HashSet<String>();
 	public static Configuration configFile;
 	public static boolean shouldPrintChangelog, shouldRegisterDusts, powerloss, eurekaIntegration;
 	public static int[] powerDifficultyModifiers = new int[4];
@@ -23,6 +25,16 @@ public class ConfigurationHandler {
 	public static void init(File file) {
 		configFile = new Configuration(file);
 		readConfig();
+	}
+
+	public static boolean enabled(String name) {
+		return enabledFeatures.contains(name);
+	}
+
+	private static void registerFeature(String name) {
+		if (configFile.get("Feature", name, true).getBoolean()) {
+			enabledFeatures.add(name);
+		}
 	}
 
 	public static void readConfig() {
@@ -67,6 +79,22 @@ public class ConfigurationHandler {
 		configFile.addCustomCategoryComment("Misc", "Stuff that didn't fit in any other category");
 		shouldRegisterDusts = configFile.get("Misc", "shouldRegisterDusts", true).setRequiresMcRestart(true).getBoolean();
 		eurekaIntegration = configFile.get("Misc", "eurekaIntegration", true).setRequiresMcRestart(true).getBoolean();
+
+		registerFeature("ChargingStation");
+		registerFeature("ColorSorter");
+		registerFeature("ColoringTool");
+		registerFeature("Duster");
+		registerFeature("FluidCanisters");
+		registerFeature("KineticBackpack");
+		registerFeature("KineticEnergyBuffer");
+		registerFeature("MachineUpgrades");
+		registerFeature("MultiBlockRefining");
+		registerFeature("MultiTools");
+		registerFeature("MultiToolsArea");
+		registerFeature("MultiToolsFortune");
+		registerFeature("MultiToolsSilky");
+		registerFeature("PortableLaser");
+		registerFeature("PowerCapsules");
 
 		if (configFile.hasChanged())
 			configFile.save();
