@@ -44,6 +44,7 @@ public class TriggerProvider implements ITriggerProvider {
 			triggers.add(Triggers.KEBUnder75);
 			triggers.add(Triggers.KEBUnder50);
 			triggers.add(Triggers.KEBUnder25);
+			triggers.add(Triggers.KEBEmpty);
 			triggers.add(Triggers.KEBEngineControl);
 		}
 		return triggers;

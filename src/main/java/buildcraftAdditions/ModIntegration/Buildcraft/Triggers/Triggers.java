@@ -21,6 +21,7 @@ public class Triggers {
 	public static ITriggerExternal KEBUnder75 = new TriggerKEBUnder75();
 	public static ITriggerExternal KEBUnder50 = new TriggerKEBUnder50();
 	public static ITriggerExternal KEBUnder25 = new TriggerKEBUnder25();
+	public static ITriggerExternal KEBEmpty = new TriggerKEBEmpty();
 	public static ITriggerExternal KEBEngineControl = new TriggerKEBEngineControl();
 
 	public static void register() {
@@ -35,6 +36,7 @@ public class Triggers {
 		StatementManager.registerStatement(KEBUnder75);
 		StatementManager.registerStatement(KEBUnder50);
 		StatementManager.registerStatement(KEBUnder25);
+		StatementManager.registerStatement(KEBEmpty);
 		StatementManager.registerStatement(KEBEngineControl);
 	}
 }

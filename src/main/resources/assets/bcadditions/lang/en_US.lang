@@ -177,6 +177,7 @@ trigger.KEBUnder25=Less the 25% charged
 trigger.KEBUnder50=Less then 50% charged
 trigger.KEBUnder75=Less then 75% charged
 trigger.KEBUnder100=Less then 100% charged
+trigger.KEBEmpty=Completely empty
 trigger.KEBEngineControl=Smart Engine Control
 
 priority.veryLow=Very Low
