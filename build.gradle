@@ -58,12 +58,9 @@ curse {
         projectId = "${curseProps.project_id}"
 
         releaseType = "release"
-        changelog = """fix id remapping bug
-fix advanced KEB gate triggers
-try to fix recipe bug with crafting mananger
-moved some things to the api
-fix refinery upgrades crash
-sort-o-tron can now read BC lists for sorting
+        changelog = """fix remapping issue
+no more shipping the BC and RF api's
+fix dust localizations
 """
     }
 }
