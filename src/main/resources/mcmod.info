@@ -2,15 +2,14 @@
 {
   "modid": "bcadditions",
   "name": "Buildcraft Additions",
-  "description": "Adds some Additions to Buildcraft",
+  "description": "Additions to Buildcraft",
   "version": "$version",
-  "mcversion": "1.7.10",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["AEnterprise"],
-  "credits": "Coded by AEnterprise, inspired by the comunity",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": ["Buildcraft 6.0.17"]
+  "mcversion": "$mcversion",
+  "url": "http://bcadditions.tk/",
+  "authorList": [ "AEnterprise", "big_Xplosion", "iTitus" ],
+  "credits": "AEnterprise, big_Xplosion, iTitus, plenituz, AlexTheGre4t & the community",
+  "logoFile": "assets/bcadditions/logo.png",
+  "requiredMods": [ "Forge", "BuildCraft|Core" ],
+  "dependencies": [ "eureka", "BuildCraft|Core" ]
 }
 ]
