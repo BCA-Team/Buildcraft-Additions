@@ -85,6 +85,8 @@ public class ConfigurationHandler {
 		registerFeature("ColorSorter");
 		registerFeature("ColoringTool");
 		registerFeature("Duster");
+		registerFeature("Coils");
+		registerFeature("HeatedFurnace");
 		registerFeature("FluidCanisters");
 		registerFeature("KineticBackpack");
 		registerFeature("KineticEnergyBuffer");
