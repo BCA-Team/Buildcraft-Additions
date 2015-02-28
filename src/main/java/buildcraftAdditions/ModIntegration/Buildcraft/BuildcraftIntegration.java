@@ -238,11 +238,12 @@ public class BuildcraftIntegration {
 	}
 
 	private static void addUpgradeRecipe(ItemToolUpgrade upgrade, Object... inputs) {
-		Object[] inputs2 = new Object[(inputs != null ? inputs.length : 0) + 1];
-		inputs2[0] = new ItemStack(ItemsAndBlocks.toolCore);
-		for (int i = 1; i < inputs2.length; i++)
-			inputs2[i] = inputs[i - 1];
-		addAssemblyRecipe("toolUpgrade" + upgrade.getType(), upgrade, 1000, inputs2);
+		if (inputs != null) {
+			Object[] inputs2 = new Object[inputs.length + 1];
+			inputs2[0] = new ItemStack(ItemsAndBlocks.toolCore);
+			System.arraycopy(inputs, 0, inputs2, 1, inputs2.length - 1);
+			addAssemblyRecipe("toolUpgrade" + upgrade.getType(), upgrade, 1000, inputs2);
+		}
 	}
 
 	private static void addUpgradeRecipe(ItemToolUpgrade upgrade) {

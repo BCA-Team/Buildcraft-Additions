@@ -22,10 +22,10 @@ import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 
 public class TileChargingStation extends TileMachineBase implements IInventory {
 
-	private final CustomInventory inventory = new CustomInventory("ChargingStation",1 , 1, this);
+	private final CustomInventory inventory = new CustomInventory("ChargingStation", 1, 1, this);
 
 	public TileChargingStation() {
-		super (1000);
+		super(1000);
 	}
 
 	@Override

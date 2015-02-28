@@ -7,6 +7,7 @@ import net.minecraftforge.fluids.FluidStack;
 import buildcraft.api.recipes.IFlexibleCrafter;
 
 import buildcraftAdditions.utils.fluids.Tank;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -15,8 +16,8 @@ import buildcraftAdditions.utils.fluids.Tank;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class DummyFlexibleCrafter implements IFlexibleCrafter {
-	public Tank input = new Tank(1000);
-	public Tank output = new Tank(1000);
+	public final Tank input = new Tank(1000);
+	public final Tank output = new Tank(1000);
 
 	@Override
 	public int getCraftingItemStackSize() {
@@ -40,7 +41,7 @@ public class DummyFlexibleCrafter implements IFlexibleCrafter {
 
 	@Override
 	public FluidStack decrCraftingFluidStack(int tankid, int amount) {
-		FluidStack fluid = null;
+		FluidStack fluid;
 		if (amount > input.getFluidAmount()) {
 			fluid = input.getFluid();
 			input.setFluid(null);

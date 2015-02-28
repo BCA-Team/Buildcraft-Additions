@@ -8,6 +8,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.RotationUtils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -25,7 +26,7 @@ public class MultiBlockPaternKEBT2 extends MultiBlockPatern {
 	@Override
 	public void checkPatern(World world, int x, int y, int z) {
 		if (isPaternValid(world, x, y, z, 0)) {
-			rotatedDirections = RotationUtils.rotateDirections(directions, 0);
+			rotatedDirections = RotationUtils.rotateDirections(0, directions);
 			Location location = new Location(world, x, y, z);
 			for (ForgeDirection direction : rotatedDirections) {
 				location.move(direction);

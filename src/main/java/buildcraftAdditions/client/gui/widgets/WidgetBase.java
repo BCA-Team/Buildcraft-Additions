@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.ResourceLocation;
 
-import buildcraftAdditions.client.gui.gui.GuiBase;
+import buildcraftAdditions.client.gui.GuiBase;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -26,8 +26,8 @@ public class WidgetBase {
 	public final int height;
 	public final int u;
 	public final int v;
-	public GuiBase gui;
-	public ResourceLocation[] textures;
+	public final GuiBase gui;
+	public final ResourceLocation[] textures;
 	public int textureIndex = 0;
 	public int value = 0;
 	public boolean enabled = true;
@@ -61,7 +61,7 @@ public class WidgetBase {
 	}
 
 	public WidgetBase(int id, int x, int y, int u, int v, int width, int height, GuiBase gui, int value, ResourceLocation... textures) {
-		this (id, x, y, u, v, width, height, gui, textures);
+		this(id, x, y, u, v, width, height, gui, textures);
 		this.value = value;
 	}
 

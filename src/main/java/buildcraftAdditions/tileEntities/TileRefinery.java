@@ -3,6 +3,10 @@ package buildcraftAdditions.tileEntities;
 import java.util.EnumSet;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableSet;
+
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -38,9 +42,6 @@ import buildcraftAdditions.utils.fluids.ITankHolder;
 import buildcraftAdditions.utils.fluids.RefineryRecipeTank;
 import buildcraftAdditions.utils.fluids.Tank;
 
-import com.google.common.collect.ImmutableSet;
-import io.netty.buffer.ByteBuf;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -49,20 +50,20 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IEnergyReceiver, ITankHolder, IPipeConnection, IUpgradableMachine {
-	public int energy, maxEnergy, currentHeat, requiredHeat, energyCost, heatTimer, lastRequiredHeat;
-	public boolean init, valve, isCooling, moved;
+	public final int maxEnergy;
+	protected final Upgrades upgrades = new Upgrades(0);
+	private final Tank input = new RefineryRecipeTank("Input", 3000, this);
+	private final Tank output = new Tank(3000, this, "Output");
+	private final MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.REFINERY);
+	public int energy, currentHeat, requiredHeat, energyCost, heatTimer, lastRequiredHeat;
+	public boolean valve, isCooling, moved;
 	public TileRefinery master;
-	private Tank input = new RefineryRecipeTank("Input", 3000, this);
-	private Tank output = new Tank(3000, this, "Output");
 	private FluidStack outputFluidStack;
 	private FluidStack inputFluidStack;
-	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.REFINERY);
-	protected Upgrades upgrades = new Upgrades(0);
 	private String inputFluid, outputFluid;
 
 	public TileRefinery() {
 		maxEnergy = 50000;
-		init = false;
 		lastRequiredHeat = 20;
 		currentHeat = 20;
 		inputFluid = "";
@@ -117,7 +118,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			factor -= 0.3;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_3))
 			factor -= 0.5;
-		energyCost = (int) (energyCost - (energyCost * factor));
+		energyCost -= (energyCost * factor);
 		energy -= energyCost;
 		if (currentHeat < requiredHeat) {
 			return;
@@ -204,7 +205,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	private void emptyTanks() {
 		if (input.getFluid() == null || input.getFluid().amount < 1000 || input.getFluidType() == null)
 			return;
-		ForgeDirection[] directions = RotationUtils.rotateDirections(new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.UP}, data.rotationIndex);
+		ForgeDirection[] directions = RotationUtils.rotateDirections(data.rotationIndex, ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.UP);
 		Location location = new Location(this);
 		location.move(directions);
 		try {
@@ -322,8 +323,18 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	@Override
+	public void setMasterX(int masterX) {
+		data.masterX = masterX;
+	}
+
+	@Override
 	public int getMasterY() {
 		return data.masterY;
+	}
+
+	@Override
+	public void setMasterY(int masterY) {
+		data.masterY = masterY;
 	}
 
 	@Override
@@ -332,8 +343,18 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	@Override
+	public void setMasterZ(int masterZ) {
+		data.masterZ = masterZ;
+	}
+
+	@Override
 	public int getRotationIndex() {
 		return data.rotationIndex;
+	}
+
+	@Override
+	public void setRotationIndex(int rotationIndex) {
+		data.rotationIndex = rotationIndex;
 	}
 
 	@Override
@@ -347,21 +368,6 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	@Override
-	public void setMasterX(int masterX) {
-		data.masterX = masterX;
-	}
-
-	@Override
-	public void setMasterY(int masterY) {
-		data.masterY = masterY;
-	}
-
-	@Override
-	public void setMasterZ(int masterZ) {
-		data.masterZ = masterZ;
-	}
-
-	@Override
 	public void setIsMaster(boolean isMaster) {
 		data.isMaster = isMaster;
 	}
@@ -369,11 +375,6 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public void setPartOfMultiBlock(boolean partOfMultiBlock) {
 		data.partOfMultiBlock = partOfMultiBlock;
-	}
-
-	@Override
-	public void setRotationIndex(int rotationIndex) {
-		data.rotationIndex = rotationIndex;
 	}
 
 	@Override
@@ -507,12 +508,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		buf.writeInt(requiredHeat);
 		char[] chars = inputFluid.toCharArray();
 		buf.writeInt(chars.length);
-		for (int t = 0; t < chars.length; t++)
-			buf.writeChar(chars[t]);
+		for (char aChar : chars) buf.writeChar(aChar);
 		chars = outputFluid.toCharArray();
 		buf.writeInt(chars.length);
-		for (int t = 0; t < chars.length; t++)
-			buf.writeChar(chars[t]);
+		for (char aChar : chars) buf.writeChar(aChar);
 		input.writeToByteBuff(buf);
 		output.writeToByteBuff(buf);
 		data.writeToByteBuff(buf);
@@ -556,9 +555,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		} else {
 			if (master == null)
 				findMaster();
-			if (master == null)
-				return false;
-			return master.canAcceptUpgrade(upgrade);
+			return master != null && master.canAcceptUpgrade(upgrade);
 		}
 	}
 

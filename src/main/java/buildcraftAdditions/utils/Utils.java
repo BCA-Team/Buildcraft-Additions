@@ -8,6 +8,8 @@ package buildcraftAdditions.utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import com.google.common.base.Strings;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -28,8 +30,6 @@ import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
-
-import com.google.common.base.Strings;
 
 public class Utils {
 
@@ -74,8 +74,13 @@ public class Utils {
 
 	public static String localizeAllFormatted(String key, String... strings) {
 		Object[] objects = new Object[strings != null ? strings.length : 0];
-		for (int i = 0; i < objects.length; i++)
-			objects[i] = localize(strings[i]);
+		if (strings != null) {
+			for (int i = 0; i < objects.length; i++) {
+				String string = strings[i];
+				if (string != null)
+					objects[i] = localize(string);
+			}
+		}
 		return localizeFormatted(key, objects);
 	}
 

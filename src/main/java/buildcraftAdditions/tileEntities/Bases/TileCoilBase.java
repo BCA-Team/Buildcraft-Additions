@@ -1,8 +1,8 @@
 package buildcraftAdditions.tileEntities.Bases;
 
-import net.minecraft.nbt.NBTTagCompound;
-
 import io.netty.buffer.ByteBuf;
+
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Copyright (c) 2014, AEnterprise

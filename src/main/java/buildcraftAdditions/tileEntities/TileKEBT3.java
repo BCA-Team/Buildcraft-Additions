@@ -36,9 +36,9 @@ import buildcraftAdditions.utils.Location;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBlockTile {
+	private final MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.KEBT3);
 	public int energyState;
 	public TileKEBT3 master;
-	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.KEBT3);
 
 	public TileKEBT3() {
 		super(100000000, 300000, 300000, ConfigurationHandler.KEB3powerloss, 3);
@@ -142,9 +142,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 			return super.canConnectEnergy(from);
 		if (master == null)
 			findMaster();
-		if (master == null)
-			return false;
-		return master.canConnectEnergy(from);
+		return master != null && master.canConnectEnergy(from);
 	}
 
 	@Override
@@ -305,8 +303,18 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
+	public void setMasterX(int masterX) {
+		data.masterX = masterX;
+	}
+
+	@Override
 	public int getMasterY() {
 		return data.masterY;
+	}
+
+	@Override
+	public void setMasterY(int masterY) {
+		data.masterY = masterY;
 	}
 
 	@Override
@@ -315,8 +323,18 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
+	public void setMasterZ(int masterZ) {
+		data.masterZ = masterZ;
+	}
+
+	@Override
 	public int getRotationIndex() {
 		return data.rotationIndex;
+	}
+
+	@Override
+	public void setRotationIndex(int rotationIndex) {
+		data.rotationIndex = rotationIndex;
 	}
 
 	@Override
@@ -330,21 +348,6 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
-	public void setMasterX(int masterX) {
-		data.masterX = masterX;
-	}
-
-	@Override
-	public void setMasterY(int masterY) {
-		data.masterY = masterY;
-	}
-
-	@Override
-	public void setMasterZ(int masterZ) {
-		data.masterZ = masterZ;
-	}
-
-	@Override
 	public void setIsMaster(boolean isMaster) {
 		data.isMaster = isMaster;
 	}
@@ -352,11 +355,6 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	@Override
 	public void setPartOfMultiBlock(boolean partOfMultiBlock) {
 		data.partOfMultiBlock = partOfMultiBlock;
-	}
-
-	@Override
-	public void setRotationIndex(int rotationIndex) {
-		data.rotationIndex = rotationIndex;
 	}
 
 	public void destruction() {

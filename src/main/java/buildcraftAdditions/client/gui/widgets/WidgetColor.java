@@ -1,13 +1,13 @@
 package buildcraftAdditions.client.gui.widgets;
 
-import buildcraftAdditions.utils.Utils;
+import java.util.List;
+
 import net.minecraft.util.ResourceLocation;
 
-import buildcraftAdditions.client.gui.gui.GuiBase;
+import buildcraftAdditions.client.gui.GuiBase;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.utils.RenderUtils;
-
-import java.util.List;
+import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -23,7 +23,7 @@ public class WidgetColor extends WidgetBase {
 	}
 
 	public WidgetColor(int id, int x, int y, int u, int v, int width, int height, GuiBase gui, int value, ResourceLocation... textures) {
-		super (id, x, y, u, v, width, height, gui, value, textures);
+		super(id, x, y, u, v, width, height, gui, value, textures);
 	}
 
 	@Override
@@ -40,12 +40,11 @@ public class WidgetColor extends WidgetBase {
 				value = 0;
 			else
 				value++;
-		}
-		else if (button == 1) {
-				if (value <= 0)
-					value = 15;
-				else
-					value--;
+		} else if (button == 1) {
+			if (value <= 0)
+				value = 15;
+			else
+				value--;
 		}
 
 		super.onWidgetClicked(x, y, button);

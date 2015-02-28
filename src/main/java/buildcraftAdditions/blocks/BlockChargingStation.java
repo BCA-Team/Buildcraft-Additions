@@ -8,9 +8,6 @@ package buildcraftAdditions.blocks;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,23 +19,19 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileChargingStation;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
-public class BlockChargingStation extends BlockContainer {
+public class BlockChargingStation extends BlockBase {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon textureFront, textureBack, textureLeft, textureRight, textureTop, textureBottom;
 
 	public BlockChargingStation() {
-		super(Material.iron);
-		setHardness(5F);
-		setResistance(10F);
+		super("blockChargingStation");
 	}
 
 	@Override
@@ -47,39 +40,32 @@ public class BlockChargingStation extends BlockContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
-		super.onBlockActivated(world, x, y, z, entityplayer, par6, par7, par8, par9);
-
-		// Drop through if the player is sneaking
-		if (entityplayer.isSneaking())
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+		if (player.isSneaking())
 			return false;
 
 
 		if (!world.isRemote)
-			entityplayer.openGui(BuildcraftAdditions.instance, Variables.Gui.CHARGING_STATION.ordinal(), world, x, y, z);
+			player.openGui(BuildcraftAdditions.instance, Variables.Gui.CHARGING_STATION.ordinal(), world, x, y, z);
 
 		return true;
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack stack) {
-		super.onBlockPlacedBy(world, i, j, k, entityliving, stack);
-
-		ForgeDirection orientation = Utils.get2dOrientation(entityliving);
-		world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(), 1);
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+		world.setBlockMetadataWithNotify(x, y, z, Utils.get2dOrientation(entity).getOpposite().ordinal(), 1);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int i, int j) {
-		// If no metadata is set, then this is an icon.
-		if (j == 0 && i == 3)
+	public IIcon getIcon(int side, int meta) {
+		if (meta == 0 && side == 3)
 			return textureFront;
 
-		if (i == j && i > 1)
+		if (side == meta && side > 1)
 			return textureFront;
 
-		switch (i) {
+		switch (side) {
 			case 0:
 				return textureBottom;
 			case 1:
@@ -98,17 +84,6 @@ public class BlockChargingStation extends BlockContainer {
 		textureBottom = RenderUtils.registerIcon(register, "charger_bottom");
 		textureLeft = RenderUtils.registerIcon(register, "charger_leftSide");
 		textureRight = RenderUtils.registerIcon(register, "charger_rightSide");
-	}
-
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		TileChargingStation station = (TileChargingStation) world.getTileEntity(x, y, z);
-		station.openInventory();
-		ItemStack stack = station.getStackInSlot(0);
-		if (stack != null) {
-			station.setInventorySlotContents(0, null);
-			Utils.dropItemstack(world, x, y, z, stack);
-		}
 	}
 
 }

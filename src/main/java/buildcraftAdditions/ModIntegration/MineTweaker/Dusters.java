@@ -32,8 +32,7 @@ public class Dusters {
 	}
 
 	private static class AddRecipeAction implements IUndoableAction {
-		public IItemStack input;
-		public IItemStack output;
+		public final IItemStack input, output;
 
 		public AddRecipeAction(IItemStack input, IItemStack output) {
 			this.input = input;
@@ -72,7 +71,7 @@ public class Dusters {
 	}
 
 	private static class RemoveRecipeAction implements IUndoableAction {
-		IItemStack input;
+		public final IItemStack input;
 
 		public RemoveRecipeAction(IItemStack input) {
 			this.input = input;

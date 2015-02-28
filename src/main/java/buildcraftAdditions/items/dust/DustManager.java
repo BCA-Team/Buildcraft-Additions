@@ -45,20 +45,20 @@ public class DustManager implements IDustManager {
 		}
 		if (dustType == null) {
 			Logger.error("Tried to register an invalid dust! The dust type must not be null! Skipping.");
-			Logger.error("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + (dustType != null ? dustType.getName() : "null"));
+			Logger.error("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: null");
 			return;
 		}
 		IDust dust = getDust(meta);
 		if (dust != null) {
 			Logger.error("A dust with the meta '" + meta + "' is already registered! Skipping.");
-			Logger.error("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + (dustType != null ? dustType.getName() : "null"));
+			Logger.error("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + dustType.getName());
 			Logger.error("Found: Meta: " + dust.getMeta() + ", Name: " + dust.getName() + ", Color multiplier: " + dust.getColorMultiplier() + ", Dust type: " + (dust.getDustType() != null ? dust.getDustType().getName() : "null"));
 			return;
 		}
 		dust = getDust(name);
 		if (dust != null) {
 			Logger.error("A dust with the name '" + name + "' is already registered! Skipping.");
-			Logger.error("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + (dustType != null ? dustType.getName() : "null"));
+			Logger.error("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + dustType.getName());
 			Logger.error("Found: Meta: " + dust.getMeta() + ", Name: " + dust.getName() + ", Color multiplier: " + dust.getColorMultiplier() + ", Dust type: " + (dust.getDustType() != null ? dust.getDustType().getName() : "null"));
 			return;
 		}
@@ -67,10 +67,10 @@ public class DustManager implements IDustManager {
 			dusts[meta] = dust;
 			Item converter = new ItemConverter(dust);
 			GameRegistry.registerItem(converter, "converter" + name.toLowerCase());
-			Logger.info("Successfully added a dust: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + (dustType != null ? dustType.getName() : "null"));
+			Logger.info("Successfully added a dust: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + dustType.getName());
 		} else {
 			Logger.debug("The dust with the name '" + name + "' will not be registered because it is invalid in this environment! Skipping.");
-			Logger.debug("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + (dustType != null ? dustType.getName() : "null"));
+			Logger.debug("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + dustType.getName());
 		}
 	}
 
@@ -84,7 +84,6 @@ public class DustManager implements IDustManager {
 		if (meta >= 0 && meta < dusts.length) {
 			dusts[meta] = null;
 			Logger.info("Successfully removed dust: Meta: " + dust.getMeta() + ", Name: " + dust.getName() + ", Color multiplier: " + dust.getColorMultiplier() + ", Dust type: " + (dust.getDustType() != null ? dust.getDustType().getName() : "null"));
-			return;
 		}
 	}
 

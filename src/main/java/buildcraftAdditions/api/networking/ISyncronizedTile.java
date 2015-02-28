@@ -1,6 +1,7 @@
 package buildcraftAdditions.api.networking;
 
 import io.netty.buffer.ByteBuf;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

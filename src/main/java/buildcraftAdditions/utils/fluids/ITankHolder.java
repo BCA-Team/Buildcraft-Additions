@@ -9,5 +9,6 @@ package buildcraftAdditions.utils.fluids;
  */
 public interface ITankHolder {
 
-	public Tank[] getTanks();
+	Tank[] getTanks();
+
 }

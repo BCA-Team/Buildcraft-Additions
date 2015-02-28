@@ -16,21 +16,10 @@ import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
 
 public final class Variables {
 
-	public static final class MOD {
-		public static final String ID = "bcadditions";
-		public static final String NAME = "Buildcraft Additions";
-	}
-
-	public static final class UUIDs {
-		public static final String CORJAANTJE = "209f3364-0042-4d2a-b539-8640e6bbd6c1";
-	}
-
 	//GUI ID's
 	public static enum Gui {
 		FLUIDIC_COMPRESSOR,
 		CHARGING_STATION,
-		@Deprecated
-		KINETIC_TOOL,
 		KINETIC_MULTI_TOOL,
 		PORTABLE_LASER,
 		HEATED_FURNACE,
@@ -40,15 +29,26 @@ public final class Variables {
 		REFINERY,
 		COOLING_TOWER,
 		ITEM_SORTER,
-		PIPE_COLORING_TOOL;
+		PIPE_COLORING_TOOL
 	}
 
 	//EUREKA NBT names
-	public static final String DustT0Key = "dusterTier0";
-	public static final String DustT1Key = "dusterTier1";
-	public static final String DustT2Key1 = "dusterTier2-1";
-	public static final String DustT2Key2 = "dusterTier2-2";
-	public static final String KineticToolKey = "kineticTool";
+	public static final class Eureka {
+		public static final String DustT0Key = "dusterTier0";
+		public static final String DustT1Key = "dusterTier1";
+		public static final String DustT2Key1 = "dusterTier2-1";
+		public static final String DustT2Key2 = "dusterTier2-2";
+		public static final String KineticToolKey = "kineticTool";
+	}
+
+	public static final class MOD {
+		public static final String ID = "bcadditions";
+		public static final String NAME = "Buildcraft Additions";
+	}
+
+	public static final class UUIDs {
+		public static final String CORJAANTJE = "209f3364-0042-4d2a-b539-8640e6bbd6c1";
+	}
 
 	//Multiblock identifiers
 	public static final class Identifiers {

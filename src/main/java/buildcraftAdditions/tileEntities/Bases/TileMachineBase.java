@@ -1,12 +1,13 @@
 package buildcraftAdditions.tileEntities.Bases;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
 
-import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -15,8 +16,8 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class TileMachineBase extends TileBase implements IEnergyReceiver {
+	private final int maxEnergy;
 	protected int energy;
-	private int maxEnergy;
 
 	protected TileMachineBase(int maxEnergy) {
 		this.maxEnergy = maxEnergy;

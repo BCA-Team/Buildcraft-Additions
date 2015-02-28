@@ -8,6 +8,7 @@ import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
 
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

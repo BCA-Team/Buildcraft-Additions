@@ -6,6 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.tileEntities.TileBCKinesisPipeWoodPlacer;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -17,6 +18,7 @@ public class BlockBCKinesisPipeWood extends BlockContainer {
 
 	public BlockBCKinesisPipeWood() {
 		super(Material.air);
+		setBlockName("kinesisPipeWood");
 	}
 
 	@Override

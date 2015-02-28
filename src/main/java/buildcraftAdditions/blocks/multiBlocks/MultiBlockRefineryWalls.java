@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileRefinery;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -16,7 +17,7 @@ import buildcraftAdditions.tileEntities.TileRefinery;
 public class MultiBlockRefineryWalls extends MultiBlockBase {
 
 	public MultiBlockRefineryWalls() {
-		super(Variables.Identifiers.REFINERY_WALLS, new MultiBlockPaternRefinery(), "heaterPlating", "heaterSidesMultiblock");
+		super("blockRefineryWalls", Variables.Identifiers.REFINERY_WALLS, new MultiBlockPaternRefinery(), "heaterPlating", "heaterSidesMultiblock");
 	}
 
 	@Override

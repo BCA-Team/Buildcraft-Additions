@@ -2,6 +2,8 @@ package buildcraftAdditions.tileEntities;
 
 import java.util.ArrayList;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -26,7 +28,6 @@ import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
 import buildcraftAdditions.utils.Location;
 
 import eureka.api.EurekaKnowledge;
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -36,8 +37,8 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBlockTile {
+	private final MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.KEBT2);
 	public int energyState;
-	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.KEBT2);
 	public TileKEBT2 master;
 
 	public TileKEBT2() {
@@ -130,9 +131,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 			return super.canConnectEnergy(from);
 		if (master == null)
 			findMaster();
-		if (master == null)
-			return false;
-		return master.canConnectEnergy(from);
+		return master != null && master.canConnectEnergy(from);
 	}
 
 	@Override
@@ -282,8 +281,18 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
+	public void setMasterX(int masterX) {
+		data.masterX = masterX;
+	}
+
+	@Override
 	public int getMasterY() {
 		return data.masterY;
+	}
+
+	@Override
+	public void setMasterY(int masterY) {
+		data.masterY = masterY;
 	}
 
 	@Override
@@ -292,8 +301,18 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
+	public void setMasterZ(int masterZ) {
+		data.masterZ = masterZ;
+	}
+
+	@Override
 	public int getRotationIndex() {
 		return data.rotationIndex;
+	}
+
+	@Override
+	public void setRotationIndex(int rotationIndex) {
+		data.rotationIndex = rotationIndex;
 	}
 
 	@Override
@@ -307,24 +326,9 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
-	public void setMasterX(int masterX) {
-		data.masterX = masterX;
-	}
-
-	@Override
-	public void setMasterY(int masterY) {
-		data.masterY = masterY;
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox() {
 		return AxisAlignedBB.getBoundingBox(xCoord - 2, yCoord - 1, zCoord - 2, xCoord + 2, yCoord + 2, zCoord + 2);
-	}
-
-	@Override
-	public void setMasterZ(int masterZ) {
-		data.masterZ = masterZ;
 	}
 
 	@Override
@@ -335,11 +339,6 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	@Override
 	public void setPartOfMultiBlock(boolean partOfMultiBlock) {
 		data.partOfMultiBlock = partOfMultiBlock;
-	}
-
-	@Override
-	public void setRotationIndex(int rotationIndex) {
-		data.rotationIndex = rotationIndex;
 	}
 
 	public void destruction() {

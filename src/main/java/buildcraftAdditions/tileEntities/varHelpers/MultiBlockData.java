@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities.varHelpers;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -7,8 +9,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.api.networking.ISyncObject;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
-
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -79,9 +79,9 @@ public class MultiBlockData implements ISyncObject {
 			oldmasterX = masterX;
 			oldmasterY = masterY;
 			oldmasterZ = masterZ;
-			masterX = masterX + direction.offsetX;
-			masterY = masterY + direction.offsetY;
-			masterZ = masterZ + direction.offsetZ;
+			masterX += direction.offsetX;
+			masterY += direction.offsetY;
+			masterZ += direction.offsetZ;
 			moved = true;
 		} else {
 			oldmasterX = masterX;

@@ -6,9 +6,10 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.util.ResourceLocation;
 
-import buildcraftAdditions.client.gui.gui.GuiBase;
+import buildcraftAdditions.client.gui.GuiBase;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/

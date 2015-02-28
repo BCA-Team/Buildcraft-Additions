@@ -1,5 +1,7 @@
 package buildcraftAdditions.networking;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.tileentity.TileEntity;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -8,8 +10,6 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 
-
-import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -20,7 +20,8 @@ import io.netty.buffer.ByteBuf;
 public class MessageSelfDestruct implements IMessage, IMessageHandler<MessageSelfDestruct, IMessage> {
 	public int x, y, z;
 
-	public MessageSelfDestruct(){}
+	public MessageSelfDestruct() {
+	}
 
 	public MessageSelfDestruct(int x, int y, int z) {
 		this.x = x;

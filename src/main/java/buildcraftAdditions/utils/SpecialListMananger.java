@@ -3,6 +3,7 @@ package buildcraftAdditions.utils;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
@@ -18,9 +19,9 @@ import buildcraftAdditions.core.Logger;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class SpecialListMananger {
-	protected static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	public static ArrayList<String> greenButtonList = new ArrayList<String>(20);
-	public static HashMap<String, String> specialTexts = new HashMap<String, String>(20);
+	public static final ArrayList<String> greenButtonList = new ArrayList<String>(20);
+	public static final HashMap<String, String> specialTexts = new HashMap<String, String>(20);
+	protected static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 	public static void init() {
 		Thread thread = new SpecialListGetter();
@@ -30,8 +31,7 @@ public class SpecialListMananger {
 	public static void readFile(File file) {
 		try {
 			SpecialList specialList = gson.fromJson(new FileReader(file), SpecialList.class);
-			for (String name : specialList.greenButton)
-				greenButtonList.add(name);
+			Collections.addAll(greenButtonList, specialList.greenButton);
 			int max = specialList.specialTextNames.length;
 			for (int teller = 0; teller < max; teller++)
 				specialTexts.put(specialList.specialTextNames[teller], specialList.specialTexts[teller]);

@@ -2,7 +2,6 @@ package buildcraftAdditions.items.dust;
 
 import net.minecraft.item.ItemStack;
 
-
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.item.dust.IDustType;
 import buildcraftAdditions.reference.ItemsAndBlocks;

@@ -2,8 +2,6 @@ package buildcraftAdditions.blocks;
 
 import java.util.List;
 
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,16 +36,13 @@ import buildcraftAdditions.utils.RenderUtils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockKineticEnergyBufferTier1 extends BlockContainer {
+public class BlockKineticEnergyBufferTier1 extends BlockBase {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon icons[];
 
 	public BlockKineticEnergyBufferTier1() {
-		super(Material.iron);
-		setResistance(2);
-		setHardness(2);
-		setHarvestLevel(null, 0);
+		super("blockKEBT1");
 	}
 
 	@Override
@@ -61,7 +56,7 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (world.getTileEntity(x, y, z) instanceof TileKineticEnergyBufferBase)
 			player.openGui(BuildcraftAdditions.instance, Variables.Gui.KEB.ordinal(), world, x, y, z);
 		return true;
@@ -124,15 +119,12 @@ public class BlockKineticEnergyBufferTier1 extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-		super.getSubBlocks(item, tab, list);
+		list.add(new ItemStack(item));
 		list.add(createCreativeKEB());
 	}
 
 	@Override
-	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-		if (world.getBlockMetadata(x, y, z) == 9) {
-			return createCreativeKEB();
-		}
-		return super.getPickBlock(target, world, x, y, z);
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
+		return world.getBlockMetadata(x, y, z) == 9 ? createCreativeKEB() : super.getPickBlock(target, world, x, y, z, player);
 	}
 }

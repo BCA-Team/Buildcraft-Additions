@@ -30,9 +30,7 @@ import buildcraftAdditions.ModIntegration.imc.IMCSender;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
-import buildcraftAdditions.client.gui.gui.GuiHandler;
 import buildcraftAdditions.config.ConfigurationHandler;
-import buildcraftAdditions.core.BucketHandler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.creative.TabBCAdditions;
@@ -59,15 +57,13 @@ import buildcraftAdditions.utils.SpecialListMananger;
 @Mod(modid = Variables.MOD.ID, name = Variables.MOD.NAME, version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "after:BuildCraft|Energy;before:zCraftingManager;required-after:Forge@[10.13.2.1230,)", acceptedMinecraftVersions = "1.7.10")
 public class BuildcraftAdditions {
 
+	public static final CreativeTabs bcadditions = new TabBCAdditions();
+	public static final CreativeTabs bcaCannisters = new TabCanisters();
+	public static final CreativeTabs bcaDusts = new TabDusts();
 	@Mod.Instance(Variables.MOD.ID)
 	public static BuildcraftAdditions instance;
-
 	@SidedProxy(clientSide = "buildcraftAdditions.proxy.ClientProxy", serverSide = "buildcraftAdditions.proxy.CommonProxy")
 	public static CommonProxy proxy;
-
-	public static CreativeTabs bcadditions = new TabBCAdditions();
-	public static CreativeTabs bcaCannisters = new TabCanisters();
-	public static CreativeTabs bcaDusts = new TabDusts();
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -88,10 +84,9 @@ public class BuildcraftAdditions {
 	@Mod.EventHandler
 	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
-		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 		FMLCommonHandler.instance().bus().register(new EventListener.FML());
 		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
-		BucketHandler.register();
 		IMCSender.sendMessages();
 		ItemsAndBlocks.registerTileEntities();
 
@@ -158,7 +153,6 @@ public class BuildcraftAdditions {
 				if (mapping.name.toLowerCase().contains(name)) {
 					mapping.remap(GameRegistry.findItem(Variables.MOD.ID, "converter" + name));
 					iterator.remove();
-					continue;
 				}
 			}
 		}

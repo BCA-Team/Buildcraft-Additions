@@ -2,6 +2,8 @@ package buildcraftAdditions.tileEntities.Bases;
 
 import java.util.UUID;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -27,8 +29,6 @@ import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.utils.PlayerUtils;
 import buildcraftAdditions.utils.Utils;
 
-import io.netty.buffer.ByteBuf;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -38,12 +38,12 @@ import io.netty.buffer.ByteBuf;
  */
 public abstract class TileKineticEnergyBufferBase extends TileBase implements IEnergyReceiver, IEnergyProvider, IConfigurableOutput, ISyncronizedTile, IOwnableMachine {
 
+	public final int tier;
 	protected final SideConfiguration configuration = new SideConfiguration();
+	protected final boolean[] blocked = new boolean[6];
 	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
-	public int tier;
 	public boolean selfDestruct, engineControl;
 	public EntityPlayer destroyer;
-	protected boolean[] blocked = new boolean[6];
 	private UUID owner;
 
 
@@ -137,7 +137,7 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 		if (fuse <= 0 && selfDestruct)
 			byeBye();
 		if (ConfigurationHandler.powerloss)
-			energy = energy - loss;
+			energy -= loss;
 		if (energy < 0)
 			energy = 0;
 		outputEnergy();

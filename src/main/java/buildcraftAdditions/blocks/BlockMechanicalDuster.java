@@ -12,8 +12,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
@@ -30,8 +28,12 @@ public class BlockMechanicalDuster extends BlockBase {
 	@SideOnly(Side.CLIENT)
 	private IIcon front, sides, bottom, top[];
 
+	public BlockMechanicalDuster() {
+		super("blockDusterMechanical");
+	}
+
 	@Override
-	public TileEntity createNewTileEntity(World world, int getal) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileMechanicalDuster();
 	}
 
@@ -41,8 +43,7 @@ public class BlockMechanicalDuster extends BlockBase {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (player.isSneaking())
 			return false;
 		TileMechanicalDuster duster = (TileMechanicalDuster) world.getTileEntity(x, y, z);
@@ -66,12 +67,8 @@ public class BlockMechanicalDuster extends BlockBase {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack stack) {
-		super.onBlockPlacedBy(world, i, j, k, entityliving, stack);
-
-		ForgeDirection orientation = Utils.get2dOrientation(entityliving);
-		world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(), 1);
-
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+		world.setBlockMetadataWithNotify(x, y, z, Utils.get2dOrientation(entity).getOpposite().ordinal(), 1);
 	}
 
 	@Override
@@ -101,7 +98,6 @@ public class BlockMechanicalDuster extends BlockBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		// If no metadata is set, then this is an icon.
 		if (meta == 0 && side == 3)
 			return front;
 

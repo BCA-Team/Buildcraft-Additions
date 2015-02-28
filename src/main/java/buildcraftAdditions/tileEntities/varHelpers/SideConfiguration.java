@@ -2,6 +2,8 @@ package buildcraftAdditions.tileEntities.varHelpers;
 
 import java.util.Arrays;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.Constants;
@@ -11,8 +13,6 @@ import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import buildcraftAdditions.api.networking.ISyncObject;
-
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise

@@ -1,6 +1,7 @@
 package buildcraftAdditions.api.configurableOutput;
 
 import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

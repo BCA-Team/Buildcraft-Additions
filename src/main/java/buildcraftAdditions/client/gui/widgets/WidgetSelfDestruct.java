@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.util.ResourceLocation;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.client.gui.gui.GuiBase;
+import buildcraftAdditions.client.gui.GuiBase;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.PlayerUtils;
 import buildcraftAdditions.utils.RenderUtils;

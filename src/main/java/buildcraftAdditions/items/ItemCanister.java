@@ -44,16 +44,6 @@ public class ItemCanister extends ItemFluidContainer {
 		setTextureName("bcadditions:" + name);
 	}
 
-	public void setFluid(ItemStack stack, FluidStack fStack) {
-		if (stack == null)
-			return;
-		if (!(stack.getItem() instanceof ItemCanister))
-			return;
-		ItemCanister canister = (ItemCanister) stack.getItem();
-		canister.drain(stack, canister.getFluid(stack).amount, true);
-		canister.fill(stack, fStack, true);
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean visible) {

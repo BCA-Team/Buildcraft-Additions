@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities.Bases;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,8 +17,6 @@ import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.utils.Utils;
-
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -53,11 +53,6 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 	@Override
 	public void changeStatus(ForgeDirection side) {
 		configuration.changeStatus(side);
-	}
-
-	@Override
-	public void setSideConfiguration(SideConfiguration configuration) {
-		this.configuration.load(configuration);
 	}
 
 	@Override
@@ -159,5 +154,10 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 	@Override
 	public SideConfiguration getSideConfiguration() {
 		return configuration;
+	}
+
+	@Override
+	public void setSideConfiguration(SideConfiguration configuration) {
+		this.configuration.load(configuration);
 	}
 }

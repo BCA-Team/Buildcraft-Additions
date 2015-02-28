@@ -2,6 +2,8 @@ package buildcraftAdditions.tileEntities;
 
 import java.util.ArrayList;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -19,8 +21,6 @@ import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.interfaces.IWidgetListener;
 
-import io.netty.buffer.ByteBuf;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -30,20 +30,10 @@ import io.netty.buffer.ByteBuf;
  */
 public class TileItemSorter extends TileBase implements ISidedInventory, IPipeConnection, IWidgetListener {
 
+	protected final CustomInventory inventory = new CustomInventory("ItemSorter", 49, 64, this);
+	public byte[] colors = new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
 	protected ForgeDirection rotation = ForgeDirection.UP;
-	protected CustomInventory inventory = new CustomInventory("ItemSorter", 49, 64, this);
 	protected boolean reloadRotation = false;
-
-	public byte[] colors = new byte[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-	public void setRotation(ForgeDirection dir) {
-		rotation = dir;
-		if (worldObj != null) {
-			updateBlock();
-			notifyNeighborBlockUpdate();
-			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, dir.ordinal(), 3);
-		}
-	}
 
 	@Override
 	public void updateEntity() {
@@ -76,9 +66,7 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 	}
 
 	private boolean areStackEqual(ItemStack stack1, ItemStack stack2) {
-		if (stack1 != null && stack1.getItem() instanceof ItemList && ItemList.matches(stack1, stack2))
-			return true;
-		return stack1 == null && stack2 == null || !(stack1 == null || stack2 == null) && stack1.getItem() == stack2.getItem() && stack1.getItemDamage() == stack2.getItemDamage() && !(stack1.stackTagCompound == null && stack2.stackTagCompound != null) && (stack1.stackTagCompound == null || stack1.stackTagCompound.equals(stack2.stackTagCompound));
+		return stack1 != null && stack1.getItem() instanceof ItemList && ItemList.matches(stack1, stack2) || stack1 == null && stack2 == null || !(stack1 == null || stack2 == null) && stack1.getItem() == stack2.getItem() && stack1.getItemDamage() == stack2.getItemDamage() && !(stack1.stackTagCompound == null && stack2.stackTagCompound != null) && (stack1.stackTagCompound == null || stack1.stackTagCompound.equals(stack2.stackTagCompound));
 	}
 
 	private TileEntity getTileFromDirection(ForgeDirection dir) {
@@ -97,6 +85,15 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 		return rotation;
 	}
 
+	public void setRotation(ForgeDirection dir) {
+		rotation = dir;
+		if (worldObj != null) {
+			updateBlock();
+			notifyNeighborBlockUpdate();
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, dir.ordinal(), 3);
+		}
+	}
+
 	public ForgeDirection getEnterSide() {
 		return rotation.getOpposite();
 	}
@@ -109,13 +106,14 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 		if (!worldObj.isRemote)
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
+
 	protected void notifyNeighborBlockUpdate() {
 		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, getBlockType());
 	}
 
 	protected void updateRender() {
 		if (worldObj.isRemote)
-			worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord , yCoord, zCoord);
+			worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -158,7 +156,7 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {
-		return side == getEnterSide().ordinal() ? new int[] {0} : new int[] {};
+		return side == getEnterSide().ordinal() ? new int[]{0} : new int[0];
 	}
 
 	@Override

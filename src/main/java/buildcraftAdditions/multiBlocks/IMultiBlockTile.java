@@ -3,6 +3,7 @@ package buildcraftAdditions.multiBlocks;
 import net.minecraft.entity.player.EntityPlayer;
 
 import net.minecraftforge.common.util.ForgeDirection;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -28,25 +29,25 @@ public interface IMultiBlockTile {
 
 	public int getMasterX();
 
+	public void setMasterX(int masterX);
+
 	public int getMasterY();
+
+	public void setMasterY(int masterY);
 
 	public int getMasterZ();
 
+	public void setMasterZ(int masterZ);
+
 	public int getRotationIndex();
+
+	public void setRotationIndex(int rotationIndex);
 
 	public boolean isMaster();
 
 	public boolean isPartOfMultiblock();
 
-	public void setMasterX(int masterX);
-
-	public void setMasterY(int masterY);
-
-	public void setMasterZ(int masterZ);
-
 	public void setIsMaster(boolean isMaster);
 
 	public void setPartOfMultiBlock(boolean partOfMultiBlock);
-
-	public void setRotationIndex(int rotationIndex);
 }

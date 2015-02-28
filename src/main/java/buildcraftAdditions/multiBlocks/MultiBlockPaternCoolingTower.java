@@ -9,6 +9,7 @@ import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileCoolingTower;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.RotationUtils;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -44,7 +45,7 @@ public class MultiBlockPaternCoolingTower extends MultiBlockPatern {
 			}
 		}
 		if (valid) {
-			rotatedDirections = RotationUtils.rotateDirections(directions, rotation);
+			rotatedDirections = RotationUtils.rotateDirections(rotation, directions);
 			Location location = new Location(world, x, y, z);
 			int t = 0;
 			for (ForgeDirection direction : rotatedDirections) {

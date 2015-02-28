@@ -19,8 +19,13 @@ import buildcraftAdditions.utils.Utils;
  */
 public abstract class BlockBase extends BlockContainer {
 
-	public BlockBase() {
+	protected final String name;
+
+	public BlockBase(String name) {
 		super(Material.iron);
+		this.name = name;
+		setBlockName(name);
+		setBlockTextureName("bcadditions:" + name);
 		setHardness(5F);
 		setResistance(10F);
 		setCreativeTab(BuildcraftAdditions.bcadditions);
@@ -31,9 +36,7 @@ public abstract class BlockBase extends BlockContainer {
 		IInventory inventory = (IInventory) world.getTileEntity(x, y, z);
 		if (inventory != null) {
 			inventory.openInventory();
-
 			for (int t = 0; t < inventory.getSizeInventory(); t++) {
-
 				ItemStack stack = inventory.getStackInSlot(t);
 				if (stack != null) {
 					inventory.setInventorySlotContents(t, null);

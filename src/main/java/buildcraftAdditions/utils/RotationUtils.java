@@ -1,6 +1,7 @@
 package buildcraftAdditions.utils;
 
 import net.minecraftforge.common.util.ForgeDirection;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -10,7 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class RotationUtils {
 
-	public static ForgeDirection[] rotateDirections(ForgeDirection[] directions, int rotationIndex) {
+	public static ForgeDirection[] rotateDirections(int rotationIndex, ForgeDirection... directions) {
 		int length = directions.length;
 		ForgeDirection[] rotatedDirections = new ForgeDirection[length];
 		for (int t = 0; t < length; t++) {

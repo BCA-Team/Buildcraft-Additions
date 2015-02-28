@@ -6,6 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.tileEntities.TileBCKinesisPipeStonePlacer;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -17,6 +18,7 @@ public class BlockBCKinisisPipeStone extends BlockContainer {
 
 	public BlockBCKinisisPipeStone() {
 		super(Material.air);
+		setBlockName("kinesisPipeCobble");
 	}
 
 	@Override

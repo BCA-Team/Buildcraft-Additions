@@ -2,7 +2,7 @@ package buildcraftAdditions.client.gui.widgets;
 
 import net.minecraft.util.ResourceLocation;
 
-import buildcraftAdditions.client.gui.gui.GuiBase;
+import buildcraftAdditions.client.gui.GuiBase;
 
 /**
  * Copyright (c) 2014, AEnterprise

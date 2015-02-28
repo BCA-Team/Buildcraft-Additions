@@ -21,7 +21,7 @@ public class CustomInventory implements IInventory {
 	private final ItemStack[] itemStacks;
 	private final String name;
 	private final int stackLimit;
-	private TileEntity entity;
+	private final TileEntity entity;
 
 	public CustomInventory(String name, int slots, int stackLimit, TileEntity entity) {
 		this.name = name;
@@ -73,8 +73,7 @@ public class CustomInventory implements IInventory {
 	public ItemStack decrStackSize(int slot, int amount) {
 		if (slot < itemStacks.length && itemStacks[slot] != null) {
 			if (itemStacks[slot].stackSize > amount) {
-				ItemStack result = itemStacks[slot].splitStack(amount);
-				return result;
+				return itemStacks[slot].splitStack(amount);
 			}
 			ItemStack stack = itemStacks[slot];
 			setInventorySlotContents(slot, null);

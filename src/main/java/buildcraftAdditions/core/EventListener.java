@@ -48,35 +48,34 @@ public class EventListener {
 
 		@SubscribeEvent
 		public void playerLogin(PlayerLoggedInEvent event) {
-			//version check stuff
 			if (VersionCheck.newerVersionAvailable && event != null) {
 				event.player.addChatComponentMessage(new ChatComponentText("There is a newer version of Buildcraft Additions available (" + VersionCheck.newerVersionNumber + ") Please consider updating"));
 				if (!ConfigurationHandler.shouldPrintChangelog)
 					return;
 				event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("changelogNotification") + ": "));
-				for (int t = 0; t < VersionCheck.numLines; t++) {
-
-					event.player.addChatComponentMessage(new ChatComponentText("- " + VersionCheck.changelog[t]));
-				}
+				for (String s : VersionCheck.changelog)
+					event.player.addChatComponentMessage(new ChatComponentText("- " + s));
 			}
 
 		}
 
 		@SubscribeEvent
 		public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-			if (event.modID.equals("bcadditions"))
+			if (event.modID.equalsIgnoreCase(Variables.MOD.ID))
 				ConfigurationHandler.readConfig();
 		}
 
 		@SubscribeEvent
 		public void onCrafted(PlayerEvent.ItemCraftedEvent event) {
-			if (event.crafting.getItem().isItemTool(event.crafting))
-				EurekaKnowledge.makeProgress(event.player, Variables.KineticToolKey, 1);
-			if (event.craftMatrix != null && event.crafting != null && event.crafting.getItem() != null && event.crafting.getItem() instanceof ItemKineticMultiTool) {
-				for (int i = 0; i < event.craftMatrix.getSizeInventory(); i++) {
-					ItemStack stack = event.craftMatrix.getStackInSlot(i);
-					if (stack != null && stack.getItem() != null && stack.getItem() instanceof ItemKineticTool) {
-						event.crafting.stackTagCompound = stack.stackTagCompound;
+			if (event.crafting != null && event.crafting.getItem() != null && event.craftMatrix != null) {
+				if (event.crafting.getItem().isItemTool(event.crafting))
+					EurekaKnowledge.makeProgress(event.player, Variables.Eureka.KineticToolKey, 1);
+				if (event.crafting.getItem() instanceof ItemKineticMultiTool) {
+					for (int i = 0; i < event.craftMatrix.getSizeInventory(); i++) {
+						ItemStack stack = event.craftMatrix.getStackInSlot(i);
+						if (stack != null && stack.getItem() != null && stack.getItem() instanceof ItemKineticTool) {
+							event.crafting.stackTagCompound = stack.stackTagCompound;
+						}
 					}
 				}
 			}
@@ -93,8 +92,7 @@ public class EventListener {
 
 		@SubscribeEvent
 		public void onGettingAchievement(AchievementEvent event) {
-			//unlock basic duster
-			EurekaKnowledge.makeProgress(event.entityPlayer, Variables.DustT0Key, 1);
+			EurekaKnowledge.makeProgress(event.entityPlayer, Variables.Eureka.DustT0Key, 1);
 		}
 
 		@SubscribeEvent
@@ -118,15 +116,14 @@ public class EventListener {
 					}
 				}
 			} else if (event.entityPlayer != null && event.action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem() == ItemsAndBlocks.machineConfigurator) {
-
-				TileEntity entity = event.world.getTileEntity(event.x, event.y, event.z);
-				if (entity != null && entity instanceof IUpgradableMachine)
-					((IUpgradableMachine) entity).removeUpgrade();
+				TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
+				if (tile != null && tile instanceof IUpgradableMachine)
+					((IUpgradableMachine) tile).removeUpgrade();
 			}
 		}
 
-		@SideOnly(Side.CLIENT)
 		@SubscribeEvent
+		@SideOnly(Side.CLIENT)
 		public void textures(TextureStitchEvent.Post event) {
 			if (event.map.getTextureType() == 0) {
 				for (int t = 0; t < RefineryRecipeConverter.inputs.length; t++) {

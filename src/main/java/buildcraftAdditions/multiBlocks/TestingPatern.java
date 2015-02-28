@@ -36,7 +36,7 @@ public class TestingPatern {
 		int length = directions.length;
 		String identifiers[] = new String[length];
 		int rotation = 3;
-		directions = RotationUtils.rotateDirections(directions, rotation);
+		directions = RotationUtils.rotateDirections(rotation, directions);
 		Arrays.fill(identifiers, "walls");
 		blocks.put("walls", ItemsAndBlocks.coolingTowerWalls);
 		blocks.put("valve", ItemsAndBlocks.coolingTowerValve);

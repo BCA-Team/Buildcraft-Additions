@@ -8,6 +8,7 @@ import buildcraft.api.blueprints.IBuilderContext;
 import buildcraft.builders.schematics.SchematicPiston;
 
 import buildcraftAdditions.reference.ItemsAndBlocks;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/

@@ -17,7 +17,6 @@ import buildcraftAdditions.utils.Utils;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-
 import static codechicken.lib.gui.GuiDraw.changeTexture;
 import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
 
@@ -96,7 +95,7 @@ public class DustingRecipeHandler extends TemplateRecipeHandler {
 
 	public class CachedDustingRecipe extends CachedRecipe {
 
-		PositionedStack input, output;
+		public final PositionedStack input, output;
 
 		public CachedDustingRecipe(ItemStack ingred, ItemStack result) {
 			ingred.stackSize = 1;

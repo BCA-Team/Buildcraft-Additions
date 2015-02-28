@@ -22,9 +22,9 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class BasicTrigger implements ITriggerExternal {
+	private final String name, iconName;
 	@SideOnly(Side.CLIENT)
 	private IIcon icon;
-	private String name, iconName;
 
 	public BasicTrigger(String name) {
 		this(name, name);

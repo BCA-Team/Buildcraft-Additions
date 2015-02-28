@@ -17,8 +17,8 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class DusterRecipeOreDict implements IDusterRecipe {
-	private String input;
-	private ItemStack output;
+	private final String input;
+	private final ItemStack output;
 
 	public DusterRecipeOreDict(String input, ItemStack output) {
 		this.input = new String(input.toCharArray());

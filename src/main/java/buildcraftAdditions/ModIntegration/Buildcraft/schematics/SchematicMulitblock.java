@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import net.minecraft.item.ItemStack;
 
 import buildcraft.api.blueprints.IBuilderContext;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/

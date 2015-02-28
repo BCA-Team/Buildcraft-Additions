@@ -42,7 +42,7 @@ public class IMCHandler {
 				}
 
 				NBTTagCompound tag = message.getNBTValue();
-				if (!checkRequiredNBTTags(message, tag, "Input", "Output", Constants.NBT.TAG_COMPOUND))
+				if (hasNotAllRequiredTags(message, tag, "Input", "Output", Constants.NBT.TAG_COMPOUND))
 					continue;
 
 				ItemStack output = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("Output"));
@@ -54,22 +54,16 @@ public class IMCHandler {
 					String oreInput = tag.getString("Input");
 					if (!Strings.isNullOrEmpty(oreInput))
 						BCARecipeManager.duster.addRecipe(oreInput, output);
-					else {
+					else
 						logWrongNBT(message);
-						continue;
-					}
 				} else if (tag.hasKey("Input", Constants.NBT.TAG_COMPOUND)) {
 					ItemStack input = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("Input"));
 					if (input != null)
 						BCARecipeManager.duster.addRecipe(input, output);
-					else {
+					else
 						logWrongNBT(message);
-						continue;
-					}
-				} else {
+				} else
 					logError(message, "Missing required NBT Tag 'Input' of type STRING or TAG_COMPOUND!");
-					continue;
-				}
 			} else if (type.equalsIgnoreCase("addCoolingTowerRecipe")) {
 				if (!message.isNBTMessage()) {
 					logNotNBT(message);
@@ -77,7 +71,7 @@ public class IMCHandler {
 				}
 
 				NBTTagCompound tag = message.getNBTValue();
-				if (!checkRequiredNBTTags(message, tag, "Input", Constants.NBT.TAG_COMPOUND, "Output", Constants.NBT.TAG_COMPOUND, "Heat", Constants.NBT.TAG_FLOAT))
+				if (hasNotAllRequiredTags(message, tag, "Input", Constants.NBT.TAG_COMPOUND, "Output", Constants.NBT.TAG_COMPOUND, "Heat", Constants.NBT.TAG_FLOAT))
 					continue;
 
 				FluidStack input = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Input"));
@@ -98,7 +92,7 @@ public class IMCHandler {
 				}
 
 				NBTTagCompound tag = message.getNBTValue();
-				if (!checkRequiredNBTTags(message, tag, "Input", Constants.NBT.TAG_COMPOUND, "Output", Constants.NBT.TAG_COMPOUND, "RequiredHeat", Constants.NBT.TAG_INT))
+				if (hasNotAllRequiredTags(message, tag, "Input", Constants.NBT.TAG_COMPOUND, "Output", Constants.NBT.TAG_COMPOUND, "RequiredHeat", Constants.NBT.TAG_INT))
 					continue;
 
 				FluidStack input = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Input"));
@@ -119,7 +113,7 @@ public class IMCHandler {
 				}
 
 				NBTTagCompound tag = message.getNBTValue();
-				if (!checkRequiredNBTTags(message, tag, "Input", Constants.NBT.TAG_COMPOUND))
+				if (hasNotAllRequiredTags(message, tag, "Input", Constants.NBT.TAG_COMPOUND))
 					continue;
 
 				ItemStack input = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("Input"));
@@ -135,7 +129,7 @@ public class IMCHandler {
 				}
 
 				NBTTagCompound tag = message.getNBTValue();
-				if (!checkRequiredNBTTags(message, tag, "Input", Constants.NBT.TAG_COMPOUND))
+				if (hasNotAllRequiredTags(message, tag, "Input", Constants.NBT.TAG_COMPOUND))
 					continue;
 
 				FluidStack input = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Input"));
@@ -151,7 +145,7 @@ public class IMCHandler {
 				}
 
 				NBTTagCompound tag = message.getNBTValue();
-				if (!checkRequiredNBTTags(message, tag, "Input", Constants.NBT.TAG_COMPOUND))
+				if (hasNotAllRequiredTags(message, tag, "Input", Constants.NBT.TAG_COMPOUND))
 					continue;
 
 				FluidStack input = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Input"));
@@ -167,7 +161,7 @@ public class IMCHandler {
 				}
 
 				NBTTagCompound tag = message.getNBTValue();
-				if (!checkRequiredNBTTags(message, tag, "Meta", Constants.NBT.TAG_INT, "Name", Constants.NBT.TAG_STRING, "ColorMultiplier", Constants.NBT.TAG_INT))
+				if (hasNotAllRequiredTags(message, tag, "Meta", Constants.NBT.TAG_INT, "Name", Constants.NBT.TAG_STRING, "ColorMultiplier", Constants.NBT.TAG_INT))
 					continue;
 
 				BCAItemManager.dusts.addDust(tag.getInteger("Meta"), tag.getString("Name"), tag.getInteger("ColorMultiplier"), DustTypes.METAL_DUST);
@@ -178,7 +172,7 @@ public class IMCHandler {
 				}
 
 				NBTTagCompound tag = message.getNBTValue();
-				if (!checkRequiredNBTTags(message, tag, "Meta", Constants.NBT.TAG_INT, "Name", Constants.NBT.TAG_STRING, "ColorMultiplier", Constants.NBT.TAG_INT))
+				if (hasNotAllRequiredTags(message, tag, "Meta", Constants.NBT.TAG_INT, "Name", Constants.NBT.TAG_STRING, "ColorMultiplier", Constants.NBT.TAG_INT))
 					continue;
 
 				BCAItemManager.dusts.addDust(tag.getInteger("Meta"), tag.getString("Name"), tag.getInteger("ColorMultiplier"), DustTypes.GEM_DUST);
@@ -189,7 +183,7 @@ public class IMCHandler {
 				}
 
 				NBTTagCompound tag = message.getNBTValue();
-				if (!checkRequiredNBTTags(message, tag, "Meta", Constants.NBT.TAG_INT, "Name", Constants.NBT.TAG_STRING, "ColorMultiplier", Constants.NBT.TAG_INT, "DustType", Constants.NBT.TAG_STRING))
+				if (hasNotAllRequiredTags(message, tag, "Meta", Constants.NBT.TAG_INT, "Name", Constants.NBT.TAG_STRING, "ColorMultiplier", Constants.NBT.TAG_INT, "DustType", Constants.NBT.TAG_STRING))
 					continue;
 
 				String className = tag.getString("DustType");
@@ -252,16 +246,17 @@ public class IMCHandler {
 	}
 
 	private static void logError(FMLInterModComms.IMCMessage message, String string, Object... args) {
-		Object[] formatArgs = new Object[(args != null ? args.length : 0) + 2];
-		formatArgs[0] = message.key;
-		formatArgs[1] = message.getSender();
-		for (int i = 2; i < formatArgs.length; i++)
-			formatArgs[i] = args[i - 2];
-		logError(message, String.format(string, formatArgs));
+		if (args != null) {
+			Object[] formatArgs = new Object[args.length + 2];
+			formatArgs[0] = message.key;
+			formatArgs[1] = message.getSender();
+			System.arraycopy(args, 0, formatArgs, 2, formatArgs.length - 2);
+			logError(message, String.format(string, formatArgs));
+		}
 	}
 
-	private static boolean checkRequiredNBTTags(FMLInterModComms.IMCMessage message, NBTTagCompound tag, Object... requiredArgs) {
-		boolean fine = true;
+	private static boolean hasNotAllRequiredTags(FMLInterModComms.IMCMessage message, NBTTagCompound tag, Object... requiredArgs) {
+		boolean error = false;
 		for (int i = 0; i < requiredArgs.length; i++) {
 			Object o = requiredArgs[i];
 			if (o == null || !(o instanceof String))
@@ -274,17 +269,17 @@ public class IMCHandler {
 				int tagTypeCode = (Integer) tagType;
 				if (!tag.hasKey(tagKey, tagTypeCode)) {
 					logError(message, "Missing required NBT Tag '%s' of type %d!", tagKey, tagTypeCode);
-					fine = false;
+					error = true;
 				}
 			} else {
 				if (!tag.hasKey(tagKey)) {
 					logError(message, "Missing required NBT Tag '%s'!", tagKey);
-					fine = false;
+					error = true;
 				}
 			}
 		}
 
-		return fine;
+		return error;
 	}
 
 }

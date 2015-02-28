@@ -29,8 +29,13 @@ public class UpgradeRecipeStick extends IntegrationTableRecipe {
 		this.inputStickOreDictName = inputStickOreDictName;
 		this.prevStickName = prevStickName;
 		Object[] inputs = new Object[chipsets != null ? chipsets.length : 0];
-		for (int i = 0; i < inputs.length; i++)
-			inputs[i] = chipsets[i].getStack();
+		if (chipsets != null) {
+			for (int i = 0; i < inputs.length; i++) {
+				ItemRedstoneChipset.Chipset chipset = chipsets[i];
+				if (chipset != null)
+					inputs[i] = chipset.getStack();
+			}
+		}
 		setContents(Variables.MOD.ID + ":" + stickName, ItemsAndBlocks.itemKineticMultiTool, 10000, 60, inputs);
 	}
 

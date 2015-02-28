@@ -24,8 +24,6 @@ public class TriggerCanisterRequested extends BasicTrigger {
 
 	@Override
 	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
-		if ((target instanceof TileFluidicCompressor))
-			return ((TileFluidicCompressor) target).getStackInSlot(0) == null;
-		return false;
+		return (target instanceof TileFluidicCompressor) && ((TileFluidicCompressor) target).getStackInSlot(0) == null;
 	}
 }

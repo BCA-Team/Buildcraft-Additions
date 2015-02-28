@@ -18,10 +18,10 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileBasicDuster extends TileBaseDuster {
-	public CustomInventory inventory = new CustomInventory("Duster", 1, 1, this);
+	public final CustomInventory inventory = new CustomInventory("Duster", 1, 1, this);
 
 	public TileBasicDuster() {
-		super(Variables.DustT1Key);
+		super(Variables.Eureka.DustT1Key);
 	}
 
 	@Override

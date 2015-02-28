@@ -4,15 +4,16 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableSet;
+
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.Constants;
 
 import buildcraftAdditions.api.networking.ISyncObject;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
-
-import com.google.common.collect.ImmutableSet;
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -22,7 +23,7 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class Upgrades implements ISyncObject {
-	private EnumSet<EnumMachineUpgrades> upgrades, whitelist, blacklist;
+	private final EnumSet<EnumMachineUpgrades> upgrades, whitelist, blacklist;
 	private int maxUpgrades;
 
 	public Upgrades(int maxUpgrades) {
@@ -38,15 +39,7 @@ public class Upgrades implements ISyncObject {
 	}
 
 	public boolean canInstallUpgrade(EnumMachineUpgrades upgrade) {
-		if (upgrades.size() >= maxUpgrades)
-			return false;
-		if (upgrades.contains(upgrade) && !upgrade.canBeInstalledMultipleTimes())
-			return false;
-		if (blacklist.contains(upgrade))
-			return false;
-		if (!whitelist.isEmpty() && !whitelist.contains(upgrade))
-			return false;
-		return true;
+		return upgrades.size() < maxUpgrades && (!upgrades.contains(upgrade) || upgrade.canBeInstalledMultipleTimes()) && !blacklist.contains(upgrade) && (whitelist.isEmpty() || whitelist.contains(upgrade));
 	}
 
 	public Upgrades blacklistUpgrade(EnumMachineUpgrades upgrade) {
@@ -82,8 +75,7 @@ public class Upgrades implements ISyncObject {
 	public ByteBuf writeToByteBuff(ByteBuf buf) {
 		buf.writeInt(maxUpgrades);
 		buf.writeInt(upgrades.size());
-		for (Iterator<EnumMachineUpgrades> it = upgrades.iterator(); it.hasNext(); )
-			buf.writeInt(it.next().ordinal());
+		for (EnumMachineUpgrades upgrade : upgrades) buf.writeInt(upgrade.ordinal());
 		return buf;
 	}
 

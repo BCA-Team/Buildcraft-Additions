@@ -64,32 +64,32 @@ public class PlayerUtils {
 
 	public static boolean playerMatches(UUID uuid, String name) {
 		UUID playerUUID = getPlayerUUID(name);
-		return playerUUID != null ? playerUUID.equals(uuid) : false;
+		return playerUUID != null && playerUUID.equals(uuid);
 	}
 
 	public static boolean playerMatches(IOwnableMachine tile, String name) {
 		UUID playerUUID = getPlayerUUID(name);
-		return playerUUID != null ? playerUUID.equals(tile.getOwner()) : false;
+		return playerUUID != null && playerUUID.equals(tile.getOwner());
 	}
 
 	public static boolean playerMatches(UUID uuid, EntityPlayer player) {
 		UUID playerUUID = getPlayerUUID(player);
-		return playerUUID != null ? playerUUID.equals(uuid) : false;
+		return playerUUID != null && playerUUID.equals(uuid);
 	}
 
 	public static boolean playerMatches(IOwnableMachine tile, EntityPlayer player) {
 		UUID playerUUID = getPlayerUUID(player);
-		return playerUUID != null ? playerUUID.equals(tile.getOwner()) : false;
+		return playerUUID != null && playerUUID.equals(tile.getOwner());
 	}
 
 	public static boolean playerMatches(String uuid, String name) {
 		UUID playerUUID = getPlayerUUID(name);
-		return playerUUID != null ? playerUUID.equals(getUUID(uuid)) : false;
+		return playerUUID != null && playerUUID.equals(getUUID(uuid));
 	}
 
 	public static boolean playerMatches(String uuid, EntityPlayer player) {
 		UUID playerUUID = getPlayerUUID(player);
-		return playerUUID != null ? playerUUID.equals(getUUID(uuid)) : false;
+		return playerUUID != null && playerUUID.equals(getUUID(uuid));
 	}
 
 	public static EntityPlayer getPlayer(String name) {
@@ -116,7 +116,7 @@ public class PlayerUtils {
 
 
 	public static boolean isUUIDString(String uuid) {
-		return uuid != null ? uuidPattern.matcher(uuid).matches() : false;
+		return uuid != null && uuidPattern.matcher(uuid).matches();
 	}
 
 	public static void writeToNBT(NBTTagCompound nbt, UUID uuid) {

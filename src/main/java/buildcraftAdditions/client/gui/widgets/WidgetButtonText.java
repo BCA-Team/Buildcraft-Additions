@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.util.ResourceLocation;
 
-import buildcraftAdditions.client.gui.gui.GuiBase;
+import buildcraftAdditions.client.gui.GuiBase;
 import buildcraftAdditions.utils.RenderUtils;
 
 /**
@@ -15,11 +15,11 @@ import buildcraftAdditions.utils.RenderUtils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class WidgetButtonText extends WidgetBase {
-	public static ResourceLocation LEFT = new ResourceLocation("bcadditions:textures/gui/button1Left.png");
-	public static ResourceLocation RIGHT = new ResourceLocation("bcadditions:textures/gui/button1Right.png");
-	public static ResourceLocation MIDDLE = new ResourceLocation("bcadditions:textures/gui/button1CenterPart.png");
-	public static ResourceLocation MIDDLESIDEHOVER = new ResourceLocation("bcadditions:textures/gui/button1CenterSidesOnHover.png");
-	public static ResourceLocation MIDDLEHOVER = new ResourceLocation("bcadditions:textures/gui/button1CenterOnHover.png");
+	public static final ResourceLocation LEFT = new ResourceLocation("bcadditions:textures/gui/button1Left.png");
+	public static final ResourceLocation RIGHT = new ResourceLocation("bcadditions:textures/gui/button1Right.png");
+	public static final ResourceLocation MIDDLE = new ResourceLocation("bcadditions:textures/gui/button1CenterPart.png");
+	public static final ResourceLocation MIDDLESIDEHOVER = new ResourceLocation("bcadditions:textures/gui/button1CenterSidesOnHover.png");
+	public static final ResourceLocation MIDDLEHOVER = new ResourceLocation("bcadditions:textures/gui/button1CenterOnHover.png");
 	private String text;
 	private int color;
 	private boolean shouldRender = true;

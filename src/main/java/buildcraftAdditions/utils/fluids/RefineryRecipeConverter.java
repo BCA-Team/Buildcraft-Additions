@@ -35,14 +35,13 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class RefineryRecipeConverter {
-	private static CraftingResult<FluidStack>[] results;
 	public static FluidStack[] inputs, outputs, gasses;
 
 	public static void doYourThing() {
 		int teller = 0;
 		int fluids = FluidRegistry.getRegisteredFluids().size();
 
-		results = new CraftingResult[fluids];
+		CraftingResult<FluidStack>[] results = new CraftingResult[fluids];
 		inputs = new FluidStack[fluids];
 		outputs = new FluidStack[fluids];
 		gasses = new FluidStack[fluids];

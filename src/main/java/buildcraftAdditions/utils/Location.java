@@ -5,6 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.util.ForgeDirection;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -13,8 +14,8 @@ import net.minecraftforge.common.util.ForgeDirection;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class Location {
+	public final World world;
 	public int x, y, z;
-	public World world;
 
 	public Location(World world, int x, int y, int z) {
 		this.x = x;
@@ -34,18 +35,18 @@ public class Location {
 		return new Location(world, x, y, z);
 	}
 
-	public Location move (ForgeDirection direction) {
+	public Location move(ForgeDirection direction) {
 		return move(direction, 1);
 	}
 
-	public Location move(ForgeDirection direction, int blocks){
+	public Location move(ForgeDirection direction, int blocks) {
 		x += (direction.offsetX * blocks);
 		y += (direction.offsetY * blocks);
 		z += direction.offsetZ;
 		return this;
 	}
 
-	public Location move(ForgeDirection[] directions) {
+	public Location move(ForgeDirection... directions) {
 		for (ForgeDirection direction : directions)
 			move(direction);
 		return this;
@@ -57,6 +58,10 @@ public class Location {
 
 	public Block getBlock() {
 		return world.getBlock(x, y, z);
+	}
+
+	public void setBlock(Block block) {
+		world.setBlock(x, y, z, block);
 	}
 
 	public void setMetadata(int meta) {
@@ -85,9 +90,5 @@ public class Location {
 
 	public void neighbourUpdate() {
 		world.notifyBlockOfNeighborChange(x, y, z, getBlock());
-	}
-
-	public void setBlock(Block block) {
-		world.setBlock(x, y, z, block);
 	}
 }

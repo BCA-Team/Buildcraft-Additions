@@ -19,9 +19,7 @@ public class CoolantTank extends RestrictedTank {
 		super(name, capacity, tile, new IFluidAcceptor() {
 			@Override
 			public boolean accepts(FluidStack fluidStack) {
-				if (fluidStack != null)
-					return CoolantManager.INSTANCE.getCoolant(fluidStack.getFluid()) != null;
-				return false;
+				return fluidStack != null && CoolantManager.INSTANCE.getCoolant(fluidStack.getFluid()) != null;
 			}
 
 			@Override

@@ -21,13 +21,13 @@ import buildcraftAdditions.utils.PlayerUtils;
  */
 public class MultiBlockKEBT3Core extends MultiBlockBase {
 
+	public MultiBlockKEBT3Core() {
+		super("blockKEBT3Core", Variables.Identifiers.KEBT3_CORE, new MultiBlockPaternKEBT3(), "energyBufferMultiblockCore");
+	}
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileKEBT3();
-	}
-
-	public MultiBlockKEBT3Core() {
-		super(Variables.Identifiers.KEBT3_CORE, new MultiBlockPaternKEBT3(), "energyBufferMultiblockCore");
 	}
 
 	@Override

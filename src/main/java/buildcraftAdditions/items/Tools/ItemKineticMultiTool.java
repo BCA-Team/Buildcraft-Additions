@@ -80,6 +80,150 @@ public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerIt
 		setNoRepair();
 	}
 
+	public static void setLastUsedMode(ItemStack stack, String mode) {
+		if (stack != null) {
+			if (stack.stackTagCompound == null)
+				stack.stackTagCompound = new NBTTagCompound();
+			stack.stackTagCompound.setString("lastUsedMode", mode);
+		}
+	}
+
+	public static String getLastUsedMode(ItemStack stack) {
+		if (stack != null && stack.stackTagCompound != null && stack.stackTagCompound.hasKey("lastUsedMode", Constants.NBT.TAG_STRING))
+			return stack.stackTagCompound.getString("lastUsedMode");
+		return null;
+	}
+
+	public static boolean isStickInstalled(ItemStack stack, String stick) {
+		return stack != null && stack.stackTagCompound != null && stack.stackTagCompound.hasKey(stick, Constants.NBT.TAG_BYTE) && stack.stackTagCompound.getBoolean(stick);
+	}
+
+	public static void installStick(ItemStack stack, String stick) {
+		if (stack != null && !isStickInstalled(stack, stick)) {
+			if (stack.stackTagCompound == null)
+				stack.stackTagCompound = new NBTTagCompound();
+			stack.stackTagCompound.setBoolean(stick, true);
+			if (!stack.stackTagCompound.hasKey("upgradesAllowed", Constants.NBT.TAG_INT))
+				stack.stackTagCompound.setInteger("upgradesAllowed", 1);
+			stack.stackTagCompound.setInteger("upgradesAllowed", getAllowedUpgrades(stack) + 1);
+		}
+	}
+
+	public static boolean isUpgradeInstalled(ItemStack stack, String upgrade) {
+		return stack != null && stack.stackTagCompound != null && stack.stackTagCompound.hasKey(upgrade, Constants.NBT.TAG_BYTE) && stack.stackTagCompound.getBoolean(upgrade);
+	}
+
+	public static boolean canInstallUpgrade(ItemStack stack, String upgrade) {
+		return !("area".equalsIgnoreCase(upgrade) && !isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw") && !isUpgradeInstalled(stack, "hoe")) && !("silky".equalsIgnoreCase(upgrade) && (isUpgradeInstalled(stack, "fortune1") || isUpgradeInstalled(stack, "fortune2") || isUpgradeInstalled(stack, "fortune3") || (!isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw")))) && !("fortune1".equalsIgnoreCase(upgrade) && !isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw")) && !("fortune2".equalsIgnoreCase(upgrade) && (isUpgradeInstalled(stack, "fortune1") || (!isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw")))) && !("fortune3".equalsIgnoreCase(upgrade) && (isUpgradeInstalled(stack, "fortune2") || (!isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw")))) && getAllowedUpgrades(stack) > 0;
+	}
+
+	public static void installUpgrade(String upgrade, ItemStack stack) {
+		if (stack != null && upgrade != null && !upgrade.isEmpty() && !isUpgradeInstalled(stack, upgrade)) {
+			if (stack.stackTagCompound == null)
+				stack.stackTagCompound = new NBTTagCompound();
+			stack.stackTagCompound.setBoolean(upgrade, true);
+			if ("silky".equalsIgnoreCase(upgrade)) {
+				Map map = EnchantmentHelper.getEnchantments(stack);
+				if (map == null)
+					map = Maps.newLinkedHashMap();
+				map.put(Enchantment.silkTouch.effectId, 1);
+				EnchantmentHelper.setEnchantments(map, stack);
+			} else if ("fortune1".equalsIgnoreCase(upgrade)) {
+				Map map = EnchantmentHelper.getEnchantments(stack);
+				if (map == null)
+					map = Maps.newLinkedHashMap();
+				map.put(Enchantment.fortune.effectId, 1);
+				EnchantmentHelper.setEnchantments(map, stack);
+			} else if ("fortune2".equalsIgnoreCase(upgrade)) {
+				Map map = EnchantmentHelper.getEnchantments(stack);
+				if (map == null)
+					map = Maps.newLinkedHashMap();
+				map.put(Enchantment.fortune.effectId, 2);
+				EnchantmentHelper.setEnchantments(map, stack);
+			} else if ("fortune3".equalsIgnoreCase(upgrade)) {
+				Map map = EnchantmentHelper.getEnchantments(stack);
+				if (map == null)
+					map = Maps.newLinkedHashMap();
+				map.put(Enchantment.fortune.effectId, 3);
+				EnchantmentHelper.setEnchantments(map, stack);
+			}
+			if (!stack.stackTagCompound.hasKey("upgradesAllowed", Constants.NBT.TAG_INT))
+				stack.stackTagCompound.setInteger("upgradesAllowed", 1);
+			stack.stackTagCompound.setInteger("upgradesAllowed", getAllowedUpgrades(stack) - 1);
+		}
+	}
+
+	public static int getAllowedUpgrades(ItemStack stack) {
+		if (stack != null && stack.stackTagCompound != null && stack.stackTagCompound.hasKey("upgradesAllowed", Constants.NBT.TAG_INT))
+			return stack.stackTagCompound.getInteger("upgradesAllowed");
+		return 1;
+	}
+
+	public static String getHarvestTool(String upgrade) {
+		if (upgrade != null) {
+			if (upgrade.equalsIgnoreCase("drill"))
+				return "pickaxe";
+			if (upgrade.equalsIgnoreCase("digger"))
+				return "shovel";
+			if (upgrade.equalsIgnoreCase("chainsaw"))
+				return "axe";
+		}
+		return null;
+	}
+
+	public static String getUpgrade(String harvestTool) {
+		if (harvestTool != null) {
+			if (harvestTool.equalsIgnoreCase("pickaxe"))
+				return "drill";
+			if (harvestTool.equalsIgnoreCase("shovel"))
+				return "digger";
+			if (harvestTool.equalsIgnoreCase("axe"))
+				return "chainsaw";
+		}
+		return null;
+	}
+
+	public static Set<Material> getEffectiveMaterials(ItemStack stack) {
+		Set<Material> set = Sets.newHashSet();
+		if (isUpgradeInstalled(stack, "drill"))
+			set.addAll(effectiveMaterialsDrill);
+		if (isUpgradeInstalled(stack, "digger"))
+			set.addAll(effectiveMaterialsDigger);
+		if (isUpgradeInstalled(stack, "chainsaw"))
+			set.addAll(effectiveMaterialsChainsaw);
+		return set;
+	}
+
+	public static Set<Block> getEffectiveBlocks(ItemStack stack) {
+		Set<Block> set = Sets.newHashSet();
+		if (isUpgradeInstalled(stack, "drill"))
+			set.addAll(effectiveBlocksDrill);
+		if (isUpgradeInstalled(stack, "digger"))
+			set.addAll(effectiveBlocksDigger);
+		if (isUpgradeInstalled(stack, "chainsaw"))
+			set.addAll(effectiveBlocksChainsaw);
+		return set;
+	}
+
+	public static float getEfficiency(ItemStack stack, Block block) {
+		float f = 1;
+		if (isUpgradeInstalled(stack, "drill") && (effectiveMaterialsDrill.contains(block.getMaterial()) || effectiveBlocksDrill.contains(block))) {
+			setLastUsedMode(stack, "pickaxe");
+			f = ConfigurationHandler.toolEfficiencyPickaxe;
+		} else if (isUpgradeInstalled(stack, "chainsaw") && (effectiveMaterialsChainsaw.contains(block.getMaterial()) || effectiveBlocksChainsaw.contains(block))) {
+			setLastUsedMode(stack, "axe");
+			f = ConfigurationHandler.toolEfficiencyAxe;
+		} else if (isUpgradeInstalled(stack, "digger") && (effectiveMaterialsDigger.contains(block.getMaterial()) || effectiveBlocksDigger.contains(block))) {
+			setLastUsedMode(stack, "shovel");
+			f = ConfigurationHandler.toolEfficiencyShovel;
+		}
+		return f * (isUpgradeInstalled(stack, "area") ? ConfigurationHandler.toolEfficiencyAreaMultiplier : 1);
+	}
+
+	public static boolean isToolEffective(ItemStack stack, Block block, int meta) {
+		return stack != null && stack.getItem() != null && stack.getItem().getHarvestLevel(stack, block.getHarvestTool(meta)) > block.getHarvestLevel(meta);
+	}
+
 	@Override
 	public boolean isItemTool(ItemStack stack) {
 		return true;
@@ -301,7 +445,7 @@ public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerIt
 			boolean fortune2 = isUpgradeInstalled(stack, "fortune2");
 			boolean fortune3 = isUpgradeInstalled(stack, "fortune3");
 			list.add(Utils.localize("tooltip.installed"));
-			if (!digger && !digger && !chainsaw && !hoe && !area && !silky && !fortune1 && !fortune2 && !fortune3)
+			if (!drill && !digger && !chainsaw && !hoe && !area && !silky && !fortune1 && !fortune2 && !fortune3)
 				list.add(Utils.localize("tooltip.none"));
 			else {
 				if (drill)
@@ -435,165 +579,6 @@ public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerIt
 		return maxStored;
 	}
 
-	public static void setLastUsedMode(ItemStack stack, String mode) {
-		if (stack != null) {
-			if (stack.stackTagCompound == null)
-				stack.stackTagCompound = new NBTTagCompound();
-			stack.stackTagCompound.setString("lastUsedMode", mode);
-		}
-	}
-
-	public static String getLastUsedMode(ItemStack stack) {
-		if (stack != null && stack.stackTagCompound != null && stack.stackTagCompound.hasKey("lastUsedMode", Constants.NBT.TAG_STRING))
-			return stack.stackTagCompound.getString("lastUsedMode");
-		return null;
-	}
-
-
-	public static boolean isStickInstalled(ItemStack stack, String stick) {
-		if (stack != null && stack.stackTagCompound != null && stack.stackTagCompound.hasKey(stick, Constants.NBT.TAG_BYTE))
-			return stack.stackTagCompound.getBoolean(stick);
-		return false;
-	}
-
-	public static void installStick(ItemStack stack, String stick) {
-		if (stack != null && !isStickInstalled(stack, stick)) {
-			if (stack.stackTagCompound == null)
-				stack.stackTagCompound = new NBTTagCompound();
-			stack.stackTagCompound.setBoolean(stick, true);
-			if (!stack.stackTagCompound.hasKey("upgradesAllowed", Constants.NBT.TAG_INT))
-				stack.stackTagCompound.setInteger("upgradesAllowed", 1);
-			stack.stackTagCompound.setInteger("upgradesAllowed", getAllowedUpgrades(stack) + 1);
-		}
-	}
-
-	public static boolean isUpgradeInstalled(ItemStack stack, String upgrade) {
-		if (stack != null && stack.stackTagCompound != null && stack.stackTagCompound.hasKey(upgrade, Constants.NBT.TAG_BYTE))
-			return stack.stackTagCompound.getBoolean(upgrade);
-		return false;
-	}
-
-	public static boolean canInstallUpgrade(ItemStack stack, String upgrade) {
-		if ("area".equalsIgnoreCase(upgrade) && !isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw") && !isUpgradeInstalled(stack, "hoe"))
-			return false;
-		if ("silky".equalsIgnoreCase(upgrade) && (isUpgradeInstalled(stack, "fortune1") || isUpgradeInstalled(stack, "fortune2") || isUpgradeInstalled(stack, "fortune3") || (!isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw"))))
-			return false;
-		if ("fortune1".equalsIgnoreCase(upgrade) && !isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw"))
-			return false;
-		if ("fortune2".equalsIgnoreCase(upgrade) && (isUpgradeInstalled(stack, "fortune1") || (!isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw"))))
-			return false;
-		if ("fortune3".equalsIgnoreCase(upgrade) && (isUpgradeInstalled(stack, "fortune2") || (!isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw"))))
-			return false;
-		return getAllowedUpgrades(stack) > 0;
-	}
-
-	public static void installUpgrade(String upgrade, ItemStack stack) {
-		if (stack != null && upgrade != null && !upgrade.isEmpty() && !isUpgradeInstalled(stack, upgrade)) {
-			if (stack.stackTagCompound == null)
-				stack.stackTagCompound = new NBTTagCompound();
-			stack.stackTagCompound.setBoolean(upgrade, true);
-			if ("silky".equalsIgnoreCase(upgrade)) {
-				Map map = EnchantmentHelper.getEnchantments(stack);
-				if (map == null)
-					map = Maps.newLinkedHashMap();
-				map.put(Enchantment.silkTouch.effectId, 1);
-				EnchantmentHelper.setEnchantments(map, stack);
-			} else if ("fortune1".equalsIgnoreCase(upgrade)) {
-				Map map = EnchantmentHelper.getEnchantments(stack);
-				if (map == null)
-					map = Maps.newLinkedHashMap();
-				map.put(Enchantment.fortune.effectId, 1);
-				EnchantmentHelper.setEnchantments(map, stack);
-			} else if ("fortune2".equalsIgnoreCase(upgrade)) {
-				Map map = EnchantmentHelper.getEnchantments(stack);
-				if (map == null)
-					map = Maps.newLinkedHashMap();
-				map.put(Enchantment.fortune.effectId, 2);
-				EnchantmentHelper.setEnchantments(map, stack);
-			} else if ("fortune3".equalsIgnoreCase(upgrade)) {
-				Map map = EnchantmentHelper.getEnchantments(stack);
-				if (map == null)
-					map = Maps.newLinkedHashMap();
-				map.put(Enchantment.fortune.effectId, 3);
-				EnchantmentHelper.setEnchantments(map, stack);
-			}
-			if (!stack.stackTagCompound.hasKey("upgradesAllowed", Constants.NBT.TAG_INT))
-				stack.stackTagCompound.setInteger("upgradesAllowed", 1);
-			stack.stackTagCompound.setInteger("upgradesAllowed", getAllowedUpgrades(stack) - 1);
-		}
-	}
-
-	public static int getAllowedUpgrades(ItemStack stack) {
-		if (stack != null && stack.stackTagCompound != null && stack.stackTagCompound.hasKey("upgradesAllowed", Constants.NBT.TAG_INT))
-			return stack.stackTagCompound.getInteger("upgradesAllowed");
-		return 1;
-	}
-
-	public static String getHarvestTool(String upgrade) {
-		if (upgrade != null) {
-			if (upgrade.equalsIgnoreCase("drill"))
-				return "pickaxe";
-			if (upgrade.equalsIgnoreCase("digger"))
-				return "shovel";
-			if (upgrade.equalsIgnoreCase("chainsaw"))
-				return "axe";
-		}
-		return null;
-	}
-
-	public static String getUpgrade(String harvestTool) {
-		if (harvestTool != null) {
-			if (harvestTool.equalsIgnoreCase("pickaxe"))
-				return "drill";
-			if (harvestTool.equalsIgnoreCase("shovel"))
-				return "digger";
-			if (harvestTool.equalsIgnoreCase("axe"))
-				return "chainsaw";
-		}
-		return null;
-	}
-
-	public static Set<Material> getEffectiveMaterials(ItemStack stack) {
-		Set<Material> set = Sets.newHashSet();
-		if (isUpgradeInstalled(stack, "drill"))
-			set.addAll(effectiveMaterialsDrill);
-		if (isUpgradeInstalled(stack, "digger"))
-			set.addAll(effectiveMaterialsDigger);
-		if (isUpgradeInstalled(stack, "chainsaw"))
-			set.addAll(effectiveMaterialsChainsaw);
-		return set;
-	}
-
-	public static Set<Block> getEffectiveBlocks(ItemStack stack) {
-		Set<Block> set = Sets.newHashSet();
-		if (isUpgradeInstalled(stack, "drill"))
-			set.addAll(effectiveBlocksDrill);
-		if (isUpgradeInstalled(stack, "digger"))
-			set.addAll(effectiveBlocksDigger);
-		if (isUpgradeInstalled(stack, "chainsaw"))
-			set.addAll(effectiveBlocksChainsaw);
-		return set;
-	}
-
-	public static float getEfficiency(ItemStack stack, Block block) {
-		float f = 1;
-		if (isUpgradeInstalled(stack, "drill") && (effectiveMaterialsDrill.contains(block.getMaterial()) || effectiveBlocksDrill.contains(block))) {
-			setLastUsedMode(stack, "pickaxe");
-			f = ConfigurationHandler.toolEfficiencyPickaxe;
-		} else if (isUpgradeInstalled(stack, "chainsaw") && (effectiveMaterialsChainsaw.contains(block.getMaterial()) || effectiveBlocksChainsaw.contains(block))) {
-			setLastUsedMode(stack, "axe");
-			f = ConfigurationHandler.toolEfficiencyAxe;
-		} else if (isUpgradeInstalled(stack, "digger") && (effectiveBlocksDigger.contains(block.getMaterial()) || effectiveBlocksDigger.contains(block))) {
-			setLastUsedMode(stack, "shovel");
-			f = ConfigurationHandler.toolEfficiencyShovel;
-		}
-		return f * (isUpgradeInstalled(stack, "area") ? ConfigurationHandler.toolEfficiencyAreaMultiplier : 1);
-	}
-
-	public static boolean isToolEffective(ItemStack stack, Block block, int meta) {
-		return stack != null && stack.getItem() != null && stack.getItem().getHarvestLevel(stack, block.getHarvestTool(meta)) > block.getHarvestLevel(meta);
-	}
-
 	public boolean harvestBlock(World world, int x, int y, int z, EntityPlayer player) {
 		if (world.isAirBlock(x, y, z))
 			return false;
@@ -618,7 +603,7 @@ public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerIt
 				world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(block) | (meta << 12));
 			if (block.removedByPlayer(world, player, x, y, z, false))
 				block.onBlockDestroyedByPlayer(world, x, y, z, meta);
-			if (!world.isRemote)
+			if (!world.isRemote && playerMP != null)
 				playerMP.playerNetServerHandler.sendPacket(new S23PacketBlockChange(x, y, z, world));
 			else
 				Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C07PacketPlayerDigging(2, x, y, z, Minecraft.getMinecraft().objectMouseOver.sideHit));
@@ -631,7 +616,8 @@ public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerIt
 				block.onBlockDestroyedByPlayer(world, x, y, z, meta);
 				block.harvestBlock(world, player, x, y, z, meta);
 			}
-			playerMP.playerNetServerHandler.sendPacket(new S23PacketBlockChange(x, y, z, world));
+			if (playerMP != null)
+				playerMP.playerNetServerHandler.sendPacket(new S23PacketBlockChange(x, y, z, world));
 		} else {
 			world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(block) | (meta << 12));
 			if (block.removedByPlayer(world, player, x, y, z, true))

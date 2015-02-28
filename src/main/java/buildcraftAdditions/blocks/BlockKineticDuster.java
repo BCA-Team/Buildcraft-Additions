@@ -12,8 +12,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
 import buildcraft.api.power.ILaserTargetBlock;
 
 import buildcraftAdditions.tileEntities.TileKineticDuster;
@@ -32,40 +30,43 @@ public class BlockKineticDuster extends BlockBase implements ILaserTargetBlock {
 	@SideOnly(Side.CLIENT)
 	private IIcon bottom, sides[], top;
 
+	public BlockKineticDuster() {
+		super("blockDusterKinetic");
+	}
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int getal) {
 		return new TileKineticDuster();
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (player.isSneaking())
 			return false;
 		TileKineticDuster duster = (TileKineticDuster) world.getTileEntity(x, y, z);
-		if (duster != null && duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
-			ItemStack stack = player.getCurrentEquippedItem().copy();
-			stack.stackSize = 1;
-			duster.setInventorySlotContents(0, stack);
-			player.getCurrentEquippedItem().stackSize--;
-			if (player.getCurrentEquippedItem().stackSize <= 0)
-				player.setCurrentItemOrArmor(0, null);
-		} else {
-			if (duster.getStackInSlot(0) != null) {
-				if (!world.isRemote)
-					Utils.dropItemstack(world, x, y, z, duster.getStackInSlot(0));
-				duster.setInventorySlotContents(0, null);
+		if (duster != null) {
+			if (duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
+				ItemStack stack = player.getCurrentEquippedItem().copy();
+				stack.stackSize = 1;
+				duster.setInventorySlotContents(0, stack);
+				player.getCurrentEquippedItem().stackSize--;
+				if (player.getCurrentEquippedItem().stackSize <= 0)
+					player.setCurrentItemOrArmor(0, null);
+			} else {
+				if (duster.getStackInSlot(0) != null) {
+					if (!world.isRemote)
+						Utils.dropItemstack(world, x, y, z, duster.getStackInSlot(0));
+					duster.setInventorySlotContents(0, null);
+				}
 			}
+			world.markBlockForUpdate(x, y, z);
 		}
-		world.markBlockForUpdate(x, y, z);
 		return true;
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack stack) {
-		super.onBlockPlacedBy(world, i, j, k, entityliving, stack);
-		ForgeDirection orientation = Utils.get2dOrientation(entityliving);
-		world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(), 1);
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entity, ItemStack stack) {
+		world.setBlockMetadataWithNotify(i, j, k, Utils.get2dOrientation(entity).getOpposite().ordinal(), 1);
 
 	}
 
@@ -90,7 +91,6 @@ public class BlockKineticDuster extends BlockBase implements ILaserTargetBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		// If no metadata is set, then this is an icon.
 		switch (side) {
 			case 0:
 				return bottom;

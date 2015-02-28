@@ -3,6 +3,10 @@ package buildcraftAdditions.tileEntities;
 import java.util.EnumSet;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableSet;
+
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -38,9 +42,6 @@ import buildcraftAdditions.utils.fluids.CoolingRecipeTank;
 import buildcraftAdditions.utils.fluids.ITankHolder;
 import buildcraftAdditions.utils.fluids.Tank;
 
-import com.google.common.collect.ImmutableSet;
-import io.netty.buffer.ByteBuf;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -49,17 +50,16 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFluidHandler, ITankHolder, ISyncronizedTile, IPipeConnection, IUpgradableMachine {
-	private MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.COOLING_TOWER);
+	private final MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.COOLING_TOWER);
+	private final Tank input = new CoolingRecipeTank("input", 2000, this);
+	private final Tank output = new Tank(2000, this, "output");
+	private final Tank coolant = new CoolantTank("coolant", 10000, this);
+	private final Upgrades upgrades = new Upgrades(0);
 	public int tank;
 	public boolean valve;
-	private Tank input = new CoolingRecipeTank("input", 2000, this);
-	private Tank output = new Tank(2000, this, "output");
-	private Tank coolant = new CoolantTank("coolant", 10000, this);
+	public float heat;
 	private TileCoolingTower master;
 	private ICoolingTowerRecipe recipe;
-	public float heat;
-	private Upgrades upgrades = new Upgrades(0);
-
 
 	@Override
 	public void updateEntity() {
@@ -230,8 +230,18 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	}
 
 	@Override
+	public void setMasterX(int masterX) {
+		data.masterX = masterX;
+	}
+
+	@Override
 	public int getMasterY() {
 		return data.masterY;
+	}
+
+	@Override
+	public void setMasterY(int masterY) {
+		data.masterY = masterY;
 	}
 
 	@Override
@@ -240,8 +250,18 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	}
 
 	@Override
+	public void setMasterZ(int masterZ) {
+		data.masterZ = masterZ;
+	}
+
+	@Override
 	public int getRotationIndex() {
 		return data.rotationIndex;
+	}
+
+	@Override
+	public void setRotationIndex(int rotationIndex) {
+		data.rotationIndex = rotationIndex;
 	}
 
 	@Override
@@ -255,21 +275,6 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	}
 
 	@Override
-	public void setMasterX(int masterX) {
-		data.masterX = masterX;
-	}
-
-	@Override
-	public void setMasterY(int masterY) {
-		data.masterY = masterY;
-	}
-
-	@Override
-	public void setMasterZ(int masterZ) {
-		data.masterZ = masterZ;
-	}
-
-	@Override
 	public void setIsMaster(boolean isMaster) {
 		data.isMaster = isMaster;
 	}
@@ -277,11 +282,6 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	@Override
 	public void setPartOfMultiBlock(boolean partOfMultiBlock) {
 		data.partOfMultiBlock = partOfMultiBlock;
-	}
-
-	@Override
-	public void setRotationIndex(int rotationIndex) {
-		data.rotationIndex = rotationIndex;
 	}
 
 	@Override
@@ -409,9 +409,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		} else {
 			if (master == null)
 				findMaster();
-			if (master == null)
-				return false;
-			return master.canAcceptUpgrade(upgrade);
+			return master != null && master.canAcceptUpgrade(upgrade);
 		}
 	}
 

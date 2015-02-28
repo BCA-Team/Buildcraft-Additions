@@ -71,25 +71,25 @@ public class ModIntegration {
 	private static void eurekaResearch() {
 		EurekaRegistry.registerCategory("BCA", new ItemStack(ItemsAndBlocks.kineticDusterBlock));
 
-		EurekaRegistry.register(new EurekaInfo(Variables.DustT0Key, "BCA", 1, new ItemStack(ItemsAndBlocks.basicDusterBlock)));
-		EurekaRegistry.registerDrops(Variables.DustT0Key, new ItemStack(eureka.utils.BCItems.STONE_GEAR, 2), new ItemStack(Items.iron_ingot), new ItemStack(Blocks.stone, 5), new ItemStack(Items.slime_ball));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.basicDusterBlock, Variables.DustT0Key);
+		EurekaRegistry.register(new EurekaInfo(Variables.Eureka.DustT0Key, "BCA", 1, new ItemStack(ItemsAndBlocks.basicDusterBlock)));
+		EurekaRegistry.registerDrops(Variables.Eureka.DustT0Key, new ItemStack(eureka.utils.BCItems.STONE_GEAR, 2), new ItemStack(Items.iron_ingot), new ItemStack(Blocks.stone, 5), new ItemStack(Items.slime_ball));
+		EurekaRegistry.bindToKey(ItemsAndBlocks.basicDusterBlock, Variables.Eureka.DustT0Key);
 
-		EurekaRegistry.register(new EurekaInfo(Variables.DustT1Key, "BCA", 20, new ItemStack(ItemsAndBlocks.semiAutomaticDusterBlock), Variables.DustT0Key));
-		EurekaRegistry.registerDrops(Variables.DustT1Key, new ItemStack(BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(Items.gold_ingot), new ItemStack(eureka.utils.BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(Blocks.stone, 3));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.semiAutomaticDusterBlock, Variables.DustT1Key);
+		EurekaRegistry.register(new EurekaInfo(Variables.Eureka.DustT1Key, "BCA", 20, new ItemStack(ItemsAndBlocks.semiAutomaticDusterBlock), Variables.Eureka.DustT0Key));
+		EurekaRegistry.registerDrops(Variables.Eureka.DustT1Key, new ItemStack(BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(Items.gold_ingot), new ItemStack(eureka.utils.BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(Blocks.stone, 3));
+		EurekaRegistry.bindToKey(ItemsAndBlocks.semiAutomaticDusterBlock, Variables.Eureka.DustT1Key);
 
-		EurekaRegistry.register(new EurekaInfo(Variables.DustT2Key1, "BCA", 40, new ItemStack(ItemsAndBlocks.mechanicalDusterBlock), Variables.DustT1Key));
-		EurekaRegistry.registerDrops(Variables.DustT2Key1, new ItemStack(BCItems.IRON_GEAR, 2), new ItemStack(Items.gold_ingot, 1), new ItemStack(ItemsAndBlocks.itemGrindingWheel, 1), new ItemStack(Blocks.stone, 5));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.mechanicalDusterBlock, Variables.DustT2Key1);
+		EurekaRegistry.register(new EurekaInfo(Variables.Eureka.DustT2Key1, "BCA", 40, new ItemStack(ItemsAndBlocks.mechanicalDusterBlock), Variables.Eureka.DustT1Key));
+		EurekaRegistry.registerDrops(Variables.Eureka.DustT2Key1, new ItemStack(BCItems.IRON_GEAR, 2), new ItemStack(Items.gold_ingot, 1), new ItemStack(ItemsAndBlocks.itemGrindingWheel, 1), new ItemStack(Blocks.stone, 5));
+		EurekaRegistry.bindToKey(ItemsAndBlocks.mechanicalDusterBlock, Variables.Eureka.DustT2Key1);
 
-		EurekaRegistry.register(new EurekaInfo(Variables.DustT2Key2, "BCA", 20, new ItemStack(ItemsAndBlocks.kineticDusterBlock), Variables.DustT2Key1));
-		EurekaRegistry.registerDrops(Variables.DustT2Key2, new ItemStack(Blocks.glass, 3), new ItemStack(BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(BCItems.GOLD_GEAR, 2), new ItemStack(BCItems.DIAMOND_GEAR));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.kineticDusterBlock, Variables.DustT2Key2);
+		EurekaRegistry.register(new EurekaInfo(Variables.Eureka.DustT2Key2, "BCA", 20, new ItemStack(ItemsAndBlocks.kineticDusterBlock), Variables.Eureka.DustT2Key1));
+		EurekaRegistry.registerDrops(Variables.Eureka.DustT2Key2, new ItemStack(Blocks.glass, 3), new ItemStack(BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(BCItems.GOLD_GEAR, 2), new ItemStack(BCItems.DIAMOND_GEAR));
+		EurekaRegistry.bindToKey(ItemsAndBlocks.kineticDusterBlock, Variables.Eureka.DustT2Key2);
 
-		EurekaRegistry.register(new EurekaInfo(Variables.KineticToolKey, "BCA", 25, new ItemStack(ItemsAndBlocks.itemKineticMultiTool)));
-		EurekaRegistry.registerDrops(Variables.KineticToolKey, new ItemStack(Items.diamond, 3), new ItemStack(ItemsAndBlocks.ironStick), new ItemStack(ItemsAndBlocks.toolCore));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.itemKineticMultiTool, Variables.KineticToolKey);
+		EurekaRegistry.register(new EurekaInfo(Variables.Eureka.KineticToolKey, "BCA", 25, new ItemStack(ItemsAndBlocks.itemKineticMultiTool)));
+		EurekaRegistry.registerDrops(Variables.Eureka.KineticToolKey, new ItemStack(Items.diamond, 3), new ItemStack(ItemsAndBlocks.ironStick), new ItemStack(ItemsAndBlocks.toolCore));
+		EurekaRegistry.bindToKey(ItemsAndBlocks.itemKineticMultiTool, Variables.Eureka.KineticToolKey);
 
 		EurekaRegistry.register(new EurekaInfo("heatedFurnace", "BCA", 5, new ItemStack(ItemsAndBlocks.heatedFurnaceBlock)));
 		EurekaRegistry.registerDrops("heatedFurnace", new ItemStack(Blocks.furnace), new ItemStack(Items.iron_ingot, 8));

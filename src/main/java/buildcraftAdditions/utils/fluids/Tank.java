@@ -1,5 +1,7 @@
 package buildcraftAdditions.utils.fluids;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -11,8 +13,6 @@ import net.minecraftforge.fluids.FluidTank;
 
 import buildcraftAdditions.api.networking.ISyncObject;
 
-import io.netty.buffer.ByteBuf;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -22,7 +22,7 @@ import io.netty.buffer.ByteBuf;
  */
 public class Tank extends FluidTank implements ISyncObject {
 
-	protected String name;
+	protected final String name;
 
 	public Tank(int capacity, TileEntity tile, String name) {
 		super(capacity);

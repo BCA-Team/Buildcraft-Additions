@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.ResourceLocation;
 
-import buildcraftAdditions.client.gui.gui.GuiBase;
+import buildcraftAdditions.client.gui.GuiBase;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.utils.fluids.Tank;
@@ -19,7 +19,7 @@ import buildcraftAdditions.utils.fluids.Tank;
  */
 public class WidgetFluidTank extends WidgetBase {
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/Pieces/tankStripes.png");
-	private Tank tank;
+	private final Tank tank;
 
 	public WidgetFluidTank(int id, int x, int y, int width, int height, GuiBase gui, Tank tank) {
 		super(id, x, y, 0, 0, width, height, gui, "");

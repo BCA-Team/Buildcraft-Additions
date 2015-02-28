@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -8,15 +10,18 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.*;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidContainerItem;
+import net.minecraftforge.fluids.IFluidHandler;
 
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 import buildcraftAdditions.tileEntities.interfaces.IWidgetListener;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.utils.fluids.Tank;
-
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -27,7 +32,7 @@ import io.netty.buffer.ByteBuf;
  */
 public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler, IWidgetListener {
 
-	public Tank tank = new Tank(FluidContainerRegistry.BUCKET_VOLUME * 10, this, "Tank");
+	public final Tank tank = new Tank(FluidContainerRegistry.BUCKET_VOLUME * 10, this, "Tank");
 	private final CustomInventory inventory = new CustomInventory("FluidicCompressor", 2, 1, this);
 	public boolean fill;
 
@@ -54,7 +59,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 						amount = tank.getFluid().amount;
 					if (energy >= amount) {
 						drain(ForgeDirection.UNKNOWN, item.fill(itemstack, new FluidStack(tank.getFluid(), amount), true), true);
-						energy = energy - amount;
+						energy -= amount;
 						FluidStack fluid = Utils.getFluidStackFromItemStack(itemstack);
 						if (fluid != null) {
 							if (getProgress() == 16) {
@@ -180,8 +185,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		int amount = tank.fill(resource, doFill);
-		return amount;
+		return tank.fill(resource, doFill);
 	}
 
 	@Override
@@ -191,8 +195,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		FluidStack fluid = tank.drain(maxDrain, doDrain);
-		return fluid;
+		return tank.drain(maxDrain, doDrain);
 	}
 
 	@Override
@@ -266,14 +269,14 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	public ByteBuf writeToByteBuff(ByteBuf buf) {
 		super.writeToByteBuff(buf);
 		tank.writeToByteBuff(buf);
-		return null;
+		return buf;
 	}
 
 	@Override
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		buf = super.readFromByteBuff(buf);
 		buf = tank.readFromByteBuff(buf);
-		return null;
+		return buf;
 	}
 
 	@Override

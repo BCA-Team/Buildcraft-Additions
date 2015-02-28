@@ -26,9 +26,9 @@ import buildcraftAdditions.utils.Utils;
  */
 public class ItemBucketBCA extends ItemBucket {
 
+	private final FluidStack fluid;
 	@SideOnly(Side.CLIENT)
 	private IIcon overlay;
-	private final FluidStack fluid;
 
 	public ItemBucketBCA(Fluid fluid) {
 		super(fluid.getBlock());

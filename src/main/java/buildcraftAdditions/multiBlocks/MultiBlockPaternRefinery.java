@@ -3,6 +3,7 @@ package buildcraftAdditions.multiBlocks;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.reference.Variables;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

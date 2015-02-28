@@ -1,17 +1,11 @@
 package buildcraftAdditions.blocks;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import buildcraftAdditions.tileEntities.TileLavaCoil;
-import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -23,8 +17,9 @@ import buildcraftAdditions.utils.Utils;
  */
 public class BlockLavaCoil extends BlockCoilBase {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon sides, top, bottom;
+	public BlockLavaCoil() {
+		super("Lava");
+	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
@@ -40,35 +35,6 @@ public class BlockLavaCoil extends BlockCoilBase {
 		}
 
 		return true;
-	}
-
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		if (meta == 0 && side == 3)
-			return sides;
-
-		if (side == meta && side > 1)
-			return sides;
-
-		switch (side) {
-			case 0:
-				return bottom;
-			case 1:
-				return top;
-			default:
-				return sides;
-		}
-	}
-
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register) {
-		sides = RenderUtils.registerIcon(register, "coilLavaSides");
-		top = RenderUtils.registerIcon(register, "coilLavaTop");
-		bottom = RenderUtils.registerIcon(register, "coilLavaBottom");
 	}
 
 	@Override

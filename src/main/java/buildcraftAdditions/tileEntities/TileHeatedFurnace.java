@@ -2,6 +2,8 @@ package buildcraftAdditions.tileEntities;
 
 import java.util.Set;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -25,8 +27,6 @@ import buildcraftAdditions.tileEntities.varHelpers.Upgrades;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
 
-import io.netty.buffer.ByteBuf;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -35,11 +35,11 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpgradableMachine, IConfigurableOutput {
+	public final TileCoilBase[] coils;
 	private final CustomInventory inventory = new CustomInventory("HeatedFurnace", 2, 64, this);
+	private final Upgrades upgrades = new Upgrades(1).whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT); //for now only allow that one as the others don't work yet
 	public int progress;
 	public boolean isCooking, shouldUpdateCoils;
-	public TileCoilBase[] coils;
-	private Upgrades upgrades = new Upgrades(1).whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT); //for now only allow that one as the others don't work yet
 	private SideConfiguration configuration = new SideConfiguration(EnumSideStatus.BOTH);
 
 	public TileHeatedFurnace() {

@@ -4,7 +4,6 @@ import java.util.Map;
 
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 
-
 import codechicken.core.launch.DepLoader;
 
 /**
@@ -37,7 +36,6 @@ public class BCALoadingPlugin implements IFMLLoadingPlugin {
 
 	@Override
 	public void injectData(Map<String, Object> data) {
-
 	}
 
 	@Override

@@ -9,8 +9,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.oredict.OreDictionary;
 
-import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.armour.KineticBackpack;
+import buildcraftAdditions.armour.ItemKineticBackpack;
 import buildcraftAdditions.blocks.BlockBCKinesisPipeWood;
 import buildcraftAdditions.blocks.BlockBCKinisisPipeStone;
 import buildcraftAdditions.blocks.BlockBackpackStand;
@@ -26,6 +25,7 @@ import buildcraftAdditions.blocks.BlockKineticEnergyBufferTier1;
 import buildcraftAdditions.blocks.BlockLavaCoil;
 import buildcraftAdditions.blocks.BlockMechanicalDuster;
 import buildcraftAdditions.blocks.BlockSemiAutomaticDuster;
+import buildcraftAdditions.blocks.BlockTest;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockCoolingTowerValve;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockCoolingTowerWalls;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT2;
@@ -33,7 +33,6 @@ import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Core;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Plating;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryValve;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryWalls;
-import buildcraftAdditions.blocks.multiBlocks.PaternTestingBlock;
 import buildcraftAdditions.core.VersionCheck;
 import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemBase;
@@ -303,102 +302,78 @@ public final class ItemsAndBlocks {
 		portableLaser = new ItemPortableLaser();
 		GameRegistry.registerItem(portableLaser, "portableLaser");
 
-		kineticBackpack = new KineticBackpack();
-		kineticBackpack.setUnlocalizedName("kineticBackpack");
+		kineticBackpack = new ItemKineticBackpack();
 		GameRegistry.registerItem(kineticBackpack, "kineticBackpack");
 
 		//START BLOCKS
 
 		kinesisPipeWood = new BlockBCKinesisPipeWood();
-		kinesisPipeWood.setBlockName("kinesisPipeWood");
 		GameRegistry.registerBlock(kinesisPipeWood, "kinesisPipeWood");
 
 		kinisisPipeStone = new BlockBCKinisisPipeStone();
-		kinisisPipeStone.setBlockName("kinesisPipeCobble");
 		GameRegistry.registerBlock(kinisisPipeStone, "kinesisPipeCobble");
 
 		fluidicCompressorBlock = new BlockFluidicCompressor();
-		fluidicCompressorBlock.setBlockName("blockFluidicCompressor").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(fluidicCompressorBlock, "blockFluidicCompressor");
 
 		chargingStationBlock = new BlockChargingStation();
-		chargingStationBlock.setBlockName("blockChargingStation").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(chargingStationBlock, "blockChargingStation");
 
 		heatedFurnaceBlock = new BlockHeatedFurnace();
-		heatedFurnaceBlock.setBlockName("blockHeatedFurnace").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(heatedFurnaceBlock, "blockHeatedFurnace");
 
 		basicCoilBlock = new BlockBasicCoil();
-		basicCoilBlock.setBlockName("blockCoilBasic").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(basicCoilBlock, "blockCoilBasic");
 
 		lavaCoilBlock = new BlockLavaCoil();
-		lavaCoilBlock.setBlockName("blockCoilLava").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(lavaCoilBlock, "blockCoilLava");
 
 		basicDusterBlock = new BlockBasicDuster();
-		basicDusterBlock.setBlockName("blockDusterBasic").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(basicDusterBlock, "blockDusterBasic");
 
 		semiAutomaticDusterBlock = new BlockSemiAutomaticDuster();
-		semiAutomaticDusterBlock.setBlockName("blockDusterSemiAutomatic").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(semiAutomaticDusterBlock, "blockDusterSemiAutomatic");
 
 		mechanicalDusterBlock = new BlockMechanicalDuster();
-		mechanicalDusterBlock.setBlockName("blockDusterMechanical").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(mechanicalDusterBlock, "blockDusterMechanical");
 
 		kineticDusterBlock = new BlockKineticDuster();
-		kineticDusterBlock.setBlockName("blockDusterKinetic").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(kineticDusterBlock, "blockDusterKinetic");
 
 		kineticCoil = new BlockKineticCoil();
-		kineticCoil.setBlockName("blockCoilKinetic").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(kineticCoil, "blockCoilKinetic");
 
 		kebT1 = new BlockKineticEnergyBufferTier1();
-		kebT1.setBlockName("blockKEBT1").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(kebT1, ItemBlockKEB.class, "KEBT1");
 
 		kebT2 = new MultiBlockKEBT2();
-		kebT2.setBlockName("blockKEBT2").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(kebT2, "KEBT2");
 
 		kebT3Core = new MultiBlockKEBT3Core();
-		kebT3Core.setBlockName("blockKEBT3Core").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(kebT3Core, "KEBT3Core");
 
 		kebT3Plating = new MultiBlockKEBT3Plating();
-		kebT3Plating.setBlockName("blockKEBT3Plating").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(kebT3Plating, "KEBT3Plating");
 
 		refineryWalls = new MultiBlockRefineryWalls();
-		refineryWalls.setBlockName("blockRefineryWalls").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(refineryWalls, "refinerywals");
 
 		refineryValve = new MultiBlockRefineryValve();
-		refineryValve.setBlockName("blockRefineryValve").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(refineryValve, "refineryValve");
 
 		coolingTowerWalls = new MultiBlockCoolingTowerWalls();
-		coolingTowerWalls.setBlockName("blockCoolingTowerWalls").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(coolingTowerWalls, "blockCoolingTowerWalls)");
 
 		coolingTowerValve = new MultiBlockCoolingTowerValve();
-		coolingTowerValve.setBlockName("blockCoolingTowerValve").setCreativeTab(BuildcraftAdditions.bcadditions);
 		GameRegistry.registerBlock(coolingTowerValve, "blockCoolingTowerValve");
 
 		itemSorter = new BlockItemSorter();
-		itemSorter.setBlockName("blockItemSorter").setCreativeTab(BuildcraftAdditions.bcadditions);
 
 		backpackStand = new BlockBackpackStand();
 		GameRegistry.registerBlock(backpackStand, "backpackStand");
 
 		if (VersionCheck.currentVersion.contains("@")) {
-			//only register testblock in dev environments
-			testBlock = new PaternTestingBlock();
-			testBlock.setBlockName("testBlock").setCreativeTab(BuildcraftAdditions.bcadditions);
+			testBlock = new BlockTest();
 			GameRegistry.registerBlock(testBlock, "testingBlock");
 		}
 	}

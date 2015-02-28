@@ -15,10 +15,11 @@ import buildcraftAdditions.core.VersionCheck;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class ConfigurationHandler {
+
+	public static final int[] powerDifficultyModifiers = new int[4];
 	private static final HashSet<String> enabledFeatures = new HashSet<String>();
 	public static Configuration configFile;
 	public static boolean shouldPrintChangelog, shouldRegisterDusts, powerloss, eurekaIntegration;
-	public static int[] powerDifficultyModifiers = new int[4];
 	public static int basePowerModifier, entityHitModifier, hoeCost, toolHarvestLevel, KEB1powerloss, KEB2powerloss, KEB3powerloss, heatedFurnaceHeatRequired, basicCoilHeat, lavaCoilHeat, kineticCoilHeatModifier, portableLaserPowerUse, portableLaserLaserPower, portableLaserEntityBurnTime;
 	public static float portableLaserEntityDamage, toolEfficiencyPickaxe, toolEfficiencyShovel, toolEfficiencyAxe, toolEfficiencyAreaMultiplier, entityDamage;
 

@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,8 +19,6 @@ import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
 
-import io.netty.buffer.ByteBuf;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -27,8 +27,8 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileKineticDuster extends TileDusterWithConfigurableOutput implements ILaserTarget {
+	private final CustomInventory inventory = new CustomInventory("KineticDuster", 1, 1, this);
 	public int progress, progressStage, oldProgressStage;
-	private CustomInventory inventory = new CustomInventory("KineticDuster", 1, 1, this);
 
 	public TileKineticDuster() {
 		super("");

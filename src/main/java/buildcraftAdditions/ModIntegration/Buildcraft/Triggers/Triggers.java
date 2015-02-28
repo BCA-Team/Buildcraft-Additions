@@ -2,6 +2,7 @@ package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
 
 import buildcraft.api.statements.ITriggerExternal;
 import buildcraft.api.statements.StatementManager;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -10,19 +11,19 @@ import buildcraft.api.statements.StatementManager;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class Triggers {
-	public static ITriggerExternal triggerCanAcceptCanister = new TriggerCanisterRequested();
-	public static ITriggerExternal triggerHasEmptyCanister = new TriggerHasEmptyCanister();
-	public static ITriggerExternal triggerhasFullCanister = new TriggerHasFullCanister();
-	public static ITriggerExternal triggerDoneCharging = new TriggerDoneCharging();
-	public static ITriggerExternal triggerReadyToCharge = new TriggerReadyToCharge();
+	public static final ITriggerExternal triggerCanAcceptCanister = new TriggerCanisterRequested();
+	public static final ITriggerExternal triggerHasEmptyCanister = new TriggerHasEmptyCanister();
+	public static final ITriggerExternal triggerhasFullCanister = new TriggerHasFullCanister();
+	public static final ITriggerExternal triggerDoneCharging = new TriggerDoneCharging();
+	public static final ITriggerExternal triggerReadyToCharge = new TriggerReadyToCharge();
 
-	public static ITriggerExternal KEBCharged = new TriggerKEBCharged();
-	public static ITriggerExternal KEBUnder100 = new TriggerKEBUnder100();
-	public static ITriggerExternal KEBUnder75 = new TriggerKEBUnder75();
-	public static ITriggerExternal KEBUnder50 = new TriggerKEBUnder50();
-	public static ITriggerExternal KEBUnder25 = new TriggerKEBUnder25();
-	public static ITriggerExternal KEBEmpty = new TriggerKEBEmpty();
-	public static ITriggerExternal KEBEngineControl = new TriggerKEBEngineControl();
+	public static final ITriggerExternal KEBCharged = new TriggerKEBCharged();
+	public static final ITriggerExternal KEBUnder100 = new TriggerKEBUnder100();
+	public static final ITriggerExternal KEBUnder75 = new TriggerKEBUnder75();
+	public static final ITriggerExternal KEBUnder50 = new TriggerKEBUnder50();
+	public static final ITriggerExternal KEBUnder25 = new TriggerKEBUnder25();
+	public static final ITriggerExternal KEBEmpty = new TriggerKEBEmpty();
+	public static final ITriggerExternal KEBEngineControl = new TriggerKEBEngineControl();
 
 	public static void register() {
 		StatementManager.registerTriggerProvider(new TriggerProvider());

@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileRefinery;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -17,15 +18,15 @@ import buildcraftAdditions.tileEntities.TileRefinery;
  */
 public class MultiBlockRefineryValve extends MultiBlockBase {
 
+	public MultiBlockRefineryValve() {
+		super("blockRefineryValve", Variables.Identifiers.REFINERY_VALVE, new MultiBlockPaternRefinery(), "refineryValve_2", "refineryValve");
+	}
+
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase livingBase, ItemStack stack) {
 		TileEntity entity = world.getTileEntity(x, y, z);
 		if (entity instanceof TileRefinery)
 			((TileRefinery) entity).valve = true;
-	}
-
-	public MultiBlockRefineryValve() {
-		super(Variables.Identifiers.REFINERY_VALVE, new MultiBlockPaternRefinery(), "refineryValve_2", "refineryValve");
 	}
 
 	@Override

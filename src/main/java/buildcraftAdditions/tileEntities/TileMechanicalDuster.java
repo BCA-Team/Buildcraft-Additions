@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,8 +20,6 @@ import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;
 
-import io.netty.buffer.ByteBuf;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -28,9 +28,10 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileMechanicalDuster extends TileBaseDuster implements IEnergyReceiver {
-	public int progress, progressStage, oldProgressStage, energy, maxEnergy;
+	public final int maxEnergy;
+	private final CustomInventory inventory = new CustomInventory("mechanicalDuster", 1, 1, this);
+	public int progress, progressStage, oldProgressStage, energy;
 	public EntityPlayer player;
-	private CustomInventory inventory = new CustomInventory("mechanicalDuster", 1, 1, this);
 
 	public TileMechanicalDuster() {
 		super("dusterTier2-2");

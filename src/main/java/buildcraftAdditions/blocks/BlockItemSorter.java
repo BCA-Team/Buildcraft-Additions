@@ -1,11 +1,6 @@
 package buildcraftAdditions.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +19,7 @@ import buildcraft.api.tools.IToolWrench;
 import buildcraft.core.ItemList;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.client.render.RendererItemSorter;
+import buildcraftAdditions.client.render.blocks.RendererItemSorter;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.utils.RenderUtils;
@@ -37,13 +32,13 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockItemSorter extends BlockContainer {
+public class BlockItemSorter extends BlockBase {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon textureIn, textureOut, textureSide, textureSide2;
 
 	public BlockItemSorter() {
-		super(Material.iron);
+		super("blockItemSorter");
 	}
 
 	@Override
@@ -109,15 +104,19 @@ public class BlockItemSorter extends BlockContainer {
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
 		TileItemSorter tile = (TileItemSorter) world.getTileEntity(x, y, z);
+		tile.openInventory();
 		ItemStack stack = tile.getStackInSlot(0);
-		if (stack != null)
+		if (stack != null) {
+			tile.setInventorySlotContents(0, null);
 			Utils.dropItemstack(world, x, y, z, stack);
+		}
 		for (int i = 1; i < tile.getSizeInventory(); ++i) {
 			ItemStack list = tile.getStackInSlot(i);
+			tile.setInventorySlotContents(i, null);
 			if (list != null && list.getItem() instanceof ItemList)
 				Utils.dropItemstack(world, x, y, z, list);
 		}
-		super.breakBlock(world, x, y, z, block, meta);
+		tile.closeInventory();
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,7 +16,6 @@ import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
 
 import eureka.api.EurekaKnowledge;
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -24,10 +25,10 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
-	private CustomInventory inventory = new CustomInventory("semiAutomaticDuster", 1, 1, this);
+	private final CustomInventory inventory = new CustomInventory("semiAutomaticDuster", 1, 1, this);
 
 	public TileSemiAutomaticDuster() {
-		super(Variables.DustT2Key1);
+		super(Variables.Eureka.DustT2Key1);
 	}
 
 	@Override
@@ -115,9 +116,7 @@ public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {
-		if (configuration.canReceive(ForgeDirection.getOrientation(side)))
-			return new int[]{0};
-		return new int[0];
+		return configuration.canReceive(ForgeDirection.getOrientation(side)) ? new int[]{0} : new int[0];
 	}
 
 	@Override

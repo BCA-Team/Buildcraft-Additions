@@ -19,11 +19,10 @@ import cpw.mods.fml.common.event.FMLInterModComms;
  */
 public class VersionCheck {
 
+	public static final String currentVersion = "@MODVERSION@";
 	public static boolean newerVersionAvailable = false;
 	public static String newerVersionNumber = "";
-	public static String currentVersion = "@MODVERSION@";
 	public static String[] changelog;
-	public static int numLines = 0;
 
 	public static void start() {
 		VersionCheckThread thread = new VersionCheckThread();
@@ -47,11 +46,9 @@ public class VersionCheck {
 					BufferedReader changelogReader = new BufferedReader((new InputStreamReader(changelogURL.openStream())));
 					String line;
 					ArrayList<String> changelogList = new ArrayList<String>();
-					while ((line = changelogReader.readLine()) != null) {
+					while ((line = changelogReader.readLine()) != null)
 						changelogList.add(line);
-						numLines++;
-					}
-					changelog = new String[10];
+					changelog = new String[changelogList.size()];
 					changelogList.toArray(changelog);
 					pingVersionChecker();
 				}
@@ -71,9 +68,8 @@ public class VersionCheck {
 				tag.setString("updateUrl", "http://buildcraftAdditions.wordpress.com/downloads/");
 				tag.setBoolean("isDirectLink", false);
 				StringBuilder builder = new StringBuilder();
-				for (int t = 0; t < numLines; t++) {
-					builder.append(changelog[t]).append("/n");
-				}
+				for (String s : changelog)
+					builder.append(s).append("/n");
 				tag.setString("changeLog", builder.toString());
 				FMLInterModComms.sendRuntimeMessage("bcadditions", "VersionChecker", "addUpdate", tag);
 			}

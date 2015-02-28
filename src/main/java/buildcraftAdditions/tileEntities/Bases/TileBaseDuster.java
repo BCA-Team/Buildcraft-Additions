@@ -1,12 +1,13 @@
 package buildcraftAdditions.tileEntities.Bases;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 
 import eureka.api.EurekaKnowledge;
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -16,8 +17,8 @@ import io.netty.buffer.ByteBuf;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class TileBaseDuster extends TileBase implements ISidedInventory {
+	private final String key;
 	public int progress;
-	private String key;
 
 	public TileBaseDuster(String key) {
 		this.key = key;

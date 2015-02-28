@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
 import buildcraftAdditions.utils.RenderUtils;
@@ -26,36 +27,37 @@ import buildcraftAdditions.utils.RenderUtils;
  */
 public abstract class MultiBlockBase extends BlockContainer {
 
+	public final char identifier;
+	public final MultiBlockPatern patern;
+	public final String altTexture;
 	@SideOnly(Side.CLIENT)
-	private IIcon icon[];
-	public char identifier;
-	public MultiBlockPatern patern;
-	public String textureName, secondTexture;
+	private IIcon altIcon;
 
-	public MultiBlockBase(char identifier, MultiBlockPatern patern, String textureName) {
-		this(identifier, patern, textureName, "multiBlockSeeInvisible");
+	public MultiBlockBase(String blockName, char identifier, MultiBlockPatern patern, String textureName) {
+		this(blockName, identifier, patern, textureName, "multiBlockSeeInvisible");
 	}
 
-	public MultiBlockBase(char identifier, MultiBlockPatern patern, String textureName, String secondTexture) {
+	public MultiBlockBase(String blockName, char identifier, MultiBlockPatern patern, String textureName, String altTexture) {
 		super(Material.iron);
-		setHardness(4f);
-		setHarvestLevel(null, 0);
+		setHardness(5);
+		setResistance(10);
+		setBlockName(blockName);
+		setBlockTextureName("bcadditions:" + textureName);
+		setCreativeTab(BuildcraftAdditions.bcadditions);
 		this.identifier = identifier;
 		this.patern = patern;
-		this.textureName = textureName;
-		this.secondTexture = secondTexture;
+		this.altTexture = altTexture;
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-		icon = new IIcon[2];
-		icon[0] = RenderUtils.registerIcon(register, textureName);
-		icon[1] = RenderUtils.registerIcon(register, secondTexture);
+		super.registerBlockIcons(register);
+		altIcon = RenderUtils.registerIcon(register, altTexture);
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return icon[meta];
+		return meta != 0 ? altIcon : blockIcon;
 	}
 
 	@Override
@@ -72,25 +74,16 @@ public abstract class MultiBlockBase extends BlockContainer {
 	}
 
 	@Override
-	public boolean hasTileEntity(int metadata) {
-		return true;
-	}
-
-
-	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
-		TileEntity entity = world.getTileEntity(x, y, z);
-		if (entity != null && entity instanceof IMultiBlockTile) {
-			return ((IMultiBlockTile) entity).onBlockActivated(player);
-		}
-		return false;
+		TileEntity tile = world.getTileEntity(x, y, z);
+		return tile != null && tile instanceof IMultiBlockTile && ((IMultiBlockTile) tile).onBlockActivated(player);
 	}
 
 	@Override
 	public void onBlockPreDestroy(World world, int x, int y, int z, int meta) {
-		TileEntity entity = world.getTileEntity(x, y, z);
-		if (entity != null && entity instanceof IMultiBlockTile)
-			((IMultiBlockTile) entity).invalidateMultiblock();
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if (tile != null && tile instanceof IMultiBlockTile)
+			((IMultiBlockTile) tile).invalidateMultiblock();
 	}
 
 	@Override

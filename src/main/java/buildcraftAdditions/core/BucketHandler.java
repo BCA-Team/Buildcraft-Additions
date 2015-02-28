@@ -14,7 +14,7 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 
-import buildcraftAdditions.client.render.BucketItemRenderer;
+import buildcraftAdditions.client.render.items.BucketItemRenderer;
 import buildcraftAdditions.items.ItemBucketBCA;
 
 /**
@@ -24,21 +24,21 @@ import buildcraftAdditions.items.ItemBucketBCA;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BucketHandler {
+public final class BucketHandler {
 
-	private static BucketHandler INSTANCE = new BucketHandler();
+	private static final BucketHandler INSTANCE = new BucketHandler();
 
 	private final HashMap<Block, ItemStack> bucketMap = new HashMap<Block, ItemStack>();
+
+	private BucketHandler() {
+		MinecraftForge.EVENT_BUS.register(this);
+	}
 
 	public static void registerBucket(Fluid fluid, ItemStack bucket) {
 		if (fluid != null && fluid.getBlock() != null && bucket != null && bucket.getItem() != null && bucket.stackSize > 0) {
 			FluidContainerRegistry.registerFluidContainer(fluid, bucket.copy(), FluidContainerRegistry.EMPTY_BUCKET);
 			INSTANCE.bucketMap.put(fluid.getBlock(), bucket.copy());
 		}
-	}
-
-	public static void register() {
-		MinecraftForge.EVENT_BUS.register(INSTANCE);
 	}
 
 	public static void registerRenderers() {

@@ -11,9 +11,9 @@ import java.util.UUID;
  */
 public interface IOwnableMachine {
 
-	void setOwner(UUID owner);
-
 	UUID getOwner();
+
+	void setOwner(UUID owner);
 
 	boolean hasOwner();
 

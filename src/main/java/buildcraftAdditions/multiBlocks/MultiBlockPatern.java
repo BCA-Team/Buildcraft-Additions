@@ -21,8 +21,9 @@ import buildcraftAdditions.utils.RotationUtils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class MultiBlockPatern {
-	protected ForgeDirection directions[], rotatedDirections[];
-	protected char identifiers[];
+	protected final ForgeDirection directions[];
+	protected final char[] identifiers;
+	protected ForgeDirection rotatedDirections[];
 	protected HashMap<String, String> replacements = new HashMap<String, String>(5);
 	protected boolean rotatable;
 
@@ -66,7 +67,7 @@ public class MultiBlockPatern {
 			}
 		}
 		if (valid) {
-			rotatedDirections = RotationUtils.rotateDirections(directions, rotation);
+			rotatedDirections = RotationUtils.rotateDirections(rotation, directions);
 			Location location = new Location(world, x, y, z);
 			for (ForgeDirection direction : rotatedDirections) {
 				location.move(direction);
@@ -84,7 +85,7 @@ public class MultiBlockPatern {
 	public boolean isPaternValid(World world, int startX, int startY, int startZ, int rotationIndex) {
 		Location location = new Location(world, startX, startY, startZ);
 		int length = directions.length;
-		rotatedDirections = RotationUtils.rotateDirections(directions, rotationIndex);
+		rotatedDirections = RotationUtils.rotateDirections(rotationIndex, directions);
 		for (int t = 0; t < length; t++) {
 			ForgeDirection direction = rotatedDirections[t];
 			location.move(direction);
@@ -126,7 +127,7 @@ public class MultiBlockPatern {
 
 	public void destroyMultiblock(World world, int x, int y, int z, int rotationIndex) {
 		Location location = new Location(world, x, y, z);
-		rotatedDirections = RotationUtils.rotateDirections(directions, rotationIndex);
+		rotatedDirections = RotationUtils.rotateDirections(rotationIndex, directions);
 		for (ForgeDirection direction : rotatedDirections) {
 			location.move(direction);
 			if (location.getTileEntity() instanceof IMultiBlockTile)
@@ -137,7 +138,7 @@ public class MultiBlockPatern {
 	public ArrayList<Location> getLocations(World world, int masterX, int masterY, int masterZ, int rotationIndex) {
 		ArrayList<Location> list = new ArrayList<Location>(directions.length);
 		Location location = new Location(world, masterX, masterY, masterZ);
-		rotatedDirections = RotationUtils.rotateDirections(directions, rotationIndex);
+		rotatedDirections = RotationUtils.rotateDirections(rotationIndex, directions);
 		for (ForgeDirection direction : rotatedDirections) {
 			location.move(direction);
 			list.add(location.copy());
@@ -157,7 +158,7 @@ public class MultiBlockPatern {
 	}
 
 	public void letNeighboursKnow(World world, int x, int y, int z, int rotationIndex) {
-		rotatedDirections = RotationUtils.rotateDirections(directions, rotationIndex);
+		rotatedDirections = RotationUtils.rotateDirections(rotationIndex, directions);
 		Location location = new Location(world, x, y, z);
 		for (ForgeDirection direction : rotatedDirections) {
 			location.move(direction);
@@ -165,12 +166,12 @@ public class MultiBlockPatern {
 		}
 	}
 
+	public boolean isRotatable() {
+		return rotatable;
+	}
+
 	public MultiBlockPatern setRotatable(boolean rotatable) {
 		this.rotatable = rotatable;
 		return this;
-	}
-
-	public boolean isRotatable() {
-		return rotatable;
 	}
 }

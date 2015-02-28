@@ -1,7 +1,12 @@
 package buildcraftAdditions.blocks;
 
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import buildcraftAdditions.utils.RenderUtils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -10,13 +15,17 @@ import net.minecraft.block.material.Material;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class BlockCoilBase extends BlockContainer {
+public abstract class BlockCoilBase extends BlockBase {
 
-	public BlockCoilBase() {
-		super(Material.iron);
-		setHardness(5F);
-		setResistance(10F);
+	private final String coilType;
+
+	@SideOnly(Side.CLIENT)
+	private IIcon sides, top, bottom;
+
+	public BlockCoilBase(String coilType) {
+		super("blockCoil" + coilType);
 		setBlockBounds(2F / 10F, 0, 2F / 10F, 8F / 10F, 1, 8F / 10F);
+		this.coilType = coilType;
 	}
 
 	@Override
@@ -29,4 +38,30 @@ public abstract class BlockCoilBase extends BlockContainer {
 		return false;
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta) {
+		if (meta == 0 && side == 3)
+			return sides;
+
+		if (side == meta && side > 1)
+			return sides;
+
+		switch (side) {
+			case 0:
+				return bottom;
+			case 1:
+				return top;
+			default:
+				return sides;
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister register) {
+		sides = RenderUtils.registerIcon(register, "coil" + coilType + "Sides");
+		top = RenderUtils.registerIcon(register, "coil" + coilType + "Top");
+		bottom = RenderUtils.registerIcon(register, "coil" + coilType + "Bottom");
+	}
 }

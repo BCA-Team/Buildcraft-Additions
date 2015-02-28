@@ -1,14 +1,15 @@
 package buildcraftAdditions.ModIntegration.Framez;
 
+import com.amadornes.framez.api.movement.BlockMovementType;
+import com.amadornes.framez.api.movement.IMovementHandler;
+import com.amadornes.framez.api.movement.IMovingBlock;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 
-import com.amadornes.framez.api.movement.BlockMovementType;
-import com.amadornes.framez.api.movement.IMovementHandler;
-import com.amadornes.framez.api.movement.IMovingBlock;
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
