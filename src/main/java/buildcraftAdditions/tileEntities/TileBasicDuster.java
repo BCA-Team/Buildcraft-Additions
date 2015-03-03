@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
+import net.minecraft.entity.player.EntityPlayer;
+
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
@@ -22,5 +24,21 @@ public class TileBasicDuster extends TileBaseDuster {
 	public void dust() {
 		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput(getStackInSlot(0)));
 		setInventorySlotContents(0, null);
+	}
+
+	@Override
+	public double getProgress() {
+		return progress / 8D;
+	}
+
+	public void makeProgress(EntityPlayer player) {
+		if (BCARecipeManager.duster.getRecipe(getStackInSlot(0)) != null) {
+			progress++;
+			if (progress >= 8) {
+				dust();
+				progress = 0;
+				makeEurekaProgress(player);
+			}
+		}
 	}
 }

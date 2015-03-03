@@ -34,17 +34,7 @@ public abstract class BlockBase extends BlockContainer {
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		TileEntity tile = world.getTileEntity(x, y, z);
-		if (tile != null && tile instanceof IInventory) {
-			IInventory inventory = (IInventory) tile;
-			for (int i = 0; i < inventory.getSizeInventory(); i++) {
-				ItemStack stack = inventory.getStackInSlot(i);
-				if (stack != null) {
-					inventory.setInventorySlotContents(i, null);
-					Utils.dropItemstack(world, x, y, z, stack);
-				}
-			}
-		}
+		Utils.dropInventory(world, x, y, z);
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 }

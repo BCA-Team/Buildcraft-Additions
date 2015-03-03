@@ -12,6 +12,7 @@ import com.google.common.base.Strings;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
@@ -88,15 +89,36 @@ public class Utils {
 		return !Strings.isNullOrEmpty(string) ? Character.toLowerCase(string.charAt(0)) + string.substring(1) : null;
 	}
 
+	public static void dropInventory(World world, int x, int y, int z) {
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if (tile != null && tile instanceof IInventory) {
+			IInventory inventory = (IInventory) tile;
+			for (int i = 0; i < inventory.getSizeInventory(); i++) {
+				dropItemstack(world, x, y, z, inventory.getStackInSlot(i));
+				inventory.setInventorySlotContents(i, null);
+			}
+		}
+	}
+
 	public static void dropItemstack(World world, int x, int y, int z, ItemStack stack) {
-		float f1 = 0.7F;
-		double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-		double d1 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-		double d2 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
-		EntityItem itemToDrop = new EntityItem(world, x + d, y + d1, z + d2, stack);
-		itemToDrop.delayBeforeCanPickup = 10;
-		if (!world.isRemote)
-			world.spawnEntityInWorld(itemToDrop);
+		if (!world.isRemote && stack != null && stack.stackSize > 0 && stack.getItem() != null) {
+			float rx = world.rand.nextFloat() * 0.8F + 0.1F;
+			float ry = world.rand.nextFloat() * 0.8F + 0.1F;
+			float rz = world.rand.nextFloat() * 0.8F + 0.1F;
+			EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, stack.copy());
+			float factor = 0.05F;
+			entityItem.motionX = (world.rand.nextGaussian() * factor);
+			entityItem.motionY = (world.rand.nextGaussian() * factor + 0.2000000029802322D);
+			entityItem.motionZ = (world.rand.nextGaussian() * factor);
+			world.spawnEntityInWorld(entityItem);
+		}
+	}
+
+	public static void dropItemstackAtEntity(Entity entity, ItemStack stack) {
+		if (!entity.worldObj.isRemote) {
+			EntityItem entityItem = new EntityItem(entity.worldObj, entity.posX, entity.posY + entity.getEyeHeight() / 2.0F, entity.posZ, stack.copy());
+			entity.worldObj.spawnEntityInWorld(entityItem);
+		}
 	}
 
 	public static void setGLColorFromInt(int color) {

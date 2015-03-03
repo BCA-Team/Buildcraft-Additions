@@ -11,10 +11,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 
-import buildcraftAdditions.api.networking.MessageByteBuff;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
+import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
 import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.networking.PacketHandler;
 
 import eureka.api.EurekaKnowledge;
 
@@ -35,23 +34,18 @@ public abstract class TileBaseDuster extends TileBase implements ISidedInventory
 		this.key = key;
 	}
 
-	public void makeProgress(EntityPlayer player) {
-		if (BCARecipeManager.duster.getRecipe(getStackInSlot(0)) != null) {
-			progress++;
-			if (progress >= 8) {
-				dust();
-				progress = 0;
-				makeEurekaProgress(player);
-			}
-		}
-	}
-
 	@Override
 	public boolean canUpdate() {
 		return false;
 	}
 
 	public abstract void dust();
+
+	public abstract double getProgress();
+
+	public IDusterRecipe getRecipe() {
+		return BCARecipeManager.duster.getRecipe(getStackInSlot(0));
+	}
 
 	public void makeEurekaProgress(EntityPlayer player) {
 		if (!Strings.isNullOrEmpty(key))
@@ -84,14 +78,6 @@ public abstract class TileBaseDuster extends TileBase implements ISidedInventory
 		super.readFromNBT(tag);
 		progress = tag.getInteger("progress");
 		inventory.readNBT(tag);
-	}
-
-	@Override
-	public void markDirty() {
-		super.markDirty();
-		if (!worldObj.isRemote)
-			PacketHandler.instance.sendToAll(new MessageByteBuff(this));
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override

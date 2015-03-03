@@ -73,6 +73,11 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 	}
 
 	@Override
+	public double getProgress() {
+		return progress / 100D;
+	}
+
+	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		tag.setInteger("energy", energy);

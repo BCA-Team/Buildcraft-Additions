@@ -44,7 +44,7 @@ public class BlockSemiAutomaticDuster extends BlockDusterBase {
 			if (tileEntity instanceof TileSemiAutomaticDuster) {
 				EntityPlayer player = (EntityPlayer) entity;
 				if (EurekaKnowledge.isFinished(player, Variables.Eureka.DustT1Key))
-					((TileSemiAutomaticDuster) tileEntity).makeProgress((EntityPlayer) entity);
+					((TileSemiAutomaticDuster) tileEntity).makeProgress(player);
 			}
 		}
 	}

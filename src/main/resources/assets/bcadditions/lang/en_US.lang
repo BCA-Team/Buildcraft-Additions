@@ -443,9 +443,15 @@ rf.change.info=%d / %d RF/t
 
 lavaCoil.info=Lava stored: %s
 
+option.bca.duster.progress.graphical=Graphical Duster Progress
+option.bca.duster.progress.textual=Textual Duster Progress
+
 waila.refinery.noMultiBlock=Not part of a multiblock
 waila.refinery.currentHeat=Current heat: %d
 waila.refinery.requiredHeat=Required heat: %d
 waila.refinery.processing=Refining %s into %s
 
 waila.upgrades.installed=Installed upgrades:
+
+waila.duster.recipe=%s -> %s
+waila.duster.progress=Progress

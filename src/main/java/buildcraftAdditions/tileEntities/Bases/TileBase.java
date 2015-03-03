@@ -1,5 +1,9 @@
 package buildcraftAdditions.tileEntities.Bases;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -36,6 +40,15 @@ public abstract class TileBase extends TileEntity implements ISyncronizedTile {
 	}
 
 	@Override
+	public void markDirty() {
+		super.markDirty();
+		if (worldObj != null) {
+			sync();
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
+	}
+
+	@Override
 	public int getX() {
 		return xCoord;
 	}
@@ -48,5 +61,17 @@ public abstract class TileBase extends TileEntity implements ISyncronizedTile {
 	@Override
 	public int getZ() {
 		return zCoord;
+	}
+
+	@Override
+	public Packet getDescriptionPacket() {
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, Byte.MAX_VALUE, nbt);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+		readFromNBT(pkt.func_148857_g());
 	}
 }

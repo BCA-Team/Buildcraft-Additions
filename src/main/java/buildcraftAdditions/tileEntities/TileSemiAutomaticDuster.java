@@ -1,5 +1,8 @@
 package buildcraftAdditions.tileEntities;
 
+import net.minecraft.entity.player.EntityPlayer;
+
+import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
 
@@ -16,4 +19,19 @@ public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 		super(Variables.Eureka.DustT2Key1);
 	}
 
+	@Override
+	public double getProgress() {
+		return progress / 8D;
+	}
+
+	public void makeProgress(EntityPlayer player) {
+		if (BCARecipeManager.duster.getRecipe(getStackInSlot(0)) != null) {
+			progress++;
+			if (progress >= 8) {
+				dust();
+				progress = 0;
+				makeEurekaProgress(player);
+			}
+		}
+	}
 }

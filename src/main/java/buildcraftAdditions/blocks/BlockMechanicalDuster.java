@@ -1,8 +1,6 @@
 package buildcraftAdditions.blocks;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -13,7 +11,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.tileEntities.TileMechanicalDuster;
 import buildcraftAdditions.utils.RenderUtils;
-import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -34,30 +31,6 @@ public class BlockMechanicalDuster extends BlockDusterBase {
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileMechanicalDuster();
-	}
-
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (player.isSneaking())
-			return false;
-		TileMechanicalDuster duster = (TileMechanicalDuster) world.getTileEntity(x, y, z);
-		duster.player = player;
-		if (duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
-			ItemStack stack = player.getCurrentEquippedItem().copy();
-			stack.stackSize = 1;
-			duster.setInventorySlotContents(0, stack);
-			player.getCurrentEquippedItem().stackSize--;
-			if (player.getCurrentEquippedItem().stackSize <= 0)
-				player.setCurrentItemOrArmor(0, null);
-		} else {
-			if (duster.getStackInSlot(0) != null) {
-				if (!world.isRemote)
-					Utils.dropItemstack(world, x, y, z, duster.getStackInSlot(0));
-				duster.setInventorySlotContents(0, null);
-			}
-		}
-		world.markBlockForUpdate(x, y, z);
-		return true;
 	}
 
 	@Override

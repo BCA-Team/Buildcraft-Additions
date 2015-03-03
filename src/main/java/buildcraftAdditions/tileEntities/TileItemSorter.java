@@ -13,9 +13,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.core.EnumColor;
+import buildcraft.api.items.IList;
 import buildcraft.api.transport.IPipeConnection;
 import buildcraft.api.transport.IPipeTile;
-import buildcraft.core.ItemList;
 
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
@@ -66,7 +66,7 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 	}
 
 	private boolean areStackEqual(ItemStack stack1, ItemStack stack2) {
-		return stack1 != null && stack1.getItem() instanceof ItemList && ItemList.matches(stack1, stack2) || stack1 == null && stack2 == null || !(stack1 == null || stack2 == null) && stack1.getItem() == stack2.getItem() && stack1.getItemDamage() == stack2.getItemDamage() && !(stack1.stackTagCompound == null && stack2.stackTagCompound != null) && (stack1.stackTagCompound == null || stack1.stackTagCompound.equals(stack2.stackTagCompound));
+		return stack1 != null && stack1.getItem() instanceof IList && ((IList) stack1.getItem()).matches(stack1, stack2) || stack1 == null && stack2 == null || !(stack1 == null || stack2 == null) && stack1.getItem() == stack2.getItem() && stack1.getItemDamage() == stack2.getItemDamage() && !(stack1.stackTagCompound == null && stack2.stackTagCompound != null) && (stack1.stackTagCompound == null || stack1.stackTagCompound.equals(stack2.stackTagCompound));
 	}
 
 	private TileEntity getTileFromDirection(ForgeDirection dir) {

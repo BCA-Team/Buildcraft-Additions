@@ -46,9 +46,10 @@ public abstract class BlockDusterBase extends BlockBase {
 					player.setCurrentItemOrArmor(0, null);
 			} else if (duster.getStackInSlot(0) != null) {
 				if (!world.isRemote)
-					Utils.dropItemstack(world, x, y, z, duster.getStackInSlot(0));
+					Utils.dropItemstackAtEntity(player, duster.getStackInSlot(0));
 				duster.setInventorySlotContents(0, null);
 			}
+			duster.progress = 0;
 		}
 		return true;
 	}
