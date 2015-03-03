@@ -1,7 +1,6 @@
 package buildcraftAdditions.blocks;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -23,23 +22,18 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockMechanicalDuster extends BlockBase {
+public class BlockMechanicalDuster extends BlockDusterBase {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon front, sides, bottom, top[];
 
 	public BlockMechanicalDuster() {
-		super("blockDusterMechanical");
+		super("Mechanical");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileMechanicalDuster();
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
 	}
 
 	@Override
@@ -64,11 +58,6 @@ public class BlockMechanicalDuster extends BlockBase {
 		}
 		world.markBlockForUpdate(x, y, z);
 		return true;
-	}
-
-	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
-		world.setBlockMetadataWithNotify(x, y, z, Utils.get2dOrientation(entity).getOpposite().ordinal(), 1);
 	}
 
 	@Override
@@ -117,13 +106,13 @@ public class BlockMechanicalDuster extends BlockBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
-		front = RenderUtils.registerIcon(register, "dusterMechanicalFront");
-		sides = RenderUtils.registerIcon(register, "dusterMechanicalSides");
-		bottom = RenderUtils.registerIcon(register, "dusterMechanicalBottom");
+		front = RenderUtils.registerIcon(register, "duster" + type + "Front");
+		sides = RenderUtils.registerIcon(register, "duster" + type + "Sides");
+		bottom = RenderUtils.registerIcon(register, "duster" + type + "Bottom");
 		top = new IIcon[4];
-		top[0] = RenderUtils.registerIcon(register, "dusterMechanicalTop0");
-		top[1] = RenderUtils.registerIcon(register, "dusterMechanicalTop1");
-		top[2] = RenderUtils.registerIcon(register, "dusterMechanicalTop2");
-		top[3] = RenderUtils.registerIcon(register, "dusterMechanicalTop3");
+		top[0] = RenderUtils.registerIcon(register, "duster" + type + "Top0");
+		top[1] = RenderUtils.registerIcon(register, "duster" + type + "Top1");
+		top[2] = RenderUtils.registerIcon(register, "duster" + type + "Top2");
+		top[3] = RenderUtils.registerIcon(register, "duster" + type + "Top3");
 	}
 }

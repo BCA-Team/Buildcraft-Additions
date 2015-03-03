@@ -66,6 +66,7 @@ public class ModIntegration {
 		addNuggets("Gold");
 		addNuggets("Copper");
 		addNuggets("Tin");
+		addNuggets("Lead");
 	}
 
 	private static void eurekaResearch() {

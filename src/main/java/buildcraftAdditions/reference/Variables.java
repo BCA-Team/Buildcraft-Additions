@@ -16,6 +16,8 @@ import buildcraftAdditions.multiBlocks.MultiBlockPaternRefinery;
 
 public final class Variables {
 
+	public static final int NETWORK_RANGE = 64;
+
 	//GUI ID's
 	public static enum Gui {
 		FLUIDIC_COMPRESSOR,

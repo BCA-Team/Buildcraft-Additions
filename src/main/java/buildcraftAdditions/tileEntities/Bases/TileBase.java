@@ -7,6 +7,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import buildcraftAdditions.api.networking.ISyncronizedTile;
 import buildcraftAdditions.api.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandler;
+import buildcraftAdditions.reference.Variables;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -16,8 +17,8 @@ import buildcraftAdditions.networking.PacketHandler;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class TileBase extends TileEntity implements ISyncronizedTile {
+
 	public int timer;
-	public int networkRange = 15;
 
 	@Override
 	public void updateEntity() {
@@ -30,7 +31,7 @@ public abstract class TileBase extends TileEntity implements ISyncronizedTile {
 
 	public void sync() {
 		if (!worldObj.isRemote) {
-			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
+			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), Variables.NETWORK_RANGE));
 		}
 	}
 

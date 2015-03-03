@@ -57,14 +57,36 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 
 	@Override
 	public ByteBuf writeToByteBuff(ByteBuf buf) {
-		configuration.writeToByteBuff(buf);
+		buf = super.writeToByteBuff(buf);
+		buf = configuration.writeToByteBuff(buf);
 		return buf;
 	}
 
 	@Override
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
-		configuration.readFromByteBuff(buf);
+		buf = super.readFromByteBuff(buf);
+		buf = configuration.readFromByteBuff(buf);
 		return buf;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+		return true;
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int side) {
+		return configuration.canReceive(ForgeDirection.getOrientation(side)) ? new int[]{0} : new int[0];
+	}
+
+	@Override
+	public boolean canInsertItem(int slot, ItemStack stack, int side) {
+		return configuration.canReceive(ForgeDirection.getOrientation(side));
+	}
+
+	@Override
+	public boolean canExtractItem(int slot, ItemStack item, int side) {
+		return configuration.canSend(ForgeDirection.getOrientation(side));
 	}
 
 	@Override
@@ -148,7 +170,6 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 			Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, output);
 
 		setInventorySlotContents(0, null);
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override

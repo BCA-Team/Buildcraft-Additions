@@ -3,8 +3,6 @@ package buildcraftAdditions.tileEntities;
 import io.netty.buffer.ByteBuf;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
@@ -15,8 +13,8 @@ import cofh.api.energy.IEnergyReceiver;
 
 import buildcraftAdditions.api.networking.MessageByteBuff;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
-import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.PacketHandler;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;
 
@@ -28,14 +26,13 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileMechanicalDuster extends TileBaseDuster implements IEnergyReceiver {
-	public final int maxEnergy;
-	private final CustomInventory inventory = new CustomInventory("mechanicalDuster", 1, 1, this);
-	public int progress, progressStage, oldProgressStage, energy;
+
+	public final int maxEnergy = 2000;
+	public int progressStage, oldProgressStage, energy;
 	public EntityPlayer player;
 
 	public TileMechanicalDuster() {
-		super("dusterTier2-2");
-		maxEnergy = 2000;
+		super(Variables.Eureka.DustT2Key2);
 	}
 
 	@Override
@@ -46,10 +43,10 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if (energy >= 4) {
+		if (energy >= 10) {
 			if (BCARecipeManager.duster.getRecipe(getStackInSlot(0)) != null) {
 				progress++;
-				energy -= 4;
+				energy -= 10;
 				oldProgressStage = progressStage;
 				if (progress > 25)
 					progressStage = 1;
@@ -60,100 +57,33 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 				if (progress >= 100) {
 					dust();
 					if (player != null)
-						makeProgress(player, "dusterTier2-2");
+						makeEurekaProgress(player);
 					progress = 0;
 					progressStage = 0;
 				}
-
-
 			} else {
 				progress = 0;
 				progressStage = 0;
 			}
 		}
 		if (oldProgressStage != progressStage) {
-			TargetPoint point = new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30);
-			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), point);
+			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, Variables.NETWORK_RANGE));
 			oldProgressStage = progressStage;
 		}
 	}
 
 	@Override
-	public int getSizeInventory() {
-		return inventory.getSizeInventory();
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int slot) {
-		return inventory.getStackInSlot(slot);
-	}
-
-	@Override
-	public ItemStack decrStackSize(int slot, int amount) {
-		return inventory.decrStackSize(slot, amount);
-	}
-
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-		return inventory.getStackInSlotOnClosing(slot);
-	}
-
-	@Override
-	public void setInventorySlotContents(int slot, ItemStack stack) {
-		inventory.setInventorySlotContents(slot, stack);
-	}
-
-	@Override
-	public String getInventoryName() {
-		return inventory.getInventoryName();
-	}
-
-	@Override
-	public boolean hasCustomInventoryName() {
-		return inventory.hasCustomInventoryName();
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return inventory.getInventoryStackLimit();
-	}
-
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
-		return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this
-				&& player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D,
-				zCoord + 0.5D) <= 64.0D;
-	}
-
-	@Override
-	public void openInventory() {
-
-	}
-
-	@Override
-	public void closeInventory() {
-
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return false;
-	}
-
-	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		inventory.writeNBT(tag);
-		tag.setInteger("progress", progress);
 		tag.setInteger("energy", energy);
+		tag.setInteger("progressStage", progressStage);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		inventory.readNBT(tag);
-		progress = tag.getInteger("progress");
 		energy = tag.getInteger("energy");
+		progressStage = tag.getInteger("progressStage");
 	}
 
 	@Override
@@ -161,7 +91,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput(getStackInSlot(0)));
 		setInventorySlotContents(0, null);
 		if (!worldObj.isRemote)
-			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
+			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, Variables.NETWORK_RANGE));
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -191,37 +121,18 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
-		return new int[]{0};
-	}
-
-	@Override
-	public boolean canInsertItem(int slot, ItemStack stack, int side) {
-		return true;
-	}
-
-	@Override
-	public boolean canExtractItem(int slot, ItemStack item, int side) {
-		return false;
-	}
-
-	@Override
 	public ByteBuf readFromByteBuff(ByteBuf buf) {
 		buf = super.readFromByteBuff(buf);
-		int id = buf.readInt();
-		int meta = buf.readInt();
-		ItemStack stack = id == -1 ? null : new ItemStack(Item.getItemById(id), 1, meta);
-		setInventorySlotContents(0, stack);
+		energy = buf.readInt();
+		progressStage = buf.readInt();
 		return buf;
 	}
 
 	@Override
 	public ByteBuf writeToByteBuff(ByteBuf buf) {
 		buf = super.writeToByteBuff(buf);
-		int id = getStackInSlot(0) == null ? -1 : Item.getIdFromItem(getStackInSlot(0).getItem());
-		int meta = getStackInSlot(0) == null ? -1 : getStackInSlot(0).getItemDamage();
-		buf.writeInt(id);
-		buf.writeInt(meta);
+		buf = buf.writeInt(energy);
+		buf = buf.writeInt(progressStage);
 		return buf;
 	}
 }

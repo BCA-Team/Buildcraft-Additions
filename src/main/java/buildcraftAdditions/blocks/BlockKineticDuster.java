@@ -1,9 +1,6 @@
 package buildcraftAdditions.blocks;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -16,7 +13,6 @@ import buildcraft.api.power.ILaserTargetBlock;
 
 import buildcraftAdditions.tileEntities.TileKineticDuster;
 import buildcraftAdditions.utils.RenderUtils;
-import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -25,66 +21,30 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockKineticDuster extends BlockBase implements ILaserTargetBlock {
+public class BlockKineticDuster extends BlockDusterBase implements ILaserTargetBlock {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon bottom, sides[], top;
 
 	public BlockKineticDuster() {
-		super("blockDusterKinetic");
+		super("Kinetic");
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int getal) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileKineticDuster();
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (player.isSneaking())
-			return false;
-		TileKineticDuster duster = (TileKineticDuster) world.getTileEntity(x, y, z);
-		if (duster != null) {
-			if (duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
-				ItemStack stack = player.getCurrentEquippedItem().copy();
-				stack.stackSize = 1;
-				duster.setInventorySlotContents(0, stack);
-				player.getCurrentEquippedItem().stackSize--;
-				if (player.getCurrentEquippedItem().stackSize <= 0)
-					player.setCurrentItemOrArmor(0, null);
-			} else {
-				if (duster.getStackInSlot(0) != null) {
-					if (!world.isRemote)
-						Utils.dropItemstack(world, x, y, z, duster.getStackInSlot(0));
-					duster.setInventorySlotContents(0, null);
-				}
-			}
-			world.markBlockForUpdate(x, y, z);
-		}
-		return true;
-	}
-
-	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entity, ItemStack stack) {
-		world.setBlockMetadataWithNotify(i, j, k, Utils.get2dOrientation(entity).getOpposite().ordinal(), 1);
-
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side) {
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
 		switch (side) {
 			case 0:
 				return bottom;
 			case 1:
 				return top;
 		}
-		TileKineticDuster duster = (TileKineticDuster) access.getTileEntity(x, y, z);
+		TileKineticDuster duster = (TileKineticDuster) world.getTileEntity(x, y, z);
 		return sides[duster.progressStage];
 	}
 
@@ -104,11 +64,11 @@ public class BlockKineticDuster extends BlockBase implements ILaserTargetBlock {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		sides = new IIcon[4];
-		sides[0] = RenderUtils.registerIcon(register, "dusterKineticSide0");
-		sides[1] = RenderUtils.registerIcon(register, "dusterKineticSide1");
-		sides[2] = RenderUtils.registerIcon(register, "dusterKineticSide2");
-		sides[3] = RenderUtils.registerIcon(register, "dusterKineticSide3");
-		bottom = RenderUtils.registerIcon(register, "dusterKineticBottom");
-		top = RenderUtils.registerIcon(register, "dusterKineticTop");
+		sides[0] = RenderUtils.registerIcon(register, "duster" + type + "Side0");
+		sides[1] = RenderUtils.registerIcon(register, "duster" + type + "Side1");
+		sides[2] = RenderUtils.registerIcon(register, "duster" + type + "Side2");
+		sides[3] = RenderUtils.registerIcon(register, "duster" + type + "Side3");
+		bottom = RenderUtils.registerIcon(register, "duster" + type + "Bottom");
+		top = RenderUtils.registerIcon(register, "duster" + type + "Top");
 	}
 }

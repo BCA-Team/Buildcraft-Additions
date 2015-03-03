@@ -15,13 +15,14 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 
 import buildcraftAdditions.api.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandler;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 
 public class ContainerFluidicCompressor extends ContainerBase<TileFluidicCompressor> {
 
 	public ContainerFluidicCompressor(InventoryPlayer inventoryPlayer, TileFluidicCompressor tile) {
 		super(inventoryPlayer, tile);
-		PacketHandler.instance.sendToAllAround(new MessageByteBuff(tile), new NetworkRegistry.TargetPoint(tile.getWorldObj().provider.dimensionId, tile.xCoord, tile.yCoord, tile.zCoord, 5));
+		PacketHandler.instance.sendToAllAround(new MessageByteBuff(tile), new NetworkRegistry.TargetPoint(tile.getWorldObj().provider.dimensionId, tile.xCoord, tile.yCoord, tile.zCoord, Variables.NETWORK_RANGE));
 		addSlotToContainer(new Slot(tile, 0, 89, 39));
 		addSlotToContainer(new Slot(tile, 1, 126, 43));
 		addPlayerInventory(8, 103);

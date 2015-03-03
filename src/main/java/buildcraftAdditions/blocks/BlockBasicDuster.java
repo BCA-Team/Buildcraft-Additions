@@ -2,9 +2,7 @@ package buildcraftAdditions.blocks;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -14,10 +12,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.utils.RenderUtils;
-import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -26,19 +22,13 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockBasicDuster extends BlockBase {
+public class BlockBasicDuster extends BlockDusterBase {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon front, back, sides, top, bottom;
 
 	public BlockBasicDuster() {
-		super("blockDusterBasic");
-	}
-
-	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
-		world.setBlockMetadataWithNotify(x, y, z, Utils.get2dOrientation(entity).getOpposite().ordinal(), 1);
-
+		super("Basic");
 	}
 
 	@Override
@@ -47,43 +37,12 @@ public class BlockBasicDuster extends BlockBase {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (player.isSneaking())
-			return false;
-
-		TileBaseDuster duster = (TileBaseDuster) world.getTileEntity(x, y, z);
-		if (duster != null) {
-			if (duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
-				ItemStack stack = player.getCurrentEquippedItem().copy();
-				stack.stackSize = 1;
-				duster.setInventorySlotContents(0, stack);
-				player.getCurrentEquippedItem().stackSize--;
-				if (player.getCurrentEquippedItem().stackSize <= 0)
-					player.setCurrentItemOrArmor(0, null);
-			} else {
-				if (duster.getStackInSlot(0) != null) {
-					if (!world.isRemote)
-						Utils.dropItemstack(world, x, y, z, duster.getStackInSlot(0));
-					duster.setInventorySlotContents(0, null);
-				}
-			}
-			world.markBlockForUpdate(x, y, z);
-		}
-		return true;
-	}
-
-	@Override
-	public void onFallenUpon(World world, int x, int y, int z, Entity entity, float hit) {
+	public void onFallenUpon(World world, int x, int y, int z, Entity entity, float fallDistance) {
 		if (entity instanceof EntityPlayer) {
 			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof TileBasicDuster)
 				((TileBasicDuster) tileEntity).makeProgress((EntityPlayer) entity);
 		}
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
 	}
 
 	@Override

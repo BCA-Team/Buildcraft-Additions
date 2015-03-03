@@ -2,9 +2,7 @@ package buildcraftAdditions.blocks;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -13,10 +11,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.reference.Variables;
-import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
 import buildcraftAdditions.utils.RenderUtils;
-import buildcraftAdditions.utils.Utils;
 
 import eureka.api.EurekaKnowledge;
 
@@ -27,43 +23,13 @@ import eureka.api.EurekaKnowledge;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockSemiAutomaticDuster extends BlockBase {
+public class BlockSemiAutomaticDuster extends BlockDusterBase {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon front, sides, top, bottom;
 
 	public BlockSemiAutomaticDuster() {
-		super("blockDusterSemiAutomatic");
-	}
-
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (player.isSneaking())
-			return false;
-		TileBaseDuster duster = (TileBaseDuster) world.getTileEntity(x, y, z);
-		if (duster != null) {
-			if (duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
-				ItemStack stack = player.getCurrentEquippedItem().copy();
-				stack.stackSize = 1;
-				duster.setInventorySlotContents(0, stack);
-				player.getCurrentEquippedItem().stackSize--;
-				if (player.getCurrentEquippedItem().stackSize <= 0)
-					player.setCurrentItemOrArmor(0, null);
-			} else {
-				if (duster.getStackInSlot(0) != null) {
-					if (!world.isRemote)
-						Utils.dropItemstack(world, x, y, z, duster.getStackInSlot(0));
-					duster.setInventorySlotContents(0, null);
-				}
-			}
-			world.markBlockForUpdate(x, y, z);
-		}
-		return true;
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
+		super("SemiAutomatic");
 	}
 
 	@Override
@@ -81,12 +47,6 @@ public class BlockSemiAutomaticDuster extends BlockBase {
 					((TileSemiAutomaticDuster) tileEntity).makeProgress((EntityPlayer) entity);
 			}
 		}
-	}
-
-	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
-		world.setBlockMetadataWithNotify(x, y, z, Utils.get2dOrientation(entity).getOpposite().ordinal(), 1);
-
 	}
 
 	@Override
@@ -110,9 +70,9 @@ public class BlockSemiAutomaticDuster extends BlockBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
-		front = RenderUtils.registerIcon(register, "dusterSemiAutomaticFront");
-		sides = RenderUtils.registerIcon(register, "dusterSemiAutomaticSides");
-		top = RenderUtils.registerIcon(register, "dusterSemiAutomaticTop");
-		bottom = RenderUtils.registerIcon(register, "dusterSemiAutomaticBottom");
+		front = RenderUtils.registerIcon(register, "duster" + type + "Front");
+		sides = RenderUtils.registerIcon(register, "duster" + type + "Sides");
+		top = RenderUtils.registerIcon(register, "duster" + type + "Top");
+		bottom = RenderUtils.registerIcon(register, "duster" + type + "Bottom");
 	}
 }
