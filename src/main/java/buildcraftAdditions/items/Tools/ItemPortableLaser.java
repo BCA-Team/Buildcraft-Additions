@@ -70,7 +70,7 @@ public class ItemPortableLaser extends ItemBase implements IEnergyContainerItem 
 			return;
 		if (f > 1)
 			f = 1;
-		f *= 2;
+		f *= 10;
 		if (getEnergyStored(stack) < (int) (f * ConfigurationHandler.portableLaserPowerUse))
 			return;
 		extractEnergy(stack, (int) (f * ConfigurationHandler.portableLaserPowerUse), false);
@@ -88,7 +88,7 @@ public class ItemPortableLaser extends ItemBase implements IEnergyContainerItem 
 			return;
 		if (f > 1)
 			f = 1;
-		f *= 2;
+		f *= 10;
 		if (getEnergyStored(stack) < f * ConfigurationHandler.portableLaserPowerUse)
 			player.stopUsingItem();
 	}
