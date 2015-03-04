@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-import buildcraft.core.ItemList;
+import buildcraft.api.items.IList;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -21,19 +21,19 @@ public class SlotItemSorter extends SlotPhantom {
 
 	@Override
 	public boolean canTakeStack(EntityPlayer player) {
-		return getHasStack() && getStack().getItem() instanceof ItemList;
+		return getHasStack() && getStack().getItem() instanceof IList;
 	}
 
 	@Override
 	public ItemStack onLeftClick(EntityPlayer player) {
 		ItemStack playerStack = player.inventory.getItemStack();
-		if (playerStack != null && playerStack.getItem() instanceof ItemList) {
+		if (playerStack != null && playerStack.getItem() instanceof IList) {
 			putStack(playerStack.copy());
 			player.inventory.setItemStack(null);
 			onSlotChanged();
 			return null;
 		}
-		if (getHasStack() && getStack().getItem() instanceof ItemList) {
+		if (getHasStack() && getStack().getItem() instanceof IList) {
 			if (playerStack == null) {
 				player.inventory.setItemStack(getStack().copy());
 				putStack(null);
@@ -51,7 +51,7 @@ public class SlotItemSorter extends SlotPhantom {
 	@Override
 	public ItemStack onRightClick(EntityPlayer player) {
 		ItemStack playerStack = player.inventory.getItemStack();
-		if (getHasStack() && getStack().getItem() instanceof ItemList) {
+		if (getHasStack() && getStack().getItem() instanceof IList) {
 			if (playerStack == null)
 				player.inventory.setItemStack(getStack().copy());
 			else

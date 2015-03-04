@@ -1,7 +1,5 @@
 package buildcraftAdditions.tileEntities;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -17,6 +15,8 @@ import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -70,6 +70,11 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, Variables.NETWORK_RANGE));
 			oldProgressStage = progressStage;
 		}
+	}
+
+	@Override
+	public double getProgress() {
+		return progress / 100D;
 	}
 
 	@Override

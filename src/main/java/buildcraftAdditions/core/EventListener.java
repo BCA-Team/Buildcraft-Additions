@@ -110,7 +110,7 @@ public class EventListener {
 						stack.stackTagCompound = tag;
 						event.world.setBlockToAir(event.x, event.y, event.z);
 						event.entityPlayer.swingItem();
-						Utils.dropItemstack(event.world, event.x, event.y, event.z, stack);
+						Utils.addToPlayerInv(event.entityPlayer, stack);
 					}
 				}
 			} else if (event.entityPlayer != null && event.action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem() == ItemsAndBlocks.machineConfigurator) {

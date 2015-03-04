@@ -15,8 +15,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraft.api.items.IList;
 import buildcraft.api.tools.IToolWrench;
-import buildcraft.core.ItemList;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.client.render.blocks.RendererItemSorter;
@@ -113,7 +113,7 @@ public class BlockItemSorter extends BlockBase {
 		for (int i = 1; i < tile.getSizeInventory(); ++i) {
 			ItemStack list = tile.getStackInSlot(i);
 			tile.setInventorySlotContents(i, null);
-			if (list != null && list.getItem() instanceof ItemList)
+			if (list != null && list.getItem() instanceof IList)
 				Utils.dropItemstack(world, x, y, z, list);
 		}
 		tile.closeInventory();

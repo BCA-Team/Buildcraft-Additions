@@ -1,7 +1,5 @@
 package buildcraftAdditions.tileEntities;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.NBTTagCompound;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -13,6 +11,8 @@ import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -37,16 +37,16 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 	@Override
 	public void receiveLaserEnergy(int energy) {
 		progress += energy;
-		if (progress > 20000) {
+		if (progress >= 20000) {
 			progress = 0;
 			progressStage = 0;
 			dust();
 		} else {
-			if (progress > 15000)
+			if (progress >= 15000)
 				progressStage = 3;
-			else if (progress > 10000)
+			else if (progress >= 10000)
 				progressStage = 2;
-			else if (progress > 5000)
+			else if (progress >= 5000)
 				progressStage = 1;
 			else
 				progressStage = 0;
@@ -55,6 +55,11 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, Variables.NETWORK_RANGE));
 			oldProgressStage = progressStage;
 		}
+	}
+
+	@Override
+	public double getProgress() {
+		return progress / 20000D;
 	}
 
 	@Override
