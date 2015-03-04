@@ -15,6 +15,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -119,6 +120,11 @@ public class Utils {
 			EntityItem entityItem = new EntityItem(entity.worldObj, entity.posX, entity.posY + entity.getEyeHeight() / 2.0F, entity.posZ, stack.copy());
 			entity.worldObj.spawnEntityInWorld(entityItem);
 		}
+	}
+
+	public static void addToPlayerInv(EntityPlayer player, ItemStack stack) {
+		if (stack != null && stack.stackSize > 0 && stack.getItem() != null && !player.inventory.addItemStackToInventory(stack.copy()))
+			player.dropPlayerItemWithRandomChoice(stack.copy(), false);
 	}
 
 	public static void setGLColorFromInt(int color) {
