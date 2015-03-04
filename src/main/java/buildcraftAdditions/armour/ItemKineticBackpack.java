@@ -2,6 +2,8 @@ package buildcraftAdditions.armour;
 
 import java.util.List;
 
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -11,6 +13,7 @@ import net.minecraft.world.World;
 import cofh.api.energy.IEnergyContainerItem;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.client.models.BackPackModel;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -91,5 +94,10 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 	private void setMaxEnergy(ItemStack stack, int maxEnergy) {
 		tagTest(stack);
 		stack.stackTagCompound.setInteger("maxEnergy", maxEnergy);
+	}
+
+	@Override
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
+		return new BackPackModel();
 	}
 }

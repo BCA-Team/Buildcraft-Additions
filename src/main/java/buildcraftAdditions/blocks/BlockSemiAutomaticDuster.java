@@ -10,11 +10,8 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
 import buildcraftAdditions.utils.RenderUtils;
-
-import eureka.api.EurekaKnowledge;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -43,7 +40,7 @@ public class BlockSemiAutomaticDuster extends BlockDusterBase {
 			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof TileSemiAutomaticDuster) {
 				EntityPlayer player = (EntityPlayer) entity;
-				if (EurekaKnowledge.isFinished(player, Variables.Eureka.DustT1Key))
+				//if (EurekaKnowledge.isFinished(player, Variables.Eureka.DustT1Key))
 					((TileSemiAutomaticDuster) tileEntity).makeProgress((EntityPlayer) entity);
 			}
 		}

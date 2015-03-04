@@ -2,8 +2,6 @@ package buildcraftAdditions.tileEntities;
 
 import java.util.ArrayList;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -20,6 +18,8 @@ import buildcraft.core.ItemList;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.interfaces.IWidgetListener;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -66,7 +66,7 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 	}
 
 	private boolean areStackEqual(ItemStack stack1, ItemStack stack2) {
-		return stack1 != null && stack1.getItem() instanceof ItemList && ItemList.matches(stack1, stack2) || stack1 == null && stack2 == null || !(stack1 == null || stack2 == null) && stack1.getItem() == stack2.getItem() && stack1.getItemDamage() == stack2.getItemDamage() && !(stack1.stackTagCompound == null && stack2.stackTagCompound != null) && (stack1.stackTagCompound == null || stack1.stackTagCompound.equals(stack2.stackTagCompound));
+		return stack1 != null && stack1.getItem() instanceof ItemList && ((ItemList) stack1.getItem()).matches(stack1, stack2) || stack1 == null && stack2 == null || !(stack1 == null || stack2 == null) && stack1.getItem() == stack2.getItem() && stack1.getItemDamage() == stack2.getItemDamage() && !(stack1.stackTagCompound == null && stack2.stackTagCompound != null) && (stack1.stackTagCompound == null || stack1.stackTagCompound.equals(stack2.stackTagCompound));
 	}
 
 	private TileEntity getTileFromDirection(ForgeDirection dir) {

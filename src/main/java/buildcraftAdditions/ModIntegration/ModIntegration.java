@@ -2,13 +2,9 @@ package buildcraftAdditions.ModIntegration;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -18,15 +14,8 @@ import buildcraftAdditions.ModIntegration.MineTweaker.MineTweakerIntegreation;
 import buildcraftAdditions.ModIntegration.waila.WailaIntegration;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
-import buildcraftAdditions.blocks.BlockBasic;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.items.dust.DustTypes;
-import buildcraftAdditions.reference.ItemsAndBlocks;
-import buildcraftAdditions.reference.Variables;
-import buildcraftAdditions.utils.BCItems;
-
-import eureka.api.EurekaInfo;
-import eureka.api.EurekaRegistry;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -70,7 +59,7 @@ public class ModIntegration {
 	}
 
 	private static void eurekaResearch() {
-		EurekaRegistry.registerCategory("BCA", new ItemStack(ItemsAndBlocks.kineticDusterBlock));
+		/*EurekaRegistry.registerCategory("BCA", new ItemStack(ItemsAndBlocks.kineticDusterBlock));
 
 		EurekaRegistry.register(new EurekaInfo(Variables.Eureka.DustT0Key, "BCA", 1, new ItemStack(ItemsAndBlocks.basicDusterBlock)));
 		EurekaRegistry.registerDrops(Variables.Eureka.DustT0Key, new ItemStack(eureka.utils.BCItems.STONE_GEAR, 2), new ItemStack(Items.iron_ingot), new ItemStack(Blocks.stone, 5), new ItemStack(Items.slime_ball));
@@ -130,7 +119,7 @@ public class ModIntegration {
 
 		EurekaRegistry.register(new EurekaInfo("KEBT3", "BCA", 2, new ItemStack(temp), "KEBT2"));
 		EurekaRegistry.registerDrops("KEBT3", new ItemStack(BCItems.PIPE_POWER_DIAMOND, 2), new ItemStack(Items.gold_ingot, 4), new ItemStack(Items.iron_ingot, 3));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT3Plating, "KEBT3");
+		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT3Plating, "KEBT3");*/
 	}
 
 	private static void metals() {

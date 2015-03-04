@@ -2,8 +2,6 @@ package buildcraftAdditions.tileEntities;
 
 import java.util.ArrayList;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -27,7 +25,7 @@ import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
 import buildcraftAdditions.utils.Location;
 
-import eureka.api.EurekaKnowledge;
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -222,7 +220,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public void makeMaster(int rotationIndex) {
 		data.isMaster = true;
 		data.partOfMultiBlock = true;
-		EurekaKnowledge.makeProgress(destroyer, "KEBT3", 1);
+		//EurekaKnowledge.makeProgress(destroyer, "KEBT3", 1);
 		data.rotationIndex = rotationIndex;
 	}
 
@@ -251,7 +249,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public void invalidateMultiblock() {
 		if (data.isMaster) {
 			data.patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
-			EurekaKnowledge.makeProgress(destroyer, "KEBT3", -1);
+			//EurekaKnowledge.makeProgress(destroyer, "KEBT3", -1);
 		} else
 			data.patern.destroyMultiblock(worldObj, data.masterX, data.masterY, data.masterZ, data.rotationIndex);
 

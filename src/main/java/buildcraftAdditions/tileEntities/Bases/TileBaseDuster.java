@@ -1,9 +1,5 @@
 package buildcraftAdditions.tileEntities.Bases;
 
-import com.google.common.base.Strings;
-
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -16,7 +12,7 @@ import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.networking.PacketHandler;
 
-import eureka.api.EurekaKnowledge;
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -54,8 +50,8 @@ public abstract class TileBaseDuster extends TileBase implements ISidedInventory
 	public abstract void dust();
 
 	public void makeEurekaProgress(EntityPlayer player) {
-		if (!Strings.isNullOrEmpty(key))
-			EurekaKnowledge.makeProgress(player, key, 1);
+		//if (!Strings.isNullOrEmpty(key))
+		//EurekaKnowledge.makeProgress(player, key, 1);
 	}
 
 	@Override

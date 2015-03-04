@@ -18,8 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.client.gui.widgets.WidgetBase;
 import buildcraftAdditions.utils.RenderUtils;
-
-import eureka.utils.Utils;
+import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
