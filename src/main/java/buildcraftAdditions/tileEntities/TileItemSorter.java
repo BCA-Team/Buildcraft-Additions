@@ -1,7 +1,5 @@
 package buildcraftAdditions.tileEntities;
 
-import java.util.ArrayList;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -74,11 +72,6 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 		if (tile == null)
 			return null;
 		return tile;
-	}
-
-	public void addDrops(ArrayList<ItemStack> drops) {
-		if (inventory.getStackInSlot(0) != null)
-			drops.add(inventory.getStackInSlot(0));
 	}
 
 	public ForgeDirection getRotation() {

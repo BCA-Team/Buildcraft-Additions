@@ -2,7 +2,7 @@ package buildcraftAdditions.inventories.containers;
 
 import net.minecraft.entity.player.InventoryPlayer;
 
-import buildcraftAdditions.inventories.slots.SlotItemSorter;
+import buildcraftAdditions.inventories.slots.SlotPhantom;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 
 /**
@@ -25,7 +25,7 @@ public class ContainerItemSorter extends ContainerBase<TileItemSorter> {
 	public void addSorterSlotColumn(int x, int y, int startID) {
 		int id = startID;
 		for (int i = 0; i < 6; i++) {
-			addSlotToContainer(new SlotItemSorter(inventory, id, x, y + i * 18));
+			addSlotToContainer(new SlotPhantom(inventory, id, x, y + i * 18));
 			id++;
 		}
 	}
