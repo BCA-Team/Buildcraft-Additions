@@ -37,7 +37,7 @@ public class ItemCanister extends ItemFluidContainer {
 
 	public ItemCanister(String name, int canisterCapacity) {
 		super(0);
-		setMaxStackSize(4);
+		setMaxStackSize(1);
 		setCreativeTab(BuildcraftAdditions.bcaCannisters);
 		setUnlocalizedName(name);
 		setCapacity(canisterCapacity);
@@ -74,17 +74,13 @@ public class ItemCanister extends ItemFluidContainer {
 		return itemStack;
 	}
 
-	public int getCapacity() {
-		return capacity;
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
 		super.getSubItems(item, tab, list);
 		for (Fluid fluid : FluidRegistry.getRegisteredFluids().values())
 			if (fluid != null)
-				list.add(getFilledItemStack(new FluidStack(fluid, getCapacity())));
+				list.add(getFilledItemStack(new FluidStack(fluid, capacity)));
 	}
 
 	@SideOnly(Side.CLIENT)

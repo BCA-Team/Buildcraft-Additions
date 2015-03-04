@@ -35,7 +35,7 @@ public class TabCanisters extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ItemStack getIconItemStack() {
-		return ItemsAndBlocks.diamondCanister.getFilledItemStack(new FluidStack(FluidRegistry.getFluid("fuel"), ItemsAndBlocks.diamondCanister.getCapacity()));
+		return ItemsAndBlocks.diamondCanister.getFilledItemStack(new FluidStack(FluidRegistry.getFluid("fuel"), 1));
 	}
 
 	@Override

@@ -93,7 +93,7 @@ public class EntityLaserShot extends EntityThrowable {
 
 	@Override
 	protected float func_70182_d() {
-		return strength + 1;
+		return strength / 5F + 1;
 	}
 
 	@Override
