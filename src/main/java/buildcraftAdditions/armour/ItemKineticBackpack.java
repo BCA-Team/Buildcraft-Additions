@@ -10,6 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import cofh.api.energy.IEnergyContainerItem;
 
 import buildcraftAdditions.BuildcraftAdditions;
@@ -96,6 +99,7 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 		stack.stackTagCompound.setInteger("maxEnergy", maxEnergy);
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
 		return new BackPackModel();
