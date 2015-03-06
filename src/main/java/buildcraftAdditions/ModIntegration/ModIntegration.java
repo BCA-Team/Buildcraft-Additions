@@ -2,17 +2,21 @@ package buildcraftAdditions.ModIntegration;
 
 import java.util.ArrayList;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import buildcraftAdditions.ModIntegration.Buildcraft.BuildcraftIntegration;
 import buildcraftAdditions.ModIntegration.Framez.FramezIntegration;
 import buildcraftAdditions.ModIntegration.MineTweaker.MineTweakerIntegreation;
 import buildcraftAdditions.ModIntegration.waila.WailaIntegration;
 import buildcraftAdditions.api.item.BCAItemManager;
+import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.items.dust.DustTypes;
@@ -176,7 +180,48 @@ public class ModIntegration {
 		BCAItemManager.dusts.addDust(meta++, "Nickel", 0xBAB0A4, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Platinum", 0xABCDEF, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Silver", 0xB3B3B3, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++, "Tin", 0xF2F2F2, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta, "Tin", 0xF2F2F2, DustTypes.METAL_DUST);
+		meta = 61;
+		BCAItemManager.dusts.addDust(meta++, "Apatite", 0x1A89C1, DustTypes.GEM_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Osmium", 0x92A6B8, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Sulfur", 0xFFDB50, DustTypes.SULFUR_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Saltpeter", 0xDEDEDE, DustTypes.SALTPETER_DUST);
+		BCAItemManager.dusts.addDust(meta++, "CertusQuartz", 0xBAC5F2, DustTypes.CERTUS_QUARTZ_DUST);
+		BCAItemManager.dusts.addDust(meta++, "AluminumBrass", 0xF0D467, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Alumite", 0xF4CCEC, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "PigIron", 0xF0A8A4, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Invar", 0x959E99, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Signalum", 0xFF5B00, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Lumium", 0xE7D648, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "EnderiumBase", 0x4B7A9A, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Enderium", 0x0F7575, DustTypes.ENDERIUM_DUST);
+		BCAItemManager.dusts.addDust(meta++, "ElectricalSteel", 0x949494, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "EnergeticAlloy", 0xE47700, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "PhasedGold", 0xB2D44D, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "RedstoneAlloy", 0x942323, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "ConductiveIron", 0x945758, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "PhasedIron", 0x2E6C3D, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "DarkSteel", 0x4B4B4B, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta, "Soularium", 0x654D31, DustTypes.METAL_DUST);
+
+		addOreDictDusterRecipe("oreApatite", "gemApatite", 2);
+		addDustRecipe("Bronze", 4, "dustCopper", "dustCopper", "dustCopper", "dustTin");
+		addDustRecipe("AluminumBrass", 4, "dustAluminum", "dustAluminum", "dustAluminum", "dustCopper");
+		addDustRecipe("Manyullyn", 1, "dustArdite", "dustCobalt");
+		addDustRecipe("Alumite", 4, "dustAluminum", "dustAluminum", "dustAluminum", "dustAluminum", "dustAluminum", "dustIron", "dustIron", "dustObsidian", "dustObsidian");
+		addDustRecipe("Invar", 3, "dustIron", "dustIron", "dustNickel");
+		addDustRecipe("Signalum", 4, "dustCopper", "dustCopper", "dustCopper", "dustSilver", "blockRedstone", "dustRedstone");
+		addDustRecipe("Lumium", 4, "dustTin", "dustTin", "dustTin", "dustSilver", "dustGlowstone", "dustGlowstone", "dustGlowstone", "dustGlowstone");
+		addDustRecipe("EnderiumBase", 4, "dustTin", "dustTin", "dustSilver", "dustPlatinum");
+		addDustRecipe("Enderium", 4, "dustEnderiumBase", "dustEnderiumBase", "dustPyrotheum", "dustEnderPearl", "dustEnderPearl");
+		addDustRecipe("ElectricalSteel", 1, "dustIron", "dustCoal", "itemSilicon");
+		addDustRecipe("EnergeticAlloy", 1, "dustRedstone", "dustGold", "dustGlowstone");
+		addDustRecipe("PhasedGold", 1, "dustEnergeticAlloy", "dustEnderPearl");
+		addDustRecipe("RedstoneAlloy", 1, "dustRedstone", "itemSilicon");
+		addDustRecipe("ConductiveIron", 1, "dustRedstone", "dustIron");
+		addDustRecipe("PhasedIron", 1, "dustIron", "dustEnderPearl");
+		addDustRecipe("DarkSteel", 1, "dustIron", "dustCoal", "dustObsidian");
+		addDustRecipe("Soularium", 1, Blocks.soul_sand, "dustGold");
 	}
 
 	private static void addNuggets(String metal) {
@@ -189,4 +234,25 @@ public class ModIntegration {
 		}
 	}
 
+	private static void addOreDictDusterRecipe(String input, String output, int outputCount) {
+		for (ItemStack stack : OreDictionary.getOres(output)) {
+			if (stack != null && stack.getItem() != null) {
+				ItemStack out = stack.copy();
+				out.stackSize = outputCount;
+				BCARecipeManager.duster.addRecipe(input, out);
+				return;
+			}
+		}
+	}
+
+	private static void addDustRecipe(String output, int outputCount, Object... inputs) {
+		IDust dust = BCAItemManager.dusts.getDust(output);
+		if (dust != null) {
+			ItemStack dustStack = ItemStack.copyItemStack(dust.getDustStack());
+			if (dustStack != null && dustStack.getItem() != null) {
+				dustStack.stackSize = outputCount;
+				GameRegistry.addRecipe(new ShapelessOreRecipe(dustStack, inputs));
+			}
+		}
+	}
 }
