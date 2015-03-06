@@ -44,10 +44,13 @@ public class TileBasicCoil extends TileCoilBase implements IInventory {
 	}
 
 	public void burn() {
-		if (getStackInSlot(0) != null) {
-			burnTime = getBurnTime(getStackInSlot(0));
+		ItemStack stack = getStackInSlot(0);
+		if (stack != null && stack.getItem() != null && stack.stackSize > 0) {
+			burnTime = getBurnTime(stack);
 			fullBurnTime = burnTime;
-			decrStackSize(0, 1);
+			stack.stackSize--;
+			if (stack.stackSize <= 0)
+				setInventorySlotContents(0, stack.getItem().getContainerItem(stack));
 			burning = true;
 		}
 	}
