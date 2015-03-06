@@ -436,10 +436,10 @@ selfdestructActivated=SELF DESTRUCT ACTIVATED
 
 configured=Configured
 
-fluids.info=%d / %d mB
-fluids.change.info=%d / %d mB/t
-rf.info=%d / %d RF
-rf.change.info=%d / %d RF/t
+fluids.info=%,d / %,d mB
+fluids.change.info=%,d / %,d mB/t
+rf.info=%,d / %,d RF
+rf.change.info=%,d / %,d RF/t
 
 lavaCoil.info=Lava stored: %s
 
