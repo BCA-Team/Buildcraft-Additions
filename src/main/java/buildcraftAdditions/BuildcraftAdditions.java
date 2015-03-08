@@ -32,6 +32,7 @@ import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.EventListener;
+import buildcraftAdditions.core.GuiHandler;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.creative.TabBCAdditions;
 import buildcraftAdditions.creative.TabCanisters;
@@ -84,7 +85,7 @@ public class BuildcraftAdditions {
 	@Mod.EventHandler
 	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
-		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(new EventListener.FML());
 		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
 		IMCSender.sendMessages();

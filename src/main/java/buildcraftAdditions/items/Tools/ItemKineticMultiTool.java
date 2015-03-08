@@ -80,6 +80,59 @@ public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerIt
 		setNoRepair();
 	}
 
+	public static Set<ItemStack> getInstalledUpgrades(ItemStack stack) {
+		Set<ItemStack> set = Sets.newHashSet();
+		InventoryKineticMultiTool inv = new InventoryKineticMultiTool(stack);
+		for (int i = 0; i < inv.getSizeInventory(); i++) {
+			ItemStack content = inv.getStackInSlot(i);
+			if (content != null)
+				set.add(content.copy());
+		}
+		if (isUpgradeInstalled(stack, "goldStick"))
+			set.add(new ItemStack(ItemsAndBlocks.goldStick));
+		if (isUpgradeInstalled(stack, "diamondStick"))
+			set.add(new ItemStack(ItemsAndBlocks.diamondStick));
+		if (isUpgradeInstalled(stack, "emeraldStick"))
+			set.add(new ItemStack(ItemsAndBlocks.emeraldStick));
+		if (isUpgradeInstalled(stack, "netherStarStick"))
+			set.add(new ItemStack(ItemsAndBlocks.netherStarStick));
+		if (isUpgradeInstalled(stack, "quartzStick"))
+			set.add(new ItemStack(ItemsAndBlocks.quartzStick));
+		if (isUpgradeInstalled(stack, "enderStick"))
+			set.add(new ItemStack(ItemsAndBlocks.enderStick));
+		if (isUpgradeInstalled(stack, "redstoneStick"))
+			set.add(new ItemStack(ItemsAndBlocks.redstoneStick));
+		if (isUpgradeInstalled(stack, "glowstoneStick"))
+			set.add(new ItemStack(ItemsAndBlocks.glowstoneStick));
+		if (isUpgradeInstalled(stack, "slimeStick"))
+			set.add(new ItemStack(ItemsAndBlocks.slimeStick));
+		if (isUpgradeInstalled(stack, "boneStick"))
+			set.add(new ItemStack(ItemsAndBlocks.boneStick));
+		if (isUpgradeInstalled(stack, "flintStick"))
+			set.add(new ItemStack(ItemsAndBlocks.flintStick));
+		if (isUpgradeInstalled(stack, "blazeStick"))
+			set.add(new ItemStack(ItemsAndBlocks.blazeStick));
+		if (isUpgradeInstalled(stack, "drill"))
+			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeDrill));
+		if (isUpgradeInstalled(stack, "digger"))
+			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeDigger));
+		if (isUpgradeInstalled(stack, "chainsaw"))
+			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeChainsaw));
+		if (isUpgradeInstalled(stack, "hoe"))
+			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeHoe));
+		if (isUpgradeInstalled(stack, "area"))
+			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeArea));
+		if (isUpgradeInstalled(stack, "silky"))
+			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeSilky));
+		if (isUpgradeInstalled(stack, "fortune1"))
+			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeFortune1));
+		if (isUpgradeInstalled(stack, "fortune2"))
+			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeFortune2));
+		if (isUpgradeInstalled(stack, "fortune3"))
+			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeFortune3));
+		return set;
+	}
+
 	public static void setLastUsedMode(ItemStack stack, String mode) {
 		if (stack != null) {
 			if (stack.stackTagCompound == null)
@@ -94,12 +147,8 @@ public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerIt
 		return null;
 	}
 
-	public static boolean isStickInstalled(ItemStack stack, String stick) {
-		return stack != null && stack.stackTagCompound != null && stack.stackTagCompound.hasKey(stick, Constants.NBT.TAG_BYTE) && stack.stackTagCompound.getBoolean(stick);
-	}
-
 	public static void installStick(ItemStack stack, String stick) {
-		if (stack != null && !isStickInstalled(stack, stick)) {
+		if (stack != null && !isUpgradeInstalled(stack, stick)) {
 			if (stack.stackTagCompound == null)
 				stack.stackTagCompound = new NBTTagCompound();
 			stack.stackTagCompound.setBoolean(stick, true);

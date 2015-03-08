@@ -41,7 +41,7 @@ public class UpgradeRecipeStick extends IntegrationTableRecipe {
 
 	@Override
 	public boolean isValidInputA(ItemStack inputA) {
-		return inputA != null && inputA.getItem() instanceof ItemKineticMultiTool && !ItemKineticMultiTool.isStickInstalled(inputA, stickName) && (prevStickName == null || prevStickName.isEmpty() || ItemKineticMultiTool.isStickInstalled(inputA, prevStickName));
+		return inputA != null && inputA.getItem() instanceof ItemKineticMultiTool && !ItemKineticMultiTool.isUpgradeInstalled(inputA, stickName) && (prevStickName == null || prevStickName.isEmpty() || ItemKineticMultiTool.isUpgradeInstalled(inputA, prevStickName));
 	}
 
 	@Override
