@@ -101,6 +101,18 @@ public class BlockKineticEnergyBufferTier1 extends BlockBase {
 		return new TileKineticEnergyBufferTier1();
 	}
 
+	public ItemStack createEmptyKEB() {
+		ItemStack stack = new ItemStack(this, 1, 0);
+		stack.stackTagCompound = new NBTTagCompound();
+		stack.stackTagCompound.setBoolean("creative", false);
+		stack.stackTagCompound.setInteger("energy", 0);
+		stack.stackTagCompound.setInteger("maxEnergy", 3000000);
+		stack.stackTagCompound.setInteger("maxInput", 30000);
+		stack.stackTagCompound.setInteger("maxOutput", 30000);
+		new SideConfiguration().writeToNBT(stack.stackTagCompound);
+		return stack;
+	}
+
 	public ItemStack createCreativeKEB() {
 		ItemStack stack = new ItemStack(this, 1, 9);
 		stack.stackTagCompound = new NBTTagCompound();
@@ -119,7 +131,7 @@ public class BlockKineticEnergyBufferTier1 extends BlockBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-		list.add(new ItemStack(item));
+		list.add(createEmptyKEB());
 		list.add(createCreativeKEB());
 	}
 

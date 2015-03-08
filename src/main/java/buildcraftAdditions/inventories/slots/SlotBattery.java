@@ -26,4 +26,8 @@ public class SlotBattery extends SlotItemInventory {
 		return stack != null && stack.getItem() != null && stack.getItem() instanceof IEnergyContainerItem && !(stack.getItem() instanceof ItemPortableLaser) && !(stack.getItem() instanceof ItemKineticMultiTool);
 	}
 
+	@Override
+	public int getSlotStackLimit() {
+		return 1;
+	}
 }
