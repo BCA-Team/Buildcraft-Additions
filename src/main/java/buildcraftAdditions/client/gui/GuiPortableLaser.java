@@ -6,8 +6,8 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.inventories.containers.ContainerPortableLaser;
 import buildcraftAdditions.inventories.InventoryPortableLaser;
+import buildcraftAdditions.inventories.containers.ContainerPortableLaser;
 import buildcraftAdditions.reference.Variables;
 
 /**
@@ -34,7 +34,7 @@ public class GuiPortableLaser extends GuiInventory<InventoryPortableLaser> {
 
 	@Override
 	public int getXSize() {
-		return 176;
+		return 186;
 	}
 
 	@Override

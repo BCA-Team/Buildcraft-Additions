@@ -3,8 +3,8 @@ package buildcraftAdditions.client.gui;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-import buildcraftAdditions.inventories.containers.ContainerKineticMultiTool;
 import buildcraftAdditions.inventories.InventoryKineticMultiTool;
+import buildcraftAdditions.inventories.containers.ContainerKineticMultiTool;
 import buildcraftAdditions.reference.Variables;
 
 /**
@@ -30,7 +30,7 @@ public class GuiKineticMultiTool extends GuiInventory<InventoryKineticMultiTool>
 
 	@Override
 	public int getXSize() {
-		return 176;
+		return 186;
 	}
 
 	@Override
