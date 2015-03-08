@@ -1,7 +1,5 @@
 package buildcraftAdditions.utils.fluids;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -12,6 +10,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 import buildcraftAdditions.api.networking.ISyncObject;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -76,6 +76,4 @@ public class Tank extends FluidTank implements ISyncObject {
 		else
 			setFluid(new FluidStack(id, amount, tag));
 	}
-
-
 }

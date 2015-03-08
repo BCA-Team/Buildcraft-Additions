@@ -1,7 +1,5 @@
 package buildcraftAdditions.tileEntities.varHelpers;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -10,6 +8,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.api.nbt.INBTSaveable;
 import buildcraftAdditions.api.networking.ISyncObject;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise

@@ -14,5 +14,4 @@ public interface INBTSaveable {
 	void readFromNBT(NBTTagCompound tag);
 
 	void writeToNBT(NBTTagCompound tag);
-
 }

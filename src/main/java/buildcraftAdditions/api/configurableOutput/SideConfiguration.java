@@ -4,8 +4,6 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.EnumSet;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.Constants;
@@ -13,6 +11,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.api.nbt.INBTSaveable;
 import buildcraftAdditions.api.networking.ISyncObject;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise

@@ -1,7 +1,5 @@
 package buildcraftAdditions.inventories;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -15,6 +13,8 @@ import net.minecraftforge.common.util.Constants;
 
 import buildcraftAdditions.api.nbt.INBTSaveable;
 import buildcraftAdditions.api.networking.ISyncObject;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise

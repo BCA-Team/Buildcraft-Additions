@@ -1,7 +1,5 @@
 package buildcraftAdditions.tileEntities.Bases;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -13,6 +11,7 @@ import buildcraftAdditions.inventories.CustomInventory;
 
 import com.google.common.base.Strings;
 import eureka.api.EurekaAPI;
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise

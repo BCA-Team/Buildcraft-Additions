@@ -10,9 +10,6 @@ package buildcraftAdditions.utils;
 
 import java.util.Set;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.Sets;
-
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.entity.Entity;
@@ -36,6 +33,9 @@ import buildcraft.api.transport.IInjectable;
 
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.api.configurableOutput.SideConfiguration;
+
+import com.google.common.base.Strings;
+import com.google.common.collect.Sets;
 
 public class Utils {
 

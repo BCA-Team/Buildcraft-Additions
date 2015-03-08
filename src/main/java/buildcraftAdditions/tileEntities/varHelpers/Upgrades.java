@@ -4,10 +4,6 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.google.common.collect.ImmutableSet;
-
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.Constants;
@@ -15,6 +11,9 @@ import net.minecraftforge.common.util.Constants;
 import buildcraftAdditions.api.nbt.INBTSaveable;
 import buildcraftAdditions.api.networking.ISyncObject;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
+
+import com.google.common.collect.ImmutableSet;
+import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
