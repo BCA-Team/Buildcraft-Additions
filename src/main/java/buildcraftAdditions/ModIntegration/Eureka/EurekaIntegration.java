@@ -101,5 +101,6 @@ public class EurekaIntegration {
 		EurekaAPI.API.register(new BasicEurekaInfo(Variables.Eureka.PORTABLE_LASER, "BCA-Tools", 4, ItemsAndBlocks.portableLaser));
 		EurekaAPI.API.bindToKey(ItemsAndBlocks.portableLaser, Variables.Eureka.PORTABLE_LASER);
 		EurekaAPI.API.registerDropHandler(new PortableLaserDropHandler());
+		EurekaAPI.API.registerProgressOption(Variables.Eureka.PORTABLE_LASER, EnumProgressOptions.CRAFTING, new ItemStack(BCItems.LASER).getItem());
 	}
 }

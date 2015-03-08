@@ -42,11 +42,10 @@ public class ModIntegration {
 		if (Loader.isModLoaded("BuildCraft|Core")) {
 			BuildcraftIntegration.integrate();
 			if (ConfigurationHandler.eurekaIntegration)
-				eurekaResearch();
+				EurekaIntegration.integrate();
 		}
 		if (Loader.isModLoaded("Waila"))
 			WailaIntegration.integrate();
-		EurekaIntegration.integrate();
 	}
 
 	public static void integrateInit() {
@@ -62,15 +61,6 @@ public class ModIntegration {
 		addNuggets("Copper");
 		addNuggets("Tin");
 		addNuggets("Lead");
-	}
-
-	private static void eurekaResearch() {
-		/*
-
-		EurekaRegistry.register(new EurekaInfo(Variables.Eureka.KineticToolKey, "BCA", 25, new ItemStack(ItemsAndBlocks.itemKineticMultiTool)));
-		EurekaRegistry.registerDrops(Variables.Eureka.KineticToolKey, new ItemStack(Items.diamond, 3), new ItemStack(ItemsAndBlocks.ironStick), new ItemStack(ItemsAndBlocks.toolCore));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.itemKineticMultiTool, Variables.Eureka.KineticToolKey);
-		*/
 	}
 
 	private static void metals() {
