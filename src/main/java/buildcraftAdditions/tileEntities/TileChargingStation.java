@@ -62,13 +62,13 @@ public class TileChargingStation extends TileMachineBase implements IInventory {
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
-		inventory.readNBT(nbtTagCompound);
+		inventory.readFromNBT(nbtTagCompound);
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
-		inventory.writeNBT(nbtTagCompound);
+		inventory.writeToNBT(nbtTagCompound);
 	}
 
 	@Override

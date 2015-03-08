@@ -6,8 +6,8 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.inventories.containers.ContainerCoolingTower;
 import buildcraftAdditions.client.gui.widgets.WidgetFluidTank;
+import buildcraftAdditions.inventories.containers.ContainerCoolingTower;
 import buildcraftAdditions.tileEntities.TileCoolingTower;
 
 /**

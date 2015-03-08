@@ -247,19 +247,17 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
-		buf = super.writeToByteBuff(buf);
+	public void writeToByteBuff(ByteBuf buf) {
+		super.writeToByteBuff(buf);
 		buf.writeInt(energyState);
-		buf = data.writeToByteBuff(buf);
-		return buf;
+		data.writeToByteBuff(buf);
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
-		buf = super.readFromByteBuff(buf);
+	public void readFromByteBuff(ByteBuf buf) {
+		super.readFromByteBuff(buf);
 		energyState = buf.readInt();
-		buf = data.readFromByteBuff(buf);
-		return buf;
+		data.readFromByteBuff(buf);
 	}
 
 	@Override

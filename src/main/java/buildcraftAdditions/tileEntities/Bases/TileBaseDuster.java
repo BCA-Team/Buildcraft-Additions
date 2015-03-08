@@ -1,11 +1,11 @@
 package buildcraftAdditions.tileEntities.Bases;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
-import cpw.mods.fml.common.network.ByteBufUtils;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
@@ -13,7 +13,6 @@ import buildcraftAdditions.inventories.CustomInventory;
 
 import com.google.common.base.Strings;
 import eureka.api.EurekaAPI;
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -51,31 +50,29 @@ public abstract class TileBaseDuster extends TileBase implements ISidedInventory
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
-		buf = buf.writeInt(progress);
-		ByteBufUtils.writeItemStack(buf, getStackInSlot(0));
-		return buf;
+	public void writeToByteBuff(ByteBuf buf) {
+		buf.writeInt(progress);
+		inventory.writeToByteBuff(buf);
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
+	public void readFromByteBuff(ByteBuf buf) {
 		progress = buf.readInt();
-		setInventorySlotContents(0, ByteBufUtils.readItemStack(buf));
-		return buf;
+		inventory.readFromByteBuff(buf);
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		tag.setInteger("progress", progress);
-		inventory.writeNBT(tag);
+		inventory.writeToNBT(tag);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		progress = tag.getInteger("progress");
-		inventory.readNBT(tag);
+		inventory.readFromNBT(tag);
 	}
 
 	@Override

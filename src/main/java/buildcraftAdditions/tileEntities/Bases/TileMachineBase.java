@@ -32,7 +32,7 @@ public abstract class TileMachineBase extends TileBase implements IEnergyReceive
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		tag.setInteger("engergy", energy);
+		tag.setInteger("energy", energy);
 	}
 
 	@Override
@@ -64,14 +64,12 @@ public abstract class TileMachineBase extends TileBase implements IEnergyReceive
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
+	public void writeToByteBuff(ByteBuf buf) {
 		buf.writeInt(energy);
-		return buf;
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
+	public void readFromByteBuff(ByteBuf buf) {
 		energy = buf.readInt();
-		return buf;
 	}
 }

@@ -18,13 +18,13 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
  */
 public class MessageByteBuff implements IMessage, IMessageHandler<MessageByteBuff, IMessage> {
 
-	public ISyncronizedTile tile;
+	public ISynchronizedTile tile;
 	public int x, y, z;
 
 	public MessageByteBuff() {
 	}
 
-	public MessageByteBuff(ISyncronizedTile tile) {
+	public MessageByteBuff(ISynchronizedTile tile) {
 		this.tile = tile;
 		x = tile.getX();
 		y = tile.getY();
@@ -38,8 +38,8 @@ public class MessageByteBuff implements IMessage, IMessageHandler<MessageByteBuf
 		z = buf.readInt();
 		if (FMLClientHandler.instance().getClient().theWorld != null) {
 			TileEntity entity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(x, y, z);
-			if (entity instanceof ISyncronizedTile) {
-				tile = (ISyncronizedTile) entity;
+			if (entity instanceof ISynchronizedTile) {
+				tile = (ISynchronizedTile) entity;
 				tile.readFromByteBuff(buf);
 			}
 		}

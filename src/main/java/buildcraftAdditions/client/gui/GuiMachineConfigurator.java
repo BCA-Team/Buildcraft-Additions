@@ -10,10 +10,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
-import buildcraftAdditions.inventories.containers.ContainerMachineConfigurator;
 import buildcraftAdditions.client.gui.widgets.WidgetBase;
 import buildcraftAdditions.client.gui.widgets.WidgetButtonText;
 import buildcraftAdditions.client.gui.widgets.WidgetImage;
+import buildcraftAdditions.inventories.containers.ContainerMachineConfigurator;
 import buildcraftAdditions.networking.MessageConfiguration;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
@@ -174,7 +174,7 @@ public class GuiMachineConfigurator extends GuiBase {
 		WidgetButtonText button;
 		for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 			button = ((WidgetButtonText) widgets.get(direction.ordinal()));
-			button.setText(configurableOutput.getStatus(direction).getText());
+			button.setText(configurableOutput.getStatus(direction).getName());
 			button.setColor(configurableOutput.getStatus(direction).getColor());
 
 			button = ((WidgetButtonText) widgets.get(direction.ordinal() + 6));

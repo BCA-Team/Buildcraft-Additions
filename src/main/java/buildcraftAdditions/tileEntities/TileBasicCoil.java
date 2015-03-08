@@ -58,13 +58,13 @@ public class TileBasicCoil extends TileCoilBase implements IInventory {
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		inventory.writeNBT(tag);
+		inventory.writeToNBT(tag);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		inventory.readNBT(tag);
+		inventory.readFromNBT(tag);
 	}
 
 	@Override
@@ -114,12 +114,10 @@ public class TileBasicCoil extends TileCoilBase implements IInventory {
 
 	@Override
 	public void openInventory() {
-
 	}
 
 	@Override
 	public void closeInventory() {
-
 	}
 
 	@Override

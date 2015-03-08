@@ -9,7 +9,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
-import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
+import buildcraftAdditions.api.configurableOutput.SideConfiguration;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -53,9 +53,10 @@ public class MessageConfiguration implements IMessage, IMessageHandler<MessageCo
 
 	@Override
 	public IMessage onMessage(MessageConfiguration message, MessageContext ctx) {
-		TileEntity entity = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
-		if (entity != null && entity instanceof IConfigurableOutput) {
-			((IConfigurableOutput) entity).setSideConfiguration(message.configuration);
+		TileEntity tile = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
+		if (tile != null && tile instanceof IConfigurableOutput) {
+			((IConfigurableOutput) tile).setSideConfiguration(message.configuration);
+			ctx.getServerHandler().playerEntity.worldObj.notifyBlocksOfNeighborChange(message.x, message.y, message.z, ctx.getServerHandler().playerEntity.worldObj.getBlock(message.x, message.y, message.z));
 		}
 		return null;
 	}

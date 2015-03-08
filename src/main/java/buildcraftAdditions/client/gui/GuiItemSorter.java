@@ -8,9 +8,9 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.inventories.containers.ContainerItemSorter;
 import buildcraftAdditions.client.gui.widgets.WidgetBase;
 import buildcraftAdditions.client.gui.widgets.WidgetColor;
+import buildcraftAdditions.inventories.containers.ContainerItemSorter;
 import buildcraftAdditions.networking.MessageWidgetUpdate;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.TileItemSorter;

@@ -16,13 +16,13 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
+import buildcraftAdditions.api.configurableOutput.SideConfiguration;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
-import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.tileEntities.varHelpers.Upgrades;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
@@ -143,7 +143,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
-		inventory.readNBT(nbtTagCompound);
+		inventory.readFromNBT(nbtTagCompound);
 		progress = nbtTagCompound.getInteger("progress");
 		isCooking = nbtTagCompound.getBoolean("isCooking");
 		shouldUpdateCoils = true;
@@ -154,7 +154,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
-		inventory.writeNBT(nbtTagCompound);
+		inventory.writeToNBT(nbtTagCompound);
 		nbtTagCompound.setInteger("progress", progress);
 		nbtTagCompound.setBoolean("isCooking", isCooking);
 		configuration.writeToNBT(nbtTagCompound);
@@ -208,12 +208,10 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 
 	@Override
 	public void openInventory() {
-
 	}
 
 	@Override
 	public void closeInventory() {
-
 	}
 
 	@Override
@@ -241,19 +239,17 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
+	public void writeToByteBuff(ByteBuf buf) {
 		buf.writeInt(progress);
-		buf = upgrades.writeToByteBuff(buf);
-		buf = configuration.writeToByteBuff(buf);
-		return buf;
+		upgrades.writeToByteBuff(buf);
+		configuration.writeToByteBuff(buf);
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
+	public void readFromByteBuff(ByteBuf buf) {
 		progress = buf.readInt();
-		buf = upgrades.readFromByteBuff(buf);
-		buf = configuration.readFromByteBuff(buf);
-		return buf;
+		upgrades.readFromByteBuff(buf);
+		configuration.readFromByteBuff(buf);
 	}
 
 	@Override

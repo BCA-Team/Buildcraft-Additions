@@ -8,10 +8,10 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.inventories.containers.ContainerFluidicCompressor;
 import buildcraftAdditions.client.gui.widgets.WidgetBase;
 import buildcraftAdditions.client.gui.widgets.WidgetButtonUpdate;
 import buildcraftAdditions.client.gui.widgets.WidgetFluidTank;
+import buildcraftAdditions.inventories.containers.ContainerFluidicCompressor;
 import buildcraftAdditions.networking.MessageWidgetUpdate;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;

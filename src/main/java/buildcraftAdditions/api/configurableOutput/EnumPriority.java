@@ -1,6 +1,6 @@
 package buildcraftAdditions.api.configurableOutput;
 
-import buildcraftAdditions.utils.Utils;
+import net.minecraft.util.StatCollector;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -26,7 +26,7 @@ public enum EnumPriority {
 	}
 
 	public String getName() {
-		return Utils.localize("priority." + name);
+		return ("" + StatCollector.translateToLocal("priority." + name)).trim();
 	}
 
 	public int getColor() {

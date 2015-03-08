@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -10,14 +12,13 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.core.EnumColor;
 import buildcraft.api.items.IList;
+import buildcraft.api.transport.IInjectable;
 import buildcraft.api.transport.IPipeConnection;
 import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.interfaces.IWidgetListener;
-
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -28,10 +29,10 @@ import io.netty.buffer.ByteBuf;
  */
 public class TileItemSorter extends TileBase implements ISidedInventory, IPipeConnection, IWidgetListener {
 
-	protected final CustomInventory inventory = new CustomInventory("ItemSorter", 49, 64, this);
+	private final CustomInventory inventory = new CustomInventory("ItemSorter", 49, 64, this);
 	public byte[] colors = new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-	protected ForgeDirection rotation = ForgeDirection.UP;
-	protected boolean reloadRotation = false;
+	private ForgeDirection rotation = ForgeDirection.UP;
+	private boolean reloadRotation = false;
 
 	@Override
 	public void updateEntity() {
@@ -40,38 +41,35 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 			setRotation(ForgeDirection.getOrientation(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)));
 			reloadRotation = false;
 		}
-		TileEntity outputTile = getTileFromDirection(getExitSide());
-		if (outputTile == null || !(outputTile instanceof IPipeTile))
-			return;
-		IPipeTile pipe = (IPipeTile) outputTile;
-		if (pipe.getPipeType() != IPipeTile.PipeType.ITEM)
-			return;
-		if (inventory.getStackInSlot(0) == null)
-			return;
 		ItemStack stack = inventory.getStackInSlot(0);
+		if (stack == null)
+			return;
+		TileEntity outputTile = getTileFromDirection(getExitSide());
+		if (outputTile == null || !(outputTile instanceof IInjectable))
+			return;
+		IInjectable injectable = (IInjectable) outputTile;
+		if (!injectable.canInjectItems(getExitSide().getOpposite()))
+			return;
 		EnumColor color = null;
 		for (int i = 1; i < inventory.getSizeInventory() - 1; i++) {
-			if (areStackEqual(inventory.getStackInSlot(i), stack)) {
+			if (areStacksEqual(inventory.getStackInSlot(i), stack)) {
 				color = EnumColor.values()[15 - colors[1 + (i - 1) / 6]];
 				break;
 			}
 		}
 		if (color == null)
 			color = EnumColor.values()[15 - colors[0]];
-		pipe.injectItem(stack, true, getExitSide().getOpposite(), color);
+		injectable.injectItem(stack, true, getExitSide().getOpposite(), color);
 		setInventorySlotContents(0, null);
 		markDirty();
 	}
 
-	private boolean areStackEqual(ItemStack stack1, ItemStack stack2) {
+	private boolean areStacksEqual(ItemStack stack1, ItemStack stack2) {
 		return stack1 != null && stack1.getItem() instanceof IList && ((IList) stack1.getItem()).matches(stack1, stack2) || stack1 == null && stack2 == null || !(stack1 == null || stack2 == null) && stack1.getItem() == stack2.getItem() && stack1.getItemDamage() == stack2.getItemDamage() && !(stack1.stackTagCompound == null && stack2.stackTagCompound != null) && (stack1.stackTagCompound == null || stack1.stackTagCompound.equals(stack2.stackTagCompound));
 	}
 
 	private TileEntity getTileFromDirection(ForgeDirection dir) {
-		TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-		if (tile == null)
-			return null;
-		return tile;
+		return worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 	}
 
 	public ForgeDirection getRotation() {
@@ -119,7 +117,7 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 		super.readFromNBT(tag);
 		rotation = ForgeDirection.getOrientation(tag.getByte("Rotation"));
 		colors = tag.getByteArray("Colors");
-		inventory.readNBT(tag);
+		inventory.readFromNBT(tag);
 		if (tag.hasKey("reloadRotation"))
 			reloadRotation = true;
 	}
@@ -129,22 +127,20 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 		super.writeToNBT(tag);
 		tag.setByte("Rotation", (byte) rotation.ordinal());
 		tag.setByteArray("Colors", colors);
-		inventory.writeNBT(tag);
+		inventory.writeToNBT(tag);
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
+	public void writeToByteBuff(ByteBuf buf) {
 		buf.writeByte(rotation.ordinal());
 		buf.writeBytes(colors);
-		return buf;
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
+	public void readFromByteBuff(ByteBuf buf) {
 		rotation = ForgeDirection.getOrientation(buf.readByte());
 		buf.readBytes(colors);
 		updateRender();
-		return buf;
 	}
 
 	@Override
@@ -209,12 +205,10 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 
 	@Override
 	public void openInventory() {
-
 	}
 
 	@Override
 	public void closeInventory() {
-
 	}
 
 	@Override

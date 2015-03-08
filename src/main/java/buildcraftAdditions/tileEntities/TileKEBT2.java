@@ -2,6 +2,8 @@ package buildcraftAdditions.tileEntities;
 
 import java.util.ArrayList;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -26,7 +28,6 @@ import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
 import buildcraftAdditions.utils.Location;
 
 import eureka.api.EurekaAPI;
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -226,19 +227,17 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
-		buf = super.writeToByteBuff(buf);
+	public void writeToByteBuff(ByteBuf buf) {
+		super.writeToByteBuff(buf);
 		buf.writeInt(energyState);
-		buf = data.writeToByteBuff(buf);
-		return buf;
+		data.writeToByteBuff(buf);
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
-		buf = super.readFromByteBuff(buf);
+	public void readFromByteBuff(ByteBuf buf) {
+		super.readFromByteBuff(buf);
 		energyState = buf.readInt();
-		buf = data.readFromByteBuff(buf);
-		return buf;
+		data.readFromByteBuff(buf);
 	}
 
 	@Override

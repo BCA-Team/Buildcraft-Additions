@@ -105,7 +105,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
 		fill = nbtTagCompound.getBoolean("fill");
-		inventory.readNBT(nbtTagCompound);
+		inventory.readFromNBT(nbtTagCompound);
 		if (nbtTagCompound.hasKey("tank", Constants.NBT.TAG_COMPOUND))
 			tank.readFromNBT(nbtTagCompound.getCompoundTag("tank"));
 	}
@@ -114,7 +114,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
 		nbtTagCompound.setBoolean("fill", fill);
-		inventory.writeNBT(nbtTagCompound);
+		inventory.writeToNBT(nbtTagCompound);
 		nbtTagCompound.setTag("tank", tank.writeToNBT(new NBTTagCompound()));
 	}
 
@@ -266,17 +266,15 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
+	public void writeToByteBuff(ByteBuf buf) {
 		super.writeToByteBuff(buf);
 		tank.writeToByteBuff(buf);
-		return buf;
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
-		buf = super.readFromByteBuff(buf);
-		buf = tank.readFromByteBuff(buf);
-		return buf;
+	public void readFromByteBuff(ByteBuf buf) {
+		super.readFromByteBuff(buf);
+		tank.readFromByteBuff(buf);
 	}
 
 	@Override

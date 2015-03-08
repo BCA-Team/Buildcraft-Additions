@@ -12,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
+
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -500,47 +502,33 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
+	public void writeToByteBuff(ByteBuf buf) {
 		buf.writeBoolean(valve);
 		buf.writeInt(currentHeat);
 		buf.writeInt(lastRequiredHeat);
 		buf.writeInt(energyCost);
 		buf.writeInt(requiredHeat);
-		char[] chars = inputFluid.toCharArray();
-		buf.writeInt(chars.length);
-		for (char aChar : chars) buf.writeChar(aChar);
-		chars = outputFluid.toCharArray();
-		buf.writeInt(chars.length);
-		for (char aChar : chars) buf.writeChar(aChar);
+		ByteBufUtils.writeUTF8String(buf, inputFluid);
+		ByteBufUtils.writeUTF8String(buf, outputFluid);
 		input.writeToByteBuff(buf);
 		output.writeToByteBuff(buf);
 		data.writeToByteBuff(buf);
 		upgrades.writeToByteBuff(buf);
-		return buf;
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
+	public void readFromByteBuff(ByteBuf buf) {
 		valve = buf.readBoolean();
 		currentHeat = buf.readInt();
 		lastRequiredHeat = buf.readInt();
 		energyCost = buf.readInt();
 		requiredHeat = buf.readInt();
-		int num = buf.readInt();
-		inputFluid = "";
-		for (int t = 0; t < num; t++)
-			inputFluid += buf.readChar();
-		inputFluid = inputFluid.trim();
-		num = buf.readInt();
-		outputFluid = "";
-		for (int t = 0; t < num; t++)
-			outputFluid += buf.readChar();
-		outputFluid = outputFluid.trim();
-		buf = input.readFromByteBuff(buf);
-		buf = output.readFromByteBuff(buf);
-		buf = data.readFromByteBuff(buf);
-		buf = upgrades.readFromByteBuff(buf);
-		return buf;
+		inputFluid = ByteBufUtils.readUTF8String(buf);
+		outputFluid = ByteBufUtils.readUTF8String(buf);
+		input.readFromByteBuff(buf);
+		output.readFromByteBuff(buf);
+		data.readFromByteBuff(buf);
+		upgrades.readFromByteBuff(buf);
 	}
 
 	@Override

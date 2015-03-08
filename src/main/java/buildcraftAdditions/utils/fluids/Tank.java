@@ -60,22 +60,22 @@ public class Tank extends FluidTank implements ISyncObject {
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
+	public void writeToByteBuff(ByteBuf buf) {
 		buf.writeInt(fluid != null ? fluid.fluidID : -1);
 		buf.writeInt(getFluidAmount());
 		ByteBufUtils.writeTag(buf, fluid != null ? fluid.tag : null);
-		return buf;
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
+	public void readFromByteBuff(ByteBuf buf) {
 		int id = buf.readInt();
 		int amount = buf.readInt();
 		NBTTagCompound tag = ByteBufUtils.readTag(buf);
-		if (id < 0)
+		if (id < 0 || amount <= 0)
 			setFluid(null);
 		else
 			setFluid(new FluidStack(id, amount, tag));
-		return buf;
 	}
+
+
 }

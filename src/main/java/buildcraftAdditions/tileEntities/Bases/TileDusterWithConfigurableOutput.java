@@ -2,20 +2,20 @@ package buildcraftAdditions.tileEntities.Bases;
 
 import io.netty.buffer.ByteBuf;
 
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraft.api.transport.IPipeConnection;
 import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
+import buildcraftAdditions.api.configurableOutput.SideConfiguration;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
-import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
+import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -25,7 +25,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster implements IConfigurableOutput {
+public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster implements IConfigurableOutput, IPipeConnection {
 
 	protected final SideConfiguration configuration = new SideConfiguration();
 
@@ -56,17 +56,15 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
-		buf = super.writeToByteBuff(buf);
-		buf = configuration.writeToByteBuff(buf);
-		return buf;
+	public void writeToByteBuff(ByteBuf buf) {
+		super.writeToByteBuff(buf);
+		configuration.writeToByteBuff(buf);
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
-		buf = super.readFromByteBuff(buf);
-		buf = configuration.readFromByteBuff(buf);
-		return buf;
+	public void readFromByteBuff(ByteBuf buf) {
+		super.readFromByteBuff(buf);
+		configuration.readFromByteBuff(buf);
 	}
 
 	@Override
@@ -102,73 +100,9 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 	@Override
 	public void dust() {
 		ItemStack output = BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput(getStackInSlot(0));
-
-		for (EnumPriority priority : EnumPriority.values()) {
-
-			//first try to put it intro a pipe
-			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-				if (configuration.getPriority(direction) != priority)
-					continue;
-				if (!configuration.canSend(direction))
-					continue;
-				int x = xCoord + direction.offsetX;
-				int y = yCoord + direction.offsetY;
-				int z = zCoord + direction.offsetZ;
-				TileEntity entity = worldObj.getTileEntity(x, y, z);
-				if (entity instanceof IPipeTile) {
-					IPipeTile pipe = (IPipeTile) entity;
-					if (output != null && pipe.isPipeConnected(direction.getOpposite()) && pipe.getPipeType() == IPipeTile.PipeType.ITEM) {
-						int leftOver = pipe.injectItem(output.copy(), true, direction.getOpposite(), null);
-						output.stackSize -= leftOver;
-						if (output.stackSize == 0)
-							output = null;
-					}
-				}
-			}
-			//try to put it intro an inventory
-			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-				if (configuration.getPriority(direction) != priority)
-					continue;
-				if (!configuration.canSend(direction))
-					continue;
-				int x = xCoord + direction.offsetX;
-				int y = yCoord + direction.offsetY;
-				int z = zCoord + direction.offsetZ;
-				TileEntity entity = worldObj.getTileEntity(x, y, z);
-				if (entity != null && entity instanceof IInventory) {
-					IInventory outputInventory = (IInventory) entity;
-					for (int slot = 0; slot < outputInventory.getSizeInventory(); slot++) {
-						int stackLimit = outputInventory.getInventoryStackLimit();
-						ItemStack testStack = outputInventory.getStackInSlot(slot);
-						if (output != null &&
-								(testStack == null || (testStack.stackSize + output.stackSize <= testStack.getMaxStackSize() && testStack.getItem() == output.getItem() && testStack.getItemDamage() == output.getItemDamage()))) {
-							ItemStack stack = outputInventory.getStackInSlot(slot);
-							int toMove;
-							if (stack == null) {
-								toMove = stackLimit - 1;
-								stack = output.copy();
-								stack.stackSize = 0;
-							} else {
-								toMove = stackLimit - stack.stackSize;
-							}
-							if (toMove > output.stackSize)
-								toMove = output.stackSize;
-							stack.stackSize += toMove;
-							output.stackSize -= toMove;
-							outputInventory.setInventorySlotContents(slot, stack);
-							outputInventory.markDirty();
-							if (output.stackSize == 0)
-								output = null;
-						}
-					}
-				}
-			}
-		}
-
-		//drop it on the ground
-		if (output != null)
+		Utils.outputStack(new Location(this), output, configuration);
+		if (output != null && output.stackSize > 0 && output.getItem() != null)
 			Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, output);
-
 		setInventorySlotContents(0, null);
 	}
 
@@ -180,5 +114,11 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 	@Override
 	public void setSideConfiguration(SideConfiguration configuration) {
 		this.configuration.load(configuration);
+	}
+
+	@Override
+	public ConnectOverride overridePipeConnection(IPipeTile.PipeType type, ForgeDirection with) {
+		EnumSideStatus status = getStatus(with);
+		return type == IPipeTile.PipeType.ITEM && (status.canSend() || status.canReceive()) ? ConnectOverride.CONNECT : ConnectOverride.DEFAULT;
 	}
 }

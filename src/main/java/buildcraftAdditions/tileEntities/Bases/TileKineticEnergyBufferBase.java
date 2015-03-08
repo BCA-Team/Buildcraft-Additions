@@ -18,14 +18,14 @@ import cofh.api.energy.IEnergyReceiver;
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
-import buildcraftAdditions.api.networking.ISyncronizedTile;
+import buildcraftAdditions.api.configurableOutput.SideConfiguration;
+import buildcraftAdditions.api.networking.ISynchronizedTile;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.networking.MessageConfiguration;
 import buildcraftAdditions.networking.MessageSelfDestruct;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
 import buildcraftAdditions.tileEntities.interfaces.IOwnableMachine;
-import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
 import buildcraftAdditions.utils.PlayerUtils;
 import buildcraftAdditions.utils.Utils;
 
@@ -36,7 +36,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileKineticEnergyBufferBase extends TileBase implements IEnergyReceiver, IEnergyProvider, IConfigurableOutput, ISyncronizedTile, IOwnableMachine {
+public abstract class TileKineticEnergyBufferBase extends TileBase implements IEnergyReceiver, IEnergyProvider, IConfigurableOutput, ISynchronizedTile, IOwnableMachine {
 
 	public final int tier;
 	protected final SideConfiguration configuration = new SideConfiguration();
@@ -207,19 +207,17 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
+	public void writeToByteBuff(ByteBuf buf) {
 		buf.writeInt(energy);
 		configuration.writeToByteBuff(buf);
 		PlayerUtils.writeToByteBuff(buf, owner);
-		return buf;
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
+	public void readFromByteBuff(ByteBuf buf) {
 		energy = buf.readInt();
 		configuration.readFromByteBuff(buf);
 		owner = PlayerUtils.readFromByteBuff(buf);
-		return buf;
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package buildcraftAdditions.api.configurableOutput;
 
-import buildcraftAdditions.utils.Utils;
+import net.minecraft.util.StatCollector;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -11,25 +11,25 @@ import buildcraftAdditions.utils.Utils;
  */
 public enum EnumSideStatus {
 
-	DISABLED("Disabled", 0xA6A6A6, false, false, false),
-	BOTH("Both", 0xFFA500, true, true, true),
-	OUTPUT("Output", 0x850000, true, false, true),
-	INPUT("Input", 0x002B87, false, true, false);
+	DISABLED("disabled", 0xA6A6A6, false, false, false),
+	BOTH("both", 0xFFA500, true, true, true),
+	OUTPUT("output", 0x850000, true, false, true),
+	INPUT("input", 0x002B87, false, true, false);
 
-	private final String text;
+	private final String name;
 	private final int color;
 	private final boolean hasPriority, canReceive, canSend;
 
-	EnumSideStatus(String text, int color, boolean hasPriority, boolean canReceive, boolean canSend) {
-		this.text = text;
+	EnumSideStatus(String name, int color, boolean hasPriority, boolean canReceive, boolean canSend) {
+		this.name = name;
 		this.color = color;
 		this.hasPriority = hasPriority;
 		this.canReceive = canReceive;
 		this.canSend = canSend;
 	}
 
-	public String getText() {
-		return Utils.localize(text);
+	public String getName() {
+		return ("" + StatCollector.translateToLocal("status." + name)).trim();
 	}
 
 	public int getColor() {
