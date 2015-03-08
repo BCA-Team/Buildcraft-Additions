@@ -4,11 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
-
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.block.Block;
@@ -54,6 +49,11 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.Utils;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -64,7 +64,7 @@ import buildcraftAdditions.utils.Utils;
 public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerItem {
 
 	private static final Set<Material> effectiveMaterialsDrill = Sets.newHashSet(Material.rock, Material.iron, Material.ice, Material.glass, Material.piston, Material.anvil);
-	private static final Set<Block> effectiveBlocksDrill = Sets.newHashSet(Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab, Blocks.stone, Blocks.sandstone, Blocks.mossy_cobblestone, Blocks.iron_ore, Blocks.iron_block, Blocks.coal_ore, Blocks.gold_block, Blocks.gold_ore, Blocks.diamond_ore, Blocks.diamond_block, Blocks.ice, Blocks.netherrack, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.lit_redstone_ore, Blocks.rail, Blocks.detector_rail, Blocks.golden_rail, Blocks.activator_rail);
+	private static final Set<Block> effectiveBlocksDrill = Sets.newHashSet(Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab, Blocks.stone, Blocks.sandstone, Blocks.mossy_cobblestone, Blocks.iron_ore, Blocks.iron_block, Blocks.coal_ore, Blocks.gold_block, Blocks.gold_ore, Blocks.diamond_ore, Blocks.diamond_block, Blocks.ice, Blocks.netherrack, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.lit_redstone_ore, Blocks.rail, Blocks.detector_rail, Blocks.golden_rail, Blocks.activator_rail, Blocks.anvil);
 	private static final Set<Material> effectiveMaterialsDigger = Sets.newHashSet(Material.grass, Material.ground, Material.sand, Material.snow, Material.craftedSnow, Material.clay);
 	private static final Set<Block> effectiveBlocksDigger = Sets.newHashSet(Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, Blocks.soul_sand, Blocks.mycelium);
 	private static final Set<Material> effectiveMaterialsChainsaw = Sets.newHashSet(Material.coral, Material.leaves, Material.plants, Material.wood, Material.vine, Material.web);

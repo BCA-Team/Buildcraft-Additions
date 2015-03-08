@@ -33,6 +33,8 @@ import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
 
+import eureka.api.EurekaAPI;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -67,7 +69,7 @@ public class EventListener {
 		public void onCrafted(PlayerEvent.ItemCraftedEvent event) {
 			if (event.crafting != null && event.crafting.getItem() != null && event.craftMatrix != null) {
 				if (event.crafting.getItem().isItemTool(event.crafting))
-					//EurekaKnowledge.makeProgress(event.player, Variables.Eureka.KineticToolKey, 1);
+					EurekaAPI.API.makeProgress(Variables.Eureka.KineticToolKey, event.player);
 				if (event.crafting.getItem() instanceof ItemKineticMultiTool) {
 					for (int i = 0; i < event.craftMatrix.getSizeInventory(); i++) {
 						ItemStack stack = event.craftMatrix.getStackInSlot(i);
@@ -90,7 +92,7 @@ public class EventListener {
 
 		@SubscribeEvent
 		public void onGettingAchievement(AchievementEvent event) {
-			//EurekaKnowledge.makeProgress(event.entityPlayer, Variables.Eureka.DustT0Key, 1);
+			EurekaAPI.API.makeProgress(Variables.Eureka.DustT0Key, event.entityPlayer);
 		}
 
 		@SubscribeEvent

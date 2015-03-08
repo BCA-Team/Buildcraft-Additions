@@ -1,0 +1,11 @@
+Basic Coil
+This Coil can be used to power the Heated Furnace.
+Place a heated furnace
+This was a tough one. It started when you accidentally left two pieces of Iron Dust next to some Lava. They were close enough for the Heat to affect them, but not close enough for it to completely melt them.
+The ‘thing’ was strangely thin and when it was placed next to some Iron (while still somewhat hot), started to spin about, creating friction and heating (by a very small amount) the Iron Ingot. You realise this can be used for your new Furnace and try to figure out how to improve the process. 
+
+After a while, you find a way to refine the process. By using the Crafting Table to combine three pieces of Iron Dust together, you make two strips of Iron Wire (still soft at this point), then proceed to place them on a Furnace to harden them.
+
+The last stage is the trickiest. You wrap 8 pieces of Wire (now harder, but still moldable) around an Iron Ingot, and end up with something that resembles a tower, but in the size of a block. Because of the way the wires loop around the thing, you decide to name it the Coil.
+
+From there on its easy. You just need to find a way to heat the Coils, and what better if not good ol’ Furnace fuel? The heat makes the wires spin, making contact with the Furnace and cooking anything inside it. A single Coil operates a Heated Furnace at 1/5th of the speed of a regular Furnace, but in compensation the fuel lasts 5 times as much. Having all 6 sides of a Heated Furnace surrounded with Coils can make it cook faster than a regular Furnace.

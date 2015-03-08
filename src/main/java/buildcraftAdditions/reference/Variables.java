@@ -41,6 +41,14 @@ public final class Variables {
 		public static final String DustT2Key1 = "dusterTier2-1";
 		public static final String DustT2Key2 = "dusterTier2-2";
 		public static final String KineticToolKey = "kineticTool";
+		public static final String HEATED_FURNACE = "heatedFurnace";
+		public static final String BASIC_COIL = "basicCoil";
+		public static final String LAVA_COIL = "lavaCoil";
+		public static final String KINETIC_COIL = "kineticCoil";
+		public static final String KEBT1 = "KEBT1";
+		public static final String KEBT2 = "KEBT2";
+		public static final String KEBT3 = "KEBT3";
+		public static final String PORTABLE_LASER = "PortableLaser";
 	}
 
 	public static final class MOD {

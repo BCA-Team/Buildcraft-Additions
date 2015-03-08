@@ -11,6 +11,8 @@ import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
 import buildcraftAdditions.inventories.CustomInventory;
 
+import com.google.common.base.Strings;
+import eureka.api.EurekaAPI;
 import io.netty.buffer.ByteBuf;
 
 /**
@@ -44,8 +46,8 @@ public abstract class TileBaseDuster extends TileBase implements ISidedInventory
 	}
 
 	public void makeEurekaProgress(EntityPlayer player) {
-		//if (!Strings.isNullOrEmpty(key))
-		//EurekaKnowledge.makeProgress(player, key, 1);
+		if (!Strings.isNullOrEmpty(key))
+			EurekaAPI.API.makeProgress(key, player);
 	}
 
 	@Override

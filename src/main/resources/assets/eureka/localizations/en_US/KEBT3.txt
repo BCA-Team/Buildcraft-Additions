@@ -1,0 +1,4 @@
+Advanced Kinetic Energy Buffer
+Massive power storage just isn't enough
+Build Large Kinetic Energy Buffers
+So Tier 2 Kinetic Capsules can’t stack on the same block. But does the same hold true for Tier 3? Nope. Turns out you can fit 3 of them inside a single block! The downside is that you have to use Diamonds to cover the structure, and only Diamond Kinesis Pipes are able to handle the energy rate inside the block. Not only that, to keep it all in there even more shielding is needed. By combining Gold and Iron (with some Diamond Kinesis Pipes to keep the energy flow going) you can create the perfect plating for the block. Safe, yet conducting.

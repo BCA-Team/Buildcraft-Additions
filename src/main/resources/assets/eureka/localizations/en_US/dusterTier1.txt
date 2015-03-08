@@ -1,0 +1,6 @@
+Semi Automatic Duster
+This improved Duster can interact with inventories
+Process items in the basic duster
+Your first Duster was a breakthrough on the Ore processing scene. Never before was getting more Ore so easy. However, everyone agreed that manually placing and jumping on the Ore was a bit rustic, so you decide to focus on making the machine better, starting with inventory connections. Experimenting with Pipes seems to have an effect, but the Stone Gears are just too crude for the Gold, so you upgrade them to Iron Gears.
+
+Finally, you have the Semi-Automatic Duster. This Duster still requires you to jump on it, but at least the Ores can be input from Hoppers and Pipes, while the output appears to move out on its own. Now it's time to work on that jumping issue.

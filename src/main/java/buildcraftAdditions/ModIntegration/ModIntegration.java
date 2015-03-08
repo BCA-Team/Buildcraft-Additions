@@ -12,6 +12,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import buildcraftAdditions.ModIntegration.Buildcraft.BuildcraftIntegration;
+import buildcraftAdditions.ModIntegration.Eureka.EurekaIntegration;
 import buildcraftAdditions.ModIntegration.Framez.FramezIntegration;
 import buildcraftAdditions.ModIntegration.MineTweaker.MineTweakerIntegreation;
 import buildcraftAdditions.ModIntegration.waila.WailaIntegration;
@@ -45,6 +46,7 @@ public class ModIntegration {
 		}
 		if (Loader.isModLoaded("Waila"))
 			WailaIntegration.integrate();
+		EurekaIntegration.integrate();
 	}
 
 	public static void integrateInit() {
@@ -63,67 +65,12 @@ public class ModIntegration {
 	}
 
 	private static void eurekaResearch() {
-		/*EurekaRegistry.registerCategory("BCA", new ItemStack(ItemsAndBlocks.kineticDusterBlock));
-
-		EurekaRegistry.register(new EurekaInfo(Variables.Eureka.DustT0Key, "BCA", 1, new ItemStack(ItemsAndBlocks.basicDusterBlock)));
-		EurekaRegistry.registerDrops(Variables.Eureka.DustT0Key, new ItemStack(eureka.utils.BCItems.STONE_GEAR, 2), new ItemStack(Items.iron_ingot), new ItemStack(Blocks.stone, 5), new ItemStack(Items.slime_ball));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.basicDusterBlock, Variables.Eureka.DustT0Key);
-
-		EurekaRegistry.register(new EurekaInfo(Variables.Eureka.DustT1Key, "BCA", 20, new ItemStack(ItemsAndBlocks.semiAutomaticDusterBlock), Variables.Eureka.DustT0Key));
-		EurekaRegistry.registerDrops(Variables.Eureka.DustT1Key, new ItemStack(BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(Items.gold_ingot), new ItemStack(eureka.utils.BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(Blocks.stone, 3));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.semiAutomaticDusterBlock, Variables.Eureka.DustT1Key);
-
-		EurekaRegistry.register(new EurekaInfo(Variables.Eureka.DustT2Key1, "BCA", 40, new ItemStack(ItemsAndBlocks.mechanicalDusterBlock), Variables.Eureka.DustT1Key));
-		EurekaRegistry.registerDrops(Variables.Eureka.DustT2Key1, new ItemStack(BCItems.IRON_GEAR, 2), new ItemStack(Items.gold_ingot, 1), new ItemStack(ItemsAndBlocks.itemGrindingWheel, 1), new ItemStack(Blocks.stone, 5));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.mechanicalDusterBlock, Variables.Eureka.DustT2Key1);
-
-		EurekaRegistry.register(new EurekaInfo(Variables.Eureka.DustT2Key2, "BCA", 20, new ItemStack(ItemsAndBlocks.kineticDusterBlock), Variables.Eureka.DustT2Key1));
-		EurekaRegistry.registerDrops(Variables.Eureka.DustT2Key2, new ItemStack(Blocks.glass, 3), new ItemStack(BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(BCItems.GOLD_GEAR, 2), new ItemStack(BCItems.DIAMOND_GEAR));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.kineticDusterBlock, Variables.Eureka.DustT2Key2);
+		/*
 
 		EurekaRegistry.register(new EurekaInfo(Variables.Eureka.KineticToolKey, "BCA", 25, new ItemStack(ItemsAndBlocks.itemKineticMultiTool)));
 		EurekaRegistry.registerDrops(Variables.Eureka.KineticToolKey, new ItemStack(Items.diamond, 3), new ItemStack(ItemsAndBlocks.ironStick), new ItemStack(ItemsAndBlocks.toolCore));
 		EurekaRegistry.bindToKey(ItemsAndBlocks.itemKineticMultiTool, Variables.Eureka.KineticToolKey);
-
-		EurekaRegistry.register(new EurekaInfo("heatedFurnace", "BCA", 5, new ItemStack(ItemsAndBlocks.heatedFurnaceBlock)));
-		EurekaRegistry.registerDrops("heatedFurnace", new ItemStack(Blocks.furnace), new ItemStack(Items.iron_ingot, 8));
-		EurekaRegistry.addPlaceBlockProgress(Blocks.furnace, "heatedFurnace");
-		EurekaRegistry.bindToKey(ItemsAndBlocks.heatedFurnaceBlock, "heatedFurnace");
-
-		EurekaRegistry.register(new EurekaInfo("basicCoil", "BCA", 1, new ItemStack(ItemsAndBlocks.basicCoilBlock), "heatedFurnace"));
-		EurekaRegistry.registerDrops("basicCoil", new ItemStack(Items.iron_ingot), new ItemStack(ItemsAndBlocks.itemIronWire, 8));
-		EurekaRegistry.addPlaceBlockProgress(ItemsAndBlocks.heatedFurnaceBlock, "basicCoil");
-		EurekaRegistry.bindToKey(ItemsAndBlocks.basicCoilBlock, "basicCoil");
-
-		EurekaRegistry.register(new EurekaInfo("lavaCoil", "BCA", 5, new ItemStack(ItemsAndBlocks.lavaCoilBlock), "basicCoil"));
-		EurekaRegistry.registerDrops("lavaCoil", new ItemStack(Items.iron_ingot), new ItemStack(ItemsAndBlocks.goldWire, 8));
-		EurekaRegistry.addPlaceBlockProgress(ItemsAndBlocks.basicCoilBlock, "lavaCoil");
-		EurekaRegistry.bindToKey(ItemsAndBlocks.lavaCoilBlock, "lavaCoil");
-
-		EurekaRegistry.register(new EurekaInfo("kineticCoil", "BCA", 4, new ItemStack(ItemsAndBlocks.kineticCoil), "lavaCoil"));
-		EurekaRegistry.registerDrops("kineticCoil", new ItemStack(Items.iron_ingot), new ItemStack(ItemsAndBlocks.diamondWire, 8));
-		EurekaRegistry.addPlaceBlockProgress(ItemsAndBlocks.lavaCoilBlock, "kineticCoil");
-		EurekaRegistry.bindToKey(ItemsAndBlocks.kineticCoil, "kineticCoil");
-
-		EurekaRegistry.register(new EurekaInfo("KEBT1", "BCA", 3, new ItemStack(ItemsAndBlocks.kebT1, 1, 8)));
-		EurekaRegistry.registerDrops("KEBT1", new ItemStack(Items.iron_ingot, 4), new ItemStack(ItemsAndBlocks.powerCapsuleTier1, 3), new ItemStack(BCItems.PIPE_POWER_GOLD, 2));
-		EurekaRegistry.addCrafingProgress(ItemsAndBlocks.powerCapsuleTier1, "KEBT1");
-		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT1, "KEBT1");
-
-		Block temp = new BlockBasic("energyBufferMultiblockSides5");
-		GameRegistry.registerBlock(temp, "kebT2DisplayItem");
-
-		EurekaRegistry.register(new EurekaInfo("KEBT2", "BCA", 4, new ItemStack(temp), "KEBT1"));
-		EurekaRegistry.registerDrops("KEBT2", new ItemStack(Items.iron_ingot, 6), new ItemStack(BCItems.PIPE_POWER_GOLD, 2), new ItemStack(ItemsAndBlocks.powerCapsuleTier2));
-		EurekaRegistry.addPlaceBlockProgress(ItemsAndBlocks.kebT1, "KEBT2");
-		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT2, "KEBT2");
-
-		temp = new BlockBasic("energyBufferT3MultiblockSides4");
-		GameRegistry.registerBlock(temp, "kebT3DisplayItem");
-
-		EurekaRegistry.register(new EurekaInfo("KEBT3", "BCA", 2, new ItemStack(temp), "KEBT2"));
-		EurekaRegistry.registerDrops("KEBT3", new ItemStack(BCItems.PIPE_POWER_DIAMOND, 2), new ItemStack(Items.gold_ingot, 4), new ItemStack(Items.iron_ingot, 3));
-		EurekaRegistry.bindToKey(ItemsAndBlocks.kebT3Plating, "KEBT3");*/
+		*/
 	}
 
 	private static void metals() {

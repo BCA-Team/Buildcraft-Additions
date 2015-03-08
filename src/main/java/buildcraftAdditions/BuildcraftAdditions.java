@@ -80,6 +80,8 @@ public class BuildcraftAdditions {
 		BCARecipeManager.refinery = new RefineryRecipeManager();
 
 		BCAItemManager.dusts = new DustManager();
+
+		ModIntegration.integrateInit();
 	}
 
 	@Mod.EventHandler
@@ -112,8 +114,6 @@ public class BuildcraftAdditions {
 		BCARecipeManager.duster.addRecipe("oreDiamond", new ItemStack(Items.diamond, 2));
 		BCARecipeManager.duster.addRecipe("oreEmerald", new ItemStack(Items.emerald, 2));
 		BCARecipeManager.duster.addRecipe(new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_powder, 4));
-
-		ModIntegration.integrateInit();
 	}
 
 	@Mod.EventHandler

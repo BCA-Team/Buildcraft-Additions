@@ -137,11 +137,5 @@ task deobfJar(type: Jar) {
     classifier = 'dev'
 }
 
-jar {
-    manifest {
-        attributes (['FMLCorePlugin': 'buildcraftAdditions.preloader.BCALoadingPlugin', 'FMLCorePluginContainsFMLMod': 'true'])
-    }
-}
-
 assemble.dependsOn deobfJar
 curse.dependsOn checkCurse

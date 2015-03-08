@@ -25,6 +25,7 @@ import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
 import buildcraftAdditions.utils.Location;
 
+import eureka.api.EurekaAPI;
 import io.netty.buffer.ByteBuf;
 
 /**
@@ -220,7 +221,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public void makeMaster(int rotationIndex) {
 		data.isMaster = true;
 		data.partOfMultiBlock = true;
-		//EurekaKnowledge.makeProgress(destroyer, "KEBT3", 1);
+		EurekaAPI.API.makeProgress(Variables.Eureka.KEBT3, destroyer);
 		data.rotationIndex = rotationIndex;
 	}
 
@@ -249,7 +250,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public void invalidateMultiblock() {
 		if (data.isMaster) {
 			data.patern.destroyMultiblock(worldObj, xCoord, yCoord, zCoord, data.rotationIndex);
-			//EurekaKnowledge.makeProgress(destroyer, "KEBT3", -1);
+			EurekaAPI.API.revertProgress(Variables.Eureka.KEBT3, destroyer);
 		} else
 			data.patern.destroyMultiblock(worldObj, data.masterX, data.masterY, data.masterZ, data.rotationIndex);
 
