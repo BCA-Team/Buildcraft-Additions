@@ -160,7 +160,7 @@ public class BuildcraftIntegration {
 			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.heatedFurnaceBlock), "III", "IFI", "III", 'I', Items.iron_ingot, 'F', Blocks.furnace);
 		}
 		if (ConfigurationHandler.enabled("KineticEnergyBuffer")) {
-			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.kebT1), "IBI", "PBP", "IBI", 'I', Items.iron_ingot, 'B', ItemsAndBlocks.powerCapsuleTier1, 'P', BCItems.PIPE_POWER_GOLD);
+			GameRegistry.addRecipe(ItemsAndBlocks.kebT1.createEmptyKEB(), "IBI", "PBP", "IBI", 'I', Items.iron_ingot, 'B', ItemsAndBlocks.powerCapsuleTier1, 'P', BCItems.PIPE_POWER_GOLD);
 			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.kebT2), "III", "PBP", "III", 'I', Items.iron_ingot, 'B', ItemsAndBlocks.powerCapsuleTier2, 'P', BCItems.PIPE_POWER_GOLD);
 			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.kebT3Core), "DBD", "PBP", "DBD", 'D', Items.diamond, 'B', ItemsAndBlocks.powerCapsuleTier3, 'P', BCItems.PIPE_POWER_DIAMOND);
 			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.kebT3Plating), "PGP", "GGG", "III", 'P', BCItems.PIPE_POWER_DIAMOND, 'G', Items.gold_ingot, 'I', Items.iron_ingot);
