@@ -201,10 +201,6 @@ gui.south=South
 gui.west=West
 gui.up=Up
 gui.down=Down
-gui.Input=Input
-gui.Output=Output
-gui.Disabled=Disabled
-gui.Both=Both
 gui.machineConfigurator.name=Machine Configurator
 gui.kebT1.name=Kinetic Energy Buffer
 gui.kebT2.name=Large KEB
@@ -261,6 +257,11 @@ trigger.KEBUnder75=Less then 75% charged
 trigger.KEBUnder100=Less then 100% charged
 trigger.KEBEmpty=Completely empty
 trigger.KEBEngineControl=Smart Engine Control
+
+status.input=Input
+status.output=Output
+status.both=Both
+status.disabled=Disabled
 
 priority.veryLow=Very Low
 priority.low=Low

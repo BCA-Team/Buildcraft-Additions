@@ -1,7 +1,5 @@
 package buildcraftAdditions.api.networking;
 
-import io.netty.buffer.ByteBuf;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -9,15 +7,11 @@ import io.netty.buffer.ByteBuf;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public interface ISyncronizedTile {
+public interface ISynchronizedTile extends ISyncObject {
 
-	public ByteBuf writeToByteBuff(ByteBuf buf);
+	int getX();
 
-	public ByteBuf readFromByteBuff(ByteBuf buf);
+	int getY();
 
-	public int getX();
-
-	public int getY();
-
-	public int getZ();
+	int getZ();
 }

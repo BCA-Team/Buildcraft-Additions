@@ -8,10 +8,10 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.inventories.containers.ContainerPipeColoringTool;
 import buildcraftAdditions.client.gui.widgets.WidgetBase;
 import buildcraftAdditions.client.gui.widgets.WidgetButtonText;
 import buildcraftAdditions.client.gui.widgets.WidgetButtonUpdate;
+import buildcraftAdditions.inventories.containers.ContainerPipeColoringTool;
 import buildcraftAdditions.networking.MessagePipeColoringTool;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.ItemsAndBlocks;

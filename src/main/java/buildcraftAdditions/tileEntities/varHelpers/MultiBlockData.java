@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraftAdditions.api.nbt.INBTSaveable;
 import buildcraftAdditions.api.networking.ISyncObject;
 import buildcraftAdditions.multiBlocks.MultiBlockPatern;
 
@@ -17,7 +18,7 @@ import buildcraftAdditions.multiBlocks.MultiBlockPatern;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class MultiBlockData implements ISyncObject {
+public class MultiBlockData implements ISyncObject, INBTSaveable {
 	public int masterX, masterY, masterZ, rotationIndex, oldmasterX, oldmasterY, oldmasterZ;
 	public boolean isMaster, partOfMultiBlock, moved;
 	public MultiBlockPatern patern;
@@ -49,24 +50,24 @@ public class MultiBlockData implements ISyncObject {
 		return this;
 	}
 
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+	@Override
+	public void writeToNBT(NBTTagCompound tag) {
 		tag.setInteger("masterX", masterX);
 		tag.setInteger("masterY", masterY);
 		tag.setInteger("masterZ", masterZ);
 		tag.setInteger("rotationIndex", rotationIndex);
 		tag.setBoolean("isMaster", isMaster);
 		tag.setBoolean("partOfMultiBlock", partOfMultiBlock);
-		return tag;
 	}
 
-	public MultiBlockData readFromNBT(NBTTagCompound tag) {
+	@Override
+	public void readFromNBT(NBTTagCompound tag) {
 		masterX = tag.getInteger("masterX");
 		masterY = tag.getInteger("masterY");
 		masterZ = tag.getInteger("masterZ");
 		rotationIndex = tag.getInteger("rotationIndex");
 		isMaster = tag.getBoolean("isMaster");
 		partOfMultiBlock = tag.getBoolean("partOfMultiBlock");
-		return this;
 	}
 
 	public MultiBlockData setPatern(MultiBlockPatern patern) {
@@ -104,22 +105,20 @@ public class MultiBlockData implements ISyncObject {
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
+	public void writeToByteBuff(ByteBuf buf) {
 		buf.writeBoolean(isMaster);
 		buf.writeBoolean(partOfMultiBlock);
 		buf.writeInt(masterX);
 		buf.writeInt(masterY);
 		buf.writeInt(masterZ);
-		return buf;
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
+	public void readFromByteBuff(ByteBuf buf) {
 		isMaster = buf.readBoolean();
 		partOfMultiBlock = buf.readBoolean();
 		masterX = buf.readInt();
 		masterY = buf.readInt();
 		masterZ = buf.readInt();
-		return buf;
 	}
 }

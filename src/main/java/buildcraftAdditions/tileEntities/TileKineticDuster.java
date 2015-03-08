@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -11,8 +13,6 @@ import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
-
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -83,17 +83,15 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
-		buf = super.writeToByteBuff(buf);
-		buf = buf.writeInt(progressStage);
-		return buf;
+	public void writeToByteBuff(ByteBuf buf) {
+		super.writeToByteBuff(buf);
+		buf.writeInt(progressStage);
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
-		buf = super.readFromByteBuff(buf);
+	public void readFromByteBuff(ByteBuf buf) {
+		super.readFromByteBuff(buf);
 		progressStage = buf.readInt();
-		return buf;
 	}
 
 	@Override

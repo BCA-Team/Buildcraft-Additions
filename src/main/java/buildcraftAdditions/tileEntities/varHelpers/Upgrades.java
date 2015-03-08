@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.Constants;
 
+import buildcraftAdditions.api.nbt.INBTSaveable;
 import buildcraftAdditions.api.networking.ISyncObject;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 
@@ -22,12 +23,13 @@ import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class Upgrades implements ISyncObject {
+public class Upgrades implements ISyncObject, INBTSaveable {
+
 	private final EnumSet<EnumMachineUpgrades> upgrades, whitelist, blacklist;
-	private int maxUpgrades;
+	private byte maxUpgrades;
 
 	public Upgrades(int maxUpgrades) {
-		this.maxUpgrades = maxUpgrades;
+		this.maxUpgrades = (byte) (0xFF & maxUpgrades);
 		upgrades = EnumSet.noneOf(EnumMachineUpgrades.class);
 		whitelist = EnumSet.noneOf(EnumMachineUpgrades.class);
 		blacklist = EnumSet.noneOf(EnumMachineUpgrades.class);
@@ -72,44 +74,52 @@ public class Upgrades implements ISyncObject {
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
-		buf.writeInt(maxUpgrades);
-		buf.writeInt(upgrades.size());
-		for (EnumMachineUpgrades upgrade : upgrades) buf.writeInt(upgrade.ordinal());
-		return buf;
+	public void writeToByteBuff(ByteBuf buf) {
+		buf.writeByte(maxUpgrades);
+		buf.writeByte(upgrades.size());
+		for (EnumMachineUpgrades upgrade : upgrades) buf.writeByte(upgrade.ordinal());
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
-		maxUpgrades = buf.readInt();
-		int installedUpgrades = buf.readInt();
+	public void readFromByteBuff(ByteBuf buf) {
+		maxUpgrades = buf.readByte();
 		upgrades.clear();
-		for (int i = 0; i < installedUpgrades; i++)
-			upgrades.add(EnumMachineUpgrades.values()[buf.readInt()]);
-		return buf;
+		byte installedUpgrades = buf.readByte();
+		for (byte b = 0; b < installedUpgrades; b++)
+			upgrades.add(EnumMachineUpgrades.values()[buf.readByte()]);
 	}
 
+	@Override
 	public void writeToNBT(NBTTagCompound tag) {
-		tag.setInteger("maxUpgrades", maxUpgrades);
-		int[] upgradeIDs = new int[upgrades.size()];
+		tag.setByte("maxUpgrades", maxUpgrades);
+		byte[] upgradeIDs = new byte[upgrades.size()];
 		EnumMachineUpgrades[] upgradeArray = upgrades.toArray(new EnumMachineUpgrades[upgrades.size()]);
-		for (int i = 0; i < upgradeIDs.length; i++) {
-			upgradeIDs[i] = upgradeArray[i].ordinal();
-		}
-		tag.setIntArray("upgrades", upgradeIDs);
+		for (int i = 0; i < upgradeIDs.length; i++)
+			upgradeIDs[i] = (byte) (0xFF & upgradeArray[i].ordinal());
+		tag.setByteArray("upgrades", upgradeIDs);
 	}
 
+	//TODO: Remove Integer reading.
+	@Override
 	public void readFromNBT(NBTTagCompound tag) {
-		maxUpgrades = tag.getInteger("maxUpgrades");
+		if (tag.hasKey("maxUpgrades", Constants.NBT.TAG_INT))
+			maxUpgrades = (byte) (0xFF & tag.getInteger("maxUpgrades"));
+		if (tag.hasKey("maxUpgrades", Constants.NBT.TAG_BYTE))
+			maxUpgrades = tag.getByte("maxUpgrades");
 		if (tag.hasKey("upgrades", Constants.NBT.TAG_INT_ARRAY)) {
 			int[] upgradeIDs = tag.getIntArray("upgrades");
 			for (int i : upgradeIDs)
 				upgrades.add(EnumMachineUpgrades.values()[i]);
 		}
+		if (tag.hasKey("upgrades", Constants.NBT.TAG_BYTE_ARRAY)) {
+			byte[] upgradeIDs = tag.getByteArray("upgrades");
+			for (byte b : upgradeIDs)
+				upgrades.add(EnumMachineUpgrades.values()[b]);
+		}
 	}
 
-	public void setMaxUpgrades(int max) {
-		maxUpgrades = max;
+	public void setMaxUpgrades(int maxUpgrades) {
+		this.maxUpgrades = (byte) (0xFF & maxUpgrades);
 	}
 
 	public void invalidate() {

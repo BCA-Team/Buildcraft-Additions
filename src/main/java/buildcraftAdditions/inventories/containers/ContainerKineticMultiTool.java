@@ -2,8 +2,8 @@ package buildcraftAdditions.inventories.containers;
 
 import net.minecraft.entity.player.InventoryPlayer;
 
-import buildcraftAdditions.inventories.slots.SlotBattery;
 import buildcraftAdditions.inventories.InventoryKineticMultiTool;
+import buildcraftAdditions.inventories.slots.SlotBattery;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise

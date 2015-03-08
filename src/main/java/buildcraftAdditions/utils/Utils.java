@@ -8,6 +8,11 @@ package buildcraftAdditions.utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import java.util.Set;
+
+import com.google.common.base.Strings;
+import com.google.common.collect.Sets;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.entity.Entity;
@@ -15,6 +20,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
@@ -26,12 +32,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import buildcraft.api.transport.IPipeTile;
+import buildcraft.api.transport.IInjectable;
 
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
-import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
-
-import com.google.common.base.Strings;
+import buildcraftAdditions.api.configurableOutput.SideConfiguration;
 
 public class Utils {
 
@@ -134,14 +138,18 @@ public class Utils {
 		GL11.glColor4f(red, green, blue, 1.0F);
 	}
 
-	public static boolean areItemStacksEqualItem(ItemStack stack1, ItemStack stack2) {
+	public static boolean areItemStacksEqualRecipe(ItemStack stack1, ItemStack stack2) {
 		return stack1 != null && stack2 != null && stack1.getItem() == stack2.getItem() && (stack1.getItemDamage() == stack2.getItemDamage() || stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack1.getItem().isDamageable());
 	}
 
-	public static ItemStack outputStack(Location from, ItemStack output, SideConfiguration configuration) {
-		for (EnumPriority priority : EnumPriority.values()) {
+	public static boolean areItemStacksMergeable(ItemStack stack1, ItemStack stack2) {
+		return stack1 == null && stack2 == null || (stack1 != null && stack2 != null && stack1.isItemEqual(stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2));
+	}
 
-			//first try to put it intro a pipe
+	public static ItemStack outputStack(Location from, ItemStack output, SideConfiguration configuration) {
+		if (from == null || output == null || output.getItem() == null || output.stackSize <= 0 || configuration == null)
+			return output;
+		for (EnumPriority priority : EnumPriority.values()) {
 			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 				Location location = from.copy();
 				if (configuration.getPriority(direction) != priority)
@@ -149,18 +157,17 @@ public class Utils {
 				if (!configuration.canSend(direction))
 					continue;
 				location.move(direction);
-				TileEntity entity = location.getTileEntity();
-				if (entity instanceof IPipeTile) {
-					IPipeTile pipe = (IPipeTile) entity;
-					if (output != null && pipe.isPipeConnected(direction.getOpposite()) && pipe.getPipeType() == IPipeTile.PipeType.ITEM) {
-						int leftOver = pipe.injectItem(output.copy(), true, direction.getOpposite(), null);
+				TileEntity tile = location.getTileEntity();
+				if (tile instanceof IInjectable) {
+					IInjectable injectable = (IInjectable) tile;
+					if (output != null && injectable.canInjectItems(direction.getOpposite())) {
+						int leftOver = injectable.injectItem(output.copy(), true, direction.getOpposite(), null);
 						output.stackSize -= leftOver;
-						if (output.stackSize == 0)
+						if (output.stackSize <= 0)
 							output = null;
 					}
 				}
 			}
-			//try to put it intro an inventory
 			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 				Location location = from.copy();
 				if (configuration.getPriority(direction) != priority)
@@ -168,18 +175,29 @@ public class Utils {
 				if (!configuration.canSend(direction))
 					continue;
 				location.move(direction);
-				TileEntity entity = location.getTileEntity();
-				if (entity != null && entity instanceof IInventory) {
-					IInventory outputInventory = (IInventory) entity;
+				TileEntity tile = location.getTileEntity();
+				if (tile != null && tile instanceof IInventory) {
+					IInventory outputInventory = (IInventory) tile;
+					ISidedInventory sidedInventory = null;
+					if (tile instanceof ISidedInventory)
+						sidedInventory = (ISidedInventory) tile;
+					Set<Integer> allowedSlots = null;
+					if (sidedInventory != null) {
+						allowedSlots = Sets.newHashSet();
+						int[] accessibleSlots = sidedInventory.getAccessibleSlotsFromSide(direction.getOpposite().ordinal());
+						if (accessibleSlots != null)
+							for (int slot : accessibleSlots)
+								allowedSlots.add(slot);
+					}
+					int stackLimit = outputInventory.getInventoryStackLimit();
 					for (int slot = 0; slot < outputInventory.getSizeInventory(); slot++) {
-						int stackLimit = outputInventory.getInventoryStackLimit();
-						ItemStack testStack = outputInventory.getStackInSlot(slot);
-						if (output != null &&
-								(testStack == null || (testStack.stackSize + output.stackSize <= testStack.getMaxStackSize() && testStack.getItem() == output.getItem() && testStack.getItemDamage() == output.getItemDamage()))) {
-							ItemStack stack = outputInventory.getStackInSlot(slot);
+						if (output == null || output.getItem() == null || output.stackSize <= 0 || (allowedSlots != null && !allowedSlots.contains(slot)) || (sidedInventory != null && !sidedInventory.canInsertItem(slot, output, direction.getOpposite().ordinal())))
+							continue;
+						ItemStack stack = outputInventory.getStackInSlot(slot);
+						if (areItemStacksMergeable(stack, output)) {
 							int toMove;
 							if (stack == null) {
-								toMove = stackLimit - 1;
+								toMove = stackLimit;
 								stack = output.copy();
 								stack.stackSize = 0;
 							} else {
@@ -191,7 +209,7 @@ public class Utils {
 							output.stackSize -= toMove;
 							outputInventory.setInventorySlotContents(slot, stack);
 							outputInventory.markDirty();
-							if (output.stackSize == 0)
+							if (output.stackSize <= 0)
 								output = null;
 						}
 					}

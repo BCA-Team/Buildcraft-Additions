@@ -56,15 +56,13 @@ public abstract class TileCoilBase extends TileBase {
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
+	public void writeToByteBuff(ByteBuf buf) {
 		buf.writeBoolean(shouldHeat);
-		return buf;
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
+	public void readFromByteBuff(ByteBuf buf) {
 		shouldHeat = buf.readBoolean();
-		return buf;
 	}
 
 }

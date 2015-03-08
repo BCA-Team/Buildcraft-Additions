@@ -33,7 +33,7 @@ public class DusterRecipeOreDict implements IDusterRecipe {
 	@Override
 	public ItemStack getOutput(ItemStack input) {
 		for (ItemStack stack : OreDictionary.getOres(this.input)) {
-			if (Utils.areItemStacksEqualItem(stack, input))
+			if (Utils.areItemStacksEqualRecipe(stack, input))
 				return output.copy();
 		}
 		return null;

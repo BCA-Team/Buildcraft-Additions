@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-import buildcraftAdditions.api.networking.ISyncronizedTile;
+import buildcraftAdditions.api.networking.ISynchronizedTile;
 import buildcraftAdditions.api.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.Variables;
@@ -20,7 +20,7 @@ import buildcraftAdditions.reference.Variables;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileBase extends TileEntity implements ISyncronizedTile {
+public abstract class TileBase extends TileEntity implements ISynchronizedTile {
 
 	public int timer;
 

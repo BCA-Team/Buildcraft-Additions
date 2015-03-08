@@ -24,14 +24,13 @@ import buildcraftAdditions.tileEntities.TileItemSorter;
 @SideOnly(Side.CLIENT)
 public class RendererItemSorter implements ISimpleBlockRenderingHandler {
 
-	public static int RENDER_ID;
-
-	public final Block fakeBlock = new Block(Material.rock) {
+	private static final Block fakeBlock = new Block(Material.rock) {
 		@Override
 		public IIcon getIcon(int side, int meta) {
 			return ItemsAndBlocks.itemSorter.getIcon(side, meta);
 		}
 	};
+	public static int RENDER_ID;
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {

@@ -2,8 +2,6 @@ package buildcraftAdditions.api.configurableOutput;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraftAdditions.tileEntities.varHelpers.SideConfiguration;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/

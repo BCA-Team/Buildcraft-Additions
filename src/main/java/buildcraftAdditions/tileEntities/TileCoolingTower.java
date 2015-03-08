@@ -25,7 +25,7 @@ import buildcraft.api.transport.IPipeTile;
 import buildcraft.energy.fuels.CoolantManager;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.api.networking.ISyncronizedTile;
+import buildcraftAdditions.api.networking.ISynchronizedTile;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.recipe.refinery.ICoolingTowerRecipe;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
@@ -49,7 +49,7 @@ import buildcraftAdditions.utils.fluids.Tank;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFluidHandler, ITankHolder, ISyncronizedTile, IPipeConnection, IUpgradableMachine {
+public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFluidHandler, ITankHolder, ISynchronizedTile, IPipeConnection, IUpgradableMachine {
 	private final MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.COOLING_TOWER);
 	private final Tank input = new CoolingRecipeTank("input", 2000, this);
 	private final Tank output = new Tank(2000, this, "output");
@@ -359,7 +359,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	}
 
 	@Override
-	public ByteBuf writeToByteBuff(ByteBuf buf) {
+	public void writeToByteBuff(ByteBuf buf) {
 		buf.writeBoolean(valve);
 		buf.writeFloat(heat);
 		input.writeToByteBuff(buf);
@@ -367,19 +367,17 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		coolant.writeToByteBuff(buf);
 		data.writeToByteBuff(buf);
 		upgrades.writeToByteBuff(buf);
-		return buf;
 	}
 
 	@Override
-	public ByteBuf readFromByteBuff(ByteBuf buf) {
+	public void readFromByteBuff(ByteBuf buf) {
 		valve = buf.readBoolean();
 		heat = buf.readFloat();
-		buf = input.readFromByteBuff(buf);
-		buf = output.readFromByteBuff(buf);
-		buf = coolant.readFromByteBuff(buf);
-		buf = data.readFromByteBuff(buf);
-		buf = upgrades.readFromByteBuff(buf);
-		return buf;
+		input.readFromByteBuff(buf);
+		output.readFromByteBuff(buf);
+		coolant.readFromByteBuff(buf);
+		data.readFromByteBuff(buf);
+		upgrades.readFromByteBuff(buf);
 	}
 
 	@Override

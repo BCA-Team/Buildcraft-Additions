@@ -1,5 +1,7 @@
 package buildcraftAdditions.inventories;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -7,7 +9,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
+
 import net.minecraftforge.common.util.Constants;
+
+import buildcraftAdditions.api.nbt.INBTSaveable;
+import buildcraftAdditions.api.networking.ISyncObject;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -16,7 +23,7 @@ import net.minecraftforge.common.util.Constants;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class CustomInventory implements IInventory {
+public class CustomInventory implements IInventory, ISyncObject, INBTSaveable {
 
 	private final ItemStack[] itemStacks;
 	private final String name;
@@ -30,7 +37,8 @@ public class CustomInventory implements IInventory {
 		this.entity = entity;
 	}
 
-	public void readNBT(NBTTagCompound tag) {
+	@Override
+	public void readFromNBT(NBTTagCompound tag) {
 		NBTTagList nbttaglist = tag.getTagList("ItemStacks", Constants.NBT.TAG_COMPOUND);
 		for (int t = 0; t < nbttaglist.tagCount(); t++) {
 			NBTTagCompound slot = nbttaglist.getCompoundTagAt(t);
@@ -46,7 +54,8 @@ public class CustomInventory implements IInventory {
 		}
 	}
 
-	public void writeNBT(NBTTagCompound tag) {
+	@Override
+	public void writeToNBT(NBTTagCompound tag) {
 		NBTTagList list = new NBTTagList();
 		for (byte t = 0; t < itemStacks.length; t++) {
 			if (itemStacks[t] != null && itemStacks[t].stackSize > 0) {
@@ -57,6 +66,18 @@ public class CustomInventory implements IInventory {
 			}
 		}
 		tag.setTag("ItemStacks", list);
+	}
+
+	@Override
+	public void writeToByteBuff(ByteBuf buf) {
+		for (ItemStack stack : itemStacks)
+			ByteBufUtils.writeItemStack(buf, stack);
+	}
+
+	@Override
+	public void readFromByteBuff(ByteBuf buf) {
+		for (int i = 0; i < itemStacks.length; i++)
+			itemStacks[i] = ByteBufUtils.readItemStack(buf);
 	}
 
 	@Override

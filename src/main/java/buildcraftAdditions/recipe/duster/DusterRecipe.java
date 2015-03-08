@@ -32,6 +32,6 @@ public class DusterRecipe implements IDusterRecipe {
 
 	@Override
 	public ItemStack getOutput(ItemStack input) {
-		return Utils.areItemStacksEqualItem(this.input, input) ? output.copy() : null;
+		return Utils.areItemStacksEqualRecipe(this.input, input) ? output.copy() : null;
 	}
 }

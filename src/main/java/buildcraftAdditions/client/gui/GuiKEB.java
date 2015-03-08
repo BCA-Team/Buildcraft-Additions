@@ -8,8 +8,8 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.inventories.containers.ContainerKEB;
 import buildcraftAdditions.client.gui.widgets.WidgetSelfDestruct;
+import buildcraftAdditions.inventories.containers.ContainerKEB;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.Utils;
 
