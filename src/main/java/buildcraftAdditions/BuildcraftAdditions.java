@@ -25,6 +25,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import buildcraftAdditions.ModIntegration.ModIntegration;
+import buildcraftAdditions.compat.CompatTest;
+import buildcraftAdditions.compat.ModuleManager;
 import buildcraftAdditions.ModIntegration.imc.IMCHandler;
 import buildcraftAdditions.ModIntegration.imc.IMCSender;
 import buildcraftAdditions.api.item.BCAItemManager;
@@ -66,8 +68,12 @@ public class BuildcraftAdditions {
 	@SidedProxy(clientSide = "buildcraftAdditions.proxy.ClientProxy", serverSide = "buildcraftAdditions.proxy.CommonProxy")
 	public static CommonProxy proxy;
 
+	public ModuleManager manager = new ModuleManager();
+
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		manager.registerModule(new CompatTest());
+
 		Logger.initiallize();
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		PacketHandler.init();
@@ -82,6 +88,8 @@ public class BuildcraftAdditions {
 		BCAItemManager.dusts = new DustManager();
 
 		ModIntegration.integrateInit();
+
+		manager.preInit(event);
 	}
 
 	@Mod.EventHandler
@@ -114,10 +122,13 @@ public class BuildcraftAdditions {
 		BCARecipeManager.duster.addRecipe("oreDiamond", new ItemStack(Items.diamond, 2));
 		BCARecipeManager.duster.addRecipe("oreEmerald", new ItemStack(Items.emerald, 2));
 		BCARecipeManager.duster.addRecipe(new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_powder, 4));
+
+		manager.init(event);
 	}
 
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		manager.postInit(event);
 	}
 
 	@Mod.EventHandler
@@ -127,6 +138,8 @@ public class BuildcraftAdditions {
 		for (IDust dust : BCAItemManager.dusts.getDusts())
 			if (dust != null)
 				dust.getDustType().register(dust.getMeta(), dust.getName(), dust.getDustStack());
+
+		manager.doneLoadingEvent(event);
 	}
 
 	@Mod.EventHandler
