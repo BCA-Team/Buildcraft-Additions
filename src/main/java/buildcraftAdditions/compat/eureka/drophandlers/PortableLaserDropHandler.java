@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.Eureka.drophandlers;
+package buildcraftAdditions.compat.eureka.drophandlers;
 
 import java.util.ArrayList;
 import java.util.List;

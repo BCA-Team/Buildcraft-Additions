@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import buildcraftAdditions.compat.buildcraft.CompatBC;
+import buildcraftAdditions.compat.eureka.CompatEureka;
 import buildcraftAdditions.core.Logger;
 
 import com.google.common.base.Strings;
@@ -33,6 +34,7 @@ public class ModuleManager {
 	public void setupModules() {
 		//registerModule(new CompatTest()); //debug compat.
 		registerModule(new CompatBC());
+		registerModule(new CompatEureka());
 	}
 
 	public void registerModule(Object object) {
@@ -45,9 +47,7 @@ public class ModuleManager {
 			id = module.id();
 			deps = module.requiredMods();
 		} catch (Exception e) {
-			e.printStackTrace();
-			return;
-			//throw new RuntimeException("failed to read CompatModule:" + object + ": " + e.getStackTrace());
+			throw new RuntimeException("failed to read CompatModule:" + object);
 		}
 
 		if (!Strings.isNullOrEmpty(deps)) {

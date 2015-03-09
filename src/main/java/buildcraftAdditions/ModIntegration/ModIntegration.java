@@ -11,14 +11,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import buildcraftAdditions.ModIntegration.Eureka.EurekaIntegration;
 import buildcraftAdditions.ModIntegration.Framez.FramezIntegration;
 import buildcraftAdditions.ModIntegration.MineTweaker.MineTweakerIntegreation;
 import buildcraftAdditions.ModIntegration.waila.WailaIntegration;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
-import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.items.dust.DustTypes;
 
 /**
@@ -37,10 +35,6 @@ public class ModIntegration {
 			FramezIntegration.Framez();
 		if (Loader.isModLoaded("MineTweaker3"))
 			MineTweakerIntegreation.integrate();
-		if (Loader.isModLoaded("BuildCraft|Core")) {
-			if (ConfigurationHandler.eurekaIntegration)
-				EurekaIntegration.integrate();
-		}
 		if (Loader.isModLoaded("Waila"))
 			WailaIntegration.integrate();
 	}

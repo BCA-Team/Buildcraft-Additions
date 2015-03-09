@@ -5,8 +5,6 @@ import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-import buildcraftAdditions.core.Logger;
-
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
