@@ -1,13 +1,11 @@
-package buildcraftAdditions.ModIntegration.Buildcraft.schematics;
+package buildcraftAdditions.compat.buildcraft.schematics;
 
 import java.util.LinkedList;
 
 import net.minecraft.item.ItemStack;
 
 import buildcraft.api.blueprints.IBuilderContext;
-import buildcraft.builders.schematics.SchematicPiston;
-
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraft.api.blueprints.SchematicTile;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -16,17 +14,30 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class SchematicSorter extends SchematicPiston {
+public class SchematicBCABase extends SchematicTile {
 
 	@Override
 	public void getRequirementsForPlacement(IBuilderContext context, LinkedList<ItemStack> requirements) {
-		requirements.add(new ItemStack(ItemsAndBlocks.itemSorter));
+		requirements.add(new ItemStack(block, 1, 0));
+	}
+
+	@Override
+	public void storeRequirements(IBuilderContext context, int x, int y, int z) {
+		//don't store items that are in the machine
 	}
 
 	@Override
 	public void placeInWorld(IBuilderContext context, int x, int y, int z, LinkedList<ItemStack> stacks) {
-		super.placeInWorld(context, x, y, z, stacks);
-		tileNBT.setBoolean("reloadRotation", true);
-		context.world().getTileEntity(x, y, z).readFromNBT(tileNBT);
+		context.world().setBlock(x, y, z, block, meta, 2);
+	}
+
+	@Override
+	public void initializeFromObjectAt(IBuilderContext context, int x, int y, int z) {
+		//don't save TE data
+	}
+
+	@Override
+	public BuildingStage getBuildStage() {
+		return BuildingStage.STANDALONE;
 	}
 }

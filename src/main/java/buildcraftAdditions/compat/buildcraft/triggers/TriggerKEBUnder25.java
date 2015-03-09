@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
+package buildcraftAdditions.compat.buildcraft.triggers;
 
 import net.minecraft.tileentity.TileEntity;
 
@@ -7,7 +7,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
 
-import buildcraftAdditions.tileEntities.TileChargingStation;
+import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -16,18 +16,14 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerDoneCharging extends BasicTrigger {
+public class TriggerKEBUnder25 extends BasicTrigger {
 
-	public TriggerDoneCharging() {
-		super("doneCharging", "TriggerDoneCharging");
+	public TriggerKEBUnder25() {
+		super("KEBUnder25", "lessThan25%");
 	}
 
 	@Override
 	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
-		if (target instanceof TileChargingStation) {
-			TileChargingStation chargingStation = (TileChargingStation) target;
-			return chargingStation.getProgress() == 1;
-		}
-		return false;
+		return target instanceof TileKineticEnergyBufferBase && ((TileKineticEnergyBufferBase) target).getEnergyLevel() < 25;
 	}
 }

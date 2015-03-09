@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
+package buildcraftAdditions.compat.buildcraft.triggers;
 
 import net.minecraft.tileentity.TileEntity;
 
@@ -7,7 +7,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
 
-import buildcraftAdditions.tileEntities.TileFluidicCompressor;
+import buildcraftAdditions.tileEntities.TileChargingStation;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -16,17 +16,17 @@ import buildcraftAdditions.tileEntities.TileFluidicCompressor;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerHasEmptyCanister extends BasicTrigger {
+public class TriggerDoneCharging extends BasicTrigger {
 
-	public TriggerHasEmptyCanister() {
-		super("hasEmptyCanister", "TriggerHasEmptyCanister");
+	public TriggerDoneCharging() {
+		super("doneCharging", "TriggerDoneCharging");
 	}
 
 	@Override
 	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
-		if (target instanceof TileFluidicCompressor) {
-			TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) target;
-			return (fluidicCompressor.getStackInSlot(1) != null && fluidicCompressor.getStackInSlot(1).stackTagCompound != null && fluidicCompressor.getStackInSlot(1).stackTagCompound.hasKey("Fluid"));
+		if (target instanceof TileChargingStation) {
+			TileChargingStation chargingStation = (TileChargingStation) target;
+			return chargingStation.getProgress() == 1;
 		}
 		return false;
 	}

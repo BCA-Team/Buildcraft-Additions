@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.Buildcraft;
+package buildcraftAdditions.compat.buildcraft;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

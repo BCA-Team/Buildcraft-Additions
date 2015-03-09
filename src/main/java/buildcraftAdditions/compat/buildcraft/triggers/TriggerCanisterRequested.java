@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
+package buildcraftAdditions.compat.buildcraft.triggers;
 
 import net.minecraft.tileentity.TileEntity;
 

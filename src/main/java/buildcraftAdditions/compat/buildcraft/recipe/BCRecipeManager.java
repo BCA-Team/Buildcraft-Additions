@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.Buildcraft;
+package buildcraftAdditions.compat.buildcraft.recipe;
 
 import java.util.ArrayList;
 
@@ -14,25 +14,16 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-import buildcraft.api.blueprints.BuilderAPI;
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 import buildcraft.silicon.ItemRedstoneChipset;
 
-import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.ModIntegration.Buildcraft.Triggers.Triggers;
-import buildcraftAdditions.ModIntegration.Buildcraft.schematics.SchematicBCABase;
-import buildcraftAdditions.ModIntegration.Buildcraft.schematics.SchematicMulitblock;
-import buildcraftAdditions.ModIntegration.Buildcraft.schematics.SchematicRotatableBCABlock;
-import buildcraftAdditions.ModIntegration.Buildcraft.schematics.SchematicSorter;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.Tools.ItemToolUpgrade;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
-import buildcraftAdditions.tileEntities.TileItemSorter;
-import buildcraftAdditions.utils.BCItems;
-import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
+import buildcraftAdditions.compat.buildcraft.BCItems;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -41,43 +32,9 @@ import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BuildcraftIntegration {
+public class BCRecipeManager {
 
-	public static void integrate() {
-		RefineryRecipeConverter.doYourThing();
-		Triggers.register();
-		addBCRecipes();
-		BuildcraftAdditions.proxy.addPowerplant();
-	}
-
-	public static void registerSchematics() {
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kebT1, SchematicBCABase.class);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kineticCoil, SchematicBCABase.class);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kineticDusterBlock, SchematicBCABase.class);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.lavaCoilBlock, SchematicBCABase.class);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.basicCoilBlock, SchematicBCABase.class);
-
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.basicDusterBlock, SchematicRotatableBCABlock.class, new int[]{2, 5, 3, 4}, true);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.heatedFurnaceBlock, SchematicRotatableBCABlock.class, new int[]{2, 5, 3, 4}, true);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.chargingStationBlock, SchematicRotatableBCABlock.class, new int[]{2, 5, 3, 4}, true);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.fluidicCompressorBlock, SchematicRotatableBCABlock.class, new int[]{2, 5, 3, 4}, true);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.mechanicalDusterBlock, SchematicRotatableBCABlock.class, new int[]{2, 5, 3, 4}, true);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.semiAutomaticDusterBlock, SchematicRotatableBCABlock.class, new int[]{2, 5, 3, 4}, true);
-
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.refineryWalls, SchematicMulitblock.class);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.refineryValve, SchematicMulitblock.class);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.coolingTowerWalls, SchematicMulitblock.class);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.coolingTowerValve, SchematicMulitblock.class);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kebT2, SchematicMulitblock.class);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kebT3Core, SchematicMulitblock.class);
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.kebT3Plating, SchematicMulitblock.class);
-
-		BuilderAPI.schematicRegistry.registerSchematicBlock(ItemsAndBlocks.itemSorter, SchematicSorter.class);
-
-		StripesHandler.register();
-	}
-
-	private static void addBCRecipes() {
+	public static void addBCRecipes() {
 		if (ConfigurationHandler.enabled("MultiTools")) {
 			addStickRecipe(ItemsAndBlocks.ironStick, 1000, "ingotIron");
 			addStickRecipe(ItemsAndBlocks.goldStick, 2000, "ingotGold");
@@ -102,10 +59,12 @@ public class BuildcraftIntegration {
 			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeUpgrade("chainsaw"));
 			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeUpgrade("hoe"));
 		}
+
 		if (ConfigurationHandler.enabled("MultiToolsArea")) {
 			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeUpgrade("area"));
 			addUpgradeRecipe(ItemsAndBlocks.toolUpgradeArea, new ItemStack(Blocks.sticky_piston), new ItemStack(Items.ender_pearl), "ingotGold");
 		}
+
 		if (ConfigurationHandler.enabled("MultiToolsSilky")) {
 			BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeUpgrade("silky"));
 			addUpgradeRecipe(ItemsAndBlocks.toolUpgradeSilky, new ItemStack(Items.string, 3), "slimeball", "ingotGold");
@@ -126,6 +85,7 @@ public class BuildcraftIntegration {
 			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.diamondCanister), "PDP", "DGD", "PDP", 'P', BCItems.SEALANT, 'D', Items.diamond, 'G', ItemsAndBlocks.goldCanister);
 			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.fluidicCompressorBlock), "IFI", "PGP", "IMI", 'I', BCItems.IRON_GEAR, 'F', BCItems.FLOODGATE, 'P', Blocks.piston, 'G', ItemsAndBlocks.goldCanister, 'M', BCItems.PUMP);
 		}
+
 		if (ConfigurationHandler.enabled("ChargingStation")) {
 			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.chargingStationBlock), "I I", "WKW", "I I", 'I', BCItems.IRON_GEAR, 'W', BCItems.PIPE_POWER_WOOD, 'K', ItemsAndBlocks.powerCapsuleTier2);
 		}
@@ -156,9 +116,10 @@ public class BuildcraftIntegration {
 			GameRegistry.addSmelting(ItemsAndBlocks.diamondWireUnhardened, new ItemStack(ItemsAndBlocks.diamondWire, 2), 0.5f);
 			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.kineticCoil), "WWW", "WIW", "WWW", 'W', ItemsAndBlocks.diamondWire, 'I', Items.iron_ingot);
 		}
-		if (ConfigurationHandler.enabled("HeatedFurnace")) {
+
+		if (ConfigurationHandler.enabled("HeatedFurnace"))
 			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.heatedFurnaceBlock), "III", "IFI", "III", 'I', Items.iron_ingot, 'F', Blocks.furnace);
-		}
+
 		if (ConfigurationHandler.enabled("KineticEnergyBuffer")) {
 			GameRegistry.addRecipe(ItemsAndBlocks.kebT1.createEmptyKEB(), "IBI", "PBP", "IBI", 'I', Items.iron_ingot, 'B', ItemsAndBlocks.powerCapsuleTier1, 'P', BCItems.PIPE_POWER_GOLD);
 			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.kebT2), "III", "PBP", "III", 'I', Items.iron_ingot, 'B', ItemsAndBlocks.powerCapsuleTier2, 'P', BCItems.PIPE_POWER_GOLD);
@@ -210,12 +171,14 @@ public class BuildcraftIntegration {
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.toolUpgradeDrill), "U", 'U', ItemsAndBlocks.toolUpgradeHoe);
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.toolUpgradeHoe), "U", 'U', ItemsAndBlocks.toolUpgradeChainsaw);
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemsAndBlocks.machineConfigurator), "RIB", " W ", "YIY", 'B', "dyeBlue", 'I', "ingotIron", 'R', "dyeRed", 'W', BCItems.WRENCH, 'Y', "dyeYellow"));
+
 		if (ConfigurationHandler.enabled("ColorSorter"))
 			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.itemSorter), "SUS", "PCP", "SGS", 'S', Blocks.stone, 'U', EnumMachineUpgrades.AUTO_OUTPUT.getItemStack(), 'P', BCItems.PIPE_ITEMS_LAPIS, 'C', Blocks.chest, 'G', BCItems.PIPE_ITEMS_GOLD);
+
 		if (ConfigurationHandler.enabled("ColoringTool"))
 			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.pipeColoringTool), "  S", " S ", "W  ", 'W', new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 'S', Items.stick);
-		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.blankUpgrade, 2), "GGG", "GPG", "GGG", 'G', Items.gold_ingot, 'P', ItemsAndBlocks.heatPlating);
 
+		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.blankUpgrade, 2), "GGG", "GPG", "GGG", 'G', Items.gold_ingot, 'P', ItemsAndBlocks.heatPlating);
 
 		//remove BC refinery recipe
 		if (ConfigurationHandler.enabled("MultiBlockRefining")) {
@@ -230,11 +193,6 @@ public class BuildcraftIntegration {
 				}
 			}
 		}
-	}
-
-	public static void addItemSorter() {
-		GameRegistry.registerBlock(ItemsAndBlocks.itemSorter, "blockItemSorter");
-		GameRegistry.registerTileEntity(TileItemSorter.class, "ItemSorter");
 	}
 
 	private static void addUpgradeRecipe(ItemToolUpgrade upgrade, Object... inputs) {

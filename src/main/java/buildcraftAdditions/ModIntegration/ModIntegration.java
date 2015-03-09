@@ -11,7 +11,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import buildcraftAdditions.ModIntegration.Buildcraft.BuildcraftIntegration;
 import buildcraftAdditions.ModIntegration.Eureka.EurekaIntegration;
 import buildcraftAdditions.ModIntegration.Framez.FramezIntegration;
 import buildcraftAdditions.ModIntegration.MineTweaker.MineTweakerIntegreation;
@@ -36,23 +35,14 @@ public class ModIntegration {
 		metals();
 		if (Loader.isModLoaded("framez"))
 			FramezIntegration.Framez();
-
 		if (Loader.isModLoaded("MineTweaker3"))
 			MineTweakerIntegreation.integrate();
 		if (Loader.isModLoaded("BuildCraft|Core")) {
-			BuildcraftIntegration.integrate();
 			if (ConfigurationHandler.eurekaIntegration)
 				EurekaIntegration.integrate();
 		}
 		if (Loader.isModLoaded("Waila"))
 			WailaIntegration.integrate();
-	}
-
-	public static void integrateInit() {
-		if (Loader.isModLoaded("BuildCraft|Core")) {
-			BuildcraftIntegration.addItemSorter();
-			BuildcraftIntegration.registerSchematics();
-		}
 	}
 
 	private static void railcraftIntegration() {

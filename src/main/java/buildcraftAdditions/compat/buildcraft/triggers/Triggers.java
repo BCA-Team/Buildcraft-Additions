@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
+package buildcraftAdditions.compat.buildcraft.triggers;
 
 import buildcraft.api.statements.ITriggerExternal;
 import buildcraft.api.statements.StatementManager;

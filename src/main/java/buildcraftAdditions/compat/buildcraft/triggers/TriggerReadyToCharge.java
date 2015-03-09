@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
+package buildcraftAdditions.compat.buildcraft.triggers;
 
 import net.minecraft.tileentity.TileEntity;
 
@@ -7,7 +7,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
 
-import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
+import buildcraftAdditions.tileEntities.TileChargingStation;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -16,14 +16,18 @@ import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerKEBUnder100 extends BasicTrigger {
+public class TriggerReadyToCharge extends BasicTrigger {
 
-	public TriggerKEBUnder100() {
-		super("KEBUnder100", "lessThan100%");
+	public TriggerReadyToCharge() {
+		super("readyToCharge", "TriggerReadyToCharge");
 	}
 
 	@Override
 	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
-		return target instanceof TileKineticEnergyBufferBase && ((TileKineticEnergyBufferBase) target).getEnergyLevel() < 100;
+		if (target instanceof TileChargingStation) {
+			TileChargingStation chargingStation = (TileChargingStation) target;
+			return chargingStation.getStackInSlot(0) == null;
+		}
+		return false;
 	}
 }

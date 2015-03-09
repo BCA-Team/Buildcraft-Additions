@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.Buildcraft.schematics;
+package buildcraftAdditions.compat.buildcraft.schematics;
 
 import java.util.LinkedList;
 

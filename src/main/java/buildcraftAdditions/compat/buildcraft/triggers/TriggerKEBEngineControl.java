@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
+package buildcraftAdditions.compat.buildcraft.triggers;
 
 import net.minecraft.tileentity.TileEntity;
 
@@ -16,14 +16,14 @@ import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerKEBUnder75 extends BasicTrigger {
+public class TriggerKEBEngineControl extends BasicTrigger {
 
-	public TriggerKEBUnder75() {
-		super("KEBUnder75", "lessThan75%");
+	public TriggerKEBEngineControl() {
+		super("KEBEngineControl");
 	}
 
 	@Override
 	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
-		return target instanceof TileKineticEnergyBufferBase && ((TileKineticEnergyBufferBase) target).getEnergyLevel() < 75;
+		return target instanceof TileKineticEnergyBufferBase && ((TileKineticEnergyBufferBase) target).engineControl;
 	}
 }

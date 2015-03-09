@@ -12,12 +12,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -25,13 +20,12 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import buildcraftAdditions.ModIntegration.ModIntegration;
-import buildcraftAdditions.compat.CompatTest;
-import buildcraftAdditions.compat.ModuleManager;
 import buildcraftAdditions.ModIntegration.imc.IMCHandler;
 import buildcraftAdditions.ModIntegration.imc.IMCSender;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
+import buildcraftAdditions.compat.ModuleManager;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.GuiHandler;
@@ -86,8 +80,6 @@ public class BuildcraftAdditions {
 		BCARecipeManager.refinery = new RefineryRecipeManager();
 
 		BCAItemManager.dusts = new DustManager();
-
-		ModIntegration.integrateInit();
 
 		manager.preInit(event);
 	}

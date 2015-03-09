@@ -12,7 +12,7 @@ import buildcraftAdditions.ModIntegration.Eureka.drophandlers.PortableLaserDropH
 import buildcraftAdditions.blocks.BlockBasic;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
-import buildcraftAdditions.utils.BCItems;
+import buildcraftAdditions.compat.buildcraft.BCItems;
 
 import eureka.api.BasicDropHandler;
 import eureka.api.BasicEurekaCategory;

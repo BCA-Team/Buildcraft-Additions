@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.Buildcraft.Triggers;
+package buildcraftAdditions.compat.buildcraft.triggers;
 
 import net.minecraft.tileentity.TileEntity;
 
@@ -7,7 +7,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
 
-import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
+import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -16,14 +16,18 @@ import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerKEBEngineControl extends BasicTrigger {
+public class TriggerHasFullCanister extends BasicTrigger {
 
-	public TriggerKEBEngineControl() {
-		super("KEBEngineControl");
+	public TriggerHasFullCanister() {
+		super("hasFullCanister", "TriggerHasFullCanister");
 	}
 
 	@Override
 	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
-		return target instanceof TileKineticEnergyBufferBase && ((TileKineticEnergyBufferBase) target).engineControl;
+		if (target instanceof TileFluidicCompressor) {
+			TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) target;
+			return (fluidicCompressor.getStackInSlot(1) != null && fluidicCompressor.getStackInSlot(1).stackTagCompound.hasKey("Fluid"));
+		}
+		return false;
 	}
 }
