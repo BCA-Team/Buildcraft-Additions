@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.MineTweaker;
+package buildcraftAdditions.compat.minetweaker.script;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 
@@ -10,41 +10,34 @@ import minetweaker.api.minecraft.MineTweakerMC;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-/**
- * Copyright (c) 2014, AEnterprise
- * http://buildcraftadditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
- * Please check the contents of the license located in
- * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
- */
-@ZenClass("mods.bcadditions.Cooling")
+@ZenClass("mods.bcadditions.Refinery")
 @ModOnly("bcadditions")
-public class Cooling {
+public class Refinery {
 
 	@ZenMethod
-	public static void addCoolingRecipe(ILiquidStack input, ILiquidStack output, float heat) {
-		MineTweakerAPI.apply(new AddRecipeAction(input, output, heat));
+	public static void addRefineryRecipe(ILiquidStack input, ILiquidStack output, int requiredHeat) {
+		MineTweakerAPI.apply(new AddRecipeAction(input, output, requiredHeat));
 	}
 
 	@ZenMethod
-	public static void removeCoolingRecipe(ILiquidStack input) {
+	public static void removeRefineryRecipe(ILiquidStack input) {
 		MineTweakerAPI.apply(new RemoveRecipeAction(input));
 	}
 
 	private static class AddRecipeAction implements IUndoableAction {
 		private final ILiquidStack input;
 		private final ILiquidStack output;
-		private final float heat;
+		private final int requiredHeat;
 
-		public AddRecipeAction(ILiquidStack input, ILiquidStack output, float heat) {
+		public AddRecipeAction(ILiquidStack input, ILiquidStack output, int requiredHeat) {
 			this.input = input;
 			this.output = output;
-			this.heat = heat;
+			this.requiredHeat = requiredHeat;
 		}
 
 		@Override
 		public void apply() {
-			BCARecipeManager.cooling.addRecipe(MineTweakerMC.getLiquidStack(input), MineTweakerMC.getLiquidStack(output), heat);
+			BCARecipeManager.refinery.addRecipe(MineTweakerMC.getLiquidStack(input), MineTweakerMC.getLiquidStack(output), requiredHeat);
 		}
 
 		@Override
@@ -54,17 +47,17 @@ public class Cooling {
 
 		@Override
 		public void undo() {
-			BCARecipeManager.cooling.removeRecipe(MineTweakerMC.getLiquidStack(input));
+			BCARecipeManager.refinery.removeRecipe(MineTweakerMC.getLiquidStack(input));
 		}
 
 		@Override
 		public String describe() {
-			return String.format("Adding BCA Cooling Tower recipe for %s -> %s", input, output);
+			return String.format("Adding BCA Refinery recipe for %s -> %s", input, output);
 		}
 
 		@Override
 		public String describeUndo() {
-			return String.format("Removing BCA Cooling Tower recipe for %s -> %s", input, output);
+			return String.format("Removing BCA Refinery recipe for %S -> %s", input, output);
 		}
 
 		@Override
@@ -82,7 +75,7 @@ public class Cooling {
 
 		@Override
 		public void apply() {
-			BCARecipeManager.cooling.removeRecipe(MineTweakerMC.getLiquidStack(input));
+			BCARecipeManager.refinery.removeRecipe(MineTweakerMC.getLiquidStack(input));
 		}
 
 		@Override
@@ -97,7 +90,7 @@ public class Cooling {
 
 		@Override
 		public String describe() {
-			return String.format("Removing BCA Cooling Tower recipe for %s -> %s", input, BCARecipeManager.cooling.getRecipe(MineTweakerMC.getLiquidStack(input)).getOutput().getLocalizedName());
+			return String.format("Removing BCA Refinery recipe for %S -> %s", input, BCARecipeManager.refinery.getRecipe(MineTweakerMC.getLiquidStack(input)).getOutput().getLocalizedName());
 		}
 
 		@Override

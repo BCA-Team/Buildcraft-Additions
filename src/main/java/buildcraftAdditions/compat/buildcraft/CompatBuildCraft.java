@@ -26,7 +26,7 @@ import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @CompatModule(id = "Buildcraft", requiredMods = "BuildCraft|Core")
-public class CompatBC {
+public class CompatBuildCraft {
 
 	@CompatModule.Handler
 	public void preInit(FMLPreInitializationEvent event) {

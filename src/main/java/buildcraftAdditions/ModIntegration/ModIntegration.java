@@ -11,7 +11,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import buildcraftAdditions.ModIntegration.MineTweaker.MineTweakerIntegreation;
 import buildcraftAdditions.ModIntegration.waila.WailaIntegration;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
@@ -30,8 +29,6 @@ public class ModIntegration {
 	public static void integrate() {
 		railcraftIntegration();
 		metals();
-		if (Loader.isModLoaded("MineTweaker3"))
-			MineTweakerIntegreation.integrate();
 		if (Loader.isModLoaded("Waila"))
 			WailaIntegration.integrate();
 	}

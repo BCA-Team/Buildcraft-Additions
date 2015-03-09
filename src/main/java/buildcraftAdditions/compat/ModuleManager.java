@@ -9,8 +9,10 @@ import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-import buildcraftAdditions.compat.buildcraft.CompatBC;
+import buildcraftAdditions.compat.buildcraft.CompatBuildCraft;
 import buildcraftAdditions.compat.eureka.CompatEureka;
+import buildcraftAdditions.compat.framez.CompatFramez;
+import buildcraftAdditions.compat.minetweaker.CompatMineTweaker;
 import buildcraftAdditions.core.Logger;
 
 import com.google.common.base.Strings;
@@ -33,8 +35,10 @@ public class ModuleManager {
 
 	public void setupModules() {
 		//registerModule(new CompatTest()); //debug compat.
-		registerModule(new CompatBC());
+		registerModule(new CompatBuildCraft());
 		registerModule(new CompatEureka());
+		registerModule(new CompatFramez());
+		registerModule(new CompatMineTweaker());
 	}
 
 	public void registerModule(Object object) {

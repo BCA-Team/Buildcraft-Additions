@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.MineTweaker;
+package buildcraftAdditions.compat.minetweaker.script;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 
