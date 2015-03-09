@@ -14,26 +14,26 @@ import buildcraftAdditions.core.Logger;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-@CompatModule(id = "test", requiredMods = "buildcraft")
+@CompatModule(id = "test", requiredMods = "BuildCraft|Core")
 public class CompatTest {
 
 	@CompatModule.Handler
 	public void preInit(FMLPreInitializationEvent event) {
-		Logger.debug("PREINIT");
+		System.out.println("PREINIT");
 	}
 
 	@CompatModule.Handler
 	public void init(FMLInitializationEvent event) {
-		Logger.debug("INIT");
+		System.out.println("INIT");
 	}
 
 	@CompatModule.Handler
 	public void postInit(FMLPostInitializationEvent event) {
-		Logger.debug("POSTINIT");
+		System.out.println("POSTINIT");
 	}
 
 	@CompatModule.Handler
 	public void doneLoading(FMLLoadCompleteEvent event) {
-		Logger.debug("DONELOADING");
+		System.out.println("DONELOADING");
 	}
 }

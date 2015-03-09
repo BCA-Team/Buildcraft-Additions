@@ -29,6 +29,10 @@ public class ModuleManager {
 		modules = Maps.newHashMap();
 	}
 
+	public void setupModules() {
+		registerModule(new CompatTest());
+	}
+
 	public void registerModule(Object object) {
 		String id;
 		String deps;
@@ -39,7 +43,9 @@ public class ModuleManager {
 			id = module.id();
 			deps = module.requiredMods();
 		} catch (Exception e) {
-			throw new RuntimeException("failed to read CompatModule:" + object);
+			e.printStackTrace();
+			return;
+			//throw new RuntimeException("failed to read CompatModule:" + object + ": " + e.getStackTrace());
 		}
 
 		if (!Strings.isNullOrEmpty(deps)) {
@@ -79,7 +85,7 @@ public class ModuleManager {
 	private void invokeHandlers(Object module, Object event) {
 		for (Method method : module.getClass().getDeclaredMethods()) {
 			try {
-				if (method.getAnnotation(CompatModule.Handler.class) != null)
+				if (method.getAnnotation(CompatModule.Handler.class) == null)
 					continue;
 				if (method.getParameterTypes().length != 1)
 					continue;

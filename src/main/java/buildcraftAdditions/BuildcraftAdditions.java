@@ -72,7 +72,7 @@ public class BuildcraftAdditions {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		manager.registerModule(new CompatTest());
+		manager.setupModules();
 
 		Logger.initiallize();
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
