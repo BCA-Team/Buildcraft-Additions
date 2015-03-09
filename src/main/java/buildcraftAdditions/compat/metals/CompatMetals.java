@@ -1,20 +1,20 @@
-package buildcraftAdditions.ModIntegration;
+package buildcraftAdditions.compat.metals;
 
 import java.util.ArrayList;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import buildcraftAdditions.ModIntegration.waila.WailaIntegration;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
+import buildcraftAdditions.compat.CompatModule;
 import buildcraftAdditions.items.dust.DustTypes;
 
 /**
@@ -24,25 +24,11 @@ import buildcraftAdditions.items.dust.DustTypes;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ModIntegration {
+@CompatModule(id = "Metals")
+public class CompatMetals {
 
-	public static void integrate() {
-		railcraftIntegration();
-		metals();
-		if (Loader.isModLoaded("Waila"))
-			WailaIntegration.integrate();
-	}
-
-	private static void railcraftIntegration() {
-		addNuggets("Iron");
-		addNuggets("Gold");
-		addNuggets("Copper");
-		addNuggets("Tin");
-		addNuggets("Lead");
-	}
-
-	private static void metals() {
-
+	@CompatModule.Handler
+	public void doneLoading(FMLLoadCompleteEvent event) {
 		int meta = 4;
 
 		BCAItemManager.dusts.addDust(meta++, "Bronze", 0xAD6726, DustTypes.METAL_DUST);
@@ -139,17 +125,7 @@ public class ModIntegration {
 		addDustRecipe("Soularium", 1, Blocks.soul_sand, "dustGold");
 	}
 
-	private static void addNuggets(String metal) {
-		ArrayList<ItemStack> oreList = OreDictionary.getOres("orePoor" + metal);
-		ArrayList<ItemStack> nuggetList = OreDictionary.getOres("nugget" + metal);
-		if (oreList.isEmpty() || nuggetList.isEmpty())
-			return;
-		for (ItemStack poorOre : oreList) {
-			BCARecipeManager.duster.addRecipe(poorOre, new ItemStack(nuggetList.get(0).getItem(), 4, nuggetList.get(0).getItemDamage()));
-		}
-	}
-
-	private static void addOreDictDusterRecipe(String input, String output, int outputCount) {
+	private void addOreDictDusterRecipe(String input, String output, int outputCount) {
 		for (ItemStack stack : OreDictionary.getOres(output)) {
 			if (stack != null && stack.getItem() != null) {
 				ItemStack out = stack.copy();
@@ -160,7 +136,7 @@ public class ModIntegration {
 		}
 	}
 
-	private static void addDustRecipe(String output, int outputCount, Object... inputs) {
+	private void addDustRecipe(String output, int outputCount, Object... inputs) {
 		IDust dust = BCAItemManager.dusts.getDust(output);
 		if (dust != null) {
 			ItemStack dustStack = ItemStack.copyItemStack(dust.getDustStack());

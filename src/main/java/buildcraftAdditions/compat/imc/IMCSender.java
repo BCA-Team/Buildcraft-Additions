@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.imc;
+package buildcraftAdditions.compat.imc;
 
 import net.minecraft.item.ItemStack;
 

@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.waila;
+package buildcraftAdditions.compat.waila.module;
 
 import java.awt.Dimension;
 

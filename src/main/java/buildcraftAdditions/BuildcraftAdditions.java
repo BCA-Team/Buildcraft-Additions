@@ -24,13 +24,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import buildcraftAdditions.ModIntegration.ModIntegration;
-import buildcraftAdditions.ModIntegration.imc.IMCHandler;
-import buildcraftAdditions.ModIntegration.imc.IMCSender;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.compat.ModuleManager;
+import buildcraftAdditions.compat.imc.IMCHandler;
+import buildcraftAdditions.compat.imc.IMCSender;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.GuiHandler;
@@ -130,7 +129,6 @@ public class BuildcraftAdditions {
 
 	@Mod.EventHandler
 	public void doneLoading(FMLLoadCompleteEvent event) {
-		ModIntegration.integrate();
 		IMCHandler.handleIMC(FMLInterModComms.fetchRuntimeMessages(this));
 		for (IDust dust : BCAItemManager.dusts.getDusts())
 			if (dust != null)

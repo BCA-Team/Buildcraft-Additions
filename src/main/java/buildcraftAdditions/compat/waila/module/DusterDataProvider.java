@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.waila;
+package buildcraftAdditions.compat.waila.module;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
+import buildcraftAdditions.compat.waila.CompatWaila;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;
 
@@ -50,14 +51,14 @@ public class DusterDataProvider implements IWailaDataProvider {
 				if (recipe != null) {
 					ItemStack output = recipe.getOutput(input);
 					if (output != null && output.getItem() != null) {
-						if (config.getConfig(WailaIntegration.GRAPHICAL_DUSTER_PROGRESS_CONFIG_KEY)) {
+						if (config.getConfig(CompatWaila.GRAPHICAL_DUSTER_PROGRESS_CONFIG_KEY)) {
 							String s = "";
 							s += SpecialChars.getRenderString("waila.stack", input.getItem() instanceof ItemBlock ? "0" : "1", input.getItem() instanceof ItemBlock ? Block.blockRegistry.getNameForObject(((ItemBlock) input.getItem()).field_150939_a) : Item.itemRegistry.getNameForObject(input.getItem()), "" + input.stackSize, "" + input.getItemDamage());
 							s += SpecialChars.getRenderString("waila.progress", "" + tag.getInteger("progress"), "100");
 							s += SpecialChars.getRenderString("waila.stack", output.getItem() instanceof ItemBlock ? "0" : "1", output.getItem() instanceof ItemBlock ? Block.blockRegistry.getNameForObject(((ItemBlock) output.getItem()).field_150939_a) : Item.itemRegistry.getNameForObject(output.getItem()), "" + output.stackSize, "" + output.getItemDamage());
 							currenttip.add(s);
 						}
-						if (config.getConfig(WailaIntegration.TEXTUAL_DUSTER_PROGRESS_CONFIG_KEY)) {
+						if (config.getConfig(CompatWaila.TEXTUAL_DUSTER_PROGRESS_CONFIG_KEY)) {
 							currenttip.add(Utils.localizeFormatted("waila.duster.recipe", input.getDisplayName(), output.getDisplayName()));
 							currenttip.add(Utils.localize("waila.duster.progress") + " : " + tag.getInteger("progress") + " %");
 						}
