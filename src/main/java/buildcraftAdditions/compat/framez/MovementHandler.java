@@ -1,4 +1,4 @@
-package buildcraftAdditions.ModIntegration.Framez;
+package buildcraftAdditions.compat.framez;
 
 import com.amadornes.framez.api.movement.BlockMovementType;
 import com.amadornes.framez.api.movement.IMovementHandler;

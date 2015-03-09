@@ -5,17 +5,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import buildcraftAdditions.compat.eureka.drophandlers.KineticToolDropHandler;
-import buildcraftAdditions.compat.eureka.drophandlers.PortableLaserDropHandler;
 import buildcraftAdditions.blocks.BlockBasic;
 import buildcraftAdditions.compat.CompatModule;
 import buildcraftAdditions.compat.buildcraft.BCItems;
+import buildcraftAdditions.compat.eureka.drophandlers.KineticToolDropHandler;
+import buildcraftAdditions.compat.eureka.drophandlers.PortableLaserDropHandler;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
@@ -38,21 +35,6 @@ public class CompatEureka {
 
 	private static final Block KEBT2 = new BlockBasic("energyBufferMultiblockSides5");
 	private static final Block KEBT3 = new BlockBasic("energyBufferT3MultiblockSides4");
-
-	@CompatModule.Handler
-	public void preInit(FMLPreInitializationEvent event) {
-
-	}
-
-	@CompatModule.Handler
-	public void init(FMLInitializationEvent event) {
-
-	}
-
-	@CompatModule.Handler
-	public void postInit(FMLPostInitializationEvent event) {
-
-	}
 
 	@CompatModule.Handler
 	public void doneLoading(FMLLoadCompleteEvent event) {

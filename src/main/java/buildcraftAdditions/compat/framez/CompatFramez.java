@@ -1,4 +1,8 @@
-package buildcraftAdditions.ModIntegration.Framez;
+package buildcraftAdditions.compat.framez;
+
+import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
+
+import buildcraftAdditions.compat.CompatModule;
 
 import com.amadornes.framez.api.FramezApi;
 
@@ -9,10 +13,11 @@ import com.amadornes.framez.api.FramezApi;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class FramezIntegration {
+@CompatModule(id = "Framez", requiredMods = "framez")
+public class CompatFramez {
 
-	public static void Framez() {
+	@CompatModule.Handler
+	public void doneLoading(FMLLoadCompleteEvent event) {
 		FramezApi.inst().getMovementApi().registerMovementHandler(new MovementHandler());
 	}
-
 }
