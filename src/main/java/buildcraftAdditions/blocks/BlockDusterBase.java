@@ -1,6 +1,5 @@
 package buildcraftAdditions.blocks;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -16,18 +15,13 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class BlockDusterBase extends BlockBase {
+public abstract class BlockDusterBase extends BlockRotationBase {
 
 	protected final String type;
 
-	public BlockDusterBase(String type) {
-		super("blockDuster" + type);
+	public BlockDusterBase(String type, String texturename) {
+		super("blockDuster" + type, texturename);
 		this.type = type;
-	}
-
-	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
-		world.setBlockMetadataWithNotify(x, y, z, Utils.get2dOrientation(entity).getOpposite().ordinal(), 3);
 	}
 
 	@Override

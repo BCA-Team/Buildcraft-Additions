@@ -27,6 +27,8 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerItem {
+	@SideOnly(Side.CLIENT)
+	private ModelBiped model = new BackPackModel();
 
 	public ItemKineticBackpack() {
 		super(ArmorMaterial.IRON, BuildcraftAdditions.proxy.addArmor("kineticBackpack"), 1);
@@ -102,6 +104,6 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 	@SideOnly(Side.CLIENT)
 	@Override
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
-		return new BackPackModel();
+		return model;
 	}
 }

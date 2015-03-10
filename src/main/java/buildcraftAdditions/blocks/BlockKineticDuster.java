@@ -27,7 +27,7 @@ public class BlockKineticDuster extends BlockDusterBase implements ILaserTargetB
 	private IIcon bottom, sides[], top;
 
 	public BlockKineticDuster() {
-		super("Kinetic");
+		super("Kinetic", "");
 	}
 
 	@Override

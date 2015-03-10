@@ -25,7 +25,7 @@ public class BlockMechanicalDuster extends BlockDusterBase {
 	private IIcon front, sides, bottom, top[];
 
 	public BlockMechanicalDuster() {
-		super("Mechanical");
+		super("Mechanical", "");
 	}
 
 	@Override

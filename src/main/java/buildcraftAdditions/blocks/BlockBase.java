@@ -16,7 +16,6 @@ import buildcraftAdditions.utils.Utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class BlockBase extends BlockContainer {
-
 	protected final String name;
 
 	public BlockBase(String name) {

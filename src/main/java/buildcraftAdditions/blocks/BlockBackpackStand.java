@@ -7,6 +7,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
+import buildcraftAdditions.tileEntities.TileBackpackStand;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -18,6 +20,7 @@ public class BlockBackpackStand extends BlockBase {
 
 	public BlockBackpackStand() {
 		super("backpackStand");
+		setBlockBounds(3F / 10F, 0, 3F / 10F, 7F / 10F, 1, 7F / 10F);
 	}
 
 	@Override
@@ -27,12 +30,22 @@ public class BlockBackpackStand extends BlockBase {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return null;
+		return new TileBackpackStand();
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		player.addChatComponentMessage(new ChatComponentText(String.format("%s, %s, %s", hitX, hitY, hitZ)));
 		return true;
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
 	}
 }

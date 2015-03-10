@@ -8,30 +8,18 @@ package buildcraftAdditions.blocks;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileChargingStation;
-import buildcraftAdditions.utils.RenderUtils;
-import buildcraftAdditions.utils.Utils;
 
-public class BlockChargingStation extends BlockBase {
-
-	@SideOnly(Side.CLIENT)
-	private IIcon textureFront, textureBack, textureLeft, textureRight, textureTop, textureBottom;
+public class BlockChargingStation extends BlockRotationBase {
 
 	public BlockChargingStation() {
-		super("blockChargingStation");
+		super("blockChargingStation", "charger_");
 	}
 
 	@Override
@@ -49,41 +37,6 @@ public class BlockChargingStation extends BlockBase {
 			player.openGui(BuildcraftAdditions.instance, Variables.Gui.CHARGING_STATION.ordinal(), world, x, y, z);
 
 		return true;
-	}
-
-	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
-		world.setBlockMetadataWithNotify(x, y, z, Utils.get2dOrientation(entity).getOpposite().ordinal(), 1);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		if (meta == 0 && side == 3)
-			return textureFront;
-
-		if (side == meta && side > 1)
-			return textureFront;
-
-		switch (side) {
-			case 0:
-				return textureBottom;
-			case 1:
-				return textureBottom;
-			default:
-				return textureBack;
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register) {
-		textureFront = RenderUtils.registerIcon(register, "charger_front");
-		textureTop = RenderUtils.registerIcon(register, "charger_top");
-		textureBack = RenderUtils.registerIcon(register, "charger_back");
-		textureBottom = RenderUtils.registerIcon(register, "charger_bottom");
-		textureLeft = RenderUtils.registerIcon(register, "charger_leftSide");
-		textureRight = RenderUtils.registerIcon(register, "charger_rightSide");
 	}
 
 }
