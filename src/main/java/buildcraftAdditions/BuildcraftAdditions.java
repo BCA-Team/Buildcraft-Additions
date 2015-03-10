@@ -24,12 +24,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import buildcraftAdditions.ModIntegration.ModIntegration;
-import buildcraftAdditions.ModIntegration.imc.IMCHandler;
-import buildcraftAdditions.ModIntegration.imc.IMCSender;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
+import buildcraftAdditions.compat.ModuleManager;
+import buildcraftAdditions.compat.imc.IMCHandler;
+import buildcraftAdditions.compat.imc.IMCSender;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.GuiHandler;
@@ -66,8 +66,12 @@ public class BuildcraftAdditions {
 	@SidedProxy(clientSide = "buildcraftAdditions.proxy.ClientProxy", serverSide = "buildcraftAdditions.proxy.CommonProxy")
 	public static CommonProxy proxy;
 
+	public ModuleManager manager = new ModuleManager();
+
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		manager.setupModules();
+
 		Logger.initiallize();
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		PacketHandler.init();
@@ -81,7 +85,7 @@ public class BuildcraftAdditions {
 
 		BCAItemManager.dusts = new DustManager();
 
-		ModIntegration.integrateInit();
+		manager.preInit(event);
 	}
 
 	@Mod.EventHandler
@@ -114,19 +118,23 @@ public class BuildcraftAdditions {
 		BCARecipeManager.duster.addRecipe("oreDiamond", new ItemStack(Items.diamond, 2));
 		BCARecipeManager.duster.addRecipe("oreEmerald", new ItemStack(Items.emerald, 2));
 		BCARecipeManager.duster.addRecipe(new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_powder, 4));
+
+		manager.init(event);
 	}
 
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		manager.postInit(event);
 	}
 
 	@Mod.EventHandler
 	public void doneLoading(FMLLoadCompleteEvent event) {
-		ModIntegration.integrate();
 		IMCHandler.handleIMC(FMLInterModComms.fetchRuntimeMessages(this));
 		for (IDust dust : BCAItemManager.dusts.getDusts())
 			if (dust != null)
 				dust.getDustType().register(dust.getMeta(), dust.getName(), dust.getDustStack());
+
+		manager.doneLoadingEvent(event);
 	}
 
 	@Mod.EventHandler
