@@ -1,7 +1,5 @@
 package buildcraftAdditions.compat.metals;
 
-import java.util.ArrayList;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
@@ -18,7 +16,7 @@ import buildcraftAdditions.compat.CompatModule;
 import buildcraftAdditions.items.dust.DustTypes;
 
 /**
- * Copyright (c) 2014, AEnterprise
+ * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
  * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
  * Please check the contents of the license located in

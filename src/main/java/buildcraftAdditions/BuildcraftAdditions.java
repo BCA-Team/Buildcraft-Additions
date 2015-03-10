@@ -33,7 +33,6 @@ import buildcraftAdditions.compat.imc.IMCSender;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.GuiHandler;
-import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.creative.TabBCAdditions;
 import buildcraftAdditions.creative.TabCanisters;
 import buildcraftAdditions.creative.TabDusts;
@@ -49,7 +48,7 @@ import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.SpecialListMananger;
 
 /**
- * Copyright (c) 2014, AEnterprise
+ * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
  * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
  * Please check the contents of the license located in
@@ -72,7 +71,6 @@ public class BuildcraftAdditions {
 	public void preInit(FMLPreInitializationEvent event) {
 		manager.setupModules();
 
-		Logger.initiallize();
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		PacketHandler.init();
 		ItemsAndBlocks.init();

@@ -1,7 +1,12 @@
 package buildcraftAdditions.compat;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Map;
+
+import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
+import com.google.common.reflect.ClassPath;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -9,63 +14,58 @@ import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-import buildcraftAdditions.compat.buildcraft.CompatBuildCraft;
-import buildcraftAdditions.compat.eureka.CompatEureka;
-import buildcraftAdditions.compat.framez.CompatFramez;
-import buildcraftAdditions.compat.minetweaker.CompatMineTweaker;
 import buildcraftAdditions.core.Logger;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.Maps;
-
 /**
- * Copyright (c) 2014, AEnterprise
+ * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
  * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ModuleManager {
+public final class ModuleManager {
 
-	private Map<String, Object> modules;
+	private final Map<String, Object> modules;
 
 	public ModuleManager() {
 		modules = Maps.newHashMap();
 	}
 
 	public void setupModules() {
-		//registerModule(new CompatTest()); //debug compat.
-		registerModule(new CompatBuildCraft());
-		registerModule(new CompatEureka());
-		registerModule(new CompatFramez());
-		registerModule(new CompatMineTweaker());
+		try {
+			for (ClassPath.ClassInfo info : ClassPath.from(ModuleManager.class.getClassLoader()).getTopLevelClassesRecursive(ModuleManager.class.getPackage().getName()))
+				if (info.getSimpleName().startsWith("Compat") && !info.getSimpleName().startsWith("CompatModule"))
+					registerModule(info);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	public void registerModule(Object object) {
-		String id;
-		String deps;
-		boolean enabled = true;
-
+	private void registerModule(ClassPath.ClassInfo moduleClassInfo) {
 		try {
-			CompatModule module = object.getClass().getAnnotation(CompatModule.class);
+			String id;
+			String requiredMods;
+			boolean enabled = true;
+			Class<?> moduleClass = moduleClassInfo.load();
+			CompatModule module = moduleClass.getAnnotation(CompatModule.class);
 			id = module.id();
-			deps = module.requiredMods();
-		} catch (Exception e) {
-			throw new RuntimeException("failed to read CompatModule:" + object);
-		}
-
-		if (!Strings.isNullOrEmpty(deps)) {
-			for (String mod : deps.split(",")) {
-				if (!Loader.isModLoaded(mod)) {
-					Logger.error(String.format("CompatModule %s is missing a dependency: %s, this module will not be loaded", id, mod));
-					enabled = false;
-					break;
+			requiredMods = module.requiredMods();
+			if (!Strings.isNullOrEmpty(requiredMods)) {
+				for (String mod : requiredMods.split(",")) {
+					if (!Loader.isModLoaded(mod)) {
+						enabled = false;
+						Logger.error(String.format("CompatModule '%s' is missing a dependency: '%s'! This module will not be loaded.", id, mod));
+						break;
+					}
 				}
 			}
+			if (enabled) {
+				Logger.info(String.format("CompatModule '%s' activated.", id));
+				modules.put(id, moduleClass.newInstance());
+			}
+		} catch (Throwable t) {
+			Logger.error(String.format("CompatModule '%s' failed to load: '%s'!", moduleClassInfo.getName(), t.getMessage()));
 		}
-
-		if (enabled)
-			modules.put(id, object);
 	}
 
 	public void preInit(FMLPreInitializationEvent event) {

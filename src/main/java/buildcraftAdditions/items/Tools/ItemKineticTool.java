@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import cofh.api.energy.IEnergyContainerItem;
 
 /**
- * Copyright (c) 2014, AEnterprise
+ * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
  * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
  * Please check the contents of the license located in

@@ -6,7 +6,7 @@ import net.minecraft.item.Item;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
- * Copyright (c) 2014, AEnterprise
+ * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
  * Eureka is distributed under the terms of LGPLv3
  * Please check the contents of the license located in

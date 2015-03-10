@@ -14,6 +14,10 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ModOnly("bcadditions")
 public class Refinery {
 
+	public static void register() {
+		MineTweakerAPI.registerClass(Refinery.class);
+	}
+
 	@ZenMethod
 	public static void addRefineryRecipe(ILiquidStack input, ILiquidStack output, int requiredHeat) {
 		MineTweakerAPI.apply(new AddRecipeAction(input, output, requiredHeat));
