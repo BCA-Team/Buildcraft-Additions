@@ -17,13 +17,13 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 import buildcraft.silicon.ItemRedstoneChipset;
 
+import buildcraftAdditions.compat.buildcraft.BCItems;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.Tools.ItemToolUpgrade;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
-import buildcraftAdditions.compat.buildcraft.BCItems;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise

@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
+
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.block.Block;
@@ -48,11 +53,6 @@ import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.Utils;
-
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise

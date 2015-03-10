@@ -4,8 +4,6 @@ import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 
 import buildcraftAdditions.compat.CompatModule;
 
-import com.amadornes.framez.api.FramezApi;
-
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/

@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities.Bases;
 
+import com.google.common.base.Strings;
+
 import io.netty.buffer.ByteBuf;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +13,6 @@ import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
 import buildcraftAdditions.inventories.CustomInventory;
 
-import com.google.common.base.Strings;
 import eureka.api.EurekaAPI;
 
 /**

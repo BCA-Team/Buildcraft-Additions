@@ -11,6 +11,7 @@ import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 
 import eureka.api.IDropHandler;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/

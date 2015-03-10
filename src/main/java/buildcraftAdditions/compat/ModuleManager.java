@@ -37,7 +37,7 @@ public final class ModuleManager {
 				if (info.getSimpleName().startsWith("Compat") && !info.getSimpleName().startsWith("CompatModule"))
 					registerModule(info);
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("Unknown error while searching for modules!", e);
 		}
 	}
 
