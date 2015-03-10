@@ -11,7 +11,7 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 /**
- * Copyright (c) 2014, AEnterprise
+ * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
  * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
  * Please check the contents of the license located in
@@ -20,6 +20,10 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.bcadditions.dusters")
 @ModOnly("bcadditions")
 public class Dusters {
+
+	public static void register() {
+		MineTweakerAPI.registerClass(Dusters.class);
+	}
 
 	@ZenMethod
 	public static void addDusting(IItemStack input, IItemStack output) {

@@ -11,7 +11,7 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 /**
- * Copyright (c) 2014, AEnterprise
+ * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
  * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
  * Please check the contents of the license located in
@@ -20,6 +20,10 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.bcadditions.Cooling")
 @ModOnly("bcadditions")
 public class Cooling {
+
+	public static void register() {
+		MineTweakerAPI.registerClass(Cooling.class);
+	}
 
 	@ZenMethod
 	public static void addCoolingRecipe(ILiquidStack input, ILiquidStack output, float heat) {

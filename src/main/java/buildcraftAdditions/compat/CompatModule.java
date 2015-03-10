@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Copyright (c) 2014, AEnterprise
+ * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
  * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
  * Please check the contents of the license located in
@@ -16,13 +16,12 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface CompatModule {
 
-	public String id();
+	String id();
 
-	public String requiredMods() default "";
+	String requiredMods() default "";
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.METHOD)
 	public static @interface Handler {
-
 	}
 }
