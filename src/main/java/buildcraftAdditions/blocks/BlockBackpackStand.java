@@ -20,7 +20,7 @@ public class BlockBackpackStand extends BlockRotationBase {
 
 	public BlockBackpackStand() {
 		super("backpackStand", "");
-		setBlockBounds(3F / 10F, 0, 3F / 10F, 7F / 10F, 1, 7F / 10F);
+		setBlockBounds(2F / 10F, 0, 2F / 10F, 8F / 10F, 1, 8F / 10F);
 	}
 
 	@Override

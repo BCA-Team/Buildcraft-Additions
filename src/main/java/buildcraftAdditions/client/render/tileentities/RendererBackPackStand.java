@@ -16,16 +16,31 @@ import buildcraftAdditions.client.models.BackPackModel;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class RendererBackPackStand extends TileEntitySpecialRenderer {
+	private final ModelBiped model = new BackPackModel();
 
 	@Override
 	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {
-		bindTexture(new ResourceLocation("bcadditions", "textures/blocks/charger_bottom.png"));
+		bindTexture(new ResourceLocation("bcadditions", "textures/blocks/charger_bottom.png")); //using this for now to stop the random texture thing
 		GL11.glPushMatrix();
+		int orientation = entity.getWorldObj().getBlockMetadata(entity.xCoord, entity.yCoord, entity.zCoord);
+		int angle;
+		switch (orientation) {
+			case 2:
+				angle = 180;
+				break;
+			case 4:
+				angle = -90;
+				break;
+			case 5:
+				angle = 90;
+				break;
+			default:
+				angle = 0;
+		}
 		GL11.glTranslated(x + 0.5, y + 0.2, z + 0.5);
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glColor4f(1f, 1f, 1f, 1f);
-		ModelBiped model = new BackPackModel();
+		GL11.glRotated(angle, 0, 1, 0);
+
 		model.render(null, 0, 0, 0, 0, 0, 0.1F);
 		GL11.glPopMatrix();
 	}
