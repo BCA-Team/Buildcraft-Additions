@@ -1,5 +1,7 @@
 package buildcraftAdditions.blocks;
 
+import com.google.common.base.Strings;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -58,6 +60,8 @@ public abstract class BlockRotationBase extends BlockBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
+		if (Strings.isNullOrEmpty(textureBaseName))
+			return;
 		front = RenderUtils.registerIcon(register, textureBaseName + "Front");
 		back = RenderUtils.registerIcon(register, textureBaseName + "Back");
 		sides = RenderUtils.registerIcon(register, textureBaseName + "Sides");
