@@ -48,19 +48,21 @@ public abstract class BlockRotationBase extends BlockBase {
 		if (side == meta && meta > 1)
 			return front;
 
+		if (side == ForgeDirection.getOrientation(meta).getOpposite().ordinal())
+			return back;
+
 		switch (side) {
 			case 0:
 				return bottom;
 			case 1:
 				return top;
 			case 2:
+			case 5:
 				return leftRight ? left : sides;
 			case 3:
+			case 4:
 				return leftRight ? right : sides;
 		}
-
-		if (side == ForgeDirection.getOrientation(meta).getOpposite().ordinal())
-			return back;
 		return sides;
 	}
 
