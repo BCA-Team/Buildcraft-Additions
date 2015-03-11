@@ -42,7 +42,7 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 		ItemStack stack = player.getCurrentEquippedItem();
 		if (stack != null && stack.getItem() instanceof IEnergyContainerItem) {
 			IEnergyContainerItem eci = (IEnergyContainerItem) stack.getItem();
-			int transfer = Math.min(eci.receiveEnergy(player.getCurrentEquippedItem(), getMaxEnergyStored(itemStack), true), 20000);
+			int transfer = Math.min(eci.receiveEnergy(player.getCurrentEquippedItem(), getEnergyStored(itemStack), true), 20000);
 			eci.receiveEnergy(player.getCurrentEquippedItem(), transfer, false);
 			extractEnergy(itemStack, transfer, player.capabilities.isCreativeMode); //don't use power if player is in creative
 		}
@@ -61,6 +61,7 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 	@Override
 	public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
 		int max = Math.min(getMaxEnergyStored(container), maxExtract);
+		max = Math.min(max, getEnergyStored(container));
 		if (!simulate)
 			setEnergy(container, getEnergyStored(container) - max);
 		return max;
