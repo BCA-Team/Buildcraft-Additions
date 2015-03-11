@@ -19,7 +19,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fluids.Fluid;
 
-import buildcraftAdditions.client.render.blocks.RendererItemSorter;
+import buildcraftAdditions.client.render.blocks.RendererSidedTextures;
 import buildcraftAdditions.client.render.entities.EntityLaserShotRenderer;
 import buildcraftAdditions.client.render.items.CanisterItemRender;
 import buildcraftAdditions.client.render.tileentities.RendererBackPackStand;
@@ -52,8 +52,8 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileKEBT2.class, new RendererKEBT2());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileKEBT3.class, new RendererKEBT3());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileBackpackStand.class, new RendererBackPackStand());
-		RendererItemSorter.RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
-		RenderingRegistry.registerBlockHandler(new RendererItemSorter());
+		RendererSidedTextures.RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(new RendererSidedTextures());
 		RenderingRegistry.registerEntityRenderingHandler(EntityLaserShot.class, new EntityLaserShotRenderer());
 	}
 

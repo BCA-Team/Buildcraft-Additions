@@ -20,7 +20,7 @@ public abstract class BlockDusterBase extends BlockRotationBase {
 	protected final String type;
 
 	public BlockDusterBase(String type, String texturename) {
-		super("blockDuster" + type, texturename);
+		super("blockDuster" + type, texturename, false);
 		this.type = type;
 	}
 

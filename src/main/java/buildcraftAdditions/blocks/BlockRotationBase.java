@@ -13,6 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraftAdditions.client.render.blocks.RendererSidedTextures;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 /**
@@ -24,11 +25,13 @@ import buildcraftAdditions.utils.Utils;
  */
 public abstract class BlockRotationBase extends BlockBase {
 	protected final String textureBaseName;
-	private IIcon front, bottom, top, back, sides;
+	private final boolean leftRight;
+	private IIcon front, bottom, top, back, sides, left, right;
 
-	public BlockRotationBase(String name, String textureBaseName) {
+	public BlockRotationBase(String name, String textureBaseName, boolean leftRight) {
 		super(name);
 		this.textureBaseName = textureBaseName;
+		this.leftRight = leftRight;
 	}
 
 	@Override
@@ -50,6 +53,10 @@ public abstract class BlockRotationBase extends BlockBase {
 				return bottom;
 			case 1:
 				return top;
+			case 2:
+				return leftRight ? left : sides;
+			case 3:
+				return leftRight ? right : sides;
 		}
 
 		if (side == ForgeDirection.getOrientation(meta).getOpposite().ordinal())
@@ -64,8 +71,18 @@ public abstract class BlockRotationBase extends BlockBase {
 			return;
 		front = RenderUtils.registerIcon(register, textureBaseName + "Front");
 		back = RenderUtils.registerIcon(register, textureBaseName + "Back");
-		sides = RenderUtils.registerIcon(register, textureBaseName + "Sides");
+		if (leftRight) {
+			left = RenderUtils.registerIcon(register, textureBaseName + "Left");
+			right = RenderUtils.registerIcon(register, textureBaseName + "Right");
+		} else {
+			sides = RenderUtils.registerIcon(register, textureBaseName + "Sides");
+		}
 		top = RenderUtils.registerIcon(register, textureBaseName + "Top");
 		bottom = RenderUtils.registerIcon(register, textureBaseName + "Bottom");
+	}
+
+	@Override
+	public int getRenderType() {
+		return RendererSidedTextures.RENDER_ID;
 	}
 }

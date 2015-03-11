@@ -19,7 +19,7 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
 public class BlockChargingStation extends BlockRotationBase {
 
 	public BlockChargingStation() {
-		super("blockChargingStation", "charger_");
+		super("blockChargingStation", "charger_", true);
 	}
 
 	@Override

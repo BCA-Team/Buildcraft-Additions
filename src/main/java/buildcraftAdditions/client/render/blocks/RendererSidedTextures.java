@@ -3,7 +3,6 @@ package buildcraftAdditions.client.render.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
@@ -11,8 +10,7 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
-import buildcraftAdditions.tileEntities.TileItemSorter;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -22,18 +20,14 @@ import buildcraftAdditions.tileEntities.TileItemSorter;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @SideOnly(Side.CLIENT)
-public class RendererItemSorter implements ISimpleBlockRenderingHandler {
+public class RendererSidedTextures implements ISimpleBlockRenderingHandler {
 
-	private static final Block fakeBlock = new Block(Material.rock) {
-		@Override
-		public IIcon getIcon(int side, int meta) {
-			return ItemsAndBlocks.itemSorter.getIcon(side, meta);
-		}
-	};
 	public static int RENDER_ID;
+	private final FakeBlock fakeBlock = new FakeBlock();
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
+		fakeBlock.setBlock(block);
 		renderer.uvRotateEast = 1;
 		renderer.uvRotateWest = 2;
 		renderer.uvRotateTop = 2;
@@ -47,12 +41,9 @@ public class RendererItemSorter implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		TileEntity te = world.getTileEntity(x, y, z);
-		if (!(te instanceof TileItemSorter))
-			return false;
-		TileItemSorter tile = (TileItemSorter) te;
+		ForgeDirection direction = ForgeDirection.getOrientation(world.getBlockMetadata(x, y, z));
 
-		switch (tile.getRotation()) {
+		switch (direction) {
 			case DOWN:
 				renderer.uvRotateSouth = 3;
 				renderer.uvRotateNorth = 3;
@@ -102,5 +93,22 @@ public class RendererItemSorter implements ISimpleBlockRenderingHandler {
 	@Override
 	public int getRenderId() {
 		return RENDER_ID;
+	}
+
+	private class FakeBlock extends Block {
+		private Block block;
+
+		protected FakeBlock() {
+			super(Material.rock);
+		}
+
+		public void setBlock(Block block) {
+			this.block = block;
+		}
+
+		@Override
+		public IIcon getIcon(int side, int meta) {
+			return block.getIcon(side, meta);
+		}
 	}
 }

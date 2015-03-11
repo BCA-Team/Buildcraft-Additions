@@ -19,7 +19,7 @@ import buildcraftAdditions.tileEntities.TileBackpackStand;
 public class BlockBackpackStand extends BlockRotationBase {
 
 	public BlockBackpackStand() {
-		super("backpackStand", "");
+		super("backpackStand", "", false);
 		setBlockBounds(2F / 10F, 0, 2F / 10F, 8F / 10F, 1, 8F / 10F);
 	}
 
