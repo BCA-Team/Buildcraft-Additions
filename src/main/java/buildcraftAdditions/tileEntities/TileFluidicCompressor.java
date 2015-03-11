@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -20,8 +22,6 @@ import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 import buildcraftAdditions.tileEntities.interfaces.IWidgetListener;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.utils.fluids.Tank;
-
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise

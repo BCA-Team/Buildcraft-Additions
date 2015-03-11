@@ -1,8 +1,8 @@
 package buildcraftAdditions.tileEntities;
 
-import buildcraftAdditions.tileEntities.Bases.TileBase;
-
 import io.netty.buffer.ByteBuf;
+
+import buildcraftAdditions.tileEntities.Bases.TileBase;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/

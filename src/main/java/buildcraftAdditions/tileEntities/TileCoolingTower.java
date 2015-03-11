@@ -3,6 +3,10 @@ package buildcraftAdditions.tileEntities;
 import java.util.EnumSet;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableSet;
+
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -37,9 +41,6 @@ import buildcraftAdditions.utils.fluids.CoolantTank;
 import buildcraftAdditions.utils.fluids.CoolingRecipeTank;
 import buildcraftAdditions.utils.fluids.ITankHolder;
 import buildcraftAdditions.utils.fluids.Tank;
-
-import com.google.common.collect.ImmutableSet;
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise

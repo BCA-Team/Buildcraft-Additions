@@ -1,5 +1,7 @@
 package buildcraftAdditions.tileEntities.Bases;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -15,8 +17,6 @@ import buildcraftAdditions.api.configurableOutput.SideConfiguration;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.Utils;
-
-import io.netty.buffer.ByteBuf;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise

@@ -16,10 +16,10 @@ import buildcraftAdditions.tileEntities.TileBackpackStand;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BlockBackpackStand extends BlockBase {
+public class BlockBackpackStand extends BlockRotationBase {
 
 	public BlockBackpackStand() {
-		super("backpackStand");
+		super("backpackStand", "");
 		setBlockBounds(3F / 10F, 0, 3F / 10F, 7F / 10F, 1, 7F / 10F);
 	}
 
