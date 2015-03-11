@@ -34,9 +34,6 @@ public class GuiCoolingTower extends GuiBase {
 
 	@Override
 	public void drawBackgroundPostWidgets(float f, int x, int y) {
-		drawTexturedModalRect(guiLeft + 22, guiTop + 70, 190, 70, 20, 50);
-		drawTexturedModalRect(guiLeft + 148, guiTop + 70, 190, 70, 20, 50);
-		drawTexturedModalRect(guiLeft + 85, guiTop + 113, 190, 70, 20, 50);
 		int width = (int) (tower.heat * 68) / 80;
 		drawTexturedModalRect(guiLeft + 53, guiTop + 84, 0, 186, 80, 7);
 		drawTexturedModalRect(guiLeft + 59, guiTop + 85, 6, 198, width, 5);
