@@ -213,7 +213,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 
 	private void findMaster() {
 		TileEntity entity = worldObj.getTileEntity(data.masterX, data.masterY, data.masterZ);
-		if (entity instanceof TileCoolingTower)
+		if (entity instanceof TileCoolingTower && ((TileCoolingTower) entity).isMaster())
 			master = (TileCoolingTower) entity;
 		else
 			data.invalidataMultiblock(worldObj);

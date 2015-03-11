@@ -18,9 +18,7 @@ import cofh.api.energy.IEnergyReceiver;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
-import buildcraftAdditions.blocks.multiBlocks.MultiBlockBase;
 import buildcraftAdditions.config.ConfigurationHandler;
-import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
@@ -230,13 +228,10 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 		if (data.isMaster)
 			master = (TileKEBT3) worldObj.getTileEntity(xCoord, yCoord, zCoord);
 		TileEntity tileEntity = worldObj.getTileEntity(data.masterX, data.masterY, data.masterZ);
-		if (tileEntity != null && tileEntity instanceof IMultiBlockTile)
+		if (tileEntity != null && tileEntity instanceof TileKEBT3 && ((TileKEBT3) tileEntity).isMaster())
 			master = (TileKEBT3) tileEntity;
-		else {
-			Logger.info("UNABLE TO FIND MASTER, SELF DESTRUCT INITIATED");
-			MultiBlockBase block = (MultiBlockBase) worldObj.getBlock(xCoord, yCoord, zCoord);
-			block.patern.destroyMultiblock(worldObj, data.masterX, data.masterY, data.masterZ, data.rotationIndex);
-		}
+		else
+			data.invalidataMultiblock(worldObj);
 	}
 
 	@Override

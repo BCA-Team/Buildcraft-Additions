@@ -210,7 +210,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 		if (data.isMaster)
 			master = (TileKEBT2) worldObj.getTileEntity(xCoord, yCoord, zCoord);
 		TileEntity tileEntity = worldObj.getTileEntity(data.masterX, data.masterY, data.masterZ);
-		if (tileEntity != null && tileEntity instanceof TileKEBT2)
+		if (tileEntity != null && tileEntity instanceof TileKEBT2 && ((TileKEBT2) tileEntity).isMaster())
 			master = (TileKEBT2) tileEntity;
 		else {
 			MultiBlockBase block = (MultiBlockBase) worldObj.getBlock(xCoord, yCoord, zCoord);
