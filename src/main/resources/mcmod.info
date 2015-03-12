@@ -1,8 +1,8 @@
 [
 {
   "modid": "bcadditions",
-  "name": "Buildcraft Additions",
-  "description": "Additions to Buildcraft",
+  "name": "BuildCraft Additions",
+  "description": "BuildCraft Additions is a mod for Minecraft which extends BuildCraft in multiple ways.",
   "version": "$version",
   "mcversion": "$mcversion",
   "url": "http://bcadditions.tk/",
