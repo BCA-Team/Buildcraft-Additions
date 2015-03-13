@@ -12,6 +12,7 @@ public class BCAEurekaEvents {
 
 	@SubscribeEvent
 	public void onGettingAchievement(AchievementEvent event) {
-		EurekaAPI.API.makeProgress(Variables.Eureka.DustT0Key, event.entityPlayer);
+		if (event.entityPlayer != null)
+			EurekaAPI.API.makeProgress(Variables.Eureka.DustT0Key, event.entityPlayer);
 	}
 }

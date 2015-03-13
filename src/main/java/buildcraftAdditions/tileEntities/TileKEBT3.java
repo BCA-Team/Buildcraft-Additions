@@ -39,7 +39,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public TileKEBT3 master;
 
 	public TileKEBT3() {
-		super(100000000, 300000, 300000, ConfigurationHandler.KEB3powerloss, 3);
+		super(ConfigurationHandler.capacityKEBTier3, ConfigurationHandler.maxTransferKEBTier3, ConfigurationHandler.KEB3powerloss, 3);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 			return;
 		}
 		super.updateEntity();
-		energyState = (int) (((long) energy) * 4) / maxEnergy;
+		energyState = (int) (((long) energy) * 4) / capacity;
 	}
 
 	@Override
@@ -162,7 +162,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 					IEnergyReceiver target = (IEnergyReceiver) location.getTileEntity();
 					if (target instanceof IMultiBlockTile && isPartOfSameMultiblock((IMultiBlockTile) target))
 						continue;
-					long output = maxOutput;
+					long output = maxTransfer;
 					if (location.getTileEntity() instanceof TileKEBT3) {
 						TileKEBT3 keb = (TileKEBT3) location.getTileEntity();
 						TileKEBT3 keb2;

@@ -29,6 +29,7 @@ import buildcraft.api.transport.IPipeTile;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.recipe.refinery.IRefineryRecipe;
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.Logger;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.reference.Variables;
@@ -52,7 +53,7 @@ import buildcraftAdditions.utils.fluids.Tank;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IEnergyReceiver, ITankHolder, IPipeConnection, IUpgradableMachine {
-	public final int maxEnergy;
+	public final int maxEnergy, maxTransfer;
 	protected final Upgrades upgrades = new Upgrades(0);
 	private final Tank input = new RefineryRecipeTank("Input", 3000, this);
 	private final Tank output = new Tank(3000, this, "Output");
@@ -65,7 +66,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	private String inputFluid, outputFluid;
 
 	public TileRefinery() {
-		maxEnergy = 50000;
+		maxEnergy = ConfigurationHandler.capacityRefinery;
+		maxTransfer = ConfigurationHandler.maxTransferRefinery;
 		lastRequiredHeat = 20;
 		currentHeat = 20;
 		inputFluid = "";
@@ -121,7 +123,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_3))
 			factor -= 0.5;
 		energyCost -= (energyCost * factor);
-		energy -= energyCost;
+		energy -= energyCost * ConfigurationHandler.energyUseRefineryMultiplier;
 		if (currentHeat < requiredHeat) {
 			return;
 		}
@@ -450,12 +452,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
 		if (isMaster()) {
-			int recieved = maxReceive;
-			if (recieved > maxEnergy - energy)
-				recieved = maxEnergy - energy;
+			int energyReceived = Math.min(maxEnergy - energy, Math.min(maxTransfer, maxReceive));
 			if (!simulate)
-				energy += recieved;
-			return recieved;
+				energy += energyReceived;
+			return energyReceived;
 		} else {
 			if (master == null)
 				findMaster();

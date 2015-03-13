@@ -7,6 +7,9 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraftAdditions.utils.RenderUtils;
 
 /**
@@ -15,11 +18,15 @@ import buildcraftAdditions.utils.RenderUtils;
  * Eureka is distributed under the terms of GNU GPL v3.0
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
- *
+ * <p/>
  * ModelBiped - Plenituz
  * Created using Tabula 4.1.1
  */
+@SideOnly(Side.CLIENT)
 public class BackPackModel extends ModelBiped {
+
+	public static final BackPackModel INSTANCE = new BackPackModel();
+
 	public ModelRenderer handleTopLeft;
 	public ModelRenderer handleTopRight;
 	public ModelRenderer shape11;
@@ -91,7 +98,7 @@ public class BackPackModel extends ModelBiped {
 	public ModelRenderer capsuleCoreTL_3;
 	public ModelRenderer capsuleCoreTR_3;
 
-	public BackPackModel() {
+	private BackPackModel() {
 		this.textureWidth = 128;
 		this.textureHeight = 64;
 		this.capsuleCoreBR = new ModelRenderer(this, 29, 21);

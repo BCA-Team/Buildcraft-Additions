@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -23,6 +22,8 @@ import buildcraft.api.core.EnumColor;
 import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.items.ItemPoweredBase;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.Utils;
 
@@ -33,7 +34,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemPipeColoringTool extends Item {
+public class ItemPipeColoringTool extends ItemPoweredBase {
 
 	public static final String[] names = new String[]{"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
 
@@ -41,10 +42,7 @@ public class ItemPipeColoringTool extends Item {
 	private IIcon[] icons;
 
 	public ItemPipeColoringTool() {
-		setMaxStackSize(1);
-		setUnlocalizedName("pipeColoringTool");
-		setHasSubtypes(true);
-		setCreativeTab(BuildcraftAdditions.bcadditions);
+		super("pipeColoringTool", ConfigurationHandler.capacityPipeColoringTool, ConfigurationHandler.maxTransferColoringTool);
 	}
 
 	@Override
@@ -56,13 +54,17 @@ public class ItemPipeColoringTool extends Item {
 
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		if (extractEnergy(stack, ConfigurationHandler.energyUseColoringTool, true) < ConfigurationHandler.energyUseColoringTool)
+			return false;
 		if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("SortMode", Constants.NBT.TAG_BYTE) && stack.stackTagCompound.getBoolean("SortMode")) {
 			TileEntity tile = world.getTileEntity(x, y, z);
-			if (tile instanceof IPipeTile) {
-				return setColor(stack.getItemDamage(), (IPipeTile) tile);
+			if (tile instanceof IPipeTile && setColor(stack.getItemDamage(), (IPipeTile) tile)) {
+				extractEnergy(stack, ConfigurationHandler.energyUseColoringTool, false);
+				return true;
 			}
-		} else {
-			return world.getBlock(x, y, z).recolourBlock(world, x, y, z, ForgeDirection.UNKNOWN, stack.getItemDamage());
+		} else if (world.getBlock(x, y, z).recolourBlock(world, x, y, z, ForgeDirection.UNKNOWN, stack.getItemDamage())) {
+			extractEnergy(stack, ConfigurationHandler.energyUseColoringTool, false);
+			return true;
 		}
 		return false;
 	}
@@ -73,18 +75,21 @@ public class ItemPipeColoringTool extends Item {
 			Method setColor = pipeTile.getPipe().getClass().getMethod("setColor", EnumColor.class);
 			setColor.invoke(pipeTile.getPipe(), EnumColor.values()[15 - color]);
 			return true;
-		} catch (Exception e) {
+		} catch (Throwable t) {
 			return false;
 		}
 	}
 
 	@Override
 	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entity) {
+		if (extractEnergy(stack, ConfigurationHandler.energyUseColoringTool, true) < ConfigurationHandler.energyUseColoringTool)
+			return false;
 		if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("SortMode", Constants.NBT.TAG_BYTE) && !stack.stackTagCompound.getBoolean("SortMode") && entity instanceof EntitySheep) {
 			EntitySheep sheep = (EntitySheep) entity;
 			if (!sheep.getSheared() && sheep.getFleeceColor() != stack.getItemDamage()) {
-				sheep.setFleeceColor(stack.getItemDamage());
 				player.swingItem();
+				sheep.setFleeceColor(stack.getItemDamage());
+				extractEnergy(stack, ConfigurationHandler.energyUseColoringTool, false);
 				return true;
 			}
 		}
@@ -93,7 +98,8 @@ public class ItemPipeColoringTool extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advancedTooltips) {
+		super.addInformation(stack, player, list, advancedTooltips);
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("SortMode") && stack.getTagCompound().getBoolean("SortMode"))
 			list.add(Utils.localize("tooltip.colorSortingMode"));
 		else

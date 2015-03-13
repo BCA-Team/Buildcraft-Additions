@@ -30,6 +30,7 @@ import buildcraftAdditions.client.render.tileentities.RendererKEBT3;
 import buildcraftAdditions.core.BucketHandler;
 import buildcraftAdditions.entities.EntityLaserShot;
 import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileBackpackStand;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
 import buildcraftAdditions.tileEntities.TileKEBT2;
@@ -52,7 +53,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileKEBT2.class, new RendererKEBT2());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileKEBT3.class, new RendererKEBT3());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileBackpackStand.class, new RendererBackPackStand());
-		RendererSidedTextures.RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+		Variables.RenderIDs.SIDED_TEXTURES_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(new RendererSidedTextures());
 		RenderingRegistry.registerEntityRenderingHandler(EntityLaserShot.class, new EntityLaserShotRenderer());
 	}

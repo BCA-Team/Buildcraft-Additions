@@ -44,12 +44,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
-import cofh.api.energy.IEnergyContainerItem;
-
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.inventories.InventoryItem;
 import buildcraftAdditions.inventories.InventoryKineticMultiTool;
-import buildcraftAdditions.items.ItemBase;
+import buildcraftAdditions.items.ItemInventoryPoweredBase;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.Utils;
@@ -61,7 +60,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerItem {
+public class ItemKineticMultiTool extends ItemInventoryPoweredBase {
 
 	private static final Set<Material> effectiveMaterialsDrill = Sets.newHashSet(Material.rock, Material.iron, Material.ice, Material.glass, Material.piston, Material.anvil);
 	private static final Set<Block> effectiveBlocksDrill = Sets.newHashSet(Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab, Blocks.stone, Blocks.sandstone, Blocks.mossy_cobblestone, Blocks.iron_ore, Blocks.iron_block, Blocks.coal_ore, Blocks.gold_block, Blocks.gold_ore, Blocks.diamond_ore, Blocks.diamond_block, Blocks.ice, Blocks.netherrack, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.lit_redstone_ore, Blocks.rail, Blocks.detector_rail, Blocks.golden_rail, Blocks.activator_rail, Blocks.anvil);
@@ -75,9 +74,8 @@ public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerIt
 
 	public ItemKineticMultiTool() {
 		super("kineticMultiTool");
-		setMaxStackSize(1);
-		setFull3D();
 		setNoRepair();
+		setFull3D();
 	}
 
 	public static Set<ItemStack> getInstalledUpgrades(ItemStack stack) {
@@ -286,19 +284,6 @@ public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerIt
 	}
 
 	@Override
-	public boolean showDurabilityBar(ItemStack stack) {
-		return getMaxEnergyStored(stack) > 0;
-	}
-
-	@Override
-	public double getDurabilityForDisplay(ItemStack stack) {
-		double maxEnergy = getMaxEnergyStored(stack);
-		if (maxEnergy <= 0)
-			return 1;
-		return (maxEnergy - getEnergyStored(stack)) / maxEnergy;
-	}
-
-	@Override
 	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player) {
 		if (getEnergyStored(stack) <= player.worldObj.getBlock(x, y, z).getBlockHardness(player.worldObj, x, y, z) * ConfigurationHandler.powerDifficultyModifiers[player.worldObj.difficultySetting.getDifficultyId()] * ConfigurationHandler.basePowerModifier) {
 			player.addChatComponentMessage(new ChatComponentTranslation("kineticTool.outOfPower"));
@@ -481,8 +466,8 @@ public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerIt
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
-		list.add(Utils.localizeFormatted("rf.info", getEnergyStored(stack), getMaxEnergyStored(stack)));
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advancedTooltips) {
+		super.addInformation(stack, player, list, advancedTooltips);
 		if (Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode())) {
 			boolean drill = isUpgradeInstalled(stack, "drill");
 			boolean digger = isUpgradeInstalled(stack, "digger");
@@ -569,63 +554,8 @@ public class ItemKineticMultiTool extends ItemBase implements IEnergyContainerIt
 	}
 
 	@Override
-	public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
-		InventoryKineticMultiTool inv = new InventoryKineticMultiTool(container);
-		int received = 0;
-		for (int i = 0; i < inv.getSizeInventory() && maxReceive - received > 0; i++) {
-			ItemStack stack = inv.getStackInSlot(i);
-			if (stack != null && stack.getItem() != null && stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem item = (IEnergyContainerItem) stack.getItem();
-				received += item.receiveEnergy(stack, maxReceive - received, simulate);
-			}
-		}
-		inv.writeToNBT();
-		return received;
-	}
-
-	@Override
-	public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
-		InventoryKineticMultiTool inv = new InventoryKineticMultiTool(container);
-		int extracted = 0;
-		for (int i = 0; i < inv.getSizeInventory() && maxExtract - extracted > 0; i++) {
-			ItemStack stack = inv.getStackInSlot(i);
-			if (stack != null && stack.getItem() != null && stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem item = (IEnergyContainerItem) stack.getItem();
-				extracted += item.extractEnergy(stack, maxExtract - extracted, simulate);
-			}
-		}
-		inv.writeToNBT();
-		return extracted;
-	}
-
-	@Override
-	public int getEnergyStored(ItemStack container) {
-		InventoryKineticMultiTool inv = new InventoryKineticMultiTool(container);
-		int stored = 0;
-		for (int i = 0; i < inv.getSizeInventory(); i++) {
-			ItemStack stack = inv.getStackInSlot(i);
-			if (stack != null && stack.getItem() != null && stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem item = (IEnergyContainerItem) stack.getItem();
-				stored += item.getEnergyStored(stack);
-			}
-		}
-		inv.writeToNBT();
-		return stored;
-	}
-
-	@Override
-	public int getMaxEnergyStored(ItemStack container) {
-		InventoryKineticMultiTool inv = new InventoryKineticMultiTool(container);
-		int maxStored = 0;
-		for (int i = 0; i < inv.getSizeInventory(); i++) {
-			ItemStack stack = inv.getStackInSlot(i);
-			if (stack != null && stack.getItem() != null && stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem item = (IEnergyContainerItem) stack.getItem();
-				maxStored += item.getMaxEnergyStored(stack);
-			}
-		}
-		inv.writeToNBT();
-		return maxStored;
+	public InventoryItem getInventory(ItemStack stack) {
+		return new InventoryKineticMultiTool(stack);
 	}
 
 	public boolean harvestBlock(World world, int x, int y, int z, EntityPlayer player) {

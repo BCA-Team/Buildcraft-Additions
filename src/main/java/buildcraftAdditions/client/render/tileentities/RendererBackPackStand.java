@@ -2,12 +2,15 @@ package buildcraftAdditions.client.render.tileentities;
 
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import buildcraftAdditions.client.models.BackPackModel;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -15,8 +18,8 @@ import buildcraftAdditions.client.models.BackPackModel;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+@SideOnly(Side.CLIENT)
 public class RendererBackPackStand extends TileEntitySpecialRenderer {
-	private final ModelBiped model = new BackPackModel();
 
 	@Override
 	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {
@@ -44,7 +47,7 @@ public class RendererBackPackStand extends TileEntitySpecialRenderer {
 		GL11.glColor4f(1f, 1f, 1f, 1f);
 		GL11.glRotated(angle, 0, 1, 0);
 		GL11.glRotated(180, 1, 0, 0);
-		model.render(null, 0, 0, 0, 0, 0, 0.1F);
+		BackPackModel.INSTANCE.render(null, 0, 0, 0, 0, 0, 0.1F);
 		GL11.glPopMatrix();
 	}
 }

@@ -11,25 +11,21 @@ package buildcraftAdditions.items.Tools;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.utils.Utils;
 
-public class ItemToolUpgrade extends Item {
+public class ItemToolUpgrade extends ItemBase {
 
 	private final String type;
 
 	public ItemToolUpgrade(String type) {
+		super("toolUpgrade" + type);
 		setMaxStackSize(16);
-		setCreativeTab(BuildcraftAdditions.bcadditions);
-		setUnlocalizedName("toolUpgrade" + type);
-		setTextureName(Variables.MOD.ID + ":" + type + "Upgrade");
 		this.type = type;
 	}
 

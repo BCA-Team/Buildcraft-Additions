@@ -16,11 +16,12 @@ import cofh.api.energy.IEnergyReceiver;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public abstract class TileMachineBase extends TileBase implements IEnergyReceiver {
-	private final int maxEnergy;
+	protected final int capacity, maxTransfer;
 	protected int energy;
 
-	protected TileMachineBase(int maxEnergy) {
-		this.maxEnergy = maxEnergy;
+	protected TileMachineBase(int capacity, int maxTransfer) {
+		this.capacity = capacity;
+		this.maxTransfer = maxTransfer;
 	}
 
 	@Override
@@ -37,16 +38,11 @@ public abstract class TileMachineBase extends TileBase implements IEnergyReceive
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		if (energy >= maxEnergy)
-			return 0;
-		int energyRecieved = maxReceive;
-		if (energyRecieved > maxEnergy - energy)
-			energyRecieved = maxEnergy - energy;
+		int energyReceived = Math.min(capacity - energy, Math.min(maxTransfer, maxReceive));
 		if (!simulate)
-			energy += energyRecieved;
-		return energyRecieved;
+			energy += energyReceived;
+		return energyReceived;
 	}
-
 
 	@Override
 	public int getEnergyStored(ForgeDirection from) {
@@ -55,7 +51,7 @@ public abstract class TileMachineBase extends TileBase implements IEnergyReceive
 
 	@Override
 	public int getMaxEnergyStored(ForgeDirection from) {
-		return maxEnergy;
+		return capacity;
 	}
 
 	@Override

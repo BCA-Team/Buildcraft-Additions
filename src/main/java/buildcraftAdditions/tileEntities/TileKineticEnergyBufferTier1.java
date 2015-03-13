@@ -24,7 +24,7 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 	private boolean creative, init;
 
 	public TileKineticEnergyBufferTier1() {
-		super(3000000, 30000, 30000, ConfigurationHandler.KEB1powerloss, 1);
+		super(ConfigurationHandler.capacityKEBTier1, ConfigurationHandler.maxTransferKEBTier1, ConfigurationHandler.KEB1powerloss, 1);
 		creative = false;
 		init = false;
 	}
@@ -35,7 +35,7 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 			return;
 		if (creative) {
 			if (!init) {
-				energy = maxEnergy;
+				energy = capacity;
 				energyState = 9;
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 9, 2);
 				init = true;
@@ -44,9 +44,9 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 			return;
 		}
 		super.updateEntity();
-		if (maxEnergy == 0)
+		if (capacity == 0)
 			return;
-		energyState = (energy * 8) / maxEnergy;
+		energyState = (energy * 8) / capacity;
 		if (lastEnergyState != energyState && worldObj.getBlock(xCoord, yCoord, zCoord) == ItemsAndBlocks.kebT1)
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, energyState, 2);
 		lastEnergyState = energyState;
@@ -90,8 +90,8 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 					}
 					if (sendEnergy < 0)
 						sendEnergy = 0;
-					if (sendEnergy > maxOutput)
-						sendEnergy = maxOutput;
+					if (sendEnergy > maxTransfer)
+						sendEnergy = maxTransfer;
 
 					int output = energyHandler.receiveEnergy(direction.getOpposite(), sendEnergy, false);
 					if (!creative) {

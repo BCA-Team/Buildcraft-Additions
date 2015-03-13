@@ -17,6 +17,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 
 import cofh.api.energy.IEnergyContainerItem;
 
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 
@@ -25,22 +26,16 @@ public class TileChargingStation extends TileMachineBase implements IInventory {
 	private final CustomInventory inventory = new CustomInventory("ChargingStation", 1, 1, this);
 
 	public TileChargingStation() {
-		super(1000);
+		super(ConfigurationHandler.capacityChargingStation, ConfigurationHandler.maxTransferChargingStation);
 	}
 
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		int charge = 6000;
-		if (charge > energy)
-			charge = energy;
-		if (charge > 0) {
-			if (getRequiredEnergy() > 0) {
-				ItemStack stack = getStackInSlot(0);
-				IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
-				energy -= containerItem.receiveEnergy(stack, charge, false);
-				setInventorySlotContents(0, stack);
-			}
+		if (energy > 0 && getRequiredEnergy() > 0) {
+			ItemStack stack = getStackInSlot(0);
+			IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
+			energy -= containerItem.receiveEnergy(stack, Math.min(energy, maxTransfer), false);
 		}
 	}
 
@@ -50,7 +45,6 @@ public class TileChargingStation extends TileMachineBase implements IInventory {
 			IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
 			return containerItem.getMaxEnergyStored(stack) - containerItem.getEnergyStored(stack);
 		}
-
 		return 0;
 	}
 

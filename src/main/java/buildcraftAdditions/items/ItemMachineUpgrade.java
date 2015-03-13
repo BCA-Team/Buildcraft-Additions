@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.utils.RenderUtils;
@@ -27,14 +26,13 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemMachineUpgrade extends Item {
+public class ItemMachineUpgrade extends ItemBase {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
 	public ItemMachineUpgrade() {
-		setUnlocalizedName("upgrade");
-		setCreativeTab(BuildcraftAdditions.bcadditions);
+		super("upgrade");
 		setHasSubtypes(true);
 	}
 
@@ -76,9 +74,8 @@ public class ItemMachineUpgrade extends Item {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
 		icons = new IIcon[EnumMachineUpgrades.values().length];
-		for (int i = 0; i < icons.length; i++) {
+		for (int i = 0; i < icons.length; i++)
 			icons[i] = RenderUtils.registerIcon(register, EnumMachineUpgrades.values()[i].getTextureName());
-		}
 	}
 
 	@Override
