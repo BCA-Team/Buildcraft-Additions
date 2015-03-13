@@ -91,11 +91,6 @@ public class EventListener {
 		}
 
 		@SubscribeEvent
-		public void onGettingAchievement(AchievementEvent event) {
-			EurekaAPI.API.makeProgress(Variables.Eureka.DustT0Key, event.entityPlayer);
-		}
-
-		@SubscribeEvent
 		public void onInteraction(PlayerInteractEvent event) {
 			Block block = event.world.getBlock(event.x, event.y, event.z);
 			if (block == ItemsAndBlocks.kebT1) {
