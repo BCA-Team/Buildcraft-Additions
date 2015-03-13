@@ -1,6 +1,9 @@
 package buildcraftAdditions.compat.eureka;
 
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
+
+import net.minecraftforge.common.MinecraftForge;
 
 import buildcraftAdditions.compat.CompatModule;
 import buildcraftAdditions.config.ConfigurationHandler;
@@ -14,6 +17,11 @@ import buildcraftAdditions.config.ConfigurationHandler;
  */
 @CompatModule(id = "Eureka", requiredMods = "eureka")
 public class CompatEureka {
+
+	@CompatModule.Handler
+	public void init(FMLInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(new BCAEurekaEvents());
+	}
 
 	@CompatModule.Handler
 	public void doneLoading(FMLLoadCompleteEvent event) {
