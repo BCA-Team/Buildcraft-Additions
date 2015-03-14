@@ -1,5 +1,7 @@
 package buildcraftAdditions.compat.buildcraft;
 
+import net.minecraft.item.Item;
+
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -9,6 +11,7 @@ import buildcraftAdditions.compat.CompatModule;
 import buildcraftAdditions.compat.buildcraft.recipe.BCRecipeManager;
 import buildcraftAdditions.compat.buildcraft.schematics.BCASchematics;
 import buildcraftAdditions.compat.buildcraft.triggers.Triggers;
+import buildcraftAdditions.items.RobotDebugTool;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
@@ -22,12 +25,14 @@ import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
  */
 @CompatModule(id = "Buildcraft", requiredMods = "BuildCraft|Core")
 public class CompatBuildCraft {
+	public static Item robotDebugTool;
 
 	@CompatModule.Handler
 	public void preInit(FMLPreInitializationEvent event) {
 		addItemSorter();
 		StripesHandler.register();
 		BCASchematics.registerSchematics();
+		addRobotDebugTool();
 	}
 
 	@CompatModule.Handler
@@ -38,8 +43,14 @@ public class CompatBuildCraft {
 		BuildcraftAdditions.proxy.addPowerplant();
 	}
 
-	public void addItemSorter() {
+	private void addItemSorter() {
 		GameRegistry.registerBlock(ItemsAndBlocks.itemSorter, "blockItemSorter");
 		GameRegistry.registerTileEntity(TileItemSorter.class, "ItemSorter");
 	}
+
+	private void addRobotDebugTool() {
+		robotDebugTool = new RobotDebugTool();
+		GameRegistry.registerItem(robotDebugTool, "robotDebugTool");
+	}
+
 }
