@@ -58,7 +58,7 @@ public final class Variables {
 
 	public static final class MOD {
 		public static final String ID = "bcadditions";
-		public static final String NAME = "Buildcraft Additions";
+		public static final String NAME = "BuildCraft Additions";
 	}
 
 	public static final class UUIDs {

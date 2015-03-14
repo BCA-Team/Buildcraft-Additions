@@ -45,7 +45,7 @@ import buildcraftAdditions.recipe.refinery.CoolingTowerRecipeManager;
 import buildcraftAdditions.recipe.refinery.RefineryRecipeManager;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
-import buildcraftAdditions.utils.SpecialListMananger;
+import buildcraftAdditions.core.SpecialListMananger;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise

@@ -25,15 +25,14 @@ public class VersionCheck {
 	public static String[] changelog;
 
 	public static void start() {
-		VersionCheckThread thread = new VersionCheckThread();
-		thread.start();
+		new VersionCheckThread().start();
 	}
 
 	private static class VersionCheckThread extends Thread {
 
 		@Override
 		public void run() {
-			Logger.info("Buildcraft Additions version check initiated, current version: @VERSION@");
+			Logger.info("BuildCraft Additions version check initiated, current version: @VERSION@");
 			try {
 
 				URL version = new URL("https://raw.githubusercontent.com/BCA-Team/Buildcraft-Additions/master/src/main/resources/changelogs/version.txt");
@@ -41,7 +40,7 @@ public class VersionCheck {
 				newerVersionNumber = reader.readLine();
 				if (!currentVersion.equals(newerVersionNumber)) {
 					newerVersionAvailable = true;
-					Logger.info("There is a newer version of Buildcraft Additions available (" + newerVersionNumber + ") please considder updating");
+					Logger.info("There is a newer version of Buildcraft Additions available (" + newerVersionNumber + ") please consider updating");
 					URL changelogURL = new URL("https://raw.githubusercontent.com/BCA-Team/Buildcraft-Additions/master/src/main/resources/changelogs/" + newerVersionNumber);
 					BufferedReader changelogReader = new BufferedReader((new InputStreamReader(changelogURL.openStream())));
 					String line;
@@ -54,7 +53,7 @@ public class VersionCheck {
 				}
 
 			} catch (Throwable e) {
-				Logger.error("Builcraft Additions version check failed!");
+				Logger.error("BuildCraft Additions version check failed!");
 				e.printStackTrace();
 			}
 		}
@@ -62,7 +61,7 @@ public class VersionCheck {
 		public void pingVersionChecker() {
 			if (Loader.isModLoaded("VersionChecker")) {
 				NBTTagCompound tag = new NBTTagCompound();
-				tag.setString("modDisplayName", "Buildcraft Additions");
+				tag.setString("modDisplayName", "BuildCraft Additions");
 				tag.setString("oldVersion", currentVersion);
 				tag.setString("newVersion", newerVersionNumber);
 				tag.setString("updateUrl", "http://buildcraftAdditions.wordpress.com/downloads/");

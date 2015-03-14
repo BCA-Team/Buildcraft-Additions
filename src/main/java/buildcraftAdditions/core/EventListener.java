@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -45,7 +46,7 @@ public class EventListener {
 		@SubscribeEvent
 		public void playerLogin(PlayerLoggedInEvent event) {
 			if (VersionCheck.newerVersionAvailable && event != null) {
-				event.player.addChatComponentMessage(new ChatComponentText("There is a newer version of Buildcraft Additions available (" + VersionCheck.newerVersionNumber + ") Please consider updating"));
+				event.player.addChatComponentMessage(new ChatComponentTranslation("updatenotification", VersionCheck.newerVersionNumber));
 				if (!ConfigurationHandler.shouldPrintChangelog)
 					return;
 				event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("changelogNotification") + ": "));

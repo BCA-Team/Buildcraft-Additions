@@ -3,6 +3,8 @@ package buildcraftAdditions.core;
 
 import org.apache.logging.log4j.LogManager;
 
+import buildcraftAdditions.reference.Variables;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -12,7 +14,7 @@ import org.apache.logging.log4j.LogManager;
  */
 public class Logger {
 
-	public static final org.apache.logging.log4j.Logger logger = LogManager.getLogger("Buildcraft Additions");
+	public static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(Variables.MOD.NAME);
 
 	public static void info(String message) {
 		logger.info(message);

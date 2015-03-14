@@ -270,7 +270,7 @@ priority.normal=Normal
 priority.high=High
 priority.veryHigh=Very High
 
-itemGroup.BuildcraftAdditions=Buildcraft Additions
+itemGroup.BuildcraftAdditions=BuildCraft Additions
 itemGroup.bcaCanisters=Canisters
 itemGroup.bcaDusts=Dusts
 
@@ -295,7 +295,7 @@ engineeringDiary.requiredResearch=Required research:
 engineeringDiary.progress=Progress:
 engineeringDiary.unlocked=UNLOCKED
 
-config.title=Buildcraft Additions Configuration
+config.title=BuildCraft Additions Configuration
 
 updates=Updates
 updates.tooltip=Configure if BCA should check for updates or not
@@ -362,7 +362,7 @@ shouldRegisterDusts.tooltip=Set to false to prevent BCA from registering its dus
 
 kineticTool.outOfPower=OUT OF POWER, BLOCK BREAKING ABORTED!
 
-updatenotification=There is a newer version of Buildcraft Additions available (%s). Please consider updating.
+updatenotification=There is a newer version of BuildCraft Additions available (%s). Please consider updating.
 changelogNotification=Changelog
 
 selfdestructCountdouwn=SELF DESTRUCTION IN
