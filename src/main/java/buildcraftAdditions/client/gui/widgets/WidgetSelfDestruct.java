@@ -9,7 +9,7 @@ import buildcraftAdditions.client.gui.GuiBase;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.PlayerUtils;
 import buildcraftAdditions.utils.RenderUtils;
-import buildcraftAdditions.utils.SpecialListMananger;
+import buildcraftAdditions.core.SpecialListMananger;
 import buildcraftAdditions.utils.Utils;
 
 /**
