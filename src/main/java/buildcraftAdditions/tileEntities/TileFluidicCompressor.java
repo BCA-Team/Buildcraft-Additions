@@ -17,6 +17,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidContainerItem;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 import buildcraftAdditions.tileEntities.interfaces.IWidgetListener;
@@ -37,7 +38,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	public boolean fill;
 
 	public TileFluidicCompressor() {
-		super(800);
+		super(ConfigurationHandler.capacityFluidicCompressor, ConfigurationHandler.maxTransferFluidicCompressor);
 	}
 
 	@Override

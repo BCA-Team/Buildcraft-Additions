@@ -59,7 +59,7 @@ public class GuiKEB extends GuiBase {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		super.drawGuiContainerBackgroundLayer(f, x, y);
-		long percent = ((long) keb.energy * 248) / keb.maxEnergy;
+		long percent = ((long) keb.energy * 248) / keb.capacity;
 		int temp = (int) percent;
 		if (temp > 36)
 			temp = 36;
@@ -96,7 +96,7 @@ public class GuiKEB extends GuiBase {
 		super.drawScreen(x, y, f);
 		if (shouldDrawEnergyNumber(x - guiLeft, y - guiTop)) {
 			ArrayList<String> list = new ArrayList<String>();
-			list.add(Utils.localizeFormatted("rf.info", keb.energy, keb.maxEnergy));
+			list.add(Utils.localizeFormatted("rf.info", keb.energy, keb.capacity));
 			drawHoveringText(list, x, y, fontRendererObj);
 		}
 	}

@@ -50,9 +50,8 @@ public class BlockItemSorter extends BlockBase {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public int getRenderType() {
-		return RendererSidedTextures.RENDER_ID;
+		return Variables.RenderIDs.SIDED_TEXTURES_RENDER_ID;
 	}
 
 	@Override

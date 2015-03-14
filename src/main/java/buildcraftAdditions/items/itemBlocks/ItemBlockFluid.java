@@ -4,7 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-import buildcraftAdditions.blocks.FluidBlockBase;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidBlock;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -15,15 +18,20 @@ import buildcraftAdditions.blocks.FluidBlockBase;
  */
 public class ItemBlockFluid extends ItemBlock {
 
+	private final FluidStack fluidStack;
+
 	public ItemBlockFluid(Block block) {
 		super(block);
+		if (block instanceof IFluidBlock) {
+			Fluid fluid = ((IFluidBlock) block).getFluid();
+			if (fluid != null)
+				fluidStack = new FluidStack(fluid.getID(), FluidContainerRegistry.BUCKET_VOLUME);
+			else fluidStack = null;
+		} else fluidStack = null;
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		if (field_150939_a instanceof FluidBlockBase) {
-			return ((FluidBlockBase) field_150939_a).getFluidStack().getLocalizedName();
-		}
-		return super.getItemStackDisplayName(stack);
+		return fluidStack != null ? fluidStack.getLocalizedName() : super.getItemStackDisplayName(stack);
 	}
 }

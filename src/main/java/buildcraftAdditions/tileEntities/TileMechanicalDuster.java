@@ -13,6 +13,7 @@ import cofh.api.energy.IEnergyReceiver;
 
 import buildcraftAdditions.api.networking.MessageByteBuff;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
@@ -27,7 +28,7 @@ import buildcraftAdditions.utils.Utils;
  */
 public class TileMechanicalDuster extends TileBaseDuster implements IEnergyReceiver {
 
-	public final int maxEnergy = 2000;
+	public final int capacity = ConfigurationHandler.capacityMechanicalDuster, maxTransfer = ConfigurationHandler.maxTransferMechanicalDuster;
 	public int progressStage, oldProgressStage, energy;
 	public EntityPlayer player;
 
@@ -43,10 +44,10 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if (energy >= 10) {
+		if (energy >= ConfigurationHandler.energyUseMechanicalDuster) {
 			if (BCARecipeManager.duster.getRecipe(getStackInSlot(0)) != null) {
 				progress++;
-				energy -= 10;
+				energy -= ConfigurationHandler.energyUseMechanicalDuster;
 				oldProgressStage = progressStage;
 				if (progress > 25)
 					progressStage = 1;
@@ -102,12 +103,10 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		int energyRecieved = maxReceive;
-		if (energyRecieved > maxEnergy - energy)
-			energyRecieved = maxReceive - energy;
+		int energyReceived = Math.min(capacity - energy, Math.min(maxTransfer, maxReceive));
 		if (!simulate)
-			energy += energyRecieved;
-		return energyRecieved;
+			energy += energyReceived;
+		return energyReceived;
 	}
 
 	@Override
@@ -117,7 +116,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 
 	@Override
 	public int getMaxEnergyStored(ForgeDirection from) {
-		return maxEnergy;
+		return capacity;
 	}
 
 	@Override

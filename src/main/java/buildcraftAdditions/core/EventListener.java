@@ -1,12 +1,10 @@
 package buildcraftAdditions.core;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -17,8 +15,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
-import net.minecraftforge.event.entity.player.AchievementEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 
@@ -83,12 +79,6 @@ public class EventListener {
 	}
 
 	public static class Forge {
-
-		@SubscribeEvent
-		public void onItemTooltip(ItemTooltipEvent event) {
-			if (event.itemStack != null && event.itemStack.getItem() == Item.getItemFromBlock(ItemsAndBlocks.kebT1) && event.itemStack.stackTagCompound != null)
-				event.toolTip.add("" + EnumChatFormatting.GRAY + EnumChatFormatting.ITALIC + Utils.localize("configured"));
-		}
 
 		@SubscribeEvent
 		public void onInteraction(PlayerInteractEvent event) {

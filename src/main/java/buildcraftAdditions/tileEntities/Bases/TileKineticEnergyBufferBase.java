@@ -41,17 +41,15 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	public final int tier;
 	protected final SideConfiguration configuration = new SideConfiguration();
 	protected final boolean[] blocked = new boolean[6];
-	public int energy, maxEnergy, maxInput, maxOutput, loss, fuse;
+	public int energy, capacity, maxTransfer, loss, fuse;
 	public boolean selfDestruct, engineControl;
 	public EntityPlayer destroyer;
 	private UUID owner;
 
 
-	public TileKineticEnergyBufferBase(int maxEnergy, int maxInput, int maxOutput, int loss, int tier) {
-		super();
-		this.maxEnergy = maxEnergy;
-		this.maxInput = maxInput;
-		this.maxOutput = maxOutput;
+	public TileKineticEnergyBufferBase(int capacity, int maxTransfer, int loss, int tier) {
+		this.capacity = capacity;
+		this.maxTransfer = maxTransfer;
 		this.loss = loss;
 		this.tier = tier;
 	}
@@ -60,30 +58,22 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
 		if (!configuration.canReceive(from))
 			return 0;
-		int recieved = maxReceive;
-		if (recieved > maxEnergy - energy)
-			recieved = maxEnergy - energy;
-		if (recieved > maxInput)
-			recieved = maxInput;
+		int energyReceived = Math.min(capacity - energy, Math.min(maxTransfer, maxReceive));
 		if (!simulate) {
-			energy += recieved;
+			energy += energyReceived;
 			blocked[from.ordinal()] = true;
 		}
-		return recieved;
+		return energyReceived;
 	}
 
 	@Override
 	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
 		if (!configuration.canSend(from))
 			return 0;
-		int extracted = maxExtract;
-		if (extracted > energy)
-			extracted = energy;
-		if (extracted > maxOutput)
-			extracted = maxOutput;
+		int energyExtracted = Math.min(energy, Math.min(maxTransfer, maxExtract));
 		if (!simulate)
-			energy -= extracted;
-		return extracted;
+			energy -= energyExtracted;
+		return energyExtracted;
 	}
 
 	@Override
@@ -93,16 +83,15 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 
 	@Override
 	public int getMaxEnergyStored(ForgeDirection from) {
-		return maxEnergy;
+		return capacity;
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		energy = tag.getInteger("energy");
-		maxEnergy = tag.getInteger("maxEnergy");
-		maxInput = tag.getInteger("maxInput");
-		maxOutput = tag.getInteger("maxOutput");
+		capacity = tag.getInteger("maxEnergy");
+		maxTransfer = Math.max(tag.getInteger("maxTransfer"), Math.max(tag.getInteger("maxInput"), tag.getInteger("maxOutput")));
 		loss = tag.getInteger("loss");
 		engineControl = tag.getBoolean("engineControl");
 		configuration.readFromNBT(tag);
@@ -113,9 +102,8 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		tag.setInteger("energy", energy);
-		tag.setInteger("maxEnergy", maxEnergy);
-		tag.setInteger("maxInput", maxInput);
-		tag.setInteger("maxOutput", maxOutput);
+		tag.setInteger("maxEnergy", capacity);
+		tag.setInteger("maxTransfer", maxTransfer);
 		tag.setInteger("loss", loss);
 		tag.setBoolean("engineControl", engineControl);
 		configuration.writeToNBT(tag);

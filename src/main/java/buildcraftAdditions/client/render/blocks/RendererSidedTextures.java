@@ -12,6 +12,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
+import buildcraftAdditions.reference.Variables;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -22,7 +24,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 @SideOnly(Side.CLIENT)
 public class RendererSidedTextures implements ISimpleBlockRenderingHandler {
 
-	public static int RENDER_ID;
 	private final FakeBlock fakeBlock = new FakeBlock();
 
 	@Override
@@ -94,7 +95,7 @@ public class RendererSidedTextures implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public int getRenderId() {
-		return RENDER_ID;
+		return Variables.RenderIDs.SIDED_TEXTURES_RENDER_ID;
 	}
 
 	private class FakeBlock extends Block {

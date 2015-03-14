@@ -346,6 +346,14 @@ PortableLaserEntityDamage.tooltip=Damage dealt by the Portable Laser in entity m
 PortableLaserEntityBurnTime=Entity burn time
 PortableLaserEntityBurnTime.tooltip=Number of seconds entities will be set on fire by the Portable Laser in entity mode
 
+coloring tool=Coloring Tool
+ColoringToolCapacity=Capacity
+ColoringToolCapacity.tooltip=Capacity of the coloring tool's RF storage, in RF
+ColoringToolMaxTransfer=Max transfer
+ColoringToolMaxTransfer.tooltip=Max transfer rate, in RF/t
+ColoringToolEnergyUse=Energy use
+ColoringToolEnergyUse.tooltip=Energy use of one color application, in RF
+
 misc=Misc
 eurekaIntegration=Eureka Integration
 eurekaIntegration.tooltip=Set to false to prevent BCA from using Eureka progressing

@@ -34,11 +34,11 @@ import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Plating;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryValve;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryWalls;
 import buildcraftAdditions.core.VersionCheck;
-import buildcraftAdditions.items.BatteryBase;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemMachineConfigurator;
 import buildcraftAdditions.items.ItemMachineUpgrade;
+import buildcraftAdditions.items.ItemPoweredBase;
 import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
 import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ItemPipeColoringTool;
@@ -100,9 +100,9 @@ public final class ItemsAndBlocks {
 	public static Block testBlock;
 	public static Block backpackStand;
 
-	public static BatteryBase powerCapsuleTier1;
-	public static BatteryBase powerCapsuleTier2;
-	public static BatteryBase powerCapsuleTier3;
+	public static ItemPoweredBase powerCapsuleTier1;
+	public static ItemPoweredBase powerCapsuleTier2;
+	public static ItemPoweredBase powerCapsuleTier3;
 	public static ItemBase ironStick;
 	public static ItemBase goldStick;
 	public static ItemBase diamondStick;
@@ -158,16 +158,13 @@ public final class ItemsAndBlocks {
 		diamondCanister = new ItemCanister("diamondCanister", 64000);
 		GameRegistry.registerItem(diamondCanister, "diamondCanister");
 
-		powerCapsuleTier1 = new BatteryBase(100000, 1000, 1000, 1, "T1_battery");
-		powerCapsuleTier1.setUnlocalizedName("PowerCapsuleTier1");
+		powerCapsuleTier1 = new ItemPoweredBase("PowerCapsuleTier1", 100000, 1024);
 		GameRegistry.registerItem(powerCapsuleTier1, "PowerCapsuleTier1");
 
-		powerCapsuleTier2 = new BatteryBase(300000, 2000, 2000, 2, "T2_battery");
-		powerCapsuleTier2.setUnlocalizedName("PowerCapsuleTier2");
+		powerCapsuleTier2 = new ItemPoweredBase("PowerCapsuleTier2", 300000, 4096);
 		GameRegistry.registerItem(powerCapsuleTier2, "powerCapsuleTier2");
 
-		powerCapsuleTier3 = new BatteryBase(1000000, 4000, 4000, 3, "T3_battery");
-		powerCapsuleTier3.setUnlocalizedName("PowerCapsuleTier3");
+		powerCapsuleTier3 = new ItemPoweredBase("PowerCapsuleTier3", 1000000, 16384);
 		GameRegistry.registerItem(powerCapsuleTier3, "powerCapsuleTier3");
 
 		ironStick = new ItemBase("stickIron");

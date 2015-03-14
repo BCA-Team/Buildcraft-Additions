@@ -13,9 +13,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraftAdditions.client.render.blocks.RendererSidedTextures;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -95,6 +96,6 @@ public abstract class BlockRotationBase extends BlockBase {
 
 	@Override
 	public int getRenderType() {
-		return RendererSidedTextures.RENDER_ID;
+		return Variables.RenderIDs.SIDED_TEXTURES_RENDER_ID;
 	}
 }

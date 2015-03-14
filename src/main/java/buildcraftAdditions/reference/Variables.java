@@ -18,6 +18,11 @@ public final class Variables {
 
 	public static final int NETWORK_RANGE = 64;
 
+	//Render ID's
+	public static final class RenderIDs {
+		public static int SIDED_TEXTURES_RENDER_ID;
+	}
+
 	//GUI ID's
 	public static enum Gui {
 		FLUIDIC_COMPRESSOR,

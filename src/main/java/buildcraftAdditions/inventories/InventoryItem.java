@@ -21,7 +21,13 @@ public class InventoryItem extends InventoryBasic {
 	public InventoryItem(ItemStack stack, String name, int size) {
 		super(stack.hasDisplayName() ? stack.getDisplayName() : name, stack.hasDisplayName(), size);
 		this.stack = stack;
-		readFromNBT();
+		openInventory();
+	}
+
+	public InventoryItem(ItemStack stack) {
+		super("", true, 0);
+		this.stack = stack;
+		openInventory();
 	}
 
 	@Override

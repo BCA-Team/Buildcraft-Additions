@@ -1,25 +1,18 @@
 package buildcraftAdditions.items.Tools;
 
-import java.util.List;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import cofh.api.energy.IEnergyContainerItem;
-
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.entities.EntityLaserShot;
+import buildcraftAdditions.inventories.InventoryItem;
 import buildcraftAdditions.inventories.InventoryPortableLaser;
-import buildcraftAdditions.items.ItemBase;
+import buildcraftAdditions.items.ItemInventoryPoweredBase;
 import buildcraftAdditions.reference.Variables;
-import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -28,12 +21,11 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemPortableLaser extends ItemBase implements IEnergyContainerItem {
+public class ItemPortableLaser extends ItemInventoryPoweredBase {
 
 	public ItemPortableLaser() {
 		super("portableLaser");
 		setNoRepair();
-		setMaxStackSize(1);
 		setFull3D();
 	}
 
@@ -94,82 +86,7 @@ public class ItemPortableLaser extends ItemBase implements IEnergyContainerItem 
 	}
 
 	@Override
-	public boolean showDurabilityBar(ItemStack stack) {
-		return getMaxEnergyStored(stack) > 0;
+	public InventoryItem getInventory(ItemStack stack) {
+		return new InventoryPortableLaser(stack);
 	}
-
-	@Override
-	public double getDurabilityForDisplay(ItemStack stack) {
-		double maxEnergy = getMaxEnergyStored(stack);
-		if (maxEnergy <= 0)
-			return 1;
-		return (maxEnergy - getEnergyStored(stack)) / maxEnergy;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
-		list.add(Utils.localizeFormatted("rf.info", getEnergyStored(stack), getMaxEnergyStored(stack)));
-	}
-
-	@Override
-	public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
-		InventoryPortableLaser inv = new InventoryPortableLaser(container);
-		int received = 0;
-		for (int i = 0; i < inv.getSizeInventory() && maxReceive - received > 0; i++) {
-			ItemStack stack = inv.getStackInSlot(i);
-			if (stack != null && stack.getItem() != null && stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem item = (IEnergyContainerItem) stack.getItem();
-				received += item.receiveEnergy(stack, maxReceive - received, simulate);
-			}
-		}
-		inv.writeToNBT();
-		return received;
-	}
-
-	@Override
-	public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
-		InventoryPortableLaser inv = new InventoryPortableLaser(container);
-		int extracted = 0;
-		for (int i = 0; i < inv.getSizeInventory() && maxExtract - extracted > 0; i++) {
-			ItemStack stack = inv.getStackInSlot(i);
-			if (stack != null && stack.getItem() != null && stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem item = (IEnergyContainerItem) stack.getItem();
-				extracted += item.extractEnergy(stack, maxExtract - extracted, simulate);
-			}
-		}
-		inv.writeToNBT();
-		return extracted;
-	}
-
-	@Override
-	public int getEnergyStored(ItemStack container) {
-		InventoryPortableLaser inv = new InventoryPortableLaser(container);
-		int stored = 0;
-		for (int i = 0; i < inv.getSizeInventory(); i++) {
-			ItemStack stack = inv.getStackInSlot(i);
-			if (stack != null && stack.getItem() != null && stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem item = (IEnergyContainerItem) stack.getItem();
-				stored += item.getEnergyStored(stack);
-			}
-		}
-		inv.writeToNBT();
-		return stored;
-	}
-
-	@Override
-	public int getMaxEnergyStored(ItemStack container) {
-		InventoryPortableLaser inv = new InventoryPortableLaser(container);
-		int maxStored = 0;
-		for (int i = 0; i < inv.getSizeInventory(); i++) {
-			ItemStack stack = inv.getStackInSlot(i);
-			if (stack != null && stack.getItem() != null && stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem item = (IEnergyContainerItem) stack.getItem();
-				maxStored += item.getMaxEnergyStored(stack);
-			}
-		}
-		inv.writeToNBT();
-		return maxStored;
-	}
-
 }

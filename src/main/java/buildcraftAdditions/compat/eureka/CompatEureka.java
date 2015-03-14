@@ -20,7 +20,8 @@ public class CompatEureka {
 
 	@CompatModule.Handler
 	public void init(FMLInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(new BCAEurekaEvents());
+		if (ConfigurationHandler.eurekaIntegration)
+			MinecraftForge.EVENT_BUS.register(new BCAEurekaEvents());
 	}
 
 	@CompatModule.Handler

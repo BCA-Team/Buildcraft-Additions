@@ -13,6 +13,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 import buildcraft.silicon.ItemRedstoneChipset;
@@ -176,7 +177,7 @@ public class BCRecipeManager {
 			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.itemSorter), "SUS", "PCP", "SGS", 'S', Blocks.stone, 'U', EnumMachineUpgrades.AUTO_OUTPUT.getItemStack(), 'P', BCItems.PIPE_ITEMS_LAPIS, 'C', Blocks.chest, 'G', BCItems.PIPE_ITEMS_GOLD);
 
 		if (ConfigurationHandler.enabled("ColoringTool"))
-			GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.pipeColoringTool), "  S", " S ", "W  ", 'W', new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 'S', Items.stick);
+			GameRegistry.addRecipe(new ShapedOreRecipe(ItemsAndBlocks.pipeColoringTool, "  S", " C ", "W  ", 'W', new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 'S', "stickIron", 'C', ItemsAndBlocks.powerCapsuleTier1));
 
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.blankUpgrade, 2), "GGG", "GPG", "GGG", 'G', Items.gold_ingot, 'P', ItemsAndBlocks.heatPlating);
 

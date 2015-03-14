@@ -1,22 +1,20 @@
-package buildcraftAdditions.items.itemBlocks;
+package buildcraftAdditions.items;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.common.util.Constants;
 
 import cofh.api.energy.IEnergyContainerItem;
 
-import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.config.ConfigurationHandler;
-import buildcraftAdditions.reference.Variables;
-import buildcraftAdditions.utils.PlayerUtils;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -26,36 +24,44 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemBlockKEB extends ItemBlock implements IEnergyContainerItem {
+public class ItemPoweredBase extends ItemBase implements IEnergyContainerItem {
 
-	public ItemBlockKEB(Block block) {
-		super(block);
-		setMaxStackSize(1);
+	protected int capacity;
+	protected int maxReceive;
+	protected int maxExtract;
+
+	public ItemPoweredBase(String name) {
+		super(name);
 		setHasSubtypes(true);
+		setMaxStackSize(1);
 	}
 
-	@Override
-	public String getItemStackDisplayName(ItemStack stack) {
-		if (PlayerUtils.playerMatches(Variables.UUIDs.CORJAANTJE, BuildcraftAdditions.proxy.getClientPlayer())) {
-			if (stack.stackTagCompound != null && stack.stackTagCompound.getBoolean("creative"))
-				return "Creative Kebab Extreme Bakery";
-			return "Kebab Extreme Bakery";
-		}
-		if (stack.stackTagCompound != null && stack.stackTagCompound.getBoolean("creative"))
-			return Utils.localize("tile.blockKEBT1Creative.name");
-		return super.getItemStackDisplayName(stack);
+	public ItemPoweredBase(String name, int capacity) {
+		this(name, capacity, capacity, capacity);
 	}
 
-	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
-		list.add(Utils.localizeFormatted("rf.info", getEnergyStored(stack), getMaxEnergyStored(stack)));
-		if (stack.stackTagCompound != null)
-			list.add("" + EnumChatFormatting.GRAY + EnumChatFormatting.ITALIC + Utils.localize("configured"));
+	public ItemPoweredBase(String name, int capacity, int maxTransfer) {
+		this(name, capacity, maxTransfer, maxTransfer);
+	}
+
+	public ItemPoweredBase(String name, int capacity, int maxReceive, int maxExtract) {
+		this(name);
+		this.capacity = capacity;
+		this.maxReceive = maxReceive;
+		this.maxExtract = maxExtract;
+	}
+
+	public int getMaxReceive() {
+		return maxReceive;
+	}
+
+	public int getMaxExtract() {
+		return maxExtract;
 	}
 
 	@Override
 	public boolean showDurabilityBar(ItemStack stack) {
-		return getMaxEnergyStored(stack) > 0 && getEnergyStored(stack) > 0 && (stack.stackTagCompound == null || !stack.stackTagCompound.hasKey("creative", Constants.NBT.TAG_BYTE) || !stack.getTagCompound().getBoolean("creative"));
+		return getMaxEnergyStored(stack) > 0;
 	}
 
 	@Override
@@ -66,8 +72,20 @@ public class ItemBlockKEB extends ItemBlock implements IEnergyContainerItem {
 		return (maxEnergy - getEnergyStored(stack)) / maxEnergy;
 	}
 
-	public int getMaxTransfer() {
-		return ConfigurationHandler.maxTransferKEBTier1;
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advancedTooltips) {
+		list.add(Utils.localizeFormatted("rf.info", getEnergyStored(stack), getMaxEnergyStored(stack)));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(Item item, CreativeTabs tabs, List list) {
+		list.add(new ItemStack(item));
+		ItemStack filled = new ItemStack(item);
+		filled.stackTagCompound = new NBTTagCompound();
+		filled.stackTagCompound.setInteger("energy", getMaxEnergyStored(filled));
+		list.add(filled);
 	}
 
 	@Override
@@ -75,7 +93,7 @@ public class ItemBlockKEB extends ItemBlock implements IEnergyContainerItem {
 		if (container.stackTagCompound == null)
 			container.stackTagCompound = new NBTTagCompound();
 		int energy = container.stackTagCompound.getInteger("energy");
-		int energyReceived = Math.min(getMaxEnergyStored(container) - energy, Math.min(getMaxTransfer(), maxReceive));
+		int energyReceived = Math.min(getMaxEnergyStored(container) - energy, Math.min(getMaxReceive(), maxReceive));
 		if (!simulate) {
 			energy += energyReceived;
 			container.stackTagCompound.setInteger("energy", energy);
@@ -88,7 +106,7 @@ public class ItemBlockKEB extends ItemBlock implements IEnergyContainerItem {
 		if (container.stackTagCompound == null || !container.stackTagCompound.hasKey("energy", Constants.NBT.TAG_INT))
 			return 0;
 		int energy = container.stackTagCompound.getInteger("energy");
-		int energyExtracted = Math.min(energy, Math.min(getMaxTransfer(), maxExtract));
+		int energyExtracted = Math.min(energy, Math.min(getMaxExtract(), maxExtract));
 		if (!simulate) {
 			energy -= energyExtracted;
 			container.stackTagCompound.setInteger("energy", energy);
@@ -105,6 +123,7 @@ public class ItemBlockKEB extends ItemBlock implements IEnergyContainerItem {
 
 	@Override
 	public int getMaxEnergyStored(ItemStack container) {
-		return ConfigurationHandler.capacityKEBTier1;
+		return capacity;
 	}
+
 }
