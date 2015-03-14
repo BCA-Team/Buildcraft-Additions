@@ -79,6 +79,7 @@ item.upgrade.upgradeSpeed1.name=Machine Upgrade: Speed I
 item.upgrade.upgradeSpeed2.name=Machine Upgrade: Speed II
 item.upgrade.upgradeSpeed3.name=Machine Upgrade: Speed III
 item.baseUpgrade.name=Blank Upgrade
+item.robotDebugTool.name=Robot Debug tool (creative only)
 
 material.iron.name=Iron
 material.gold.name=Gold
