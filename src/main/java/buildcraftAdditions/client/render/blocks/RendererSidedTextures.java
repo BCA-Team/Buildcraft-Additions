@@ -28,8 +28,8 @@ public class RendererSidedTextures implements ISimpleBlockRenderingHandler {
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
 		fakeBlock.setBlock(block);
-		renderer.uvRotateEast = 1;
-		renderer.uvRotateWest = 2;
+		renderer.uvRotateEast = 0;
+		renderer.uvRotateWest = 0;
 		renderer.uvRotateTop = 2;
 		renderer.uvRotateBottom = 1;
 		renderer.renderBlockAsItem(fakeBlock, 4, 1.0F);
@@ -51,16 +51,17 @@ public class RendererSidedTextures implements ISimpleBlockRenderingHandler {
 				renderer.uvRotateWest = 1;
 				break;
 			case NORTH:
-				renderer.uvRotateSouth = 3;
-				renderer.uvRotateNorth = 3;
+				renderer.uvRotateSouth = 0;
+				renderer.uvRotateNorth = 0;
 				break;
 			case SOUTH:
 				renderer.uvRotateTop = 3;
 				renderer.uvRotateBottom = 3;
+				renderer.uvRotateNorth = 0;
 				break;
 			case WEST:
-				renderer.uvRotateEast = 3;
-				renderer.uvRotateWest = 3;
+				renderer.uvRotateEast = 0;
+				renderer.uvRotateWest = 0;
 				renderer.uvRotateTop = 2;
 				renderer.uvRotateBottom = 1;
 				break;

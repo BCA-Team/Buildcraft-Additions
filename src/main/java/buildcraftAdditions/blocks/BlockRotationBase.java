@@ -56,12 +56,22 @@ public abstract class BlockRotationBase extends BlockBase {
 				return bottom;
 			case 1:
 				return top;
-			case 2:
-			case 5:
-				return leftRight ? left : sides;
 			case 3:
-			case 4:
+				if (ForgeDirection.getOrientation(meta) == ForgeDirection.WEST)
+					return leftRight ? left : sides;
 				return leftRight ? right : sides;
+			case 5:
+				if (ForgeDirection.getOrientation(meta) == ForgeDirection.SOUTH)
+					return leftRight ? left : sides;
+				return leftRight ? right : sides;
+			case 2:
+				if (ForgeDirection.getOrientation(meta) == ForgeDirection.WEST)
+					return leftRight ? right : sides;
+				return leftRight ? left : sides;
+			case 4:
+				if (ForgeDirection.getOrientation(meta) == ForgeDirection.SOUTH)
+					return leftRight ? right : sides;
+				return leftRight ? left : sides;
 		}
 		return sides;
 	}
