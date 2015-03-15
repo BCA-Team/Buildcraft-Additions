@@ -23,7 +23,6 @@ tile.blockItemSorter.name=Sort-O-Tron
 item.ironCanister.name=Iron Canister
 item.goldCanister.name=Gold Canister
 item.diamondCanister.name=Diamond Canister
-item.mjMeter.name=MJ Meter
 item.poweredShovel.name=Kinetic Digger
 item.drill.name=Kinetic Drill
 item.chainsaw.name=Kinetic Chainsaw
@@ -79,7 +78,7 @@ item.upgrade.upgradeSpeed1.name=Machine Upgrade: Speed I
 item.upgrade.upgradeSpeed2.name=Machine Upgrade: Speed II
 item.upgrade.upgradeSpeed3.name=Machine Upgrade: Speed III
 item.baseUpgrade.name=Blank Upgrade
-item.robotDebugTool.name=Robot Debug tool (creative only)
+item.robotDebugTool.name=Robot Debug Tool (Creative only)
 
 material.iron.name=Iron
 material.gold.name=Gold
@@ -165,7 +164,7 @@ material.soularium.name=Soularium
 
 entity.bcadditions.bcaLaserShot=Laser Shot
 
-tooltip.installed=Installed upgrades:
+tooltip.installed=Installed Upgrades:
 tooltip.deactivated=Deactivated
 tooltip.upgradesPossible=Upgrades Possible
 tooltip.holdShiftForMoreInfo=Hold Shift for more info
