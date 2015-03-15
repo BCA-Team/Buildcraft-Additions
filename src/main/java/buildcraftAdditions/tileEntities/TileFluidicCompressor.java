@@ -34,7 +34,7 @@ import buildcraftAdditions.utils.fluids.Tank;
 public class TileFluidicCompressor extends TileMachineBase implements ISidedInventory, IFluidHandler, IWidgetListener {
 
 	public final Tank tank = new Tank(FluidContainerRegistry.BUCKET_VOLUME * 10, this, "Tank");
-	private final CustomInventory inventory = new CustomInventory("FluidicCompressor", 2, 64, this);
+	private final CustomInventory inventory = new CustomInventory("FluidicCompressor", 2, 1, this);
 	public boolean fill;
 
 	public TileFluidicCompressor() {
@@ -100,15 +100,14 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 
 			if (getProgress() >= 16) {
 				stack = getStackInSlot(0);
-				ItemStack outputStack = getStackInSlot(1);
-				if (outputStack == null) {
-					ItemStack copyStack = stack.copy();
-					copyStack.stackSize = 1;
-					inventory.setInventorySlotContents(1, copyStack);
-					inventory.decrStackSize(0, 1);
-				} else if (Utils.areItemStacksMergeable(stack, outputStack) && outputStack.stackSize + stack.stackSize <= outputStack.getMaxStackSize()) {
-					outputStack.stackSize += stack.stackSize;
-					inventory.decrStackSize(0, 1);
+				if (stack != null) {
+					ItemStack outputStack = getStackInSlot(1);
+					if (outputStack == null || outputStack.getItem() == null || outputStack.stackSize <= 0) {
+						ItemStack copyStack = stack.copy();
+						copyStack.stackSize = 1;
+						inventory.setInventorySlotContents(1, copyStack);
+						inventory.decrStackSize(0, 1);
+					}
 				}
 			}
 		}
@@ -188,8 +187,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		ItemStack itemStack = getStackInSlot(0);
-		return stack != null && slot == 0 && (stack.getItem() instanceof IFluidContainerItem || FluidContainerRegistry.isContainer(stack)) && (itemStack == null || itemStack.getItem() == null || itemStack.stackSize + stack.stackSize <= 1);
+		return stack != null && stack.getItem() != null && slot == 0 && (stack.getItem() instanceof IFluidContainerItem || FluidContainerRegistry.isContainer(stack));
 	}
 
 	@Override

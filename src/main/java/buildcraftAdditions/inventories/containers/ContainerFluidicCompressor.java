@@ -28,11 +28,6 @@ public class ContainerFluidicCompressor extends ContainerBase<TileFluidicCompres
 			public boolean isItemValid(ItemStack stack) {
 				return stack != null && stack.getItem() != null && (stack.getItem() instanceof IFluidContainerItem || FluidContainerRegistry.isContainer(stack));
 			}
-
-			@Override
-			public int getSlotStackLimit() {
-				return 1;
-			}
 		});
 		addSlotToContainer(new SlotOutput(tile, 1, 126, 43));
 		addPlayerInventory(8, 103);
