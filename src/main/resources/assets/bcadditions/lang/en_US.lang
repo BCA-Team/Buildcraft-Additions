@@ -250,9 +250,7 @@ gui.color.green=Green
 gui.color.red=Red
 gui.color.black=Black
 
-trigger.canisterRequested=Canister requested
-trigger.hasEmptyCanister=Has Empty Canister
-trigger.hasFullCanister=Has Full Canister
+trigger.fluidContainerRequested=Fluid Container requested
 trigger.doneCharging=Done Charging
 trigger.readyToCharge=Ready To Charge
 trigger.KEBCharged=Fully charged
@@ -262,6 +260,9 @@ trigger.KEBUnder75=Less then 75% charged
 trigger.KEBUnder100=Less then 100% charged
 trigger.KEBEmpty=Completely empty
 trigger.KEBEngineControl=Smart Engine Control
+
+action.fluidicCompressorModeSwitchToFill=Switch to Fill mode
+action.fluidicCompressorModeSwitchToEmpty=Switch to Empty mode
 
 status.input=Input
 status.output=Output

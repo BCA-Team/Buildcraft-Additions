@@ -188,7 +188,8 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return stack != null && slot == 0 && (stack.getItem() instanceof IFluidContainerItem || FluidContainerRegistry.isContainer(stack));
+		ItemStack itemStack = getStackInSlot(0);
+		return stack != null && slot == 0 && (stack.getItem() instanceof IFluidContainerItem || FluidContainerRegistry.isContainer(stack)) && (itemStack == null || itemStack.getItem() == null || itemStack.stackSize + stack.stackSize <= 1);
 	}
 
 	@Override
@@ -269,13 +270,17 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	@Override
 	public void writeToByteBuff(ByteBuf buf) {
 		super.writeToByteBuff(buf);
+		buf.writeBoolean(fill);
 		tank.writeToByteBuff(buf);
+		inventory.writeToByteBuff(buf);
 	}
 
 	@Override
 	public void readFromByteBuff(ByteBuf buf) {
 		super.readFromByteBuff(buf);
+		fill = buf.readBoolean();
 		tank.readFromByteBuff(buf);
+		inventory.readFromByteBuff(buf);
 	}
 
 	@Override

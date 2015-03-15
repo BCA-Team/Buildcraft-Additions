@@ -33,9 +33,7 @@ public class TriggerProvider implements ITriggerProvider {
 	public Collection<ITriggerExternal> getExternalTriggers(ForgeDirection side, TileEntity tile) {
 		Collection<ITriggerExternal> triggers = new ArrayList<ITriggerExternal>();
 		if (tile instanceof TileFluidicCompressor) {
-			triggers.add(Triggers.triggerCanAcceptCanister);
-			triggers.add(Triggers.triggerHasEmptyCanister);
-			triggers.add(Triggers.triggerhasFullCanister);
+			triggers.add(Triggers.triggerFluidContainerRequested);
 		} else if (tile instanceof TileChargingStation) {
 			triggers.add(Triggers.triggerDoneCharging);
 			triggers.add(Triggers.triggerReadyToCharge);

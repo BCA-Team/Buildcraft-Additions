@@ -16,18 +16,14 @@ import buildcraftAdditions.tileEntities.TileFluidicCompressor;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class TriggerHasEmptyCanister extends BasicTrigger {
+public class TriggerFluidContainerRequested extends BasicTrigger {
 
-	public TriggerHasEmptyCanister() {
-		super("hasEmptyCanister", "TriggerHasEmptyCanister");
+	public TriggerFluidContainerRequested() {
+		super("fluidContainerRequested", "TriggerFluidContainerRequested");
 	}
 
 	@Override
 	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
-		if (target instanceof TileFluidicCompressor) {
-			TileFluidicCompressor fluidicCompressor = (TileFluidicCompressor) target;
-			return (fluidicCompressor.getStackInSlot(1) != null && fluidicCompressor.getStackInSlot(1).stackTagCompound != null && fluidicCompressor.getStackInSlot(1).stackTagCompound.hasKey("Fluid"));
-		}
-		return false;
+		return (target instanceof TileFluidicCompressor) && ((TileFluidicCompressor) target).getStackInSlot(0) == null;
 	}
 }

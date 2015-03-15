@@ -11,9 +11,7 @@ import buildcraft.api.statements.StatementManager;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class Triggers {
-	public static final ITriggerExternal triggerCanAcceptCanister = new TriggerCanisterRequested();
-	public static final ITriggerExternal triggerHasEmptyCanister = new TriggerHasEmptyCanister();
-	public static final ITriggerExternal triggerhasFullCanister = new TriggerHasFullCanister();
+	public static final ITriggerExternal triggerFluidContainerRequested = new TriggerFluidContainerRequested();
 	public static final ITriggerExternal triggerDoneCharging = new TriggerDoneCharging();
 	public static final ITriggerExternal triggerReadyToCharge = new TriggerReadyToCharge();
 
@@ -27,9 +25,7 @@ public class Triggers {
 
 	public static void register() {
 		StatementManager.registerTriggerProvider(new TriggerProvider());
-		StatementManager.registerStatement(triggerCanAcceptCanister);
-		StatementManager.registerStatement(triggerHasEmptyCanister);
-		StatementManager.registerStatement(triggerhasFullCanister);
+		StatementManager.registerStatement(triggerFluidContainerRequested);
 		StatementManager.registerStatement(triggerDoneCharging);
 		StatementManager.registerStatement(triggerReadyToCharge);
 		StatementManager.registerStatement(KEBCharged);

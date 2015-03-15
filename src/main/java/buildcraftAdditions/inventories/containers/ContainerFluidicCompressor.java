@@ -12,22 +12,16 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
-import buildcraftAdditions.api.networking.MessageByteBuff;
 import buildcraftAdditions.inventories.slots.SlotOutput;
-import buildcraftAdditions.networking.PacketHandler;
-import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 
 public class ContainerFluidicCompressor extends ContainerBase<TileFluidicCompressor> {
 
 	public ContainerFluidicCompressor(InventoryPlayer inventoryPlayer, TileFluidicCompressor tile) {
 		super(inventoryPlayer, tile);
-		PacketHandler.instance.sendToAllAround(new MessageByteBuff(tile), new NetworkRegistry.TargetPoint(tile.getWorldObj().provider.dimensionId, tile.xCoord, tile.yCoord, tile.zCoord, Variables.NETWORK_RANGE));
 		addSlotToContainer(new Slot(tile, 0, 89, 39) {
 
 			@Override
