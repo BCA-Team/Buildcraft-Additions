@@ -19,8 +19,6 @@ tile.blockKEBT3.name=Pokročilá kinetická batéria
 item.ironCanister.name=Železný kanister
 item.goldCanister.name=Zlatý kanister
 item.diamondCanister.name=Diamantový kanister
-item.mjMeter.name=Merač MJ
-# ^ Aren't buildcraft additoins running on RF?
 item.poweredShovel.name=Kinetická lopata
 item.drill.name=Kinetický vrták
 item.chainsaw.name=Kinetická píla
