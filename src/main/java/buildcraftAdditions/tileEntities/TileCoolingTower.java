@@ -90,8 +90,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			input.setFluid(null);
 		if (output.getFluid() != null && output.getFluid().amount <= 0)
 			output.setFluid(null);
-		int max = 20;
-		while (!coolant.isEmpty() && heat > 0 && max > 0) {
+		while (!coolant.isEmpty() && heat > 0) {
 			ICoolant cooling = CoolantManager.INSTANCE.getCoolant(coolant.getFluid().getFluid());
 			if (cooling == null)
 				break;
@@ -104,7 +103,6 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_3))
 				factor += 1;
 			heat -= cooling.getDegreesCoolingPerMB(heat) * factor;
-			max--;
 		}
 		int count = 1;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_1))
@@ -114,7 +112,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_3))
 			count += 3;
 		for (int i = 0; i < count; i++) {
-			if (heat > 80 || recipe == null || output.isFull() || input.isEmpty() || !input.getFluid().isFluidEqual(recipe.getInput()) || input.getFluidAmount() < recipe.getInput().amount || (!output.isEmpty() && !output.getFluid().isFluidEqual(recipe.getOutput())) || output.getCapacity() - output.getFluidAmount() < recipe.getOutput().amount)
+			if (heat > 80 || recipe == null || output.isFull() || input.isEmpty() || !input.getFluid().isFluidEqual(recipe.getInput()) || input.getFluidAmount() < recipe.getInput().amount || (!output.isEmpty() && !output.getFluid().isFluidEqual(recipe.getOutput())) || output.getFreeSpace() < recipe.getOutput().amount)
 				return;
 			input.drain(recipe.getInput().amount, true);
 			output.fill(recipe.getOutput(), true);

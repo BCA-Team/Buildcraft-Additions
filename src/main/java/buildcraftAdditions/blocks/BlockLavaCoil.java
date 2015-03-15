@@ -30,7 +30,7 @@ public class BlockLavaCoil extends BlockCoilBase {
 			TileEntity tile = world.getTileEntity(x, y, z);
 			if (tile instanceof TileLavaCoil) {
 				TileLavaCoil coil = (TileLavaCoil) tile;
-				player.addChatComponentMessage(new ChatComponentTranslation("lavaCoil.info", Utils.localizeFormatted("fluids.info", coil.getLavaAmount(), coil.getLavaCapaity())));
+				player.addChatComponentMessage(new ChatComponentTranslation("lavaCoil.info", Utils.localizeFormatted("fluids.info", coil.getLavaAmount(), coil.getLavaCapacity())));
 			}
 		}
 

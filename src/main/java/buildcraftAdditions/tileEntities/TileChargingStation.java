@@ -106,23 +106,21 @@ public class TileChargingStation extends TileMachineBase implements IInventory {
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer var1) {
-		return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && var1.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
+	public boolean isUseableByPlayer(EntityPlayer player) {
+		return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override
 	public void openInventory() {
-
 	}
 
 	@Override
 	public void closeInventory() {
-
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return stack.getItem() instanceof IEnergyContainerItem;
+		return stack != null && stack.getItem() instanceof IEnergyContainerItem;
 	}
 
 	public double getProgress() {
