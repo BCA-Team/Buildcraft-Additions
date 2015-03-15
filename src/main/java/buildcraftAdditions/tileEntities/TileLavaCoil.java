@@ -39,7 +39,7 @@ public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
 		return tank.getFluidAmount();
 	}
 
-	public int getLavaCapaity() {
+	public int getLavaCapacity() {
 		return tank.getCapacity();
 	}
 

@@ -42,6 +42,10 @@ public class Tank extends FluidTank implements ISyncObject {
 		return fluid != null && fluid.amount >= capacity;
 	}
 
+	public int getFreeSpace() {
+		return getCapacity() - getFluidAmount();
+	}
+
 	public Fluid getFluidType() {
 		if (fluid == null)
 			return null;

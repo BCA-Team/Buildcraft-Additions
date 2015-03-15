@@ -135,7 +135,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_3))
 			count += 3;
 		for (int i = 0; i < count; i++) {
-			if (energyCost == 0 || input.isEmpty() || output.isFull() || !input.getFluid().isFluidEqual(inputFluidStack) || input.getFluidAmount() < inputFluidStack.amount || (!output.isEmpty() && !output.getFluid().isFluidEqual(outputFluidStack)) || output.getCapacity() - output.getFluidAmount() < outputFluidStack.amount)
+			if (energyCost == 0 || input.isEmpty() || output.isFull() || !input.getFluid().isFluidEqual(inputFluidStack) || input.getFluidAmount() < inputFluidStack.amount || (!output.isEmpty() && !output.getFluid().isFluidEqual(outputFluidStack)) || output.getFreeSpace() < outputFluidStack.amount)
 				return;
 			input.drain(inputFluidStack.amount, true);
 			output.fill(outputFluidStack, true);

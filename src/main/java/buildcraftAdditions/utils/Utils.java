@@ -142,8 +142,8 @@ public class Utils {
 		return stack1 != null && stack2 != null && stack1.getItem() == stack2.getItem() && (stack1.getItemDamage() == stack2.getItemDamage() || stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack1.getItem().isDamageable());
 	}
 
-	public static boolean areItemStacksMergeable(ItemStack stack1, ItemStack stack2) {
-		return stack1 == null && stack2 == null || (stack1 != null && stack2 != null && stack1.isItemEqual(stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2));
+	public static boolean areItemStacksMergeable(ItemStack existingStack, ItemStack stackToAdd) {
+		return existingStack == null || stackToAdd == null || (existingStack != null && stackToAdd != null && existingStack.isItemEqual(stackToAdd) && ItemStack.areItemStackTagsEqual(existingStack, stackToAdd));
 	}
 
 	public static ItemStack outputStack(Location from, ItemStack output, SideConfiguration configuration) {
@@ -166,32 +166,25 @@ public class Utils {
 						if (output.stackSize <= 0)
 							output = null;
 					}
-				}
-			}
-			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-				Location location = from.copy();
-				if (configuration.getPriority(direction) != priority)
-					continue;
-				if (!configuration.canSend(direction))
-					continue;
-				location.move(direction);
-				TileEntity tile = location.getTileEntity();
-				if (tile != null && tile instanceof IInventory) {
+				} else if (tile instanceof IInventory) {
 					IInventory outputInventory = (IInventory) tile;
 					ISidedInventory sidedInventory = null;
 					if (tile instanceof ISidedInventory)
 						sidedInventory = (ISidedInventory) tile;
-					Set<Integer> allowedSlots = null;
+					Set<Integer> allowedSlots = Sets.newHashSet();
+					for (int slot = 0; slot < outputInventory.getSizeInventory(); slot++)
+						allowedSlots.add(slot);
 					if (sidedInventory != null) {
-						allowedSlots = Sets.newHashSet();
+						Set<Integer> accessibleSlotsSet = Sets.newHashSet();
 						int[] accessibleSlots = sidedInventory.getAccessibleSlotsFromSide(direction.getOpposite().ordinal());
 						if (accessibleSlots != null)
 							for (int slot : accessibleSlots)
-								allowedSlots.add(slot);
+								accessibleSlotsSet.add(slot);
+						allowedSlots.retainAll(accessibleSlotsSet);
 					}
 					int stackLimit = outputInventory.getInventoryStackLimit();
-					for (int slot = 0; slot < outputInventory.getSizeInventory(); slot++) {
-						if (output == null || output.getItem() == null || output.stackSize <= 0 || (allowedSlots != null && !allowedSlots.contains(slot)) || (sidedInventory != null && !sidedInventory.canInsertItem(slot, output, direction.getOpposite().ordinal())))
+					for (int slot : allowedSlots) {
+						if (output == null || output.getItem() == null || output.stackSize <= 0 || (sidedInventory != null && !sidedInventory.canInsertItem(slot, output, direction.getOpposite().ordinal())))
 							continue;
 						ItemStack stack = outputInventory.getStackInSlot(slot);
 						if (areItemStacksMergeable(stack, output)) {
