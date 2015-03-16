@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.client.models.BackPackModel;
+import buildcraftAdditions.client.models.ModelBackpackStand;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -43,11 +44,22 @@ public class RendererBackPackStand extends TileEntitySpecialRenderer {
 			default:
 				angle = 0;
 		}
-		GL11.glTranslated(x + 0.5, y + 1, z + 0.5);
+		GL11.glTranslated(x + 0.5, y + 1.4, z + 0.5);
 		GL11.glColor4f(1f, 1f, 1f, 1f);
 		GL11.glRotated(angle, 0, 1, 0);
 		GL11.glRotated(180, 1, 0, 0);
 		BackPackModel.INSTANCE.render(null, 0, 0, 0, 0, 0, 0.1F);
 		GL11.glPopMatrix();
+		GL11.glPushMatrix();
+		GL11.glTranslated(x + 0.5, y + 2.4, z + 0.5);
+		GL11.glRotated(angle, 0, 1, 0);
+		GL11.glRotated(180, 1, 0, 0);
+		bindTexture(new ResourceLocation("bcadditions", "textures/blocks/charger_Bottom.png"));
+		GL11.glScaled(10, 10, 10);
+		ModelBackpackStand.INSTANCE.render(null, 0, 0, 0, 0, 0, 0.01f);
+		GL11.glPopMatrix();
+
+
+
 	}
 }

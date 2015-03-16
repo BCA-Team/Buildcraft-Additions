@@ -3,6 +3,7 @@ package buildcraftAdditions.blocks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.tileEntities.TileBackpackStand;
@@ -15,10 +16,10 @@ import buildcraftAdditions.tileEntities.TileBackpackStand;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BlockBackpackStand extends BlockRotationBase {
+	public IIcon icon;
 
 	public BlockBackpackStand() {
 		super("backpackStand", "", false);
-		setBlockBounds(2F / 10F, 0, 2F / 10F, 8F / 10F, 1, 8F / 10F);
 	}
 
 
@@ -40,6 +41,21 @@ public class BlockBackpackStand extends BlockRotationBase {
 
 	@Override
 	public boolean renderAsNormalBlock() {
+		return false;
+	}
+
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
+
+	@Override
+	public boolean isBlockNormalCube() {
+		return false;
+	}
+
+	@Override
+	public boolean isNormalCube() {
 		return false;
 	}
 }
