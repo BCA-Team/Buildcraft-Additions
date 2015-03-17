@@ -26,6 +26,7 @@ import buildcraftAdditions.utils.RenderUtils;
 public class BackPackModel extends ModelBiped {
 
 	public static final BackPackModel INSTANCE = new BackPackModel();
+	public static final BackPackModel INSTANCE2 = new BackPackModel();
 
 	public ModelRenderer handleTopLeft;
 	public ModelRenderer handleTopRight;

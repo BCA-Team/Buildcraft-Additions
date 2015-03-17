@@ -103,6 +103,6 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 	@SideOnly(Side.CLIENT)
 	@Override
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
-		return BackPackModel.INSTANCE;
+		return BackPackModel.INSTANCE2;
 	}
 }
