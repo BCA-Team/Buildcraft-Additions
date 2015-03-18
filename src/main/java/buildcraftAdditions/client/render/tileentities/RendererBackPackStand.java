@@ -54,7 +54,6 @@ public class RendererBackPackStand extends TileEntitySpecialRenderer {
 		GL11.glTranslated(x + 0.5, y + 2.4, z + 0.5);
 		GL11.glRotated(angle, 0, 1, 0);
 		GL11.glRotated(180, 1, 0, 0);
-		bindTexture(new ResourceLocation("bcadditions", "textures/blocks/charger_Bottom.png"));
 		GL11.glScaled(10, 10, 10);
 		ModelBackpackStand.INSTANCE.render(null, 0, 0, 0, 0, 0, 0.01f);
 		GL11.glPopMatrix();

@@ -9,6 +9,7 @@ package buildcraftAdditions.proxy;
  */
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -21,6 +22,8 @@ import net.minecraftforge.fluids.Fluid;
 
 import buildcraftAdditions.client.render.blocks.RendererSidedTextures;
 import buildcraftAdditions.client.render.entities.EntityLaserShotRenderer;
+import buildcraftAdditions.client.render.items.BackPackItemRenderer;
+import buildcraftAdditions.client.render.items.BackpackStandItemRenderer;
 import buildcraftAdditions.client.render.items.CanisterItemRender;
 import buildcraftAdditions.client.render.tileentities.RendererBackPackStand;
 import buildcraftAdditions.client.render.tileentities.RendererDuster;
@@ -46,6 +49,8 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.ironCanister, CanisterItemRender.INSTANCE);
 		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.goldCanister, CanisterItemRender.INSTANCE);
 		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.diamondCanister, CanisterItemRender.INSTANCE);
+		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.kineticBackpack, BackPackItemRenderer.INSTANCE);
+		MinecraftForgeClient.registerItemRenderer(new ItemStack(ItemsAndBlocks.backpackStand).getItem(), BackpackStandItemRenderer.INSTANCE);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileBasicDuster.class, new RendererDuster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileSemiAutomaticDuster.class, new RendererDuster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileMechanicalDuster.class, new RendererDuster());

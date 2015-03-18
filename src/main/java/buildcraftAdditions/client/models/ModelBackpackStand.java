@@ -5,6 +5,9 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+
+import buildcraftAdditions.utils.RenderUtils;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -16,9 +19,9 @@ import net.minecraft.entity.Entity;
  * Created using Tabula 4.1.1
  */
 public class ModelBackpackStand extends ModelBiped {
-
 	public static ModelBackpackStand INSTANCE = new ModelBackpackStand();
-
+	public static ModelBackpackStand INSTANCE2 = new ModelBackpackStand();
+	private final ResourceLocation TEXTURE = new ResourceLocation("bcadditions", "textures/blocks/charger_Bottom.png");
 	public ModelRenderer shape11;
 	public ModelRenderer shape11_1;
 	public ModelRenderer shape11_2;
@@ -203,6 +206,7 @@ public class ModelBackpackStand extends ModelBiped {
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		RenderUtils.bindTexture(TEXTURE);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(this.shape8_4.offsetX, this.shape8_4.offsetY, this.shape8_4.offsetZ);
 		GL11.glTranslatef(this.shape8_4.rotationPointX * f5, this.shape8_4.rotationPointY * f5, this.shape8_4.rotationPointZ * f5);
