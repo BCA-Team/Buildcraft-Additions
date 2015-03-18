@@ -110,7 +110,7 @@ public class TileBackpackStand extends TileBase implements IInventory {
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		return inventory.getStackInSlot(slot);
+		return null;
 	}
 
 	@Override
@@ -125,7 +125,6 @@ public class TileBackpackStand extends TileBase implements IInventory {
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-		inventory.setInventorySlotContents(slot, stack);
 	}
 
 	@Override
