@@ -17,6 +17,7 @@ import buildcraftAdditions.blocks.BlockBasicCoil;
 import buildcraftAdditions.blocks.BlockBasicDuster;
 import buildcraftAdditions.blocks.BlockChargingStation;
 import buildcraftAdditions.blocks.BlockFluidicCompressor;
+import buildcraftAdditions.blocks.BlockGhostBackpackStand;
 import buildcraftAdditions.blocks.BlockHeatedFurnace;
 import buildcraftAdditions.blocks.BlockItemSorter;
 import buildcraftAdditions.blocks.BlockKineticCoil;
@@ -99,6 +100,7 @@ public final class ItemsAndBlocks {
 	public static BlockItemSorter itemSorter;
 	public static Block testBlock;
 	public static Block backpackStand;
+	public static Block backpackStandGhost;
 
 	public static ItemPoweredBase powerCapsuleTier1;
 	public static ItemPoweredBase powerCapsuleTier2;
@@ -369,6 +371,9 @@ public final class ItemsAndBlocks {
 
 		backpackStand = new BlockBackpackStand();
 		GameRegistry.registerBlock(backpackStand, "backpackStand");
+
+		backpackStandGhost = new BlockGhostBackpackStand();
+		GameRegistry.registerBlock(backpackStandGhost, "backpackstandGhost");
 
 		if (VersionCheck.currentVersion.contains("@")) {
 			testBlock = new BlockTest();

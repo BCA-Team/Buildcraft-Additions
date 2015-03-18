@@ -1,11 +1,14 @@
 package buildcraftAdditions.blocks;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.TileBackpackStand;
 
 /**
@@ -32,6 +35,12 @@ public class BlockBackpackStand extends BlockRotationBase {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		player.addChatComponentMessage(new ChatComponentText(String.format("%s, %s, %s", hitX, hitY, hitZ)));
 		return true;
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+		super.onBlockPlacedBy(world, x, y, z, entity, stack);
+		world.setBlock(x, y + 1, z, ItemsAndBlocks.backpackStandGhost);
 	}
 
 	@Override

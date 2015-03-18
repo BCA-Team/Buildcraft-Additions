@@ -15,20 +15,27 @@ import com.google.common.collect.Sets;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.client.C07PacketPlayerDigging;
+import net.minecraft.network.play.server.S23PacketBlockChange;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -210,5 +217,51 @@ public class Utils {
 			}
 		}
 		return output;
+	}
+
+	public static boolean harvestBlock(World world, int x, int y, int z, EntityPlayer player) {
+		if (world.isAirBlock(x, y, z))
+			return false;
+		EntityPlayerMP playerMP = null;
+		if (player instanceof EntityPlayerMP)
+			playerMP = (EntityPlayerMP) player;
+		Block block = world.getBlock(x, y, z);
+		int meta = world.getBlockMetadata(x, y, z);
+		if (!ForgeHooks.canHarvestBlock(block, player, meta))
+			return false;
+		if (playerMP != null) {
+			BlockEvent.BreakEvent event = ForgeHooks.onBlockBreakEvent(world, playerMP.theItemInWorldManager.getGameType(), playerMP, x, y, z);
+			if (event.isCanceled())
+				return false;
+		}
+		if (player.capabilities.isCreativeMode) {
+			if (!world.isRemote)
+				block.onBlockHarvested(world, x, y, z, meta, player);
+			else
+				world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(block) | (meta << 12));
+			if (block.removedByPlayer(world, player, x, y, z, false))
+				block.onBlockDestroyedByPlayer(world, x, y, z, meta);
+			if (!world.isRemote && playerMP != null)
+				playerMP.playerNetServerHandler.sendPacket(new S23PacketBlockChange(x, y, z, world));
+			else
+				Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C07PacketPlayerDigging(2, x, y, z, Minecraft.getMinecraft().objectMouseOver.sideHit));
+			return true;
+		}
+
+		if (!world.isRemote) {
+			block.onBlockHarvested(world, x, y, z, meta, player);
+			if (block.removedByPlayer(world, player, x, y, z, true)) {
+				block.onBlockDestroyedByPlayer(world, x, y, z, meta);
+				block.harvestBlock(world, player, x, y, z, meta);
+			}
+			if (playerMP != null)
+				playerMP.playerNetServerHandler.sendPacket(new S23PacketBlockChange(x, y, z, world));
+		} else {
+			world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(block) | (meta << 12));
+			if (block.removedByPlayer(world, player, x, y, z, true))
+				block.onBlockDestroyedByPlayer(world, x, y, z, meta);
+			Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C07PacketPlayerDigging(2, x, y, z, Minecraft.getMinecraft().objectMouseOver.sideHit));
+		}
+		return true;
 	}
 }
