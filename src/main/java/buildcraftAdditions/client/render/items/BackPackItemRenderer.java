@@ -50,14 +50,6 @@ public class BackPackItemRenderer implements IItemRenderer {
 				GL11.glRotated(180, 1, 0, 0);
 				GL11.glTranslated(0, -.25, 0);
 		}
-		if (type.equals(ItemRenderType.EQUIPPED)) {
-
-
-		}
-		if (type.equals(ItemRenderType.EQUIPPED_FIRST_PERSON)) {
-
-
-		}
 		BackPackModel.INSTANCE2.render(null, 0, 0, 0, 0, 0, 0.06f);
 
 		GL11.glPopMatrix();
