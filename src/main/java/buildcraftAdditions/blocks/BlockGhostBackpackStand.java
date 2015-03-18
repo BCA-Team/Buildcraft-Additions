@@ -5,10 +5,13 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.tileEntities.TileBackpackStand;
 import buildcraftAdditions.utils.Utils;
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -21,6 +24,19 @@ public class BlockGhostBackpackStand extends BlockBase {
 
 	public BlockGhostBackpackStand() {
 		super("blockGhost");
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+		if (!world.isRemote) {
+			TileEntity entity = world.getTileEntity(x, y - 1, z);
+			if (entity != null && entity instanceof TileBackpackStand) {
+				((TileBackpackStand) entity).onBlockActivated(hitX, hitY + 1, hitZ, world.getBlockMetadata(x, y - 1, z), player);
+			} else {
+				world.setBlockToAir(x, y, z);
+			}
+		}
+		return true;
 	}
 
 	@Override
@@ -44,6 +60,11 @@ public class BlockGhostBackpackStand extends BlockBase {
 	}
 
 	@Override
+	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
+		world.setBlockToAir(x, y - 1, z);
+	}
+
+	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
 		if (world.getBlock(x, y - 1, z) != ItemsAndBlocks.backpackStand)
 			world.setBlockToAir(x, y, z);
@@ -57,5 +78,10 @@ public class BlockGhostBackpackStand extends BlockBase {
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
+		return new ItemStack(ItemsAndBlocks.backpackStand);
 	}
 }

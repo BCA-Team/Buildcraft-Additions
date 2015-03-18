@@ -4,7 +4,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
@@ -33,7 +32,13 @@ public class BlockBackpackStand extends BlockRotationBase {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		player.addChatComponentMessage(new ChatComponentText(String.format("%s, %s, %s", hitX, hitY, hitZ)));
+		if (!world.isRemote) {
+			TileEntity entity = world.getTileEntity(x, y, z);
+			if (entity != null && entity instanceof TileBackpackStand) {
+				((TileBackpackStand) entity).onBlockActivated(hitX, hitY, hitZ, world.getBlockMetadata(x, y, z), player);
+			}
+		}
+
 		return true;
 	}
 
