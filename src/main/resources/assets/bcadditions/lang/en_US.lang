@@ -71,6 +71,7 @@ item.machineConfigurator.name=Machine Configurator
 item.bcaBucket.name=%s Bucket
 item.pipeColoringTool.name=Coloring Tool
 item.upgrade.upgradeAutoEject.name=Machine Upgrade: Auto-Eject
+item.upgrade.upgradeAutoImport.name=Machine Upgrade: Auto-Import
 item.upgrade.upgradeEfficiency1.name=Machine Upgrade: Efficiency I
 item.upgrade.upgradeEfficiency2.name=Machine Upgrade: Efficiency II
 item.upgrade.upgradeEfficiency3.name=Machine Upgrade: Efficiency III

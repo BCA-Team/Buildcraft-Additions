@@ -72,7 +72,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			findMaster();
 		if (master == null && !isMaster())
 			return;
-		if (upgrades.hasUpgrade(EnumMachineUpgrades.AUTO_OUTPUT)) {
+		if (valve && upgrades.hasUpgrade(EnumMachineUpgrades.AUTO_OUTPUT)) {
 			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 				Location location = new Location(this).move(direction);
 				TileEntity entity = location.getTileEntity();
@@ -81,6 +81,23 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 					int drain = tank.fill(direction.getOpposite(), new FluidStack(master.output.getFluidType(), 100), false);
 					FluidStack stack = master.drain(drain, true, 1);
 					tank.fill(direction.getOpposite(), stack, true);
+				}
+			}
+		}
+		if (valve && upgrades.hasUpgrade(EnumMachineUpgrades.AUTO_IMPORT)) {
+			if (master == null)
+				findMaster();
+			if (master == null)
+				return;
+			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+				Location location = new Location(this).move(direction);
+				TileEntity tile = location.getTileEntity();
+				if (tile != null && tile instanceof IFluidHandler && !master.input.isFull()) {
+					IFluidHandler tank = (IFluidHandler) tile;
+					FluidStack drain = tank.drain(direction.getOpposite(), 100, false);
+					int fill = master.input.fill(drain, true);
+					if (fill > 0)
+						tank.drain(direction.getOpposite(), fill, true);
 				}
 			}
 		}
@@ -131,7 +148,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	public void makeMaster(int rotationIndex) {
 		data.isMaster = true;
 		data.rotationIndex = rotationIndex;
-		upgrades.blacklistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).setMaxUpgrades(4);
+		upgrades.blacklistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).blacklistUpgrade(EnumMachineUpgrades.AUTO_IMPORT).setMaxUpgrades(4);
 	}
 
 	@Override
@@ -158,7 +175,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	public void formMultiblock(int masterX, int masterY, int masterZ, int rotationIndex) {
 		data.formMultiBlock(masterX, masterY, masterZ, rotationIndex);
 		if (valve)
-			upgrades.whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).setMaxUpgrades(1);
+			upgrades.whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).whitelistUpgrade(EnumMachineUpgrades.AUTO_IMPORT).setMaxUpgrades(1);
 		sync();
 	}
 
@@ -178,9 +195,9 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		updateRecipe();
 		upgrades.readFromNBT(tag);
 		if (valve)
-			upgrades.whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT);
+			upgrades.whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).whitelistUpgrade(EnumMachineUpgrades.AUTO_IMPORT);
 		if (isMaster())
-			upgrades.blacklistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT);
+			upgrades.blacklistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).blacklistUpgrade(EnumMachineUpgrades.AUTO_IMPORT);
 	}
 
 	@Override
