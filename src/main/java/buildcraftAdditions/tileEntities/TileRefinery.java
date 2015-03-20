@@ -99,6 +99,23 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 				}
 			}
 		}
+		if (valve && upgrades.hasUpgrade(EnumMachineUpgrades.AUTO_IMPORT)) {
+			if (master == null)
+				findMaster();
+			if (master == null)
+				return;
+			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+				Location location = new Location(this).move(direction);
+				TileEntity tile = location.getTileEntity();
+				if (tile != null && tile instanceof IFluidHandler && !master.input.isFull()) {
+					IFluidHandler tank = (IFluidHandler) tile;
+					FluidStack drain = tank.drain(direction.getOpposite(), 100, false);
+					int fill = master.input.fill(drain, true);
+					if (fill > 0)
+						tank.drain(direction.getOpposite(), fill, true);
+				}
+			}
+		}
 		if (!data.isMaster)
 			return;
 		if (input.getFluid() != null && input.getFluid().amount <= 0)
@@ -184,7 +201,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		data.isMaster = true;
 		data.partOfMultiBlock = true;
 		data.rotationIndex = rotationIndex;
-		upgrades.blacklistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).setMaxUpgrades(4);
+		upgrades.blacklistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).blacklistUpgrade(EnumMachineUpgrades.AUTO_IMPORT).setMaxUpgrades(4);
 	}
 
 	public void findMaster() {
@@ -274,9 +291,9 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		updateRecipe();
 		upgrades.readFromNBT(tag);
 		if (valve)
-			upgrades.whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT);
+			upgrades.whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).whitelistUpgrade(EnumMachineUpgrades.AUTO_IMPORT);
 		if (isMaster())
-			upgrades.blacklistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT);
+			upgrades.blacklistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).blacklistUpgrade(EnumMachineUpgrades.AUTO_IMPORT);
 	}
 
 	@Override
@@ -297,7 +314,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public void formMultiblock(int masterX, int masterY, int masterZ, int rotationIndex) {
 		data.formMultiBlock(masterX, masterY, masterZ, rotationIndex);
 		if (valve)
-			upgrades.whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).setMaxUpgrades(1);
+			upgrades.whitelistUpgrade(EnumMachineUpgrades.AUTO_OUTPUT).whitelistUpgrade(EnumMachineUpgrades.AUTO_IMPORT).setMaxUpgrades(1);
 		sync();
 	}
 

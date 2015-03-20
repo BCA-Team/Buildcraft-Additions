@@ -22,7 +22,8 @@ public enum EnumMachineUpgrades {
 	EFFICIENCY_3("upgradeEfficiency3", false),
 	SPEED_1("upgradeSpeed1", false),
 	SPEED_2("upgradeSpeed2", false),
-	SPEED_3("upgradeSpeed3", false);
+	SPEED_3("upgradeSpeed3", false),
+	AUTO_IMPORT("upgradeAutoImport", false);
 
 	private final String tag;
 	private final boolean multipleInstalls;
