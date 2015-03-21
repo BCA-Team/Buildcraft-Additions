@@ -96,10 +96,10 @@ public class ConfigurationHandler {
 		energyUseRefineryMultiplier = configFile.get("Refinery", "RefineryEnergyUseMultiplier", 1).setMinValue(0).getInt();
 
 		configFile.addCustomCategoryComment("Portable Laser", "Configuration stuff for your Portable Lasers");
-		portableLaserPowerUse = configFile.get("Portable Laser", "PortableLaserPowerUse", 40).setMinValue(0).getInt();
-		portableLaserLaserPower = configFile.get("Portable Laser", "PortableLaserLaserPower", 40).setMinValue(0).getInt();
-		portableLaserEntityDamage = (float) configFile.get("Portable Laser", "PortableLaserEntityDamage", 4D).setMinValue(0).setMaxValue(Float.MAX_VALUE).getDouble();
-		portableLaserEntityBurnTime = configFile.get("Portable Laser", "PortableLaserEntityBurnTime", 4).setMinValue(0).getInt();
+		portableLaserPowerUse = configFile.get("Portable Laser", "PortableLaserPowerUse", 8000).setMinValue(0).getInt();
+		portableLaserLaserPower = configFile.get("Portable Laser", "PortableLaserLaserPower", 8000).setMinValue(0).getInt();
+		portableLaserEntityDamage = (float) configFile.get("Portable Laser", "PortableLaserEntityDamage", 10D).setMinValue(0).setMaxValue(Float.MAX_VALUE).getDouble();
+		portableLaserEntityBurnTime = configFile.get("Portable Laser", "PortableLaserEntityBurnTime", 8).setMinValue(0).getInt();
 
 		configFile.addCustomCategoryComment("Coloring Tool", "Configuration stuff for your Portable Lasers");
 		capacityPipeColoringTool = configFile.get("Coloring Tool", "ColoringToolCapacity", 100000).setMinValue(0).getInt();

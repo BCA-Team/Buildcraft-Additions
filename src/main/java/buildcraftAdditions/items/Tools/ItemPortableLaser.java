@@ -1,10 +1,15 @@
 package buildcraftAdditions.items.Tools;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.config.ConfigurationHandler;
@@ -13,6 +18,7 @@ import buildcraftAdditions.inventories.InventoryItem;
 import buildcraftAdditions.inventories.InventoryPortableLaser;
 import buildcraftAdditions.items.ItemInventoryPoweredBase;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.utils.RenderUtils;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -22,6 +28,9 @@ import buildcraftAdditions.reference.Variables;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class ItemPortableLaser extends ItemInventoryPoweredBase {
+
+	@SideOnly(Side.CLIENT)
+	private IIcon[] icons;
 
 	public ItemPortableLaser() {
 		super("portableLaser");
@@ -62,11 +71,11 @@ public class ItemPortableLaser extends ItemInventoryPoweredBase {
 			return;
 		if (f > 1)
 			f = 1;
-		f *= 10;
-		if (getEnergyStored(stack) < (int) (f * ConfigurationHandler.portableLaserPowerUse))
+		int energyUse = (int) (f * ConfigurationHandler.portableLaserPowerUse);
+		if (getEnergyStored(stack) < energyUse)
 			return;
-		extractEnergy(stack, (int) (f * ConfigurationHandler.portableLaserPowerUse), false);
-		world.playSoundAtEntity(player, "random.bow", 1, 1 / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.25F);
+		extractEnergy(stack, energyUse, false);
+		world.playSoundAtEntity(player, "random.bow", 1, 1 / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 		if (!world.isRemote)
 			world.spawnEntityInWorld(new EntityLaserShot(world, player, f));
 	}
@@ -80,13 +89,43 @@ public class ItemPortableLaser extends ItemInventoryPoweredBase {
 			return;
 		if (f > 1)
 			f = 1;
-		f *= 10;
-		if (getEnergyStored(stack) < f * ConfigurationHandler.portableLaserPowerUse)
+		if (getEnergyStored(stack) < (int) (f * ConfigurationHandler.portableLaserPowerUse))
 			player.stopUsingItem();
 	}
 
 	@Override
 	public InventoryItem getInventory(ItemStack stack) {
 		return new InventoryPortableLaser(stack);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister register) {
+		super.registerIcons(register);
+		icons = new IIcon[5];
+		for (int i = 0; i < icons.length; i++)
+			icons[i] = RenderUtils.registerIcon(register, getName() + "_" + i);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
+		if (usingItem == null || useRemaining <= 0 || useRemaining >= getMaxItemUseDuration(stack))
+			return super.getIcon(stack, renderPass, player, usingItem, useRemaining);
+		float j = getMaxItemUseDuration(stack) - useRemaining;
+		float f = j / 20;
+		f = (f * f + f * 2) / 3;
+		if (f < 0.1)
+			return super.getIcon(stack, renderPass, player, usingItem, useRemaining);
+		if (f >= 1)
+			return icons[4];
+		else if (f > 0.75)
+			return icons[3];
+		else if (f > 0.6)
+			return icons[2];
+		else if (f > 0.35)
+			return icons[1];
+		//else if (f >= 0.1)
+		return icons[0];
 	}
 }

@@ -163,7 +163,10 @@ material.phasedIron.name=Phased Iron
 material.darkSteel.name=Dark Steel
 material.soularium.name=Soularium
 
-entity.bcadditions.bcaLaserShot=Laser Shot
+entity.bcadditions.bcaLaserShot.name=Laser Shot
+
+death.attack.bcaLaser=%1$s was lasered away by %2$s
+death.attack.bcaLaser.item=%1$s was lasered away by %2$s using %3$s
 
 tooltip.installed=Installed Upgrades:
 tooltip.deactivated=Deactivated
