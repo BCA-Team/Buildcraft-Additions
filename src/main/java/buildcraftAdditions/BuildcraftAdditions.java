@@ -33,6 +33,7 @@ import buildcraftAdditions.compat.imc.IMCSender;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.EventListener;
 import buildcraftAdditions.core.GuiHandler;
+import buildcraftAdditions.core.SpecialListMananger;
 import buildcraftAdditions.creative.TabBCAdditions;
 import buildcraftAdditions.creative.TabCanisters;
 import buildcraftAdditions.creative.TabDusts;
@@ -45,7 +46,6 @@ import buildcraftAdditions.recipe.refinery.CoolingTowerRecipeManager;
 import buildcraftAdditions.recipe.refinery.RefineryRecipeManager;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
-import buildcraftAdditions.core.SpecialListMananger;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -107,9 +107,9 @@ public class BuildcraftAdditions {
 		BCAItemManager.dusts.addDust(meta++, "EnderPearl", 0x105E51, DustTypes.ENDER_PEARL_DUST);
 		BCAItemManager.dusts.addDust(meta, "NetherQuartz", 0xDBCCBF, DustTypes.NETHER_QUARTZ_DUST);
 
-		BCARecipeManager.duster.addRecipe("oreRedstone", new ItemStack(Items.redstone, 8));
+		BCARecipeManager.duster.addRecipe("oreRedstone", new ItemStack(Items.redstone, 10));
 		BCARecipeManager.duster.addRecipe("oreCoal", new ItemStack(Items.coal, 2));
-		BCARecipeManager.duster.addRecipe("oreLapis", new ItemStack(Items.dye, 8, 4));
+		BCARecipeManager.duster.addRecipe("oreLapis", new ItemStack(Items.dye, 12, 4));
 		BCARecipeManager.duster.addRecipe("oreQuartz", new ItemStack(Items.quartz, 2));
 		BCARecipeManager.duster.addRecipe("stone", new ItemStack(Blocks.gravel));
 		BCARecipeManager.duster.addRecipe("cobblestone", new ItemStack(Blocks.sand));
@@ -128,11 +128,10 @@ public class BuildcraftAdditions {
 	@Mod.EventHandler
 	public void doneLoading(FMLLoadCompleteEvent event) {
 		IMCHandler.handleIMC(FMLInterModComms.fetchRuntimeMessages(this));
+		manager.doneLoadingEvent(event);
 		for (IDust dust : BCAItemManager.dusts.getDusts())
 			if (dust != null)
 				dust.getDustType().register(dust.getMeta(), dust.getName(), dust.getDustStack());
-
-		manager.doneLoadingEvent(event);
 	}
 
 	@Mod.EventHandler

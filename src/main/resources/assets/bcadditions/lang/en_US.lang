@@ -162,6 +162,7 @@ material.conductiveIron.name=Conductive Iron
 material.phasedIron.name=Phased Iron
 material.darkSteel.name=Dark Steel
 material.soularium.name=Soularium
+material.fzDarkIron.name=Dark Iron
 
 entity.bcadditions.bcaLaserShot.name=Laser Shot
 

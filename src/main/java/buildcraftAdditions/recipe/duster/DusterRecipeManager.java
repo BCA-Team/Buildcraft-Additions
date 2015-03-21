@@ -32,12 +32,13 @@ public class DusterRecipeManager implements IDusterRecipeManager {
 		}
 		IDusterRecipe recipe = getRecipe(input);
 		if (recipe != null) {
-			Logger.error("A duster recipe with input  " + input + " is already registered! Skipping.");
+			Logger.error("A duster recipe with input " + input + " is already registered! Skipping.");
 			Logger.error("Was trying to add: Input: " + input + " Output: " + output);
 			Logger.error("Found: Input: " + input + " Output: " + recipe.getOutput(input));
 			return;
 		}
 		recipes.add(new DusterRecipe(input, output));
+		Logger.info("Successfully added duster recipe with Input: " + input + " Output: " + output);
 	}
 
 	@Override
@@ -47,7 +48,20 @@ public class DusterRecipeManager implements IDusterRecipeManager {
 			Logger.error("Was trying to add: Input: " + oreInput + " Output: " + output);
 			return;
 		}
-		recipes.add(new DusterRecipeOreDict(oreInput, output));
+		IDusterRecipe newRecipe = new DusterRecipeOreDict(oreInput, output);
+		for (ItemStack input : newRecipe.getInputs()) {
+			IDusterRecipe recipe = getRecipe(input);
+			if (recipe != null) {
+				Logger.error("A duster recipe with input " + input + " is already registered! " + (recipe instanceof DusterRecipeOreDict ? "Skipping." : "Overwriting."));
+				Logger.error("Was trying to add: Input: " + oreInput + " Output: " + output);
+				Logger.error("Found: Input: " + input + " Output: " + recipe.getOutput(input));
+				if (recipe instanceof DusterRecipeOreDict)
+					return;
+				removeRecipe(input);
+			}
+		}
+		recipes.add(newRecipe);
+		Logger.info("Successfully added duster recipe with Input: " + oreInput + " Output: " + output);
 	}
 
 	@Override
@@ -56,7 +70,19 @@ public class DusterRecipeManager implements IDusterRecipeManager {
 			Logger.error("Tried to register an invalid duster recipe! Skipping.");
 			Logger.error("Was trying to add: " + recipe);
 		}
+		for (ItemStack input : recipe.getInputs()) {
+			IDusterRecipe dusterRecipe = getRecipe(input);
+			if (dusterRecipe != null) {
+				Logger.error("A duster recipe with input " + input + " is already registered! " + (dusterRecipe instanceof DusterRecipeOreDict ? "Skipping." : "Overwriting."));
+				Logger.error("Was trying to add: Valid inputs: " + recipe.getInputs() + " Output: " + recipe.getOutput(input));
+				Logger.error("Found: Input: " + input + " Output: " + dusterRecipe.getOutput(input));
+				if (dusterRecipe instanceof DusterRecipeOreDict)
+					return;
+				removeRecipe(input);
+			}
+		}
 		recipes.add(recipe);
+		Logger.info("Successfully added duster recipe with Valid inputs: " + recipe.getInputs());
 	}
 
 	@Override
@@ -66,9 +92,13 @@ public class DusterRecipeManager implements IDusterRecipeManager {
 			for (Iterator<IDusterRecipe> iterator = recipes.iterator(); iterator.hasNext(); recipe = iterator.next()) {
 				if (recipe != null && recipe.getOutput(input) != null) {
 					iterator.remove();
+					Logger.info("Successfully removed duster recipe with Valid inputs: " + recipe.getInputs());
 					return;
 				}
 			}
+			Logger.error("Tried to remove an invalid duster recipe! A duster recipe with the input " + input + " could not be found! Skipping.");
+		} else {
+			Logger.error("Tried to remove an invalid duster recipe! Skipping.");
 		}
 	}
 

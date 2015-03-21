@@ -101,9 +101,10 @@ public class CompatMetals {
 		BCAItemManager.dusts.addDust(meta++, "ConductiveIron", 0x945758, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "PhasedIron", 0x2E6C3D, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "DarkSteel", 0x4B4B4B, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta, "Soularium", 0x654D31, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Soularium", 0x654D31, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "FzDarkIron", 0x6700BE, DustTypes.METAL_DUST);
 
-		addOreDictDusterRecipe("oreApatite", "gemApatite", 2);
+		addOreDictDusterRecipe("oreApatite", "gemApatite", 6);
 		addDustRecipe("Bronze", 4, "dustCopper", "dustCopper", "dustCopper", "dustTin");
 		addDustRecipe("AluminumBrass", 4, "dustAluminum", "dustAluminum", "dustAluminum", "dustCopper");
 		addDustRecipe("Manyullyn", 1, "dustArdite", "dustCobalt");
