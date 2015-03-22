@@ -19,6 +19,7 @@ tile.blockRefineryValve.name=Refinery Valve
 tile.blockCoolingTowerWalls.name=Cooling Tower Walls
 tile.blockCoolingTowerValve.name=Cooling Tower Valve
 tile.blockItemSorter.name=Sort-O-Tron
+tile.backpackStand.name=Backpack Stand
 
 item.ironCanister.name=Iron Canister
 item.goldCanister.name=Gold Canister
@@ -80,6 +81,7 @@ item.upgrade.upgradeSpeed2.name=Machine Upgrade: Speed II
 item.upgrade.upgradeSpeed3.name=Machine Upgrade: Speed III
 item.baseUpgrade.name=Blank Upgrade
 item.robotDebugTool.name=Robot Debug Tool (Creative only)
+item.kineticBackpack.name=Kinetic Backpack
 
 material.iron.name=Iron
 material.gold.name=Gold
