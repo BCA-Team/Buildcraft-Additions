@@ -74,7 +74,7 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 
 	@Override
 	public double getYCoord() {
-		return yCoord;
+		return yCoord + 0.08;
 	}
 
 	@Override

@@ -25,6 +25,7 @@ import buildcraftAdditions.client.render.entities.EntityLaserShotRenderer;
 import buildcraftAdditions.client.render.items.BackPackItemRenderer;
 import buildcraftAdditions.client.render.items.BackpackStandItemRenderer;
 import buildcraftAdditions.client.render.items.CanisterItemRender;
+import buildcraftAdditions.client.render.items.KineticDusterItemRenderer;
 import buildcraftAdditions.client.render.tileentities.RendererBackPackStand;
 import buildcraftAdditions.client.render.tileentities.RendererDuster;
 import buildcraftAdditions.client.render.tileentities.RendererDusterKinetic;
@@ -51,6 +52,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.diamondCanister, CanisterItemRender.INSTANCE);
 		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.kineticBackpack, BackPackItemRenderer.INSTANCE);
 		MinecraftForgeClient.registerItemRenderer(new ItemStack(ItemsAndBlocks.backpackStand).getItem(), BackpackStandItemRenderer.INSTANCE);
+		MinecraftForgeClient.registerItemRenderer(new ItemStack(ItemsAndBlocks.kineticDusterBlock).getItem(), KineticDusterItemRenderer.INSTANCE);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileBasicDuster.class, new RendererDuster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileSemiAutomaticDuster.class, new RendererDuster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileMechanicalDuster.class, new RendererDuster());

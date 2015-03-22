@@ -12,7 +12,8 @@ import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
+import buildcraftAdditions.client.models.ModelKineticDuster;
+import buildcraftAdditions.tileEntities.TileKineticDuster;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -27,8 +28,8 @@ public class RendererDusterKinetic extends TileEntitySpecialRenderer {
 	@Override
 	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {
 		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
-		TileBaseDuster duster = (TileBaseDuster) entity;
+		GL11.glTranslated(x, y + 0.08, z);
+		TileKineticDuster duster = (TileKineticDuster) entity;
 		ItemStack stack = duster.getStackInSlot(0);
 		EntityItem item;
 		if (stack != null) {
@@ -36,6 +37,12 @@ public class RendererDusterKinetic extends TileEntitySpecialRenderer {
 			item.hoverStart = 0;
 			RenderManager.instance.renderEntityWithPosYaw(item, 0.5, 0.5, 0.5, 0, 0);
 		}
+		GL11.glPopMatrix();
+		GL11.glPushMatrix();
+		GL11.glTranslated(x + .5, y + 1.5, z + .5);
+		GL11.glRotated(180, 1, 0, 0);
+		GL11.glScaled(0.063, 0.063, 0.063);
+		ModelKineticDuster.INSTANCE.render(null, 0, 0, 0, 0, 0, 1f, duster.progressStage);
 		GL11.glPopMatrix();
 	}
 }
