@@ -1,5 +1,6 @@
 package buildcraftAdditions.blocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,6 +10,7 @@ import net.minecraft.world.World;
 
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.TileBackpackStand;
+import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -71,5 +73,16 @@ public class BlockBackpackStand extends BlockRotationBase {
 	@Override
 	public boolean isNormalCube() {
 		return false;
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+		TileEntity entity = world.getTileEntity(x, y, z);
+		if (entity != null && entity instanceof TileBackpackStand) {
+			TileBackpackStand stand = (TileBackpackStand) entity;
+			Utils.dropItemstack(world, x, y, z, stand.inventory.getStackInSlot(0));
+			stand.inventory.setInventorySlotContents(0, null);
+		}
+		super.breakBlock(world, x, y, z, block, meta);
 	}
 }
