@@ -43,6 +43,8 @@ import buildcraft.api.transport.IInjectable;
 
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.api.configurableOutput.SideConfiguration;
+import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
+import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 
 public class Utils {
 
@@ -103,11 +105,19 @@ public class Utils {
 
 	public static void dropInventory(World world, int x, int y, int z) {
 		TileEntity tile = world.getTileEntity(x, y, z);
-		if (tile != null && tile instanceof IInventory) {
-			IInventory inventory = (IInventory) tile;
-			for (int i = 0; i < inventory.getSizeInventory(); i++) {
-				dropItemstack(world, x, y, z, inventory.getStackInSlot(i));
-				inventory.setInventorySlotContents(i, null);
+		if (tile != null) {
+			if (tile instanceof IInventory) {
+				IInventory inventory = (IInventory) tile;
+				for (int i = 0; i < inventory.getSizeInventory(); i++) {
+					dropItemstack(world, x, y, z, inventory.getStackInSlot(i));
+					inventory.setInventorySlotContents(i, null);
+				}
+			}
+			if (tile instanceof IUpgradableMachine) {
+				IUpgradableMachine machine = (IUpgradableMachine) tile;
+				Set<EnumMachineUpgrades> upgrades = machine.getInstalledUpgrades();
+				for (int i = 0; i < (upgrades != null ? upgrades.size() : 0); i++)
+					machine.removeUpgrade();
 			}
 		}
 	}

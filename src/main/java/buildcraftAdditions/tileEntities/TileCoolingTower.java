@@ -215,15 +215,15 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 
 	@Override
 	public void invalidateBlock() {
-		data.invalidate();
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
+		data.invalidate();
 		input.setFluid(null);
 		output.setFluid(null);
 		coolant.setFluid(null);
 		heat = 0;
-		sync();
 		recipe = null;
+		sync();
 	}
 
 	private void findMaster() {
