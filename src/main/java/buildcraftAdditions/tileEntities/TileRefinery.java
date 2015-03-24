@@ -326,7 +326,16 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 		input.setFluid(null);
 		output.setFluid(null);
+		energy = 0;
+		currentHeat = 0;
 		requiredHeat = 0;
+		energyCost = 0;
+		heatTimer = 0;
+		lastRequiredHeat = 0;
+		outputFluidStack = null;
+		inputFluidStack = null;
+		inputFluid = "";
+		outputFluid = "";
 		data.invalidate();
 		upgrades.invalidate();
 		sync();
