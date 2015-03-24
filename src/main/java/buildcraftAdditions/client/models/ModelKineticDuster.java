@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 import cpw.mods.fml.client.FMLClientHandler;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -17,13 +18,10 @@ import cpw.mods.fml.client.FMLClientHandler;
  */
 public class ModelKineticDuster extends ModelBiped {
 
-	public static ModelKineticDuster INSTANCE = new ModelKineticDuster();
-	public static ModelKineticDuster INSTANCE2 = new ModelKineticDuster();
-
-	private final ResourceLocation TEXTURE0 = new ResourceLocation("bcadditions", "textures/models/duster3-texturemap0.png");
-	private final ResourceLocation TEXTURE1 = new ResourceLocation("bcadditions", "textures/models/duster3-texturemap1.png");
-	private final ResourceLocation TEXTURE2 = new ResourceLocation("bcadditions", "textures/models/duster3-texturemap2.png");
-	private final ResourceLocation TEXTURE3 = new ResourceLocation("bcadditions", "textures/models/duster3-texturemap3.png");
+	private static final ResourceLocation TEXTURE0 = new ResourceLocation("bcadditions", "textures/models/duster3-texturemap0.png");
+	private static final ResourceLocation TEXTURE1 = new ResourceLocation("bcadditions", "textures/models/duster3-texturemap1.png");
+	private static final ResourceLocation TEXTURE2 = new ResourceLocation("bcadditions", "textures/models/duster3-texturemap2.png");
+	private static final ResourceLocation TEXTURE3 = new ResourceLocation("bcadditions", "textures/models/duster3-texturemap3.png");
 
 	public ModelRenderer cube;
 	public ModelRenderer shape11;
@@ -41,7 +39,7 @@ public class ModelKineticDuster extends ModelBiped {
 	public ModelRenderer shape24_4;
 	public ModelRenderer shape24_5;
 
-	private ModelKineticDuster() {
+	public ModelKineticDuster() {
 		this.textureWidth = 64;
 		this.textureHeight = 32;
 		this.shape24 = new ModelRenderer(this, 0, 0);
@@ -95,7 +93,7 @@ public class ModelKineticDuster extends ModelBiped {
 		this.shape24_2.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, int texture) {
+	public void render(int texture) {
 		switch (texture) {
 			case 0:
 				FMLClientHandler.instance().getClient().getTextureManager().bindTexture(TEXTURE0);
@@ -110,7 +108,7 @@ public class ModelKineticDuster extends ModelBiped {
 				FMLClientHandler.instance().getClient().getTextureManager().bindTexture(TEXTURE3);
 				break;
 		}
-		render(entity, f, f1, f2, f3, f4, f5);
+		render(null, 0, 0, 0, 0, 0, 0.0625F);
 	}
 
 	@Override

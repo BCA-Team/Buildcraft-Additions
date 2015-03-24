@@ -140,6 +140,8 @@ public class Utils {
 		if (!entity.worldObj.isRemote) {
 			EntityItem entityItem = new EntityItem(entity.worldObj, entity.posX, entity.posY + entity.getEyeHeight() / 2.0F, entity.posZ, stack.copy());
 			entity.worldObj.spawnEntityInWorld(entityItem);
+			if (entity instanceof EntityPlayer)
+				entityItem.onCollideWithPlayer((EntityPlayer) entity);
 		}
 	}
 

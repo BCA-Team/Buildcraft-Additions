@@ -2,11 +2,6 @@ package buildcraftAdditions.client.render.tileentities;
 
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 import cpw.mods.fml.relauncher.Side;
@@ -23,26 +18,26 @@ import buildcraftAdditions.tileEntities.TileKineticDuster;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @SideOnly(Side.CLIENT)
-public class RendererDusterKinetic extends TileEntitySpecialRenderer {
+public class RendererDusterKinetic extends RendererDuster {
+
+	private final ModelKineticDuster model = new ModelKineticDuster();
 
 	@Override
-	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {
-		GL11.glPushMatrix();
-		GL11.glTranslated(x, y + 0.08, z);
-		TileKineticDuster duster = (TileKineticDuster) entity;
-		ItemStack stack = duster.getStackInSlot(0);
-		EntityItem item;
-		if (stack != null) {
-			item = new EntityItem(Minecraft.getMinecraft().theWorld, 0, 0, 0, stack);
-			item.hoverStart = 0;
-			RenderManager.instance.renderEntityWithPosYaw(item, 0.5, 0.5, 0.5, 0, 0);
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float fl) {
+		if (tile != null && tile instanceof TileKineticDuster) {
+			TileKineticDuster duster = (TileKineticDuster) tile;
+			GL11.glPushMatrix();
+			GL11.glTranslated(x + .5, y + 1.5, z + .5);
+			GL11.glRotated(180, 1, 0, 0);
+			model.render(duster.progressStage);
+			GL11.glPopMatrix();
 		}
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glTranslated(x + .5, y + 1.5, z + .5);
-		GL11.glRotated(180, 1, 0, 0);
-		GL11.glScaled(0.063, 0.063, 0.063);
-		ModelKineticDuster.INSTANCE.render(null, 0, 0, 0, 0, 0, 1f, duster.progressStage);
-		GL11.glPopMatrix();
+		super.renderTileEntityAt(tile, x, y, z, fl);
+	}
+
+	@Override
+	protected double getYOffset() {
+		//TODO: Change to a proper value once the model's depth test works correctly
+		return super.getYOffset();
 	}
 }
