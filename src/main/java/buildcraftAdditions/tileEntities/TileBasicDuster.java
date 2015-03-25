@@ -34,6 +34,7 @@ public class TileBasicDuster extends TileBaseDuster {
 	public void makeProgress(EntityPlayer player) {
 		if (BCARecipeManager.duster.getRecipe(getStackInSlot(0)) != null) {
 			progress++;
+			spawnDustingParticles();
 			if (progress >= 8) {
 				dust();
 				progress = 0;

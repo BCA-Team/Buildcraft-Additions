@@ -4,10 +4,14 @@ import com.google.common.base.Strings;
 
 import io.netty.buffer.ByteBuf;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.WorldServer;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
@@ -43,6 +47,29 @@ public abstract class TileBaseDuster extends TileBase implements ISidedInventory
 
 	public IDusterRecipe getRecipe() {
 		return BCARecipeManager.duster.getRecipe(getStackInSlot(0));
+	}
+
+	protected void spawnDustingParticles() {
+		if (!worldObj.isRemote && worldObj instanceof WorldServer) {
+			WorldServer worldServer = (WorldServer) worldObj;
+			ItemStack stack = getStackInSlot(0);
+			if (stack != null && stack.getItem() != null && stack.stackSize > 0) {
+				Item item = stack.getItem();
+				String s = null;
+				double offsetY = 0;
+				if (item instanceof ItemBlock) {
+					s = "blockcrack_" + Block.getIdFromBlock(((ItemBlock) item).field_150939_a) + "_" + stack.getItemDamage();
+					offsetY = 0.1;
+				} else {
+					s = "iconcrack_" + Item.getIdFromItem(item);
+					if (stack.getHasSubtypes())
+						s += "_" + stack.getItemDamage();
+					offsetY = 0.5;
+				}
+				if (!Strings.isNullOrEmpty(s))
+					worldServer.func_147487_a(s, xCoord + .5, yCoord + 1 + offsetY, zCoord + .5, 2, 0, 0, 0, 0.075);
+			}
+		}
 	}
 
 	public void makeEurekaProgress(EntityPlayer player) {

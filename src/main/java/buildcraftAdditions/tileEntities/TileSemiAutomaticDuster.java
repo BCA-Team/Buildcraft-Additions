@@ -27,6 +27,7 @@ public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 	public void makeProgress(EntityPlayer player) {
 		if (BCARecipeManager.duster.getRecipe(getStackInSlot(0)) != null) {
 			progress++;
+			spawnDustingParticles();
 			if (progress >= 8) {
 				dust();
 				progress = 0;

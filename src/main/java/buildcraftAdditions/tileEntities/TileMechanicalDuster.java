@@ -5,16 +5,12 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
 
-import buildcraftAdditions.api.networking.MessageByteBuff;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.config.ConfigurationHandler;
-import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;
@@ -48,6 +44,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 			if (BCARecipeManager.duster.getRecipe(getStackInSlot(0)) != null) {
 				progress++;
 				energy -= ConfigurationHandler.energyUseMechanicalDuster;
+				spawnDustingParticles();
 				oldProgressStage = progressStage;
 				if (progress > 25)
 					progressStage = 1;
@@ -68,7 +65,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 			}
 		}
 		if (oldProgressStage != progressStage) {
-			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, Variables.NETWORK_RANGE));
+			sync();
 			oldProgressStage = progressStage;
 		}
 	}
@@ -96,8 +93,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 	public void dust() {
 		Utils.dropItemstack(worldObj, xCoord, yCoord, zCoord, BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput(getStackInSlot(0)));
 		setInventorySlotContents(0, null);
-		if (!worldObj.isRemote)
-			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, Variables.NETWORK_RANGE));
+		sync();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 

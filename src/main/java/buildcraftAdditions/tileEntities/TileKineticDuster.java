@@ -4,14 +4,9 @@ import io.netty.buffer.ByteBuf;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-
 import buildcraft.api.power.ILaserTarget;
 
-import buildcraftAdditions.api.networking.MessageByteBuff;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
-import buildcraftAdditions.networking.PacketHandler;
-import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
 
 /**
@@ -24,6 +19,7 @@ import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
 public class TileKineticDuster extends TileDusterWithConfigurableOutput implements ILaserTarget {
 
 	public int progressStage, oldProgressStage;
+	private boolean receivedLaserEnergy = false;
 
 	public TileKineticDuster() {
 		super("");
@@ -37,6 +33,7 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 	@Override
 	public void receiveLaserEnergy(int energy) {
 		progress += energy;
+		receivedLaserEnergy = true;
 		if (progress >= 20000) {
 			progress = 0;
 			progressStage = 0;
@@ -48,12 +45,25 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 				progressStage = 2;
 			else if (progress >= 5000)
 				progressStage = 1;
-			else
-				progressStage = 0;
+			else progressStage = 0;
 		}
 		if (progressStage != oldProgressStage) {
-			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, Variables.NETWORK_RANGE));
+			sync();
 			oldProgressStage = progressStage;
+		}
+	}
+
+	@Override
+	public boolean canUpdate() {
+		return true;
+	}
+
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		if (!worldObj.isRemote && receivedLaserEnergy) {
+			spawnDustingParticles();
+			receivedLaserEnergy = false;
 		}
 	}
 
