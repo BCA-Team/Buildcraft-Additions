@@ -5,7 +5,7 @@
   "description": "BuildCraft Additions is a mod for Minecraft which extends BuildCraft in multiple ways.",
   "version": "$version",
   "mcversion": "$mcversion",
-  "url": "http://bcadditions.tk/",
+  "url": "http://bcadditions.ga/",
   "authorList": [ "AEnterprise", "big_Xplosion", "iTitus" ],
   "credits": "AEnterprise, big_Xplosion, iTitus, plenituz, AlexTheGre4t & the community",
   "logoFile": "assets/bcadditions/logo.png",
