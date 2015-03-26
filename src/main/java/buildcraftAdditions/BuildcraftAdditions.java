@@ -1,28 +1,21 @@
 package buildcraftAdditions;
 
-import java.util.Iterator;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.FluidRegistry;
 
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
@@ -137,37 +130,5 @@ public class BuildcraftAdditions {
 	@Mod.EventHandler
 	public void onIMC(FMLInterModComms.IMCEvent event) {
 		IMCHandler.handleIMC(event.getMessages());
-	}
-
-	@Mod.EventHandler
-	public void remap(FMLMissingMappingsEvent event) {
-		Iterator<? extends IDust> iterator = BCAItemManager.dusts.getDusts().iterator();
-		for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
-			if (mapping.name.toLowerCase().contains("fuelgas")) {
-				if (mapping.type == GameRegistry.Type.ITEM)
-					mapping.remap(Item.getItemFromBlock(FluidRegistry.getFluid("fuelgas").getBlock()));
-				if (mapping.type == GameRegistry.Type.BLOCK)
-					mapping.remap(FluidRegistry.getFluid("fuelgas").getBlock());
-				continue;
-			} else if (mapping.name.toLowerCase().contains("bioethanolgas") && Loader.isModLoaded("Forestry")) {
-				if (mapping.type == GameRegistry.Type.ITEM)
-					mapping.remap(Item.getItemFromBlock(FluidRegistry.getFluid("bioethanolgas").getBlock()));
-				else if (mapping.type == GameRegistry.Type.BLOCK)
-					mapping.remap(FluidRegistry.getFluid("bioethanolgas").getBlock());
-				continue;
-			}
-			if (!ConfigurationHandler.shouldRegisterDusts)
-				return;
-			while (iterator.hasNext()) {
-				IDust dust = iterator.next();
-				if (dust == null)
-					continue;
-				String name = dust.getName().toLowerCase();
-				if (mapping.name.toLowerCase().contains(name)) {
-					mapping.remap(GameRegistry.findItem(Variables.MOD.ID, "converter" + name));
-					iterator.remove();
-				}
-			}
-		}
 	}
 }

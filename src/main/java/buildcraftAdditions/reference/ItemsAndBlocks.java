@@ -41,7 +41,6 @@ import buildcraftAdditions.items.ItemMachineConfigurator;
 import buildcraftAdditions.items.ItemMachineUpgrade;
 import buildcraftAdditions.items.ItemPoweredBase;
 import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
-import buildcraftAdditions.items.Tools.ItemKineticTool;
 import buildcraftAdditions.items.Tools.ItemPipeColoringTool;
 import buildcraftAdditions.items.Tools.ItemPortableLaser;
 import buildcraftAdditions.items.Tools.ItemToolUpgrade;
@@ -115,8 +114,6 @@ public final class ItemsAndBlocks {
 	public static ItemBase redstoneStick;
 	public static ItemBase glowstoneStick;
 	public static ItemBase slimeStick;
-	public static ItemBase boneStick;
-	public static ItemBase flintStick;
 	public static ItemBase blazeStick;
 	public static Item toolCore;
 	public static ItemToolUpgrade toolUpgradeHoe;
@@ -135,8 +132,6 @@ public final class ItemsAndBlocks {
 	public static Item goldWire;
 	public static Item diamondWireUnhardened;
 	public static Item diamondWire;
-	@Deprecated
-	public static ItemKineticTool kineticTool;
 	public static Item itemKineticMultiTool;
 	public static Item machineConfigurator;
 	public static Item heatPlating;
@@ -209,14 +204,6 @@ public final class ItemsAndBlocks {
 		GameRegistry.registerItem(slimeStick, "stickSlime");
 		OreDictionary.registerOre("stickSlime", new ItemStack(slimeStick));
 
-		boneStick = new ItemBase("stickBone");
-		GameRegistry.registerItem(boneStick, "stickBone");
-		OreDictionary.registerOre("stickBone", new ItemStack(boneStick));
-
-		flintStick = new ItemBase("stickFlint");
-		GameRegistry.registerItem(flintStick, "stickFlint");
-		OreDictionary.registerOre("stickFlint", new ItemStack(flintStick));
-
 		blazeStick = new ItemBase("stickBlaze");
 		GameRegistry.registerItem(blazeStick, "stickBlaze");
 		OreDictionary.registerOre("stickBlaze", new ItemStack(blazeStick));
@@ -251,8 +238,6 @@ public final class ItemsAndBlocks {
 		toolUpgradeFortune3 = new ItemToolUpgrade("Fortune3");
 		GameRegistry.registerItem(toolUpgradeFortune3, "toolUpgradeFortune3");
 
-		kineticTool = new ItemKineticTool();
-		GameRegistry.registerItem(kineticTool, "kineticMultiTool");
 
 		itemKineticMultiTool = new ItemKineticMultiTool();
 		GameRegistry.registerItem(itemKineticMultiTool, "itemKineticMultiTool");

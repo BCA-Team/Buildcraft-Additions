@@ -1,5 +1,6 @@
 package buildcraftAdditions.items;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -44,5 +45,9 @@ public class RobotDebugTool extends ItemBase {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void registerIcons(IIconRegister register) {
 	}
 }

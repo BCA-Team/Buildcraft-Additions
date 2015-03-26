@@ -3,6 +3,7 @@ package buildcraftAdditions.armour;
 import java.util.List;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
@@ -32,7 +33,6 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 
 	public ItemKineticBackpack() {
 		super(ArmorMaterial.IRON, BuildcraftAdditions.proxy.addArmor("kineticBackpack"), 1);
-		setTextureName("bcadditions:kineticBackpack");
 		setUnlocalizedName("kineticBackpack");
 	}
 
@@ -136,5 +136,9 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 	@Override
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
 		return BackPackModel.INSTANCE2;
+	}
+
+	@Override
+	public void registerIcons(IIconRegister register) {
 	}
 }

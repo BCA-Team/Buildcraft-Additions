@@ -3,6 +3,7 @@ package buildcraftAdditions.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -83,5 +84,9 @@ public class BlockGhostBackpackStand extends BlockBase {
 	@Override
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
 		return new ItemStack(ItemsAndBlocks.backpackStand);
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
 	}
 }
