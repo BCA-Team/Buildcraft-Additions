@@ -53,6 +53,10 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 		super.updateEntity();
 		if (worldObj.isRemote)
 			return;
+		if (upgrades.hasUpgrade(EnumMachineUpgrades.AUTO_OUTPUT))
+			output();
+		if (inventory.getStackInSlot(0) == null && !isCooking)
+			return;
 		if (shouldUpdateCoils) {
 			updateCoils();
 			shouldUpdateCoils = false;
@@ -64,10 +68,11 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 						coil.startHeating();
 						if (coil.isBurning()) {
 							isCooking = true;
-							doBlockUpdate();
 						}
 					}
 				}
+				if (isCooking)
+					sync();
 			}
 			if (progress > 0)
 				isCooking = true;
@@ -93,28 +98,28 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 		} else {
 			stop();
 		}
-		if (upgrades.hasUpgrade(EnumMachineUpgrades.AUTO_OUTPUT))
-			output();
 	}
 
 	public void stop() {
 		isCooking = false;
-		doBlockUpdate();
 		progress = 0;
+		sync();
 		for (TileCoilBase coil : coils) {
 			if (coil != null)
 				coil.stopHeating();
 		}
 	}
 
+	@Override
+	public void sync() {
+		super.sync();
+		worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
+	}
+
 	private void output() {
 		if (getStackInSlot(1) == null)
 			return;
 		setInventorySlotContents(1, Utils.outputStack(new Location(this), getStackInSlot(1), configuration));
-	}
-
-	public void doBlockUpdate() {
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	public boolean canCook() {
@@ -241,6 +246,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	@Override
 	public void writeToByteBuff(ByteBuf buf) {
 		buf.writeInt(progress);
+		buf.writeBoolean(isCooking);
 		upgrades.writeToByteBuff(buf);
 		configuration.writeToByteBuff(buf);
 	}
@@ -248,6 +254,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	@Override
 	public void readFromByteBuff(ByteBuf buf) {
 		progress = buf.readInt();
+		isCooking = buf.readBoolean();
 		upgrades.readFromByteBuff(buf);
 		configuration.readFromByteBuff(buf);
 	}
