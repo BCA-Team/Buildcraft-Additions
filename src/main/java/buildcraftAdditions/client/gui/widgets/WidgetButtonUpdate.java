@@ -13,7 +13,7 @@ import buildcraftAdditions.client.gui.GuiBase;
  */
 public class WidgetButtonUpdate extends WidgetBase {
 
-	private boolean active = false;
+	protected boolean active = false;
 
 	public WidgetButtonUpdate(int id, int x, int y, int u, int v, int width, int height, GuiBase gui) {
 		super(id, x, y, u, v, width, height, gui, "");
