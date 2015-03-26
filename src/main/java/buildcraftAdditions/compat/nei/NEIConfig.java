@@ -30,7 +30,6 @@ public class NEIConfig implements IConfigureNEI {
 		API.hideItem(GameRegistry.findItemStack(Variables.MOD.ID, "kebT3DisplayItem", 1));
 		API.hideItem(new ItemStack(ItemsAndBlocks.kinesisPipeWood));
 		API.hideItem(new ItemStack(ItemsAndBlocks.kinisisPipeStone));
-		API.hideItem(new ItemStack(ItemsAndBlocks.kineticTool));
 		API.hideItem(new ItemStack(ItemsAndBlocks.backpackStandGhost));
 		for (IDust dust : BCAItemManager.dusts.getDusts())
 			if (dust != null && dust.getName() != null)

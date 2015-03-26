@@ -99,10 +99,6 @@ public class ItemKineticMultiTool extends ItemInventoryPoweredBase {
 			set.add(new ItemStack(ItemsAndBlocks.glowstoneStick));
 		if (isUpgradeInstalled(stack, "slimeStick"))
 			set.add(new ItemStack(ItemsAndBlocks.slimeStick));
-		if (isUpgradeInstalled(stack, "boneStick"))
-			set.add(new ItemStack(ItemsAndBlocks.boneStick));
-		if (isUpgradeInstalled(stack, "flintStick"))
-			set.add(new ItemStack(ItemsAndBlocks.flintStick));
 		if (isUpgradeInstalled(stack, "blazeStick"))
 			set.add(new ItemStack(ItemsAndBlocks.blazeStick));
 		if (isUpgradeInstalled(stack, "drill"))

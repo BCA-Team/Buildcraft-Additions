@@ -13,7 +13,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 import buildcraft.silicon.ItemRedstoneChipset;
@@ -46,8 +45,6 @@ public class BCRecipeManager {
 			addStickRecipe(ItemsAndBlocks.redstoneStick, 3000, "stickIron", "dustRedstone");
 			addStickRecipe(ItemsAndBlocks.glowstoneStick, 3000, "stickIron", "dustGlowstone");
 			addStickRecipe(ItemsAndBlocks.slimeStick, 2000, "stickIron", "slimeball");
-			addStickRecipe(ItemsAndBlocks.boneStick, 2000, "stickIron", Items.bone);
-			addStickRecipe(ItemsAndBlocks.flintStick, 2000, "stickIron", Items.flint);
 			addStickRecipe(ItemsAndBlocks.blazeStick, 4000, "stickQuartz", Items.blaze_rod);
 			addAssemblyRecipe("kineticTool", ItemsAndBlocks.itemKineticMultiTool, 8000, "gemDiamond", "gemDiamond", "gemDiamond", "stickIron", ItemsAndBlocks.toolCore);
 			addUpgradeRecipe(ItemsAndBlocks.toolUpgradeChainsaw);
@@ -161,8 +158,6 @@ public class BCRecipeManager {
 		BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeStick("boneStick", "stickBone", "redstoneStick", ItemRedstoneChipset.Chipset.RED));
 		BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeStick("flintStick", "stickFlint", "redstoneStick", ItemRedstoneChipset.Chipset.RED));
 		BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeStick("blazeStick", "stickBlaze", "redstoneStick", ItemRedstoneChipset.Chipset.RED));
-
-		GameRegistry.addShapelessRecipe(new ItemStack(ItemsAndBlocks.itemKineticMultiTool), new ItemStack(ItemsAndBlocks.kineticTool, 1, OreDictionary.WILDCARD_VALUE));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemsAndBlocks.heatPlatingRaw, 2), "DD", "DD", 'D', "dustIron"));
 		GameRegistry.addSmelting(new ItemStack(ItemsAndBlocks.heatPlatingRaw), new ItemStack(ItemsAndBlocks.heatPlating), 0);

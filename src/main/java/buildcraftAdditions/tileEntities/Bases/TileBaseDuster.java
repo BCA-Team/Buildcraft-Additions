@@ -66,10 +66,15 @@ public abstract class TileBaseDuster extends TileBase implements ISidedInventory
 						s += "_" + stack.getItemDamage();
 					offsetY = 0.5;
 				}
+				offsetY += getParticleOffset();
 				if (!Strings.isNullOrEmpty(s))
 					worldServer.func_147487_a(s, xCoord + .5, yCoord + 1 + offsetY, zCoord + .5, 2, 0, 0, 0, 0.075);
 			}
 		}
+	}
+
+	protected double getParticleOffset() {
+		return 0;
 	}
 
 	public void makeEurekaProgress(EntityPlayer player) {

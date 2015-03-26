@@ -24,6 +24,7 @@ public class RendererDusterKinetic extends RendererDuster {
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float fl) {
+		super.renderTileEntityAt(tile, x, y, z, fl);
 		if (tile != null && tile instanceof TileKineticDuster) {
 			TileKineticDuster duster = (TileKineticDuster) tile;
 			GL11.glPushMatrix();
@@ -32,12 +33,10 @@ public class RendererDusterKinetic extends RendererDuster {
 			model.render(duster.progressStage);
 			GL11.glPopMatrix();
 		}
-		super.renderTileEntityAt(tile, x, y, z, fl);
 	}
 
 	@Override
 	protected double getYOffset() {
-		//TODO: Change to a proper value once the model's depth test works correctly
-		return super.getYOffset();
+		return 0.5D / 16;
 	}
 }

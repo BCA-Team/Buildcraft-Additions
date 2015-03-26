@@ -73,6 +73,11 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 	}
 
 	@Override
+	protected double getParticleOffset() {
+		return -1;
+	}
+
+	@Override
 	public boolean isInvalidTarget() {
 		return isInvalid();
 	}
