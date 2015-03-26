@@ -74,7 +74,7 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 
 	@Override
 	protected double getParticleOffset() {
-		return -1;
+		return 0;
 	}
 
 	@Override
