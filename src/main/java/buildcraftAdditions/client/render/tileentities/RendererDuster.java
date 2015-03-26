@@ -12,6 +12,8 @@ import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import net.minecraftforge.common.util.ForgeDirection;
+
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 
 /**
@@ -25,17 +27,40 @@ import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 public class RendererDuster extends TileEntitySpecialRenderer {
 
 	@Override
-	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {
-		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
-		TileBaseDuster duster = (TileBaseDuster) entity;
-		ItemStack stack = duster.getStackInSlot(0);
-		EntityItem item;
-		if (stack != null) {
-			item = new EntityItem(Minecraft.getMinecraft().theWorld, 0, 0, 0, stack);
-			item.hoverStart = 0;
-			RenderManager.instance.renderEntityWithPosYaw(item, 0.5, 1.05, 0.5, 0, 0);
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float fl) {
+		if (tile != null && tile instanceof TileBaseDuster) {
+			TileBaseDuster duster = (TileBaseDuster) tile;
+			GL11.glPushMatrix();
+			GL11.glTranslated(x + .5, y + .5 + getYOffset(), z + .5);
+			float angle = 0;
+			switch (ForgeDirection.getOrientation(duster.getBlockMetadata())) {
+				case NORTH:
+					angle = 0;
+					break;
+				case SOUTH:
+					angle = 180;
+					break;
+				case WEST:
+					angle = 90;
+					break;
+				case EAST:
+					angle = -90;
+					break;
+				default:
+					break;
+			}
+			GL11.glRotatef(angle, 0, 1, 0);
+			ItemStack stack = duster.getStackInSlot(0);
+			if (stack != null && stack.getItem() != null && stack.stackSize > 0) {
+				EntityItem item = new EntityItem(Minecraft.getMinecraft().theWorld, 0, 0, 0, stack);
+				item.hoverStart = 0;
+				RenderManager.instance.renderEntityWithPosYaw(item, 0, 0, 0, 0, 0);
+			}
+			GL11.glPopMatrix();
 		}
-		GL11.glPopMatrix();
+	}
+
+	protected double getYOffset() {
+		return .5 + 1D / 16;
 	}
 }

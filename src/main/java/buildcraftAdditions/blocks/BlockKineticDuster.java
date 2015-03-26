@@ -1,11 +1,7 @@
 package buildcraftAdditions.blocks;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraft.api.power.ILaserTargetBlock;
 
@@ -21,20 +17,12 @@ import buildcraftAdditions.tileEntities.TileKineticDuster;
 public class BlockKineticDuster extends BlockDusterBase implements ILaserTargetBlock {
 
 	public BlockKineticDuster() {
-		super("Kinetic", "");
+		super("Kinetic", "dusterKinetic");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileKineticDuster();
-	}
-
-
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register) {
-
 	}
 
 	@Override

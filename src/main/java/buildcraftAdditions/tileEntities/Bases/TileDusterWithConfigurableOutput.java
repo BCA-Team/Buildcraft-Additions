@@ -69,7 +69,7 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return true;
+		return BCARecipeManager.duster.getRecipe(stack) != null;
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack stack, int side) {
-		return configuration.canReceive(ForgeDirection.getOrientation(side));
+		return configuration.canReceive(ForgeDirection.getOrientation(side)) && isItemValidForSlot(slot, stack);
 	}
 
 	@Override

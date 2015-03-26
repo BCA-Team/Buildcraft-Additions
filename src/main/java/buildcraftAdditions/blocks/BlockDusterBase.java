@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
 import buildcraftAdditions.utils.Utils;
 
@@ -34,13 +35,15 @@ public abstract class BlockDusterBase extends BlockRotationBase {
 			if (duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
 				ItemStack stack = player.getCurrentEquippedItem().copy();
 				stack.stackSize = 1;
-				duster.setInventorySlotContents(0, stack);
-				player.getCurrentEquippedItem().stackSize--;
-				if (player.getCurrentEquippedItem().stackSize <= 0)
-					player.setCurrentItemOrArmor(0, null);
+				if (BCARecipeManager.duster.getRecipe(stack) != null) {
+					duster.setInventorySlotContents(0, stack);
+					player.getCurrentEquippedItem().stackSize--;
+					if (player.getCurrentEquippedItem().stackSize <= 0)
+						player.setCurrentItemOrArmor(0, null);
+				}
 			} else if (duster.getStackInSlot(0) != null) {
 				if (!world.isRemote)
-					Utils.addToPlayerInv(player, duster.getStackInSlot(0));
+					Utils.dropItemstackAtEntity(player, duster.getStackInSlot(0));
 				duster.setInventorySlotContents(0, null);
 			}
 			duster.progress = 0;
