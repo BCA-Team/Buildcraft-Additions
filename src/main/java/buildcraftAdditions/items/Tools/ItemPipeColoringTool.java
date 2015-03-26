@@ -9,6 +9,7 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
@@ -104,7 +105,7 @@ public class ItemPipeColoringTool extends ItemPoweredBase {
 			list.add(Utils.localize("tooltip.colorSortingMode"));
 		else
 			list.add(Utils.localize("tooltip.colorNormalMode"));
-		list.add(Utils.localize("gui.color." + Utils.COLOR_NAMES[stack.getItemDamage()]));
+		list.add(Utils.localize("" + EnumChatFormatting.getValueByName(Utils.CHATCOLORS[stack.getItemDamage()]) + Utils.localize("gui.color." + Utils.COLOR_NAMES[stack.getItemDamage()])));
 	}
 
 	@Override

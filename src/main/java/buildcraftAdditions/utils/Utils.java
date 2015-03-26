@@ -49,6 +49,7 @@ import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 public class Utils {
 
 	public static final String[] COLOR_NAMES = {"white", "orange", "magenta", "lightBlue", "yellow", "lime", "pink", "gray", "lightGray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
+	public static final String[] CHATCOLORS = {"white", "gold", "light_purple", "aqua", "yellow", "green", "light_purple", "dark_gray", "gray", "dark_aqua", "dark_purple", "dark_blue", "dark_red", "dark_green", "red", "black"};
 
 	public static FluidStack getFluidStackFromItemStack(ItemStack itemStack) {
 		if (itemStack.stackTagCompound == null || !itemStack.getTagCompound().hasKey("Fluid", Constants.NBT.TAG_COMPOUND))
