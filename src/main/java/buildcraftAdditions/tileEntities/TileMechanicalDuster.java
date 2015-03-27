@@ -30,6 +30,7 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 
 	public TileMechanicalDuster() {
 		super(Variables.Eureka.DustT2Key2);
+		particles = 5;
 	}
 
 	@Override

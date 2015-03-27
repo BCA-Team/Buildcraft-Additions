@@ -78,7 +78,7 @@ public class ItemPoweredBase extends ItemBase implements IEnergyContainerItem {
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advancedTooltips) {
 		int energy = getEnergyStored(stack);
 		int maxEnergy = getMaxEnergyStored(stack);
-		int percent = (energy * 100) / maxEnergy;
+		int percent = maxEnergy != 0 ? (energy * 100) / maxEnergy : 0;
 		String color = "";
 		if (percent > 75) {
 			color += EnumChatFormatting.DARK_GREEN;
