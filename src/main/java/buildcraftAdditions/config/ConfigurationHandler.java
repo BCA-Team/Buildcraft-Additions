@@ -139,7 +139,6 @@ public class ConfigurationHandler {
 		coolingTowerSpeed3SpeedModifier = configFile.get("Upgrades.Cooling Tower", "UpgradesCoolingTowerSpeed3SpeedModifier", 3).setMinValue(0).getInt();
 		coolingTowerEfficiency1CoolingModifier = (float) configFile.get("Upgrades.Cooling Tower", "UpgradesCoolingTowerEfficiency1CoolingModifier", 0.25).setMinValue(0).setMaxValue(Float.MAX_VALUE).getDouble();
 		coolingTowerEfficiency2CoolingModifier = (float) configFile.get("Upgrades.Cooling Tower", "UpgradesCoolingTowerEfficiency2CoolingModifier", 0.5).setMinValue(0).setMaxValue(Float.MAX_VALUE).getDouble();
-		coolingTowerEfficiency2CoolingModifier = (float) configFile.get("Upgrades.Cooling Tower", "UpgradesCoolingTowerEfficiency2CoolingModifier", 0.5).setMinValue(0).setMaxValue(Float.MAX_VALUE).getDouble();
 		coolingTowerEfficiency3CoolingModifier = (float) configFile.get("Upgrades.Cooling Tower", "UpgradesCoolingTowerEfficiency3CoolingModifier", 1D).setMinValue(0).setMaxValue(Float.MAX_VALUE).getDouble();
 
 		configFile.addCustomCategoryComment("Misc", "Stuff that didn't fit in any other category");
