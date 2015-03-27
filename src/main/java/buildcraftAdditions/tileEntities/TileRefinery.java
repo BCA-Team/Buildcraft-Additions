@@ -93,7 +93,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 				TileEntity entity = location.getTileEntity();
 				if (entity != null && entity instanceof IFluidHandler && !(entity instanceof TileRefinery) && master.output.getFluidType() != null) {
 					IFluidHandler tank = (IFluidHandler) entity;
-					int drain = tank.fill(direction.getOpposite(), new FluidStack(master.output.getFluidType(), 100), false);
+					int drain = tank.fill(direction.getOpposite(), new FluidStack(master.output.getFluidType(), ConfigurationHandler.refineryAutoExportMaxTransfer), false);
 					FluidStack stack = master.drain(direction, drain, true);
 					tank.fill(direction.getOpposite(), stack, true);
 				}
@@ -109,7 +109,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 				TileEntity tile = location.getTileEntity();
 				if (tile != null && tile instanceof IFluidHandler && !master.input.isFull()) {
 					IFluidHandler tank = (IFluidHandler) tile;
-					FluidStack drain = tank.drain(direction.getOpposite(), 100, false);
+					FluidStack drain = tank.drain(direction.getOpposite(), ConfigurationHandler.refineryAutoImportMaxTransfer, false);
 					int fill = master.input.fill(drain, true);
 					if (fill > 0)
 						tank.drain(direction.getOpposite(), fill, true);
@@ -125,32 +125,33 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (input.getFluid() == null)
 			updateRecipe();
 		updateHeat();
-		energyCost = (input.getFluid() == null || isCooling || energy < (int) (50 + (50 * ((double) currentHeat / 100)))) ? 0 : (int) (50 + (50 * ((double) currentHeat / 100)));
+		int pEnergyCost = (int) (50 + (50 * (currentHeat / 100D)));
+		energyCost = (input.getFluid() == null || isCooling || energy < pEnergyCost) ? 0 : pEnergyCost;
 		double factor = 0;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_1))
-			factor += 0.1;
+			factor += ConfigurationHandler.refineryEfficiency1EnergyCostModifier;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_2))
-			factor += 0.15;
+			factor += ConfigurationHandler.refineryEfficiency2EnergyCostModifier;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_3))
-			factor += 0.25;
+			factor += ConfigurationHandler.refineryEfficiency3EnergyCostModifier;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_1))
-			factor -= 0.2;
+			factor += ConfigurationHandler.refinerySpeed1EnergyCostModifier;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_2))
-			factor -= 0.3;
+			factor += ConfigurationHandler.refinerySpeed2EnergyCostModifier;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_3))
-			factor -= 0.5;
-		energyCost -= (energyCost * factor);
+			factor += ConfigurationHandler.refinerySpeed3EnergyCostModifier;
+		energyCost += (energyCost * factor);
 		energy -= energyCost * ConfigurationHandler.energyUseRefineryMultiplier;
 		if (currentHeat < requiredHeat) {
 			return;
 		}
 		int count = 1;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_1))
-			count++;
+			count += ConfigurationHandler.refinerySpeed1SpeedModifier;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_2))
-			count += 2;
+			count += ConfigurationHandler.refinerySpeed2SpeedModifier;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_3))
-			count += 3;
+			count += ConfigurationHandler.refinerySpeed3SpeedModifier;
 		for (int i = 0; i < count; i++) {
 			if (energyCost == 0 || input.isEmpty() || output.isFull() || !input.getFluid().isFluidEqual(inputFluidStack) || input.getFluidAmount() < inputFluidStack.amount || (!output.isEmpty() && !output.getFluid().isFluidEqual(outputFluidStack)) || output.getFreeSpace() < outputFluidStack.amount)
 				return;

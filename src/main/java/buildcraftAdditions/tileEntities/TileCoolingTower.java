@@ -28,6 +28,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.networking.ISynchronizedTile;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.recipe.refinery.ICoolingTowerRecipe;
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
@@ -78,7 +79,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 				TileEntity entity = location.getTileEntity();
 				if (entity != null && entity instanceof IFluidHandler && !(entity instanceof TileCoolingTower) && master.output.getFluidType() != null) {
 					IFluidHandler tank = (IFluidHandler) entity;
-					int drain = tank.fill(direction.getOpposite(), new FluidStack(master.output.getFluidType(), 100), false);
+					int drain = tank.fill(direction.getOpposite(), new FluidStack(master.output.getFluidType(), ConfigurationHandler.coolingTowerAutoExportMaxTransfer), false);
 					FluidStack stack = master.drain(drain, true, 1);
 					tank.fill(direction.getOpposite(), stack, true);
 				}
@@ -94,7 +95,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 				TileEntity tile = location.getTileEntity();
 				if (tile != null && tile instanceof IFluidHandler && !master.input.isFull()) {
 					IFluidHandler tank = (IFluidHandler) tile;
-					FluidStack drain = tank.drain(direction.getOpposite(), 100, false);
+					FluidStack drain = tank.drain(direction.getOpposite(), ConfigurationHandler.coolingTowerAutoImportMaxTransfer, false);
 					int fill = master.input.fill(drain, true);
 					if (fill > 0)
 						tank.drain(direction.getOpposite(), fill, true);
@@ -114,20 +115,20 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			coolant.drain(1, true);
 			float factor = 1;
 			if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_1))
-				factor += 0.25;
+				factor += ConfigurationHandler.coolingTowerEfficiency1CoolingModifier;
 			if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_2))
-				factor += 0.5;
+				factor += ConfigurationHandler.coolingTowerEfficiency2CoolingModifier;
 			if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_3))
-				factor += 1;
+				factor += ConfigurationHandler.coolingTowerEfficiency3CoolingModifier;
 			heat -= cooling.getDegreesCoolingPerMB(heat) * factor;
 		}
 		int count = 1;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_1))
-			count++;
+			count += ConfigurationHandler.coolingTowerSpeed1SpeedModifier;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_2))
-			count += 2;
+			count += ConfigurationHandler.coolingTowerSpeed2SpeedModifier;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.SPEED_3))
-			count += 3;
+			count += ConfigurationHandler.coolingTowerSpeed3SpeedModifier;
 		for (int i = 0; i < count; i++) {
 			if (heat > 80 || recipe == null || output.isFull() || input.isEmpty() || !input.getFluid().isFluidEqual(recipe.getInput()) || input.getFluidAmount() < recipe.getInput().amount || (!output.isEmpty() && !output.getFluid().isFluidEqual(recipe.getOutput())) || output.getFreeSpace() < recipe.getOutput().amount)
 				return;
