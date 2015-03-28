@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -76,24 +75,7 @@ public class ItemPoweredBase extends ItemBase implements IEnergyContainerItem {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advancedTooltips) {
-		int energy = getEnergyStored(stack);
-		int maxEnergy = getMaxEnergyStored(stack);
-		int percent = maxEnergy != 0 ? (energy * 100) / maxEnergy : 0;
-		String color = "";
-		if (percent > 75) {
-			color += EnumChatFormatting.DARK_GREEN;
-		} else if (percent > 60) {
-			color += EnumChatFormatting.GREEN;
-		} else if (percent > 45) {
-			color += EnumChatFormatting.YELLOW;
-		} else if (percent > 30) {
-			color += EnumChatFormatting.GOLD;
-		} else if (percent > 15) {
-			color += EnumChatFormatting.RED;
-		} else {
-			color += EnumChatFormatting.DARK_RED;
-		}
-		list.add((color.equals("") ? "" : color) + Utils.localizeFormatted("rf.info", energy, maxEnergy));
+		list.add(Utils.getRFInfoTooltip(getEnergyStored(stack), getMaxEnergyStored(stack)));
 	}
 
 	@Override

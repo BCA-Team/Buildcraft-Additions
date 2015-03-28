@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.TileBackpackStand;
-import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -25,23 +25,25 @@ public class BlockGhostBackpackStand extends BlockBase {
 
 	public BlockGhostBackpackStand() {
 		super("blockGhost");
+		setCreativeTab(null);
+		isBlockContainer = false;
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
+			if (world.getBlock(x, y - 1, z) != ItemsAndBlocks.backpackStand)
+				return true;
 			TileEntity entity = world.getTileEntity(x, y - 1, z);
 			if (entity != null && entity instanceof TileBackpackStand) {
 				((TileBackpackStand) entity).onBlockActivated(hitX, hitY + 1, hitZ, world.getBlockMetadata(x, y - 1, z), player);
-			} else {
-				world.setBlockToAir(x, y, z);
 			}
 		}
 		return true;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return null;
 	}
 
@@ -57,12 +59,8 @@ public class BlockGhostBackpackStand extends BlockBase {
 
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player) {
-		Utils.harvestBlock(world, x, y - 1, z, player);
-	}
-
-	@Override
-	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
-		world.setBlockToAir(x, y - 1, z);
+		if (player.capabilities.isCreativeMode && world.getBlock(x, y - 1, z) == ItemsAndBlocks.backpackStand)
+			world.setBlockToAir(x, y - 1, z);
 	}
 
 	@Override
@@ -72,7 +70,7 @@ public class BlockGhostBackpackStand extends BlockBase {
 	}
 
 	@Override
-	public Item getItemDropped(int number, Random random, int anotherNumber) {
+	public Item getItemDropped(int meta, Random random, int fortune) {
 		return null;
 	}
 

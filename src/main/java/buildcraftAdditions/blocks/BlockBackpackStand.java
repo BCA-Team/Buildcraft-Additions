@@ -26,7 +26,6 @@ public class BlockBackpackStand extends BlockRotationBase {
 		super("backpackStand", "", false);
 	}
 
-
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileBackpackStand();
@@ -35,6 +34,8 @@ public class BlockBackpackStand extends BlockRotationBase {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
+			if (world.getBlock(x, y + 1, z) != ItemsAndBlocks.backpackStandGhost)
+				return true;
 			TileEntity entity = world.getTileEntity(x, y, z);
 			if (entity != null && entity instanceof TileBackpackStand) {
 				((TileBackpackStand) entity).onBlockActivated(hitX, hitY, hitZ, world.getBlockMetadata(x, y, z), player);
@@ -84,5 +85,19 @@ public class BlockBackpackStand extends BlockRotationBase {
 			stand.inventory.setInventorySlotContents(0, null);
 		}
 		super.breakBlock(world, x, y, z, block, meta);
+	}
+
+	@Override
+	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+		return super.canPlaceBlockAt(world, x, y, z) && world.isAirBlock(x, y + 1, z);
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+		if (world.getBlock(x, y + 1, z) != ItemsAndBlocks.backpackStandGhost) {
+			world.setBlockToAir(x, y, z);
+			if (!world.isRemote)
+				dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+		}
 	}
 }

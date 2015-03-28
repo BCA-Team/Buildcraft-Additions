@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
 import buildcraftAdditions.client.models.ModelBackpackStand;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -34,6 +35,11 @@ public class BackpackStandItemRenderer implements IItemRenderer {
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		GL11.glPushMatrix();
 		switch (type) {
+			case ENTITY:
+				GL11.glTranslated(0, 1, 0);
+				GL11.glRotated(180, 1, 0, 0);
+				GL11.glRotated(90, 0, 1, 0);
+				break;
 			case EQUIPPED:
 				GL11.glRotated(180, 0, 0, 1);
 				GL11.glTranslated(-0.75, 0, 0);
@@ -48,8 +54,10 @@ public class BackpackStandItemRenderer implements IItemRenderer {
 				GL11.glRotated(180, 1, 0, 0);
 				GL11.glTranslated(0, -1, 0);
 				break;
+			default:
+				break;
 		}
-		ModelBackpackStand.INSTANCE2.render(null, 0, 0, 0, 0, 0, 0.06f);
+		ModelBackpackStand.INSTANCE2.render(null, 0, 0, 0, 0, 0, 0.0625F);
 
 		GL11.glPopMatrix();
 	}
