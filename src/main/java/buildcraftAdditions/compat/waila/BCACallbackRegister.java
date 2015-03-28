@@ -1,5 +1,7 @@
 package buildcraftAdditions.compat.waila;
 
+import buildcraftAdditions.blocks.BlockGhostBackpackStand;
+import buildcraftAdditions.compat.waila.module.BackbackStandGhostBlockProvider;
 import buildcraftAdditions.compat.waila.module.DusterDataProvider;
 import buildcraftAdditions.compat.waila.module.KEBT1DataProvider;
 import buildcraftAdditions.compat.waila.module.RefineryDataProvider;
@@ -11,6 +13,7 @@ import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
 import buildcraftAdditions.tileEntities.TileRefinery;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 
+import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
 
 /**
@@ -23,18 +26,27 @@ import mcp.mobius.waila.api.IWailaRegistrar;
 public class BCACallbackRegister {
 
 	public static void register(IWailaRegistrar registrar) {
-		registrar.registerStackProvider(new UpgradableMachineDataProvider(), IUpgradableMachine.class);
-		registrar.registerBodyProvider(new UpgradableMachineDataProvider(), IUpgradableMachine.class);
-		registrar.registerNBTProvider(new UpgradableMachineDataProvider(), IUpgradableMachine.class);
+		IWailaDataProvider provider = null;
 
+		provider = new UpgradableMachineDataProvider();
+		registrar.registerStackProvider(provider, IUpgradableMachine.class);
+		registrar.registerBodyProvider(provider, IUpgradableMachine.class);
+		registrar.registerNBTProvider(provider, IUpgradableMachine.class);
 
-		registrar.registerStackProvider(new KEBT1DataProvider(), TileKineticEnergyBufferTier1.class);
+		provider = new KEBT1DataProvider();
+		registrar.registerStackProvider(provider, TileKineticEnergyBufferTier1.class);
 
-		registrar.registerBodyProvider(new RefineryDataProvider(), TileRefinery.class);
-		registrar.registerNBTProvider(new RefineryDataProvider(), TileRefinery.class);
+		provider = new BackbackStandGhostBlockProvider();
+		registrar.registerStackProvider(provider, BlockGhostBackpackStand.class);
 
-		registrar.registerBodyProvider(new DusterDataProvider(), TileBaseDuster.class);
-		registrar.registerNBTProvider(new DusterDataProvider(), TileBaseDuster.class);
+		provider = new RefineryDataProvider();
+		registrar.registerBodyProvider(provider, TileRefinery.class);
+		registrar.registerNBTProvider(provider, TileRefinery.class);
+
+		provider = new DusterDataProvider();
+		registrar.registerBodyProvider(provider, TileBaseDuster.class);
+		registrar.registerNBTProvider(provider, TileBaseDuster.class);
+
 		registrar.addConfigRemote(Variables.MOD.NAME, CompatWaila.GRAPHICAL_DUSTER_PROGRESS_CONFIG_KEY, true);
 		registrar.addConfigRemote(Variables.MOD.NAME, CompatWaila.TEXTUAL_DUSTER_PROGRESS_CONFIG_KEY, false);
 

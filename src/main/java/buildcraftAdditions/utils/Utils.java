@@ -28,6 +28,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.server.S23PacketBlockChange;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -98,6 +99,24 @@ public class Utils {
 			}
 		}
 		return localizeFormatted(key, objects);
+	}
+
+	public static String getRFInfoTooltip(int energy, int maxEnergy) {
+		int percent = maxEnergy > 0 ? ((energy * 100) / maxEnergy) : 0;
+		String color = "";
+		if (percent >= 75)
+			color += EnumChatFormatting.DARK_GREEN;
+		else if (percent >= 60)
+			color += EnumChatFormatting.GREEN;
+		else if (percent >= 45)
+			color += EnumChatFormatting.YELLOW;
+		else if (percent >= 30)
+			color += EnumChatFormatting.GOLD;
+		else if (percent >= 15)
+			color += EnumChatFormatting.RED;
+		else
+			color += EnumChatFormatting.DARK_RED;
+		return color + localizeFormatted("rf.info", energy, maxEnergy);
 	}
 
 	public static String decapitalizeFirstChar(String string) {
