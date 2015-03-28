@@ -311,6 +311,24 @@ keb=Kinetic Energy Buffer
 
 heated furnace=Heated Furnace
 
+charging station=Charging Station
+
+feature=Feature
+
+fluidic compressor=Fluidic Compressor
+
+mechanical duster=Mechanical Duster
+
+power capsule=Power Capsule
+
+refinery=Refinery
+
+upgrades=Upgrades
+
+upgrades.refinery=Refinery Upgrades
+
+upgrades.cooling tower=Cooling Tower Upgrades
+
 power usage=Kinetic Multi-Tool
 BaseModifier=Base Modifier
 BaseModifier.tooltip=Base energy the multi-tool uses for breaking a block

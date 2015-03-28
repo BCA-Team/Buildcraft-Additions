@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiScreen;
 import cpw.mods.fml.client.config.GuiConfig;
 import cpw.mods.fml.client.config.IConfigElement;
 
+import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.ConfigElement;
 
 import buildcraftAdditions.utils.Utils;
@@ -27,8 +28,11 @@ public class ConfigGui extends GuiConfig {
 
 	public static List<IConfigElement> getList() {
 		List list = new ArrayList<IConfigElement>();
-		for (String category : ConfigurationHandler.configFile.getCategoryNames())
-			list.add(new ConfigElement(ConfigurationHandler.configFile.getCategory(category)));
+		for (String categoryName : ConfigurationHandler.configFile.getCategoryNames()) {
+			ConfigCategory category = ConfigurationHandler.configFile.getCategory(categoryName);
+			if (category != null && !category.isChild())
+				list.add(new ConfigElement(category));
+		}
 		return list;
 	}
 }

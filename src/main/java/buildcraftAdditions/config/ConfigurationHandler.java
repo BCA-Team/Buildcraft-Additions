@@ -22,6 +22,10 @@ public class ConfigurationHandler {
 	public static boolean shouldPrintChangelog, shouldRegisterDusts, powerloss, eurekaIntegration;
 	public static int basePowerModifier, entityHitModifier, hoeCost, toolHarvestLevel, KEB1powerloss, KEB2powerloss, KEB3powerloss, heatedFurnaceHeatRequired, basicCoilHeat, lavaCoilHeat, kineticCoilHeatModifier, portableLaserPowerUse, portableLaserLaserPower, portableLaserEntityBurnTime, capacityPipeColoringTool, maxTransferColoringTool, energyUseColoringTool, capacityPowerCapsuleTier1, maxTransferPowerCapsuleTier1, capacityPowerCapsuleTier2, maxTransferPowerCapsuleTier2, capacityPowerCapsuleTier3, maxTransferPowerCapsuleTier3, capacityKEBTier1, maxTransferKEBTier1, capacityKEBTier2, maxTransferKEBTier2, capacityKEBTier3, maxTransferKEBTier3, capacityChargingStation, maxTransferChargingStation, capacityFluidicCompressor, maxTransferFluidicCompressor, capacityMechanicalDuster, maxTransferMechanicalDuster, energyUseMechanicalDuster, capacityRefinery, maxTransferRefinery, energyUseRefineryMultiplier;
 	public static float portableLaserEntityDamage, toolEfficiencyPickaxe, toolEfficiencyShovel, toolEfficiencyAxe, toolEfficiencyAreaMultiplier, entityDamage;
+	public static int refineryAutoExportMaxTransfer, refineryAutoImportMaxTransfer, refinerySpeed1SpeedModifier, refinerySpeed2SpeedModifier, refinerySpeed3SpeedModifier;
+	public static double refineryEfficiency1EnergyCostModifier, refineryEfficiency2EnergyCostModifier, refineryEfficiency3EnergyCostModifier, refinerySpeed1EnergyCostModifier, refinerySpeed2EnergyCostModifier, refinerySpeed3EnergyCostModifier;
+	public static int coolingTowerAutoExportMaxTransfer, coolingTowerAutoImportMaxTransfer, coolingTowerSpeed1SpeedModifier, coolingTowerSpeed2SpeedModifier, coolingTowerSpeed3SpeedModifier;
+	public static float coolingTowerEfficiency1CoolingModifier, coolingTowerEfficiency2CoolingModifier, coolingTowerEfficiency3CoolingModifier;
 
 	public static void init(File file) {
 		configFile = new Configuration(file);
@@ -114,6 +118,28 @@ public class ConfigurationHandler {
 		maxTransferPowerCapsuleTier2 = configFile.get("Power Capsule", "PowerCapsuleTier2MaxTransfer", 4096).setMinValue(0).getInt();
 		maxTransferPowerCapsuleTier3 = configFile.get("Power Capsule", "PowerCapsuleTier3MaxTransfer", 16384).setMinValue(0).getInt();
 
+		configFile.addCustomCategoryComment("Upgrades.Refinery", "Configuration stuff for your refinery upgrades");
+		refineryAutoExportMaxTransfer = configFile.get("Upgrades.Refinery", "UpgradesRefineryAutoExportMaxTransfer", 100).setMinValue(0).getInt();
+		refineryAutoImportMaxTransfer = configFile.get("Upgrades.Refinery", "UpgradesRefineryAutoImportMaxTransfer", 100).setMinValue(0).getInt();
+		refineryEfficiency1EnergyCostModifier = configFile.get("Upgrades.Refinery", "UpgradesRefineryEfficiency1EnergyCostModifier", -0.1).setMaxValue(0).getDouble();
+		refineryEfficiency2EnergyCostModifier = configFile.get("Upgrades.Refinery", "UpgradesRefineryEfficiency2EnergyCostModifier", -0.15).setMaxValue(0).getDouble();
+		refineryEfficiency3EnergyCostModifier = configFile.get("Upgrades.Refinery", "UpgradesRefineryEfficiency3EnergyCostModifier", -0.25).setMaxValue(0).getDouble();
+		refinerySpeed1EnergyCostModifier = configFile.get("Upgrades.Refinery", "UpgradesRefinerySpeed1EnergyCostModifier", 0.2).setMinValue(0).getDouble();
+		refinerySpeed2EnergyCostModifier = configFile.get("Upgrades.Refinery", "UpgradesRefinerySpeed2EnergyCostModifier", 0.3).setMinValue(0).getDouble();
+		refinerySpeed3EnergyCostModifier = configFile.get("Upgrades.Refinery", "UpgradesRefinerySpeed3EnergyCostModifier", 0.5).setMinValue(0).getDouble();
+		refinerySpeed1SpeedModifier = configFile.get("Upgrades.Refinery", "UpgradesRefinerySpeed1SpeedModifier", 1).setMinValue(0).getInt();
+		refinerySpeed2SpeedModifier = configFile.get("Upgrades.Refinery", "UpgradesRefinerySpeed2SpeedModifier", 2).setMinValue(0).getInt();
+		refinerySpeed3SpeedModifier = configFile.get("Upgrades.Refinery", "UpgradesRefinerySpeed3SpeedModifier", 3).setMinValue(0).getInt();
+
+		configFile.addCustomCategoryComment("Upgrades.Cooling Tower", "Configuration stuff for your cooling tower upgrades");
+		coolingTowerAutoExportMaxTransfer = configFile.get("Upgrades.Cooling Tower", "UpgradesCoolingTowerAutoExportMaxTransfer", 100).setMinValue(0).getInt();
+		coolingTowerAutoImportMaxTransfer = configFile.get("Upgrades.Cooling Tower", "UpgradesCoolingTowerAutoImportMaxTransfer", 100).setMinValue(0).getInt();
+		coolingTowerSpeed1SpeedModifier = configFile.get("Upgrades.Cooling Tower", "UpgradesCoolingTowerSpeed1SpeedModifier", 1).setMinValue(0).getInt();
+		coolingTowerSpeed2SpeedModifier = configFile.get("Upgrades.Cooling Tower", "UpgradesCoolingTowerSpeed2SpeedModifier", 2).setMinValue(0).getInt();
+		coolingTowerSpeed3SpeedModifier = configFile.get("Upgrades.Cooling Tower", "UpgradesCoolingTowerSpeed3SpeedModifier", 3).setMinValue(0).getInt();
+		coolingTowerEfficiency1CoolingModifier = (float) configFile.get("Upgrades.Cooling Tower", "UpgradesCoolingTowerEfficiency1CoolingModifier", 0.25).setMinValue(0).setMaxValue(Float.MAX_VALUE).getDouble();
+		coolingTowerEfficiency2CoolingModifier = (float) configFile.get("Upgrades.Cooling Tower", "UpgradesCoolingTowerEfficiency2CoolingModifier", 0.5).setMinValue(0).setMaxValue(Float.MAX_VALUE).getDouble();
+		coolingTowerEfficiency3CoolingModifier = (float) configFile.get("Upgrades.Cooling Tower", "UpgradesCoolingTowerEfficiency3CoolingModifier", 1D).setMinValue(0).setMaxValue(Float.MAX_VALUE).getDouble();
 
 		configFile.addCustomCategoryComment("Misc", "Stuff that didn't fit in any other category");
 		shouldRegisterDusts = configFile.get("Misc", "shouldRegisterDusts", true).setRequiresMcRestart(true).getBoolean();
