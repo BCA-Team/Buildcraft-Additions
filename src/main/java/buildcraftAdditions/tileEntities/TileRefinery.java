@@ -112,8 +112,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 					IFluidHandler tank = (IFluidHandler) tile;
 					FluidStack drain = tank.drain(direction.getOpposite(), ConfigurationHandler.refineryAutoImportMaxTransfer, false);
 					int fill = fill(ForgeDirection.UNKNOWN, drain, true);
-						if (fill > 0)
-							tank.drain(direction.getOpposite(), fill, true);
+					if (fill > 0)
+						tank.drain(direction.getOpposite(), fill, true);
 				}
 			}
 		}
