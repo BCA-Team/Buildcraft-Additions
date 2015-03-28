@@ -61,6 +61,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public int energy, currentHeat, requiredHeat, energyCost, heatTimer, lastRequiredHeat;
 	public boolean valve, isCooling, moved;
 	public TileRefinery master;
+	private boolean firstTick = true;
 	private FluidStack outputFluidStack;
 	private FluidStack inputFluidStack;
 	private String inputFluid, outputFluid;
@@ -110,9 +111,10 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 				if (tile != null && tile instanceof IFluidHandler && !master.input.isFull()) {
 					IFluidHandler tank = (IFluidHandler) tile;
 					FluidStack drain = tank.drain(direction.getOpposite(), 100, false);
-					int fill = master.input.fill(drain, true);
-					if (fill > 0)
+					int fill = fill(ForgeDirection.UNKNOWN, drain, true);
+					if (fill > 0) {
 						tank.drain(direction.getOpposite(), fill, true);
+					}
 				}
 			}
 		}
@@ -125,6 +127,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (input.getFluid() == null)
 			updateRecipe();
 		updateHeat();
+		if (firstTick)
+			firstTick = false;
 		energyCost = (input.getFluid() == null || isCooling || energy < (int) (50 + (50 * ((double) currentHeat / 100)))) ? 0 : (int) (50 + (50 * ((double) currentHeat / 100)));
 		double factor = 0;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_1))
@@ -160,7 +164,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	}
 
 	private void updateHeat() {
-		if (worldObj.isRemote)
+		if (worldObj.isRemote || firstTick)
 			return;
 		if (heatTimer == 0) {
 			if ((currentHeat > requiredHeat || (energy < energyCost || energyCost == 0)) && currentHeat > 20) {
@@ -278,12 +282,12 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
+		data.readFromNBT(tag);
 		valve = tag.getBoolean("valve");
 		energy = tag.getInteger("energy");
 		currentHeat = tag.getInteger("currentHeat");
 		requiredHeat = tag.getInteger("requiredHeat");
 		lastRequiredHeat = tag.getInteger("lastRequiredHeat");
-		data.readFromNBT(tag);
 		if (tag.hasKey("input", Constants.NBT.TAG_COMPOUND))
 			input.readFromNBT(tag.getCompoundTag("input"));
 		if (tag.hasKey("output", Constants.NBT.TAG_COMPOUND))
@@ -299,7 +303,6 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		data.writeToNBT(tag);
 		tag.setBoolean("valve", valve);
 		tag.setInteger("energy", energy);
 		tag.setInteger("currentHeat", currentHeat);
@@ -307,6 +310,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		tag.setInteger("lastRequiredHeat", lastRequiredHeat);
 		tag.setTag("input", input.writeToNBT(new NBTTagCompound()));
 		tag.setTag("output", output.writeToNBT(new NBTTagCompound()));
+		data.writeToNBT(tag);
 		upgrades.writeToNBT(tag);
 	}
 

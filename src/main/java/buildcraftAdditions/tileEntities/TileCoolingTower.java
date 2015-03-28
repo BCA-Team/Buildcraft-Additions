@@ -95,9 +95,10 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 				if (tile != null && tile instanceof IFluidHandler && !master.input.isFull()) {
 					IFluidHandler tank = (IFluidHandler) tile;
 					FluidStack drain = tank.drain(direction.getOpposite(), 100, false);
-					int fill = master.input.fill(drain, true);
-					if (fill > 0)
+					int fill = fill(ForgeDirection.UNKNOWN, drain, true);
+					if (fill > 0) {
 						tank.drain(direction.getOpposite(), fill, true);
+					}
 				}
 			}
 		}
