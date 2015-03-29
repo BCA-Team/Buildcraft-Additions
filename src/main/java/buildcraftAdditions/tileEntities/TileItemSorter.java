@@ -51,7 +51,7 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 		if (!injectable.canInjectItems(getExitSide().getOpposite()))
 			return;
 		EnumColor color = null;
-		for (int i = 1; i < inventory.getSizeInventory() - 1; i++) {
+		for (int i = 1; i < inventory.getSizeInventory(); i++) {
 			if (areStacksEqual(inventory.getStackInSlot(i), stack)) {
 				color = EnumColor.values()[15 - colors[1 + (i - 1) / 6]];
 				break;
