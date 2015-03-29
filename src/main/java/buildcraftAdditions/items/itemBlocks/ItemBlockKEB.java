@@ -49,8 +49,11 @@ public class ItemBlockKEB extends ItemBlock implements IEnergyContainerItem {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean visible) {
 		list.add(Utils.getRFInfoTooltip(getEnergyStored(stack), getMaxEnergyStored(stack)));
-		if (stack.stackTagCompound != null)
+		if (stack.stackTagCompound != null) {
 			list.add("" + EnumChatFormatting.GRAY + EnumChatFormatting.ITALIC + Utils.localize("configured"));
+			if (stack.stackTagCompound.getBoolean("creative"))
+				list.add(Utils.localize("tooltip.creativeOnly"));
+		}
 	}
 
 	@Override

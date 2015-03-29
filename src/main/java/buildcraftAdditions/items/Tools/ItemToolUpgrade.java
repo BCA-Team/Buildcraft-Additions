@@ -37,5 +37,6 @@ public class ItemToolUpgrade extends ItemBase {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advancedItemTooltips) {
 		list.add(Utils.localize("tooltip.forKineticMultiTool"));
+		list.add(Utils.localize("tooltip." + getName() + ".use"));
 	}
 }

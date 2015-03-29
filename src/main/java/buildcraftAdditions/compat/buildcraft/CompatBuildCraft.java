@@ -12,7 +12,7 @@ import buildcraftAdditions.compat.buildcraft.actions.Actions;
 import buildcraftAdditions.compat.buildcraft.recipe.BCRecipeManager;
 import buildcraftAdditions.compat.buildcraft.schematics.BCASchematics;
 import buildcraftAdditions.compat.buildcraft.triggers.Triggers;
-import buildcraftAdditions.items.RobotDebugTool;
+import buildcraftAdditions.items.ItemRobotDebugTool;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
@@ -51,7 +51,7 @@ public class CompatBuildCraft {
 	}
 
 	private void addRobotDebugTool() {
-		robotDebugTool = new RobotDebugTool();
+		robotDebugTool = new ItemRobotDebugTool();
 		GameRegistry.registerItem(robotDebugTool, "robotDebugTool");
 	}
 
