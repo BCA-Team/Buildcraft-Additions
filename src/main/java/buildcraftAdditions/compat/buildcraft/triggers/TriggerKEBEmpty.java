@@ -24,6 +24,6 @@ public class TriggerKEBEmpty extends BasicTrigger {
 
 	@Override
 	public boolean isTriggerActive(TileEntity target, ForgeDirection side, IStatementContainer source, IStatementParameter[] parameters) {
-		return target instanceof TileKineticEnergyBufferBase && ((TileKineticEnergyBufferBase) target).getEnergyLevel() == 0;
+		return target instanceof TileKineticEnergyBufferBase && ((TileKineticEnergyBufferBase) target).getEnergyStored(ForgeDirection.UNKNOWN) == 0;
 	}
 }
