@@ -3,11 +3,8 @@ package buildcraftAdditions.reference;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-
-import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraftAdditions.armour.ItemKineticBackpack;
 import buildcraftAdditions.blocks.BlockBCKinesisPipeWood;
@@ -35,6 +32,7 @@ import buildcraftAdditions.blocks.multiBlocks.MultiBlockKEBT3Plating;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryValve;
 import buildcraftAdditions.blocks.multiBlocks.MultiBlockRefineryWalls;
 import buildcraftAdditions.core.VersionCheck;
+import buildcraftAdditions.items.ItemStickBCA;
 import buildcraftAdditions.items.ItemBase;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemMachineConfigurator;
@@ -104,17 +102,17 @@ public final class ItemsAndBlocks {
 	public static ItemPoweredBase powerCapsuleTier1;
 	public static ItemPoweredBase powerCapsuleTier2;
 	public static ItemPoweredBase powerCapsuleTier3;
-	public static ItemBase ironStick;
-	public static ItemBase goldStick;
-	public static ItemBase diamondStick;
-	public static ItemBase emeraldStick;
-	public static ItemBase netherStarStick;
-	public static ItemBase quartzStick;
-	public static ItemBase enderStick;
-	public static ItemBase redstoneStick;
-	public static ItemBase glowstoneStick;
-	public static ItemBase slimeStick;
-	public static ItemBase blazeStick;
+	public static ItemStickBCA ironStick;
+	public static ItemStickBCA goldStick;
+	public static ItemStickBCA diamondStick;
+	public static ItemStickBCA emeraldStick;
+	public static ItemStickBCA netherStarStick;
+	public static ItemStickBCA quartzStick;
+	public static ItemStickBCA enderStick;
+	public static ItemStickBCA redstoneStick;
+	public static ItemStickBCA glowstoneStick;
+	public static ItemStickBCA slimeStick;
+	public static ItemStickBCA blazeStick;
 	public static Item toolCore;
 	public static ItemToolUpgrade toolUpgradeHoe;
 	public static ItemToolUpgrade toolUpgradeDigger;
@@ -164,49 +162,38 @@ public final class ItemsAndBlocks {
 		powerCapsuleTier3 = new ItemPoweredBase("PowerCapsuleTier3", 1000000, 16384);
 		GameRegistry.registerItem(powerCapsuleTier3, "powerCapsuleTier3");
 
-		ironStick = new ItemBase("stickIron");
+		ironStick = new ItemStickBCA("Iron");
 		GameRegistry.registerItem(ironStick, "stickIron");
-		OreDictionary.registerOre("stickIron", new ItemStack(ironStick));
 
-		goldStick = new ItemBase("stickGold");
+		goldStick = new ItemStickBCA("Gold");
 		GameRegistry.registerItem(goldStick, "stickGold");
-		OreDictionary.registerOre("stickGold", new ItemStack(goldStick));
 
-		diamondStick = new ItemBase("stickDiamond");
+		diamondStick = new ItemStickBCA("Diamond");
 		GameRegistry.registerItem(diamondStick, "stickDiamond");
-		OreDictionary.registerOre("stickDiamond", new ItemStack(diamondStick));
 
-		emeraldStick = new ItemBase("stickEmerald");
+		emeraldStick = new ItemStickBCA("Emerald");
 		GameRegistry.registerItem(emeraldStick, "stickEmerald");
-		OreDictionary.registerOre("stickEmerald", new ItemStack(emeraldStick));
 
-		netherStarStick = new ItemBase("stickNetherStar");
+		netherStarStick = new ItemStickBCA("NetherStar");
 		GameRegistry.registerItem(netherStarStick, "stickNetherStar");
-		OreDictionary.registerOre("stickNetherStar", new ItemStack(netherStarStick));
 
-		quartzStick = new ItemBase("stickQuartz");
+		quartzStick = new ItemStickBCA("Quartz");
 		GameRegistry.registerItem(quartzStick, "stickQuartz");
-		OreDictionary.registerOre("stickQuartz", new ItemStack(quartzStick));
 
-		enderStick = new ItemBase("stickEnder");
+		enderStick = new ItemStickBCA("Ender");
 		GameRegistry.registerItem(enderStick, "stickEnder");
-		OreDictionary.registerOre("stickEnder", new ItemStack(enderStick));
 
-		redstoneStick = new ItemBase("stickRedstone");
+		redstoneStick = new ItemStickBCA("Redstone");
 		GameRegistry.registerItem(redstoneStick, "stickRedstone");
-		OreDictionary.registerOre("stickRedstone", new ItemStack(redstoneStick));
 
-		glowstoneStick = new ItemBase("stickGlowstone");
+		glowstoneStick = new ItemStickBCA("Glowstone");
 		GameRegistry.registerItem(glowstoneStick, "stickGlowstone");
-		OreDictionary.registerOre("stickGlowstone", new ItemStack(glowstoneStick));
 
-		slimeStick = new ItemBase("stickSlime");
+		slimeStick = new ItemStickBCA("Slime");
 		GameRegistry.registerItem(slimeStick, "stickSlime");
-		OreDictionary.registerOre("stickSlime", new ItemStack(slimeStick));
 
-		blazeStick = new ItemBase("stickBlaze");
+		blazeStick = new ItemStickBCA("Blaze");
 		GameRegistry.registerItem(blazeStick, "stickBlaze");
-		OreDictionary.registerOre("stickBlaze", new ItemStack(blazeStick));
 
 		toolCore = new ItemBase("toolCore");
 		GameRegistry.registerItem(toolCore, "toolCore");

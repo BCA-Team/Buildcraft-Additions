@@ -1,5 +1,7 @@
 package buildcraftAdditions.items;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -7,12 +9,18 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.robots.EntityRobotBase;
 import buildcraft.api.transport.pluggable.PipePluggable;
 import buildcraft.robots.RobotStationPluggable;
 import buildcraft.transport.TileGenericPipe;
+
+import buildcraftAdditions.utils.Utils;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -20,8 +28,9 @@ import buildcraft.transport.TileGenericPipe;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class RobotDebugTool extends ItemBase {
-	public RobotDebugTool() {
+public class ItemRobotDebugTool extends ItemBase {
+
+	public ItemRobotDebugTool() {
 		super("robotDebugTool");
 	}
 
@@ -49,5 +58,11 @@ public class RobotDebugTool extends ItemBase {
 
 	@Override
 	public void registerIcons(IIconRegister register) {
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advancedItemTooltips) {
+		list.add(Utils.localize("tooltip.creativeOnly"));
 	}
 }
