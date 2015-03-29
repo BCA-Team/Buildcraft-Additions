@@ -15,6 +15,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
 
+import buildcraft.api.transport.IPipeConnection;
+import buildcraft.api.transport.IPipeTile;
+
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
@@ -36,7 +39,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public abstract class TileKineticEnergyBufferBase extends TileBase implements IEnergyReceiver, IEnergyProvider, IConfigurableOutput, ISynchronizedTile, IOwnableMachine {
+public abstract class TileKineticEnergyBufferBase extends TileBase implements IEnergyReceiver, IEnergyProvider, IConfigurableOutput, ISynchronizedTile, IOwnableMachine, IPipeConnection {
 
 	public final int tier;
 	protected final SideConfiguration configuration = new SideConfiguration();
@@ -247,5 +250,11 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	@Override
 	public void setSideConfiguration(SideConfiguration configuration) {
 		this.configuration.load(configuration);
+	}
+
+	public ConnectOverride overridePipeConnection(IPipeTile.PipeType type, ForgeDirection from) {
+		if ((configuration.getStatus(from).canReceive() || configuration.getStatus(from).canSend()) && type == IPipeTile.PipeType.POWER)
+			return ConnectOverride.CONNECT;
+		return ConnectOverride.DISCONNECT;
 	}
 }
