@@ -1,7 +1,10 @@
 package buildcraftAdditions.inventories.containers;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 
+import buildcraftAdditions.api.networking.MessageByteBuff;
+import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.PlayerUtils;
 
@@ -16,9 +19,19 @@ public class ContainerKEB extends ContainerBase<TileKineticEnergyBufferBase> {
 
 	public ContainerKEB(EntityPlayer player, TileKineticEnergyBufferBase tile) {
 		super(player.inventory, tile);
-		tile.sync();
 		if (PlayerUtils.playerMatches(tile, player))
 			tile.destroyer = player;
+	}
+
+	@Override
+	public void detectAndSendChanges() {
+		super.detectAndSendChanges();
+		if (crafters != null) {
+			MessageByteBuff msg = new MessageByteBuff(inventory);
+			for (Object o : crafters)
+				if (o != null && o instanceof EntityPlayerMP)
+					PacketHandler.instance.sendTo(msg, (EntityPlayerMP) o);
+		}
 	}
 
 }

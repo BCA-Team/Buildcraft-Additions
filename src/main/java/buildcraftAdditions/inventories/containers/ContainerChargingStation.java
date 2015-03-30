@@ -16,7 +16,7 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ContainerChargingStation extends ContainerBase {
+public class ContainerChargingStation extends ContainerBase<TileChargingStation> {
 
 	public ContainerChargingStation(InventoryPlayer inventoryPlayer, TileChargingStation tile) {
 		super(inventoryPlayer, tile);
