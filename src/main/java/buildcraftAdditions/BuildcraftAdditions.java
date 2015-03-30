@@ -50,7 +50,7 @@ import buildcraftAdditions.reference.Variables;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-@Mod(modid = Variables.MOD.ID, name = Variables.MOD.NAME, version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "required-after:BuildCraft|Core;after:eureka;before:zCraftingManager;required-after:Forge@[10.13.2.1236,);", acceptedMinecraftVersions = "1.7.10")
+@Mod(modid = Variables.MOD.ID, name = Variables.MOD.NAME, version = "@MODVERSION@", guiFactory = "buildcraftAdditions.config.GuiFactory", dependencies = "required-after:BuildCraft|Core;required-after:eureka;before:zCraftingManager;required-after:Forge@[10.13.2.1236,);", acceptedMinecraftVersions = "1.7.10")
 public class BuildcraftAdditions {
 
 	public static final CreativeTabs bcadditions = new TabBCAdditions();

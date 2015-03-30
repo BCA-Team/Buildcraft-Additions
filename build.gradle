@@ -58,9 +58,21 @@ curse {
         projectId = "${curseProps.project_id}"
 
         releaseType = "release"
-        changelog = """fix remapping issue
-no more shipping the BC and RF api's
-fix dust localizations
+        changelog = """update to Eureka 3.0
+Added Kinetic packpack with backpackstand
+sort-o-tron no longer eats lists
+canisters no longer stack
+added decimal separators on large numbers
+more dusts
+improved WAILA tooltips for the dusters
+new gui's
+colored tooltips for items that store power
+kinetic coils now require more power
+added auto-import upgrade
+added portable laser
+added partile effects to the dusters
+more config options (requires regenning the config file)
+bugfixes
 """
     }
 }
