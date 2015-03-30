@@ -9,7 +9,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.compat.CompatModule;
 import buildcraftAdditions.compat.buildcraft.actions.Actions;
-import buildcraftAdditions.compat.buildcraft.recipe.BCRecipeManager;
 import buildcraftAdditions.compat.buildcraft.schematics.BCASchematics;
 import buildcraftAdditions.compat.buildcraft.triggers.Triggers;
 import buildcraftAdditions.items.ItemRobotDebugTool;
@@ -41,7 +40,6 @@ public class CompatBuildCraft {
 		RefineryRecipeConverter.doYourThing();
 		Triggers.register();
 		Actions.register();
-		BCRecipeManager.addBCRecipes();
 		BuildcraftAdditions.proxy.addPowerplant();
 	}
 

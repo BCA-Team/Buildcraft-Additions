@@ -78,6 +78,9 @@ item.upgrade.upgradeSpeed3.name=Machine Upgrade: Speed III
 item.baseUpgrade.name=Blank Upgrade
 item.robotDebugTool.name=Robot Debug Tool
 item.kineticBackpack.name=Kinetic Backpack
+item.gildedRedMetalIngot.name=Gilded Red Metal Ingot
+item.conductivePlateRaw.name=Raw Conductive Plating
+item.conductivePlate.name=Conductive Plating
 
 material.iron.name=Iron
 material.gold.name=Gold
@@ -161,6 +164,7 @@ material.phasedIron.name=Phased Iron
 material.darkSteel.name=Dark Steel
 material.soularium.name=Soularium
 material.fzDarkIron.name=Dark Iron
+material.gildedRedMetal.name=Gilded Red Metal
 
 entity.bcadditions.bcaLaserShot.name=Laser Shot
 

@@ -101,7 +101,8 @@ public class BuildcraftAdditions {
 		BCAItemManager.dusts.addDust(meta++, "Charcoal", 0x53493A, DustTypes.CHARCOAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Obsidian", 0x171124, DustTypes.OBSIDIAN_DUST);
 		BCAItemManager.dusts.addDust(meta++, "EnderPearl", 0x105E51, DustTypes.ENDER_PEARL_DUST);
-		BCAItemManager.dusts.addDust(meta, "NetherQuartz", 0xDBCCBF, DustTypes.NETHER_QUARTZ_DUST);
+		BCAItemManager.dusts.addDust(meta++, "NetherQuartz", 0xDBCCBF, DustTypes.NETHER_QUARTZ_DUST);
+		BCAItemManager.dusts.addDust(83, "GildedRedMetal", 0xFF6E1B, DustTypes.METAL_DUST);
 
 		BCARecipeManager.duster.addRecipe("oreRedstone", new ItemStack(Items.redstone, 10));
 		BCARecipeManager.duster.addRecipe("oreCoal", new ItemStack(Items.coal, 2));
@@ -114,6 +115,7 @@ public class BuildcraftAdditions {
 		BCARecipeManager.duster.addRecipe(new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_powder, 4));
 
 		manager.init(event);
+		ItemsAndBlocks.addRecipes();
 	}
 
 	@Mod.EventHandler
