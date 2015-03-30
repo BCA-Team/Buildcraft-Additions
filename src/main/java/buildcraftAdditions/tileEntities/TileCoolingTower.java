@@ -51,10 +51,10 @@ import buildcraftAdditions.utils.fluids.Tank;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFluidHandler, ITankHolder, ISynchronizedTile, IPipeConnection, IUpgradableMachine {
+	public final Tank input = new CoolingRecipeTank("input", 2000, this);
+	public final Tank output = new Tank(2000, this, "output");
+	public final Tank coolant = new CoolantTank("coolant", 10000, this);
 	private final MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.COOLING_TOWER);
-	private final Tank input = new CoolingRecipeTank("input", 2000, this);
-	private final Tank output = new Tank(2000, this, "output");
-	private final Tank coolant = new CoolantTank("coolant", 10000, this);
 	private final Upgrades upgrades = new Upgrades(0);
 	public int tank;
 	public boolean valve;

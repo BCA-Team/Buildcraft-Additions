@@ -54,9 +54,9 @@ import buildcraftAdditions.utils.fluids.Tank;
  */
 public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHandler, IEnergyReceiver, ITankHolder, IPipeConnection, IUpgradableMachine {
 	public final int maxEnergy, maxTransfer;
+	public final Tank input = new RefineryRecipeTank("Input", 3000, this);
+	public final Tank output = new Tank(3000, this, "Output");
 	protected final Upgrades upgrades = new Upgrades(0);
-	private final Tank input = new RefineryRecipeTank("Input", 3000, this);
-	private final Tank output = new Tank(3000, this, "Output");
 	private final MultiBlockData data = new MultiBlockData().setPatern(Variables.Paterns.REFINERY);
 	public int energy, currentHeat, requiredHeat, energyCost, heatTimer, lastRequiredHeat;
 	public boolean valve, isCooling, moved;
@@ -83,7 +83,6 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			data.afterMoveCheck(worldObj);
 			worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
 		}
-		sync();
 		if (valve && upgrades.hasUpgrade(EnumMachineUpgrades.AUTO_OUTPUT)) {
 			if (master == null)
 				findMaster();
@@ -635,4 +634,5 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	public String getInput() {
 		return inputFluid;
 	}
+
 }
