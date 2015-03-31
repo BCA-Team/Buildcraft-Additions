@@ -77,7 +77,7 @@ public class BlockItemSorter extends BlockBase {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
 		ForgeDirection orientation = Utils.get3dOrientation(entity).getOpposite();
-		world.setBlockMetadataWithNotify(x, y, z, orientation.ordinal(), 1);
+		world.setBlockMetadataWithNotify(x, y, z, orientation.ordinal(), 3);
 		getSorterTile(world, x, y, z).setRotation(orientation);
 	}
 

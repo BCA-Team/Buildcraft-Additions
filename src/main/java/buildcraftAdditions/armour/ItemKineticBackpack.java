@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
@@ -132,10 +133,15 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 		stack.stackTagCompound.setInteger("capsule" + slot, 0);
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
 		return BackPackModel.INSTANCE2;
+	}
+
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+		return "bcadditions:textures/models/armor/kineticBackpack_layer_1.png";
 	}
 
 	@Override
