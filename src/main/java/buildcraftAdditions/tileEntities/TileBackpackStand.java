@@ -97,6 +97,8 @@ public class TileBackpackStand extends TileBase {
 					}
 					break;
 			}
+			if (capsuleSlot == -1)
+				return;
 			ItemStack playerStack = player.getCurrentEquippedItem();
 			if (playerStack == null)
 				return;
