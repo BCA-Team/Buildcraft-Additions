@@ -119,6 +119,10 @@ public class Utils {
 		return color + localizeFormatted("rf.info", energy, maxEnergy);
 	}
 
+	public static String colorText(String text, EnumChatFormatting color) {
+		return ("" + color + text).trim();
+	}
+
 	public static String decapitalizeFirstChar(String string) {
 		return !Strings.isNullOrEmpty(string) ? Character.toLowerCase(string.charAt(0)) + string.substring(1) : null;
 	}

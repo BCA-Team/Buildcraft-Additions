@@ -2,6 +2,8 @@ package buildcraftAdditions.armour;
 
 import java.util.List;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -10,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -86,6 +89,8 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean sneaking) {
 		list.add(Utils.getRFInfoTooltip(getEnergyStored(stack), getMaxEnergyStored(stack)));
+		for (String line : WordUtils.wrap(Utils.localize("backpack.info"), 60).split(System.getProperty("line.separator")))
+			list.add(Utils.colorText(line, EnumChatFormatting.AQUA));
 	}
 
 	private void tagTest(ItemStack stack) {
