@@ -40,6 +40,10 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		ItemStack stack = player.getCurrentEquippedItem();
+		ItemStack capsule = null;
+		switch (getInstalledCapsule(itemStack, -1)) {
+
+		}
 		if (stack != null && stack.getItem() instanceof IEnergyContainerItem) {
 			IEnergyContainerItem eci = (IEnergyContainerItem) stack.getItem();
 			int transfer = Math.min(eci.receiveEnergy(player.getCurrentEquippedItem(), getEnergyStored(itemStack), true), 20000);

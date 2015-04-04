@@ -1,6 +1,7 @@
 package buildcraftAdditions.blocks;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -55,6 +56,19 @@ public class BlockMechanicalDuster extends BlockDusterBase {
 			default:
 				return sides;
 		}
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+		if (super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ)) {
+			TileEntity tile = world.getTileEntity(x, y, z);
+			if (tile != null && tile instanceof TileMechanicalDuster) {
+				TileMechanicalDuster duster = (TileMechanicalDuster) tile;
+				duster.player = player;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

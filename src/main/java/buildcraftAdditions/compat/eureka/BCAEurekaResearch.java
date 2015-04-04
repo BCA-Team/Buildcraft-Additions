@@ -43,8 +43,8 @@ public class BCAEurekaResearch {
 		EurekaAPI.API.registerDropHandler(new BasicDropHandler(new ItemStack(ItemsAndBlocks.basicDusterBlock), new ItemStack(BCItems.STONE_GEAR, 2), new ItemStack(Items.iron_ingot), new ItemStack(Blocks.stone, 5), new ItemStack(Items.slime_ball)));
 
 		EurekaAPI.API.register(new BasicEurekaInfo(Variables.Eureka.DustT1Key, "BCA-Dusters", 20, ItemsAndBlocks.semiAutomaticDusterBlock, Variables.Eureka.DustT0Key));
-		EurekaAPI.API.bindToKey(ItemsAndBlocks.semiAutomaticDusterBlock, Variables.Eureka.DustT2Key1);
-		EurekaAPI.API.registerDropHandler(new BasicDropHandler(new ItemStack(ItemsAndBlocks.semiAutomaticDusterBlock), new ItemStack(BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(Items.gold_ingot), new ItemStack(BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(Blocks.stone, 3)));
+		EurekaAPI.API.bindToKey(ItemsAndBlocks.semiAutomaticDusterBlock, Variables.Eureka.DustT1Key);
+		EurekaAPI.API.registerDropHandler(new BasicDropHandler(new ItemStack(ItemsAndBlocks.semiAutomaticDusterBlock), new ItemStack(BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(Items.gold_ingot), new ItemStack(BCItems.PIPE_ITEMS_GOLD, 2), new ItemStack(Blocks.stone, 3), new ItemStack(Items.slime_ball)));
 
 		EurekaAPI.API.register(new BasicEurekaInfo(Variables.Eureka.DustT2Key1, "BCA-Dusters", 40, ItemsAndBlocks.mechanicalDusterBlock, Variables.Eureka.DustT1Key));
 		EurekaAPI.API.bindToKey(ItemsAndBlocks.mechanicalDusterBlock, Variables.Eureka.DustT2Key1);
