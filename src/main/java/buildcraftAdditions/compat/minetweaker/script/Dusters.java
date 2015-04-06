@@ -1,12 +1,19 @@
 package buildcraftAdditions.compat.minetweaker.script;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.item.ItemStack;
+
 import buildcraftAdditions.api.recipe.BCARecipeManager;
+import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
 
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
 import minetweaker.annotations.ModOnly;
 import minetweaker.api.item.IItemStack;
 import minetweaker.api.minecraft.MineTweakerMC;
+import minetweaker.api.oredict.IOreDictEntry;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -31,8 +38,18 @@ public class Dusters {
 	}
 
 	@ZenMethod
+	public static void addDusting(IOreDictEntry input, IItemStack output) {
+		MineTweakerAPI.apply(new AddRecipeOreDictAction(input, output));
+	}
+
+	@ZenMethod
 	public static void removeDusting(IItemStack input) {
 		MineTweakerAPI.apply(new RemoveRecipeAction(input));
+	}
+
+	@ZenMethod
+	public static void removeDusting(IOreDictEntry input) {
+		MineTweakerAPI.apply(new RemoveRecipeOreDictAction(input));
 	}
 
 	private static class AddRecipeAction implements IUndoableAction {
@@ -60,12 +77,12 @@ public class Dusters {
 
 		@Override
 		public String describe() {
-			return String.format("Adding BCA Duster recipe for %s -> %s * %s", input, output, output.getAmount());
+			return String.format("Adding BCA Duster recipe for %s -> %s", input, output);
 		}
 
 		@Override
 		public String describeUndo() {
-			return String.format("Removing BCA Duster recipe for %s -> %s", input, BCARecipeManager.duster.getRecipe(MineTweakerMC.getItemStack(input)).getOutput(MineTweakerMC.getItemStack(input)));
+			return String.format("Undoing \"Adding BCA Duster recipe\": Removing BCA Duster recipe for %s -> %s", input, output);
 		}
 
 		@Override
@@ -76,6 +93,7 @@ public class Dusters {
 
 	private static class RemoveRecipeAction implements IUndoableAction {
 		public final IItemStack input;
+		public IDusterRecipe dusterRecipe;
 
 		public RemoveRecipeAction(IItemStack input) {
 			this.input = input;
@@ -83,27 +101,125 @@ public class Dusters {
 
 		@Override
 		public void apply() {
-			BCARecipeManager.duster.removeRecipe(MineTweakerMC.getItemStack(input));
+			ItemStack inputStack = MineTweakerMC.getItemStack(input);
+			IDusterRecipe recipe = BCARecipeManager.duster.getRecipe(inputStack);
+			if (recipe != null) {
+				dusterRecipe = recipe;
+				BCARecipeManager.duster.removeRecipe(inputStack);
+			}
 		}
 
 		@Override
 		public boolean canUndo() {
-			return false;
+			return dusterRecipe != null;
 		}
 
 		@Override
 		public void undo() {
-
+			BCARecipeManager.duster.addRecipe(dusterRecipe);
 		}
 
 		@Override
 		public String describe() {
-			return String.format("Removing BCA Duster recipe for %s -> %s", input, BCARecipeManager.duster.getRecipe(MineTweakerMC.getItemStack(input)).getOutput(MineTweakerMC.getItemStack(input)));
+			ItemStack inputStack = MineTweakerMC.getItemStack(input);
+			IDusterRecipe recipe = BCARecipeManager.duster.getRecipe(inputStack);
+			return String.format("Removing BCA Duster recipe for %s -> %s", input, recipe != null ? recipe.getOutput(inputStack) : "?");
 		}
 
 		@Override
 		public String describeUndo() {
+			return String.format("Undoing \"Removing BCA Duster recipe\": Adding BCA Duster recipe for %s (%s)", input, dusterRecipe);
+		}
+
+		@Override
+		public Object getOverrideKey() {
 			return null;
+		}
+	}
+
+	private static class AddRecipeOreDictAction implements IUndoableAction {
+		public final IOreDictEntry input;
+		public final IItemStack output;
+
+		public AddRecipeOreDictAction(IOreDictEntry input, IItemStack output) {
+			this.input = input;
+			this.output = output;
+		}
+
+		@Override
+		public void apply() {
+			BCARecipeManager.duster.addRecipe(input.getName(), MineTweakerMC.getItemStack(output));
+		}
+
+		@Override
+		public boolean canUndo() {
+			return true;
+		}
+
+		@Override
+		public void undo() {
+			for (IItemStack inputStack : input.getItems())
+				BCARecipeManager.duster.removeRecipe(MineTweakerMC.getItemStack(inputStack));
+		}
+
+		@Override
+		public String describe() {
+			return String.format("Adding BCA Duster recipe for %s -> %s", input, output);
+		}
+
+		@Override
+		public String describeUndo() {
+			return String.format("Undoing \"Adding BCA Duster recipe\": Removing BCA Duster recipe for %s -> %s", input, output);
+		}
+
+		@Override
+		public Object getOverrideKey() {
+			return null;
+		}
+	}
+
+	private static class RemoveRecipeOreDictAction implements IUndoableAction {
+		public final IOreDictEntry input;
+		public final List<IDusterRecipe> recipes;
+
+		public RemoveRecipeOreDictAction(IOreDictEntry input) {
+			this.input = input;
+			recipes = new ArrayList<IDusterRecipe>();
+		}
+
+		@Override
+		public void apply() {
+			for (IItemStack inputStack : input.getItems()) {
+				ItemStack inputItemStack = MineTweakerMC.getItemStack(inputStack);
+				IDusterRecipe recipe = BCARecipeManager.duster.getRecipe(inputItemStack);
+				if (recipe != null) {
+					recipes.add(recipe);
+					BCARecipeManager.duster.removeRecipe(inputItemStack);
+				}
+			}
+		}
+
+		@Override
+		public boolean canUndo() {
+			return !recipes.isEmpty();
+		}
+
+		@Override
+		public void undo() {
+			for (IDusterRecipe recipe : recipes)
+				BCARecipeManager.duster.addRecipe(recipe);
+		}
+
+		@Override
+		public String describe() {
+			ItemStack inputStack = MineTweakerMC.getItemStack(input);
+			IDusterRecipe recipe = BCARecipeManager.duster.getRecipe(inputStack);
+			return String.format("Removing BCA Duster recipe for %s -> %s", input, recipe != null ? recipe.getOutput(inputStack) : "?");
+		}
+
+		@Override
+		public String describeUndo() {
+			return String.format("Undoing \"Removing BCA Duster recipe\": Adding BCA Duster recipe for %s (%s)", input, recipes);
 		}
 
 		@Override
