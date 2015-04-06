@@ -10,7 +10,7 @@ import minetweaker.api.minecraft.MineTweakerMC;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-@ZenClass("mods.bcadditions.Refinery")
+@ZenClass("mods.bcadditions.refinery")
 @ModOnly("bcadditions")
 public class Refinery {
 

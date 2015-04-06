@@ -17,7 +17,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-@ZenClass("mods.bcadditions.Cooling")
+@ZenClass("mods.bcadditions.cooling")
 @ModOnly("bcadditions")
 public class Cooling {
 
