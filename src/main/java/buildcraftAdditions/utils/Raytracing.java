@@ -11,7 +11,7 @@ import net.minecraft.util.Vec3;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-//credit goes to Amadornes for the raytracing code
+//credit goes to chickenbones for the raytracing code
 public class Raytracing {
 
 	public static Vec3 getEndVector(EntityPlayer player) {
