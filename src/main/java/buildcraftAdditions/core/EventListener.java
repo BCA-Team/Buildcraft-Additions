@@ -75,30 +75,33 @@ public class EventListener {
 
 		@SubscribeEvent
 		public void onInteraction(PlayerInteractEvent event) {
-			Block block = event.world.getBlock(event.x, event.y, event.z);
-			if (block == ItemsAndBlocks.kebT1) {
-				if (event.entityPlayer != null && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem() != null && ((event.entityPlayer.getCurrentEquippedItem().getItem() instanceof IToolWrench && ((IToolWrench) event.entityPlayer.getCurrentEquippedItem().getItem()).canWrench(event.entityPlayer, event.x, event.y, event.z)) || event.entityPlayer.getCurrentEquippedItem().getItem().getToolClasses(event.entityPlayer.getCurrentEquippedItem()).contains("wrench")) && event.entityPlayer.isSneaking()) {
-					TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
-					if (tile != null) {
-						NBTTagCompound tag = new NBTTagCompound();
-						tile.writeToNBT(tag);
-						ItemStack stack = new ItemStack(ItemsAndBlocks.kebT1, 1, event.world.getBlockMetadata(event.x, event.y, event.z));
-						tag.removeTag("x");
-						tag.removeTag("y");
-						tag.removeTag("z");
-						tag.removeTag("id");
-						stack.stackTagCompound = tag;
-						event.world.setBlockToAir(event.x, event.y, event.z);
-						event.entityPlayer.swingItem();
-						Utils.dropItemstackAtEntity(event.entityPlayer, stack);
-						if (event.entityPlayer.getCurrentEquippedItem().getItem() instanceof IToolWrench)
-							((IToolWrench) event.entityPlayer.getCurrentEquippedItem().getItem()).wrenchUsed(event.entityPlayer, event.x, event.y, event.z);
+			if (!event.world.isRemote) {
+				Block block = event.world.getBlock(event.x, event.y, event.z);
+				if (block == ItemsAndBlocks.kebT1) {
+					if (event.entityPlayer != null && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem() != null && ((event.entityPlayer.getCurrentEquippedItem().getItem() instanceof IToolWrench && ((IToolWrench) event.entityPlayer.getCurrentEquippedItem().getItem()).canWrench(event.entityPlayer, event.x, event.y, event.z)) || event.entityPlayer.getCurrentEquippedItem().getItem().getToolClasses(event.entityPlayer.getCurrentEquippedItem()).contains("wrench")) && event.entityPlayer.isSneaking()) {
+						TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
+						if (tile != null) {
+							NBTTagCompound tag = new NBTTagCompound();
+							tile.writeToNBT(tag);
+							ItemStack stack = new ItemStack(ItemsAndBlocks.kebT1, 1, event.world.getBlockMetadata(event.x, event.y, event.z));
+							tag.removeTag("x");
+							tag.removeTag("y");
+							tag.removeTag("z");
+							tag.removeTag("id");
+							stack.stackTagCompound = tag;
+							event.world.setBlockToAir(event.x, event.y, event.z);
+							if (event.entityPlayer.getCurrentEquippedItem().getItem() instanceof IToolWrench)
+								((IToolWrench) event.entityPlayer.getCurrentEquippedItem().getItem()).wrenchUsed(event.entityPlayer, event.x, event.y, event.z);
+							if (!event.entityPlayer.isSwingInProgress)
+								event.entityPlayer.swingItem();
+							Utils.dropItemstackAtEntity(event.entityPlayer, stack);
+						}
 					}
+				} else if (event.entityPlayer != null && event.action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem() == ItemsAndBlocks.machineConfigurator) {
+					TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
+					if (tile != null && tile instanceof IUpgradableMachine)
+						((IUpgradableMachine) tile).removeUpgrade();
 				}
-			} else if (event.entityPlayer != null && event.action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem() == ItemsAndBlocks.machineConfigurator) {
-				TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
-				if (tile != null && tile instanceof IUpgradableMachine)
-					((IUpgradableMachine) tile).removeUpgrade();
 			}
 		}
 
