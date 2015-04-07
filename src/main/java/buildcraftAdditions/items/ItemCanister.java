@@ -51,7 +51,7 @@ public class ItemCanister extends ItemFluidContainer {
 		if (fStack == null)
 			list.add(String.format(Utils.localize("tooltip.FluidCapacity"), capacity / 1000));
 		else
-			list.add(String.format(Utils.localize("tooltip.storedFluid"), fStack.amount, fStack.getFluid().getLocalizedName(fStack)));
+			list.add(String.format(Utils.localize("tooltip.storedFluid"), fStack.getFluid().getLocalizedName(fStack), fStack.amount));
 	}
 
 	@Override
