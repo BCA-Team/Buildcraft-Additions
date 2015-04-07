@@ -1,6 +1,9 @@
 package buildcraftAdditions.compat.minetweaker.script;
 
+import net.minecraftforge.fluids.FluidStack;
+
 import buildcraftAdditions.api.recipe.BCARecipeManager;
+import buildcraftAdditions.api.recipe.refinery.ICoolingTowerRecipe;
 
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
@@ -63,12 +66,12 @@ public class Cooling {
 
 		@Override
 		public String describe() {
-			return String.format("Adding BCA Cooling Tower recipe for %s -> %s", input, output);
+			return String.format("Adding BCA Cooling Tower recipe for %s -> %s : %s", input, output, heat);
 		}
 
 		@Override
 		public String describeUndo() {
-			return String.format("Removing BCA Cooling Tower recipe for %s -> %s", input, output);
+			return String.format("Undoing \"Adding BCA Cooling Tower recipe\":Removing BCA Cooling Tower recipe for %s -> %s : %s", input, output, heat);
 		}
 
 		@Override
@@ -79,6 +82,7 @@ public class Cooling {
 
 	private static class RemoveRecipeAction implements IUndoableAction {
 		private final ILiquidStack input;
+		private ICoolingTowerRecipe coolingTowerRecipe;
 
 		public RemoveRecipeAction(ILiquidStack input) {
 			this.input = input;
@@ -86,27 +90,31 @@ public class Cooling {
 
 		@Override
 		public void apply() {
-			BCARecipeManager.cooling.removeRecipe(MineTweakerMC.getLiquidStack(input));
+			FluidStack fluidStack = MineTweakerMC.getLiquidStack(input);
+			coolingTowerRecipe = BCARecipeManager.cooling.getRecipe(fluidStack);
+			BCARecipeManager.cooling.removeRecipe(fluidStack);
 		}
 
 		@Override
 		public boolean canUndo() {
-			return false;
+			return coolingTowerRecipe != null;
 		}
 
 		@Override
 		public void undo() {
-
+			BCARecipeManager.cooling.addRecipe(coolingTowerRecipe);
 		}
 
 		@Override
 		public String describe() {
-			return String.format("Removing BCA Cooling Tower recipe for %s -> %s", input, BCARecipeManager.cooling.getRecipe(MineTweakerMC.getLiquidStack(input)).getOutput().getLocalizedName());
+			ICoolingTowerRecipe recipe = BCARecipeManager.cooling.getRecipe(MineTweakerMC.getLiquidStack(input));
+			return String.format("Removing BCA Cooling Tower recipe for %s -> %s mB of %s : %s", input, recipe != null ? recipe.getOutput().amount : "?", recipe != null ? recipe.getOutput().getUnlocalizedName() : "?", recipe.getHeat());
+
 		}
 
 		@Override
 		public String describeUndo() {
-			return null;
+			return String.format("Undoing \"Removing BCA Cooling Tower recipe\": Adding BCA Cooling Tower recipe for %s (%s)", input, coolingTowerRecipe);
 		}
 
 		@Override

@@ -40,6 +40,22 @@ public class CoolingTowerRecipeManager implements ICoolingTowerRecipeManager {
 	}
 
 	@Override
+	public void addRecipe(ICoolingTowerRecipe recipe) {
+		if (recipe == null || recipe.getInput() == null || recipe.getOutput() == null) {
+			Logger.error("Tried to register an invalid cooling tower recipe! Skipping.");
+			Logger.error("Was trying to add: " + recipe);
+		}
+		ICoolingTowerRecipe coolingTowerRecipe = getRecipe(recipe.getInput());
+		if (coolingTowerRecipe != null) {
+			Logger.error("A cooling tower recipe with input  " + recipe.getInput() + " is already registered! Skipping.");
+			Logger.error("Was trying to add: Input: " + recipe.getInput() + " Output: " + recipe.getInput() + " Heat: " + recipe.getHeat());
+			Logger.error("Found: Input: " + coolingTowerRecipe.getInput() + " Output: " + coolingTowerRecipe.getOutput() + " Heat: " + coolingTowerRecipe.getHeat());
+			return;
+		}
+		recipes.add(recipe);
+	}
+
+	@Override
 	public void removeRecipe(FluidStack input) {
 		if (input != null) {
 			ICoolingTowerRecipe recipe = null;

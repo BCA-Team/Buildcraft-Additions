@@ -15,6 +15,8 @@ public interface IRefineryRecipeManager {
 
 	void addRecipe(FluidStack input, FluidStack output, int requiredHeat);
 
+	void addRecipe(IRefineryRecipe recipe);
+
 	void removeRecipe(FluidStack input);
 
 	IRefineryRecipe getRecipe(FluidStack input);
