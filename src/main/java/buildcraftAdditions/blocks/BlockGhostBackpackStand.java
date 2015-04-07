@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.TileBackpackStand;
+import buildcraftAdditions.utils.Raytracing;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -40,6 +41,15 @@ public class BlockGhostBackpackStand extends BlockBase {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
+		MovingObjectPosition mop = world.rayTraceBlocks(Raytracing.getCorrectedHeadVec(player), Raytracing.getEndVector(player));
+		TileEntity entity = world.getTileEntity(x, y - 1, z);
+		if (entity != null && entity instanceof TileBackpackStand)
+			((TileBackpackStand) entity).removeCapsule(player, world.getBlockMetadata(x, y - 1, z), mop.hitVec.xCoord - mop.blockX, mop.hitVec.yCoord - mop.blockY + 1, mop.hitVec.zCoord - mop.blockZ);
+
 	}
 
 	@Override

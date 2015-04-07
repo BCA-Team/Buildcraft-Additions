@@ -313,42 +313,43 @@ public class Utils {
 	}
 
 	public static List<ItemStack> getDropsForCapsule(int tier) {
-		List<ItemStack> drops = new ArrayList<ItemStack>();
+		List<ItemStack> list = new ArrayList<ItemStack>();
 		switch (tier) {
 			case 3:
-				drops.add(new ItemStack(Items.diamond));
-				drops.add(new ItemStack(Items.diamond));
-				drops.add(new ItemStack(Items.diamond));
-				drops.add(new ItemStack(Items.diamond));
-				drops.add(new ItemStack(Items.diamond));
-				drops.add(new ItemStack(Items.diamond));
-				drops.add(new ItemStack(Items.emerald));
-				drops.add(new ItemStack(Items.emerald));
+				list.add(new ItemStack(Items.diamond));
+				list.add(new ItemStack(Items.diamond));
+				list.add(new ItemStack(Items.diamond));
+				list.add(new ItemStack(Items.diamond));
+				list.add(new ItemStack(Items.diamond));
+				list.add(new ItemStack(Items.diamond));
+				list.add(new ItemStack(Items.emerald));
+				list.add(new ItemStack(Items.emerald));
 			case 2:
-				drops.add(new ItemStack(Items.gold_ingot));
-				drops.add(new ItemStack(Items.gold_ingot));
-				drops.add(new ItemStack(Items.gold_ingot));
-				drops.add(new ItemStack(Items.gold_ingot));
-				drops.add(new ItemStack(Items.gold_ingot));
-				drops.add(new ItemStack(Items.gold_ingot));
-				drops.add(new ItemStack(Items.diamond));
-				drops.add(new ItemStack(Items.diamond));
+				list.add(new ItemStack(Items.gold_ingot));
+				list.add(new ItemStack(Items.gold_ingot));
+				list.add(new ItemStack(Items.gold_ingot));
+				list.add(new ItemStack(Items.gold_ingot));
+				list.add(new ItemStack(Items.gold_ingot));
+				list.add(new ItemStack(Items.gold_ingot));
+				list.add(new ItemStack(Items.diamond));
+				list.add(new ItemStack(Items.diamond));
 			case 1:
-				drops.add(new ItemStack(Items.gold_ingot));
-				drops.add(new ItemStack(Items.gold_ingot));
-				drops.add(new ItemStack(Items.iron_ingot));
-				drops.add(new ItemStack(Items.iron_ingot));
-				drops.add(new ItemStack(Items.iron_ingot));
-				drops.add(new ItemStack(Items.iron_ingot));
-				drops.add(new ItemStack(Items.iron_ingot));
-				drops.add(new ItemStack(Items.iron_ingot));
-				drops.add(new ItemStack(Blocks.redstone_block));
+				list.add(new ItemStack(Items.gold_ingot));
+				list.add(new ItemStack(Items.gold_ingot));
+				list.add(new ItemStack(Items.iron_ingot));
+				list.add(new ItemStack(Items.iron_ingot));
+				list.add(new ItemStack(Items.iron_ingot));
+				list.add(new ItemStack(Items.iron_ingot));
+				list.add(new ItemStack(Items.iron_ingot));
+				list.add(new ItemStack(Items.iron_ingot));
+				list.add(new ItemStack(Blocks.redstone_block));
 		}
 		Random random = new Random();
-		if (!drops.isEmpty())
-			for (ItemStack stack : drops) {
+		ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
+		if (!list.isEmpty())
+			for (ItemStack stack : list) {
 				if (random.nextBoolean())
-					drops.remove(stack);
+					drops.add(stack);
 			}
 		return drops;
 	}

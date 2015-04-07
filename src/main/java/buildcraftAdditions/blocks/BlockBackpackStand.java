@@ -6,10 +6,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.TileBackpackStand;
+import buildcraftAdditions.utils.Raytracing;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -45,29 +47,14 @@ public class BlockBackpackStand extends BlockRotationBase {
 		return true;
 	}
 
+
 	@Override
 	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
-		/*
-		Vec3 vec = Vec3.createVectorHelper(player.posX, player.posY, player.posZ);
-		if(player.worldObj.isRemote) {
-			vec.yCoord += player.getEyeHeight() - player.getDefaultEyeHeight();
-		} else {
-			vec.yCoord += player.getEyeHeight();
-			if(player instanceof EntityPlayerMP && player.isSneaking()) {
-				vec.yCoord -= 0.08;
-			}
-		}
-		Vec3 lookvector = player.getLook(1.0F);
-		vec.addVector(lookvector.xCoord * 10, lookvector.yCoord * 10, lookvector.zCoord * 10);
-		MovingObjectPosition mop = world.rayTraceBlocks(vec, lookvector);
+		MovingObjectPosition mop = world.rayTraceBlocks(Raytracing.getCorrectedHeadVec(player), Raytracing.getEndVector(player));
 		TileEntity entity = world.getTileEntity(x, y, z);
-		player.addChatComponentMessage(new ChatComponentText("X: " + mop.hitVec.xCoord));
-		player.addChatComponentMessage(new ChatComponentText("Y: " + mop.hitVec.yCoord));
-		player.addChatComponentMessage(new ChatComponentText("Z: " + mop.hitVec.zCoord));
 		if (entity != null && entity instanceof TileBackpackStand)
 			((TileBackpackStand) entity).removeCapsule(player, world.getBlockMetadata(x, y, z), mop.hitVec.xCoord - mop.blockX, mop.hitVec.yCoord - mop.blockY, mop.hitVec.zCoord - mop.blockZ);
 
-		*/
 	}
 
 	@Override
