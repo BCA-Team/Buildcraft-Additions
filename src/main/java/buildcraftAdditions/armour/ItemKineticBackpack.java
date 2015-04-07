@@ -44,9 +44,8 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		ItemStack stack = player.getCurrentEquippedItem();
 		ItemStack capsule = null;
-		switch (getInstalledCapsule(itemStack, -1)) {
-
-		}
+		/*if (getInstalledCapsule(itemStack, -1) > 0)
+			Utils.dropItemstacksAtEntity(player, Utils.getDropsForCapsule(removeCapsule(stack, -1)));*/
 		if (stack != null && stack.getItem() instanceof IEnergyContainerItem) {
 			IEnergyContainerItem eci = (IEnergyContainerItem) stack.getItem();
 			int transfer = Math.min(eci.receiveEnergy(player.getCurrentEquippedItem(), getEnergyStored(itemStack), true), 20000);
@@ -137,9 +136,11 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 		return stack.stackTagCompound.getInteger("capsule" + slot);
 	}
 
-	public void removeCapsule(ItemStack stack, int slot) {
+	public int removeCapsule(ItemStack stack, int slot) {
 		tagTest(stack);
+		int tier = stack.stackTagCompound.getInteger("capsule" + slot);
 		stack.stackTagCompound.setInteger("capsule" + slot, 0);
+		return tier;
 	}
 
 	@Override

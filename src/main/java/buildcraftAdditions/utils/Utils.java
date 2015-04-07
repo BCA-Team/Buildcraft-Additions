@@ -8,6 +8,9 @@ package buildcraftAdditions.utils;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import com.google.common.base.Strings;
@@ -22,6 +25,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -158,6 +163,12 @@ public class Utils {
 			entityItem.motionZ = (world.rand.nextGaussian() * factor);
 			world.spawnEntityInWorld(entityItem);
 		}
+	}
+
+	public static void dropItemstacksAtEntity(Entity entity, List<ItemStack> stacks) {
+		if (!stacks.isEmpty())
+			for (ItemStack stack : stacks)
+				dropItemstackAtEntity(entity, stack);
 	}
 
 	public static void dropItemstackAtEntity(Entity entity, ItemStack stack) {
@@ -299,5 +310,46 @@ public class Utils {
 			Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C07PacketPlayerDigging(2, x, y, z, Minecraft.getMinecraft().objectMouseOver.sideHit));
 		}
 		return true;
+	}
+
+	public static List<ItemStack> getDropsForCapsule(int tier) {
+		List<ItemStack> drops = new ArrayList<ItemStack>();
+		switch (tier) {
+			case 3:
+				drops.add(new ItemStack(Items.diamond));
+				drops.add(new ItemStack(Items.diamond));
+				drops.add(new ItemStack(Items.diamond));
+				drops.add(new ItemStack(Items.diamond));
+				drops.add(new ItemStack(Items.diamond));
+				drops.add(new ItemStack(Items.diamond));
+				drops.add(new ItemStack(Items.emerald));
+				drops.add(new ItemStack(Items.emerald));
+			case 2:
+				drops.add(new ItemStack(Items.gold_ingot));
+				drops.add(new ItemStack(Items.gold_ingot));
+				drops.add(new ItemStack(Items.gold_ingot));
+				drops.add(new ItemStack(Items.gold_ingot));
+				drops.add(new ItemStack(Items.gold_ingot));
+				drops.add(new ItemStack(Items.gold_ingot));
+				drops.add(new ItemStack(Items.diamond));
+				drops.add(new ItemStack(Items.diamond));
+			case 1:
+				drops.add(new ItemStack(Items.gold_ingot));
+				drops.add(new ItemStack(Items.gold_ingot));
+				drops.add(new ItemStack(Items.iron_ingot));
+				drops.add(new ItemStack(Items.iron_ingot));
+				drops.add(new ItemStack(Items.iron_ingot));
+				drops.add(new ItemStack(Items.iron_ingot));
+				drops.add(new ItemStack(Items.iron_ingot));
+				drops.add(new ItemStack(Items.iron_ingot));
+				drops.add(new ItemStack(Blocks.redstone_block));
+		}
+		Random random = new Random();
+		if (!drops.isEmpty())
+			for (ItemStack stack : drops) {
+				if (random.nextBoolean())
+					drops.remove(stack);
+			}
+		return drops;
 	}
 }

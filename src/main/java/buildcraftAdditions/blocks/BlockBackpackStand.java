@@ -46,6 +46,31 @@ public class BlockBackpackStand extends BlockRotationBase {
 	}
 
 	@Override
+	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
+		/*
+		Vec3 vec = Vec3.createVectorHelper(player.posX, player.posY, player.posZ);
+		if(player.worldObj.isRemote) {
+			vec.yCoord += player.getEyeHeight() - player.getDefaultEyeHeight();
+		} else {
+			vec.yCoord += player.getEyeHeight();
+			if(player instanceof EntityPlayerMP && player.isSneaking()) {
+				vec.yCoord -= 0.08;
+			}
+		}
+		Vec3 lookvector = player.getLook(1.0F);
+		vec.addVector(lookvector.xCoord * 10, lookvector.yCoord * 10, lookvector.zCoord * 10);
+		MovingObjectPosition mop = world.rayTraceBlocks(vec, lookvector);
+		TileEntity entity = world.getTileEntity(x, y, z);
+		player.addChatComponentMessage(new ChatComponentText("X: " + mop.hitVec.xCoord));
+		player.addChatComponentMessage(new ChatComponentText("Y: " + mop.hitVec.yCoord));
+		player.addChatComponentMessage(new ChatComponentText("Z: " + mop.hitVec.zCoord));
+		if (entity != null && entity instanceof TileBackpackStand)
+			((TileBackpackStand) entity).removeCapsule(player, world.getBlockMetadata(x, y, z), mop.hitVec.xCoord - mop.blockX, mop.hitVec.yCoord - mop.blockY, mop.hitVec.zCoord - mop.blockZ);
+
+		*/
+	}
+
+	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
 		super.onBlockPlacedBy(world, x, y, z, entity, stack);
 		world.setBlock(x, y + 1, z, ItemsAndBlocks.backpackStandGhost);
