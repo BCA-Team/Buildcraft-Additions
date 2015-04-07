@@ -19,6 +19,8 @@ import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 
+import buildcraft.api.tools.IToolWrench;
+
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.items.dust.ItemConverter;
@@ -75,7 +77,7 @@ public class EventListener {
 		public void onInteraction(PlayerInteractEvent event) {
 			Block block = event.world.getBlock(event.x, event.y, event.z);
 			if (block == ItemsAndBlocks.kebT1) {
-				if (event.entityPlayer != null && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem().getToolClasses(event.entityPlayer.getCurrentEquippedItem()).contains("wrench") && event.entityPlayer.isSneaking()) {
+				if (event.entityPlayer != null && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem() != null && ((event.entityPlayer.getCurrentEquippedItem().getItem() instanceof IToolWrench && ((IToolWrench) event.entityPlayer.getCurrentEquippedItem().getItem()).canWrench(event.entityPlayer, event.x, event.y, event.z)) || event.entityPlayer.getCurrentEquippedItem().getItem().getToolClasses(event.entityPlayer.getCurrentEquippedItem()).contains("wrench")) && event.entityPlayer.isSneaking()) {
 					TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
 					if (tile != null) {
 						NBTTagCompound tag = new NBTTagCompound();
@@ -88,7 +90,9 @@ public class EventListener {
 						stack.stackTagCompound = tag;
 						event.world.setBlockToAir(event.x, event.y, event.z);
 						event.entityPlayer.swingItem();
-						Utils.addToPlayerInv(event.entityPlayer, stack);
+						Utils.dropItemstackAtEntity(event.entityPlayer, stack);
+						if (event.entityPlayer.getCurrentEquippedItem().getItem() instanceof IToolWrench)
+							((IToolWrench) event.entityPlayer.getCurrentEquippedItem().getItem()).wrenchUsed(event.entityPlayer, event.x, event.y, event.z);
 					}
 				}
 			} else if (event.entityPlayer != null && event.action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK && event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItem() == ItemsAndBlocks.machineConfigurator) {
