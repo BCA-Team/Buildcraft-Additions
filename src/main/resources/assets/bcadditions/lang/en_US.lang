@@ -165,6 +165,11 @@ material.darkSteel.name=Dark Steel
 material.soularium.name=Soularium
 material.fzDarkIron.name=Dark Iron
 material.gildedRedMetal.name=Gilded Red Metal
+material.yellorium.name=Yellorium
+material.graphite.name=Graphite
+material.cyanite.name=Cyanite
+material.blutonium.name=Blutonium
+material.ludicrite.name=Ludicrite
 
 entity.bcadditions.bcaLaserShot.name=Laser Shot
 
