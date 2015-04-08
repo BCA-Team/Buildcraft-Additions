@@ -129,6 +129,8 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 			firstTick = false;
 		int pEnergyCost = (int) (50 + (50 * (currentHeat / 100D)));
 		energyCost = (input.getFluid() == null || isCooling || energy < pEnergyCost) ? 0 : pEnergyCost;
+		if (output.isFull())
+			energyCost = 0;
 		double factor = 0;
 		if (upgrades.hasUpgrade(EnumMachineUpgrades.EFFICIENCY_1))
 			factor += ConfigurationHandler.refineryEfficiency1EnergyCostModifier;
@@ -166,7 +168,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (worldObj.isRemote || firstTick)
 			return;
 		if (heatTimer == 0) {
-			if (((currentHeat > requiredHeat || (energy < energyCost || energyCost == 0)) && currentHeat > 20) || output.isFull()) {
+			if (((currentHeat > requiredHeat || (energy < energyCost || energyCost == 0)) && currentHeat > 20) || (output.isFull() && currentHeat > 20)) {
 				currentHeat--;
 				isCooling = true;
 			}
