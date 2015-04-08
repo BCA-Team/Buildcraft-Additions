@@ -166,11 +166,11 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		if (worldObj.isRemote || firstTick)
 			return;
 		if (heatTimer == 0) {
-			if ((currentHeat > requiredHeat || (energy < energyCost || energyCost == 0)) && currentHeat > 20) {
+			if (((currentHeat > requiredHeat || (energy < energyCost || energyCost == 0)) && currentHeat > 20) || output.isFull()) {
 				currentHeat--;
 				isCooling = true;
 			}
-			if (currentHeat < requiredHeat && (energy >= energyCost && energyCost != 0)) {
+			if ((currentHeat < requiredHeat && (energy >= energyCost && energyCost != 0)) && !output.isFull()) {
 				currentHeat++;
 				isCooling = false;
 			}
@@ -429,9 +429,15 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-		if (!isMaster())
+		if (isMaster())
+			return realDrain(resource, doDrain);
+		if (!valve)
 			return null;
-		return output.drain(resource, doDrain);
+		if (master == null)
+			findMaster();
+		if (master != null)
+			return master.realDrain(resource, doDrain);
+		return null;
 	}
 
 	@Override
@@ -449,6 +455,12 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 
 	public FluidStack realDrain(int maxDrain, boolean doDrain) {
 		FluidStack result = output.drain(maxDrain, doDrain);
+		updateRecipe();
+		return result;
+	}
+
+	public FluidStack realDrain(FluidStack fluid, boolean doDrain) {
+		FluidStack result = output.drain(fluid, doDrain);
 		updateRecipe();
 		return result;
 	}

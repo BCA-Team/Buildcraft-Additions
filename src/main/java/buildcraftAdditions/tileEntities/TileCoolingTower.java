@@ -93,10 +93,10 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 			for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
 				Location location = new Location(this).move(direction);
 				TileEntity tile = location.getTileEntity();
-				if (tile != null && tile instanceof IFluidHandler && !master.input.isFull()) {
+				if (tile != null && tile instanceof IFluidHandler) {
 					IFluidHandler tank = (IFluidHandler) tile;
 					FluidStack drain = tank.drain(direction.getOpposite(), ConfigurationHandler.coolingTowerAutoImportMaxTransfer, false);
-					int fill = fill(ForgeDirection.UNKNOWN, drain, true);
+					int fill = fill(direction.getOpposite(), drain, true);
 					if (fill > 0) {
 						tank.drain(direction.getOpposite(), fill, true);
 					}
@@ -314,11 +314,18 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 		Tank tank = getTanks()[tankID];
 		int filled = tank.fill(resouce, doFill);
 		updateRecipe();
+		sync();
 		return filled;
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+		if (isMaster())
+			return drain(resource, doDrain, tank);
+		if (isPartOfMultiblock() && valve) {
+			if (masterCheck())
+				return master.drain(resource, doDrain, tank);
+		}
 		return null;
 	}
 
@@ -336,6 +343,13 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private FluidStack drain(int maxDrain, boolean doDrain, int tankID) {
 		Tank tank = getTanks()[tankID];
 		FluidStack drained = tank.drain(maxDrain, doDrain);
+		updateRecipe();
+		return drained;
+	}
+
+	private FluidStack drain(FluidStack fluid, boolean doDrain, int tankID) {
+		Tank tank = getTanks()[tankID];
+		FluidStack drained = tank.drain(fluid, doDrain);
 		updateRecipe();
 		return drained;
 	}
