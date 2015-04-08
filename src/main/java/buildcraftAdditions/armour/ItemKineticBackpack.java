@@ -140,6 +140,18 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 		tagTest(stack);
 		int tier = stack.stackTagCompound.getInteger("capsule" + slot);
 		stack.stackTagCompound.setInteger("capsule" + slot, 0);
+		int capacity = 0;
+		for (int t = 0; t < 4; t++) {
+			int capsuletier = stack.stackTagCompound.getInteger("capsule" + t);
+			if (capsuletier == 1) {
+				capacity += 100000;
+			} else if (capsuletier == 2) {
+				capacity += 300000;
+			} else if (capsuletier == 3) {
+				capacity += 1000000;
+			}
+		}
+		setMaxEnergy(stack, capacity);
 		return tier;
 	}
 
