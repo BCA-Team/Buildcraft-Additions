@@ -22,6 +22,7 @@ import buildcraft.silicon.ItemRedstoneChipset;
 
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.armour.ItemKineticBackpack;
+import buildcraftAdditions.armour.ItemRocketPants;
 import buildcraftAdditions.blocks.BlockBCKinesisPipeWood;
 import buildcraftAdditions.blocks.BlockBCKinisisPipeStone;
 import buildcraftAdditions.blocks.BlockBackpackStand;
@@ -165,6 +166,7 @@ public final class ItemsAndBlocks {
 	public static Item conductivePlate;
 
 	public static ItemArmor kineticBackpack;
+	public static ItemArmor rocketPants;
 
 
 	public static void init() {
@@ -300,6 +302,9 @@ public final class ItemsAndBlocks {
 
 		kineticBackpack = new ItemKineticBackpack();
 		GameRegistry.registerItem(kineticBackpack, "kineticBackpack");
+
+		rocketPants = new ItemRocketPants();
+		GameRegistry.registerItem(rocketPants, "rocketPants");
 
 		gildedRedMetalIngot = new ItemBase("gildedRedMetalIngot");
 		GameRegistry.registerItem(gildedRedMetalIngot, "ingotGildedRedMetal");

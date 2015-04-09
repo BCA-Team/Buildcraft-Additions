@@ -1,4 +1,4 @@
-package buildcraftAdditions.core;
+package buildcraftAdditions.listeners;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -21,6 +21,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.core.VersionCheck;
 import buildcraftAdditions.items.dust.ItemConverter;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
@@ -51,7 +52,6 @@ public class EventListener {
 				for (String s : VersionCheck.changelog)
 					event.player.addChatComponentMessage(new ChatComponentText("- " + s));
 			}
-
 		}
 
 		@SubscribeEvent
