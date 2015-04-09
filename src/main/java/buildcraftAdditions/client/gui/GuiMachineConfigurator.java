@@ -184,10 +184,4 @@ public class GuiMachineConfigurator extends GuiBase {
 		}
 	}
 
-	@Override
-	public void onGuiClosed() {
-		super.onGuiClosed();
-		if (configurable)
-			PacketHandler.instance.sendToServer(new MessageConfiguration(configurableOutput));
-	}
 }

@@ -1,6 +1,7 @@
 package buildcraftAdditions.compat.minetweaker.script;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
+import buildcraftAdditions.api.recipe.refinery.IRefineryRecipe;
 
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
@@ -10,7 +11,7 @@ import minetweaker.api.minecraft.MineTweakerMC;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-@ZenClass("mods.bcadditions.Refinery")
+@ZenClass("mods.bcadditions.refinery")
 @ModOnly("bcadditions")
 public class Refinery {
 
@@ -56,12 +57,12 @@ public class Refinery {
 
 		@Override
 		public String describe() {
-			return String.format("Adding BCA Refinery recipe for %s -> %s", input, output);
+			return String.format("Adding BCA Refinery recipe for %s -> %s : %s", input, output, requiredHeat);
 		}
 
 		@Override
 		public String describeUndo() {
-			return String.format("Removing BCA Refinery recipe for %S -> %s", input, output);
+			return String.format("Undoing \"Adding BCA Refinery recipe\": Removing BCA Refinery recipe for %s -> %s : %s", input, output, requiredHeat);
 		}
 
 		@Override
@@ -72,6 +73,7 @@ public class Refinery {
 
 	private static class RemoveRecipeAction implements IUndoableAction {
 		private final ILiquidStack input;
+		private IRefineryRecipe refineryRecipe;
 
 		public RemoveRecipeAction(ILiquidStack input) {
 			this.input = input;
@@ -84,22 +86,23 @@ public class Refinery {
 
 		@Override
 		public boolean canUndo() {
-			return false;
+			return refineryRecipe != null;
 		}
 
 		@Override
 		public void undo() {
-
+			BCARecipeManager.refinery.addRecipe(refineryRecipe);
 		}
 
 		@Override
 		public String describe() {
-			return String.format("Removing BCA Refinery recipe for %S -> %s", input, BCARecipeManager.refinery.getRecipe(MineTweakerMC.getLiquidStack(input)).getOutput().getLocalizedName());
+			IRefineryRecipe recipe = BCARecipeManager.refinery.getRecipe(MineTweakerMC.getLiquidStack(input));
+			return String.format("Removing BCA Refinery recipe for %s -> %s mB of %s : %s", input, recipe != null ? recipe.getOutput().amount : "?", recipe != null ? recipe.getOutput().getUnlocalizedName() : "?", recipe.getRequiredHeat());
 		}
 
 		@Override
 		public String describeUndo() {
-			return null;
+			return String.format("Undoing \"Removing BCA Refinery recipe\": Adding BCA Refinery recipe for %s (%s)", input, refineryRecipe);
 		}
 
 		@Override

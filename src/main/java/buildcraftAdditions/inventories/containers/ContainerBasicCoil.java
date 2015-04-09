@@ -36,7 +36,7 @@ public class ContainerBasicCoil extends ContainerBase<TileBasicCoil> {
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		if (crafters != null) {
+		if ((burnTime != inventory.burnTime || fullBurnTime != inventory.fullBurnTime) && crafters != null) {
 			for (Object o : crafters) {
 				if (o != null && o instanceof ICrafting) {
 					ICrafting crafting = (ICrafting) o;

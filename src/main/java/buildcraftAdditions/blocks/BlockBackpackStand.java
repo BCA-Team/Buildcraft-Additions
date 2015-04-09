@@ -6,10 +6,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.TileBackpackStand;
+import buildcraftAdditions.utils.Raytracing;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -43,6 +45,16 @@ public class BlockBackpackStand extends BlockRotationBase {
 		}
 
 		return true;
+	}
+
+
+	@Override
+	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
+		MovingObjectPosition mop = world.rayTraceBlocks(Raytracing.getCorrectedHeadVec(player), Raytracing.getEndVector(player));
+		TileEntity entity = world.getTileEntity(x, y, z);
+		if (entity != null && entity instanceof TileBackpackStand)
+			((TileBackpackStand) entity).removeCapsule(player, world.getBlockMetadata(x, y, z), mop.hitVec.xCoord - mop.blockX, mop.hitVec.yCoord - mop.blockY, mop.hitVec.zCoord - mop.blockZ);
+
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 import buildcraftAdditions.api.networking.ISyncObject;
+import buildcraftAdditions.tileEntities.Bases.TileBase;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -31,7 +32,7 @@ public class Tank extends FluidTank implements ISyncObject {
 	}
 
 	public Tank(int capacity) {
-		this(capacity, null, "Tank");
+		this(capacity, null, "");
 	}
 
 	public boolean isEmpty() {
@@ -53,9 +54,13 @@ public class Tank extends FluidTank implements ISyncObject {
 	}
 
 	public FluidStack drain(FluidStack resource, boolean doDrain) {
-		if (fluid != null && fluid.isFluidEqual(resource))
-			return drain(resource.amount, doDrain);
-		return null;
+		FluidStack drained = null;
+		if (fluid != null && fluid.isFluidEqual(resource)) {
+			if (tile instanceof TileBase)
+				((TileBase) tile).sync();
+			drained = drain(resource.amount, doDrain);
+		}
+		return drained;
 	}
 
 	@Override

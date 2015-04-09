@@ -57,7 +57,7 @@ public class BlockKineticEnergyBufferTier1 extends BlockBase {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (world.getTileEntity(x, y, z) instanceof TileKineticEnergyBufferBase)
+		if (!world.isRemote)
 			player.openGui(BuildcraftAdditions.instance, Variables.Gui.KEB.ordinal(), world, x, y, z);
 		return true;
 	}

@@ -96,15 +96,16 @@ public class BuildcraftAdditions {
 		int meta = 1;
 		BCAItemManager.dusts.addDust(meta++, "Iron", 0xD2CEC9, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Gold", 0xF8DF17, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++, "Diamond", 0x13ECFC, DustTypes.GEM_DUST);
+		BCAItemManager.dusts.addDust(meta, "Diamond", 0x13ECFC, DustTypes.GEM_DUST);
 		meta = 55;
 		BCAItemManager.dusts.addDust(meta++, "Emerald", 0x00B038, DustTypes.GEM_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Coal", 0x1B1B1B, DustTypes.COAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Charcoal", 0x53493A, DustTypes.CHARCOAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Obsidian", 0x171124, DustTypes.OBSIDIAN_DUST);
 		BCAItemManager.dusts.addDust(meta++, "EnderPearl", 0x105E51, DustTypes.ENDER_PEARL_DUST);
-		BCAItemManager.dusts.addDust(meta++, "NetherQuartz", 0xDBCCBF, DustTypes.NETHER_QUARTZ_DUST);
-		BCAItemManager.dusts.addDust(83, "GildedRedMetal", 0xFF6E1B, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta, "NetherQuartz", 0xDBCCBF, DustTypes.NETHER_QUARTZ_DUST);
+		meta = 83;
+		BCAItemManager.dusts.addDust(meta, "GildedRedMetal", 0xFF6E1B, DustTypes.METAL_DUST);
 
 		BCARecipeManager.duster.addRecipe("oreRedstone", new ItemStack(Items.redstone, 10));
 		BCARecipeManager.duster.addRecipe("oreCoal", new ItemStack(Items.coal, 2));

@@ -102,7 +102,13 @@ public class CompatMetals {
 		BCAItemManager.dusts.addDust(meta++, "PhasedIron", 0x2E6C3D, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "DarkSteel", 0x4B4B4B, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Soularium", 0x654D31, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++, "FzDarkIron", 0x6700BE, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta, "FzDarkIron", 0x6700BE, DustTypes.METAL_DUST);
+		meta = 84;
+		BCAItemManager.dusts.addDust(meta++, "Yellorium", 0xD7EF00, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Graphite", 0x515151, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Cyanite", 0x0087EF, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Blutonium", 0x1B00E6, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta, "Ludicrite", 0xEF00EF, DustTypes.METAL_DUST);
 
 		addOreDictDusterRecipe("oreApatite", "gemApatite", 6);
 		addDustRecipe("Bronze", 4, "dustCopper", "dustCopper", "dustCopper", "dustTin");
@@ -122,6 +128,9 @@ public class CompatMetals {
 		addDustRecipe("PhasedIron", 1, "dustIron", "dustEnderPearl");
 		addDustRecipe("DarkSteel", 1, "dustIron", "dustCoal", "dustObsidian");
 		addDustRecipe("Soularium", 1, Blocks.soul_sand, "dustGold");
+		addDustRecipe("Cyanite", 1, Blocks.sand, "dustYellorium");
+		addDustSmelting("Graphite", 1, "dustCoal");
+		addDustSmelting("Graphite", 1, "dustCharcoal");
 	}
 
 	private void addOreDictDusterRecipe(String input, String output, int outputCount) {
@@ -142,6 +151,19 @@ public class CompatMetals {
 			if (dustStack != null && dustStack.getItem() != null) {
 				dustStack.stackSize = outputCount;
 				GameRegistry.addRecipe(new ShapelessOreRecipe(dustStack, inputs));
+			}
+		}
+	}
+
+	private void addDustSmelting(String output, int outputCount, String input) {
+		IDust dust = BCAItemManager.dusts.getDust(output);
+		if (dust != null) {
+			ItemStack dustStack = ItemStack.copyItemStack(dust.getDustStack());
+			if (dustStack != null && dustStack.getItem() != null) {
+				dustStack.stackSize = outputCount;
+				for (ItemStack stack : OreDictionary.getOres(input))
+					if (stack != null && stack.getItem() != null)
+						GameRegistry.addSmelting(stack, dustStack, 0);
 			}
 		}
 	}

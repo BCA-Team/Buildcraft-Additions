@@ -28,7 +28,6 @@ public class TileBackpackStand extends TileBase {
 	public CustomInventory inventory = new CustomInventory("backpackStand", 1, 1, this);
 
 	public void onBlockActivated(float hitX, float hitY, float hitZ, int rotation, EntityPlayer player) {
-		int capsuleSlot = -1;
 		if (inventory.getStackInSlot(0) == null) {
 			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ItemsAndBlocks.kineticBackpack) {
 				inventory.setInventorySlotContents(0, player.getCurrentEquippedItem());
@@ -40,63 +39,9 @@ public class TileBackpackStand extends TileBase {
 				inventory.setInventorySlotContents(0, null);
 				return;
 			}
-			switch (ForgeDirection.getOrientation(rotation)) {
-				case NORTH:
-					if (hitY >= 1.1 && hitY <= 1.3) {
-						if (hitX >= 0.58 && hitX <= 0.81)
-							capsuleSlot = 0;
-						else if (hitX >= 0.18 && hitX <= 0.41)
-							capsuleSlot = 1;
-					} else if (hitY >= 0.78 && hitY <= 1) {
-						if (hitX >= 0.58 && hitX <= 0.81)
-							capsuleSlot = 2;
-						else if (hitX >= 0.18 && hitX <= 0.41)
-							capsuleSlot = 3;
-					}
-					break;
-
-				case EAST:
-					if (hitY >= 1.1 && hitY <= 1.3) {
-						if (hitZ >= 0.58 && hitZ <= 0.81)
-							capsuleSlot = 0;
-						else if (hitZ >= 0.18 && hitZ <= 0.41)
-							capsuleSlot = 1;
-					} else if (hitY >= 0.78 && hitY <= 1) {
-						if (hitZ >= 0.58 && hitZ <= 0.81)
-							capsuleSlot = 2;
-						else if (hitZ >= 0.18 && hitZ <= 0.41)
-							capsuleSlot = 3;
-					}
-					break;
-
-				case SOUTH:
-					if (hitY >= 1.1 && hitY <= 1.3) {
-						if (hitX >= 0.58 && hitX <= 0.81)
-							capsuleSlot = 1;
-						else if (hitX >= 0.18 && hitX <= 0.41)
-							capsuleSlot = 0;
-					} else if (hitY >= 0.78 && hitY <= 1) {
-						if (hitX >= 0.58 && hitX <= 0.81)
-							capsuleSlot = 3;
-						else if (hitX >= 0.18 && hitX <= 0.41)
-							capsuleSlot = 2;
-					}
-					break;
-
-				case WEST:
-					if (hitY >= 1.1 && hitY <= 1.3) {
-						if (hitZ >= 0.58 && hitZ <= 0.81)
-							capsuleSlot = 1;
-						else if (hitZ >= 0.18 && hitZ <= 0.41)
-							capsuleSlot = 0;
-					} else if (hitY >= 0.78 && hitY <= 1) {
-						if (hitZ >= 0.58 && hitZ <= 0.81)
-							capsuleSlot = 3;
-						else if (hitZ >= 0.18 && hitZ <= 0.41)
-							capsuleSlot = 2;
-					}
-					break;
-			}
+			int capsuleSlot = getSlot(rotation, hitX, hitY, hitZ);
+			if (capsuleSlot == -1)
+				return;
 			ItemStack playerStack = player.getCurrentEquippedItem();
 			if (playerStack == null)
 				return;
@@ -112,6 +57,78 @@ public class TileBackpackStand extends TileBase {
 		}
 		sync();
 	}
+
+	public void removeCapsule(EntityPlayer player, int rotation, double hitX, double hitY, double hitZ) {
+		if (inventory.getStackInSlot(0) == null)
+			return;
+		ItemStack bStack = inventory.getStackInSlot(0);
+		ItemKineticBackpack backpack = (ItemKineticBackpack) bStack.getItem();
+		int slot = getSlot(rotation, hitX, hitY, hitZ);
+		if (backpack.getInstalledCapsule(bStack, slot) > 0)
+			Utils.dropItemstacksAtEntity(player, Utils.getDropsForCapsule(backpack.removeCapsule(bStack, slot)));
+	}
+
+	private int getSlot(int rotation, double hitX, double hitY, double hitZ) {
+		switch (ForgeDirection.getOrientation(rotation)) {
+			case NORTH:
+				if (hitY >= 1.1 && hitY <= 1.3) {
+					if (hitX >= 0.58 && hitX <= 0.81)
+						return 0;
+					else if (hitX >= 0.18 && hitX <= 0.41)
+						return 1;
+				} else if (hitY >= 0.78 && hitY <= 1) {
+					if (hitX >= 0.58 && hitX <= 0.81)
+						return 2;
+					else if (hitX >= 0.18 && hitX <= 0.41)
+						return 3;
+				}
+				break;
+
+			case EAST:
+				if (hitY >= 1.1 && hitY <= 1.3) {
+					if (hitZ >= 0.58 && hitZ <= 0.81)
+						return 0;
+					else if (hitZ >= 0.18 && hitZ <= 0.41)
+						return 1;
+				} else if (hitY >= 0.78 && hitY <= 1) {
+					if (hitZ >= 0.58 && hitZ <= 0.81)
+						return 2;
+					else if (hitZ >= 0.18 && hitZ <= 0.41)
+						return 3;
+				}
+				break;
+
+			case SOUTH:
+				if (hitY >= 1.1 && hitY <= 1.3) {
+					if (hitX >= 0.58 && hitX <= 0.81)
+						return 1;
+					else if (hitX >= 0.18 && hitX <= 0.41)
+						return 0;
+				} else if (hitY >= 0.78 && hitY <= 1) {
+					if (hitX >= 0.58 && hitX <= 0.81)
+						return 3;
+					else if (hitX >= 0.18 && hitX <= 0.41)
+						return 2;
+				}
+				break;
+
+			case WEST:
+				if (hitY >= 1.1 && hitY <= 1.3) {
+					if (hitZ >= 0.58 && hitZ <= 0.81)
+						return 1;
+					else if (hitZ >= 0.18 && hitZ <= 0.41)
+						return 0;
+				} else if (hitY >= 0.78 && hitY <= 1) {
+					if (hitZ >= 0.58 && hitZ <= 0.81)
+						return 3;
+					else if (hitZ >= 0.18 && hitZ <= 0.41)
+						return 2;
+				}
+				break;
+		}
+		return -1;
+	}
+
 
 	@Override
 	public void writeToByteBuff(ByteBuf buf) {

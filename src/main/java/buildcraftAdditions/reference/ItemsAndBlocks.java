@@ -533,10 +533,15 @@ public final class ItemsAndBlocks {
 
 		GameRegistry.addRecipe(new ItemStack(ItemsAndBlocks.blankUpgrade, 2), "GGG", "GPG", "GGG", 'G', Items.gold_ingot, 'P', ItemsAndBlocks.heatPlating);
 
-		ItemStack dust = BCAItemManager.dusts.getDust("GildedRedMetal").getDustStack().copy();
-		dust.stackSize = 6;
-		GameRegistry.addRecipe(new ShapelessOreRecipe(dust, "dustGold", "dustGold", "dustGold", "dustIron", "dustIron", "dustRedstone"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(conductivePlateRaw, "DD", "DD", 'D', "dustGildedRedMetal"));
+		if (OreDictionary.getOres("dustGold").isEmpty() || OreDictionary.getOres("dustIron").isEmpty()) {
+			GameRegistry.addRecipe(new ShapelessOreRecipe(gildedRedMetalIngot, "ingotGold", "ingotGold", "ingotGold", "ingotIron", "ingotIron", "dustRedstone"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(conductivePlateRaw, "DD", "DD", 'D', "ingotGildedRedMetal"));
+		} else {
+			ItemStack dust = BCAItemManager.dusts.getDust("GildedRedMetal").getDustStack().copy();
+			dust.stackSize = 6;
+			GameRegistry.addRecipe(new ShapelessOreRecipe(dust, "dustGold", "dustGold", "dustGold", "dustIron", "dustIron", "dustRedstone"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(conductivePlateRaw, "DD", "DD", 'D', "dustGildedRedMetal"));
+		}
 		GameRegistry.addSmelting(conductivePlateRaw, new ItemStack(conductivePlate), 0.5f);
 		GameRegistry.addRecipe(new ItemStack(kineticBackpack), "PLP", "PPP", "PPP", 'P', conductivePlate, 'L', Items.leather);
 		GameRegistry.addRecipe(new ItemStack(backpackStand), "III", " I ", "III", 'I', Items.iron_ingot);

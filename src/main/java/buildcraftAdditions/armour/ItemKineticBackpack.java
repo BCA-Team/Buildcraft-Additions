@@ -2,13 +2,17 @@ package buildcraftAdditions.armour;
 
 import java.util.List;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -39,6 +43,9 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		ItemStack stack = player.getCurrentEquippedItem();
+		ItemStack capsule = null;
+		/*if (getInstalledCapsule(itemStack, -1) > 0)
+			Utils.dropItemstacksAtEntity(player, Utils.getDropsForCapsule(removeCapsule(stack, -1)));*/
 		if (stack != null && stack.getItem() instanceof IEnergyContainerItem) {
 			IEnergyContainerItem eci = (IEnergyContainerItem) stack.getItem();
 			int transfer = Math.min(eci.receiveEnergy(player.getCurrentEquippedItem(), getEnergyStored(itemStack), true), 20000);
@@ -81,6 +88,8 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean sneaking) {
 		list.add(Utils.getRFInfoTooltip(getEnergyStored(stack), getMaxEnergyStored(stack)));
+		for (String line : WordUtils.wrap(Utils.localize("backpack.info"), 60).split(System.getProperty("line.separator")))
+			list.add(Utils.colorText(line, EnumChatFormatting.AQUA));
 	}
 
 	private void tagTest(ItemStack stack) {
@@ -127,15 +136,34 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 		return stack.stackTagCompound.getInteger("capsule" + slot);
 	}
 
-	public void removeCapsule(ItemStack stack, int slot) {
+	public int removeCapsule(ItemStack stack, int slot) {
 		tagTest(stack);
+		int tier = stack.stackTagCompound.getInteger("capsule" + slot);
 		stack.stackTagCompound.setInteger("capsule" + slot, 0);
+		int capacity = 0;
+		for (int t = 0; t < 4; t++) {
+			int capsuletier = stack.stackTagCompound.getInteger("capsule" + t);
+			if (capsuletier == 1) {
+				capacity += 100000;
+			} else if (capsuletier == 2) {
+				capacity += 300000;
+			} else if (capsuletier == 3) {
+				capacity += 1000000;
+			}
+		}
+		setMaxEnergy(stack, capacity);
+		return tier;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
 		return BackPackModel.INSTANCE2;
+	}
+
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+		return "bcadditions:textures/models/armor/kineticBackpack_layer_1.png";
 	}
 
 	@Override

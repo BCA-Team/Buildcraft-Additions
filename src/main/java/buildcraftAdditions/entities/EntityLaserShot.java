@@ -2,6 +2,8 @@ package buildcraftAdditions.entities;
 
 import io.netty.buffer.ByteBuf;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,6 +11,7 @@ import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -16,6 +19,8 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.common.registry.IThrowableEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import net.minecraftforge.fluids.IFluidBlock;
 
 import buildcraft.api.power.ILaserTarget;
 import buildcraft.api.power.ILaserTargetBlock;
@@ -53,6 +58,18 @@ public class EntityLaserShot extends EntityThrowable implements IEntityAdditiona
 		worldObj.spawnParticle("flame", posX + rand.nextDouble() / 4 - 0.125, posY + rand.nextDouble() / 4 - 0.125, posZ + rand.nextDouble() / 4 - 0.125, 0, 0, 0);
 		if (ticksExisted > 6000)
 			setDead();
+		if (isInWater() || handleLavaMovement()) {
+			worldObj.playSoundEffect(posX + 0.5, posY + 0.5, posZ + 0.5, "random.fizz", 0.5F, 2.6F + (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.8F);
+			for (int i = 0; i < 8; i++)
+				worldObj.spawnParticle("largesmoke", posX + Math.random(), posY + 1.2, posZ + Math.random(), 0, 0, 0);
+			int x = MathHelper.floor_double(posX);
+			int y = MathHelper.floor_double(posY);
+			int z = MathHelper.floor_double(posZ);
+			Block block = this.worldObj.getBlock(x, y, z);
+			if (block instanceof BlockLiquid || block instanceof IFluidBlock)
+				worldObj.setBlockToAir(x, y, z);
+			setDead();
+		}
 	}
 
 	@Override
@@ -64,7 +81,7 @@ public class EntityLaserShot extends EntityThrowable implements IEntityAdditiona
 			if (ConfigurationHandler.portableLaserEntityBurnTime > 0)
 				mop.entityHit.setFire((int) (strength * ConfigurationHandler.portableLaserEntityBurnTime));
 			if (ConfigurationHandler.portableLaserEntityDamage > 0)
-				mop.entityHit.attackEntityFrom(new EntityDamageSourceIndirect("bcaLaser", this, thrower).setFireDamage().setDamageBypassesArmor().setProjectile(), (int) (strength * ConfigurationHandler.portableLaserEntityDamage));
+				mop.entityHit.attackEntityFrom(new EntityDamageSourceIndirect("bcaLaser", this, thrower != null ? thrower : super.getThrower()).setFireDamage().setDamageBypassesArmor().setProjectile(), (int) (strength * ConfigurationHandler.portableLaserEntityDamage));
 		} else if (mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
 			hit = true;
 			if (worldObj.getBlock(mop.blockX, mop.blockY, mop.blockZ) instanceof ILaserTargetBlock) {
@@ -110,16 +127,16 @@ public class EntityLaserShot extends EntityThrowable implements IEntityAdditiona
 	}
 
 	@Override
+	public EntityLivingBase getThrower() {
+		return thrower;
+	}
+
+	@Override
 	public void setThrower(Entity entity) {
 		if (entity == null)
 			thrower = null;
 		else if (entity instanceof EntityLivingBase)
 			thrower = (EntityLivingBase) entity;
-	}
-
-	@Override
-	public EntityLivingBase getThrower() {
-		return thrower;
 	}
 
 	@Override

@@ -40,6 +40,22 @@ public class RefineryRecipeManager implements IRefineryRecipeManager {
 	}
 
 	@Override
+	public void addRecipe(IRefineryRecipe recipe) {
+		if (recipe == null || recipe.getInput() == null || recipe.getOutput() == null || recipe.getRequiredHeat() < 0) {
+			Logger.error("Tried to register an invalid cooling tower recipe! Skipping.");
+			Logger.error("Was trying to add: " + recipe);
+		}
+		IRefineryRecipe refineryRecipe = getRecipe(recipe.getInput());
+		if (refineryRecipe != null) {
+			Logger.error("A refinery recipe with input  " + recipe.getInput() + " is already registered! Skipping.");
+			Logger.error("Was trying to add: Input: " + recipe.getInput() + " Output: " + recipe.getInput() + " Required heat: " + recipe.getRequiredHeat());
+			Logger.error("Found: Input: " + refineryRecipe.getInput() + " Output: " + refineryRecipe.getOutput() + " Required heat: " + refineryRecipe.getRequiredHeat());
+			return;
+		}
+		recipes.add(recipe);
+	}
+
+	@Override
 	public void removeRecipe(FluidStack input) {
 		if (input != null) {
 			IRefineryRecipe recipe = null;

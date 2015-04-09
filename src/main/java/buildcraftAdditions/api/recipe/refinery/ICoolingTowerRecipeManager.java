@@ -15,6 +15,8 @@ public interface ICoolingTowerRecipeManager {
 
 	void addRecipe(FluidStack input, FluidStack output, float heat);
 
+	void addRecipe(ICoolingTowerRecipe recipe);
+
 	void removeRecipe(FluidStack input);
 
 	ICoolingTowerRecipe getRecipe(FluidStack input);

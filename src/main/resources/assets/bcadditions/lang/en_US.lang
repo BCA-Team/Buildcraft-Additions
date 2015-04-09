@@ -165,6 +165,11 @@ material.darkSteel.name=Dark Steel
 material.soularium.name=Soularium
 material.fzDarkIron.name=Dark Iron
 material.gildedRedMetal.name=Gilded Red Metal
+material.yellorium.name=Yellorium
+material.graphite.name=Graphite
+material.cyanite.name=Cyanite
+material.blutonium.name=Blutonium
+material.ludicrite.name=Ludicrite
 
 entity.bcadditions.bcaLaserShot.name=Laser Shot
 
@@ -176,7 +181,7 @@ tooltip.deactivated=Deactivated
 tooltip.upgradesPossible=Upgrades Possible
 tooltip.holdShiftForMoreInfo=Hold Shift for more info
 tooltip.FluidCapacity=Can hold %s buckets of fluid
-tooltip.storedFluid=Currently stores %s mb of %s
+tooltip.storedFluid=Currently stores %s (%,d mb)
 tooltip.colorNormalMode=Normal Mode
 tooltip.colorNormalMode.info=Colors standard colorable blocks, sheep and BC pipes
 tooltip.colorSortingMode=Sorting Mode
@@ -313,27 +318,6 @@ itemGroup.BuildcraftAdditions=BuildCraft Additions
 itemGroup.bcaCanisters=Canisters
 itemGroup.bcaDusts=Dusts
 
-Eureka=EUREKA!
-eureka.dusterTier0Finished=You start planning all your feature builds but realize you'll need a ton of resources. You also start thinking of a way to make that easier.
-eureka.dusterTier1Finished=While processing your ores, you suddenly realize there are more efficient ways to process them.
-eureka.dusterTier2-1Finished=After being able to output to inventories, you decide to try to see if you can automate the processing itself instead.
-eureka.dusterTier2-2Finished=You like that you don't have to jump on the machine, but also want the auto-input/output. You decide to combine your knowledge into a new machine. Maybe something with lasers?
-eureka.kineticToolFinished=While making yet another tool to replace your old one, you think of a way to make a tool that won't break
-eureka.missingKnowledge=You have no idea how this machine works (yet). You try to use it, but due to your incompetence, it falls apart.
-eureka.missingKnowledgeKineticTool=You have no idea how this tool works (yet). You try to use it, but due to your incompetence, it falls apart.
-
-eureka.heatedFurnaceFinished=After placing all those furnaces you think of a way to make a better, more effective and faster furnace
-eureka.basicCoilFinished=You already knew how to make the heated furnace but now that you actually placed it you come up with a way to actually heat it
-eureka.lavaCoilFinished=You observe your basic coils and there heat generation and ask yourself if you can't use lava heating for a new type of coil
-eureka.kineticCoilFinished=Those lava coils are great, but like with all things: there is always something better
-eureka.KEBT1Finished=Storing energy in batteries is useful but now it's time to also store it in block form
-eureka.KEBT2Finished=These single blocks hold a lot of power but it's not enough, time to step things up
-eureka.KEBT3Finished=Massive power storage just isn't enough
-
-engineeringDiary.requiredResearch=Required research:
-engineeringDiary.progress=Progress:
-engineeringDiary.unlocked=UNLOCKED
-
 config.title=BuildCraft Additions Configuration
 
 updates=Updates
@@ -446,3 +430,5 @@ waila.upgrades.installed=Installed upgrades:
 
 waila.duster.recipe=%s -> %s
 waila.duster.progress=Progress
+
+backpack.info=Place on a backpackstand and click with kinetic capsules on the holes in the back to install capsules

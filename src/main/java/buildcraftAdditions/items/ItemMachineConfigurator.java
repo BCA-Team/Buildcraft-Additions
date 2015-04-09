@@ -8,7 +8,6 @@ import net.minecraft.world.World;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import buildcraftAdditions.reference.Variables;
-import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 
 /**
@@ -27,15 +26,13 @@ public class ItemMachineConfigurator extends ItemBase {
 
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ) {
-		TileEntity entity = world.getTileEntity(x, y, z);
-		if (entity instanceof TileBase)
-			((TileBase) entity).sync();
-
-
-		if (entity instanceof IConfigurableOutput || entity instanceof IUpgradableMachine) {
-			player.openGui(BuildcraftAdditions.instance, Variables.Gui.MACHINE_CONFIGURATOR.ordinal(), world, x, y, z);
-			return true;
+		if (!player.isSneaking())
+			return false;
+		if (!world.isRemote) {
+			TileEntity tile = world.getTileEntity(x, y, z);
+			if (tile != null && (tile instanceof IConfigurableOutput || tile instanceof IUpgradableMachine))
+				player.openGui(BuildcraftAdditions.instance, Variables.Gui.MACHINE_CONFIGURATOR.ordinal(), world, x, y, z);
 		}
-		return false;
+		return true;
 	}
 }

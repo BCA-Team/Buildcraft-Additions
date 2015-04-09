@@ -1,7 +1,12 @@
 package buildcraftAdditions.inventories.containers;
 
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
+
+import buildcraftAdditions.api.networking.ISynchronizedTile;
+import buildcraftAdditions.api.networking.MessageByteBuff;
+import buildcraftAdditions.networking.PacketHandler;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -14,6 +19,17 @@ public class ContainerMachineConfigurator extends ContainerBase<TileEntity> {
 
 	public ContainerMachineConfigurator(InventoryPlayer inventoryPlayer, TileEntity tile) {
 		super(inventoryPlayer, tile);
+	}
+
+	@Override
+	public void detectAndSendChanges() {
+		super.detectAndSendChanges();
+		if (inventory instanceof ISynchronizedTile && crafters != null) {
+			MessageByteBuff msg = new MessageByteBuff((ISynchronizedTile) inventory);
+			for (Object o : crafters)
+				if (o != null && o instanceof EntityPlayerMP)
+					PacketHandler.instance.sendTo(msg, (EntityPlayerMP) o);
+		}
 	}
 
 }

@@ -197,7 +197,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-		return null;
+		return tank.drain(resource, doDrain);
 	}
 
 	@Override

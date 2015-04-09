@@ -37,15 +37,10 @@ public class ContainerHeatedFurnace extends ContainerBase<TileHeatedFurnace> {
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		if (crafters != null) {
-			for (Object o : crafters) {
-				if (o != null && o instanceof ICrafting) {
-					ICrafting crafting = (ICrafting) o;
-					if (progress != inventory.progress)
-						crafting.sendProgressBarUpdate(this, 0, inventory.progress);
-				}
-			}
-		}
+		if (progress != inventory.progress && crafters != null)
+			for (Object o : crafters)
+				if (o != null && o instanceof ICrafting)
+					((ICrafting) o).sendProgressBarUpdate(this, 0, inventory.progress);
 		progress = inventory.progress;
 	}
 

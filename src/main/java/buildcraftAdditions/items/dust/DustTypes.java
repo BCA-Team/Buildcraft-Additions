@@ -27,8 +27,11 @@ public class DustTypes {
 			OreDictionary.registerOre("dust" + name, dust.copy());
 			ItemStack twoDusts = dust.copy();
 			twoDusts.stackSize = 2;
+			ItemStack nineDusts = dust.copy();
+			nineDusts.stackSize = 9;
 			BCARecipeManager.duster.addRecipe("ore" + name, twoDusts);
 			BCARecipeManager.duster.addRecipe("ingot" + name, dust.copy());
+			BCARecipeManager.duster.addRecipe("block" + name, nineDusts);
 			for (ItemStack stack : OreDictionary.getOres("ingot" + name)) {
 				ItemStack copy = ItemStack.copyItemStack(stack);
 				if (copy != null && copy.getItem() != null) {
@@ -46,7 +49,7 @@ public class DustTypes {
 
 		@Override
 		public boolean isValid(int meta, String name, ItemStack dust) {
-			return OreDictionary.getOres("ore" + name).size() > 0 || OreDictionary.getOres("ingot" + name).size() > 0 || OreDictionary.getOres("dust" + name).size() > 0;
+			return OreDictionary.getOres("ore" + name).size() > 0 || OreDictionary.getOres("ingot" + name).size() > 0 || OreDictionary.getOres("block" + name).size() > 0 || OreDictionary.getOres("dust" + name).size() > 0;
 		}
 
 	};

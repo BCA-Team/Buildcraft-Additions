@@ -52,7 +52,7 @@ public class BlockFluidicCompressor extends BlockBase {
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
-		world.setBlockMetadataWithNotify(x, y, z, Utils.get2dOrientation(entity).getOpposite().ordinal(), 1);
+		world.setBlockMetadataWithNotify(x, y, z, Utils.get2dOrientation(entity).getOpposite().ordinal(), 3);
 		TileEntity tile = world.getTileEntity(x, y, z);
 		if (tile instanceof TileFluidicCompressor)
 			((TileFluidicCompressor) tile).fill = true;

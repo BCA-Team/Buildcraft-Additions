@@ -58,21 +58,12 @@ curse {
         projectId = "${curseProps.project_id}"
 
         releaseType = "release"
-        changelog = """update to Eureka 3.0
-Added Kinetic packpack with backpackstand
-sort-o-tron no longer eats lists
-canisters no longer stack
-added decimal separators on large numbers
-more dusts
-improved WAILA tooltips for the dusters
-new gui's
-colored tooltips for items that store power
-kinetic coils now require more power
-added auto-import upgrade
-added portable laser
-added partile effects to the dusters
-more config options (requires regenning the config file)
-bugfixes
+        changelog = """fixed fluidic compressor dupe bug
+fixed refinery gui crash
+added usage tooltip to the kinetic backpack
+tweaked fluid canister tooltip
+fix backpack accepting additional canister
+improved gui syncing
 """
     }
 }

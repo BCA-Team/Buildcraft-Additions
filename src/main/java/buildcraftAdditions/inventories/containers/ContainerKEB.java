@@ -17,6 +17,8 @@ import buildcraftAdditions.utils.PlayerUtils;
  */
 public class ContainerKEB extends ContainerBase<TileKineticEnergyBufferBase> {
 
+	private int energy;
+
 	public ContainerKEB(EntityPlayer player, TileKineticEnergyBufferBase tile) {
 		super(player.inventory, tile);
 		if (PlayerUtils.playerMatches(tile, player))
@@ -26,12 +28,13 @@ public class ContainerKEB extends ContainerBase<TileKineticEnergyBufferBase> {
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		if (crafters != null) {
+		if (energy != inventory.energy && crafters != null) {
 			MessageByteBuff msg = new MessageByteBuff(inventory);
 			for (Object o : crafters)
 				if (o != null && o instanceof EntityPlayerMP)
 					PacketHandler.instance.sendTo(msg, (EntityPlayerMP) o);
 		}
+		energy = inventory.energy;
 	}
 
 }
