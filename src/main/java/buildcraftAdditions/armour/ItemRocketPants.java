@@ -24,8 +24,10 @@ public class ItemRocketPants extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		if (FlightTracker.wantsToFly(player.getDisplayName()))
+		if (FlightTracker.wantsToFly(player.getDisplayName())) {
 			player.motionY = 0.25;
+			player.fallDistance = 0;
+		}
 	}
 
 	@Override
