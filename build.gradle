@@ -46,7 +46,7 @@ if (System.getenv().BUILD_NUMBER != null) {
 }
 
 minecraft {
-    version = "${config.version.mc}-${config.version.forge}"
+    version = "${config.version.forge}-${config.version.mc}"
     runDir = "eclipse"
     replace "@MODVERSION@", config.version.mod
 }

@@ -42,6 +42,7 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+		setDamage(itemStack, 0);
 		ItemStack stack = player.getCurrentEquippedItem();
 		ItemStack capsule = null;
 		/*if (getInstalledCapsule(itemStack, -1) > 0)
@@ -168,5 +169,10 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 
 	@Override
 	public void registerIcons(IIconRegister register) {
+	}
+
+	@Override
+	public boolean isDamageable() {
+		return false;
 	}
 }
