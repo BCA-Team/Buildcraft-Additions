@@ -3,6 +3,7 @@ package buildcraftAdditions.compat.eureka;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -103,7 +104,7 @@ public class BCAEurekaResearch {
 		EurekaAPI.API.register(new BasicEurekaInfo(Variables.Eureka.PORTABLE_LASER, "BCA-Tools", 4, ItemsAndBlocks.portableLaser));
 		EurekaAPI.API.bindToKey(ItemsAndBlocks.portableLaser, Variables.Eureka.PORTABLE_LASER);
 		EurekaAPI.API.registerDropHandler(new PortableLaserDropHandler());
-		EurekaAPI.API.registerProgressOption(Variables.Eureka.PORTABLE_LASER, EnumProgressOptions.CRAFTING, new ItemStack(BCItems.LASER).getItem());
+		EurekaAPI.API.registerProgressOption(Variables.Eureka.PORTABLE_LASER, EnumProgressOptions.CRAFTING, ((ItemBlock) new ItemStack(BCItems.LASER).getItem()).field_150939_a);
 	}
 
 }
