@@ -39,7 +39,7 @@ public class RefineryRecipeConverter {
 
 	public static void doYourThing() {
 		int teller = 0;
-		int fluids = FluidRegistry.getRegisteredFluids().size();
+		int fluids = FluidRegistry.getRegisteredFluidIDs().size();
 
 		CraftingResult<FluidStack>[] results = new CraftingResult[fluids];
 		inputs = new FluidStack[fluids];
