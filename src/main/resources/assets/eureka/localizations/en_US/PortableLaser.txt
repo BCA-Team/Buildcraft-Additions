@@ -1,8 +1,8 @@
 Portable Laser
 It’s exactly what you think it is. Probably.
 Craft lasers
- Lasers are a powerful thing. You know that they emerge from high-frequency redstone power, but even so they never seemed to affect phsycial things, unless they’re sitting inside a special Obsidian Table… That is, until today. While playing with Blaze Rods the other day, you actually placed one too near a working laser, and, just like that, got yourself on fire.
- After jumping in water, you got thinking. And here’s the result: When near Blazer Rods, Lasers will set things on fire.While weakened, the beam can still power Tables.
-Now this calls for some experimenting. Now that you know that this is a thing, you want to carry one of these with you at all times. So why not do it? You take a regular laser, add Blaze Rods for the fire, a Diamond and a piece of Glass for increased focus (thus more damage),  patch it all up on a Tool Core, and that’s it.
+ Lasers are a powerful thing. You know that they emerge from high-frequency redstone power, but even so they never seemed to affect physical things, unless they're sitting inside a special Obsidian Table... That is, until today. While playing with Blaze Rods the other day, you actually placed one too near a working laser, and, just like that, got yourself on fire.
+ After jumping in water, you got thinking. And here's the result: When near Blaze Rods, Lasers will set things on fire. While weakened, the beam can still power Tables.
+Now this calls for some experimenting. Now that you know that this is a thing, you want to carry one of these with you at all times. So why not do it? You take a regular laser, add Blaze Rods for the fire, a Diamond and a piece of Glass for increased focus (thus more damage), patch it all up on a Tool Core, and that's it.
 
 It is glorious. You can damage anything that lives AND you can craft Silicon-based items on the fly! What more could you ask?
