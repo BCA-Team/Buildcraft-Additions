@@ -1,3 +1,3 @@
-Grinding it down
+Измельчение руд
 
-Blocks that can double Ore, as simple as that. These machines are the cornerstone of the Eureka system, by making them you will learn to use it.
+Блоки, которые просто могут удваивать руды. Эти механизмы являются краеугольным камнем системы «Эврика», сделав их, Вы научитесь использовать их.
