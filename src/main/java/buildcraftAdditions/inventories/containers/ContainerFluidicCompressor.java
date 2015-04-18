@@ -17,6 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
@@ -80,13 +81,13 @@ public class ContainerFluidicCompressor extends ContainerBase<TileFluidicCompres
 				break;
 			case 1:
 				if (value >= 0)
-					inventory.tank.setFluid(new FluidStack(value, inventory.tank.getFluidAmount()));
+					inventory.tank.setFluid(new FluidStack(FluidRegistry.getFluid(value), inventory.tank.getFluidAmount()));
 				else
 					inventory.tank.setFluid(null);
 				break;
 			case 2:
 				if (value > 0 && inventory.tank.getFluid() != null)
-					inventory.tank.setFluid(new FluidStack(inventory.tank.getFluid().getFluidID(), value));
+					inventory.tank.setFluid(new FluidStack(inventory.tank.getFluid(), value));
 				else
 					inventory.tank.setFluid(null);
 				break;

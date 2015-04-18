@@ -6,6 +6,7 @@ import net.minecraft.inventory.ICrafting;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import buildcraftAdditions.tileEntities.TileRefinery;
@@ -86,25 +87,25 @@ public class ContainerRefinery extends ContainerBase<TileRefinery> {
 				break;
 			case 3:
 				if (value >= 0)
-					inventory.input.setFluid(new FluidStack(value, inventory.input.getFluidAmount()));
+					inventory.input.setFluid(new FluidStack(FluidRegistry.getFluid(value), inventory.input.getFluidAmount()));
 				else
 					inventory.input.setFluid(null);
 				break;
 			case 4:
 				if (value > 0 && inventory.input.getFluid() != null)
-					inventory.input.setFluid(new FluidStack(inventory.input.getFluid().getFluidID(), value));
+					inventory.input.setFluid(new FluidStack(inventory.input.getFluid(), value));
 				else
 					inventory.input.setFluid(null);
 				break;
 			case 5:
 				if (value >= 0)
-					inventory.output.setFluid(new FluidStack(value, inventory.output.getFluidAmount()));
+					inventory.output.setFluid(new FluidStack(FluidRegistry.getFluid(value), inventory.output.getFluidAmount()));
 				else
 					inventory.output.setFluid(null);
 				break;
 			case 6:
 				if (value > 0 && inventory.output.getFluid() != null)
-					inventory.output.setFluid(new FluidStack(inventory.output.getFluid().getFluidID(), value));
+					inventory.output.setFluid(new FluidStack(inventory.output.getFluid(), value));
 				else
 					inventory.output.setFluid(null);
 				break;

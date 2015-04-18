@@ -19,7 +19,6 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 import buildcraftAdditions.tileEntities.interfaces.IWidgetListener;
 import buildcraftAdditions.utils.Utils;
@@ -39,7 +38,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	public boolean fill;
 
 	public TileFluidicCompressor() {
-		super(ConfigurationHandler.capacityFluidicCompressor, ConfigurationHandler.maxTransferFluidicCompressor, Variables.SyncIDs.FLUIDIC_COMPRESSOR.ordinal());
+		super(ConfigurationHandler.capacityFluidicCompressor, ConfigurationHandler.maxTransferFluidicCompressor);
 	}
 
 	@Override
@@ -58,7 +57,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 						if (tank.getFluidAmount() < amount)
 							amount = tank.getFluidAmount();
 						if (energy >= amount) {
-							drain(ForgeDirection.UNKNOWN, iFluidContainerItem.fill(stack, new FluidStack(tank.getFluid().getFluidID(), amount), true), true);
+							drain(ForgeDirection.UNKNOWN, iFluidContainerItem.fill(stack, new FluidStack(tank.getFluid(), amount), true), true);
 							energy -= amount;
 						}
 					}
@@ -70,7 +69,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 							amount = tank.getFreeSpace();
 						if (amount > contained.amount)
 							amount = contained.amount;
-						iFluidContainerItem.drain(stack, fill(ForgeDirection.UNKNOWN, new FluidStack(contained.getFluidID(), amount), true), true);
+						iFluidContainerItem.drain(stack, fill(ForgeDirection.UNKNOWN, new FluidStack(contained, amount), true), true);
 					}
 				}
 			} else if (FluidContainerRegistry.isContainer(stack)) {
@@ -78,7 +77,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 					if (!tank.isEmpty()) {
 						int amount = FluidContainerRegistry.getContainerCapacity(tank.getFluid(), stack);
 						if (amount > 0 && energy >= amount && tank.getFluidAmount() >= amount) {
-							ItemStack filledContainer = FluidContainerRegistry.fillFluidContainer(new FluidStack(tank.getFluid().getFluidID(), amount), stack);
+							ItemStack filledContainer = FluidContainerRegistry.fillFluidContainer(new FluidStack(tank.getFluid(), amount), stack);
 							if (filledContainer != null && filledContainer.getItem() != null && filledContainer.stackSize > 0) {
 								energy -= amount;
 								drain(ForgeDirection.UNKNOWN, amount, true);
