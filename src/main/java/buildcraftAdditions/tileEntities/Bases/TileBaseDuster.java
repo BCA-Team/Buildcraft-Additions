@@ -15,6 +15,7 @@ import net.minecraft.world.WorldServer;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.recipe.duster.IDusterRecipe;
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
 
 import eureka.api.EurekaAPI;
@@ -31,7 +32,6 @@ public abstract class TileBaseDuster extends TileBase implements ISidedInventory
 	public final CustomInventory inventory = new CustomInventory("Duster", 1, 1, this);
 	protected final String key;
 	public int progress;
-	protected int particles = 100;
 
 	public TileBaseDuster(String key) {
 		this.key = key;
@@ -51,6 +51,8 @@ public abstract class TileBaseDuster extends TileBase implements ISidedInventory
 	}
 
 	protected void spawnDustingParticles() {
+		if (!ConfigurationHandler.dusterParticles)
+			return;
 		if (!worldObj.isRemote && worldObj instanceof WorldServer) {
 			WorldServer worldServer = (WorldServer) worldObj;
 			ItemStack stack = getStackInSlot(0);
@@ -69,7 +71,7 @@ public abstract class TileBaseDuster extends TileBase implements ISidedInventory
 				}
 				offsetY += getParticleOffset();
 				if (!Strings.isNullOrEmpty(s))
-					worldServer.func_147487_a(s, xCoord + .5, yCoord + offsetY, zCoord + .5, particles, 0, 0, 0, 0.075);
+					worldServer.func_147487_a(s, xCoord + .5, yCoord + offsetY, zCoord + .5, ConfigurationHandler.particleCount, 0, 0, 0, 0.075);
 			}
 		}
 	}
