@@ -70,7 +70,7 @@ public class Tank extends FluidTank implements ISyncObject {
 
 	@Override
 	public void writeToByteBuff(ByteBuf buf) {
-		buf.writeInt(fluid != null ? fluid.fluidID : -1);
+		buf.writeInt(fluid != null ? fluid.getFluidID() : -1);
 		buf.writeInt(getFluidAmount());
 		ByteBufUtils.writeTag(buf, fluid != null ? fluid.tag : null);
 	}
