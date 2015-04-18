@@ -58,12 +58,10 @@ curse {
         projectId = "${curseProps.project_id}"
 
         releaseType = "release"
-        changelog = """fixed fluidic compressor dupe bug
-fixed refinery gui crash
-added usage tooltip to the kinetic backpack
-tweaked fluid canister tooltip
-fix backpack accepting additional canister
-improved gui syncing
+        changelog = """fixed anohter dupe bug
+fixed portable laser research
+foxed gilded red metal recipe
+attempt at fixing forge fluid id mess
 """
     }
 }

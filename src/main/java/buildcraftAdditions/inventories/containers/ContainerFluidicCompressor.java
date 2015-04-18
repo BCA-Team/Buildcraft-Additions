@@ -45,7 +45,7 @@ public class ContainerFluidicCompressor extends ContainerBase<TileFluidicCompres
 	public void addCraftingToCrafters(ICrafting crafting) {
 		super.addCraftingToCrafters(crafting);
 		crafting.sendProgressBarUpdate(this, 0, inventory.fill ? 1 : 0);
-		crafting.sendProgressBarUpdate(this, 1, inventory.tank.getFluidAmount() > 0 ? inventory.tank.getFluid().fluidID : -1);
+		crafting.sendProgressBarUpdate(this, 1, inventory.tank.getFluidAmount() > 0 ? inventory.tank.getFluid().getFluidID() : -1);
 		crafting.sendProgressBarUpdate(this, 2, inventory.tank.getFluidAmount());
 	}
 
@@ -58,15 +58,15 @@ public class ContainerFluidicCompressor extends ContainerBase<TileFluidicCompres
 					ICrafting crafting = (ICrafting) o;
 					if (fill != inventory.fill)
 						crafting.sendProgressBarUpdate(this, 0, inventory.fill ? 1 : 0);
-					if (fluidID != (inventory.tank.getFluidAmount() > 0 ? inventory.tank.getFluid().fluidID : -1))
-						crafting.sendProgressBarUpdate(this, 1, inventory.tank.getFluidAmount() > 0 ? inventory.tank.getFluid().fluidID : -1);
+					if (fluidID != (inventory.tank.getFluidAmount() > 0 ? inventory.tank.getFluid().getFluidID() : -1))
+						crafting.sendProgressBarUpdate(this, 1, inventory.tank.getFluidAmount() > 0 ? inventory.tank.getFluid().getFluidID() : -1);
 					if (fluidAmount != inventory.tank.getFluidAmount())
 						crafting.sendProgressBarUpdate(this, 2, inventory.tank.getFluidAmount());
 				}
 			}
 		}
 		fill = inventory.fill;
-		fluidID = inventory.tank.getFluidAmount() > 0 ? inventory.tank.getFluid().fluidID : -1;
+		fluidID = inventory.tank.getFluidAmount() > 0 ? inventory.tank.getFluid().getFluidID() : -1;
 		fluidAmount = inventory.tank.getFluidAmount();
 	}
 
@@ -86,7 +86,7 @@ public class ContainerFluidicCompressor extends ContainerBase<TileFluidicCompres
 				break;
 			case 2:
 				if (value > 0 && inventory.tank.getFluid() != null)
-					inventory.tank.setFluid(new FluidStack(inventory.tank.getFluid().fluidID, value));
+					inventory.tank.setFluid(new FluidStack(inventory.tank.getFluid().getFluidID(), value));
 				else
 					inventory.tank.setFluid(null);
 				break;

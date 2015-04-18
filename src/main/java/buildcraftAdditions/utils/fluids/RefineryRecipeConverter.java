@@ -39,7 +39,7 @@ public class RefineryRecipeConverter {
 
 	public static void doYourThing() {
 		int teller = 0;
-		int fluids = FluidRegistry.getRegisteredFluids().size();
+		int fluids = FluidRegistry.getRegisteredFluidIDs().size();
 
 		CraftingResult<FluidStack>[] results = new CraftingResult[fluids];
 		inputs = new FluidStack[fluids];
@@ -57,7 +57,7 @@ public class RefineryRecipeConverter {
 					results[teller] = currentResult;
 					dummy.output.fill(currentResult.crafted.copy(), true);
 					outputs[teller] = dummy.output.getFluid();
-					inputs[teller] = new FluidStack(dummy.input.getFluid().fluidID, 1000 - dummy.input.getFluidAmount());
+					inputs[teller] = new FluidStack(dummy.input.getFluid().getFluidID(), 1000 - dummy.input.getFluidAmount());
 					teller++;
 					Logger.info("Buildcraft refinery recipe detected, input: " + dummy.input.getFluid().getLocalizedName() + ", output: " + dummy.output.getFluid().getLocalizedName());
 				}
@@ -86,7 +86,7 @@ public class RefineryRecipeConverter {
 
 			BuildcraftRecipeRegistry.refinery.removeRecipe(results[t].recipe);
 			BuildcraftRecipeRegistry.refinery.addRecipe(results[t].recipe.getId() + "_GAS", inputs[t], new FluidStack(fluid, outputs[t].amount), results[t].energyCost, 0);
-			BCARecipeManager.cooling.addRecipe(new FluidStack(fluid.getID(), 1), new FluidStack(outputs[t].fluidID, 1), ((float) results[t].energyCost) / 2000);
+			BCARecipeManager.cooling.addRecipe(new FluidStack(fluid.getID(), 1), new FluidStack(outputs[t].getFluidID(), 1), ((float) results[t].energyCost) / 2000);
 			BCARecipeManager.refinery.addRecipe(inputs[t], new FluidStack(fluid.getID(), outputs[t].amount), results[t].energyCost);
 		}
 

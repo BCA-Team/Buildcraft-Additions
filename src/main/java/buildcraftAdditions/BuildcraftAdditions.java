@@ -17,8 +17,12 @@ import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
@@ -133,6 +137,15 @@ public class BuildcraftAdditions {
 		for (IDust dust : BCAItemManager.dusts.getDusts())
 			if (dust != null)
 				dust.getDustType().register(dust.getMeta(), dust.getName(), dust.getDustStack());
+		if (OreDictionary.getOres("dustGold").isEmpty() || OreDictionary.getOres("dustIron").isEmpty()) {
+			GameRegistry.addRecipe(new ShapelessOreRecipe(ItemsAndBlocks.gildedRedMetalIngot, "ingotGold", "ingotGold", "ingotGold", "ingotIron", "ingotIron", "dustRedstone"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(ItemsAndBlocks.conductivePlateRaw, "DD", "DD", 'D', "ingotGildedRedMetal"));
+		} else {
+			ItemStack dust = BCAItemManager.dusts.getDust("GildedRedMetal").getDustStack().copy();
+			dust.stackSize = 6;
+			GameRegistry.addRecipe(new ShapelessOreRecipe(dust, "dustGold", "dustGold", "dustGold", "dustIron", "dustIron", "dustRedstone"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(ItemsAndBlocks.conductivePlateRaw, "DD", "DD", 'D', "dustGildedRedMetal"));
+		}
 	}
 
 	@Mod.EventHandler
