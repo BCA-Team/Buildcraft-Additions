@@ -7,6 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import buildcraft.api.power.ILaserTarget;
 
 import buildcraftAdditions.api.recipe.BCARecipeManager;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
 
 /**
@@ -22,7 +23,7 @@ public class TileKineticDuster extends TileDusterWithConfigurableOutput implemen
 	private boolean receivedLaserEnergy = false;
 
 	public TileKineticDuster() {
-		super("");
+		super("", Variables.SyncIDs.KINETIC_DUSTER.ordinal());
 	}
 
 	@Override

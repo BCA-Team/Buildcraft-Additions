@@ -9,6 +9,7 @@ import cofh.api.energy.IEnergyReceiver;
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.Location;
 
@@ -24,7 +25,7 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 	private boolean creative, init;
 
 	public TileKineticEnergyBufferTier1() {
-		super(ConfigurationHandler.capacityKEBTier1, ConfigurationHandler.maxTransferKEBTier1, ConfigurationHandler.KEB1powerloss, 1);
+		super(ConfigurationHandler.capacityKEBTier1, ConfigurationHandler.maxTransferKEBTier1, ConfigurationHandler.KEB1powerloss, 1, Variables.SyncIDs.KEBT1.ordinal());
 		creative = false;
 		init = false;
 	}

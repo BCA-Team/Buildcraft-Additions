@@ -15,6 +15,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraftAdditions.armour.ItemKineticBackpack;
 import buildcraftAdditions.inventories.CustomInventory;
 import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.utils.Utils;
 /**
@@ -26,6 +27,10 @@ import buildcraftAdditions.utils.Utils;
  */
 public class TileBackpackStand extends TileBase {
 	public CustomInventory inventory = new CustomInventory("backpackStand", 1, 1, this);
+
+	public TileBackpackStand() {
+		super(Variables.SyncIDs.BACKPACK_STAND.ordinal());
+	}
 
 	public void onBlockActivated(float hitX, float hitY, float hitZ, int rotation, EntityPlayer player) {
 		if (inventory.getStackInSlot(0) == null) {

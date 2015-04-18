@@ -18,13 +18,8 @@ public final class Variables {
 
 	public static final int NETWORK_RANGE = 64;
 
-	//Render ID's
-	public static final class RenderIDs {
-		public static int SIDED_TEXTURES_RENDER_ID;
-	}
-
 	//GUI ID's
-	public static enum Gui {
+	public enum Gui {
 		FLUIDIC_COMPRESSOR,
 		CHARGING_STATION,
 		KINETIC_MULTI_TOOL,
@@ -37,6 +32,31 @@ public final class Variables {
 		COOLING_TOWER,
 		ITEM_SORTER,
 		PIPE_COLORING_TOOL
+	}
+
+	public enum SyncIDs {
+		BACKPACK_STAND,
+		BASIC_COIL,
+		BASIC_DUSTER,
+		CHARGING_STATION,
+		COOLING_TOWER,
+		FLUIDIC_COMPRESSOR,
+		HEATED_FURNACE,
+		ITEM_SORTER,
+		KEBT1,
+		KEBT2,
+		KEBT3,
+		KINETIC_COIL,
+		KINETIC_DUSTER,
+		LAVA_COIL,
+		MECHANIC_DUSTER,
+		REFINERY,
+		SEMI_AUTOMATIC_DUSTER
+	}
+
+	//Render ID's
+	public static final class RenderIDs {
+		public static int SIDED_TEXTURES_RENDER_ID;
 	}
 
 	//EUREKA NBT names

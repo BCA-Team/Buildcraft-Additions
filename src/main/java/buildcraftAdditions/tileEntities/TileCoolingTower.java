@@ -62,6 +62,10 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private TileCoolingTower master;
 	private ICoolingTowerRecipe recipe;
 
+	public TileCoolingTower() {
+		super(Variables.SyncIDs.COOLING_TOWER.ordinal());
+	}
+
 	@Override
 	public void updateEntity() {
 		super.updateEntity();

@@ -14,4 +14,6 @@ public interface ISynchronizedTile extends ISyncObject {
 	int getY();
 
 	int getZ();
+
+	int getIdentifier();
 }

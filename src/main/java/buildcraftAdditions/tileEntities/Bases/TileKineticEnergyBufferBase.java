@@ -49,8 +49,8 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	public EntityPlayer destroyer;
 	private UUID owner;
 
-
-	public TileKineticEnergyBufferBase(int capacity, int maxTransfer, int loss, int tier) {
+	public TileKineticEnergyBufferBase(int capacity, int maxTransfer, int loss, int tier, int identifier) {
+		super(identifier);
 		this.capacity = capacity;
 		this.maxTransfer = maxTransfer;
 		this.loss = loss;

@@ -39,7 +39,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public TileKEBT3 master;
 
 	public TileKEBT3() {
-		super(ConfigurationHandler.capacityKEBTier3, ConfigurationHandler.maxTransferKEBTier3, ConfigurationHandler.KEB3powerloss, 3);
+		super(ConfigurationHandler.capacityKEBTier3, ConfigurationHandler.maxTransferKEBTier3, ConfigurationHandler.KEB3powerloss, 3, Variables.SyncIDs.KEBT3.ordinal());
 	}
 
 	@Override

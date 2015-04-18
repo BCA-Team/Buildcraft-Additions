@@ -42,7 +42,7 @@ public class TileKEBT2 extends TileKineticEnergyBufferBase implements IMultiBloc
 	public TileKEBT2 master;
 
 	public TileKEBT2() {
-		super(ConfigurationHandler.capacityKEBTier2, ConfigurationHandler.maxTransferKEBTier2, ConfigurationHandler.KEB2powerloss, 2);
+		super(ConfigurationHandler.capacityKEBTier2, ConfigurationHandler.maxTransferKEBTier2, ConfigurationHandler.KEB2powerloss, 2, Variables.SyncIDs.KEBT2.ordinal());
 	}
 
 	@Override

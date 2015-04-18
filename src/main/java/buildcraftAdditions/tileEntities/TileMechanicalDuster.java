@@ -29,8 +29,8 @@ public class TileMechanicalDuster extends TileBaseDuster implements IEnergyRecei
 	public EntityPlayer player;
 
 	public TileMechanicalDuster() {
-		super(Variables.Eureka.DustT2Key2);
-		particles = 5;
+		super(Variables.Eureka.DustT2Key2, Variables.SyncIDs.MECHANIC_DUSTER.ordinal());
+		particles = particles / 20;
 	}
 
 	@Override

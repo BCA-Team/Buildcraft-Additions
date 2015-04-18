@@ -19,6 +19,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 import buildcraftAdditions.tileEntities.interfaces.IWidgetListener;
 import buildcraftAdditions.utils.Utils;
@@ -38,7 +39,7 @@ public class TileFluidicCompressor extends TileMachineBase implements ISidedInve
 	public boolean fill;
 
 	public TileFluidicCompressor() {
-		super(ConfigurationHandler.capacityFluidicCompressor, ConfigurationHandler.maxTransferFluidicCompressor);
+		super(ConfigurationHandler.capacityFluidicCompressor, ConfigurationHandler.maxTransferFluidicCompressor, Variables.SyncIDs.FLUIDIC_COMPRESSOR.ordinal());
 	}
 
 	@Override

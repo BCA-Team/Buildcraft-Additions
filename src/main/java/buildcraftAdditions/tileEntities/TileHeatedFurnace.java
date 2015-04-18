@@ -19,6 +19,7 @@ import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import buildcraftAdditions.api.configurableOutput.SideConfiguration;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
@@ -43,6 +44,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	private SideConfiguration configuration = new SideConfiguration(EnumSideStatus.BOTH);
 
 	public TileHeatedFurnace() {
+		super(Variables.SyncIDs.HEATED_FURNACE.ordinal());
 		progress = 0;
 		isCooking = false;
 		coils = new TileCoilBase[6];
