@@ -35,7 +35,7 @@ public class RestrictedTank extends Tank {
 	}
 
 	public boolean canFill(Fluid fluid) {
-		return acceptor.accepts(new FluidStack(fluid.getID(), 1));
+		return acceptor.accepts(new FluidStack(fluid, 1));
 	}
 
 	@Override

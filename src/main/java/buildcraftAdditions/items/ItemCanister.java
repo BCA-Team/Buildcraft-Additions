@@ -80,7 +80,7 @@ public class ItemCanister extends ItemFluidContainer {
 		super.getSubItems(item, tab, list);
 		for (Fluid fluid : FluidRegistry.getRegisteredFluids().values())
 			if (fluid != null)
-				list.add(getFilledItemStack(new FluidStack(fluid.getID(), capacity)));
+				list.add(getFilledItemStack(new FluidStack(fluid, capacity)));
 	}
 
 	@SideOnly(Side.CLIENT)

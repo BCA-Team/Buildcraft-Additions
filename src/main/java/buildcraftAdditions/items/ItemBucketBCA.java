@@ -32,7 +32,7 @@ public class ItemBucketBCA extends ItemBucket {
 
 	public ItemBucketBCA(Fluid fluid) {
 		super(fluid.getBlock());
-		this.fluid = new FluidStack(fluid.getID(), FluidContainerRegistry.BUCKET_VOLUME);
+		this.fluid = new FluidStack(fluid, FluidContainerRegistry.BUCKET_VOLUME);
 		setContainerItem(Items.bucket);
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		setUnlocalizedName("bcaBucket." + fluid.getName());

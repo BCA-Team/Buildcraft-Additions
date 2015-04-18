@@ -25,7 +25,7 @@ public class ItemBlockFluid extends ItemBlock {
 		if (block instanceof IFluidBlock) {
 			Fluid fluid = ((IFluidBlock) block).getFluid();
 			if (fluid != null)
-				fluidStack = new FluidStack(fluid.getID(), FluidContainerRegistry.BUCKET_VOLUME);
+				fluidStack = new FluidStack(fluid, FluidContainerRegistry.BUCKET_VOLUME);
 			else fluidStack = null;
 		} else fluidStack = null;
 	}
