@@ -1,17 +1,9 @@
 package buildcraftAdditions.armour;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.client.models.ModelRocketPants;
 import buildcraftAdditions.listeners.FlightTracker;
 import buildcraftAdditions.reference.ItemsAndBlocks;
@@ -22,12 +14,14 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemRocketPants extends ItemArmor {
-	private static final int POWER_USE = 15;
-	private static final ModelBiped MODEL = new ModelRocketPants();
+public class ItemRocketPants extends ItemPoweredArmor {
+	private static final int
+			POWER_USE = 15,
+			MAX_LIFT = 1,
+			MAX_SPEED = 2;
 
 	public ItemRocketPants() {
-		super(ArmorMaterial.IRON, BuildcraftAdditions.proxy.addArmor("kineticBackpack"), 2);
+		super("rocketPants", 2, new ModelRocketPants());
 		setUnlocalizedName("rocketPants");
 	}
 
@@ -40,25 +34,15 @@ public class ItemRocketPants extends ItemArmor {
 				ItemKineticBackpack backpack = (ItemKineticBackpack) stack.getItem();
 				if (backpack.extractEnergy(stack, POWER_USE, true) == POWER_USE) {
 					backpack.extractEnergy(stack, POWER_USE, false);
-					player.motionY = 0.25;
+					player.motionX *= 10 / player.posY;
+					if (player.motionY < MAX_LIFT)
+						player.motionY += 0.1;
+					player.motionZ *= 10 / player.posY;
 					player.fallDistance = 0;
 				}
 			}
 		}
 	}
 
-	@Override
-	public void registerIcons(IIconRegister register) {
-	}
 
-	@Override
-	public boolean isDamageable() {
-		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
-		return MODEL;
-	}
 }

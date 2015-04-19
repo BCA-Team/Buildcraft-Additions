@@ -15,7 +15,10 @@ import buildcraftAdditions.networking.PacketHandler;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class FlightTracker {
-	private static final HashMap<String, Boolean> jumpers = new HashMap<String, Boolean>();
+	private static final HashMap<String, Boolean>
+			jumpers = new HashMap<String, Boolean>(),
+			movers = new HashMap<String, Boolean>();
+
 
 	public static boolean wantsToFly(String player) {
 		if (!jumpers.containsKey(player))
@@ -23,13 +26,25 @@ public class FlightTracker {
 		return jumpers.get(player);
 	}
 
+	public static boolean wantsToMove(String player) {
+		if (movers.containsKey(player))
+			movers.put(player, false);
+		return movers.get(player);
+	}
+
 	public static void setJumping(EntityPlayer player, boolean newStatus) {
 		jumpers.put(player.getDisplayName(), newStatus);
 		if (player.worldObj.isRemote)
-			sync(player);
+			sync(player.getDisplayName());
 	}
 
-	private static void sync(EntityPlayer player) {
-		PacketHandler.instance.sendToServer(new MessageFlightSync(jumpers.get(player.getDisplayName())));
+	public static void setMoving(EntityPlayer player, boolean moving) {
+		movers.put(player.getDisplayName(), moving);
+		if (player.worldObj.isRemote)
+			sync(player.getDisplayName());
+	}
+
+	private static void sync(String player) {
+		PacketHandler.instance.sendToServer(new MessageFlightSync(wantsToFly(player), wantsToMove(player)));
 	}
 }
