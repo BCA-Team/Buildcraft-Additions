@@ -15,6 +15,8 @@ import cpw.mods.fml.common.gameevent.InputEvent;
  */
 public class KeyListener {
 	private static final int jumpkey = Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode();
+	private static final int forwardKey = Minecraft.getMinecraft().gameSettings.keyBindForward.getKeyCode();
+
 
 	@SubscribeEvent
 	public void InputEvent(InputEvent.KeyInputEvent event) {
@@ -24,6 +26,10 @@ public class KeyListener {
 			boolean newStatus = Keyboard.isKeyDown(jumpkey);
 			if (oldStatus != newStatus)
 				FlightTracker.setJumping(mc.thePlayer, newStatus);
+			oldStatus = FlightTracker.wantsToMove(mc.thePlayer.getDisplayName());
+			newStatus = Keyboard.isKeyDown(forwardKey);
+			if (oldStatus != newStatus)
+				FlightTracker.setMoving(mc.thePlayer, newStatus);
 		}
 	}
 }

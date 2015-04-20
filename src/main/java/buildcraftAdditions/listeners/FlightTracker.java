@@ -27,24 +27,23 @@ public class FlightTracker {
 	}
 
 	public static boolean wantsToMove(String player) {
-		if (movers.containsKey(player))
+		if (!movers.containsKey(player))
 			movers.put(player, false);
 		return movers.get(player);
 	}
 
 	public static void setJumping(EntityPlayer player, boolean newStatus) {
 		jumpers.put(player.getDisplayName(), newStatus);
-		if (player.worldObj.isRemote)
-			sync(player.getDisplayName());
+		sync(player);
 	}
 
 	public static void setMoving(EntityPlayer player, boolean moving) {
 		movers.put(player.getDisplayName(), moving);
-		if (player.worldObj.isRemote)
-			sync(player.getDisplayName());
+		sync(player);
 	}
 
-	private static void sync(String player) {
-		PacketHandler.instance.sendToServer(new MessageFlightSync(wantsToFly(player), wantsToMove(player)));
+	private static void sync(EntityPlayer player) {
+		if (player.worldObj.isRemote)
+			PacketHandler.instance.sendToServer(new MessageFlightSync(wantsToFly(player.getDisplayName()), wantsToMove(player.getDisplayName())));
 	}
 }

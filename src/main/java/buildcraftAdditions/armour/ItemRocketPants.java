@@ -16,9 +16,8 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
  */
 public class ItemRocketPants extends ItemPoweredArmor {
 	private static final int
-			POWER_USE = 15,
-			MAX_LIFT = 1,
-			MAX_SPEED = 2;
+			POWER_USE = 75,
+			MAX_LIFT = 5;
 
 	public ItemRocketPants() {
 		super("rocketPants", 2, new ModelRocketPants());
@@ -28,17 +27,21 @@ public class ItemRocketPants extends ItemPoweredArmor {
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		setDamage(itemStack, 0);
-		if (FlightTracker.wantsToFly(player.getDisplayName())) {
+		if (FlightTracker.wantsToFly(player.getDisplayName()) || !player.onGround) {
 			ItemStack stack = player.getCurrentArmor(2);
 			if (stack != null && stack.getItem() == ItemsAndBlocks.kineticBackpack) {
 				ItemKineticBackpack backpack = (ItemKineticBackpack) stack.getItem();
 				if (backpack.extractEnergy(stack, POWER_USE, true) == POWER_USE) {
 					backpack.extractEnergy(stack, POWER_USE, false);
-					player.motionX *= 10 / player.posY;
-					if (player.motionY < MAX_LIFT)
+					if (FlightTracker.wantsToMove(player.getDisplayName())) {
+						player.moveFlying(0, .2f, .2f);
+					}
+					player.motionX *= 1.025;
+					player.motionZ *= 1.025;
+					if (player.motionY < MAX_LIFT && FlightTracker.wantsToFly(player.getDisplayName())) {
 						player.motionY += 0.1;
-					player.motionZ *= 10 / player.posY;
-					player.fallDistance = 0;
+						player.fallDistance = 0;
+					}
 				}
 			}
 		}

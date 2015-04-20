@@ -28,11 +28,13 @@ public class MessageFlightSync implements IMessage, IMessageHandler<MessageFligh
 	@Override
 	public void fromBytes(ByteBuf buf) {
 		wantsToFly = buf.readBoolean();
+		wantsToMove = buf.readBoolean();
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf) {
 		buf.writeBoolean(wantsToFly);
+		buf.writeBoolean(wantsToMove);
 	}
 
 	@Override
