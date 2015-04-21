@@ -86,10 +86,7 @@ repositories {
 	    name = "buildcraft"
 	    url = "http://mod-buildcraft.com"
     }
-    maven {
-        name = "amadornesrepo"
-        url = "http://maven.amadornes.com/"
-    }
+    
     ivy {
         name "MineTweaker3"
         artifactPattern "http://minetweaker3.powerofbytes.com/download/[module]-[revision].[ext]"

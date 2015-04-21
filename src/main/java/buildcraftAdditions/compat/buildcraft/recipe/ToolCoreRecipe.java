@@ -6,7 +6,7 @@ import buildcraft.BuildCraftCore;
 import buildcraft.api.recipes.CraftingResult;
 import buildcraft.silicon.ItemRedstoneChipset;
 import buildcraft.silicon.TileIntegrationTable;
-import buildcraft.transport.recipes.IntegrationTableRecipe;
+import buildcraft.silicon.recipes.IntegrationTableRecipe;
 
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;

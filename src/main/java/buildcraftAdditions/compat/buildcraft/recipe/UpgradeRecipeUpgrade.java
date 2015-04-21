@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 
 import buildcraft.api.recipes.CraftingResult;
 import buildcraft.silicon.TileIntegrationTable;
-import buildcraft.transport.recipes.IntegrationTableRecipe;
+import buildcraft.silicon.recipes.IntegrationTableRecipe;
 
 import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
 import buildcraftAdditions.items.Tools.ItemToolUpgrade;
