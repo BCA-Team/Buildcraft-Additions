@@ -1,157 +1,431 @@
 tile.blockFluidicCompressor.name=Compresor de líquidos
 tile.blockChargingStation.name=Estación de carga
 tile.blockHeatedFurnace.name=Horno térmico
-tile.blockCoilBasic.name=Bobina basica
+tile.blockCoilBasic.name=Bobina básica
 tile.blockDusterBasic.name=Sacudidor básico
 tile.blockDusterSemiAutomatic.name=Sacudidor semi-automático
 tile.blockDusterMechanical.name=Sacudidor mecánico
 tile.blockDusterKinetic.name=Sacudidor cinético
- 
+tile.blockCoilLava.name=Bobina de lava
+tile.blockCoilKinetic.name=Bobina cinética
+tile.blockKEBT1.name=Bateria cinética
+tile.blockKEBT2.name=Bateria grande cinética
+tile.blockKEBT3Core.name=Nucleo de bateria cinética avanzada
+tile.blockKEBT3Plating.name=Chapado de bateria cinética avanzada
+tile.blockKEBT3.name=Bateria cinética avanzada
+tile.blockRefineryWalls.name=Chapado de Refineria
+tile.blockRefineryValve.name=Valvúla de Refineria
+tile.blockCoolingTowerWalls.name=Paredes torre de enfriamiento
+tile.blockCoolingTowerValve.name=Valvúla torre de enfriamiento
+tile.blockItemSorter.name=Sort-O-Tron
+tile.backpackStand.name=Soporte de mochila
+
 item.ironCanister.name=Lata de hierro
-item.goldCanister.name=Lata de oro
-item.diamondCanister.name=Lata de diamante
-item.poweredShovel.name=Excavadora cinética
-item.drill.name=Taladro cinético
-item.chainsaw.name=Sierra cinética
-item.megaHoe.name=Azada cinética
-item.PowerCapsuleTier1.name=Capsula cinética nivel 1
-item.PowerCapsuleTier2.name=Capsula cinética nivel 2
-item.PowerCapsuleTier3.name=Capsula cinética nivel 3
-item.stickIron.name=Palo de hierro
-item.stickGold.name=Palo de oro
-item.stickDiamond.name=Palo de diamante
-item.stickEmerald.name=Palo de Esmeralda
-item.toolCore.name=Núcleo de herramienta
-item.toolUpgradeDrill.name=Cabeza del taladro
-item.toolUpgradeDigger.name=Accesorio de excavación
-item.toolUpgradeChainsaw.name=Sierra
-item.toolUpgradeHoe.name=Cultivador
-item.kineticMultiTool.name=Multi-Herramienta cinética
-item.dustGold.name=Polvo de oro
-item.dustIron.name=Polvo de hierro
-item.dustCopper.name=Polvo de cobre
-item.dustLead.name=Polvo de plomo
-item.dustNickel.name=Polvo de níquel
-item.dustPlatinum.name=Polvo de platino
-item.dustTin.name=Polvo de estaño
-item.dustSilver.name=Polvo de plata
-item.dustDiamond.name=Polvo de diamante
-item.grindingWheel.name=Rueda de moler
-item.engineeringDiary.name=Diario de Ingeniería
- 
-tooltip.installed=Instalado
-tooltip.deactivated=Desactivado
-tooltip.upgradesPossible=Mejores disponibles
- 
-gui.progress=Progreso
-gui.fluid=Líquido
-gui.noFluid=Vacío
-gui.fluidStored=Cantidad de líquido
-gui.energyInTool=Energia guardada
-gui.maxEnergy=Energia máxima
- 
-trigger.canisterRequested=Lata requerida
-trigger.hasEmptyCanister=Tiene lata vacía
-trigger.hasFullCanister=Tiene lata llena
-trigger.doneCharging=Acabado de cargar
-trigger.readyToCharge=Preparado para cargar
- 
-itemGroup.BuildcraftAdditions=Buildcraft Additions
+ item.goldCanister.name=Lata de oro
+ item.diamondCanister.name=Lata de diamante
+ item.mjMeter.name=Medidor de MJ
+ item.poweredShovel.name=Excavadora cinética
+ item.drill.name=Taladro cinético
+ item.chainsaw.name=Sierra cinética
+ item.megaHoe.name=Azada cinética
+ item.PowerCapsuleTier1.name=Capsula cinética nivel 1
+ item.PowerCapsuleTier2.name=Capsula cinética nivel 2
+ item.PowerCapsuleTier3.name=Capsula cinética nivel 3
+ item.stickIron.name=Palo de hierro
+ item.stickGold.name=Palo de oro
+ item.stickDiamond.name=Palo de diamante
+ item.stickEmerald.name=Palo de Esmeralda
+ item.toolCore.name=Núcleo de herramienta
+ item.toolUpgradeDrill.name=Cabeza del taladro
+ item.toolUpgradeDigger.name=Accesorio de excavación
+ item.toolUpgradeChainsaw.name=Sierra
+ item.toolUpgradeHoe.name=Cultivador
+ item.kineticMultiTool.name=Multi-Herramienta cinética
+ item.dustGold.name=Polvo de oro
+ item.dustIron.name=Polvo de hierro
+ item.dustCopper.name=Polvo de cobre
+ item.dustLead.name=Polvo de plomo
+ item.dustNickel.name=Polvo de níquel
+ item.dustPlatinum.name=Polvo de platino
+ item.dustTin.name=Polvo de estaño
+ item.dustSilver.name=Polvo de plata
+ item.dustDiamond.name=Polvo de diamante
+ item.grindingWheel.name=Rueda de moler
+ item.engineeringDiary.name=Diario de Ingeniería
++item.wireIron.name=Cable de Hierro
++item.wireIronUnhardened.name=Cable de Hierro (Inusable)
++item.wireGold.name=Cable de Oro
++item.wireGoldUnhardened.name=Cable de Oro (Inusable)
++item.wireDiamond.name=Cable de Diamante
++item.wireDiamondUnhardened.name=Cable de Diamante (Inusable)
+item.heatPlatingRaw.name=Chapado térmico crudo
+item.heatPlating.name=Chapado térmico
+item.dustConverter.name=Convertidor de Polvo
+item.machineConfigurator.name=Configurador de máquinas
+item.bcaBucket.name=%s Cubo
+item.pipeColoringTool.name=Herramienta de coloreado
+item.upgrade.upgradeAutoEject.name=Mejora para maquinas: Auto-Exportación
+item.upgrade.upgradeAutoImport.name=Mejora para maquinas: Auto-Importación
+item.upgrade.upgradeEfficiency1.name=Mejora para maquinas: Eficiencia I
+item.upgrade.upgradeEfficiency2.name=Mejora para maquinas: Eficiencia II
+item.upgrade.upgradeEfficiency3.name=Mejora para maquinas: Eficiencia III
+item.upgrade.upgradeSpeed1.name=Mejora para maquinas: Velocidad I
+item.upgrade.upgradeSpeed2.name=Mejora para maquinas: Velocidad II
+item.upgrade.upgradeSpeed3.name=Mejora para maquinas: Velocidad III
+item.baseUpgrade.name=Mejora en blanco
+item.robotDebugTool.name=Herramienta de Debug para el robot
+item.kineticBackpack.name=Mochila cinética
+item.gildedRedMetalIngot.name=Lingote de Metal Rojo dorado
+item.conductivePlateRaw.name=Chapado conductivo crudo
+item.conductivePlate.name=Chapado conductivo
 
-Eureka=EUREKA!
-eureka.dusterTier0Finished=Empiezas a planear todas tus próximas invenciones pero te das cuenta de que vas a necesitas un montón de recursos. También empiezas a pensar en una forma de hacer eso mas fácil.
-eureka.dusterTier1Finished=Mientras procesas tus minerales, de repente te das cuenta de que hay formas mas eficientes de procesarlos.
-eureka.dusterTier2-1Finished=Después de poder interactuar con inventarios, decides intentar automatizar el procesamiento en sí.
-eureka.dusterTier2-2Finished=Te gusta no tener que saltar encima de la maquina, pero también quieres la habilidad de interactuar con los inventarios. Decides combinar tu sabiduría en una nueva máquina. Seguramente algo con láseres?
-eureka.kineticToolFinished=Mientras creas una nueva herramienta para sustituir la antigua, empiezas a pensar en una herramienta que no se romperá.
-eureka.missingKnowledge=No entiendes como funciona esta maquina (aún) . Intentas usarla, pero debido a tu incompetencia, se rompe en pedazos.
-eureka.missingKnowledgeKineticTool=No entiendes como funciona esta maquina (aún) . Intentas usarla, pero debido a tu incompetencia, se rompe en pedazos.
+material.iron.name=Hierro
+material.gold.name=Oro
+material.diamond.name=Diamante
+material.emerald.name=Esmeralda
+material.coal.name=Carbón
+material.charcoal.name=Carbón vegetal
+material.obsidian.name=Obsidiana
+material.enderPearl.name=Perla de Ender
+material.netherQuartz.name=Nether Quartz
+material.bronze.name=Bronce
+material.manganese.name=Manganeso
+material.hepatizon.name=Hepatizon
+material.damascusSteel.name=Acero Damasco
+material.angmallen.name=Angmallen
+material.steel.name=Acero
+material.eximite.name=Eximite
+material.meutoite.name=Meutoite
+material.desichalkos.name=Desichalkos
+material.prometheum.name=Prometheum
+material.deepIron.name=Hierro profundo
+material.infuscolium.name=Infuscolium
+material.blackSteel.name=Acero Negro
+material.oureclase.name=Oureclase
+material.astralSilver.name=Astral Silver
+material.carmot.name=Carmot
+material.mithril.name=Mithril
+material.rubracium.name=Rubracium
+material.quicksilver.name=Mercurio
+material.haderoth.name=Haderoth
+material.orichalcum.name=Orichalcum
+material.celenegil.name=Celenegil
+material.adamantine.name=Adamantine
+material.atlarus.name=Atlarus
+material.tartarite.name=Tartarite
+material.ignatius.name=Ignatius
+material.shadowIron.name=Shadow Iron
+material.lemurite.name=Lemurite
+material.midasium.name=Midasium
+material.vyroxeres.name=Vyroxeres
+material.ceruclase.name=Ceruclase
+material.alduorite.name=Alduorite
+material.kalendrite.name=Kalendrite
+material.vulcanite.name=Vulcanite
+material.sanguinite.name=Sanguinite
+material.shadowSteel.name=Shadow Steel
+material.inolashite.name=Inolashite
+material.amordrine.name=Amordrine
+material.zinc.name=Zinc
+material.brass.name=Brass
+material.electrum.name=Electrum
+material.aluminum.name=Aluminio
+material.ardite.name=Ardite
+material.manyullyn.name=Manyullyn
+material.cobalt.name=Cobalto
+material.copper.name=Cobre
+material.lead.name=Plomo
+material.nickel.name=Nikel
+material.platinum.name=Platino
+material.silver.name=Plata
+material.tin.name=Tin
+material.apatite.name=Apatite
+material.osmium.name=Osmium
+material.sulfur.name=Sulfuro
+material.saltpeter.name=Saltpeter
+material.certusQuartz.name=Certus Quartz
+material.aluminumBrass.name=Aluminum Brass
+material.alumite.name=Alumite
+material.pigIron.name=Pig Iron
+material.invar.name=Invar
+material.signalum.name=Signalum
+material.lumium.name=Lumium
+material.enderiumBase.name=Enderium Base
+material.enderium.name=Enderium
+material.electricalSteel.name=Electrical Steel
+material.energeticAlloy.name=Energetic Alloy
+material.phasedGold.name=Phased Gold
+material.redstoneAlloy.name=Redstone Alloy
+material.conductiveIron.name=Conductive Iron
+material.phasedIron.name=Phased Iron
+material.darkSteel.name=Acero oscuro
+material.soularium.name=Soularium
+material.fzDarkIron.name=Dark Iron
+material.gildedRedMetal.name=Gilded Red Metal
+material.yellorium.name=Yellorium
+material.graphite.name=Graphite
+material.cyanite.name=Cyanite
+material.blutonium.name=Blutonium
+material.ludicrite.name=Ludicrite
 
-engineeringDiary.BCA.title=Buildcraft Additions
-engineeringDiary.BCA.page0=Aquí podras encontrar todos los objetos investigables y su progreso.
- 
-engineeringDiary.dusterTier0.title=Sacudidor Básico
-engineeringDiary.dusterTier0.description=Puedes usar esta máquina simple para doblar tus minerales.
-engineeringDiary.dusterTier0.page1=No eres nostálgico, pero a veces le llega a todo el mundo. Te acuerdas de los viejos tiempos, cuando uno tenía todos los minerales que siempre quería, solo para construir grandes contracciones de redstone o vías tan grandes
-engineeringDiary.dusterTier0.page2=que cubrían continentes enteros. Buenos tiempos. Aunque después de la llegada de los ingenieros, todo cambio. Todas sus complejas máquinas y herramientas requerían grandes cantidades de minerales, tanto, que a veces
-engineeringDiary.dusterTier0.page3=secaban la tierra. Empiezas a pensar como incrementar la producción de mineral, y creas el sacudidor básico, una maquina simple creada usando piedra y slimes, con piezas de moledora encima.
-engineeringDiary.dusterTier0.page4=Funciona poniendo mineral encima y saltando, algo con lo que no estas entusiasmado, pero más minerales son más minerales. Te preguntas como puedes mejorar esta máquina...
-engineeringDiary.dusterTier0.requiredResearch=Ninguno
-engineeringDiary.dusterTier0.howToMakeProgress=Planea futuras máquinas
- 
- 
-engineeringDiary.dusterTier1.title=Sacudidor Semi Automático
-engineeringDiary.dusterTier1.description=Este sacudidor mejorado puede interactuar con inventarios.
-engineeringDiary.dusterTier1.page1=Tu primer sacudidor era una ruptura en la escena del procesamiento del mineral. Nunca antes a sido tan fácil conseguir mas mineral. Todo el mundo entendió que saltar y poner manualmente el mineral era un poco rústico, a si que decides
-engineeringDiary.dusterTier1.page2=centrarte en hacer una máquina mejor, empezando con interactuar con inventarios. Experimentando con Tuberías parece tener un efecto, pero los engranajes de piedra son demasiado toscos para el oro, así que los actualizas a un engranaje
-engineeringDiary.dusterTier1.page3=de hierro. Finalmente, tienes el sacudidor semi-automático. Este sacudidor aun necesita que saltes encima, pero al menos los minerales pueden ser insertados por Tolvas y Tuberías, mientras la salida parece salir solo.
-engineeringDiary.dusterTier1.page4= Ahora es hora de trabajar en ese problema de saltar.
-engineeringDiary.dusterTier1.page5=Recuerdas de que no puede interactuar directamente con cofres, solo con Tuberías y Tolvas.
-engineeringDiary.dusterTier1.requiredResearch=Sacudidor básico
-engineeringDiary.dusterTier1.howToMakeProgress=Procesa objetos en el sacudidor básico
- 
-engineeringDiary.dusterTier2-1.title=Sacudidor Mecánico
-engineeringDiary.dusterTier2-1.description=Usa energia para procesar.
-engineeringDiary.dusterTier2-1.page1=Después del descubrimiento inicial de la automatización, intentas crear una máquina que doble los minerales por ti, sin éxito. decides ir un paso atrás y usar el sacudidor básico como base para tus experimentos otra vez,
-engineeringDiary.dusterTier2-1.page2=y acabas creando la rueda moledora, un objeto que podría ser la llave a la automatización de esta máquina. y parece ser muy eficiente una vez mejorado el engranaje de piedra a hierro, parece que acepta energía para doblar los minerales.
-engineeringDiary.dusterTier2-1.page3=Finalmente has creado el Sacudidor mecánico! Aunque esta máquina es otro experimento incompleto, ya que no tiene las capacidades del inventario del sacudidor semi-automático. Tienes que mejorarla.
-engineeringDiary.dusterTier2-1.requiredResearch=Sacudidor semi-automático
-engineeringDiary.dusterTier2-1.howToMakeProgress=Procesa objetos en la sacudidora semi-automática
- 
-engineeringDiary.dusterTier2-2.title=Sacudidor Cinético
-engineeringDiary.dusterTier2-2.description=El sacudidor definitivo (también conocido como sacudineitor 9000)
-engineeringDiary.dusterTier2-2.page1=Después de muchas versiones fallidas de sacudidores, decides que simplemente no puedes juntar el poder de moler del sacudidor mecánico y las capacidades de inventario del sacudidor semi-automático, así que decides mejorarlo
-engineeringDiary.dusterTier2-2.page2=y probar otro metodo de doblaje de minerales: Lasers. su precisión seguro que ayudara en no romper las tuberías internas como pasaba cada vez que era golpeado por un motor. Afortunadamente funciona,
-engineeringDiary.dusterTier2-2.page3=pero esta vez tienes que involucrar algunos materials de gama alta, incluyendo un engranaje de diamante. El sacudidor cinético a nacido. La precision de los láseres mantiene el circuito de oro integrado intacto,
-engineeringDiary.dusterTier2-2.page4=que permite la máquina recibir energy externa (mediante lasers) y manejar su propio inventario. Ya as acabado aquí.
-engineeringDiary.dusterTier2-2.requiredResearch=Sacudidor mecánico
-engineeringDiary.dusterTier2-2.howToMakeProgress=Procesa objetos en el sacudidor mecánico
- 
-engineeringDiary.kineticTool.title=Multi Herramienta Cinética
-engineeringDiary.kineticTool.description=Una herramienta para todas
-engineeringDiary.kineticTool.page1=Las herramientas son una parte fundamental en nuestro mundo, odias que se sigan rompiendo. Las máquinas no parecen romperse nunca, y empiezas a pensar porque. Después de un tiempo, te das cuenta del porque: Redstone y energía.
-engineeringDiary.kineticTool.page2=Mientras las herramientas también reciben una forma de energia (la que viene de tu brazo), máquinas reciben una especial, energia redstoniana, y eso parece hacer que duren para siempre.
-engineeringDiary.kineticTool.page3=Decides que la mejor forma de craftear estas herramientas es con materiales de gama alta,materiales redstonianos. El nucleo de tu herramienta consiste de un engranaje de oro (para la mayor velocidad) combinado
-engineeringDiary.kineticTool.page4=con un circuito de Diamante (para que dure el efecto de redstone) en la mesa de integraciónes. Después de usar lasers para perfectamente combinar esos obejetos, decides que su precision sera importante,
-engineeringDiary.kineticTool.page5=en el proceso, asi que para aguantar la cabeca de la herramienta, creas un palo de Hierro por poner hierro en la mesa de ensamblaje. entonces entonces es solo questión de juntar todo con Diamantes,
-engineeringDiary.kineticTool.page6= ya que eso hace las herramientas mas resistentes (mesa de ensamblaje). Finalmente ya tienes tu mango, y estas seguro de que puede aguantar cualquier herramienta, y da igual cuantas veces usada nunca se rompera.
-engineeringDiary.kineticTool.page7=Aunque, aún tienes que energizarlo, y para eso creas las Capsulas Cinéticas. Ahora es hora de mejorar tu Multi Herramienta! Para eso pones 3 de hierro, 2 de oro y un nucleo de herramienta en la mesa de ensablaje 
-engineeringDiary.kineticTool.page8=para crear cabeceras de herramienta. Después de crear tu primera mejora, decides que la mesa de integración es lo mejor para juntarlo todo. Ahora tienes una herramienta inrompible, RF energizada. Aunque los costes para esta herramienta 
-engineeringDiary.kineticTool.page9=eran demasiado altos para considerar crear otras 3. Decides manosear con ello y encuentras una forma de añadir otra mejora a tu Multi Herramienta! pones 4 de oro en la mesa de ensamblaje para un palo de oro. 
-engineeringDiary.kineticTool.page10=Aúnque juntar esto a la herramienta por si solo no funcionaria, asi que decides añadir un circuito de quarzo con ello (mesa de integración). La herramienta parece enteder cuando usar cada mejora, haciendola una herramienta 
-engineeringDiary.kineticTool.page11=2 en 1! Esto aun no cubre todas tus posibles mejoras, asi que crafteas un palo de diamante (2 diamanes en la mesa de ensamblaje). Y lo juntas con la herramienta y un chip de oro (mesa de integración). 
-engineeringDiary.kineticTool.page12=Aunque la herramienta tenga 3 mejoras, te preguntas si puedes añadir una cuarta. No hay mas minerals naturales para crear un nuevo palo, pero un dia de encuentras una Planta de energia (aldea), y dentro  
-engineeringDiary.kineticTool.page13=te encuentras a un Ingeniero aldeano! Parece ser que este Aldeano a experimentado con ideas muy similares a las tuyas en el pasado, y aparenta llevar consigo unos Palos de Esmeralda! Vuelves corriendo a casa y combinas el palo con un
-engineeringDiary.kineticTool.page14=Vuelves corriendo a casa y combinas el palo con un Chip de Diamante en tu herramienta. Finalmente, tienes las cuatro mejoras en tu herramienta!
-engineeringDiary.kineticTool.requiredResearch=Ninguno
-engineeringDiary.kineticTool.howToMakeProgress=Craftea herramientas
- 
-engineeringDiary.requiredResearch=Investigación necesaria:
-engineeringDiary.progress=Progreso:
-engineeringDiary.unlocked=DESBLOQUEADO
- 
-config.title=Buildcraft Additions (BCA) configuración
- 
-updates=Actualizaciones
-updates.tooltip=Configura si BCA debería mirar si hay actualizaciones o no
-shouldCheckForUpdates=Mirar si hay actualizaciones
-shouldCheckForUpdates.tooltip=“True" = Buscar actualizaciones, “false" = no buscar actualizaciones
-shouldPrintOutChangelog=Mostrar la lista de cambios
-shouldPrintOutChangelog.tooltip=Si puesto en “true" también veras la lista de cambios para la nueva versión
- 
-BaseModifier=Modificador basico
-BaseModifier.tooltip=Energia basica que las herramientas usan
-EasyDifficultyModifier=Modificador facil
-EasyDifficultyModifier.tooltip=La consumición de la energía es multiplicada con el modo fácil puesto
-HardDifficultyModifier=Modificador difícil
-HardDifficultyModifier.tooltip=La consumición de la energía es multiplicada con el modo difícil puesto
-NormalDifficultyModifier=Modificador normal
-NormalDifficultyModifier.tooltip=La consumición de la energía es multiplicada con el modo normal puesto
-PeacefullDifficultyModifier=Modificador “peacefull"
-PeacefullDifficultyModifier.tooltip=La consumición de la energía es multiplicada con el modo “peacefull" puesto
- 
-Misc=Misc
-shouldRegisterDusts=Registrar polvos
-shouldRegisterDusts.tooltip=poner en false para prevenir BCA de registrar nuevos polvos
+entity.bcadditions.bcaLaserShot.name=Disparo laser
 
-kineticTool.outOfPower=SIN ENERGIA, DESHABILITADO EL PODER ROMPER BLOQUES
+death.attack.bcaLaser=%1$s ha sido lasereado por %2$s
+death.attack.bcaLaser.item=%1$s ha sido lasereado por %2$s usando %3$s
+
+tooltip.installed=Installed Upgrades:
+tooltip.deactivated=Deactivated
+tooltip.upgradesPossible=Upgrades Possible
+tooltip.holdShiftForMoreInfo=Hold Shift for more info
+tooltip.FluidCapacity=Can hold %s buckets of fluid
+tooltip.storedFluid=Currently stores %s (%,d mb)
+tooltip.colorNormalMode=Normal Mode
+tooltip.colorNormalMode.info=Colors standard colorable blocks, sheep and BC pipes
+tooltip.colorSortingMode=Sorting Mode
+tooltip.colorSortingMode.info=Colors the sorting part of the Daizuli and Lapis pipes
+tooltip.defaultColor=Default Item Color
+tooltip.compressor.fill=Fill
+tooltip.compressor.empty=Empty
+tooltip.none=None
+tooltip.forKineticMultiTool=Usable with the Kinetic Multi-Tool
+tooltip.forUpgradableMachines=Usable with upgradable machines
+tooltip.stick.0=Works best together with %s chipset
+tooltip.stick.1=Needs %s stick to be installed
+tooltip.stickGold.chipset=an iron
+tooltip.stickGold.stick=no
+tooltip.stickDiamond.chipset=a gold
+tooltip.stickDiamond.stick=a gold
+tooltip.stickEmerald.chipset=a diamond
+tooltip.stickEmerald.stick=a diamond
+tooltip.stickNetherStar.chipset=an emerald chipset & a pulsating
+tooltip.stickNetherStar.stick=an emerald
+tooltip.stickQuartz.chipset=an iron
+tooltip.stickQuartz.stick=a glowstone
+tooltip.stickEnder.chipset=a redstone comp
+tooltip.stickEnder.stick=a gold
+tooltip.stickRedstone.chipset=an iron
+tooltip.stickRedstone.stick=no
+tooltip.stickGlowstone.chipset=a redstone
+tooltip.stickGlowstone.stick=a redstone
+tooltip.stickSlime.chipset=a redstone
+tooltip.stickSlime.stick=a redstone
+tooltip.stickBlaze.chipset=a redstone
+tooltip.stickBlaze.stick=a redstone
+tooltip.toolUpgradeHoe.use=Allows the tool to till the lands
+tooltip.toolUpgradeDigger.use=Allows the tool to dig up dirt like materials
+tooltip.toolUpgradeDrill.use=Allows the tool to drill through stone and metal like materials
+tooltip.toolUpgradeChainsaw.use=Allows the tool to harvest wood like materials and to saw through your foes
+tooltip.toolUpgradeArea.use=Allows the tool to work in 3x3 area
+tooltip.toolUpgradeSilky.use=Gives the tool a Silk Touch ability
+tooltip.toolUpgradeFortune1.use=Gives the tool Fortune I
+tooltip.toolUpgradeFortune2.use=Gives the tool Fortune II if it has Fortune I
+tooltip.toolUpgradeFortune3.use=Gives the tool Fortune III if it has Fortune II
+tooltip.creativeOnly=Creative Only
+
+fluid.gas.name=%s Gas
+
+gui.progress=Progress
+gui.fluid=Fluid
+gui.noFluid=Empty
+gui.fluidStored=Amount of Fluid
+gui.energyInTool=Energy Stored
+gui.maxEnergy=Max Energy
+gui.refinery.name=Refinery
+gui.heat=Heat
+gui.requiredHeat=Required Heat
+gui.powerUsage=Power Usage
+gui.empty=Empty
+gui.coolingTower.name=Cooling Tower
+gui.north=North
+gui.east=East
+gui.south=South
+gui.west=West
+gui.up=Up
+gui.down=Down
+gui.machineConfigurator.name=Machine Configurator
+gui.kebT1.name=Kinetic Energy Buffer
+gui.kebT2.name=Large KEB
+gui.kebT3.name=Advanced KEB
+gui.itemSorter.name=Sort-O-Tron
+gui.basicCoil.name=Basic Coil
+gui.chargingStation.name=Charging Station
+gui.priority=Priority
+gui.kineticMultiTool.name=Kinetic Multi-Tool
+gui.portableLaser.name=Portable Laser
+gui.heatedFurnace.name=Heated Furnace
+gui.fluidicCompressor.name=Fluidic Compressor
+gui.coloringMode=Coloring Mode
+gui.pipeColorTool.name=Coloring Tool
+gui.colorNormalMode=Normal Mode
+gui.colorSortingMode=Sorting Mode
+gui.installedUpgrades=Installed Upgrades:
+gui.configureIO=Configure Input/Output
+gui.showUpgrades=Installed Upgrades
+
+gui.keb.dangerousButton=BIG RED BUTTONS ARE VERY DANGEROUS
+gui.keb.noPushing=DON'T PUSH IT
+gui.keb.pressForBoom=PRESS HERE FOR A BIG BOOM
+
+gui.nei.dusting=Dusting
+
+gui.color.none=None
+gui.color.white=White
+gui.color.orange=Orange
+gui.color.magenta=Magenta
+gui.color.lightBlue=Light Blue
+gui.color.yellow=Yellow
+gui.color.lime=Lime
+gui.color.pink=Pink
+gui.color.gray=Gray
+gui.color.lightGray=Light Gray
+gui.color.cyan=Cyan
+gui.color.purple=Purple
+gui.color.blue=Blue
+gui.color.brown=Brown
+gui.color.green=Green
+gui.color.red=Red
+gui.color.black=Black
+
+trigger.fluidContainerRequested=Fluid Container requested
+trigger.doneCharging=Done Charging
+trigger.readyToCharge=Ready To Charge
+trigger.KEBCharged=Fully charged
+trigger.KEBUnder25=Less the 25% charged
+trigger.KEBUnder50=Less then 50% charged
+trigger.KEBUnder75=Less then 75% charged
+trigger.KEBUnder100=Less then 100% charged
+trigger.KEBEmpty=Completely empty
+trigger.KEBEngineControl=Smart Engine Control
+
+action.fluidicCompressorModeSwitchToFill=Switch to Fill mode
+action.fluidicCompressorModeSwitchToEmpty=Switch to Empty mode
+
+status.input=Input
+status.output=Output
+status.both=Both
+status.disabled=Disabled
+
+priority.veryLow=Very Low
+priority.low=Low
+priority.normal=Normal
+priority.high=High
+priority.veryHigh=Very High
+
+itemGroup.BuildcraftAdditions=BuildCraft Additions
+itemGroup.bcaCanisters=Canisters
+itemGroup.bcaDusts=Dusts
+
+config.title=BuildCraft Additions Configuration
+
+updates=Updates
+updates.tooltip=Configure if BCA should check for updates or not
+shouldCheckForUpdates=Check for updates
+shouldCheckForUpdates.tooltip=Set to false to disable update checking
+shouldPrintOutChangelog=Print out changelog
+shouldPrintOutChangelog.tooltip=If set to true, you will also see the changelog of the newer version
+
+keb=Kinetic Energy Buffer
+
+heated furnace=Heated Furnace
+
+charging station=Charging Station
+
+feature=Feature
+
+fluidic compressor=Fluidic Compressor
+
+mechanical duster=Mechanical Duster
+
+power capsule=Power Capsule
+
+refinery=Refinery
+
+upgrades=Upgrades
+
+upgrades.refinery=Refinery Upgrades
+
+upgrades.cooling tower=Cooling Tower Upgrades
+
+power usage=Kinetic Multi-Tool
+BaseModifier=Base Modifier
+BaseModifier.tooltip=Base energy the multi-tool uses for breaking a block
+EntityHitModifier=Entity Base Modifier
+EntityHitModifier.tooltip=Base energy the multi-tool uses for damaging an entity
+EntityDamage=Entity Damage
+EntityDamage.tooltip=Damage dealt by the multi-tool
+HoeCost=Tilling power cost
+HoeCost.tooltip=Energy the multi-tool uses for tilling a block of dirt or grass
+EasyDifficultyModifier=Easy Modifier
+EasyDifficultyModifier.tooltip=The energy consumption is multiplied with this on Easy
+HardDifficultyModifier=Hard Modifier
+HardDifficultyModifier.tooltip=The energy consumption is multiplied with this on Hard
+NormalDifficultyModifier=Normal Modifier
+NormalDifficultyModifier.tooltip=The energy consumption is multiplied with this on Normal
+PeacefulDifficultyModifier=Peaceful Modifier
+PeacefulDifficultyModifier.tooltip=The energy consumption is multiplied with this on Peaceful
+ToolEfficiencyPickaxe=Pickaxe efficiency
+ToolEfficiencyPickaxe.tooltip=Efficiency (mining speed) on blocks that can be broken by a pickaxe
+ToolEfficiencyShovel=Shovel efficiency
+ToolEfficiencyShovel.tooltip=Efficiency (mining speed) on blocks that can be broken by a shovel
+ToolEfficiencyAxe=Axe efficiency
+ToolEfficiencyAxe.tooltip=Efficiency (mining speed) on blocks that can be broken by an axe
+ToolHarvestLevel=Harvest level
+ToolEfficiencyAxe.tooltip=Tool harvest level (Wood/Gold: 0, Stone: 1, Iron: 2, Diamond: 3)
+ToolEfficiencyAreaMultiplier=Area Efficiency Multiplier
+ToolEfficiencyAreaMultiplier.tooltip=The efficiency of the tool gets multiplied with this when the area upgrade is installed
+
+portable laser=Portable Laser
+PortableLaserPowerUse=Power use
+PortableLaserPowerUse.tooltip=Power use of the Portable Laser per shoot
+PortableLaserLaserPower=Laser power
+PortableLaserLaserPower.tooltip=Laser power transferred to the laser target per shoot
+PortableLaserEntityDamage=Entity damage
+PortableLaserEntityDamage.tooltip=Damage dealt by the Portable Laser in entity mode
+PortableLaserEntityBurnTime=Entity burn time
+PortableLaserEntityBurnTime.tooltip=Number of seconds entities will be set on fire by the Portable Laser in entity mode
+
+coloring tool=Coloring Tool
+ColoringToolCapacity=Capacity
+ColoringToolCapacity.tooltip=Capacity of the coloring tool's RF storage, in RF
+ColoringToolMaxTransfer=Max transfer
+ColoringToolMaxTransfer.tooltip=Max transfer rate, in RF/t
+ColoringToolEnergyUse=Energy use
+ColoringToolEnergyUse.tooltip=Energy use of one color application, in RF
+
+misc=Misc
+eurekaIntegration=Eureka Integration
+eurekaIntegration.tooltip=Set to false to prevent BCA from using Eureka progressing
+shouldRegisterDusts=Register Dusts
+shouldRegisterDusts.tooltip=Set to false to prevent BCA from registering its dusts
+
+kineticTool.outOfPower=OUT OF POWER, BLOCK BREAKING ABORTED!
+
+updatenotification=There is a newer version of BuildCraft Additions available (%s). Please consider updating.
+changelogNotification=Changelog
+
+selfdestructCountdouwn=SELF DESTRUCTION IN
+selfdestructActivated=SELF DESTRUCT ACTIVATED
+
+configured=Configured
+
+fluids.info=%,d / %,d mB
+fluids.change.info=%,d / %,d mB/t
+rf.info=%,d / %,d RF
+rf.change.info=%,d / %,d RF/t
+
+lavaCoil.info=Lava stored: %s
+
+option.bca.duster.progress.graphical=Graphical Duster Progress
+option.bca.duster.progress.textual=Textual Duster Progress
+
+waila.refinery.noMultiBlock=Not part of a multiblock
+waila.refinery.currentHeat=Current heat: %d
+waila.refinery.requiredHeat=Required heat: %d
+waila.refinery.processing=Refining %s into %s
+
+waila.upgrades.installed=Installed upgrades:
+
+waila.duster.recipe=%s -> %s
+waila.duster.progress=Progress
+
+backpack.info=Place on a backpackstand and click with kinetic capsules on the holes in the back to install capsules
