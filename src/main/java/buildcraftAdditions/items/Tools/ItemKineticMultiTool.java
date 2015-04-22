@@ -277,7 +277,8 @@ public class ItemKineticMultiTool extends ItemInventoryPoweredBase {
 	@Override
 	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player) {
 		if (getEnergyStored(stack) <= player.worldObj.getBlock(x, y, z).getBlockHardness(player.worldObj, x, y, z) * ConfigurationHandler.powerDifficultyModifiers[player.worldObj.difficultySetting.getDifficultyId()] * ConfigurationHandler.basePowerModifier) {
-			player.addChatComponentMessage(new ChatComponentTranslation("kineticTool.outOfPower"));
+			if (!player.worldObj.isRemote)
+				player.addChatComponentMessage(new ChatComponentTranslation("kineticTool.outOfPower"));
 			return true;
 		}
 		if (!player.isSneaking() && isUpgradeInstalled(stack, "area")) {

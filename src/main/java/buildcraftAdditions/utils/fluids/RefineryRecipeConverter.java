@@ -50,16 +50,18 @@ public class RefineryRecipeConverter {
 		for (IFlexibleRecipe<FluidStack> recipe : recipes) {
 			DummyFlexibleCrafter dummy = new DummyFlexibleCrafter();
 			for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
-				dummy.input.setFluid(new FluidStack(fluid, 1000));
-				dummy.output.setFluid(null);
-				CraftingResult<FluidStack> currentResult = recipe.craft(dummy, false);
-				if (currentResult != null) {
-					results[teller] = currentResult;
-					dummy.output.fill(currentResult.crafted.copy(), true);
-					outputs[teller] = dummy.output.getFluid();
-					inputs[teller] = new FluidStack(dummy.input.getFluid(), 1000 - dummy.input.getFluidAmount());
-					teller++;
-					Logger.info("Buildcraft refinery recipe detected, input: " + dummy.input.getFluid().getLocalizedName() + ", output: " + dummy.output.getFluid().getLocalizedName());
+				if (fluid != null) {
+					dummy.input.setFluid(new FluidStack(fluid, 1000));
+					dummy.output.setFluid(null);
+					CraftingResult<FluidStack> currentResult = recipe.craft(dummy, false);
+					if (currentResult != null) {
+						results[teller] = currentResult;
+						dummy.output.fill(currentResult.crafted.copy(), true);
+						outputs[teller] = dummy.output.getFluid();
+						inputs[teller] = new FluidStack(dummy.input.getFluid(), 1000 - dummy.input.getFluidAmount());
+						teller++;
+						Logger.info("Buildcraft refinery recipe detected, input: " + dummy.input.getFluid().getLocalizedName() + ", output: " + dummy.output.getFluid().getLocalizedName());
+					}
 				}
 			}
 		}

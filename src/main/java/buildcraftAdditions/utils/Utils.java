@@ -107,7 +107,7 @@ public class Utils {
 	}
 
 	public static String getRFInfoTooltip(int energy, int maxEnergy) {
-		int percent = maxEnergy > 0 ? ((energy * 100) / maxEnergy) : 0;
+		int percent = maxEnergy > 0 ? (int) ((energy / (double) maxEnergy) * 100) : 0;
 		String color = "";
 		if (percent >= 75)
 			color += EnumChatFormatting.DARK_GREEN;

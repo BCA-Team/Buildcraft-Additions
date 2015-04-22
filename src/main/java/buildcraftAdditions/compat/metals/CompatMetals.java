@@ -1,6 +1,5 @@
 package buildcraftAdditions.compat.metals;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
@@ -83,16 +82,16 @@ public class CompatMetals {
 		meta = 61;
 		BCAItemManager.dusts.addDust(meta++, "Apatite", 0x1A89C1, DustTypes.GEM_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Osmium", 0x92A6B8, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++, "Sulfur", 0xFFDB50, DustTypes.SULFUR_DUST);
-		BCAItemManager.dusts.addDust(meta++, "Saltpeter", 0xDEDEDE, DustTypes.SALTPETER_DUST);
-		BCAItemManager.dusts.addDust(meta++, "CertusQuartz", 0xBAC5F2, DustTypes.CERTUS_QUARTZ_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Sulfur", 0xFFDB50, new DustTypes.SimpleDustWithOre(6));
+		BCAItemManager.dusts.addDust(meta++, "Saltpeter", 0xDEDEDE, new DustTypes.SimpleDustWithOre(4));
+		BCAItemManager.dusts.addDust(meta++, "CertusQuartz", 0xBAC5F2, new DustTypes.SimpleDustWithOre(2));
 		BCAItemManager.dusts.addDust(meta++, "AluminumBrass", 0xF0D467, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Alumite", 0xF4CCEC, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "PigIron", 0xF0A8A4, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Invar", 0x959E99, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Signalum", 0xFF5B00, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Lumium", 0xE7D648, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta++, "EnderiumBase", 0x4B7A9A, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "EnderiumBase", 0x4B7A9A, DustTypes.ENDERIUM_BASE_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Enderium", 0x0F7575, DustTypes.ENDERIUM_DUST);
 		BCAItemManager.dusts.addDust(meta++, "ElectricalSteel", 0x949494, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "EnergeticAlloy", 0xE47700, DustTypes.METAL_DUST);
@@ -108,9 +107,13 @@ public class CompatMetals {
 		BCAItemManager.dusts.addDust(meta++, "Graphite", 0x515151, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Cyanite", 0x0087EF, DustTypes.METAL_DUST);
 		BCAItemManager.dusts.addDust(meta++, "Blutonium", 0x1B00E6, DustTypes.METAL_DUST);
-		BCAItemManager.dusts.addDust(meta, "Ludicrite", 0xEF00EF, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Ludicrite", 0xEF00EF, DustTypes.METAL_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Pyrotheum", 0xF8B33D, DustTypes.ONLY_ORE_DICTIONARY_REGISTRATION);
+		BCAItemManager.dusts.addDust(meta++, "Cryotheum", 0x49EFFF, DustTypes.ONLY_ORE_DICTIONARY_REGISTRATION);
+		BCAItemManager.dusts.addDust(meta, "Blizz", 0x8BEDFC, DustTypes.ONLY_ORE_DICTIONARY_REGISTRATION);
 
 		addOreDictDusterRecipe("oreApatite", "gemApatite", 6);
+		addOreDictDusterRecipe("rodBlizz", "dustBlizz", 4);
 		addDustRecipe("Bronze", 4, "dustCopper", "dustCopper", "dustCopper", "dustTin");
 		addDustRecipe("AluminumBrass", 4, "dustAluminum", "dustAluminum", "dustAluminum", "dustCopper");
 		addDustRecipe("Manyullyn", 1, "dustArdite", "dustCobalt");
@@ -127,8 +130,11 @@ public class CompatMetals {
 		addDustRecipe("ConductiveIron", 1, "dustRedstone", "dustIron");
 		addDustRecipe("PhasedIron", 1, "dustIron", "dustEnderPearl");
 		addDustRecipe("DarkSteel", 1, "dustIron", "dustCoal", "dustObsidian");
-		addDustRecipe("Soularium", 1, Blocks.soul_sand, "dustGold");
-		addDustRecipe("Cyanite", 1, Blocks.sand, "dustYellorium");
+		addDustRecipe("Soularium", 1, "blockSoulSand", "dustGold");
+		addDustRecipe("Cyanite", 1, "blockSand", "dustYellorium");
+		addDustRecipe("Pyrotheum", 2, "dustCoal", "dustSulfur", "dustRedstone", "dustBlaze");
+		addDustRecipe("Cryotheum", 2, "materialSnowball", "dustSaltpeter", "dustRedstone", "dustBlizz");
+		addDustRecipe("Blizz", 1, "materialSnowball", "dustRedstone", "dustRedstone");
 		addDustSmelting("Graphite", 1, "dustCoal");
 		addDustSmelting("Graphite", 1, "dustCharcoal");
 	}

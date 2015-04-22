@@ -1,7 +1,5 @@
 package buildcraftAdditions;
 
-import java.util.Iterator;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -84,6 +82,12 @@ public class BuildcraftAdditions {
 
 		BCAItemManager.dusts = new DustManager();
 
+		OreDictionary.registerOre("rodBlaze", Items.blaze_rod);
+		OreDictionary.registerOre("dustBlaze", Items.blaze_powder);
+		OreDictionary.registerOre("materialSnowball", Items.snowball);
+		OreDictionary.registerOre("blockSand", Blocks.sand);
+		OreDictionary.registerOre("blockSoulSand", Blocks.soul_sand);
+
 		manager.preInit(event);
 	}
 
@@ -103,11 +107,11 @@ public class BuildcraftAdditions {
 		BCAItemManager.dusts.addDust(meta, "Diamond", 0x13ECFC, DustTypes.GEM_DUST);
 		meta = 55;
 		BCAItemManager.dusts.addDust(meta++, "Emerald", 0x00B038, DustTypes.GEM_DUST);
-		BCAItemManager.dusts.addDust(meta++, "Coal", 0x1B1B1B, DustTypes.COAL_DUST);
-		BCAItemManager.dusts.addDust(meta++, "Charcoal", 0x53493A, DustTypes.CHARCOAL_DUST);
-		BCAItemManager.dusts.addDust(meta++, "Obsidian", 0x171124, DustTypes.OBSIDIAN_DUST);
-		BCAItemManager.dusts.addDust(meta++, "EnderPearl", 0x105E51, DustTypes.ENDER_PEARL_DUST);
-		BCAItemManager.dusts.addDust(meta, "NetherQuartz", 0xDBCCBF, DustTypes.NETHER_QUARTZ_DUST);
+		BCAItemManager.dusts.addDust(meta++, "Coal", 0x1B1B1B, new DustTypes.SimpleDustAlwaysValid(new ItemStack(Items.coal)));
+		BCAItemManager.dusts.addDust(meta++, "Charcoal", 0x53493A, new DustTypes.SimpleDustAlwaysValid(new ItemStack(Items.coal, 1, 1)));
+		BCAItemManager.dusts.addDust(meta++, "Obsidian", 0x171124, new DustTypes.SimpleDustAlwaysValid(new ItemStack(Blocks.obsidian), 4));
+		BCAItemManager.dusts.addDust(meta++, "EnderPearl", 0x105E51, new DustTypes.SimpleDustAlwaysValid(new ItemStack(Items.ender_pearl)));
+		BCAItemManager.dusts.addDust(meta, "NetherQuartz", 0xDBCCBF, new DustTypes.SimpleDustAlwaysValid(new ItemStack(Items.coal, 1, 1)));
 		meta = 83;
 		BCAItemManager.dusts.addDust(meta, "GildedRedMetal", 0xFF6E1B, DustTypes.METAL_DUST);
 
@@ -119,7 +123,7 @@ public class BuildcraftAdditions {
 		BCARecipeManager.duster.addRecipe("cobblestone", new ItemStack(Blocks.sand));
 		BCARecipeManager.duster.addRecipe("oreDiamond", new ItemStack(Items.diamond, 2));
 		BCARecipeManager.duster.addRecipe("oreEmerald", new ItemStack(Items.emerald, 2));
-		BCARecipeManager.duster.addRecipe(new ItemStack(Items.blaze_rod), new ItemStack(Items.blaze_powder, 4));
+		BCARecipeManager.duster.addRecipe("rodBlaze", new ItemStack(Items.blaze_powder, 4));
 
 		manager.init(event);
 		ItemsAndBlocks.addRecipes();
@@ -155,7 +159,6 @@ public class BuildcraftAdditions {
 
 	@Mod.EventHandler
 	public void remap(FMLMissingMappingsEvent event) {
-		Iterator<? extends IDust> iterator = BCAItemManager.dusts.getDusts().iterator();
 		for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
 			if (mapping.name.toLowerCase().contains("tool")) {
 				mapping.ignore();

@@ -170,6 +170,9 @@ material.graphite.name=Graphite
 material.cyanite.name=Cyanite
 material.blutonium.name=Blutonium
 material.ludicrite.name=Ludicrite
+material.pyrotheum.name=Pyrotheum
+material.cryotheum.name=Cryotheum
+material.blizz.name=Blizz
 
 entity.bcadditions.bcaLaserShot.name=Laser Shot
 
