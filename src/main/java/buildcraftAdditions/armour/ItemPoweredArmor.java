@@ -18,11 +18,10 @@ import buildcraftAdditions.BuildcraftAdditions;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class ItemPoweredArmor extends ItemArmor {
-	private final ModelBiped MODEL;
+	protected ModelBiped MODEL;
 
-	public ItemPoweredArmor(String name, int slot, ModelBiped model) {
+	public ItemPoweredArmor(String name, int slot) {
 		super(ArmorMaterial.IRON, BuildcraftAdditions.proxy.addArmor(name), slot);
-		MODEL = model;
 	}
 
 	@Override

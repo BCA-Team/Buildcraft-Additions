@@ -1,10 +1,13 @@
 package buildcraftAdditions.armour;
 
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import buildcraftAdditions.client.models.ModelRocketPants;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+
 import buildcraftAdditions.listeners.FlightTracker;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 /**
@@ -20,8 +23,10 @@ public class ItemRocketPants extends ItemPoweredArmor {
 			MAX_LIFT = 5;
 
 	public ItemRocketPants() {
-		super("rocketPants", 2, new ModelRocketPants());
+		super("rocketPants", 2);
 		setUnlocalizedName("rocketPants");
+		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
+			this.MODEL = new ModelBiped();
 	}
 
 	@Override

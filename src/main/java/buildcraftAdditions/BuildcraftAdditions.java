@@ -39,7 +39,6 @@ import buildcraftAdditions.creative.TabDusts;
 import buildcraftAdditions.items.dust.DustManager;
 import buildcraftAdditions.items.dust.DustTypes;
 import buildcraftAdditions.listeners.EventListener;
-import buildcraftAdditions.listeners.KeyListener;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.recipe.duster.DusterRecipeManager;
@@ -92,7 +91,6 @@ public class BuildcraftAdditions {
 		proxy.registerRenderers();
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(new EventListener.FML());
-		FMLCommonHandler.instance().bus().register(new KeyListener());
 		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
 		IMCSender.sendMessages();
 		ItemsAndBlocks.registerTileEntities();

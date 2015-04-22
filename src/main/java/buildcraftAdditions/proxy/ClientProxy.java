@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -33,6 +34,7 @@ import buildcraftAdditions.client.render.tileentities.RendererKEBT2;
 import buildcraftAdditions.client.render.tileentities.RendererKEBT3;
 import buildcraftAdditions.core.BucketHandler;
 import buildcraftAdditions.entities.EntityLaserShot;
+import buildcraftAdditions.listeners.KeyListener;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileBackpackStand;
@@ -94,5 +96,10 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public int addArmor(String name) {
 		return RenderingRegistry.addNewArmourRendererPrefix(name);
+	}
+
+	@Override
+	public void addListeners() {
+		FMLCommonHandler.instance().bus().register(new KeyListener());
 	}
 }
