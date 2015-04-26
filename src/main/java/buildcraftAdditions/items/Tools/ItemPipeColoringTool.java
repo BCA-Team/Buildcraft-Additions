@@ -113,7 +113,7 @@ public class ItemPipeColoringTool extends ItemPoweredBase {
 	public void registerIcons(IIconRegister register) {
 		icons = new IIcon[names.length];
 		for (int i = 0; i < names.length; i++)
-			icons[i] = register.registerIcon("buildcraft:triggers/color_" + names[i]);
+			icons[i] = register.registerIcon("buildcraftcore:paintbrush/" + names[i]);
 	}
 
 	@Override
