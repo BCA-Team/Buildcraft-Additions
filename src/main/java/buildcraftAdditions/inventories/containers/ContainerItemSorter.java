@@ -1,12 +1,15 @@
 package buildcraftAdditions.inventories.containers;
 
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import buildcraftAdditions.client.gui.GuiBase;
 import buildcraftAdditions.inventories.slots.SlotPhantom;
+import buildcraftAdditions.proxy.ClientProxy;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 
 /**
@@ -64,7 +67,9 @@ public class ContainerItemSorter extends ContainerBase<TileItemSorter> {
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int value) {
 		super.updateProgressBar(id, value);
-		if (id >= 0 && id < colors.length)
+		if (id >= 0 && id < colors.length) {
 			inventory.colors[id] = (byte) (0xFF & value);
+			redrawOpenGui();
+		}
 	}
 }
