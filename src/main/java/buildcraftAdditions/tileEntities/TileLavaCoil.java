@@ -69,7 +69,7 @@ public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
 			burning = false;
 		if (!isBurning() && shouldHeat && tank.getFluidAmount() >= 100) {
 			tank.drain(100, true);
-			burnTime = 10000;
+			burnTime = 5000;
 			increment = ConfigurationHandler.lavaCoilHeat;
 			burning = true;
 		}

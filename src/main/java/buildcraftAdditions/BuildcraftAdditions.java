@@ -96,6 +96,7 @@ public class BuildcraftAdditions {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(new EventListener.FML());
 		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
+		proxy.addListeners();
 		IMCSender.sendMessages();
 		ItemsAndBlocks.registerTileEntities();
 
