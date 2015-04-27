@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import buildcraft.api.blueprints.IBuilderContext;
-import buildcraft.builders.schematics.SchematicRotateMeta;
+import buildcraft.core.builders.schematics.SchematicRotateMeta;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise

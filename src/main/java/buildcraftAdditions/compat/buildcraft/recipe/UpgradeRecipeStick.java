@@ -7,7 +7,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import buildcraft.api.recipes.CraftingResult;
 import buildcraft.silicon.ItemRedstoneChipset;
 import buildcraft.silicon.TileIntegrationTable;
-import buildcraft.transport.recipes.IntegrationTableRecipe;
+import buildcraft.silicon.recipes.IntegrationTableRecipe;
 
 import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
 import buildcraftAdditions.reference.ItemsAndBlocks;
