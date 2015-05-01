@@ -25,7 +25,8 @@ public class ConfigurationHandler {
 			shouldRegisterDusts,
 			powerloss,
 			eurekaIntegration,
-			dusterParticles;
+			dusterParticles,
+			forceEnableBCRefinery;
 
 	public static int
 			basePowerModifier,
@@ -216,6 +217,7 @@ public class ConfigurationHandler {
 		eurekaIntegration = configFile.get("Misc", "eurekaIntegration", true).setRequiresMcRestart(true).getBoolean();
 		dusterParticles = configFile.get("Misc", "dusterParticles", true).getBoolean();
 		particleCount = configFile.get("Misc", "particleCount", 100).setMinValue(0).getInt();
+		forceEnableBCRefinery = !enabled("MultiBlockRefining") || configFile.get("Misc", "forceEnableBCRefinery", false).getBoolean();
 
 		registerFeature("ChargingStation");
 		registerFeature("ColorSorter");
