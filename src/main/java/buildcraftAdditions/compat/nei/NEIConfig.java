@@ -26,6 +26,7 @@ public class NEIConfig implements IConfigureNEI {
 	public void loadConfig() {
 		registerRecipeHandler(new DustingRecipeHandler());
 		registerRecipeHandler(new RecipeHandlerCoolingTower());
+		registerRecipeHandler(new RecipeHandlerRefinery());
 		API.hideItem(GameRegistry.findItemStack(Variables.MOD.ID, "kebT2DisplayItem", 1));
 		API.hideItem(GameRegistry.findItemStack(Variables.MOD.ID, "kebT3DisplayItem", 1));
 		API.hideItem(new ItemStack(ItemsAndBlocks.kinesisPipeWood));
