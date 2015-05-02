@@ -52,12 +52,12 @@ public class GuiCoolingTower extends GuiBase {
 
 	@Override
 	public int getXSize() {
-		return 185;
+		return 186;
 	}
 
 	@Override
 	public int getYSize() {
-		return 185;
+		return 186;
 	}
 
 	@Override
