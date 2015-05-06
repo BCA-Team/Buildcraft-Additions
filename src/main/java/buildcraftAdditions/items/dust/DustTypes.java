@@ -52,6 +52,38 @@ public class DustTypes {
 
 	};
 
+	public static final IDustType METAL_DUST_FORCE_REGISTRATION = new IDustType() {
+		@Override
+		public void register(int meta, String name, ItemStack dust) {
+			OreDictionary.registerOre("dust" + name, dust.copy());
+			ItemStack twoDusts = dust.copy();
+			twoDusts.stackSize = 2;
+			ItemStack nineDusts = dust.copy();
+			nineDusts.stackSize = 9;
+			BCARecipeManager.duster.addRecipe("ore" + name, twoDusts);
+			BCARecipeManager.duster.addRecipe("ingot" + name, dust.copy());
+			BCARecipeManager.duster.addRecipe("block" + name, nineDusts);
+			for (ItemStack stack : OreDictionary.getOres("ingot" + name)) {
+				ItemStack copy = ItemStack.copyItemStack(stack);
+				if (copy != null && copy.getItem() != null) {
+					copy.stackSize = 1;
+					GameRegistry.addSmelting(dust.copy(), copy, 0);
+					return;
+				}
+			}
+		}
+
+		@Override
+		public String getName() {
+			return "Metal";
+		}
+
+		@Override
+		public boolean isValid(int meta, String name, ItemStack dust) {
+			return true;
+		}
+	};
+
 	public static final IDustType GEM_DUST = new IDustType() {
 
 		@Override

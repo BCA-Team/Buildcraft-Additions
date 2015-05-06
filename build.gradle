@@ -46,7 +46,7 @@ if (System.getenv().BUILD_NUMBER != null) {
 }
 
 minecraft {
-    version = "${config.version.forge}-${config.version.mc}"
+    version = "${config.version.mc}-${config.version.forge}-${config.version.mc}"
     runDir = "eclipse"
     replace "@MODVERSION@", config.version.mod
 }
@@ -58,10 +58,9 @@ curse {
         projectId = "${curseProps.project_id}"
 
         releaseType = "release"
-        changelog = """fixed anohter dupe bug
-fixed portable laser research
-foxed gilded red metal recipe
-attempt at fixing forge fluid id mess
+        changelog = """update to BC 7
+fix red gilded metal crash when dusts are dissabled
+more forge fluid fixes
 """
     }
 }
