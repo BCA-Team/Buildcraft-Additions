@@ -536,7 +536,7 @@ public final class ItemsAndBlocks {
 		GameRegistry.addRecipe(new ItemStack(backpackStand), "III", " I ", "III", 'I', Items.iron_ingot);
 
 		//remove BC refinery recipe
-		if (ConfigurationHandler.enabled("MultiBlockRefining")) {
+		if (!ConfigurationHandler.forceEnableBCRefinery) {
 			ItemStack stack = new ItemStack(BCItems.REFINERY);
 			ArrayList recipeList = (ArrayList) CraftingManager.getInstance().getRecipeList();
 			for (int t = 0; t < recipeList.size(); t++) {
