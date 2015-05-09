@@ -1,8 +1,8 @@
-#Slovak language file by leSamo (twitter: @leSamoSK)
+# Slovak language file for mod 'Buildcraft Additions' 2.2.x by leSamo, if this translation gets outdated, please, contact me on Twitter: @leSamoSK
 
 tile.blockFluidicCompressor.name=Kompresor tekutín
 tile.blockChargingStation.name=Nabíjacia stanica
-tile.blockHeatedFurnace.name=Tepelná pec
+tile.blockHeatedFurnace.name=Vyhrievaná pec
 tile.blockCoilBasic.name=Základná cievka
 tile.blockDusterBasic.name=Základný drvič
 tile.blockDusterSemiAutomatic.name=Poloautomatický drvič
@@ -11,66 +11,429 @@ tile.blockDusterKinetic.name=Kinetický drvič
 tile.blockCoilLava.name=Lávová cievka
 tile.blockCoilKinetic.name=Kinetická cievka
 tile.blockKEBT1.name=Kinetická batéria
-tile.blockKEBT2.name=Veľká kinetická batéria
+tile.blockKEBT1Creative.name=Tvorivá kinetická batéria
+tile.blockKEBT2.name=Veľka kinetická batéria
 tile.blockKEBT3Core.name=Jadro pokročilej kinetickej batérie
 tile.blockKEBT3Plating.name=Obal pokročilej kinetickej batérie
 tile.blockKEBT3.name=Pokročilá kinetická batéria
+tile.blockRefineryWalls.name=Obal rafinérie
+tile.blockRefineryValve.name=Ventil rafinérie
+tile.blockCoolingTowerWalls.name=Steny chladiacej veže
+tile.blockCoolingTowerValve.name=Ventil chladiacej veže
+tile.blockItemSorter.name=Roztrieďovač
+tile.backpackStand.name=Stojan na batohy
 
 item.ironCanister.name=Železný kanister
 item.goldCanister.name=Zlatý kanister
 item.diamondCanister.name=Diamantový kanister
-item.poweredShovel.name=Kinetická lopata
-item.drill.name=Kinetický vrták
-item.chainsaw.name=Kinetická píla
-item.megaHoe.name=Kinetická motyka
 item.PowerCapsuleTier1.name=Kinetická kapsula (úroveň 1)
 item.PowerCapsuleTier2.name=Kinetická kapsula (úroveň 2)
 item.PowerCapsuleTier3.name=Kinetická kapsula (úroveň 3)
-item.stickIron.name=Železná palička
-item.stickGold.name=Zlatá palička
-item.stickDiamond.name=Diamantová palička
-item.stickEmerald.name=Smaragdová palička
-item.toolCore.name=Základ nástroja
-item.toolUpgradeDrill.name=Hlava vrtáku
+item.stickIron.name=Železná tyč
+item.stickGold.name=Zlatá tyč
+item.stickDiamond.name=Diamantová tyč
+item.stickEmerald.name=Smaragdová tyč
+item.stickQuartz.name=Kremeňová tyč
+item.stickNetherStar.name=Tyč z pekelnej hviezdy
+item.stickEnder.name=Tyč z konca
+item.stickRedstone.name=Ruditová tyč
+item.stickGlowstone.name=Tyč zo svietivca
+item.stickSlime.name=Tyč zo slizu
+item.stickBone.name=Tyč z kosti
+item.stickFlint.name=Tyč z pazúrika
+item.stickBlaze.name=Ohnivá tyč
+item.toolCore.name=Jadro nástroja
+item.toolUpgradeDrill.name=Vŕtací nástavec
 item.toolUpgradeDigger.name=Kopací nástavec
 item.toolUpgradeChainsaw.name=Čepeľ píly
-item.toolUpgradeHoe.name=Nástavec na motyku
-item.kineticMultiTool.name=Kinetický multi-nástroj
-item.dustGold.name=Zlatý prášok
-item.dustIron.name=Železný prášok
-item.dustCopper.name=Medený prášok
-item.dustLead.name=Olovený prášok
-item.dustNickel.name=Nikelný prášok
-item.dustPlatinum.name=Platinový prášok
-item.dustTin.name=Cínový prášok
-item.dustSilver.name=Strieborný prášok
-item.dustDiamond.name=Diamantový prášok
+item.toolUpgradeHoe.name=Orací nástavec
+item.toolUpgradeArea.name=Rozšírenie dosahu
+item.toolUpgradeSilky.name=Rozšírenie jemnosti
+item.toolUpgradeFortune1.name=Šťastie I vylepšenie
+item.toolUpgradeFortune2.name=Šťastie II vylepšenie
+item.toolUpgradeFortune3.name=Šťastie III vylepšenie
+item.kineticMultiTool.name=Kinetický multinástroj
+item.portableLaser.name=Prenosný lasér
+item.dust.name=%s Prášok
 item.grindingWheel.name=Drviace koleso
-item.engineeringDiary.name=Denník inžiniera
+item.engineeringDiary.name=Diár inžiniera
 item.wireIron.name=Železný drôt
-item.wireIronUnhardened.name=Surový železný drôt
+item.wireIronUnhardened.name=Železný drôt (nevytvrdený)
 item.wireGold.name=Zlatý drôt
-item.wireGoldUnhardened.name=Surový zlatý drôt
+item.wireGoldUnhardened.name=Zlatý drôt (nevytvrdený)
 item.wireDiamond.name=Diamantový drôt
-item.wireDiamondUnhardened.name=Surový diamantový drôt
+item.wireDiamondUnhardened.name=Diamantový drôt (nevytvrdený)
+item.heatPlatingRaw.name=Surové teplovodivé pokovovanie
+item.heatPlating.name=Teplovodivé pokovovanie
+item.dustConverter.name=Konvertor prášku
+item.machineConfigurator.name=Konfigurátor strojov
+item.bcaBucket.name=%s vedro
+item.pipeColoringTool.name=Farbiaci nástroj
+item.upgrade.upgradeAutoEject.name=Vylepšenie stroja: Automatické vysúvanie
+item.upgrade.upgradeAutoImport.name=Vylepšenie stroja: Automatické vsúvanie
+item.upgrade.upgradeEfficiency1.name=Vylepšenie stroja: Efektivita I
+item.upgrade.upgradeEfficiency2.name=Vylepšenie stroja: Efektivita II
+item.upgrade.upgradeEfficiency3.name=Vylepšenie stroja: Efektivita III
+item.upgrade.upgradeSpeed1.name=Vylepšenie stroja: Rýchlosť I
+item.upgrade.upgradeSpeed2.name=Vylepšenie stroja: Rýchlosť II
+item.upgrade.upgradeSpeed3.name=Vylepšenie stroja: Rýchlosť III
+item.baseUpgrade.name=Prázdne vylepšenie
+item.robotDebugTool.name=Ladiaci nástroj robotov
+item.kineticBackpack.name=Kinetický batoh
+item.gildedRedMetalIngot.name=Pozlátený ingot červeného kovu
+item.conductivePlateRaw.name=Surové vodivé pokovovanie
+item.conductivePlate.name=Vodivé pokovovanie
 
-tooltip.installed=Naištalované
+material.iron.name=Železo
+material.gold.name=Zlato
+material.diamond.name=Diamant
+material.emerald.name=Smaragd
+material.coal.name=Uhlie
+material.charcoal.name=Drevené uhlie
+material.obsidian.name=Obsidián
+material.enderPearl.name=Perla z konca
+material.netherQuartz.name=Pekelný kremeň
+material.bronze.name=Bronz
+material.manganese.name=Mangán
+material.hepatizon.name=Hepatizon
+material.damascusSteel.name=Damascusová oceľ
+material.angmallen.name=Angmallen
+material.steel.name=Oceľ
+material.eximite.name=Eximit
+material.meutoite.name=Meutoit
+material.desichalkos.name=Desichalkos
+material.prometheum.name=Prometheum
+material.deepIron.name=Hlboké železo
+material.infuscolium.name=Infuscolium
+material.blackSteel.name=Čierna oceľ
+material.oureclase.name=Oureclas
+material.astralSilver.name=Astralské striebko
+material.carmot.name=Carmot
+material.mithril.name=Mithril
+material.rubracium.name=Rubracium
+material.quicksilver.name=Ortuť
+material.haderoth.name=Haderoth
+material.orichalcum.name=Orichalcum
+material.celenegil.name=Celenegil
+material.adamantine.name=Adamantin
+material.atlarus.name=Atlarus
+material.tartarite.name=Tartarit
+material.ignatius.name=Ignatius
+material.shadowIron.name=Tieňové železo
+material.lemurite.name=Lemurit
+material.midasium.name=Midasium
+material.vyroxeres.name=Vyroxeres
+material.ceruclase.name=Ceruclas
+material.alduorite.name=Alduorit
+material.kalendrite.name=Kalendrit
+material.vulcanite.name=Vulkanit
+material.sanguinite.name=Sanguinit
+material.shadowSteel.name=Tieňová oceĽ
+material.inolashite.name=Inolashit
+material.amordrine.name=Amordrin
+material.zinc.name=Zinok
+material.brass.name=Mosadz
+material.electrum.name=Elektrum
+material.aluminum.name=Hliník
+material.ardite.name=Ardit
+material.manyullyn.name=Manyullyn
+material.cobalt.name=Kobalt
+material.copper.name=Meď
+material.lead.name=Olovo
+material.nickel.name=Nikel
+material.platinum.name=Platina
+material.silver.name=Striebro
+material.tin.name=Cín
+material.apatite.name=Apatit
+material.osmium.name=Osmium
+material.sulfur.name=Síra
+material.saltpeter.name=Liadok
+material.certusQuartz.name=Kremeň
+material.aluminumBrass.name=Hliníková mosadz
+material.alumite.name=Alumit
+material.pigIron.name=Prasacie železo
+material.invar.name=Invar
+material.signalum.name=Signálum
+material.lumium.name=Lumium
+material.enderiumBase.name=Základ endéria
+material.enderium.name=Endérium
+material.electricalSteel.name=Electrická oceľ
+material.energeticAlloy.name=Energetická zliatina
+material.phasedGold.name=Zlato
+material.redstoneAlloy.name=Ruditová zliatina
+material.conductiveIron.name=Vodivé železo
+material.phasedIron.name=Železo
+material.darkSteel.name=Temná oceľ
+material.soularium.name=Dušarium
+material.fzDarkIron.name=Temné železo
+material.gildedRedMetal.name=Pozlátený červený kov
+material.yellorium.name=Yelórium
+material.graphite.name=Grafit
+material.cyanite.name=Kyanid
+material.blutonium.name=Blutónium
+material.ludicrite.name=Ludikrit
+material.pyrotheum.name=Pyroteum
+material.cryotheum.name=Kryoteum
+material.blizz.name=Ľadovec
+
+entity.bcadditions.bcaLaserShot=Lasér
+
+death.attack.bcaLaser=%2$s spálil lasérom %1$s
+death.attack.bcaLaser.item=%2$s bol spálený hráčom %1$s pomocou %3$s
+
+tooltip.installed=Naištalované vylepšenia:
 tooltip.deactivated=Deaktivované
 tooltip.upgradesPossible=Možné vylepšenia
+tooltip.holdShiftForMoreInfo=Drž shift pre viac informácií
+tooltip.FluidCapacity=Kapacita: %s vedier
+tooltip.storedFluid=Práve je tu uložených %s mB z %s mB
+tooltip.colorNormalMode=Normálny mód
+tooltip.colorNormalMode.info=Zafarbí bežné farbiteľné predmety, ovce a BC rúry
+tooltip.colorSortingMode=Triediaci mód
+tooltip.colorSortingMode.info=Zafarbí triediace časti diazuritovej a lazuritovej rúry.
+tooltip.defaultColor=Štandardná farba
+tooltip.compressor.fill=Naplniť
+tooltip.compressor.empty=Vyprázdniť
+tooltip.none=Žiadne
+tooltip.forKineticMultiTool=Použiteľné s kinetickým multinástrojom
+tooltip.forUpgradableMachines=Použiteľné s prístrojmi, ktoré sa dajú vylepšiť
+tooltip.stick.0=Najlepšie funguje %s čipom
+tooltip.stick.1=%s tyč pre inštaláciu
+tooltip.stickGold.chipset=so železným
+tooltip.stickGold.stick=Nepotrebuje žiadnu
+tooltip.stickDiamond.chipset=so zlatým
+tooltip.stickDiamond.stick=Potrebuje diamantovú
+tooltip.stickEmerald.chipset=s diamantovým
+tooltip.stickEmerald.stick=Potrebuje diamantovú
+tooltip.stickNetherStar.chipset=so smaragdovým a pulzujúcim
+tooltip.stickNetherStar.stick=Potrebuje emeraldovú
+tooltip.stickQuartz.chipset=so železným
+tooltip.stickQuartz.stick=Potrebuje svietivcovú
+tooltip.stickEnder.chipset=s ruditovým
+tooltip.stickEnder.stick=Potrebuje zlatú
+tooltip.stickRedstone.chipset=s železným
+tooltip.stickRedstone.stick=Nepotrebuje žiadnu
+tooltip.stickGlowstone.chipset=s ruditovým
+tooltip.stickGlowstone.stick=Potrebuje ruditovú
+tooltip.stickSlime.chipset=so slizovým
+tooltip.stickSlime.stick=Potrebuje slizovú
+tooltip.stickBlaze.chipset=s ruditovým
+tooltip.stickBlaze.stick=Potrebuje ruditovú
+tooltip.toolUpgradeHoe.use=Dovolí nástroju obrábať pôdu
+tooltip.toolUpgradeDigger.use=Dovolí nástroju kopať materiály podobné hline
+tooltip.toolUpgradeDrill.use=Dovolí nástroju kopať kameň a kovové materiály
+tooltip.toolUpgradeChainsaw.use=Dovolí nástroju rúbať drevo a presekávať sa tvojími nepriateľmi
+tooltip.toolUpgradeArea.use=Dovolí nástroju pracovať v 3x3 území
+tooltip.toolUpgradeSilky.use=Pridá nástroju jemný dotyk
+tooltip.toolUpgradeFortune1.use=Pridá nástroju Šťastie I
+tooltip.toolUpgradeFortune2.use=Pridá nástroju Šťastie II, ak má Šťastie I
+tooltip.toolUpgradeFortune3.use=Pridá nástroju Šťastie III, ak má Šťastie II
+tooltip.creativeOnly=Iba pre tvorivý mód
+
+fluid.gas.name=%s Plyn
 
 gui.progress=Postup
 gui.fluid=Tekutina
 gui.noFluid=Prázdne
 gui.fluidStored=Množstvo tekutiny
-gui.energyInTool=Uskladnená energia
-gui.maxEnergy=Maximálna energia
+gui.energyInTool=Uložená energia
+gui.maxEnergy=Kapacita energie
+gui.refinery.name=Rafinéria
+gui.heat=Teplo
+gui.requiredHeat=Potrebné teplo
+gui.powerUsage=Spotreba energie
+gui.empty=Prázdne
+gui.coolingTower.name=Chladiaca veža
+gui.north=Sever
+gui.east=Východ
+gui.south=Juh
+gui.west=Západ
+gui.up=Vrch
+gui.down=Spodok
+gui.machineConfigurator.name=Konfigurátor strojov
+gui.kebT1.name=Kinetická batéria
+gui.kebT2.name=Veľká kinetická batéria
+gui.kebT3.name=Pokročilá kinetická batéria
+gui.itemSorter.name=Roztrieďovač
+gui.basicCoil.name=Základná cievka
+gui.chargingStation.name=Nabíjacia stanica
+gui.priority=Priorita
+gui.kineticMultiTool.name=Kinetický multinástroj
+gui.portableLaser.name=Prenosný lasér
+gui.heatedFurnace.name=Vyhrievaná pec
+gui.fluidicCompressor.name=Kompresor tekutín
+gui.coloringMode=Farbiaci mód
+gui.pipeColorTool.name=Farbiaci nástroj
+gui.colorNormalMode=Normálny mód
+gui.colorSortingMode=Triediaci mód
+gui.installedUpgrades=Naištalované vylepšenia:
+gui.configureIO=Konfigurovať vstup/výstup
+gui.showUpgrades=Nainštalované vylepšenia
+
+gui.keb.dangerousButton=VEĽKÉ ČERVENÉ TLAČIDLÁ SÚ NEBEZPEČNÉ
+gui.keb.noPushing=NESTLÁČAJ HO!
+gui.keb.pressForBoom=STLAČ MA AK CHCEŠ VYBUCHNÚŤ
 
 gui.nei.dusting=Drvenie
 
-trigger.canisterRequested=Kanister je potrebný
-trigger.hasEmptyCanister=Obsahuje prázdny kanister
-trigger.hasFullCanister=Obsahuje plný kanister
+gui.color.none=Žiadna
+gui.color.white=Biela
+gui.color.orange=Oranžová
+gui.color.magenta=Purpurová
+gui.color.lightBlue=Svetlomodrá
+gui.color.yellow=Žltá
+gui.color.lime=Svetlozelená
+gui.color.pink=Ružová
+gui.color.gray=Sivá
+gui.color.lightGray=Svetlosivá
+gui.color.cyan=Tyrkysová
+gui.color.purple=Fialová
+gui.color.blue=Modrá
+gui.color.brown=Hnedá
+gui.color.green=Zelená
+gui.color.red=Červená
+gui.color.black=Čierna
+
+trigger.canisterRequested=Kanister požiadaný
 trigger.doneCharging=Nabité
 trigger.readyToCharge=Pripravené na nabíjanie
+trigger.KEBCharged=Plne nabité
+trigger.KEBUnder25=Menej ako 25% nabité
+trigger.KEBUnder50=Menej ako 50% nabité
+trigger.KEBUnder75=Menej ako 75% nabité
+trigger.KEBUnder100=Menej ako 100% nabité
+trigger.KEBEmpty=Prázdne
+trigger.KEBEngineControl=Chytré ovládanie motorov
 
-itemGroup.BuildcraftAdditions=Buildcraft Doplnky
+action.fluidicCompressorModeSwitchToFill=Prepnúť na plnici mód
+action.fluidicCompressorModeSwitchToEmpty=Prepnúť na vyprázdňovací mód
+
+status.input=Vstup
+status.output=Výstup
+status.both=Oba
+status.disabled=Zakázané
+
+priority.veryLow=Veľmi málo
+priority.low=Málo
+priority.normal=Normálne
+priority.high=Veľa
+priority.veryHigh=Veľmi veľa
+
+itemGroup.BuildcraftAdditions=Buildcraft Additions
+itemGroup.bcaCanisters=Kanistre
+itemGroup.bcaDusts=Prášky
+
+config.title=Buildcraft Additions Konfigurácia
+
+updates=Aktualizácie
+updates.tooltip=Konfigurácia, či má BCA vyhľadávať aktualizácie
+shouldCheckForUpdates=Vyhľadávanie aktualizácií
+shouldCheckForUpdates.tooltip=Nastavte na 'false', ako chcete aby BCA nevyhľadávalo aktualizácie
+shouldPrintOutChangelog=Zoznam zmien
+shouldPrintOutChangelog.tooltip=Nastavte na 'true', ak chcete vidieť zoznam zmien z novšej verzie
+
+keb=Kinetická batéria
+
+heated furnace=Vyhrievaná pec
+
+charging station=Nabíjacia stanica
+
+feature=Funkcia
+
+fluidic compressor=Kompresor tekutín
+
+mechanical duster=Mechanický drvič
+
+power capsule=Kinetická kapsula
+
+refinery=Rafinéria
+
+upgrades=Vylepšenia
+
+upgrades.refinery=Vylepšenia rafinérie
+
+upgrades.cooling tower=Vylepšenia chladiacej veže
+
+power usage=Kinetický multi-nástroj
+BaseModifier=Základný modifikátor
+BaseModifier.tooltip=Základná energia, ktorú multi-nástroj vynaloží na rozbitie jednej kocky
+EntityHitModifier=Základný modifikátor bytostí
+EntityHitModifier.tooltip=Základná energia, ktorú multi-nástroj vynaloží na udretie jednej bytosti
+EntityDamage=Poškodenie bytostí
+EntityDamage.tooltip=Poškodenie bytostí na jeden úder
+HoeCost=Využitie energie obrábania
+HoeCost.tooltip=Energia, ktorú multi-nástroj využije na obrobenie jednej kocky
+EasyDifficultyModifier=Modifikátor ľahkej obtiažnosti
+EasyDifficultyModifier.tooltip=Násobok spotreby energie na ľahkej obtiažnosti
+HardDifficultyModifier=Modifikátor ťažkej obtiažnosti
+HardDifficultyModifier.tooltip=Násobok spotreby energie na ťažkej obtiažnosti
+NormalDifficultyModifier=Modifikátor strednej obtiažnosti
+NormalDifficultyModifier.tooltip=Násobok spotreby energie na strednej obtiažnosti
+PeacefulDifficultyModifier=Modifikátor mierumilovnej obtiažnosti
+PeacefulDifficultyModifier.tooltip=Násobok spotreby energie na mierumilovnej obtiažnosti
+ToolEfficiencyPickaxe=Efektivita krompáča
+ToolEfficiencyPickaxe.tooltip=Rýchlosť kopania kociek, ktoré sa dajú rozbiť krompáčom
+ToolEfficiencyShovel=Efektivita lopaty
+ToolEfficiencyShovel.tooltip=Rýchlosť kopania kociek, ktoré sa dajú rozbiť lopatou
+ToolEfficiencyAxe=Efektivita sekery
+ToolEfficiencyAxe.tooltip=Rýchlosť kopania kociek, ktoré sa dajú rozbiť sekerou
+ToolHarvestLevel=Úroveň rozbitia
+ToolEfficiencyAxe.tooltip=Úroveň rozbitia nástroja (Drevo/zlato: 0, kameň: 1, železo: 2, diamant: 3)
+ToolEfficiencyAreaMultiplier=Modifikátor efektivity územia
+ToolEfficiencyAreaMultiplier.tooltip=Násobok efektivity po inštalácie vylepšení územia
+
+portable laser=Prenosný lasér
+PortableLaserPowerUse=Využívanie energie
+PortableLaserPowerUse.tooltip=Využívanie energie prenosného laséra na operáciu
+PortableLaserLaserPower=Sila laséra
+PortableLaserLaserPower.tooltip=Prenos energie z laséra na jeho cieľ
+PortableLaserEntityDamage=Poškodenie bytostí
+PortableLaserEntityDamage.tooltip=Poškodenie bytostí, keď je lasér v zraňovaciom móde
+PortableLaserEntityBurnTime=Horenie bytostí
+PortableLaserEntityBurnTime.tooltip=Počet sekúnd, koľko budú bytosti horieť po zásahu lasérom v zraňovaciom móde
+
+coloring tool=Farbiaci nástroj
+ColoringToolCapacity=Kapacita
+ColoringToolCapacity.tooltip=Kapacita farbiaceho nástroja v RF
+ColoringToolMaxTransfer=Maximálny presun
+ColoringToolMaxTransfer.tooltip=Maximálna rýchlosť presunu v RF
+ColoringToolEnergyUse=Využívanie energie
+ColoringToolEnergyUse.tooltip=Využitie energie jednej operácie v RF
+
+misc=Rôzne
+eurekaIntegration=Eureka integrácia
+eurekaIntegration.tooltip=Nastavte na 'false', aby ste predišli 'Eureka' postupu BCA
+shouldRegisterDusts=Registrovanie práškov
+shouldRegisterDusts.tooltip=Nastavte na 'false', aby ste predišli registrovaniu práškov BCA
+
+kineticTool.outOfPower=DOŠLA BATÉRIA, NIČENIE KOCIEK PRERUŠENÉ!
+
+updatenotification=Je dostupná nová verzia Buildcraft Additions (%s). Prosím zvážte aktualizáciu.
+changelogNotification=Zoznam zmien
+
+selfdestructCountdouwn=SAMODEŠTRUKCIA O
+selfdestructActivated=SAMODEŠTRUKCIA ZAHÁJENÁ
+
+configured=Nakonfigurované
+
+fluids.info=%,d / %,d mB
+fluids.change.info=%,d / %,d mB/t
+rf.info=%,d / %,d RF
+rf.change.info=%,d / %,d RF/t
+
+lavaCoil.info=Uložená láva: %s
+
+option.bca.duster.progress.graphical=Grafický postup drviča
+option.bca.duster.progress.textual=Textový postup drviča
+
+waila.refinery.noMultiBlock=Nie je súčasťou multi-kocky
+waila.refinery.currentHeat=Súčasné teplo: %d
+waila.refinery.requiredHeat=Potrebné teplo: %d
+waila.refinery.processing=Rafinuje %s na %s
+
+waila.upgrades.installed=Nainštalované vylepšenia:
+
+waila.duster.recipe=%s -> %s
+waila.duster.progress=Postup
+
+backpack.info=Ulož do batoha a klikni s kinetickými kapsulami na diery vzadu pre ich nainštalovanie.
