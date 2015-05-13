@@ -1,18 +1,5 @@
 package buildcraftAdditions.compat.buildcraft.recipe;
 
-import net.minecraft.item.ItemStack;
-
-import net.minecraftforge.oredict.OreDictionary;
-
-import buildcraft.api.recipes.CraftingResult;
-import buildcraft.silicon.ItemRedstoneChipset;
-import buildcraft.silicon.TileIntegrationTable;
-import buildcraft.silicon.recipes.IntegrationTableRecipe;
-
-import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
-import buildcraftAdditions.reference.ItemsAndBlocks;
-import buildcraftAdditions.reference.Variables;
-
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -20,9 +7,9 @@ import buildcraftAdditions.reference.Variables;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class UpgradeRecipeStick extends IntegrationTableRecipe {
+public class UpgradeRecipeStick {
 
-	private final String stickName, inputStickOreDictName, prevStickName;
+	/*private final String stickName, inputStickOreDictName, prevStickName;
 
 	public UpgradeRecipeStick(String stickName, String inputStickOreDictName, String prevStickName, ItemRedstoneChipset.Chipset... chipsets) {
 		this.stickName = stickName;
@@ -62,5 +49,5 @@ public class UpgradeRecipeStick extends IntegrationTableRecipe {
 		ItemKineticMultiTool.installStick(outputStack, stickName);
 		result.crafted = outputStack;
 		return result;
-	}
+	}*/
 }

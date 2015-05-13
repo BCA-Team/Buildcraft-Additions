@@ -102,7 +102,7 @@ dependencies {
 	compile "codechicken:NotEnoughItems:${config.version.mc}-${config.version.nei}:dev"
 	compile "mcp.mobius.waila:Waila:${config.version.waila}_${config.version.mc}"
 	//compile "com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev"
-    //compile name:'Framez', version: config.version.framez, ext: 'jar'
+    //compile "framez:Framez:${config.version.framez}:deobf"
 	compile name: 'MineTweaker3', version: config.version.minetweaker, ext: 'jar'
     compile name: 'buildcraft', version: config.version.buildcraft, classifier: "dev", ext: 'jar'
 	compile fileTree(dir: 'libs', include: '*.jar')

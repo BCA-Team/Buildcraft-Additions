@@ -1,16 +1,5 @@
 package buildcraftAdditions.compat.buildcraft.recipe;
 
-import net.minecraft.item.ItemStack;
-
-import buildcraft.api.recipes.CraftingResult;
-import buildcraft.silicon.TileIntegrationTable;
-import buildcraft.silicon.recipes.IntegrationTableRecipe;
-
-import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
-import buildcraftAdditions.items.Tools.ItemToolUpgrade;
-import buildcraftAdditions.reference.ItemsAndBlocks;
-import buildcraftAdditions.reference.Variables;
-
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -18,9 +7,9 @@ import buildcraftAdditions.reference.Variables;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class UpgradeRecipeUpgrade extends IntegrationTableRecipe {
+public class UpgradeRecipeUpgrade {
 
-	private final String upgradeName;
+	/*private final String upgradeName;
 
 	public UpgradeRecipeUpgrade(String upgradeName) {
 		this.upgradeName = upgradeName;
@@ -45,5 +34,5 @@ public class UpgradeRecipeUpgrade extends IntegrationTableRecipe {
 		result.crafted = outputStack;
 		return result;
 	}
-
+	*/
 }
