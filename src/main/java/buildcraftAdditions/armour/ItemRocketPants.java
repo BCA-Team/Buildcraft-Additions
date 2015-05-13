@@ -1,6 +1,5 @@
 package buildcraftAdditions.armour;
 
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -8,6 +7,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 
+import buildcraftAdditions.client.models.ModelRocketPants;
 import buildcraftAdditions.listeners.FlightTracker;
 import buildcraftAdditions.reference.ItemsAndBlocks;
 /**
@@ -24,9 +24,8 @@ public class ItemRocketPants extends ItemPoweredArmor {
 
 	public ItemRocketPants() {
 		super("rocketPants", 2);
-		setUnlocalizedName("rocketPants");
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
-			this.MODEL = new ModelBiped();
+			this.MODEL = new ModelRocketPants();
 	}
 
 	@Override
@@ -37,13 +36,13 @@ public class ItemRocketPants extends ItemPoweredArmor {
 			if (stack != null && stack.getItem() == ItemsAndBlocks.kineticBackpack) {
 				ItemKineticBackpack backpack = (ItemKineticBackpack) stack.getItem();
 				if (backpack.extractEnergy(stack, POWER_USE, true) == POWER_USE) {
-					backpack.extractEnergy(stack, POWER_USE, false);
 					if (FlightTracker.wantsToMove(player.getDisplayName())) {
 						player.moveFlying(0, .2f, .2f);
 					}
 					player.motionX *= 1.025;
 					player.motionZ *= 1.025;
 					if (player.motionY < MAX_LIFT && FlightTracker.wantsToFly(player.getDisplayName())) {
+						backpack.extractEnergy(stack, POWER_USE, false);
 						player.motionY += 0.1;
 						player.fallDistance = 0;
 					}

@@ -435,3 +435,5 @@ waila.duster.recipe=%s -> %s
 waila.duster.progress=Progress
 
 backpack.info=Place on a backpackstand and click with kinetic capsules on the holes in the back to install capsules
+
+keybinding.toggleBoots=Toggle hover boots

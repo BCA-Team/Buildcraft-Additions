@@ -22,6 +22,7 @@ public class ItemPoweredArmor extends ItemArmor {
 
 	public ItemPoweredArmor(String name, int slot) {
 		super(ArmorMaterial.IRON, BuildcraftAdditions.proxy.addArmor(name), slot);
+		setUnlocalizedName(name);
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 
+import buildcraftAdditions.armour.ItemHoverBoots;
 import buildcraftAdditions.armour.ItemKineticBackpack;
 import buildcraftAdditions.armour.ItemRocketPants;
 import buildcraftAdditions.blocks.BlockBCKinesisPipeWood;
@@ -161,6 +162,7 @@ public final class ItemsAndBlocks {
 
 	public static ItemArmor kineticBackpack;
 	public static ItemArmor rocketPants;
+	public static ItemArmor hoverBoots;
 
 
 	public static void init() {
@@ -309,6 +311,9 @@ public final class ItemsAndBlocks {
 
 		conductivePlate = new ItemBase("conductivePlate");
 		GameRegistry.registerItem(conductivePlate, "condictuvePlate");
+
+		hoverBoots = new ItemHoverBoots();
+		GameRegistry.registerItem(hoverBoots, "hoverBoots");
 
 		//START BLOCKS
 
