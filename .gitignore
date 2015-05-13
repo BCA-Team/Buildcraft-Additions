@@ -6,7 +6,6 @@ build/
 bin/
 out/
 eclipse/
-libs/
 
 # Files
 *.eml
