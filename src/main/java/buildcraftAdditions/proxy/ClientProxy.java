@@ -21,6 +21,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fluids.Fluid;
 
+import buildcraftAdditions.client.HUDRenderer;
 import buildcraftAdditions.client.render.blocks.RendererSidedTextures;
 import buildcraftAdditions.client.render.entities.EntityLaserShotRenderer;
 import buildcraftAdditions.client.render.items.BackPackItemRenderer;
@@ -65,6 +66,8 @@ public class ClientProxy extends CommonProxy {
 		Variables.RenderIDs.SIDED_TEXTURES_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(new RendererSidedTextures());
 		RenderingRegistry.registerEntityRenderingHandler(EntityLaserShot.class, new EntityLaserShotRenderer());
+
+		FMLCommonHandler.instance().bus().register(new HUDRenderer());
 	}
 
 	@Override

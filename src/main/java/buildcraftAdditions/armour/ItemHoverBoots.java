@@ -25,9 +25,13 @@ public class ItemHoverBoots extends ItemPoweredArmor {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		tagTest(itemStack);
 		if (itemStack.stackTagCompound.getBoolean("enabled")) {
+			player.fallDistance = 0;
 			if (player.motionY < -0 && !player.onGround) {
-				player.motionY = 0;
-				player.fallDistance = 0;
+				if (player.isSneaking()) {
+					player.motionY /= 1.1;
+				} else {
+					player.motionY = 0;
+				}
 			}
 		}
 	}
