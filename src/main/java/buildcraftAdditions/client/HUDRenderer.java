@@ -19,7 +19,7 @@ public class HUDRenderer {
 
 	@SubscribeEvent
 	public void renderTick(TickEvent.RenderTickEvent event) {
-		List<String> info = new ArrayList<>();
+		List<String> info = new ArrayList<String>();
 		if (event.phase == TickEvent.Phase.END && mc.currentScreen == null) {
 			for (int i = 0; i < 4; i++) {
 				ItemStack stack = mc.thePlayer.getCurrentArmor(i);
