@@ -57,6 +57,7 @@ public final class Variables {
 	//Render ID's
 	public static final class RenderIDs {
 		public static int SIDED_TEXTURES_RENDER_ID;
+		public static int SORTER;
 	}
 
 	//EUREKA NBT names

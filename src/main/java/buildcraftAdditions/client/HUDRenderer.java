@@ -1,6 +1,7 @@
 package buildcraftAdditions.client;
 
-import org.lwjgl.opengl.GL11;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -8,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.utils.IHUD;
 
 /**
  * Created by AEnterprise
@@ -18,13 +19,18 @@ public class HUDRenderer {
 
 	@SubscribeEvent
 	public void renderTick(TickEvent.RenderTickEvent event) {
+		List<String> info = new ArrayList<>();
 		if (event.phase == TickEvent.Phase.END && mc.currentScreen == null) {
-			ItemStack stack = mc.thePlayer.getCurrentArmor(0);
-			if (stack != null && stack.getItem() == ItemsAndBlocks.hoverBoots) {
-				GL11.glPushMatrix();
-				mc.entityRenderer.setupOverlayRendering();
-				mc.fontRenderer.drawString("Hover boots status: " + (stack.stackTagCompound.getBoolean("enabled") ? "enabled" : "dissabled"), 0, 0, 0x1D1CFF);
-				GL11.glPopMatrix();
+			for (int i = 0; i < 4; i++) {
+				ItemStack stack = mc.thePlayer.getCurrentArmor(i);
+				if (stack != null && stack.getItem() instanceof IHUD) {
+					IHUD h = (IHUD) stack.getItem();
+					info.add(h.getInfo(stack));
+				}
+			}
+			int line = 0;
+			for (String s : info) {
+				mc.fontRenderer.drawString(s, 0, line++ * 9, 0x000000, true);
 			}
 		}
 	}

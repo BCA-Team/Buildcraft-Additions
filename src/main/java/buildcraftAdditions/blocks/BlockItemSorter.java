@@ -18,7 +18,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.tools.IToolWrench;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.client.render.blocks.RendererSidedTextures;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.utils.RenderUtils;
@@ -51,7 +50,7 @@ public class BlockItemSorter extends BlockBase {
 
 	@Override
 	public int getRenderType() {
-		return Variables.RenderIDs.SIDED_TEXTURES_RENDER_ID;
+		return Variables.RenderIDs.SORTER;
 	}
 
 	@Override

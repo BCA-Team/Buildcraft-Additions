@@ -23,6 +23,7 @@ import net.minecraftforge.fluids.Fluid;
 
 import buildcraftAdditions.client.HUDRenderer;
 import buildcraftAdditions.client.render.blocks.RendererSidedTextures;
+import buildcraftAdditions.client.render.blocks.RendererSorter;
 import buildcraftAdditions.client.render.entities.EntityLaserShotRenderer;
 import buildcraftAdditions.client.render.items.BackPackItemRenderer;
 import buildcraftAdditions.client.render.items.BackpackStandItemRenderer;
@@ -65,6 +66,8 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileBackpackStand.class, new RendererBackPackStand());
 		Variables.RenderIDs.SIDED_TEXTURES_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(new RendererSidedTextures());
+		Variables.RenderIDs.SORTER = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(new RendererSorter());
 		RenderingRegistry.registerEntityRenderingHandler(EntityLaserShot.class, new EntityLaserShotRenderer());
 
 		FMLCommonHandler.instance().bus().register(new HUDRenderer());

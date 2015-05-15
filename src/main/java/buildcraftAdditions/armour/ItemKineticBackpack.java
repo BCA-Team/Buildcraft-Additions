@@ -24,6 +24,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.client.models.BackPackModel;
 import buildcraftAdditions.items.ItemPoweredBase;
 import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.utils.IHUD;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -33,7 +34,7 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerItem {
+public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerItem, IHUD {
 
 	public ItemKineticBackpack() {
 		super(ArmorMaterial.IRON, BuildcraftAdditions.proxy.addArmor("kineticBackpack"), 1);
@@ -174,5 +175,10 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 	@Override
 	public boolean isDamageable() {
 		return false;
+	}
+
+	@Override
+	public String getInfo(ItemStack stack) {
+		return EnumChatFormatting.GOLD + Utils.localize("hud.backpack") + " " + Utils.getRFPercentTooltip(getEnergyStored(stack), getMaxEnergyStored(stack));
 	}
 }

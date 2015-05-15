@@ -124,6 +124,24 @@ public class Utils {
 		return color + localizeFormatted("rf.info", energy, maxEnergy);
 	}
 
+	public static String getRFPercentTooltip(int energy, int maxEnergy) {
+		int percent = maxEnergy > 0 ? (int) ((energy / (double) maxEnergy) * 100) : 0;
+		String color = "";
+		if (percent >= 75)
+			color += EnumChatFormatting.DARK_GREEN;
+		else if (percent >= 60)
+			color += EnumChatFormatting.GREEN;
+		else if (percent >= 45)
+			color += EnumChatFormatting.YELLOW;
+		else if (percent >= 30)
+			color += EnumChatFormatting.GOLD;
+		else if (percent >= 15)
+			color += EnumChatFormatting.RED;
+		else
+			color += EnumChatFormatting.DARK_RED;
+		return color + percent + "%";
+	}
+
 	public static String colorText(String text, EnumChatFormatting color) {
 		return ("" + color + text).trim();
 	}
