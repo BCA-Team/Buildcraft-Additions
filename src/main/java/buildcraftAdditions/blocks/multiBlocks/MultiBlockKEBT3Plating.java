@@ -22,7 +22,7 @@ import buildcraftAdditions.utils.PlayerUtils;
 public class MultiBlockKEBT3Plating extends MultiBlockBase {
 
 	public MultiBlockKEBT3Plating() {
-		super("blockKEBT3Plating", Variables.Identifiers.KEBT3_PLATING, new MultiBlockPaternKEBT3(), "energyBufferMultiblockPlating");
+		super("blockKEBT3Plating", Variables.Identifiers.KEBT3_PLATING, new MultiBlockPaternKEBT3(), "KEB/T3/plating");
 	}
 
 	@Override

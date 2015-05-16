@@ -19,8 +19,9 @@ import buildcraftAdditions.reference.ItemsAndBlocks;
  */
 public class ItemRocketPants extends ItemPoweredArmor {
 	private static final int
-			POWER_USE = 75,
-			MAX_LIFT = 5;
+			MAX_LIFT = 6,
+			FLY_POWER = 60,
+			SPEED_POWER = 20;
 
 	public ItemRocketPants() {
 		super("rocketPants", 2);
@@ -35,14 +36,15 @@ public class ItemRocketPants extends ItemPoweredArmor {
 			ItemStack stack = player.getCurrentArmor(2);
 			if (stack != null && stack.getItem() == ItemsAndBlocks.kineticBackpack) {
 				ItemKineticBackpack backpack = (ItemKineticBackpack) stack.getItem();
-				if (backpack.extractEnergy(stack, POWER_USE, true) == POWER_USE) {
+				if (backpack.extractEnergy(stack, 40, true) == 40) {
 					if (FlightTracker.wantsToMove(player.getDisplayName())) {
 						player.moveFlying(0, .2f, .2f);
 					}
 					player.motionX *= 1.025;
 					player.motionZ *= 1.025;
+					backpack.extractEnergy(stack, SPEED_POWER, false);
 					if (player.motionY < MAX_LIFT && FlightTracker.wantsToFly(player.getDisplayName())) {
-						backpack.extractEnergy(stack, POWER_USE, false);
+						backpack.extractEnergy(stack, FLY_POWER, false);
 						player.motionY += 0.1;
 						player.fallDistance = 0;
 					}

@@ -42,10 +42,10 @@ public class BlockItemSorter extends BlockBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
-		textureSide = RenderUtils.registerIcon(register, "itemSorterSide");
-		textureSide2 = RenderUtils.registerIcon(register, "itemSorterSide2");
-		textureIn = RenderUtils.registerIcon(register, "itemSorterIn");
-		textureOut = RenderUtils.registerIcon(register, "itemSorterOut");
+		textureSide = RenderUtils.registerIcon(register, "sorter/Side");
+		textureSide2 = RenderUtils.registerIcon(register, "sorter/Side2");
+		textureIn = RenderUtils.registerIcon(register, "sorter/In");
+		textureOut = RenderUtils.registerIcon(register, "sorter/Out");
 	}
 
 	@Override

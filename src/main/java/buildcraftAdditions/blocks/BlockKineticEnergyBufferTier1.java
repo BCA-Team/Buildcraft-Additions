@@ -50,9 +50,9 @@ public class BlockKineticEnergyBufferTier1 extends BlockBase {
 	public void registerBlockIcons(IIconRegister register) {
 		icons = new IIcon[10];
 		for (int teller = 0; teller < 9; teller++) {
-			icons[teller] = RenderUtils.registerIcon(register, "kineticEnergyBuffer" + teller);
+			icons[teller] = RenderUtils.registerIcon(register, "KEB/T1/" + teller);
 		}
-		icons[9] = RenderUtils.registerIcon(register, "kineticEnergyBufferCreative");
+		icons[9] = RenderUtils.registerIcon(register, "KEB/T1/creative");
 	}
 
 	@Override

@@ -23,12 +23,12 @@ import buildcraftAdditions.tileEntities.TileKEBT3;
 @SideOnly(Side.CLIENT)
 public class RendererKEBT3 extends TileEntitySpecialRenderer {
 
-	public static final ResourceLocation[] sides = {new ResourceLocation("bcadditions", "textures/blocks/energyBufferT3MultiblockSides0.png"),
-			new ResourceLocation("bcadditions", "textures/blocks/energyBufferT3MultiblockSides1.png"),
-			new ResourceLocation("bcadditions", "textures/blocks/energyBufferT3MultiblockSides2.png"),
-			new ResourceLocation("bcadditions", "textures/blocks/energyBufferT3MultiblockSides3.png"),
-			new ResourceLocation("bcadditions", "textures/blocks/energyBufferT3MultiblockSides4.png")};
-	public static final ResourceLocation topAndBottom = new ResourceLocation("bcadditions", "textures/blocks/energyBufferT3MultiblockTopAndBottom.png");
+	public static final ResourceLocation[] sides = {new ResourceLocation("bcadditions", "textures/blocks/KEB/T3/0.png"),
+			new ResourceLocation("bcadditions", "textures/blocks/KEB/T3/1.png"),
+			new ResourceLocation("bcadditions", "textures/blocks/KEB/T3/2.png"),
+			new ResourceLocation("bcadditions", "textures/blocks/KEB/T3/3.png"),
+			new ResourceLocation("bcadditions", "textures/blocks/KEB/T3/4.png")};
+	public static final ResourceLocation topAndBottom = new ResourceLocation("bcadditions", "textures/blocks/KEB/T3/TopAndBottom.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {

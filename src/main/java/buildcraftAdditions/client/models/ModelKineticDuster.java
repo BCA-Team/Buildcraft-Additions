@@ -18,10 +18,10 @@ import cpw.mods.fml.client.FMLClientHandler;
  */
 public class ModelKineticDuster extends ModelBiped {
 
-	private static final ResourceLocation TEXTURE0 = new ResourceLocation("bcadditions", "textures/models/duster3-texturemap0.png");
-	private static final ResourceLocation TEXTURE1 = new ResourceLocation("bcadditions", "textures/models/duster3-texturemap1.png");
-	private static final ResourceLocation TEXTURE2 = new ResourceLocation("bcadditions", "textures/models/duster3-texturemap2.png");
-	private static final ResourceLocation TEXTURE3 = new ResourceLocation("bcadditions", "textures/models/duster3-texturemap3.png");
+	private static final ResourceLocation TEXTURE0 = new ResourceLocation("bcadditions", "textures/models/kineticDuster/0.png");
+	private static final ResourceLocation TEXTURE1 = new ResourceLocation("bcadditions", "textures/models/kineticDuster/1.png");
+	private static final ResourceLocation TEXTURE2 = new ResourceLocation("bcadditions", "textures/models/kineticDuster/2.png");
+	private static final ResourceLocation TEXTURE3 = new ResourceLocation("bcadditions", "textures/models/kineticDuster/3.png");
 
 	public ModelRenderer cube;
 	public ModelRenderer shape11;
