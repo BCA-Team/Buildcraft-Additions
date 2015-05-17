@@ -28,7 +28,6 @@ public class GuiCoolingTower extends GuiBase {
 		this.tower = tower;
 		setTitleXOffset(70);
 		setTitleYOffset(3);
-		setTextColor(0xFFCC00);
 		setCenterTitle(true);
 	}
 
