@@ -18,9 +18,13 @@ public class ItemBase extends Item {
 	private final String name;
 
 	public ItemBase(String name) {
+		this(name, name);
+	}
+
+	public ItemBase(String name, String texture) {
 		this.name = name;
 		setUnlocalizedName(name);
-		setTextureName(Variables.MOD.ID + ":" + name);
+		setTextureName(Variables.MOD.ID + ":" + texture);
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 	}
 

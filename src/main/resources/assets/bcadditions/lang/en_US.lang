@@ -441,4 +441,4 @@ keybinding.toggleBoots=Toggle hover boots
 hud.backpack=Backpack charge level:
 hud.boots=Hover boots status:
 hud.enabled=Enabled
-hud.dissabled=Dissabled
+hud.dissabled=Disabled

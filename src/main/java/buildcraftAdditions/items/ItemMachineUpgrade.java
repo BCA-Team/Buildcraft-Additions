@@ -53,7 +53,7 @@ public class ItemMachineUpgrade extends ItemBase {
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return super.getUnlocalizedName(stack) + "." + EnumMachineUpgrades.values()[stack.getItemDamage()].getTextureName();
+		return super.getUnlocalizedName(stack) + "." + EnumMachineUpgrades.values()[stack.getItemDamage()].getTag();
 	}
 
 	@Override

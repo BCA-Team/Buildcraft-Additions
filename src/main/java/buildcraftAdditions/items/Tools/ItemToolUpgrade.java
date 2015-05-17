@@ -24,7 +24,11 @@ public class ItemToolUpgrade extends ItemBase {
 	private final String type;
 
 	public ItemToolUpgrade(String type) {
-		super("toolUpgrade" + type);
+		this(type, type);
+	}
+
+	public ItemToolUpgrade(String type, String texture) {
+		super("toolUpgrade" + type, texture);
 		setMaxStackSize(16);
 		this.type = type;
 	}

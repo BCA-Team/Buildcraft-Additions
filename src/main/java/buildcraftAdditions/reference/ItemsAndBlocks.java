@@ -220,33 +220,32 @@ public final class ItemsAndBlocks {
 		toolCore = new ItemBase("toolCore");
 		GameRegistry.registerItem(toolCore, "toolCore");
 
-		toolUpgradeHoe = new ItemToolUpgrade("Hoe");
+		toolUpgradeHoe = new ItemToolUpgrade("Hoe", "upgrades/hoe");
 		GameRegistry.registerItem(toolUpgradeHoe, "toolUpgradeHoe");
 
-		toolUpgradeDigger = new ItemToolUpgrade("Digger");
+		toolUpgradeDigger = new ItemToolUpgrade("Digger", "upgrades/digger");
 		GameRegistry.registerItem(toolUpgradeDigger, "toolUpgradeDigger");
 
-		toolUpgradeDrill = new ItemToolUpgrade("Drill");
+		toolUpgradeDrill = new ItemToolUpgrade("Drill", "upgrades/drill");
 		GameRegistry.registerItem(toolUpgradeDrill, "toolUpgradeDrill");
 
-		toolUpgradeChainsaw = new ItemToolUpgrade("Chainsaw");
+		toolUpgradeChainsaw = new ItemToolUpgrade("Chainsaw", "upgrades/chainsaw");
 		GameRegistry.registerItem(toolUpgradeChainsaw, "toolUpgradeChaisaw");
 
-		toolUpgradeArea = new ItemToolUpgrade("Area");
+		toolUpgradeArea = new ItemToolUpgrade("Area", "upgrades/area");
 		GameRegistry.registerItem(toolUpgradeArea, "toolUpgradeArea");
 
-		toolUpgradeSilky = new ItemToolUpgrade("Silky");
+		toolUpgradeSilky = new ItemToolUpgrade("Silky", "upgrades/silky");
 		GameRegistry.registerItem(toolUpgradeSilky, "toolUpgradeSilky");
 
-		toolUpgradeFortune1 = new ItemToolUpgrade("Fortune1");
+		toolUpgradeFortune1 = new ItemToolUpgrade("Fortune1", "upgrades/fortune1");
 		GameRegistry.registerItem(toolUpgradeFortune1, "toolUpgradeFortune1");
 
-		toolUpgradeFortune2 = new ItemToolUpgrade("Fortune2");
+		toolUpgradeFortune2 = new ItemToolUpgrade("Fortune2", "upgrades/fortune2");
 		GameRegistry.registerItem(toolUpgradeFortune2, "toolUpgradeFortune2");
 
-		toolUpgradeFortune3 = new ItemToolUpgrade("Fortune3");
+		toolUpgradeFortune3 = new ItemToolUpgrade("Fortune3", "upgrades/fortune3");
 		GameRegistry.registerItem(toolUpgradeFortune3, "toolUpgradeFortune3");
-
 
 		itemKineticMultiTool = new ItemKineticMultiTool();
 		GameRegistry.registerItem(itemKineticMultiTool, "itemKineticMultiTool");
@@ -290,7 +289,7 @@ public final class ItemsAndBlocks {
 		upgrade = new ItemMachineUpgrade();
 		GameRegistry.registerItem(upgrade, "upgrade");
 
-		blankUpgrade = new ItemBase("baseUpgrade");
+		blankUpgrade = new ItemBase("baseUpgrade", "upgrades/base");
 		GameRegistry.registerItem(blankUpgrade, "blankUpgrade");
 
 		portableLaser = new ItemPortableLaser();

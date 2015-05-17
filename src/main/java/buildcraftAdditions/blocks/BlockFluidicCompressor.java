@@ -8,7 +8,6 @@ package buildcraftAdditions.blocks;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -22,16 +21,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
-import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
-public class BlockFluidicCompressor extends BlockBase {
+public class BlockFluidicCompressor extends BlockRotationBase {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon textureFront, textureBack, textureTop, textureBottom, textureSide;
 
 	public BlockFluidicCompressor() {
-		super("blockFluidicCompressor");
+		super("blockFluidicCompressor", "fluidicCompressor/", false);
 	}
 
 	@Override
@@ -56,34 +54,5 @@ public class BlockFluidicCompressor extends BlockBase {
 		TileEntity tile = world.getTileEntity(x, y, z);
 		if (tile instanceof TileFluidicCompressor)
 			((TileFluidicCompressor) tile).fill = true;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		if (meta == 0 && side == 3)
-			return textureFront;
-
-		if (side == meta && side > 1)
-			return textureFront;
-
-		switch (side) {
-			case 0:
-				return textureBottom;
-			case 1:
-				return textureTop;
-			default:
-				return textureSide;
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register) {
-		textureFront = RenderUtils.registerIcon(register, "fluidicCompressor_front");
-		textureSide = RenderUtils.registerIcon(register, "fluidicCompressor_sides");
-		textureTop = RenderUtils.registerIcon(register, "fluidicCompressor_top");
-		textureBack = RenderUtils.registerIcon(register, "fluidicCompressor_back");
-		textureBottom = RenderUtils.registerIcon(register, "fluidicCompressor_bottom");
 	}
 }
