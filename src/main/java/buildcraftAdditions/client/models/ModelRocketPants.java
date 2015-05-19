@@ -19,6 +19,9 @@ import net.minecraft.util.MathHelper;
  * Created using Tabula 4.1.1
  */
 public class ModelRocketPants extends ModelBiped {
+
+	public static ModelRocketPants INSTANCE = new ModelRocketPants();
+
 	public ModelRenderer shape9;
 	public ModelRenderer shape9_1;
 	public ModelRenderer shape9_2;
@@ -56,83 +59,7 @@ public class ModelRocketPants extends ModelBiped {
 	public ModelRenderer shape9_31;
 	public ModelRenderer frl_3;
 
-	private void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
-		this.shape9.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9.rotateAngleY = 0.0F;
-		this.shape9_1.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_1.rotateAngleY = 0.0F;
-		this.shape9_2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_2.rotateAngleY = 0.0F;
-		this.shape9_3.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_3.rotateAngleY = 0.0F;
-		this.shape9_4.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_4.rotateAngleY = 0.0F;
-		this.shape9_5.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_5.rotateAngleY = 0.0F;
-		this.shape9_6.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_6.rotateAngleY = 0.0F;
-		this.shape9_7.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_7.rotateAngleY = 0.0F;
-		this.shape9_8.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_8.rotateAngleY = 0.0F;
-		this.shape9_9.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_9.rotateAngleY = 0.0F;
-		this.frl.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.frl.rotateAngleY = 0.0F;
-		this.shape9_10.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_10.rotateAngleY = 0.0F;
-		this.shape9_11.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_11.rotateAngleY = 0.0F;
-		this.frl_1.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.frl_1.rotateAngleY = 0.0F;
-		this.shape9_12.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_12.rotateAngleY = 0.0F;
-		this.shape9_13.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_13.rotateAngleY = 0.0F;
-		this.shape9_14.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_14.rotateAngleY = 0.0F;
-		this.shape9_15.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_15.rotateAngleY = 0.0F;
-		this.shape9_16.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_16.rotateAngleY = 0.0F;
-		this.shape9_17.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_17.rotateAngleY = 0.0F;
-		this.shape9_18.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_18.rotateAngleY = 0.0F;
-		this.shape9_19.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_19.rotateAngleY = 0.0F;
-		this.shape9_20.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_20.rotateAngleY = 0.0F;
-		this.shape9_21.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_21.rotateAngleY = 0.0F;
-		this.shape9_22.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_22.rotateAngleY = 0.0F;
-		this.shape9_23.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_23.rotateAngleY = 0.0F;
-		this.shape9_24.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_24.rotateAngleY = 0.0F;
-		this.shape9_25.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_25.rotateAngleY = 0.0F;
-		this.shape9_26.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_26.rotateAngleY = 0.0F;
-		this.shape9_27.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_27.rotateAngleY = 0.0F;
-		this.shape9_28.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_28.rotateAngleY = 0.0F;
-		this.shape9_29.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_29.rotateAngleY = 0.0F;
-		this.frl_2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.frl_2.rotateAngleY = 0.0F;
-		this.shape9_30.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_30.rotateAngleY = 0.0F;
-		this.shape9_31.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.shape9_31.rotateAngleY = 0.0F;
-		this.frl_3.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.frl_3.rotateAngleY = 0.0F;
-
-	}
-
-	public ModelRocketPants() {
+	private ModelRocketPants() {
 		super();
 		this.textureWidth = 128;
 		this.textureHeight = 64;
@@ -244,6 +171,82 @@ public class ModelRocketPants extends ModelBiped {
 		this.shape9_13 = new ModelRenderer(this, 0, 0);
 		this.shape9_13.setRotationPoint(1.9F, 12.0F, 0.0F);
 		this.shape9_13.addBox(6.0F, 0.6F, 1.7F, 1, 1, 1, 0.0F);
+	}
+
+	private void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
+		this.shape9.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9.rotateAngleY = 0.0F;
+		this.shape9_1.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_1.rotateAngleY = 0.0F;
+		this.shape9_2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_2.rotateAngleY = 0.0F;
+		this.shape9_3.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_3.rotateAngleY = 0.0F;
+		this.shape9_4.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_4.rotateAngleY = 0.0F;
+		this.shape9_5.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_5.rotateAngleY = 0.0F;
+		this.shape9_6.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_6.rotateAngleY = 0.0F;
+		this.shape9_7.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_7.rotateAngleY = 0.0F;
+		this.shape9_8.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_8.rotateAngleY = 0.0F;
+		this.shape9_9.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_9.rotateAngleY = 0.0F;
+		this.frl.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.frl.rotateAngleY = 0.0F;
+		this.shape9_10.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_10.rotateAngleY = 0.0F;
+		this.shape9_11.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_11.rotateAngleY = 0.0F;
+		this.frl_1.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.frl_1.rotateAngleY = 0.0F;
+		this.shape9_12.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_12.rotateAngleY = 0.0F;
+		this.shape9_13.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_13.rotateAngleY = 0.0F;
+		this.shape9_14.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_14.rotateAngleY = 0.0F;
+		this.shape9_15.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_15.rotateAngleY = 0.0F;
+		this.shape9_16.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_16.rotateAngleY = 0.0F;
+		this.shape9_17.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_17.rotateAngleY = 0.0F;
+		this.shape9_18.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_18.rotateAngleY = 0.0F;
+		this.shape9_19.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_19.rotateAngleY = 0.0F;
+		this.shape9_20.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_20.rotateAngleY = 0.0F;
+		this.shape9_21.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_21.rotateAngleY = 0.0F;
+		this.shape9_22.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_22.rotateAngleY = 0.0F;
+		this.shape9_23.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_23.rotateAngleY = 0.0F;
+		this.shape9_24.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_24.rotateAngleY = 0.0F;
+		this.shape9_25.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_25.rotateAngleY = 0.0F;
+		this.shape9_26.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_26.rotateAngleY = 0.0F;
+		this.shape9_27.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_27.rotateAngleY = 0.0F;
+		this.shape9_28.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_28.rotateAngleY = 0.0F;
+		this.shape9_29.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_29.rotateAngleY = 0.0F;
+		this.frl_2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.frl_2.rotateAngleY = 0.0F;
+		this.shape9_30.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_30.rotateAngleY = 0.0F;
+		this.shape9_31.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.shape9_31.rotateAngleY = 0.0F;
+		this.frl_3.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
+		this.frl_3.rotateAngleY = 0.0F;
+
 	}
 
 	@Override

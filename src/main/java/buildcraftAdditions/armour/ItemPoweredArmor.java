@@ -1,13 +1,7 @@
 package buildcraftAdditions.armour;
 
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.BuildcraftAdditions;
 /**
@@ -18,7 +12,6 @@ import buildcraftAdditions.BuildcraftAdditions;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class ItemPoweredArmor extends ItemArmor {
-	protected ModelBiped MODEL;
 
 	public ItemPoweredArmor(String name, int slot) {
 		super(ArmorMaterial.IRON, BuildcraftAdditions.proxy.addArmor(name), slot);
@@ -32,11 +25,5 @@ public class ItemPoweredArmor extends ItemArmor {
 	@Override
 	public boolean isDamageable() {
 		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
-		return MODEL;
 	}
 }

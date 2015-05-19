@@ -1,11 +1,13 @@
 package buildcraftAdditions.armour;
 
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.client.models.ModelRocketPants;
 import buildcraftAdditions.listeners.FlightTracker;
@@ -25,8 +27,6 @@ public class ItemRocketPants extends ItemPoweredArmor {
 
 	public ItemRocketPants() {
 		super("rocketPants", 2);
-		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
-			this.MODEL = new ModelRocketPants();
 	}
 
 	@Override
@@ -51,6 +51,12 @@ public class ItemRocketPants extends ItemPoweredArmor {
 				}
 			}
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
+		return ModelRocketPants.INSTANCE;
 	}
 
 
