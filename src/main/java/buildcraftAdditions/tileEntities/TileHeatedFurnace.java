@@ -130,7 +130,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 		if (stack0 == null || getResult(stack0) == null)
 			return false;
 		ItemStack result = getResult(stack0);
-		return stack1 == null || (result.getItem() == stack1.getItem() && result.stackSize + stack1.stackSize <= result.getMaxStackSize());
+		return stack1 == null || (result.getItem() == stack1.getItem() && result.getItemDamage() == stack1.getItemDamage() && result.stackTagCompound == stack1.stackTagCompound && result.stackSize + stack1.stackSize <= result.getMaxStackSize());
 	}
 
 	public ItemStack getResult(ItemStack stack) {
