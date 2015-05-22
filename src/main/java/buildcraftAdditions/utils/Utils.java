@@ -218,6 +218,10 @@ public class Utils {
 		return existingStack == null || stackToAdd == null || (existingStack != null && stackToAdd != null && existingStack.isItemEqual(stackToAdd) && ItemStack.areItemStackTagsEqual(existingStack, stackToAdd));
 	}
 
+	public static boolean areItemStacksMergeableStrict(ItemStack existingStack, ItemStack stackToAdd) {
+		return existingStack == null || stackToAdd == null || (existingStack != null && stackToAdd != null && existingStack.isItemEqual(stackToAdd) && ItemStack.areItemStackTagsEqual(existingStack, stackToAdd) && existingStack.stackSize + stackToAdd.stackSize <= existingStack.getMaxStackSize());
+	}
+
 	public static ItemStack outputStack(Location from, ItemStack output, SideConfiguration configuration) {
 		if (from == null || output == null || output.getItem() == null || output.stackSize <= 0 || configuration == null)
 			return output;
