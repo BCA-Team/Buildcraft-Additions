@@ -6,7 +6,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.BlockLoader;
 import buildcraftAdditions.reference.Variables;
 
 import codechicken.nei.api.API;
@@ -29,9 +29,9 @@ public class NEIConfig implements IConfigureNEI {
 		registerRecipeHandler(new RecipeHandlerRefinery());
 		API.hideItem(GameRegistry.findItemStack(Variables.MOD.ID, "kebT2DisplayItem", 1));
 		API.hideItem(GameRegistry.findItemStack(Variables.MOD.ID, "kebT3DisplayItem", 1));
-		API.hideItem(new ItemStack(ItemsAndBlocks.kinesisPipeWood));
-		API.hideItem(new ItemStack(ItemsAndBlocks.kinisisPipeStone));
-		API.hideItem(new ItemStack(ItemsAndBlocks.backpackStandGhost));
+		API.hideItem(new ItemStack(BlockLoader.kinesisPipeWood));
+		API.hideItem(new ItemStack(BlockLoader.kinisisPipeStone));
+		API.hideItem(new ItemStack(BlockLoader.backpackStandGhost));
 		for (IDust dust : BCAItemManager.dusts.getDusts())
 			if (dust != null && dust.getName() != null)
 				API.hideItem(GameRegistry.findItemStack(Variables.MOD.ID, "converter" + dust.getName().toLowerCase(), 1));

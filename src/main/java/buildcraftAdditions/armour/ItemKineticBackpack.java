@@ -15,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -23,7 +24,7 @@ import cofh.api.energy.IEnergyContainerItem;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.client.models.BackPackModel;
 import buildcraftAdditions.items.ItemPoweredBase;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemLoader;
 import buildcraftAdditions.utils.IHUD;
 import buildcraftAdditions.utils.Utils;
 
@@ -39,6 +40,7 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 	public ItemKineticBackpack() {
 		super(ArmorMaterial.IRON, BuildcraftAdditions.proxy.addArmor("kineticBackpack"), 1);
 		setUnlocalizedName("kineticBackpack");
+		GameRegistry.registerItem(this, "kineticBackpack");
 	}
 
 	@Override
@@ -118,11 +120,11 @@ public class ItemKineticBackpack extends ItemArmor implements IEnergyContainerIt
 	public void installCapsule(ItemStack backpack, int slot, ItemStack capsule) {
 		tagTest(backpack);
 		int capsuleType = 0;
-		if (capsule.getItem() == ItemsAndBlocks.powerCapsuleTier1) {
+		if (capsule.getItem() == ItemLoader.powerCapsuleTier1) {
 			capsuleType = 1;
-		} else if (capsule.getItem() == ItemsAndBlocks.powerCapsuleTier2) {
+		} else if (capsule.getItem() == ItemLoader.powerCapsuleTier2) {
 			capsuleType = 2;
-		} else if (capsule.getItem() == ItemsAndBlocks.powerCapsuleTier3) {
+		} else if (capsule.getItem() == ItemLoader.powerCapsuleTier3) {
 			capsuleType = 3;
 		}
 		if (capsuleType > 0) {

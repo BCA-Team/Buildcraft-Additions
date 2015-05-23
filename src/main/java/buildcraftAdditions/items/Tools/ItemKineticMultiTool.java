@@ -44,7 +44,7 @@ import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.InventoryItem;
 import buildcraftAdditions.inventories.InventoryKineticMultiTool;
 import buildcraftAdditions.items.ItemInventoryPoweredBase;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemLoader;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.Utils;
 
@@ -68,7 +68,7 @@ public class ItemKineticMultiTool extends ItemInventoryPoweredBase {
 	private IIcon iconChainsaw, iconDigger, iconDrill, iconHoe;
 
 	public ItemKineticMultiTool() {
-		super("kineticMultiTool");
+		super("kineticMultiTool", "itemKineticMultiTool");
 		setNoRepair();
 		setFull3D();
 	}
@@ -82,43 +82,43 @@ public class ItemKineticMultiTool extends ItemInventoryPoweredBase {
 				set.add(content.copy());
 		}
 		if (isUpgradeInstalled(stack, "goldStick"))
-			set.add(new ItemStack(ItemsAndBlocks.goldStick));
+			set.add(new ItemStack(ItemLoader.goldStick));
 		if (isUpgradeInstalled(stack, "diamondStick"))
-			set.add(new ItemStack(ItemsAndBlocks.diamondStick));
+			set.add(new ItemStack(ItemLoader.diamondStick));
 		if (isUpgradeInstalled(stack, "emeraldStick"))
-			set.add(new ItemStack(ItemsAndBlocks.emeraldStick));
+			set.add(new ItemStack(ItemLoader.emeraldStick));
 		if (isUpgradeInstalled(stack, "netherStarStick"))
-			set.add(new ItemStack(ItemsAndBlocks.netherStarStick));
+			set.add(new ItemStack(ItemLoader.netherStarStick));
 		if (isUpgradeInstalled(stack, "quartzStick"))
-			set.add(new ItemStack(ItemsAndBlocks.quartzStick));
+			set.add(new ItemStack(ItemLoader.quartzStick));
 		if (isUpgradeInstalled(stack, "enderStick"))
-			set.add(new ItemStack(ItemsAndBlocks.enderStick));
+			set.add(new ItemStack(ItemLoader.enderStick));
 		if (isUpgradeInstalled(stack, "redstoneStick"))
-			set.add(new ItemStack(ItemsAndBlocks.redstoneStick));
+			set.add(new ItemStack(ItemLoader.redstoneStick));
 		if (isUpgradeInstalled(stack, "glowstoneStick"))
-			set.add(new ItemStack(ItemsAndBlocks.glowstoneStick));
+			set.add(new ItemStack(ItemLoader.glowstoneStick));
 		if (isUpgradeInstalled(stack, "slimeStick"))
-			set.add(new ItemStack(ItemsAndBlocks.slimeStick));
+			set.add(new ItemStack(ItemLoader.slimeStick));
 		if (isUpgradeInstalled(stack, "blazeStick"))
-			set.add(new ItemStack(ItemsAndBlocks.blazeStick));
+			set.add(new ItemStack(ItemLoader.blazeStick));
 		if (isUpgradeInstalled(stack, "drill"))
-			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeDrill));
+			set.add(new ItemStack(ItemLoader.toolUpgradeDrill));
 		if (isUpgradeInstalled(stack, "digger"))
-			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeDigger));
+			set.add(new ItemStack(ItemLoader.toolUpgradeDigger));
 		if (isUpgradeInstalled(stack, "chainsaw"))
-			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeChainsaw));
+			set.add(new ItemStack(ItemLoader.toolUpgradeChainsaw));
 		if (isUpgradeInstalled(stack, "hoe"))
-			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeHoe));
+			set.add(new ItemStack(ItemLoader.toolUpgradeHoe));
 		if (isUpgradeInstalled(stack, "area"))
-			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeArea));
+			set.add(new ItemStack(ItemLoader.toolUpgradeArea));
 		if (isUpgradeInstalled(stack, "silky"))
-			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeSilky));
+			set.add(new ItemStack(ItemLoader.toolUpgradeSilky));
 		if (isUpgradeInstalled(stack, "fortune1"))
-			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeFortune1));
+			set.add(new ItemStack(ItemLoader.toolUpgradeFortune1));
 		if (isUpgradeInstalled(stack, "fortune2"))
-			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeFortune2));
+			set.add(new ItemStack(ItemLoader.toolUpgradeFortune2));
 		if (isUpgradeInstalled(stack, "fortune3"))
-			set.add(new ItemStack(ItemsAndBlocks.toolUpgradeFortune3));
+			set.add(new ItemStack(ItemLoader.toolUpgradeFortune3));
 		return set;
 	}
 
@@ -478,23 +478,23 @@ public class ItemKineticMultiTool extends ItemInventoryPoweredBase {
 				list.add(Utils.localize("tooltip.none"));
 			else {
 				if (drill)
-					list.add(ItemsAndBlocks.toolUpgradeDrill.getItemStackDisplayName(new ItemStack(ItemsAndBlocks.toolUpgradeDrill)));
+					list.add(ItemLoader.toolUpgradeDrill.getItemStackDisplayName(new ItemStack(ItemLoader.toolUpgradeDrill)));
 				if (digger)
-					list.add(ItemsAndBlocks.toolUpgradeDigger.getItemStackDisplayName(new ItemStack(ItemsAndBlocks.toolUpgradeDigger)));
+					list.add(ItemLoader.toolUpgradeDigger.getItemStackDisplayName(new ItemStack(ItemLoader.toolUpgradeDigger)));
 				if (chainsaw)
-					list.add(ItemsAndBlocks.toolUpgradeChainsaw.getItemStackDisplayName(new ItemStack(ItemsAndBlocks.toolUpgradeChainsaw)));
+					list.add(ItemLoader.toolUpgradeChainsaw.getItemStackDisplayName(new ItemStack(ItemLoader.toolUpgradeChainsaw)));
 				if (hoe)
-					list.add(ItemsAndBlocks.toolUpgradeHoe.getItemStackDisplayName(new ItemStack(ItemsAndBlocks.toolUpgradeHoe)));
+					list.add(ItemLoader.toolUpgradeHoe.getItemStackDisplayName(new ItemStack(ItemLoader.toolUpgradeHoe)));
 				if (area)
-					list.add(ItemsAndBlocks.toolUpgradeArea.getItemStackDisplayName(new ItemStack(ItemsAndBlocks.toolUpgradeArea)));
+					list.add(ItemLoader.toolUpgradeArea.getItemStackDisplayName(new ItemStack(ItemLoader.toolUpgradeArea)));
 				if (silky)
-					list.add(ItemsAndBlocks.toolUpgradeSilky.getItemStackDisplayName(new ItemStack(ItemsAndBlocks.toolUpgradeSilky)));
+					list.add(ItemLoader.toolUpgradeSilky.getItemStackDisplayName(new ItemStack(ItemLoader.toolUpgradeSilky)));
 				else if (fortune3)
-					list.add(ItemsAndBlocks.toolUpgradeFortune3.getItemStackDisplayName(new ItemStack(ItemsAndBlocks.toolUpgradeFortune3)));
+					list.add(ItemLoader.toolUpgradeFortune3.getItemStackDisplayName(new ItemStack(ItemLoader.toolUpgradeFortune3)));
 				else if (fortune2)
-					list.add(ItemsAndBlocks.toolUpgradeFortune2.getItemStackDisplayName(new ItemStack(ItemsAndBlocks.toolUpgradeFortune2)));
+					list.add(ItemLoader.toolUpgradeFortune2.getItemStackDisplayName(new ItemStack(ItemLoader.toolUpgradeFortune2)));
 				else if (fortune1)
-					list.add(ItemsAndBlocks.toolUpgradeFortune1.getItemStackDisplayName(new ItemStack(ItemsAndBlocks.toolUpgradeFortune1)));
+					list.add(ItemLoader.toolUpgradeFortune1.getItemStackDisplayName(new ItemStack(ItemLoader.toolUpgradeFortune1)));
 			}
 
 			int upgradesAllowed = getAllowedUpgrades(stack);

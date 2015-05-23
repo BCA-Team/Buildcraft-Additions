@@ -11,7 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.client.models.ModelRocketPants;
 import buildcraftAdditions.listeners.FlightTracker;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ArmorLoader;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -34,7 +34,7 @@ public class ItemRocketPants extends ItemPoweredArmor {
 		setDamage(itemStack, 0);
 		if (FlightTracker.wantsToFly(player.getDisplayName()) || !player.onGround) {
 			ItemStack stack = player.getCurrentArmor(2);
-			if (stack != null && stack.getItem() == ItemsAndBlocks.kineticBackpack) {
+			if (stack != null && stack.getItem() == ArmorLoader.kineticBackpack) {
 				ItemKineticBackpack backpack = (ItemKineticBackpack) stack.getItem();
 				if (backpack.extractEnergy(stack, 40, true) == 40) {
 					if (FlightTracker.wantsToMove(player.getDisplayName())) {

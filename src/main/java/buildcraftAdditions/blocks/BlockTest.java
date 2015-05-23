@@ -7,6 +7,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.multiBlocks.TestingPatern;
 import buildcraftAdditions.utils.Location;
@@ -25,6 +27,7 @@ public class BlockTest extends Block {
 		setBlockName("testBlock");
 		setBlockTextureName("bcadditions:testBlock");
 		setCreativeTab(BuildcraftAdditions.bcadditions);
+		GameRegistry.registerBlock(this, "testingBlock");
 	}
 
 	@Override

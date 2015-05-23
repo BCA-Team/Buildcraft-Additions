@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.BlockLoader;
 import buildcraftAdditions.tileEntities.TileBackpackStand;
 import buildcraftAdditions.utils.Raytracing;
 
@@ -25,7 +25,7 @@ import buildcraftAdditions.utils.Raytracing;
 public class BlockGhostBackpackStand extends BlockBase {
 
 	public BlockGhostBackpackStand() {
-		super("blockGhost");
+		super("blockGhost", "", "backpackstandGhost");
 		setCreativeTab(null);
 		isBlockContainer = false;
 	}
@@ -33,7 +33,7 @@ public class BlockGhostBackpackStand extends BlockBase {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
-			if (world.getBlock(x, y - 1, z) != ItemsAndBlocks.backpackStand)
+			if (world.getBlock(x, y - 1, z) != BlockLoader.backpackStand)
 				return true;
 			TileEntity entity = world.getTileEntity(x, y - 1, z);
 			if (entity != null && entity instanceof TileBackpackStand) {
@@ -69,13 +69,13 @@ public class BlockGhostBackpackStand extends BlockBase {
 
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player) {
-		if (player.capabilities.isCreativeMode && world.getBlock(x, y - 1, z) == ItemsAndBlocks.backpackStand)
+		if (player.capabilities.isCreativeMode && world.getBlock(x, y - 1, z) == BlockLoader.backpackStand)
 			world.setBlockToAir(x, y - 1, z);
 	}
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-		if (world.getBlock(x, y - 1, z) != ItemsAndBlocks.backpackStand)
+		if (world.getBlock(x, y - 1, z) != BlockLoader.backpackStand)
 			world.setBlockToAir(x, y, z);
 	}
 
@@ -91,7 +91,7 @@ public class BlockGhostBackpackStand extends BlockBase {
 
 	@Override
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
-		return new ItemStack(ItemsAndBlocks.backpackStand);
+		return new ItemStack(BlockLoader.backpackStand);
 	}
 
 	@Override

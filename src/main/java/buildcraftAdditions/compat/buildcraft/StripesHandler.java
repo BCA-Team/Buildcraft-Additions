@@ -14,7 +14,7 @@ import buildcraft.api.transport.IStripesHandler;
 import buildcraft.api.transport.PipeManager;
 
 import buildcraftAdditions.items.itemBlocks.ItemBlockKEB;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.BlockLoader;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 
 /**
@@ -49,7 +49,7 @@ public class StripesHandler {
 			TileEntity tile = world.getTileEntity(x, y, z);
 			if (tile != null)
 				tile.writeToNBT(tag);
-			ItemStack stack1 = new ItemStack(ItemsAndBlocks.kebT1, 1, world.getBlockMetadata(x, y, z));
+			ItemStack stack1 = new ItemStack(BlockLoader.kebT1, 1, world.getBlockMetadata(x, y, z));
 			tag.removeTag("x");
 			tag.removeTag("y");
 			tag.removeTag("z");
@@ -78,7 +78,7 @@ public class StripesHandler {
 		public boolean handle(World world, int x, int y, int z, ForgeDirection direction, ItemStack stack, EntityPlayer player, IStripesActivator activator) {
 			if (world.isAirBlock(x, y, z)) {
 				stack.stackSize--;
-				world.setBlock(x, y, z, ItemsAndBlocks.kebT1, stack.getItemDamage(), 3);
+				world.setBlock(x, y, z, BlockLoader.kebT1, stack.getItemDamage(), 3);
 				TileEntity tile = world.getTileEntity(x, y, z);
 				if (tile != null && tile instanceof TileKineticEnergyBufferBase && stack.stackTagCompound != null) {
 					NBTBase nbtBase = stack.stackTagCompound.copy();

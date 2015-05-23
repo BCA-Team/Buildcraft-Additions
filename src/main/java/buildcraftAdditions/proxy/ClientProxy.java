@@ -37,7 +37,9 @@ import buildcraftAdditions.client.render.tileentities.RendererKEBT3;
 import buildcraftAdditions.core.BucketHandler;
 import buildcraftAdditions.entities.EntityLaserShot;
 import buildcraftAdditions.listeners.KeyListener;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ArmorLoader;
+import buildcraftAdditions.reference.BlockLoader;
+import buildcraftAdditions.reference.ItemLoader;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileBackpackStand;
 import buildcraftAdditions.tileEntities.TileBasicDuster;
@@ -51,12 +53,12 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenderers() {
-		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.ironCanister, CanisterItemRender.INSTANCE);
-		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.goldCanister, CanisterItemRender.INSTANCE);
-		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.diamondCanister, CanisterItemRender.INSTANCE);
-		MinecraftForgeClient.registerItemRenderer(ItemsAndBlocks.kineticBackpack, BackPackItemRenderer.INSTANCE);
-		MinecraftForgeClient.registerItemRenderer(new ItemStack(ItemsAndBlocks.backpackStand).getItem(), BackpackStandItemRenderer.INSTANCE);
-		MinecraftForgeClient.registerItemRenderer(new ItemStack(ItemsAndBlocks.kineticDusterBlock).getItem(), KineticDusterItemRenderer.INSTANCE);
+		MinecraftForgeClient.registerItemRenderer(ItemLoader.ironCanister, CanisterItemRender.INSTANCE);
+		MinecraftForgeClient.registerItemRenderer(ItemLoader.goldCanister, CanisterItemRender.INSTANCE);
+		MinecraftForgeClient.registerItemRenderer(ItemLoader.diamondCanister, CanisterItemRender.INSTANCE);
+		MinecraftForgeClient.registerItemRenderer(ArmorLoader.kineticBackpack, BackPackItemRenderer.INSTANCE);
+		MinecraftForgeClient.registerItemRenderer(new ItemStack(BlockLoader.backpackStand).getItem(), BackpackStandItemRenderer.INSTANCE);
+		MinecraftForgeClient.registerItemRenderer(new ItemStack(BlockLoader.kineticDusterBlock).getItem(), KineticDusterItemRenderer.INSTANCE);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileBasicDuster.class, new RendererDuster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileSemiAutomaticDuster.class, new RendererDuster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileMechanicalDuster.class, new RendererDuster());

@@ -3,6 +3,8 @@ package buildcraftAdditions.armour;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemArmor;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 import buildcraftAdditions.BuildcraftAdditions;
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -16,6 +18,7 @@ public class ItemPoweredArmor extends ItemArmor {
 	public ItemPoweredArmor(String name, int slot) {
 		super(ArmorMaterial.IRON, BuildcraftAdditions.proxy.addArmor(name), slot);
 		setUnlocalizedName(name);
+		GameRegistry.registerItem(this, name);
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import buildcraft.api.blueprints.IBuilderContext;
 import buildcraft.builders.schematics.SchematicPiston;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.BlockLoader;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -20,7 +20,7 @@ public class SchematicSorter extends SchematicPiston {
 
 	@Override
 	public void getRequirementsForPlacement(IBuilderContext context, LinkedList<ItemStack> requirements) {
-		requirements.add(new ItemStack(ItemsAndBlocks.itemSorter));
+		requirements.add(new ItemStack(BlockLoader.itemSorter));
 	}
 
 	@Override

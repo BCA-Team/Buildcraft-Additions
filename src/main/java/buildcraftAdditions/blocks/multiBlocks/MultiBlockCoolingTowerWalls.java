@@ -16,7 +16,7 @@ import buildcraftAdditions.tileEntities.TileCoolingTower;
 public class MultiBlockCoolingTowerWalls extends MultiBlockBase {
 
 	public MultiBlockCoolingTowerWalls() {
-		super("blockCoolingTowerWalls", Variables.Identifiers.COOLING_TOWER_WALLS, Variables.Paterns.COOLING_TOWER, "coolingTowerPlating", "coolingTowerFormed");
+		super("blockCoolingTowerWalls", Variables.Identifiers.COOLING_TOWER_WALLS, Variables.Paterns.COOLING_TOWER, "coolingTowerPlating", "coolingTowerFormed", "blockCoolingTowerWalls)");
 	}
 
 	@Override

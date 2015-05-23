@@ -22,7 +22,7 @@ import buildcraftAdditions.utils.PlayerUtils;
 public class MultiBlockKEBT3Core extends MultiBlockBase {
 
 	public MultiBlockKEBT3Core() {
-		super("blockKEBT3Core", Variables.Identifiers.KEBT3_CORE, new MultiBlockPaternKEBT3(), "KEB/T3/core");
+		super("blockKEBT3Core", Variables.Identifiers.KEBT3_CORE, new MultiBlockPaternKEBT3(), "KEB/T3/core", "KEBT3Core");
 	}
 
 	@Override

@@ -4,7 +4,7 @@ package buildcraftAdditions.reference.enums;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemLoader;
 import buildcraftAdditions.reference.Variables;
 
 /**
@@ -44,7 +44,7 @@ public enum EnumMachineUpgrades {
 	}
 
 	public ItemStack getItemStack() {
-		return new ItemStack(ItemsAndBlocks.upgrade, 1, ordinal());
+		return new ItemStack(ItemLoader.upgrade, 1, ordinal());
 	}
 
 	public ResourceLocation getTexture() {

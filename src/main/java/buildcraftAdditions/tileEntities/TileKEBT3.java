@@ -20,7 +20,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.multiBlocks.IMultiBlockTile;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.BlockLoader;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.varHelpers.MultiBlockData;
@@ -274,7 +274,7 @@ public class TileKEBT3 extends TileKineticEnergyBufferBase implements IMultiBloc
 	@Override
 	public void invalidateBlock() {
 		if (data.isMaster)
-			worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, ItemsAndBlocks.kebT3Core, 80);
+			worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, BlockLoader.kebT3Core, 80);
 		data.invalidate();
 		energy = 0;
 		configuration.invalidate();

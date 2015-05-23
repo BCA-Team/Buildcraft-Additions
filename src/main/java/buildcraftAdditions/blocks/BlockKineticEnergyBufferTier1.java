@@ -2,6 +2,7 @@ package buildcraftAdditions.blocks;
 
 import java.util.List;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,6 +24,7 @@ import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
 import buildcraftAdditions.api.configurableOutput.SideConfiguration;
+import buildcraftAdditions.items.itemBlocks.ItemBlockKEB;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.tileEntities.TileKineticEnergyBufferTier1;
@@ -42,7 +44,7 @@ public class BlockKineticEnergyBufferTier1 extends BlockBase {
 	private IIcon icons[];
 
 	public BlockKineticEnergyBufferTier1() {
-		super("blockKEBT1");
+		super(Material.iron, "blockKEBT1", "blockKEBT1", "KEBT1", BuildcraftAdditions.bcadditions, ItemBlockKEB.class);
 	}
 
 	@Override

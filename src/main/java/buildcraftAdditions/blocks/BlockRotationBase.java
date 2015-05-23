@@ -30,7 +30,11 @@ public abstract class BlockRotationBase extends BlockBase {
 	private IIcon front, bottom, top, back, sides, left, right;
 
 	public BlockRotationBase(String name, String textureBaseName, boolean leftRight) {
-		super(name);
+		this(name, textureBaseName, leftRight, name);
+	}
+
+	public BlockRotationBase(String name, String textureBaseName, boolean leftRight, String gameRegistryName) {
+		super(name, "", gameRegistryName);
 		this.textureBaseName = textureBaseName;
 		this.leftRight = leftRight;
 	}

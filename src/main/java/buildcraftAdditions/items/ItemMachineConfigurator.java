@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
+import buildcraftAdditions.items.bases.ItemBase;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 

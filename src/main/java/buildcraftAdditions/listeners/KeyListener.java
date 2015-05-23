@@ -11,7 +11,7 @@ import cpw.mods.fml.common.gameevent.InputEvent;
 
 import buildcraftAdditions.networking.MessageToggleBoots;
 import buildcraftAdditions.networking.PacketHandler;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ArmorLoader;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -43,7 +43,7 @@ public class KeyListener {
 			if (oldStatus != newStatus)
 				FlightTracker.setMoving(mc.thePlayer, newStatus);
 			if (toggleKey.getIsKeyPressed()) {
-				if (mc.thePlayer.getCurrentArmor(0) != null && mc.thePlayer.getCurrentArmor(0).getItem() == ItemsAndBlocks.hoverBoots) {
+				if (mc.thePlayer.getCurrentArmor(0) != null && mc.thePlayer.getCurrentArmor(0).getItem() == ArmorLoader.hoverBoots) {
 					PacketHandler.instance.sendToServer(new MessageToggleBoots());
 				}
 			}

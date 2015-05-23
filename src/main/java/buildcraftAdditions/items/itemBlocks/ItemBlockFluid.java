@@ -1,13 +1,14 @@
 package buildcraftAdditions.items.itemBlocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
+
+import buildcraftAdditions.items.bases.ItemBlockBase;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -16,12 +17,11 @@ import net.minecraftforge.fluids.IFluidBlock;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemBlockFluid extends ItemBlock {
-
+public class ItemBlockFluid extends ItemBlockBase {
 	private final FluidStack fluidStack;
 
 	public ItemBlockFluid(Block block) {
-		super(block);
+		super(block, "", "", "", null);
 		if (block instanceof IFluidBlock) {
 			Fluid fluid = ((IFluidBlock) block).getFluid();
 			if (fluid != null)

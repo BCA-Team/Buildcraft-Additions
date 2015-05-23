@@ -14,7 +14,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraftAdditions.armour.ItemKineticBackpack;
 import buildcraftAdditions.inventories.CustomInventory;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ArmorLoader;
+import buildcraftAdditions.reference.ItemLoader;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.utils.Utils;
@@ -34,7 +35,7 @@ public class TileBackpackStand extends TileBase {
 
 	public void onBlockActivated(float hitX, float hitY, float hitZ, int rotation, EntityPlayer player) {
 		if (inventory.getStackInSlot(0) == null) {
-			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ItemsAndBlocks.kineticBackpack) {
+			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ArmorLoader.kineticBackpack) {
 				inventory.setInventorySlotContents(0, player.getCurrentEquippedItem());
 				player.destroyCurrentEquippedItem();
 			}
@@ -50,7 +51,7 @@ public class TileBackpackStand extends TileBase {
 			ItemStack playerStack = player.getCurrentEquippedItem();
 			if (playerStack == null)
 				return;
-			if (playerStack.getItem() == ItemsAndBlocks.powerCapsuleTier1 || playerStack.getItem() == ItemsAndBlocks.powerCapsuleTier2 || playerStack.getItem() == ItemsAndBlocks.powerCapsuleTier3) {
+			if (playerStack.getItem() == ItemLoader.powerCapsuleTier1 || playerStack.getItem() == ItemLoader.powerCapsuleTier2 || playerStack.getItem() == ItemLoader.powerCapsuleTier3) {
 				ItemStack bStack = inventory.getStackInSlot(0);
 				ItemKineticBackpack backpack = (ItemKineticBackpack) bStack.getItem();
 				if (backpack.getInstalledCapsule(bStack, capsuleSlot) == 0) {

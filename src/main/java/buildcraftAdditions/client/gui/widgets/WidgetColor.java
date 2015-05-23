@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.util.ResourceLocation;
 
 import buildcraftAdditions.client.gui.GuiBase;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemLoader;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
@@ -30,7 +30,7 @@ public class WidgetColor extends WidgetBase {
 	public void render(int mouseX, int mouseY) {
 		super.render(mouseX, mouseY);
 		gui.bindTexture(RenderUtils.MC_ITEM_SHEET);
-		gui.drawTexturedModelRectFromIcon(x + ((width - 16) / 2), y + ((height - 16) / 2), ItemsAndBlocks.pipeColoringTool.getIconFromDamage(value), 16, 16);
+		gui.drawTexturedModelRectFromIcon(x + ((width - 16) / 2), y + ((height - 16) / 2), ItemLoader.pipeColoringTool.getIconFromDamage(value), 16, 16);
 	}
 
 	@Override

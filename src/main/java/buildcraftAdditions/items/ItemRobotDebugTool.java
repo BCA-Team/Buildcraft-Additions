@@ -19,6 +19,7 @@ import buildcraft.api.transport.pluggable.PipePluggable;
 import buildcraft.robotics.RobotStationPluggable;
 import buildcraft.transport.TileGenericPipe;
 
+import buildcraftAdditions.items.bases.ItemBase;
 import buildcraftAdditions.utils.Utils;
 
 /**

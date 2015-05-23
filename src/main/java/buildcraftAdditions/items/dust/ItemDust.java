@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
+import buildcraftAdditions.items.bases.ItemBase;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -21,12 +22,10 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemDust extends Item {
+public class ItemDust extends ItemBase {
 
 	public ItemDust() {
-		setUnlocalizedName("dustUnknown");
-		setTextureName("bcadditions:dust");
-		setCreativeTab(BuildcraftAdditions.bcaDusts);
+		super("dustUnknown", "dust", "dust", BuildcraftAdditions.bcaDusts);
 		setHasSubtypes(true);
 	}
 

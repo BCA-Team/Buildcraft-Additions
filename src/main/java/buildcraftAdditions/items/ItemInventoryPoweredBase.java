@@ -23,7 +23,11 @@ import buildcraftAdditions.inventories.InventoryItem;
 public abstract class ItemInventoryPoweredBase extends ItemPoweredBase {
 
 	public ItemInventoryPoweredBase(String name) {
-		super(name);
+		this(name, name);
+	}
+
+	public ItemInventoryPoweredBase(String name, String gameregistryName) {
+		super(name, gameregistryName);
 	}
 
 	@Override

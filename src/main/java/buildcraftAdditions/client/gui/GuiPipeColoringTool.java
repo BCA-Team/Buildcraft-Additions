@@ -14,7 +14,7 @@ import buildcraftAdditions.client.gui.widgets.WidgetButtonUpdate;
 import buildcraftAdditions.inventories.containers.ContainerPipeColoringTool;
 import buildcraftAdditions.networking.MessagePipeColoringTool;
 import buildcraftAdditions.networking.PacketHandler;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemLoader;
 import buildcraftAdditions.utils.RenderUtils;
 import buildcraftAdditions.utils.Utils;
 
@@ -119,7 +119,7 @@ public class GuiPipeColoringTool extends GuiBase {
 		public void render(int mouseX, int mouseY) {
 			RenderUtils.drawImage(active ? ACTIVE : INACTIVE, x, y, width, height);
 			gui.bindTexture(RenderUtils.MC_ITEM_SHEET);
-			gui.drawTexturedModelRectFromIcon(x + 2, y + 2, ItemsAndBlocks.pipeColoringTool.getIconFromDamage(id), 16, 16);
+			gui.drawTexturedModelRectFromIcon(x + 2, y + 2, ItemLoader.pipeColoringTool.getIconFromDamage(id), 16, 16);
 		}
 
 		@Override

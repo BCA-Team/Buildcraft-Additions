@@ -23,7 +23,7 @@ import buildcraftAdditions.utils.PlayerUtils;
 public class MultiBlockKEBT2 extends MultiBlockBase {
 
 	public MultiBlockKEBT2() {
-		super("blockKEBT2", Variables.Identifiers.KEBT2, new MultiBlockPaternKEBT2(), "KEB/T2/unformed");
+		super("blockKEBT2", Variables.Identifiers.KEBT2, new MultiBlockPaternKEBT2(), "KEB/T2/unformed", "KEBT2");
 	}
 
 	@Override

@@ -42,7 +42,9 @@ import buildcraftAdditions.proxy.CommonProxy;
 import buildcraftAdditions.recipe.duster.DusterRecipeManager;
 import buildcraftAdditions.recipe.refinery.CoolingTowerRecipeManager;
 import buildcraftAdditions.recipe.refinery.RefineryRecipeManager;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ArmorLoader;
+import buildcraftAdditions.reference.BlockLoader;
+import buildcraftAdditions.reference.ItemLoader;
 import buildcraftAdditions.reference.Variables;
 
 /**
@@ -71,7 +73,10 @@ public class BuildcraftAdditions {
 
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		PacketHandler.init();
-		ItemsAndBlocks.init();
+		BlockLoader.loadBlocks();
+		ItemLoader.loadItems();
+		ArmorLoader.loadArmor();
+
 		proxy.registerEntities();
 		SpecialListMananger.init();
 
@@ -98,7 +103,7 @@ public class BuildcraftAdditions {
 		MinecraftForge.EVENT_BUS.register(new EventListener.Forge());
 		proxy.addListeners();
 		IMCSender.sendMessages();
-		ItemsAndBlocks.registerTileEntities();
+		BlockLoader.registerTileEntities();
 
 		int meta = 1;
 		BCAItemManager.dusts.addDust(meta++, "Iron", 0xD2CEC9, DustTypes.METAL_DUST);
@@ -125,7 +130,9 @@ public class BuildcraftAdditions {
 		BCARecipeManager.duster.addRecipe("rodBlaze", new ItemStack(Items.blaze_powder, 4));
 
 		manager.init(event);
-		ItemsAndBlocks.addRecipes();
+		BlockLoader.addRecipes();
+		ItemLoader.addRecipes();
+		ArmorLoader.addRecipes();
 	}
 
 	@Mod.EventHandler
@@ -141,13 +148,13 @@ public class BuildcraftAdditions {
 			if (dust != null)
 				dust.getDustType().register(dust.getMeta(), dust.getName(), dust.getDustStack());
 		if (OreDictionary.getOres("dustGold").isEmpty() || OreDictionary.getOres("dustIron").isEmpty()) {
-			GameRegistry.addRecipe(new ShapelessOreRecipe(ItemsAndBlocks.gildedRedMetalIngot, "ingotGold", "ingotGold", "ingotGold", "ingotIron", "ingotIron", "dustRedstone"));
-			GameRegistry.addRecipe(new ShapedOreRecipe(ItemsAndBlocks.conductivePlateRaw, "DD", "DD", 'D', "ingotGildedRedMetal"));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(ItemLoader.gildedRedMetalIngot, "ingotGold", "ingotGold", "ingotGold", "ingotIron", "ingotIron", "dustRedstone"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(ItemLoader.conductivePlateRaw, "DD", "DD", 'D', "ingotGildedRedMetal"));
 		} else {
 			ItemStack dust = BCAItemManager.dusts.getDust("GildedRedMetal").getDustStack().copy();
 			dust.stackSize = 6;
 			GameRegistry.addRecipe(new ShapelessOreRecipe(dust, "dustGold", "dustGold", "dustGold", "dustIron", "dustIron", "dustRedstone"));
-			GameRegistry.addRecipe(new ShapedOreRecipe(ItemsAndBlocks.conductivePlateRaw, "DD", "DD", 'D', "dustGildedRedMetal"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(ItemLoader.conductivePlateRaw, "DD", "DD", 'D', "dustGildedRedMetal"));
 		}
 	}
 
@@ -159,7 +166,23 @@ public class BuildcraftAdditions {
 	@Mod.EventHandler
 	public void remap(FMLMissingMappingsEvent event) {
 		for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
-			if (mapping.name.toLowerCase().contains("tool")) {
+			if (mapping.name.equals(Variables.MOD.ID + ":condictuvePlateRaw")) {
+				mapping.remap(ItemLoader.conductivePlateRaw);
+			} else if (mapping.name.equals(Variables.MOD.ID + ":PowerCapsuleTier1")) {
+				mapping.remap(ItemLoader.powerCapsuleTier1);
+			} else if (mapping.name.equals(Variables.MOD.ID + ":backpackstandGhost")) {
+				mapping.remap(BlockLoader.backpackStandGhost);
+			} else if (mapping.name.equals(Variables.MOD.ID + ":blankUpgrade")) {
+				mapping.remap(ItemLoader.blankUpgrade);
+			} else if (mapping.name.equals(Variables.MOD.ID + ":condictuvePlate")) {
+				mapping.remap(ItemLoader.conductivePlate);
+			} else if (mapping.name.equals(Variables.MOD.ID + ":toolUpgradeChaisaw")) {
+				mapping.remap(ItemLoader.toolUpgradeChainsaw);
+			} else if (mapping.name.equals(Variables.MOD.ID + ":ingotGildedRedMetal")) {
+				mapping.remap(ItemLoader.gildedRedMetalIngot);
+			} else if (mapping.name.equals(Variables.MOD.ID + ":itemKineticMultiTool")) {
+				mapping.remap(ItemLoader.itemKineticMultiTool);
+			} else if (mapping.name.equals(Variables.MOD.ID + ":robotDebugTool")) {
 				mapping.ignore();
 			}
 		}

@@ -16,7 +16,7 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.items.ItemBase;
+import buildcraftAdditions.items.bases.ItemBase;
 import buildcraftAdditions.utils.Utils;
 
 public class ItemToolUpgrade extends ItemBase {

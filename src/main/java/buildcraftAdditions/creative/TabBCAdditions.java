@@ -9,7 +9,8 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.BlockLoader;
+import buildcraftAdditions.reference.ItemLoader;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -27,14 +28,14 @@ public class TabBCAdditions extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
-		return Item.getItemFromBlock(ItemsAndBlocks.fluidicCompressorBlock);
+		return Item.getItemFromBlock(BlockLoader.fluidicCompressorBlock);
 	}
 
 	@Override
 	public void displayAllReleventItems(List list) {
 		super.displayAllReleventItems(list);
-		list.add(new ItemStack(ItemsAndBlocks.ironCanister));
-		list.add(new ItemStack(ItemsAndBlocks.goldCanister));
-		list.add(new ItemStack(ItemsAndBlocks.diamondCanister));
+		list.add(new ItemStack(ItemLoader.ironCanister));
+		list.add(new ItemStack(ItemLoader.goldCanister));
+		list.add(new ItemStack(ItemLoader.diamondCanister));
 	}
 }

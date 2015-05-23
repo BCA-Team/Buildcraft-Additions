@@ -3,7 +3,11 @@ package buildcraftAdditions.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.utils.Utils;
@@ -19,13 +23,30 @@ public abstract class BlockBase extends BlockContainer {
 	protected final String name;
 
 	public BlockBase(String name) {
-		super(Material.iron);
+		this(Material.iron, name, name, name, BuildcraftAdditions.bcadditions, null);
+	}
+
+	public BlockBase(Material material, String name) {
+		this(material, name, name, name, BuildcraftAdditions.bcadditions, null);
+	}
+
+	public BlockBase(String name, String texture, String gameRegistryName) {
+		this(Material.iron, name, texture, gameRegistryName, BuildcraftAdditions.bcadditions, null);
+	}
+
+	public BlockBase(Material material, String name, String texture, String gameRegistryName, CreativeTabs tab, Class<? extends ItemBlock> clas) {
+		super(material);
 		this.name = name;
 		setBlockName(name);
-		setBlockTextureName("bcadditions:" + name);
+		setBlockTextureName("bcadditions:" + texture);
 		setHardness(5F);
 		setResistance(10F);
-		setCreativeTab(BuildcraftAdditions.bcadditions);
+		setCreativeTab(tab);
+		if (clas == null) {
+			GameRegistry.registerBlock(this, gameRegistryName);
+		} else {
+			GameRegistry.registerBlock(this, clas, gameRegistryName);
+		}
 	}
 
 	@Override

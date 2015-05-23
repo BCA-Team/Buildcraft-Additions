@@ -12,7 +12,6 @@ import buildcraftAdditions.compat.buildcraft.actions.Actions;
 import buildcraftAdditions.compat.buildcraft.schematics.BCASchematics;
 import buildcraftAdditions.compat.buildcraft.triggers.Triggers;
 import buildcraftAdditions.items.ItemRobotDebugTool;
-import buildcraftAdditions.reference.ItemsAndBlocks;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
 
@@ -44,7 +43,6 @@ public class CompatBuildCraft {
 	}
 
 	private void addItemSorter() {
-		GameRegistry.registerBlock(ItemsAndBlocks.itemSorter, "blockItemSorter");
 		GameRegistry.registerTileEntity(TileItemSorter.class, "ItemSorter");
 	}
 
