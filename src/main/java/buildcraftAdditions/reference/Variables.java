@@ -84,6 +84,7 @@ public final class Variables {
 
 	public static final class UUIDs {
 		public static final String CORJAANTJE = "209f3364-0042-4d2a-b539-8640e6bbd6c1";
+		public static final String FORECASTER = "f5cd509e-fa84-4479-ad9e-f318454517e2";
 	}
 
 	//Multiblock identifiers
