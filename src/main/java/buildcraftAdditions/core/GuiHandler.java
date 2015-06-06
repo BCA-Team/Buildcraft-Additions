@@ -92,7 +92,7 @@ public final class GuiHandler implements IGuiHandler {
 			case REFINERY:
 				return new ContainerRefinery(player.inventory, (TileRefinery) tile);
 			case COOLING_TOWER:
-				return new ContainerCoolingTower(player.inventory, (TileCoolingTower) tile);
+				return new ContainerCoolingTower((TileCoolingTower) tile);
 			case ITEM_SORTER:
 				return new ContainerItemSorter(player.inventory, (TileItemSorter) tile);
 			case PIPE_COLORING_TOOL:
@@ -142,7 +142,7 @@ public final class GuiHandler implements IGuiHandler {
 					return new GuiRefinery(player.inventory, (TileRefinery) tile);
 			case COOLING_TOWER:
 				if (tile instanceof TileCoolingTower)
-					return new GuiCoolingTower(player.inventory, (TileCoolingTower) tile);
+					return new GuiCoolingTower((TileCoolingTower) tile);
 			case ITEM_SORTER:
 				if (tile instanceof TileItemSorter)
 					return new GuiItemSorter(player.inventory, (TileItemSorter) tile);

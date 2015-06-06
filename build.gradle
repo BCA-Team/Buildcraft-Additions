@@ -135,3 +135,6 @@ task deobfJar(type: Jar) {
 
 assemble.dependsOn deobfJar
 curse.dependsOn checkCurse
+
+
+idea { module { inheritOutputDirs = true } }

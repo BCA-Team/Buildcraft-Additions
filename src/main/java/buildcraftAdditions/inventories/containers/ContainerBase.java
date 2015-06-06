@@ -14,7 +14,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.client.gui.GuiBase;
 import buildcraftAdditions.inventories.slots.SlotPhantom;
-import buildcraftAdditions.proxy.ClientProxy;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -55,6 +54,8 @@ public class ContainerBase<T> extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
+		if (inventorySlots.isEmpty())
+			return null;
 		int numSlots = inventorySlots.size();
 		if (slotIndex < 0 || slotIndex >= numSlots)
 			return null;
