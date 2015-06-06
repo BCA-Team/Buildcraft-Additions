@@ -1,7 +1,10 @@
 package buildcraftAdditions.inventories.containers;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -9,6 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+import buildcraftAdditions.inventories.slots.SlotFake;
 import buildcraftAdditions.tileEntities.TileRefinery;
 
 /**
@@ -114,5 +118,29 @@ public class ContainerRefinery extends ContainerBase<TileRefinery> {
 		}
 	}
 
+	@Override
+	protected void addPlayerInventory(int x, int y) {
+
+	}
+
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
+		return null;
+	}
+
+	@Override
+	public ItemStack slotClick(int slotNum, int mouseButton, int modifier, EntityPlayer player) {
+		return null;
+	}
+
+	@Override
+	protected Slot addSlotToContainer(Slot slot) {
+		return null;
+	}
+
+	@Override
+	public Slot getSlot(int id) {
+		return new SlotFake(null, -5, -5, 0);
+	}
 
 }
