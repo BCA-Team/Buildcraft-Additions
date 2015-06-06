@@ -42,7 +42,6 @@ public class ContainerCoolingTower extends ContainerBase<TileCoolingTower> {
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		super.detectAndSendChanges();
 		if (crafters != null) {
 			for (Object o : crafters) {
 				if (o != null && o instanceof ICrafting) {
