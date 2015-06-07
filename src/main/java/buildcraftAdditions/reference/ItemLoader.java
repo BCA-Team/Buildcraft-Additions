@@ -80,6 +80,9 @@ public class ItemLoader {
 	public static Item gildedRedMetalIngot;
 	public static Item conductivePlateRaw;
 	public static Item conductivePlate;
+	public static Item spring;
+	public static Item lightPlating;
+	public static Item thruster;
 
 
 	public static void loadItems() {
@@ -137,6 +140,9 @@ public class ItemLoader {
 		blankUpgrade = new ItemBase("baseUpgrade", "upgrades/base", "blankUpgrade");
 		conductivePlateRaw = new ItemBase("conductivePlateRaw");
 		conductivePlate = new ItemBase("conductivePlate");
+		spring = new ItemBase("spring", "components/spring");
+		thruster = new ItemBase("thruster", "components/thruster");
+		lightPlating = new ItemBase("lightPlating", "components/light plating");
 
 		//other
 		dust = new ItemDust();
@@ -226,6 +232,9 @@ public class ItemLoader {
 		GameRegistry.addRecipe(new ItemStack(blankUpgrade, 2), "GGG", "GPG", "GGG", 'G', Items.gold_ingot, 'P', heatPlating);
 
 		GameRegistry.addSmelting(conductivePlateRaw, new ItemStack(conductivePlate), 0.5f);
+		GameRegistry.addRecipe(new ItemStack(thruster), "LCL", "LPL", "I I", 'L', lightPlating, 'C', powerCapsuleTier2, 'P', conductivePlate, 'I', Items.iron_ingot);
+		GameRegistry.addRecipe(new ItemStack(lightPlating, 2), "CH", "HC", 'C', conductivePlate, 'H', heatPlating);
+		GameRegistry.addRecipe(new ItemStack(spring), "III", "I I", "III", 'I', Items.iron_ingot);
 	}
 
 	private static void addUpgradeRecipe(ItemToolUpgrade upgrade, Object... inputs) {

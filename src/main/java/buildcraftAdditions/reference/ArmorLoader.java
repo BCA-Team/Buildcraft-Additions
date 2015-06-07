@@ -32,5 +32,7 @@ public class ArmorLoader {
 	public static void addRecipes() {
 		GameRegistry.addRecipe(new ItemStack(kineticBackpack), "PLP", "PPP", "PPP", 'P', ItemLoader.conductivePlate, 'L', Items.leather);
 		GameRegistry.addRecipe(new ItemStack(BlockLoader.backpackStand), "III", " I ", "III", 'I', Items.iron_ingot);
+		GameRegistry.addRecipe(new ItemStack(rocketPants), "P P", "ITI", "T T", 'P', ItemLoader.lightPlating, 'I', Items.iron_ingot, 'T', ItemLoader.thruster);
+		GameRegistry.addRecipe(new ItemStack(hoverBoots), "P P", "I I", "T T", 'P', ItemLoader.lightPlating, 'I', Items.iron_ingot, 'T', ItemLoader.thruster);
 	}
 }

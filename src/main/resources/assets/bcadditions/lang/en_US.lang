@@ -81,6 +81,9 @@ item.kineticBackpack.name=Kinetic Backpack
 item.gildedRedMetalIngot.name=Gilded Red Metal Ingot
 item.conductivePlateRaw.name=Raw Conductive Plating
 item.conductivePlate.name=Conductive Plating
+item.spring.name=Spring
+item.thruster.name=Thruster
+item.lightPlating=Light Plating
 
 material.iron.name=Iron
 material.gold.name=Gold
