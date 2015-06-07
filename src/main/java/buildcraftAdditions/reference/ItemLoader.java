@@ -61,7 +61,7 @@ public class ItemLoader {
 	public static ItemToolUpgrade toolUpgradeFortune1;
 	public static ItemToolUpgrade toolUpgradeFortune2;
 	public static ItemToolUpgrade toolUpgradeFortune3;
-	public static Item itemGrindingWheel;
+	public static Item grindingWheel;
 	public static Item itemIronWireUnhardened;
 	public static Item itemIronWire;
 	public static Item goldWireUnhardened;
@@ -83,6 +83,8 @@ public class ItemLoader {
 	public static Item spring;
 	public static Item lightPlating;
 	public static Item thruster;
+	public static Item fluxConductor;
+	public static Item fluxDisperser;
 
 
 	public static void loadItems() {
@@ -128,7 +130,7 @@ public class ItemLoader {
 
 		//crafting components
 		toolCore = new ItemBase("toolCore");
-		itemGrindingWheel = new ItemBase("grindingWheel");
+		grindingWheel = new ItemBase("grindingWheel");
 		itemIronWireUnhardened = new ItemBase("wireIronUnhardened");
 		itemIronWire = new ItemBase("wireIron");
 		goldWireUnhardened = new ItemBase("wireGoldUnhardened");
@@ -143,6 +145,9 @@ public class ItemLoader {
 		spring = new ItemBase("spring", "components/spring");
 		thruster = new ItemBase("thruster", "components/thruster");
 		lightPlating = new ItemBase("lightPlating", "components/light plating");
+		fluxConductor = new ItemBase("fluxConductor", "components/Flux_Conductor");
+		fluxDisperser = new ItemBase("fluxDisperser", "components/Flux_Disperser");
+
 
 		//other
 		dust = new ItemDust();
@@ -154,6 +159,8 @@ public class ItemLoader {
 	}
 
 	public static void addRecipes() {
+
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(grindingWheel), "FFF", "FGF", "FFF", 'F', Items.flint, 'G', "gearStone"));
 		if (ConfigurationHandler.enabled("MultiTools")) {
 			addStickRecipe(ItemLoader.ironStick, 1000, "ingotIron");
 			addStickRecipe(ItemLoader.goldStick, 2000, "ingotGold");
@@ -197,10 +204,10 @@ public class ItemLoader {
 		}
 
 		if (ConfigurationHandler.enabled("FluidCanisters")) {
-			GameRegistry.addRecipe(new ItemStack(ItemLoader.ironCanister, 4), "PIP", "IGI", "PIP", 'P', BCItems.SEALANT, 'I', Items.iron_ingot, 'G', Blocks.glass_pane);
-			GameRegistry.addRecipe(new ItemStack(ItemLoader.goldCanister), "PGP", "GIG", "PGP", 'P', BCItems.SEALANT, 'G', Items.gold_ingot, 'I', ItemLoader.ironCanister);
-			GameRegistry.addRecipe(new ItemStack(ItemLoader.diamondCanister), "PDP", "DGD", "PDP", 'P', BCItems.SEALANT, 'D', Items.diamond, 'G', ItemLoader.goldCanister);
-			GameRegistry.addRecipe(new ItemStack(BlockLoader.fluidicCompressorBlock), "IFI", "PGP", "IMI", 'I', BCItems.IRON_GEAR, 'F', BCItems.FLOODGATE, 'P', Blocks.piston, 'G', ItemLoader.goldCanister, 'M', BCItems.PUMP);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemLoader.ironCanister, 4), "PIP", "IGI", "PIP", 'P', BCItems.SEALANT, 'I', "ingotIron", 'G', "glassPane"));
+			GameRegistry.addRecipe(new ItemStack(ItemLoader.goldCanister), "PGP", "GIG", "PGP", 'P', BCItems.SEALANT, 'G', Items.gold_ingot, 'I', ironCanister);
+			GameRegistry.addRecipe(new ItemStack(ItemLoader.diamondCanister), "PDP", "DGD", "PDP", 'P', BCItems.SEALANT, 'D', Items.diamond, 'G', goldCanister);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockLoader.fluidicCompressorBlock), "GFG", "PCP", "IGI", 'G', "ingotGold", 'F', fluxConductor, 'C', goldCanister, 'I', "ingotIron", 'P', Blocks.piston));
 
 			if (ConfigurationHandler.enabled("PortableLaser"))
 				addAssemblyRecipe("portableLaser", portableLaser, 8000, "blockGlass", "gemDiamond", "stickBlaze", "stickBlaze", BCItems.LASER, toolCore);
@@ -234,7 +241,9 @@ public class ItemLoader {
 		GameRegistry.addSmelting(conductivePlateRaw, new ItemStack(conductivePlate), 0.5f);
 		GameRegistry.addRecipe(new ItemStack(thruster), "LCL", "LPL", "I I", 'L', lightPlating, 'C', powerCapsuleTier2, 'P', conductivePlate, 'I', Items.iron_ingot);
 		GameRegistry.addRecipe(new ItemStack(lightPlating, 2), "CH", "HC", 'C', conductivePlate, 'H', heatPlating);
-		GameRegistry.addRecipe(new ItemStack(spring), "III", "I I", "III", 'I', Items.iron_ingot);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(spring), "III", "I I", "III", 'I', "ingotIron"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fluxConductor), "GIG", "GRG", "GIG", 'G', "ingotGold", 'I', "ingotIron", 'R', "dustRedstone"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fluxDisperser), "IGI", "IRI", "IGI", 'G', "ingotGold", 'I', "ingotIron", 'R', "dustRedstone"));
 	}
 
 	private static void addUpgradeRecipe(ItemToolUpgrade upgrade, Object... inputs) {

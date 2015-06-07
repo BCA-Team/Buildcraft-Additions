@@ -144,50 +144,51 @@ public class BlockLoader {
 
 	public static void addRecipes() {
 		if (ConfigurationHandler.enabled("ChargingStation")) {
-			GameRegistry.addRecipe(new ItemStack(chargingStationBlock), "I I", "WKW", "I I", 'I', BCItems.IRON_GEAR, 'W', BCItems.PIPE_POWER_WOOD, 'K', ItemLoader.powerCapsuleTier2);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(chargingStationBlock), "IFI", "GKG", "III", 'I', "ingotIron", 'F', ItemLoader.fluxConductor, 'K', ItemLoader.powerCapsuleTier2, 'G', "gearIron"));
 		}
 
 		if (ConfigurationHandler.enabled("PowerCapsules")) {
-			GameRegistry.addRecipe(new ItemStack(ItemLoader.powerCapsuleTier1), "IGI", "IRI", "IGI", 'I', Items.iron_ingot, 'G', Items.gold_ingot, 'R', Blocks.redstone_block);
-			GameRegistry.addRecipe(new ItemStack(ItemLoader.powerCapsuleTier2), "GDG", "GPG", "GDG", 'G', Items.gold_ingot, 'D', Items.diamond, 'P', ItemLoader.powerCapsuleTier1);
-			GameRegistry.addRecipe(new ItemStack(ItemLoader.powerCapsuleTier3), "DED", "DPD", "DED", 'D', Items.diamond, 'E', Items.emerald, 'P', ItemLoader.powerCapsuleTier2);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemLoader.powerCapsuleTier1), "IGI", "IRI", "IGI", 'I', "ingotIron", 'G', "ingotGold", 'R', Blocks.redstone_block));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemLoader.powerCapsuleTier2), "GDG", "GPG", "GDG", 'G', "ingotGold", 'D', ItemLoader.conductivePlate, 'P', ItemLoader.powerCapsuleTier1));
+			GameRegistry.addRecipe(new ItemStack(ItemLoader.powerCapsuleTier3), "DED", "DPD", "DED", 'D', Items.diamond, 'E', ItemLoader.conductivePlate, 'P', ItemLoader.powerCapsuleTier2);
 		}
 
 		if (ConfigurationHandler.enabled("Duster")) {
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(basicDusterBlock), "GIG", "SLS", "SSS", 'G', BCItems.STONE_GEAR, 'I', Items.iron_ingot, 'S', Blocks.stone, 'L', "slimeball"));
-			GameRegistry.addRecipe(new ItemStack(mechanicalDusterBlock), "GMG", "SFS", "SSS", 'G', BCItems.IRON_GEAR, 'M', Items.gold_ingot, 'F', ItemLoader.itemGrindingWheel, 'S', Blocks.stone);
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(semiAutomaticDusterBlock), "GMG", "PLP", "SSS", 'G', BCItems.IRON_GEAR, 'M', Items.gold_ingot, 'P', BCItems.PIPE_ITEMS_GOLD, 'L', "slimeball", 'S', Blocks.stone));
-			GameRegistry.addRecipe(new ItemStack(kineticDusterBlock), "GGG", "P P", "IDI", 'G', Blocks.glass, 'P', BCItems.PIPE_ITEMS_GOLD, 'I', BCItems.GOLD_GEAR, 'D', BCItems.DIAMOND_GEAR);
-			GameRegistry.addRecipe(new ItemStack(ItemLoader.itemGrindingWheel), "FFF", "FGF", "FFF", 'F', Items.flint, 'G', BCItems.STONE_GEAR);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(basicDusterBlock), "GIG", "SLS", "SSS", 'G', "gearStone", 'I', "ingotIron", 'S', Blocks.stone, 'L', "slimeball"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(basicDusterBlock), "GIG", "SLS", "SSS", 'G', "gearStone", 'I', "ingotIron", 'S', Blocks.stone, 'L', ItemLoader.spring));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(mechanicalDusterBlock), "IFI", "IGI", "III", 'I', "ingotIron", 'F', ItemLoader.fluxConductor, 'G', ItemLoader.grindingWheel));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(semiAutomaticDusterBlock), "IMI", "PLP", "III", 'M', "ingotGold", 'P', Blocks.piston, 'L', "slimeball", 'I', "ingotIron"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(semiAutomaticDusterBlock), "IMI", "PLP", "III", 'M', "ingotGold", 'P', Blocks.piston, 'L', ItemLoader.spring, 'I', "ingotIron"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(kineticDusterBlock), "GGG", "G G", "IDI", 'G', "blockGlass", 'I', "gearGold", 'D', Items.diamond));
 		}
 
 		if (ConfigurationHandler.enabled("Coils")) {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemLoader.itemIronWireUnhardened, 2), "DDD", 'D', "dustIron"));
 			GameRegistry.addSmelting(ItemLoader.itemIronWireUnhardened, new ItemStack(ItemLoader.itemIronWire, 2), 0.5f);
-			GameRegistry.addRecipe(new ItemStack(basicCoilBlock), "WWW", "WIW", "WWW", 'W', ItemLoader.itemIronWire, 'I', Items.iron_ingot);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(basicCoilBlock), "WWW", "WIW", "WWW", 'W', ItemLoader.itemIronWire, 'I', "ingotIron"));
 
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemLoader.goldWireUnhardened, 2), "DDD", 'D', "dustGold"));
 			GameRegistry.addSmelting(ItemLoader.goldWireUnhardened, new ItemStack(ItemLoader.goldWire, 2), 0.5f);
-			GameRegistry.addRecipe(new ItemStack(lavaCoilBlock), "WWW", "WIW", "WWW", 'W', ItemLoader.goldWire, 'I', Items.iron_ingot);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(lavaCoilBlock), "WWW", "WIW", "WWW", 'W', ItemLoader.goldWire, 'I', "ingotIron"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemLoader.diamondWireUnhardened, 2), "DDD", 'D', "dustDiamond"));
 			GameRegistry.addSmelting(ItemLoader.diamondWireUnhardened, new ItemStack(ItemLoader.diamondWire, 2), 0.5f);
-			GameRegistry.addRecipe(new ItemStack(kineticCoil), "WWW", "WIW", "WWW", 'W', ItemLoader.diamondWire, 'I', Items.iron_ingot);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(kineticCoil), "WWW", "WIW", "WWW", 'W', ItemLoader.diamondWire, 'I', "ingotIron"));
 		}
 
 		if (ConfigurationHandler.enabled("HeatedFurnace"))
-			GameRegistry.addRecipe(new ItemStack(heatedFurnaceBlock), "III", "IFI", "III", 'I', Items.iron_ingot, 'F', Blocks.furnace);
+			GameRegistry.addRecipe(new ItemStack(heatedFurnaceBlock), "III", "IFI", "III", 'I', ItemLoader.heatPlating, 'F', Blocks.furnace);
 
 		if (ConfigurationHandler.enabled("KineticEnergyBuffer")) {
-			GameRegistry.addRecipe(kebT1.createEmptyKEB(), "IBI", "PBP", "IBI", 'I', Items.iron_ingot, 'B', ItemLoader.powerCapsuleTier1, 'P', BCItems.PIPE_POWER_GOLD);
-			GameRegistry.addRecipe(new ItemStack(kebT2), "III", "PBP", "III", 'I', Items.iron_ingot, 'B', ItemLoader.powerCapsuleTier2, 'P', BCItems.PIPE_POWER_GOLD);
-			GameRegistry.addRecipe(new ItemStack(kebT3Core), "DBD", "PBP", "DBD", 'D', Items.diamond, 'B', ItemLoader.powerCapsuleTier3, 'P', BCItems.PIPE_POWER_DIAMOND);
-			GameRegistry.addRecipe(new ItemStack(kebT3Plating), "PGP", "GGG", "III", 'P', BCItems.PIPE_POWER_DIAMOND, 'G', Items.gold_ingot, 'I', Items.iron_ingot);
+			GameRegistry.addRecipe(new ShapedOreRecipe(kebT1.createEmptyKEB(), "IBI", "CBD", "IBI", 'I', "ingotIron", 'B', ItemLoader.powerCapsuleTier1, 'C', ItemLoader.fluxConductor, 'D', ItemLoader.fluxDisperser));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(kebT2), "III", "CBD", "III", 'I', "ingotIron", 'B', ItemLoader.powerCapsuleTier2, 'C', ItemLoader.fluxConductor, 'D', ItemLoader.fluxDisperser));
+			GameRegistry.addRecipe(new ItemStack(kebT3Core), "DBD", "CBP", "DBD", 'D', Items.diamond, 'B', ItemLoader.powerCapsuleTier3, 'C', ItemLoader.fluxConductor, 'P', ItemLoader.fluxDisperser);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(kebT3Plating), "CGD", "GGG", "III", 'C', ItemLoader.fluxConductor, 'D', ItemLoader.fluxDisperser, 'G', "ingotGold", 'I', "ingotIron"));
 		}
 
 		if (ConfigurationHandler.enabled("MultiBlockRefining")) {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(refineryWalls, 10), "PPP", "PDP", "PPP", 'P', ItemLoader.heatPlating, 'D', "dustDiamond"));
 			GameRegistry.addRecipe(new ItemStack(refineryValve, 4), " P ", "PBP", " P ", 'P', ItemLoader.heatPlating, 'B', Blocks.iron_bars);
-			GameRegistry.addRecipe(new ItemStack(coolingTowerWalls, 10), "PPP", "PDP", "PPP", 'P', ItemLoader.heatPlating, 'D', Items.redstone);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(coolingTowerWalls, 10), "PPP", "PDP", "PPP", 'P', ItemLoader.heatPlating, 'D', "dustRedstone"));
 			GameRegistry.addRecipe(new ItemStack(coolingTowerValve), "V", 'V', refineryValve);
 		}
 

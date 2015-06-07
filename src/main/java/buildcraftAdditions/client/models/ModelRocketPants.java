@@ -64,7 +64,7 @@ public class ModelRocketPants extends ModelBiped {
 	public ModelRenderer frl_3;
 	public ModelRenderer shape9_31;
 
-	private ModelRocketPants() {
+	public ModelRocketPants() {
 		this.textureWidth = 128;
 		this.textureHeight = 64;
 		this.shape9_18 = new ModelRenderer(this, 13, 44);
@@ -329,9 +329,15 @@ public class ModelRocketPants extends ModelBiped {
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		setRotationAnglesLeft(f, f1, f2, f3, f4, f5);
+		render(entity, f, f1, f2, f3, f4, f5, true);
+	}
+
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, boolean rotate) {
+		if (rotate)
+			setRotationAnglesLeft(f, f1, f2, f3, f4, f5);
 		render(entity, f, f1, f2, f3, f4, f5, 0, 0, 0.17f);
-		setRotationAnglesRight(f, f1, f2, f3, f4, f5);
+		if (rotate)
+			setRotationAnglesRight(f, f1, f2, f3, f4, f5);
 		render(entity, f, f1, f2, f3, f4, f5, -0.25f, 0, 0.17f);
 	}
 

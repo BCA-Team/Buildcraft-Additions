@@ -31,8 +31,8 @@ import eureka.api.EurekaAPI;
  */
 public class BCAEurekaResearch {
 
-	private static final Block KEBT2 = new BlockBasic("energyBufferMultiblockSides5");
-	private static final Block KEBT3 = new BlockBasic("energyBufferT3MultiblockSides4");
+	private static final Block KEBT2 = new BlockBasic("KEB/T2/5");
+	private static final Block KEBT3 = new BlockBasic("KEB/T3/4");
 
 	public static void addEurekeResearch() {
 		GameRegistry.registerBlock(KEBT2, "kebT2DisplayItem");
@@ -50,7 +50,7 @@ public class BCAEurekaResearch {
 
 		EurekaAPI.API.register(new BasicEurekaInfo(Variables.Eureka.DustT2Key1, "BCA-Dusters", 40, BlockLoader.mechanicalDusterBlock, Variables.Eureka.DustT1Key));
 		EurekaAPI.API.bindToKey(BlockLoader.mechanicalDusterBlock, Variables.Eureka.DustT2Key1);
-		EurekaAPI.API.registerDropHandler(new BasicDropHandler(new ItemStack(BlockLoader.mechanicalDusterBlock), new ItemStack(BCItems.IRON_GEAR, 2), new ItemStack(Items.gold_ingot, 1), new ItemStack(ItemLoader.itemGrindingWheel, 1), new ItemStack(Blocks.stone, 5)));
+		EurekaAPI.API.registerDropHandler(new BasicDropHandler(new ItemStack(BlockLoader.mechanicalDusterBlock), new ItemStack(BCItems.IRON_GEAR, 2), new ItemStack(Items.gold_ingot, 1), new ItemStack(ItemLoader.grindingWheel, 1), new ItemStack(Blocks.stone, 5)));
 
 		EurekaAPI.API.register(new BasicEurekaInfo(Variables.Eureka.DustT2Key2, "BCA-Dusters", 20, BlockLoader.kineticDusterBlock, Variables.Eureka.DustT2Key1));
 		EurekaAPI.API.bindToKey(BlockLoader.kineticDusterBlock, Variables.Eureka.DustT2Key2);
