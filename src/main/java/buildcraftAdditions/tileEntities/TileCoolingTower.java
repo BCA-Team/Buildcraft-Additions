@@ -69,7 +69,7 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if (getMasterX() == xCoord && getMasterY() == yCoord && getMasterZ() == zCoord) {
+		if (getMasterX() == xCoord && getMasterY() == yCoord && getMasterZ() == zCoord && !isMaster()) {
 			data.invalidataMultiblock(worldObj);
 			master = null;
 			return;
