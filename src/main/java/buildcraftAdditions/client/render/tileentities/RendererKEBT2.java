@@ -30,7 +30,7 @@ public class RendererKEBT2 extends TileEntitySpecialRenderer {
 			new ResourceLocation("bcadditions", "textures/blocks/KEB/T2/3.png"),
 			new ResourceLocation("bcadditions", "textures/blocks/KEB/T2/4.png"),
 			new ResourceLocation("bcadditions", "textures/blocks/KEB/T2/5.png")};
-	public static final ResourceLocation topAndBottom = new ResourceLocation("bcadditions", "textures/blocks/KEB/T2/TopAndBottom.png");
+	public static final ResourceLocation topAndBottom = new ResourceLocation("bcadditions", "textures/blocks/KEB/T2/topAndBottom.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float fl) {
