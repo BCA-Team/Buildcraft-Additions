@@ -1,5 +1,16 @@
 package buildcraftAdditions.compat.buildcraft.recipe;
 
+import java.util.Arrays;
+import java.util.List;
+
+import net.minecraft.item.ItemStack;
+
+import buildcraft.api.recipes.IIntegrationRecipe;
+import buildcraft.silicon.ItemRedstoneChipset;
+
+import buildcraftAdditions.compat.buildcraft.BCItems;
+import buildcraftAdditions.reference.ItemLoader;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -7,27 +18,46 @@ package buildcraftAdditions.compat.buildcraft.recipe;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ToolCoreRecipe {
-
-	/*public ToolCoreRecipe() {
-		setContents(Variables.MOD.ID + ":toolCore", ItemsAndBlocks.toolCore, 30000, 100000);
+public class ToolCoreRecipe implements IIntegrationRecipe {
+	@Override
+	public int getEnergyCost() {
+		return 10000;
 	}
 
 	@Override
-	public CraftingResult<ItemStack> craft(TileIntegrationTable crafter, boolean preview, ItemStack inputA, ItemStack inputB) {
-		CraftingResult<ItemStack> result = super.craft(crafter, preview, inputA, inputB);
-		if (result != null)
-			result.crafted = new ItemStack(ItemsAndBlocks.toolCore);
-		return result;
+	public List<ItemStack> getExampleInput() {
+		return Arrays.asList(new ItemStack(BCItems.GOLD_GEAR));
 	}
 
 	@Override
-	public boolean isValidInputA(ItemStack inputA) {
-		return inputA != null && inputA.getItem() == BuildCraftCore.goldGearItem;
+	public List<List<ItemStack>> getExampleExpansions() {
+		return Arrays.asList(Arrays.asList(ItemRedstoneChipset.Chipset.DIAMOND.getStack()));
 	}
 
 	@Override
-	public boolean isValidInputB(ItemStack inputB) {
-		return inputB != null && inputB.getItem() == ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem();
-	}*/
+	public List<ItemStack> getExampleOutput() {
+		return Arrays.asList(new ItemStack(ItemLoader.toolCore));
+	}
+
+	@Override
+	public boolean isValidInput(ItemStack input) {
+		return input != null && input.getItem() == BCItems.GOLD_GEAR;
+	}
+
+	@Override
+	public boolean isValidExpansion(ItemStack input, ItemStack expansion) {
+		return expansion != null && expansion.getItem() == ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem();
+	}
+
+	@Override
+	public ItemStack craft(ItemStack input, List<ItemStack> expansions, boolean preview) {
+		if (!preview)
+			expansions.get(0).stackSize--;
+		return new ItemStack(ItemLoader.toolCore);
+	}
+
+	@Override
+	public int getMaximumExpansionCount(ItemStack input) {
+		return 1;
+	}
 }

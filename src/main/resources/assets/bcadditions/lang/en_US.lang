@@ -86,6 +86,7 @@ item.thruster.name=Thruster
 item.lightPlating.name=Light Plating
 item.fluxConductor.name=Flux Conductor
 item.fluxDisperser.name=Flux Disperser
+item.rocketPants.name=Rocket Pants
 
 material.iron.name=Iron
 material.gold.name=Gold

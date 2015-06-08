@@ -1,9 +1,11 @@
 package buildcraftAdditions.armour;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -12,6 +14,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import buildcraftAdditions.client.models.ModelRocketPants;
 import buildcraftAdditions.listeners.FlightTracker;
 import buildcraftAdditions.reference.ArmorLoader;
+import buildcraftAdditions.utils.RenderUtils;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -24,6 +28,8 @@ public class ItemRocketPants extends ItemPoweredArmor {
 			MAX_LIFT = 6,
 			FLY_POWER = 60,
 			SPEED_POWER = 20;
+
+	public static IIcon icon;
 
 	public ItemRocketPants() {
 		super("rocketPants", 2);
@@ -59,5 +65,18 @@ public class ItemRocketPants extends ItemPoweredArmor {
 		return ModelRocketPants.INSTANCE;
 	}
 
+	@Override
+	public void registerIcons(IIconRegister register) {
+		icon = RenderUtils.registerIcon(register, "rocketPants");
+	}
 
+	@Override
+	public IIcon getIcon(ItemStack stack, int pass) {
+		return icon;
+	}
+
+	@Override
+	public IIcon getIconFromDamage(int damage) {
+		return icon;
+	}
 }
