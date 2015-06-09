@@ -1,8 +1,0 @@
-Kinetic Duster
-The Ultimate Duster (also known as Dustinator 9000)
-Process items in the Mechanical Duster
-After many failed Duster versions, you decide you simply can’t mix the grinding power of the Mechanical Duster and the inventory managing capabilities of the Semi-Automatic Duster, so you decide to step it up and try another method of doubling the Ore: Lasers.
-Their precision surely will help in not breaking the internal piping like it happened every time it was hit by an Engine. Fortunately it works, but this time you have to involve some high-tier materials, including a Diamond Gear.
-The Kinetic Duster is born.
-
-The precision of the Lasers keeps the internal gold circuit intact, which allows the machine to receive external power (through Lasers) and manage its own inventory. You’re done here.

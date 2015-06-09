@@ -1,4 +1,0 @@
-Large Kinetic Energy Buffer
-Larger energy storage
-Place Kinetic Energy Buffers
-After your initial discovery of the Kinetic Energy Buffer, it’s time to build a better version. But however you try, you just can’t place two Tier 2 Kinetic Capsules on the same block. Instead of giving up, you have a better idea. By placing just one Capsule per block and filling the gaps with Iron Ingots, you make a block that is capable of connecting with others of the same kind. Adding them one by one, you make a small cubic structure, which works just like a larger Kinetic Energy Buffer, except you can’t move it.
