@@ -1,0 +1,225 @@
+tile.blockFluidicCompressor.name=Compressor Fluídico
+tile.blockChargingStation.name=Estação de Carregamento
+tile.blockHeatedFurnace.name=Fornalha Aquecida
+tile.blockCoilBasic.name=Bobina Básica
+tile.blockDusterBasic.name=Pulverizador Básico
+tile.blockDusterSemiAutomatic.name=Pulverizador Semiautomático
+tile.blockDusterMechanical.name=Pulverizador Mecânico
+tile.blockDusterKinetic.name=Pulverizador Cinético
+tile.blockCoilLava.name=Bobina de Lava
+tile.blockCoilKinetic.name=Bobina Cinética
+tile.blockKEBT1.name=´Buffer´ de Energia Cinética
+tile.blockKEBT2.name=´Buffer´ de Energia Cinética Grande
+tile.blockKEBT3Core.name=Núcleo do ´Buffer´ de Energia Cinética Avançado 
+tile.blockKEBT3Plating.name=Chapeamento do ´Buffer´ de Energia Cinética Avançado 
+tile.blockKEBT3.name=´Buffer´ de Energia Cinética Avançado
+
+item.ironCanister.name=Lata de Ferro
+item.goldCanister.name=Lata de Ouro
+item.diamondCanister.name=Lata de Diamante
+item.poweredShovel.name=Escavadora Cinética
+item.drill.name=Broca Cinética
+item.chainsaw.name=Motoserra Cinética
+item.megaHoe.name=Enxada Cinética
+item.PowerCapsuleTier1.name=Cápsula Cinética Nível 1
+item.PowerCapsuleTier2.name=Cápsula Cinética Nível 2
+item.PowerCapsuleTier3.name=Cápsula Cinética Nível 3
+item.stickIron.name=Graveto de Ferro
+item.stickGold.name=Graveto de Ouro
+item.stickDiamond.name=Graveto de Diamante
+item.stickEmerald.name=Graveto de Esmeralda
+item.toolCore.name=Núcleo de Ferramentas
+item.toolUpgradeDrill.name=Cabeça da Broca
+item.toolUpgradeDigger.name=Acessório de Escavação
+item.toolUpgradeChainsaw.name=Lâmina de Serra
+item.toolUpgradeHoe.name=Lavrador
+item.kineticMultiTool.name=Multi-Ferramenta Cinética
+item.dustGold.name=Pó de Ouro
+item.dustIron.name=Pó de Ferro
+item.dustCopper.name=Pó de Cobre
+item.dustLead.name=Pó de Chumbo
+item.dustNickel.name=Pó de Níquel
+item.dustPlatinum.name=Pó de Platina
+item.dustTin.name=Pó de Estanho
+item.dustSilver.name=Pó de Prata
+item.dustDiamond.name=Pó de Diamante
+item.grindingWheel.name=Disco Abrasivo
+item.engineeringDiary.name=Diário de Engenharia
+item.wireIron.name=Fio de Ferro
+item.wireIronUnhardened.name=Fio de Ferro (Não endurecido)
+item.wireGold.name=Fio de Ouro
+item.wireGoldUnhardened.name=Fio de Ouro (Não endurecido)
+item.wireDiamond.name=Fio de Diamante
+item.wireDiamondUnhardened.name=Fio de Diamante (Não endurecido)
+
+tooltip.installed=Instalado
+tooltip.deactivated=Desativado
+tooltip.upgradesPossible=Atualizações Possíveis
+
+gui.progress=Progresso
+gui.fluid=Fluido
+gui.noFluid=Vazio
+gui.fluidStored=Quantidade de Fluido
+gui.energyInTool=Energia Armazenada
+gui.maxEnergy=Energia Máxima
+
+gui.nei.dusting=Pulverizando
+
+trigger.canisterRequested=Lata Solicitada
+trigger.hasEmptyCanister=Has Lata Vazia
+trigger.hasFullCanister=Has Lata Cheia
+trigger.doneCharging=Carregado
+trigger.readyToCharge=Pronto para carregar
+
+itemGroup.BuildcraftAdditions=Buildcraft: Adições
+
+Eureka=EUREKA!
+eureka.dusterTier0Finished=Você começa planejando todas as funções de suas construções, mas percebe que vai precisar de uma tonelada de recursos. E também começar a pensar em uma forma mais fácil de fazer.
+eureka.dusterTier1Finished=Enquanto processava seus minérios, de repente você percebe que há formas mais eficientes para processá-los.
+eureka.dusterTier2-1Finished=Depois de ser capaz de exportar os itens para inventários, você decide tentar automatizar o processamento em si.
+eureka.dusterTier2-2Finished=Você gosta que não tem mais que pular na máquina, mas também quer a entrada e saída de itens automatizada. Você decide combinar seu conhecimento em uma nova máquina. Talvez algo com lasers?
+eureka.kineticToolFinished=Ao fazer mais uma ferramenta para substituir a sua antiga, você pensa em uma maneira de fazer uma ferramenta inquebrável
+eureka.missingKnowledge=Você não tem idéia de como esta máquina funciona (por enquanto). Você tenta usá-la, mas devido à sua incompetência, ela se desfaz.
+eureka.missingKnowledgeKineticTool=Você não tem idéia (ainda) de como funciona esta ferramenta. Tenta usá-la, mas devido à sua inaptidão, ela se quebra.
+
+engineeringDiary.BCA.title=Buildcraft: Adições
+engineeringDiary.BCA.page0=Aqui você pode encontrar todos os itens pesquisáveis e seu progresso
+
+engineeringDiary.dusterTier0.title=Pulverizador Básico
+engineeringDiary.dusterTier0.page0=Você pode usar esta simples máquina para duplicar seus minérios
+engineeringDiary.dusterTier0.page1=Você não é um saudosista, mas de vez em quando a saudade bate em todo mundo. Você se lembra dos velhos tempos, quando todos tinham todo o minério que precisavam, só gastando para fazer grandes engenhocas de Redstone
+engineeringDiary.dusterTier0.page2=ou ferrovias tão grandes que cobriam continentes inteiros. Bons tempos. Mas tudo mudou depois da chegada dos Engenheiros. Todas as suas complexas ferramentas e máquinas requerem grandes quantidades de minério,
+engineeringDiary.dusterTier0.page3=tanto que de vez em quando a terra secava. Você começa a se perguntar se é possível aumentar a produção de minério, e você termina criando o Pulverizador Básico, uma simples máquina criada utilizando Pedras e Gosma de Slime, com
+engineeringDiary.dusterTier0.page4=partes raspantes no topo. Funciona colocando o minério em cima e pulando nele, algo que você não está feliz por ter que fazer, mas o dobro de minério é o dobro de minério. Você se pergunta como pode melhorar esta máquina...
+engineeringDiary.dusterTier0.howToMakeProgress=Plano para futuras construções
+
+
+engineeringDiary.dusterTier1.title=Pulverizador Semiautomático
+engineeringDiary.dusterTier1.page0=Este Pulverizador melhorado pode interagir com inventários
+engineeringDiary.dusterTier1.page1=Seu primeiro Pulverizador foi um enorme avanço no meio de processamento de minérios. Nunca antes foi tão fácil conseguir mais minérios. Entretanto, todos concordaram que colocar o minério manualmente e pular
+engineeringDiary.dusterTier1.page2=em cima dele é um pouco rústico, então você decide focar em fazer a máquina melhor, começando com interação com inventários. Enquanto experimenta, você descobre que Tubos tem um certo efeito, mas as Engrenagens de Pedra são muito brutas para o Ouro, então você as aprimora para Engrenagens de Ferro.
+engineeringDiary.dusterTier1.page3=Finalmente, você faz o Pulverizador Semiautomático. Este Pulverizador ainda requer que você pule nele, mas ao menos os minérios podem ser introduzidos atráves de Funis e Tubos,enquanto que os produtos finais aparentam se ejetar sozinhos. Agora é hora de trabalhar no problema dos pulos.
+engineeringDiary.dusterTier1.howToMakeProgress=Processar itens no Pulverizador Básico
+
+engineeringDiary.dusterTier2-1.title=Pulverizador Mecânico
+engineeringDiary.dusterTier2-1.page0=Esta máquina de duplicar minérios pode receber energia
+engineeringDiary.dusterTier2-1.page1=Após a sua descoberta inicial de automatização, você tenta fazer a máquina triturar o minério para você, sem sucesso. Você decide dar um passo pra trás e utilizar o Pulverizador Básico como base para os seus experimentos (de novo),
+engineeringDiary.dusterTier2-1.page2=e você acaba criando o Disco Abrasivo, um item que pode ser a chave para automatizar esta máquina. E acaba sendo, visto que depois que você aprimora as Engrenagens de Pedra para Engrenagens de Ferro novamente,
+engineeringDiary.dusterTier2-1.page3=ela parece aceitar energia para duplicar os minérios. Você finalmente fez o Pulverizador Mecânico! Contudo esta máquina é outro experimento incompleto, visto que ela não tem a capacidade de gerenciar inventários que o Pulverizador Semiautomático tinha. Você precisa fazer melhor.
+engineeringDiary.dusterTier2-1.howToMakeProgress=Processar itens no Pulverizador Semiautomático
+
+engineeringDiary.dusterTier2-2.title=Pulverizador Cinético
+engineeringDiary.dusterTier2-2.page0=O Pulverizador Final (também conhecido como Pulverizador 9000)
+engineeringDiary.dusterTier2-2.page1=Depois de muitas versões falhas de Pulverizadores, você decide que simplesmente não dá para mistoriar o poder triturador do Pulverizador Mecânico e as capacidades de gerenciamento de inventário do Pulverizador Semiautomático,
+engineeringDiary.dusterTier2-2.page2=enão você decide tentar algo diferente para duplicar seus minérios: Lasers. A sua precisão definitivamente vai ajudar em não quebrar a tubulação interna do Pulverizador, o que acontecia toda vez quando ele era atingido por um Motor.
+engineeringDiary.dusterTier2-2.page3=Felizmente funciona, mas dessa vez você tem que involver alguns materias de alta qualidade, incluindo uma Engrenagem de Diamante. Nasce o Pulverizador Cinético. A precisão dos Lasers mantém o circuito interno de Ouro,
+engineeringDiary.dusterTier2-2.page4=o que permite a máquina receber energia externa (através dos Lasers) e gerenciar o próprio inventário. Isso é tudo para esta máquina.
+engineeringDiary.dusterTier2-2.howToMakeProgress=Processar itens no Pulverizador Mecânico
+
+engineeringDiary.kineticTool.title=Multi-Ferramenta Cinética
+engineeringDiary.kineticTool.page0=Uma ferramenta para tudo
+engineeringDiary.kineticTool.page1=Ferramentas são uma parte fundamental do nosso mundo e você odeia o fato delas continuem quebrando. As máquinas parecem nunca quebrar e você começa a se perguntar por quê. Depois de um tempo, entendo o porquê: Redstone e Energia.
+engineeringDiary.kineticTool.page2=Enquanto ferramentas também recebem um tipo de energia (aquele que vem de seu braço), as máquinas recebem um energia especial, ajustadas da Redstone, e que parece ser o que as faz durar indefinidamente.
+engineeringDiary.kineticTool.page3=Você decide a melhor maneira de fazer ferramentas inquebráveis é montá-las com materiais da mais alta qualidade e afinados a Redstone. O núcleo de sua ferramenta consiste de uma engrenagem de ouro (para a melhor velocidade) combinados
+engineeringDiary.kineticTool.page4=com um Chipset de Diamante (para o efeito de longa duração, afinado a Redstone) na tabela de integração. Após o uso de Lasers para combinar perfeitamente esses itens, você decide que sua precisão será chave neste processo,
+engineeringDiary.kineticTool.page5=Então para fixar a cabeça da ferramenta junto a uma vara de ferro, coloque o ferro na tabela de montagem. Então é só uma questão de combinar tudo com alguns diamantes, pois isso torna as ferramentas mais duras (Mesa de Montagem).
+engineeringDiary.kineticTool.page6=Você finalmente tem seu punho, e com certeza isso pode segurar qualquer ferramenta, e não importa quantas vezes for usada, ela nunca vai quebrar. No entanto, você ainda precisa fornecêr energia, e para isso tem que criar as cápsulas cinética.
+engineeringDiary.kineticTool.page7=Agora é hora de atualizar sua Multi-Ferramenta Cinética! Para isso, você põe 3 de ferro, 2 de ouro e 1 núcleo de ferramenta na tabela de montagem para fazer a cabeça da ferramenta. Depois de montar sua primeira atualização, você decide
+engineeringDiary.kineticTool.page8=que a tabela de integração é melhor para anexá-la à ferramenta. Agora você tem uma ferramenta inquebrável alimentada à RF. No entanto, os custos desta ferramenta foram demasiado altos para que você considere fazer mais 3 delas.
+engineeringDiary.kineticTool.page9=Você decide mexer nela e acaba por descobrir como colocar outra atualização na Multi-Ferramenta! Você colocou 4 de ouro na tabela de montagem e 1 graveto de ouro. No entanto, anexar isto a ferramenta por si só faria
+engineeringDiary.kineticTool.page10=sair de sintonia da Redstone, assim que você decide adicionar um Chipset de quartzo ao lado dela (tabela de integração). A ferramenta parece saber quando usar cada atualização, tornando-se efetivamente uma ferramenta 2 em 1! Isto ainda não cobre todos os upgrades possíveis,
+engineeringDiary.kineticTool.page11=para você montar crie um graveto de diamante (2 diamantes na mesa de montagem). E coloque na ferramenta com um Chipset de ouro (tabela de integração). Embora a ferramenta agora tenha 3 atualizações, você quer saber se é possível adicionar uma quarta.
+engineeringDiary.kineticTool.page12=Existem outros materiais não naturais que podem ser usados para fazer gravetos, mas um dia que você se depara com uma planta de energia, e se surpreende por encontrar um aldeão engenheiro! Parece que este aldeão tem experimentado idéias
+engineeringDiary.kineticTool.page13=muito semelhante às suas no passado e por acaso trazia algumas gravetos de Esmeralda! Você correr para casa e combina o graveto com um Chipset de diamante em sua ferramenta. Finalmente, você tem todos as 4 atualizações na sua ferramenta!
+engineeringDiary.kineticTool.howToMakeProgress=Montar ferramentas
+
+engineeringDiary.heatedFurnace.title=Fornalha Aquecida
+engineeringDiary.heatedFurnace.page0=Uma nova fornalha que pode ser alimentada de várias maneiras.
+engineeringDiary.heatedFurnace.page1=Você já teve uma miríade de fornos, mas eles foram ficando difíceis de gerenciar. Você só queria algo que pudesse levar mais carvão uma vez, mas o que você obteve foi algo totalmente inesperado.
+engineeringDiary.heatedFurnace.page2=Cercando uma fornalha com lingotes de ferro, você removeu o espaço do combustível. Oops. @ @ No entanto, não era para isso acontecer mas você já sabe dos recursos de transmissão de energia do ferro e está convencido
+engineeringDiary.heatedFurnace.page3=que pode fazer algo para dar energia a esta fornalha... Você decide colocá-la no mundo e ver se você consegue pensar em algo mais
+engineeringDiary.heatedFurnace.howToMakeProgress=Montar fornalhas
+eureka.heatedFurnaceFinished=Depois de colocar todas essas fornalhas você pensa em uma maneira de fazer uma fornalha melhor, mais eficaz e mais rápida
+
+engineeringDiary.basicCoil.title=Bobina Básica
+engineeringDiary.basicCoil.page0=Esta bobina pode ser usada para alimentar a Fornalha Aquecida.
+engineeringDiary.basicCoil.page1=Isso foi difícil. Tudo começou quando você acidentalmente deixou dois punhados de pó de ferro ao lado da Lava. Eles estavam perto o bastante para que o calor pudesse afetá-los, mas não perto o suficiente para derrete-los completamente. A 'coisa' era estranhamente
+engineeringDiary.basicCoil.page2=fina e quando foi colocada ao lado de um ferro (enquanto ainda quente), começou a girar criando atrito e aquecimento (em uma porção extremamente pequena) do lingote de ferro. E você percebe que isso pode ser usado em seu novo forno e
+engineeringDiary.basicCoil.page3=tentar descobrir como melhorar o processo. @ @ Depois de um tempo, você encontra uma maneira de aperfeiçoar o processo. Usando a Mesa Trabalho para combinar três porções de pó de ferro juntos, você faz duas tiras de fios de ferro
+engineeringDiary.basicCoil.page4=(ainda mole), então prossiga para colocá-los em um forno para endurece-los. @ @ A última etapa é a mais complicada. Você envolve oito pedaços de fios (agora endurecidos, mas ainda moldáveis) em torno de um lingote de ferro, e pronto você tem algo
+engineeringDiary.basicCoil.page5=que se assemelha a uma torre, mas no tamanho de um bloco. Devido à forma como os fios fios rodeiam a coisa, você decide chamá-la de Bobina @ @ Agora é fácil. Você só precisa encontrar uma maneira de aquecer as bobinas, e o que é melhor
+engineeringDiary.basicCoil.page6=se não for bom e velho combustível da fornalha? O calor faz com que o rolo de fio, em contato com a fornalha, cozinhe qualquer coisa dentro dela. Uma única bobina opera uma fornalha aquecida a 1/5 da velocidade de uma fornalha normal,
+engineeringDiary.basicCoil.page7=mas em compensação o combustível dura 5 vezes mais. Tendo todos os 6 lados de um forno aquecido cercado com bobinas podem torná-lo cozinhar mais rápido do que um forno regular.
+engineeringDiary.basicCoil.howToMakeProgress=Coloque numa fornalha aquecida
+eureka.basicCoilFinished=Você já sabia como fazer o fornalha aquecida, mas agora que você a colocou no mundo você tem inventar uma maneira de realmente aquecê-la
+
+engineeringDiary.lavaCoil.title=Bobina de Lava
+engineeringDiary.lavaCoil.page0=Essa bobina pode alimentar a Fornalha Aquecida com Lava.
+engineeringDiary.lavaCoil.page1=Foi um passo lógico. Após suas descobertas iniciais da bobina com ferro, você decide fazer o mesmo com o ouro, mas você é surpreendido ao descobrir que os fios de ouro são realmente verdes. É estranho. Não só isso, mas as bobinas feitas de
+engineeringDiary.lavaCoil.page2=simplesmente não precisam mais da energia do carvão. Você decide colocar Lava. É um tiro no escuro, mas ele são tão verdes quanto fluido selante, então por que não? @ @ Funciona. Você realmente pensou que seria só para derretê-lo, mas.
+engineeringDiary.lavaCoil.page3=Estas bobinas pegam a Lava fluida já quente e se aquecem ainda mais.
+engineeringDiary.lavaCoil.howToMakeProgress=Coloque as Bobinas Básicas
+eureka.lavaCoilFinished=Você observa suas bobinas básicas e a geração de calor e se pergunta se não daria pra usar o aquecimento de lava para um novo tipo de bobina
+
+engineeringDiary.kineticCoil.title=Bobina Cinética
+engineeringDiary.kineticCoil.page0=Essa bobina pode alimentar a Fornalha Aquecida com Lasers.
+engineeringDiary.kineticCoil.page1=Desta vez você estava um pouco conservador sobre o uso de diamantes para atualizar algo, considerando apenas quantos você precisa, mas novamente você ficou curioso sobre isso.
+engineeringDiary.kineticCoil.page2=Estava claro desde o início, onde estaria a sua fonte de poder. @ @ Lasers. @ @ Diamantes são grandes condutores de energia afinal e nem carvão nem Lava já gerariam calor suficiente para
+engineeringDiary.kineticCoil.page3=fazer diamantes girar. Depois disto você é nunca mais vai fazer uma parede de fornalhas.
+engineeringDiary.kineticCoil.howToMakeProgress=Coloque as Bobinas de Lava
+eureka.kineticCoilFinished=Essas bobinas de lava são ótimas, mas como com tudo: há sempre algo melhor
+
+engineeringDiary.KEBT1.title=´Buffer´ de Energia Cinética Básico
+engineeringDiary.KEBT1.page0=Armazenamento de energia básica em forma de bloco
+engineeringDiary.KEBT1.page1=As cápsulas cinéticas foram um avanço quando veio a energia, mas elas não eram perfeitas. Apesar de serem capazes de armazenar energia, podem apenas transmitir para dispositivos pequenos, tornando-se impossíveis de serem usadas em operações de grande escala.
+engineeringDiary.KEBT1.page2=Determinado a fazer funcionar, você faz algo simples. Empilhando três Cápsulas Cinéticas Nível 1, você pode armazenar energia suficiente para algo mais significativo. Para que ele funcione, você deve colocar alguns Tubos Cinéticos de Ouro nas laterais,
+engineeringDiary.KEBT1.page3=que deve ser suficiente para transmitir energia para máquinas normais. Arrudei isso tudo em um pouco de ferro, e você tem uma reserva de energia cinética! @ @ O bloco tem uma interface gráfica interessante, mas a coisa mais notável é o fato de
+engineeringDiary.KEBT1.page4=que você pode usar uma Chave de Grifo para movê-lo!
+engineeringDiary.KEBT1.howToMakeProgress=Monte cápsulas cinéticas
+eureka.KEBT1Finished=Armazenar energia em baterias é útil, mas agora é hora de também armazená-la em forma de bloco
+
+engineeringDiary.KEBT2.title=´Buffer´ de Energia Cinética Grande
+engineeringDiary.KEBT2.page0=Maior armazenamento de energia
+engineeringDiary.KEBT2.page1=Após a sua descoberta inicial dos ´Buffers´ de Energia Cinética, é hora de construir uma versão melhorada. Mas, por mais que você tente, você simplesmente não consegue colocar duas Cápsulas Cinéticas Nível 2 no mesmo bloco. Em vez de desistir, você tem uma idéia melhor.
+engineeringDiary.KEBT2.page2=Ao colocar apenas uma cápsula por bloco e preenchendo as lacunas com lingotes de ferro, você faz um bloco que é capaz de se conectar com outros do mesmo tipo. Pondo um a um, você monta uma pequena estrutura cúbica,
+engineeringDiary.KEBT2.page3=que funciona como um ´Buffers´ de Energia Cinética Grande, exceto que você não pode movê-lo.
+engineeringDiary.KEBT2.howToMakeProgress=Coloque ´Buffers´ de Energia Cinética
+eureka.KEBT2Finished=Esse bloco simple guarda um monte de energia, mas não é suficiente, é hora de dar um passo a frente
+
+engineeringDiary.KEBT3.title=´Buffer´ de Energia Cinética Avançado
+engineeringDiary.KEBT3.page0=Ainda mais armazenamento de energia
+engineeringDiary.KEBT3.page1=Então Cinéticas Cápsulas Nível 2 não podem ser postas no mesmo bloco. Mas será que o mesmo acontece com a Nível 3? Não. Você pode colocar 3 delas dentro de um único bloco! A contrapartida é que você tem que usar diamantes para montar a estrutura,
+engineeringDiary.KEBT3.page2=e apenas Tubos Cinéticos de Diamante são capazes de lidar com o coeficiente energético dentro do bloco. E para manter tudo ali, mais blindagem é necessária. Através da combinação de ouro e ferro (com alguns Tubos Cinéticos de Diamante para manter o fluxo de energia funcionando)
+engineeringDiary.KEBT3.page3=você pode criar o revestimento perfeito para o bloco. Seguro, e ainda conduzindo.
+engineeringDiary.KEBT3.howToMakeProgress=Monte 2 'Buffers' de Energia Cinética Grande
+eureka.KEBT3Finished=Só o armazenamento de energia em massa não é suficiente
+
+engineeringDiary.requiredResearch=Pesquisa requerida:
+engineeringDiary.progress=Progresso:
+engineeringDiary.unlocked=DESBLOQUEADO
+
+config.title=Configuração do Buildcraft: Adições
+
+updates=Atualizações
+updates.tooltip=Configure se o BCA deve verificar se há atualizações
+shouldCheckForUpdates=Verificar atualizações
+shouldCheckForUpdates.tooltip=Verdadeiro (TRUE) verificar atualizações, Falso (FALSE) não verificar se há atualizações
+shouldPrintOutChangelog=Ver 'changelog'
+shouldPrintOutChangelog.tooltip=Se Verdadeiro (TRUE), você também vai ver o 'changelog' da versão mais recente
+
+BaseModifier=Modificador Base
+BaseModifier.tooltip=Energia base que as ferramentas usam
+EasyDifficultyModifier=Modificador Fácil
+EasyDifficultyModifier.tooltip=O consumo de energia é multiplicado por isso no Fácil
+HardDifficultyModifier=Modificador Difícil
+HardDifficultyModifier.tooltip=O consumo de energia é multiplicado por isso no Difícil
+NormalDifficultyModifier=Modificador Normal
+NormalDifficultyModifier.tooltip=O consumo de energia é multiplicado por isso no Normal
+PeacefullDifficultyModifier=Modificador Pacífico
+PeacefullDifficultyModifier.tooltip=O consumo de energia é multiplicado por isso no Pacífico
+
+Misc=Diversos
+shouldRegisterDusts=Registrar Pós
+shouldRegisterDusts.tooltip=Defina como Falso (FALSE) para impedir o BCA de registrar novos pós
+
+kineticTool.outOfPower=SEM ENERGIA, ABORTANDO A QUEBRA DE BLOCOS

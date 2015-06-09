@@ -1,0 +1,6 @@
+Basic Kinetic Energy Buffer
+Basic energy storage in block form
+Craft kinetic capsules
+The Kinetic Capsules were quite the advancement when it came to energy, but they weren’t perfect. Despite being able to store energy, you can only transmit it to small devices, making it impossible to use it in large scale operations. Determined to make it work, you make a simple machine. By stacking three Tier 1 Kinetic Capsules, you think you can store enough energy for something meaningful. To make it work, you place some Golden Kinesis Pipes on the sides, which ought to be enough to transmit energy to regular machines. Encase it all in some Iron, and you’ve got yourself a Kinetic Energy Buffer! 
+
+The block has an interesting GUI, but the most notable thing about it is the fact that you can use a Wrench to move it!

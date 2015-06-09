@@ -1,0 +1,7 @@
+Lava Coil
+This Coil can power the Heated Furnace with Lava.
+Place Basic Coils
+It was a logical step up. After your initial Coil discoveries with Iron, you decide to do the same with Gold, but you’re surprised to find out that Gold Wires are actually green. Weird. Not only that, but the Coils made from them simply don’t take Coal for power. You decide to place Lava in these. Its a long shot, but they’re just as green as Fluid Sealant, so why not?
+
+It works. You really thought it was just going to melt it, but nope.
+These Coils take the already hot fluid Lava and use it to make even more heat. Now we’re talking.

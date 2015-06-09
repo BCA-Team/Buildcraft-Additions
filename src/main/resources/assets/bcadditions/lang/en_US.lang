@@ -1,0 +1,451 @@
+tile.blockFluidicCompressor.name=Fluidic Compressor
+tile.blockChargingStation.name=Charging Station
+tile.blockHeatedFurnace.name=Heated Furnace
+tile.blockCoilBasic.name=Basic Coil
+tile.blockDusterBasic.name=Basic Duster
+tile.blockDusterSemiAutomatic.name=Semi-Automatic Duster
+tile.blockDusterMechanical.name=Mechanical Duster
+tile.blockDusterKinetic.name=Kinetic Duster
+tile.blockCoilLava.name=Lava Coil
+tile.blockCoilKinetic.name=Kinetic Coil
+tile.blockKEBT1.name=Kinetic Energy Buffer
+tile.blockKEBT1Creative.name=Creative Kinetic Energy Buffer
+tile.blockKEBT2.name=Large Kinetic Energy Buffer
+tile.blockKEBT3Core.name=Advanced Kinetic Energy Buffer Core
+tile.blockKEBT3Plating.name=Advanced Kinetic Energy Buffer Plating
+tile.blockKEBT3.name=Advanced Kinetic Energy Buffer
+tile.blockRefineryWalls.name=Refinery Plating
+tile.blockRefineryValve.name=Refinery Valve
+tile.blockCoolingTowerWalls.name=Cooling Tower Walls
+tile.blockCoolingTowerValve.name=Cooling Tower Valve
+tile.blockItemSorter.name=Sort-O-Tron
+tile.backpackStand.name=Backpack Stand
+
+item.ironCanister.name=Iron Canister
+item.goldCanister.name=Gold Canister
+item.diamondCanister.name=Diamond Canister
+item.powerCapsuleTier1.name=Kinetic Capsule Tier 1
+item.powerCapsuleTier2.name=Kinetic Capsule Tier 2
+item.powerCapsuleTier3.name=Kinetic Capsule Tier 3
+item.stickIron.name=Iron Stick
+item.stickGold.name=Gold Stick
+item.stickDiamond.name=Diamond Stick
+item.stickEmerald.name=Emerald Stick
+item.stickQuartz.name=Quartz Stick
+item.stickNetherStar.name=Nether Star Stick
+item.stickEnder.name=Ender Stick
+item.stickRedstone.name=Redstone Stick
+item.stickGlowstone.name=Glowstone Stick
+item.stickSlime.name=Slime Stick
+item.stickBone.name=Bone Stick
+item.stickFlint.name=Flint Stick
+item.stickBlaze.name=Blaze Stick
+item.toolCore.name=Tool Core
+item.toolUpgradeDrill.name=Drill Head
+item.toolUpgradeDigger.name=Excavation Attachment
+item.toolUpgradeChainsaw.name=Saw Blade
+item.toolUpgradeHoe.name=Tiller
+item.toolUpgradeArea.name=Area Augment
+item.toolUpgradeSilky.name=Silky Upgrade
+item.toolUpgradeFortune1.name=Fortune I Upgrade
+item.toolUpgradeFortune2.name=Fortune II Upgrade
+item.toolUpgradeFortune3.name=Fortune III Upgrade
+item.kineticMultiTool.name=Kinetic Multi-Tool
+item.portableLaser.name=Portable Laser
+item.dust.name=%s Dust
+item.grindingWheel.name=Grinding Wheel
+item.engineeringDiary.name=Engineering Diary
+item.wireIron.name=Iron Wire
+item.wireIronUnhardened.name=Iron Wire (Unhardened)
+item.wireGold.name=Gold Wire
+item.wireGoldUnhardened.name=Gold Wire (Unhardened)
+item.wireDiamond.name=Diamond Wire
+item.wireDiamondUnhardened.name=Diamond Wire (Unhardened)
+item.heatPlatingRaw.name=Raw Heat Conducting Plating
+item.heatPlating.name=Heat Conducting Plating
+item.dustConverter.name=Dust Converter
+item.machineConfigurator.name=Machine Configurator
+item.bcaBucket.name=%s Bucket
+item.pipeColoringTool.name=Coloring Tool
+item.upgrade.upgradeAutoEject.name=Machine Upgrade: Auto-Eject
+item.upgrade.upgradeAutoImport.name=Machine Upgrade: Auto-Import
+item.upgrade.upgradeEfficiency1.name=Machine Upgrade: Efficiency I
+item.upgrade.upgradeEfficiency2.name=Machine Upgrade: Efficiency II
+item.upgrade.upgradeEfficiency3.name=Machine Upgrade: Efficiency III
+item.upgrade.upgradeSpeed1.name=Machine Upgrade: Speed I
+item.upgrade.upgradeSpeed2.name=Machine Upgrade: Speed II
+item.upgrade.upgradeSpeed3.name=Machine Upgrade: Speed III
+item.baseUpgrade.name=Blank Upgrade
+item.robotDebugTool.name=Robot Debug Tool
+item.kineticBackpack.name=Kinetic Backpack
+item.gildedRedMetalIngot.name=Gilded Red Metal Ingot
+item.conductivePlateRaw.name=Raw Conductive Plating
+item.conductivePlate.name=Conductive Plating
+item.spring.name=Spring
+item.thruster.name=Thruster
+item.lightPlating.name=Light Plating
+item.fluxConductor.name=Flux Conductor
+item.fluxDisperser.name=Flux Disperser
+item.rocketPants.name=Rocket Pants
+item.hoverBoots.name=Hover Boots
+
+material.iron.name=Iron
+material.gold.name=Gold
+material.diamond.name=Diamond
+material.emerald.name=Emerald
+material.coal.name=Coal
+material.charcoal.name=Charcoal
+material.obsidian.name=Obsidian
+material.enderPearl.name=Ender Pearl
+material.netherQuartz.name=Nether Quartz
+material.bronze.name=Bronze
+material.manganese.name=Manganese
+material.hepatizon.name=Hepatizon
+material.damascusSteel.name=Damascus Steel
+material.angmallen.name=Angmallen
+material.steel.name=Steel
+material.eximite.name=Eximite
+material.meutoite.name=Meutoite
+material.desichalkos.name=Desichalkos
+material.prometheum.name=Prometheum
+material.deepIron.name=Deep Iron
+material.infuscolium.name=Infuscolium
+material.blackSteel.name=Black Steel
+material.oureclase.name=Oureclase
+material.astralSilver.name=Astral Silver
+material.carmot.name=Carmot
+material.mithril.name=Mithril
+material.rubracium.name=Rubracium
+material.quicksilver.name=Quicksilver
+material.haderoth.name=Haderoth
+material.orichalcum.name=Orichalcum
+material.celenegil.name=Celenegil
+material.adamantine.name=Adamantine
+material.atlarus.name=Atlarus
+material.tartarite.name=Tartarite
+material.ignatius.name=Ignatius
+material.shadowIron.name=Shadow Iron
+material.lemurite.name=Lemurite
+material.midasium.name=Midasium
+material.vyroxeres.name=Vyroxeres
+material.ceruclase.name=Ceruclase
+material.alduorite.name=Alduorite
+material.kalendrite.name=Kalendrite
+material.vulcanite.name=Vulcanite
+material.sanguinite.name=Sanguinite
+material.shadowSteel.name=Shadow Steel
+material.inolashite.name=Inolashite
+material.amordrine.name=Amordrine
+material.zinc.name=Zinc
+material.brass.name=Brass
+material.electrum.name=Electrum
+material.aluminum.name=Aluminum
+material.ardite.name=Ardite
+material.manyullyn.name=Manyullyn
+material.cobalt.name=Cobalt
+material.copper.name=Copper
+material.lead.name=Lead
+material.nickel.name=Nickel
+material.platinum.name=Platinum
+material.silver.name=Silver
+material.tin.name=Tin
+material.apatite.name=Apatite
+material.osmium.name=Osmium
+material.sulfur.name=Sulfur
+material.saltpeter.name=Saltpeter
+material.certusQuartz.name=Certus Quartz
+material.aluminumBrass.name=Aluminum Brass
+material.alumite.name=Alumite
+material.pigIron.name=Pig Iron
+material.invar.name=Invar
+material.signalum.name=Signalum
+material.lumium.name=Lumium
+material.enderiumBase.name=Enderium Base
+material.enderium.name=Enderium
+material.electricalSteel.name=Electrical Steel
+material.energeticAlloy.name=Energetic Alloy
+material.phasedGold.name=Phased Gold
+material.redstoneAlloy.name=Redstone Alloy
+material.conductiveIron.name=Conductive Iron
+material.phasedIron.name=Phased Iron
+material.darkSteel.name=Dark Steel
+material.soularium.name=Soularium
+material.fzDarkIron.name=Dark Iron
+material.gildedRedMetal.name=Gilded Red Metal
+material.yellorium.name=Yellorium
+material.graphite.name=Graphite
+material.cyanite.name=Cyanite
+material.blutonium.name=Blutonium
+material.ludicrite.name=Ludicrite
+material.pyrotheum.name=Pyrotheum
+material.cryotheum.name=Cryotheum
+material.blizz.name=Blizz
+
+entity.bcadditions.bcaLaserShot.name=Laser Shot
+
+death.attack.bcaLaser=%1$s was lasered away by %2$s
+death.attack.bcaLaser.item=%1$s was lasered away by %2$s using %3$s
+
+tooltip.installed=Installed Upgrades:
+tooltip.deactivated=Deactivated
+tooltip.upgradesPossible=Upgrades Possible
+tooltip.holdShiftForMoreInfo=Hold Shift for more info
+tooltip.FluidCapacity=Can hold %s buckets of fluid
+tooltip.storedFluid=Currently stores %s (%,d mb)
+tooltip.colorNormalMode=Normal Mode
+tooltip.colorNormalMode.info=Colors standard colorable blocks, sheep and BC pipes
+tooltip.colorSortingMode=Sorting Mode
+tooltip.colorSortingMode.info=Colors the sorting part of the Daizuli and Lapis pipes
+tooltip.defaultColor=Default Item Color
+tooltip.compressor.fill=Fill
+tooltip.compressor.empty=Empty
+tooltip.none=None
+tooltip.forKineticMultiTool=Usable with the Kinetic Multi-Tool
+tooltip.forUpgradableMachines=Usable with upgradable machines
+tooltip.stick.0=Works best together with %s chipset
+tooltip.stick.1=Needs %s stick to be installed
+tooltip.stickGold.chipset=an iron
+tooltip.stickGold.stick=no
+tooltip.stickDiamond.chipset=a gold
+tooltip.stickDiamond.stick=a gold
+tooltip.stickEmerald.chipset=a diamond
+tooltip.stickEmerald.stick=a diamond
+tooltip.stickNetherStar.chipset=an emerald chipset & a pulsating
+tooltip.stickNetherStar.stick=an emerald
+tooltip.stickQuartz.chipset=an iron
+tooltip.stickQuartz.stick=a glowstone
+tooltip.stickEnder.chipset=a redstone comp
+tooltip.stickEnder.stick=a gold
+tooltip.stickRedstone.chipset=an iron
+tooltip.stickRedstone.stick=no
+tooltip.stickGlowstone.chipset=a redstone
+tooltip.stickGlowstone.stick=a redstone
+tooltip.stickSlime.chipset=a redstone
+tooltip.stickSlime.stick=a redstone
+tooltip.stickBlaze.chipset=a redstone
+tooltip.stickBlaze.stick=a redstone
+tooltip.toolUpgradeHoe.use=Allows the tool to till the lands
+tooltip.toolUpgradeDigger.use=Allows the tool to dig up dirt like materials
+tooltip.toolUpgradeDrill.use=Allows the tool to drill through stone and metal like materials
+tooltip.toolUpgradeChainsaw.use=Allows the tool to harvest wood like materials and to saw through your foes
+tooltip.toolUpgradeArea.use=Allows the tool to work in 3x3 area
+tooltip.toolUpgradeSilky.use=Gives the tool a Silk Touch ability
+tooltip.toolUpgradeFortune1.use=Gives the tool Fortune I
+tooltip.toolUpgradeFortune2.use=Gives the tool Fortune II if it has Fortune I
+tooltip.toolUpgradeFortune3.use=Gives the tool Fortune III if it has Fortune II
+tooltip.creativeOnly=Creative Only
+
+fluid.gas.name=%s Gas
+
+gui.progress=Progress
+gui.fluid=Fluid
+gui.noFluid=Empty
+gui.fluidStored=Amount of Fluid
+gui.energyInTool=Energy Stored
+gui.maxEnergy=Max Energy
+gui.refinery.name=Refinery
+gui.heat=Heat
+gui.requiredHeat=Required Heat
+gui.powerUsage=Power Usage
+gui.empty=Empty
+gui.coolingTower.name=Cooling Tower
+gui.north=North
+gui.east=East
+gui.south=South
+gui.west=West
+gui.up=Up
+gui.down=Down
+gui.machineConfigurator.name=Machine Configurator
+gui.kebT1.name=Kinetic Energy Buffer
+gui.kebT2.name=Large KEB
+gui.kebT3.name=Advanced KEB
+gui.itemSorter.name=Sort-O-Tron
+gui.basicCoil.name=Basic Coil
+gui.chargingStation.name=Charging Station
+gui.priority=Priority
+gui.kineticMultiTool.name=Kinetic Multi-Tool
+gui.portableLaser.name=Portable Laser
+gui.heatedFurnace.name=Heated Furnace
+gui.fluidicCompressor.name=Fluidic Compressor
+gui.coloringMode=Coloring Mode
+gui.pipeColorTool.name=Coloring Tool
+gui.colorNormalMode=Normal Mode
+gui.colorSortingMode=Sorting Mode
+gui.installedUpgrades=Installed Upgrades:
+gui.configureIO=Configure Input/Output
+gui.showUpgrades=Installed Upgrades
+
+gui.keb.dangerousButton=BIG RED BUTTONS ARE VERY DANGEROUS
+gui.keb.noPushing=DON'T PUSH IT
+gui.keb.pressForBoom=PRESS HERE FOR A BIG BOOM
+
+gui.nei.dusting=Dusting
+
+gui.color.none=None
+gui.color.white=White
+gui.color.orange=Orange
+gui.color.magenta=Magenta
+gui.color.lightBlue=Light Blue
+gui.color.yellow=Yellow
+gui.color.lime=Lime
+gui.color.pink=Pink
+gui.color.gray=Gray
+gui.color.lightGray=Light Gray
+gui.color.cyan=Cyan
+gui.color.purple=Purple
+gui.color.blue=Blue
+gui.color.brown=Brown
+gui.color.green=Green
+gui.color.red=Red
+gui.color.black=Black
+
+trigger.fluidContainerRequested=Fluid Container requested
+trigger.doneCharging=Done Charging
+trigger.readyToCharge=Ready To Charge
+trigger.KEBCharged=Fully charged
+trigger.KEBUnder25=Less the 25% charged
+trigger.KEBUnder50=Less then 50% charged
+trigger.KEBUnder75=Less then 75% charged
+trigger.KEBUnder100=Less then 100% charged
+trigger.KEBEmpty=Completely empty
+trigger.KEBEngineControl=Smart Engine Control
+
+action.fluidicCompressorModeSwitchToFill=Switch to Fill mode
+action.fluidicCompressorModeSwitchToEmpty=Switch to Empty mode
+
+status.input=Input
+status.output=Output
+status.both=Both
+status.disabled=Disabled
+
+priority.veryLow=Very Low
+priority.low=Low
+priority.normal=Normal
+priority.high=High
+priority.veryHigh=Very High
+
+itemGroup.BuildcraftAdditions=BuildCraft Additions
+itemGroup.bcaCanisters=Canisters
+itemGroup.bcaDusts=Dusts
+
+config.title=BuildCraft Additions Configuration
+
+updates=Updates
+updates.tooltip=Configure if BCA should check for updates or not
+shouldCheckForUpdates=Check for updates
+shouldCheckForUpdates.tooltip=Set to false to disable update checking
+shouldPrintOutChangelog=Print out changelog
+shouldPrintOutChangelog.tooltip=If set to true, you will also see the changelog of the newer version
+
+keb=Kinetic Energy Buffer
+
+heated furnace=Heated Furnace
+
+charging station=Charging Station
+
+feature=Feature
+
+fluidic compressor=Fluidic Compressor
+
+mechanical duster=Mechanical Duster
+
+power capsule=Power Capsule
+
+refinery=Refinery
+
+upgrades=Upgrades
+
+upgrades.refinery=Refinery Upgrades
+
+upgrades.cooling tower=Cooling Tower Upgrades
+
+power usage=Kinetic Multi-Tool
+BaseModifier=Base Modifier
+BaseModifier.tooltip=Base energy the multi-tool uses for breaking a block
+EntityHitModifier=Entity Base Modifier
+EntityHitModifier.tooltip=Base energy the multi-tool uses for damaging an entity
+EntityDamage=Entity Damage
+EntityDamage.tooltip=Damage dealt by the multi-tool
+HoeCost=Tilling power cost
+HoeCost.tooltip=Energy the multi-tool uses for tilling a block of dirt or grass
+EasyDifficultyModifier=Easy Modifier
+EasyDifficultyModifier.tooltip=The energy consumption is multiplied with this on Easy
+HardDifficultyModifier=Hard Modifier
+HardDifficultyModifier.tooltip=The energy consumption is multiplied with this on Hard
+NormalDifficultyModifier=Normal Modifier
+NormalDifficultyModifier.tooltip=The energy consumption is multiplied with this on Normal
+PeacefulDifficultyModifier=Peaceful Modifier
+PeacefulDifficultyModifier.tooltip=The energy consumption is multiplied with this on Peaceful
+ToolEfficiencyPickaxe=Pickaxe efficiency
+ToolEfficiencyPickaxe.tooltip=Efficiency (mining speed) on blocks that can be broken by a pickaxe
+ToolEfficiencyShovel=Shovel efficiency
+ToolEfficiencyShovel.tooltip=Efficiency (mining speed) on blocks that can be broken by a shovel
+ToolEfficiencyAxe=Axe efficiency
+ToolEfficiencyAxe.tooltip=Efficiency (mining speed) on blocks that can be broken by an axe
+ToolHarvestLevel=Harvest level
+ToolEfficiencyAxe.tooltip=Tool harvest level (Wood/Gold: 0, Stone: 1, Iron: 2, Diamond: 3)
+ToolEfficiencyAreaMultiplier=Area Efficiency Multiplier
+ToolEfficiencyAreaMultiplier.tooltip=The efficiency of the tool gets multiplied with this when the area upgrade is installed
+
+portable laser=Portable Laser
+PortableLaserPowerUse=Power use
+PortableLaserPowerUse.tooltip=Power use of the Portable Laser per shoot
+PortableLaserLaserPower=Laser power
+PortableLaserLaserPower.tooltip=Laser power transferred to the laser target per shoot
+PortableLaserEntityDamage=Entity damage
+PortableLaserEntityDamage.tooltip=Damage dealt by the Portable Laser in entity mode
+PortableLaserEntityBurnTime=Entity burn time
+PortableLaserEntityBurnTime.tooltip=Number of seconds entities will be set on fire by the Portable Laser in entity mode
+
+coloring tool=Coloring Tool
+ColoringToolCapacity=Capacity
+ColoringToolCapacity.tooltip=Capacity of the coloring tool's RF storage, in RF
+ColoringToolMaxTransfer=Max transfer
+ColoringToolMaxTransfer.tooltip=Max transfer rate, in RF/t
+ColoringToolEnergyUse=Energy use
+ColoringToolEnergyUse.tooltip=Energy use of one color application, in RF
+
+misc=Misc
+eurekaIntegration=Eureka Integration
+eurekaIntegration.tooltip=Set to false to prevent BCA from using Eureka progressing
+shouldRegisterDusts=Register Dusts
+shouldRegisterDusts.tooltip=Set to false to prevent BCA from registering its dusts
+
+kineticTool.outOfPower=OUT OF POWER, BLOCK BREAKING ABORTED!
+
+updatenotification=There is a newer version of BuildCraft Additions available (%s). Please consider updating.
+changelogNotification=Changelog
+
+selfdestructCountdouwn=SELF DESTRUCTION IN
+selfdestructActivated=SELF DESTRUCT ACTIVATED
+
+configured=Configured
+
+fluids.info=%,d / %,d mB
+fluids.change.info=%,d / %,d mB/t
+rf.info=%,d / %,d RF
+rf.change.info=%,d / %,d RF/t
+
+lavaCoil.info=Lava stored: %s
+
+option.bca.duster.progress.graphical=Graphical Duster Progress
+option.bca.duster.progress.textual=Textual Duster Progress
+
+waila.refinery.noMultiBlock=Not part of a multiblock
+waila.refinery.currentHeat=Current heat: %d
+waila.refinery.requiredHeat=Required heat: %d
+waila.refinery.processing=Refining %s into %s
+
+waila.upgrades.installed=Installed upgrades:
+
+waila.duster.recipe=%s -> %s
+waila.duster.progress=Progress
+
+backpack.info=Place on a backpackstand and click with kinetic capsules on the holes in the back to install capsules
+
+keybinding.toggleBoots=Toggle hover boots
+
+hud.backpack=Backpack charge level:
+hud.boots=Hover boots status:
+hud.enabled=Enabled
+hud.dissabled=Disabled

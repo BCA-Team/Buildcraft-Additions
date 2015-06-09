@@ -1,0 +1,156 @@
+tile.blockFluidicCompressor.name=流体压缩机
+tile.blockChargingStation.name=充能台
+tile.blockHeatedFurnace.name=热力炉
+tile.blockCoilBasic.name=基础线圈
+tile.blockDusterBasic.name=基础打粉机
+tile.blockDusterSemiAutomatic.name=半自动打粉机
+tile.blockDusterMechanical.name=机械打粉机
+tile.blockDusterKinetic.name=动力打粉机
+
+item.ironCanister.name=铁罐
+item.goldCanister.name=金罐
+item.diamondCanister.name=钻石罐
+item.poweredShovel.name=动力铲
+item.drill.name=动力钻
+item.chainsaw.name=动力链锯
+item.megaHoe.name=动力锄
+item.PowerCapsuleTier1.name=一级动力胶囊
+item.PowerCapsuleTier2.name=二级动力胶囊
+item.PowerCapsuleTier3.name=三级动力胶囊
+item.stickIron.name=铁棍
+item.stickGold.name=金棍
+item.stickDiamond.name=钻石棍
+item.stickEmerald.name=绿宝石棍
+item.toolCore.name=工具核心
+item.toolUpgradeDrill.name=钻头
+item.toolUpgradeDigger.name=铲头
+item.toolUpgradeChainsaw.name=锯片
+item.toolUpgradeHoe.name=锄尖
+item.kineticMultiTool.name=动力万能工具
+item.dustGold.name=金粉
+item.dustIron.name=铁粉
+item.dustCopper.name=铜粉
+item.dustLead.name=铅粉
+item.dustNickel.name=镍粉
+item.dustPlatinum.name=铂粉
+item.dustTin.name=锡粉
+item.dustSilver.name=银粉
+item.dustDiamond.name=钻石粉
+item.grindingWheel.name=砂轮
+item.engineeringDiary.name=工程日志
+item.wireIron.name=铁电缆
+item.wireIronUnhardened.name=铁电缆 (未硬化)
+
+tooltip.installed=已安装
+tooltip.deactivated=已关闭
+tooltip.upgradesPossible=可升级
+
+gui.progress=进度
+gui.fluid=流体
+gui.noFluid=空
+gui.fluidStored=流体量
+gui.energyInTool=已储能量
+gui.maxEnergy=最大能量
+
+trigger.canisterRequested=无罐子触发
+trigger.hasEmptyCanister=空罐触发
+trigger.hasFullCanister=满罐触发
+trigger.doneCharging=充能完毕触发
+trigger.readyToCharge=预备充能触发
+
+itemGroup.BuildcraftAdditions=建筑|附件
+
+Eureka=灵光一现!
+eureka.dusterTier0Finished=你开始规划未来的建筑, 但你意识到了这可能需要大量的资源. 于是你开始考虑如何更简单的获取资源.
+eureka.dusterTier1Finished=在加工矿石过程中, 你突然觉察到了一些更有效率的工艺技术.
+eureka.dusterTier2-1Finished=将输出产物放入物品栏令你不胜其烦,你决定尝试研究使之自动化的方法.
+eureka.dusterTier2-2Finished=你希望不必轮换使用不同机器, 你还希望实现自动输入输出, 于是你倾其所学, 研究出一台新的设备, 好像是台带激光的新玩意儿!
+eureka.kineticToolFinished=你希望不必在工具破损后再去做新的, 于是你开始考虑如何制作不会损坏的工具.
+eureka.missingKnowledge=你还不知道如何运作这台机器. 你尝试使用它, 但它却因为你经验不足胡乱操作而损坏了.
+eureka.missingKnowledgeKineticTool=你还不知道如何摆弄这个工具. 你尝试使用它, 但它却因为你经验不足胡乱操作而损坏了.
+
+engineeringDiary.BCA.title=工程日志
+engineeringDiary.BCA.page0=你可以在这里找到所有可研究项目以及目前的研究进度
+
+engineeringDiary.dusterTier0.title=基础打粉机
+engineeringDiary.dusterTier0.page0=用这台简陋的设备翻倍你的矿物使用率
+engineeringDiary.dusterTier0.page1=你并非怀旧之人, 只是每个人难免有这样的时候: 回想起过去那些黄金岁月, 那时候人们拥有数之不尽的矿物, 足以用来制造覆盖整片大陆的大型红石装置和铁路网络.
+engineeringDiary.dusterTier0.page2=那可真是一段黄金时代. 可是一切都在工程师到来后改变了. 他们那些复杂的工具和机械需要的矿物如此之多, 以至于有时候令这富饶大陆的矿脉也开始枯竭.
+engineeringDiary.dusterTier0.page3=你开始试图寻找某种增加矿石利用效率的方法, 就这样你制造出了这台基础打粉机, 一台用粘液球和石头做成的简陋设备, 顶上还装着磨盘.
+engineeringDiary.dusterTier0.page4=它是这样用的:将矿石置于其上, 然后在上面跳跃踩踏就好了. 你自然是不喜欢做这么傻帽的事情, 但这样毕竟能够将矿物使用率翻倍. 能不能对它做点改良呢?
+engineeringDiary.dusterTier0.requiredResearch=无
+engineeringDiary.dusterTier0.howToMakeProgress=规划未来建筑
+
+
+engineeringDiary.dusterTier1.title=半自动打粉机
+engineeringDiary.dusterTier1.page0=能与物品栏互动的高级打粉机
+engineeringDiary.dusterTier1.page1=你制造出的第一台打粉机让矿物加工领域的风貌为之一变. 在此之前, 从未有过这样的方法, 能够如此简单地获得更多的矿物. 然而大家一致认为手动塞入矿物然后踩踏碾碎的方式实在有点乡土.
+engineeringDiary.dusterTier1.page2=你决心对机器进行改良, 让它拥有内置的物品栏. 加入管道似乎有用, 而石头齿轮应该换成铁质的, 这样加工黄金的时候不会太过粗糙.
+engineeringDiary.dusterTier1.page3=最终你研究出了这台半自动打粉机. 加工方式依然是跳跃踩踏, 但起码矿物能够通过管道和漏斗进行自动输入了. 输出的粉末还得靠自己拿出来. 现在该解决跳跃加工的尴尬问题了.
+engineeringDiary.dusterTier1.requiredResearch=基础打粉机
+engineeringDiary.dusterTier1.howToMakeProgress=使用基础打粉机加工矿物
+
+engineeringDiary.dusterTier2-1.title=机械打粉机
+engineeringDiary.dusterTier2-1.page0=这台矿率翻倍机能够接受能量输入
+engineeringDiary.dusterTier2-1.page1=你初次尝试改进机器的自动化, 让机器自动为你打粉, 却以失败告终. 于是你决定后退一小步, 以基础打粉机为基础再次进行研究, 
+engineeringDiary.dusterTier2-1.page2=然后你便发明出了砂轮, 一种实现打粉机自动化的关键零部件. 当你用铁质齿轮代替石头齿轮  后, 发现它非常有用, 能够接受能量输入来加工矿物.
+engineeringDiary.dusterTier2-1.page3=于是你终于研究出这台机械打粉机! 然后这台设备仍然并非尽善尽美. 它并没有半自动打粉机那样的内置物品栏. 你需要再次改进它.
+engineeringDiary.dusterTier2-1.requiredResearch=半自动打粉机
+engineeringDiary.dusterTier2-1.howToMakeProgress=使用半自动打粉机加工矿物
+
+engineeringDiary.dusterTier2-2.title=动力打粉机
+engineeringDiary.dusterTier2-2.page0=终极打粉机 (亦名夺你命3000型打粉机)
+engineeringDiary.dusterTier2-2.page1=许多失败的打粉机设计尝试之后, 你发现将机械打粉机的砂轮加工和半自动打粉机的内置物品栏功能合二为一是不可能的事情.
+engineeringDiary.dusterTier2-2.page2=于是你决定尝试全新的加工方式: 激光. 他们精密的加工方式不会破坏内置的管道系统, 而机械打粉机那种加工方式则时时刻刻都在对管道系统造成损害.
+engineeringDiary.dusterTier2-2.page3=好在这个方案可以实现. 不过你需要使用更高级的材料: 钻石齿轮. 至此, 动力打粉机诞生了. 
+engineeringDiary.dusterTier2-2.page4=激光精密地与内置的黄金元器件交互, 让机器能够接受外部能量(通过激光), 并自动管理内置的物品栏. 你终于做到了.
+engineeringDiary.dusterTier2-2.requiredResearch=机械打粉机
+engineeringDiary.dusterTier2-2.howToMakeProgress=使用机械打粉机加工矿物
+
+engineeringDiary.kineticTool.title=动力万能工具
+engineeringDiary.kineticTool.page0=一柄在手天下我有
+engineeringDiary.kineticTool.page1=工具是我们世界相当基础的组成部分, 让你讨厌的是它们老会坏掉. 可机器就从来不会损坏, 你开始好奇其中的缘由. 经过一段时间的研究, 你认为你找到了原因所在: 红石和能量.
+engineeringDiary.kineticTool.page2=工具需要某种能量驱动(来自胳膊的机械能), 而机器则通过一种特殊的, 与红石能量相谐的能量来驱动, 似乎这就是它们能够久用不坏的关键.
+engineeringDiary.kineticTool.page3=你决心用高质量且与红石能量相谐的材料来制造一些永不朽坏的工具.工具的核心将由一枚金质齿轮(因为它速度最快)
+engineeringDiary.kineticTool.page4=以及一枚钻石芯片(因为它的高耐久和良好的红石谐性)在集成工作台中制造.使用激光完美地组装这些零部件后, 你意识到激光的精确性将成为加工过程的关键,
+engineeringDiary.kineticTool.page5=为了将工具刃部组合起来, 你将铁锭放入装配工作台制作了铁棍. 然后将它同能够制造最坚固工具的钻石都放入装配工作台中来制造你的新发明.
+engineeringDiary.kineticTool.page6=这样你终于得到了万能的手柄, 你确信它能够按照任意种类的工具刃部, 且永远不会用坏. 你还考虑了供能问题, 制作出了动力胶囊.
+engineeringDiary.kineticTool.page7=现在是时候升级你的动力万能工具了! 你将三个铁锭, 两个金锭放入装配台中以制作工具刃部. 进行第一次工具升级(即按照某种工具刃部) 你确认
+engineeringDiary.kineticTool.page8=集成工作台最适合用来安装工具刃部. 就这样, 你得到了永远不会损坏使用RF能量的工具. 然而再制造其他三种工具耗费对你来说有些过高.
+engineeringDiary.kineticTool.page9=你决心对它进行一番改造以便能够同时安装其他的刃部升级! 你在装配工作台中使用4块金锭制造出金棍. 但仅仅将它装配到工具上会使得
+engineeringDiary.kineticTool.page10=红石谐性无法同步, 因此你决定添加一个石英芯片(在集成工作台中). 如此, 工具似乎能够知道何时自动调用何种刃部, 成为了一柄高效的二合一工具. 但这样仍无法安装所有种类的刃部,
+engineeringDiary.kineticTool.page11=因此你又尝试制造出钻石棍(将2颗钻石放入装配工作台), 并将它与金质芯片在集成工作台中组合. 这样的工具能够拥有三种升级, 你好奇是否有办法能够让它安装第四种刃部.
+engineeringDiary.kineticTool.page12=自然界再也没有什么材料能够让你制造更好的棍子了, 但是某一天, 你发现了一处能量工厂，在那里你惊讶地遇见一名工程师村民! 看得出这位村民过去也曾和你有相似的研究经历, 
+engineeringDiary.kineticTool.page13=并且碰巧拥有一些绿宝石棍! 你奔回家将它与钻石芯片组合, 终于制造出了能够按照四种刃部的万能工具! 
+engineeringDiary.kineticTool.requiredResearch=无
+engineeringDiary.kineticTool.howToMakeProgress=合成工具
+
+engineeringDiary.requiredResearch=前置研究:
+engineeringDiary.progress=进度:
+engineeringDiary.unlocked=解锁
+
+config.title="建筑|附件"配置
+
+updates=更新
+updates.tooltip=配置"建筑|附件"是否检测版本更新
+shouldCheckForUpdates=检测更新
+shouldCheckForUpdates.tooltip=True = 检测更新, false = 不检测更新
+shouldPrintOutChangelog=显示更新日志
+shouldPrintOutChangelog.tooltip=如果设置为true, 那么你同样能看到较新版本的更新日志
+
+BaseModifier=基础模式
+BaseModifier.tooltip=工具消耗默认能量
+EasyDifficultyModifier=简单模式
+EasyDifficultyModifier.tooltip=简单模式下它的能量将加倍消耗
+HardDifficultyModifier=困难模式
+HardDifficultyModifier.tooltip=困难模式下它的能量将加倍消耗
+NormalDifficultyModifier=普通模式
+NormalDifficultyModifier.tooltip=普通模式下它的能量将加倍消耗
+PeacefullDifficultyModifier=和平模式
+PeacefullDifficultyModifier.tooltip=和平模式下它的能量将加倍消耗
+
+Misc=Misc
+shouldRegisterDusts=注册粉末
+shouldRegisterDusts.tooltip=设为false则"建筑|附件"将不会注册新的粉末.
+
+kineticTool.outOfPower=动力耗尽, 无法破坏方块

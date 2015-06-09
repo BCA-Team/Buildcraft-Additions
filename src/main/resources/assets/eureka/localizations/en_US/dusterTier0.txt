@@ -1,0 +1,6 @@
+Basic Duster
+You can use this simple machine to double your ores.
+Plan future builds
+You’re not a nostalgic, but sometimes it just gets to everyone. You remember the good ol’ days, where one had all the Ore they ever wanted, only ever using it to build large redstone contraptions or railroads so big they covered entire continents. Good times. After the arrival of Engineers though, everything changed. All of their complex tools and machines required large amounts of Ore, so much it sometimes dried the land.
+
+You start to wonder if you could somehow increase your Ore output, and you come up with the Basic Duster, a simple machine created using Stone and Slimeballs, with grindy-bits on top. It works by placing ore on the top and jumping on it, something you’re not so keen about doing, but double ore is double ore. You wonder how you could improve this machine...

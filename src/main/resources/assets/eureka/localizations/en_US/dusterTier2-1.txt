@@ -1,0 +1,6 @@
+Mechanical Duster
+This ore-doubling machine can receive power
+Process items in the Semi-automatic Duster
+After your initial automation discovery, you try to make the machine grind the ore for you, without success. You decide to take a step back and use the Basic Duster as base for your experiments again, and you end up creating the Grinding Wheel, an item that could be the key to automating this machine. And it proves very effective: once you upgrade the Stone Gears to Iron, it seems to accept power to double the ores.
+
+You finally made the Mechanical Duster! However this machine is another incomplete experiment, since it doesn’t have the inventory managing capabilities of the Semi-Automatic Duster. You need to step it up.
