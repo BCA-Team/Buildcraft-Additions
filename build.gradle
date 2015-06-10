@@ -137,4 +137,4 @@ assemble.dependsOn deobfJar
 curse.dependsOn checkCurse
 
 
-idea { module { inheritOutputDirs = true } }
+idea { module.outputDir=sourceSets.main.output.classesDir }

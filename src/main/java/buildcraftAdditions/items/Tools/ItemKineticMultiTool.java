@@ -68,7 +68,7 @@ public class ItemKineticMultiTool extends ItemInventoryPoweredBase {
 	private IIcon iconChainsaw, iconDigger, iconDrill, iconHoe;
 
 	public ItemKineticMultiTool() {
-		super("kineticMultiTool", "itemKineticMultiTool");
+		super("kineticMultiTool", "kineticMultiTool");
 		setNoRepair();
 		setFull3D();
 	}
@@ -155,7 +155,7 @@ public class ItemKineticMultiTool extends ItemInventoryPoweredBase {
 		return !("area".equalsIgnoreCase(upgrade) && !isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw") && !isUpgradeInstalled(stack, "hoe")) && !("silky".equalsIgnoreCase(upgrade) && (isUpgradeInstalled(stack, "fortune1") || isUpgradeInstalled(stack, "fortune2") || isUpgradeInstalled(stack, "fortune3") || (!isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw")))) && !("fortune1".equalsIgnoreCase(upgrade) && !isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw")) && !("fortune2".equalsIgnoreCase(upgrade) && (isUpgradeInstalled(stack, "fortune1") || (!isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw")))) && !("fortune3".equalsIgnoreCase(upgrade) && (isUpgradeInstalled(stack, "fortune2") || (!isUpgradeInstalled(stack, "drill") && !isUpgradeInstalled(stack, "digger") && !isUpgradeInstalled(stack, "chainsaw")))) && getAllowedUpgrades(stack) > 0;
 	}
 
-	public static void installUpgrade(String upgrade, ItemStack stack) {
+	public static void installUpgrade(ItemStack stack, String upgrade) {
 		if (stack != null && upgrade != null && !upgrade.isEmpty() && !isUpgradeInstalled(stack, upgrade)) {
 			if (stack.stackTagCompound == null)
 				stack.stackTagCompound = new NBTTagCompound();

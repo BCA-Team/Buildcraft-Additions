@@ -98,8 +98,8 @@ public class BCAEurekaResearch {
 
 		EurekaAPI.API.registerCategory(new BasicEurekaCategory("BCA-Tools", ItemLoader.portableLaser));
 
-		EurekaAPI.API.register(new BasicEurekaInfo(Variables.Eureka.KineticToolKey, "BCA-Tools", 15, ItemLoader.itemKineticMultiTool));
-		EurekaAPI.API.bindToKey(ItemLoader.itemKineticMultiTool, Variables.Eureka.KineticToolKey);
+		EurekaAPI.API.register(new BasicEurekaInfo(Variables.Eureka.KineticToolKey, "BCA-Tools", 15, ItemLoader.kineticMultiTool));
+		EurekaAPI.API.bindToKey(ItemLoader.kineticMultiTool, Variables.Eureka.KineticToolKey);
 		EurekaAPI.API.registerDropHandler(new KineticToolDropHandler());
 
 		EurekaAPI.API.register(new BasicEurekaInfo(Variables.Eureka.PORTABLE_LASER, "BCA-Tools", 4, ItemLoader.portableLaser));

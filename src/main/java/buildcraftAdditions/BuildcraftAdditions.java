@@ -181,7 +181,7 @@ public class BuildcraftAdditions {
 			} else if (mapping.name.equals(Variables.MOD.ID + ":ingotGildedRedMetal")) {
 				mapping.remap(ItemLoader.gildedRedMetalIngot);
 			} else if (mapping.name.equals(Variables.MOD.ID + ":itemKineticMultiTool")) {
-				mapping.remap(ItemLoader.itemKineticMultiTool);
+				mapping.remap(ItemLoader.kineticMultiTool);
 			} else if (mapping.name.equals(Variables.MOD.ID + ":robotDebugTool")) {
 				mapping.ignore();
 			}
