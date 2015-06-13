@@ -1,13 +1,10 @@
 package buildcraftAdditions.items.dust;
 
-import net.minecraft.item.ItemStack;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-
-import net.minecraftforge.oredict.OreDictionary;
-
 import buildcraftAdditions.api.item.dust.IDustType;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -51,59 +48,33 @@ public class DustTypes {
 		}
 
 	};
-
-	public static final IDustType METAL_DUST_FORCE_REGISTRATION = new IDustType() {
-		@Override
-		public void register(int meta, String name, ItemStack dust) {
-			OreDictionary.registerOre("dust" + name, dust.copy());
-			ItemStack twoDusts = dust.copy();
-			twoDusts.stackSize = 2;
-			ItemStack nineDusts = dust.copy();
-			nineDusts.stackSize = 9;
-			BCARecipeManager.duster.addRecipe("ore" + name, twoDusts);
-			BCARecipeManager.duster.addRecipe("ingot" + name, dust.copy());
-			BCARecipeManager.duster.addRecipe("block" + name, nineDusts);
-			for (ItemStack stack : OreDictionary.getOres("ingot" + name)) {
-				ItemStack copy = ItemStack.copyItemStack(stack);
-				if (copy != null && copy.getItem() != null) {
-					copy.stackSize = 1;
-					GameRegistry.addSmelting(dust.copy(), copy, 0);
-					return;
-				}
-			}
-		}
+	public static final IDustType METAL_DUST_FORCE_REGISTRATION = new DustAlwaysVallid();
+	public static final IDustType GEM_DUST = new IDustType()
+	{
 
 		@Override
-		public String getName() {
-			return "Metal";
-		}
-
-		@Override
-		public boolean isValid(int meta, String name, ItemStack dust) {
-			return true;
-		}
-	};
-
-	public static final IDustType GEM_DUST = new IDustType() {
-
-		@Override
-		public void register(int meta, String name, ItemStack dust) {
+		public void register(int meta, String name, ItemStack dust)
+		{
 			OreDictionary.registerOre("dust" + name, dust.copy());
 			BCARecipeManager.duster.addRecipe("gem" + name, dust.copy());
 		}
 
 		@Override
-		public String getName() {
+		public String getName()
+		{
 			return "Gem";
 		}
 
 		@Override
-		public boolean isValid(int meta, String name, ItemStack dust) {
+		public boolean isValid(int meta, String name, ItemStack dust)
+		{
 			return OreDictionary.getOres("ore" + name).size() > 0 || OreDictionary.getOres("gem" + name).size() > 0 || OreDictionary.getOres("dust" + name).size() > 0;
 		}
 	};
 
-	public static final IDustType ENDERIUM_BASE_DUST = new IDustType() {
+	;
+	public static final IDustType ENDERIUM_BASE_DUST = new IDustType()
+	{
 
 		@Override
 		public void register(int meta, String name, ItemStack dust) {
@@ -130,8 +101,8 @@ public class DustTypes {
 		}
 
 	};
-
-	public static final IDustType ENDERIUM_DUST = new IDustType() {
+	public static final IDustType ENDERIUM_DUST = new IDustType()
+	{
 
 		@Override
 		public void register(int meta, String name, ItemStack dust) {
@@ -160,8 +131,8 @@ public class DustTypes {
 		}
 
 	};
-
-	public static final IDustType ONLY_ORE_DICTIONARY_REGISTRATION = new IDustType() {
+	public static final IDustType ONLY_ORE_DICTIONARY_REGISTRATION = new IDustType()
+	{
 
 		@Override
 		public void register(int meta, String name, ItemStack dust) {
@@ -178,6 +149,40 @@ public class DustTypes {
 			return OreDictionary.getOres("dust" + name).size() > 0;
 		}
 	};
+
+	public static final class DustAlwaysVallid implements IDustType
+	{
+		@Override
+		public void register(int meta, String name, ItemStack dust) {
+			OreDictionary.registerOre("dust" + name, dust.copy());
+			ItemStack twoDusts = dust.copy();
+			twoDusts.stackSize = 2;
+			ItemStack nineDusts = dust.copy();
+			nineDusts.stackSize = 9;
+			BCARecipeManager.duster.addRecipe("ore" + name, twoDusts);
+			BCARecipeManager.duster.addRecipe("ingot" + name, dust.copy());
+			BCARecipeManager.duster.addRecipe("block" + name, nineDusts);
+			for (ItemStack stack : OreDictionary.getOres("ingot" + name))
+			{
+				ItemStack copy = ItemStack.copyItemStack(stack);
+				if (copy != null && copy.getItem() != null)
+				{
+					copy.stackSize = 1;
+					GameRegistry.addSmelting(dust.copy(), copy, 0);
+					return;
+				}
+			}
+		}
+		@Override
+		public String getName() {
+			return "Metal";
+		}
+
+		@Override
+		public boolean isValid(int meta, String name, ItemStack dust) {
+			return true;
+		}
+	}
 
 	public static class SimpleDustAlwaysValid implements IDustType {
 

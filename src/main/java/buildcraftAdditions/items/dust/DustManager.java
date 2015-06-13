@@ -1,19 +1,17 @@
 package buildcraftAdditions.items.dust;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import net.minecraft.item.Item;
-import net.minecraft.util.StringUtils;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.item.dust.IDustManager;
 import buildcraftAdditions.api.item.dust.IDustType;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.Logger;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
+import net.minecraft.util.StringUtils;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -28,7 +26,8 @@ public class DustManager implements IDustManager {
 
 	@Override
 	public void addDust(int meta, String name, int colorMultiplier, IDustType dustType) {
-		if (!ConfigurationHandler.shouldRegisterDusts) {
+		if (!ConfigurationHandler.shouldRegisterDusts || dustType instanceof DustTypes.DustAlwaysVallid)
+		{
 			Logger.debug("Dust registering is disabled via config.");
 			Logger.debug("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + (dustType != null ? dustType.getName() : "null"));
 			return;
