@@ -207,7 +207,7 @@ public class ItemLoader {
 		}
 
 		if (ConfigurationHandler.enabled("FluidCanisters")) {
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemLoader.ironCanister, 4), "PIP", "IGI", "PIP", 'P', BCItems.SEALANT, 'I', "ingotIron", 'G', "glassPane"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemLoader.ironCanister, 4), "PIP", "IGI", "PIP", 'P', BCItems.SEALANT, 'I', "ingotIron", 'G', "paneGlass"));
 			GameRegistry.addRecipe(new ItemStack(ItemLoader.goldCanister), "PGP", "GIG", "PGP", 'P', BCItems.SEALANT, 'G', Items.gold_ingot, 'I', ironCanister);
 			GameRegistry.addRecipe(new ItemStack(ItemLoader.diamondCanister), "PDP", "DGD", "PDP", 'P', BCItems.SEALANT, 'D', Items.diamond, 'G', goldCanister);
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockLoader.fluidicCompressorBlock), "GFG", "PCP", "IGI", 'G', "ingotGold", 'F', fluxConductor, 'C', goldCanister, 'I', "ingotIron", 'P', Blocks.piston));
