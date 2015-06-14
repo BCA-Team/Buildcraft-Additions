@@ -1,27 +1,5 @@
 package buildcraftAdditions;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
-
 import buildcraftAdditions.api.item.BCAItemManager;
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
@@ -46,6 +24,20 @@ import buildcraftAdditions.reference.ArmorLoader;
 import buildcraftAdditions.reference.BlockLoader;
 import buildcraftAdditions.reference.ItemLoader;
 import buildcraftAdditions.reference.Variables;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -117,7 +109,7 @@ public class BuildcraftAdditions {
 		BCAItemManager.dusts.addDust(meta++, "EnderPearl", 0x105E51, new DustTypes.SimpleDustAlwaysValid(new ItemStack(Items.ender_pearl)));
 		BCAItemManager.dusts.addDust(meta, "NetherQuartz", 0xDBCCBF, new DustTypes.SimpleDustAlwaysValid(new ItemStack(Items.coal, 1, 1)));
 		meta = 83;
-		BCAItemManager.dusts.addDust(meta, "GildedRedMetal", 0xFF6E1B, DustTypes.METAL_DUST_FORCE_REGISTRATION);
+		BCAItemManager.dusts.addDust(meta, "GildedRedMetal", 0xFF6E1B, new DustTypes.SimpleDustAlwaysValid(new ItemStack(ItemLoader.gildedRedMetalIngot), 1));
 
 		BCARecipeManager.duster.addRecipe("oreRedstone", new ItemStack(Items.redstone, 10));
 		BCARecipeManager.duster.addRecipe("oreCoal", new ItemStack(Items.coal, 2));
