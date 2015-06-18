@@ -1,20 +1,18 @@
 package buildcraftAdditions.compat;
 
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.Map;
-
+import buildcraftAdditions.core.Logger;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.common.reflect.ClassPath;
-
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-import buildcraftAdditions.core.Logger;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -54,7 +52,7 @@ public final class ModuleManager {
 				for (String mod : requiredMods.split(",")) {
 					if (!Loader.isModLoaded(mod)) {
 						enabled = false;
-						Logger.error(String.format("CompatModule '%s' is missing a dependency: '%s'! This module will not be loaded.", id, mod));
+						Logger.info(String.format("CompatModule '%s' is missing a dependency: '%s'! This module will not be loaded.", id, mod));
 						break;
 					}
 				}
