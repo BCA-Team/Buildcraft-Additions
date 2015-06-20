@@ -52,6 +52,7 @@ public class BuildcraftAdditions {
 	public static final CreativeTabs bcadditions = new TabBCAdditions();
 	public static final CreativeTabs bcaCannisters = new TabCanisters();
 	public static final CreativeTabs bcaDusts = new TabDusts();
+
 	@Mod.Instance(Variables.MOD.ID)
 	public static BuildcraftAdditions instance;
 	@SidedProxy(clientSide = "buildcraftAdditions.proxy.ClientProxy", serverSide = "buildcraftAdditions.proxy.CommonProxy")
@@ -109,7 +110,7 @@ public class BuildcraftAdditions {
 		BCAItemManager.dusts.addDust(meta++, "EnderPearl", 0x105E51, new DustTypes.SimpleDustAlwaysValid(new ItemStack(Items.ender_pearl)));
 		BCAItemManager.dusts.addDust(meta, "NetherQuartz", 0xDBCCBF, new DustTypes.SimpleDustAlwaysValid(new ItemStack(Items.coal, 1, 1)));
 		meta = 83;
-		BCAItemManager.dusts.addDust(meta, "GildedRedMetal", 0xFF6E1B, new DustTypes.SimpleDustAlwaysValid(new ItemStack(ItemLoader.gildedRedMetalIngot), 1));
+		BCAItemManager.dusts.addDust(meta, "GildedRedMetal", 0xFF6E1B, new DustTypes.DustAlwaysVallid());
 
 		BCARecipeManager.duster.addRecipe("oreRedstone", new ItemStack(Items.redstone, 10));
 		BCARecipeManager.duster.addRecipe("oreCoal", new ItemStack(Items.coal, 2));
