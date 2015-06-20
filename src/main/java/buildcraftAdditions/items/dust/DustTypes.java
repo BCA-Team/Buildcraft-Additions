@@ -48,7 +48,7 @@ public class DustTypes {
 		}
 
 	};
-	public static final IDustType METAL_DUST_FORCE_REGISTRATION = new DustAlwaysVallid();
+	public static final IDustType METAL_DUST_FORCE_REGISTRATION = new DustAlwaysValid();
 	public static final IDustType GEM_DUST = new IDustType()
 	{
 
@@ -150,7 +150,7 @@ public class DustTypes {
 		}
 	};
 
-	public static final class DustAlwaysVallid implements IDustType
+	public static final class DustAlwaysValid implements IDustType
 	{
 		@Override
 		public void register(int meta, String name, ItemStack dust) {

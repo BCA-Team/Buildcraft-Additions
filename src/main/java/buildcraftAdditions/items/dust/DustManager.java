@@ -24,7 +24,7 @@ public class DustManager implements IDustManager {
 
 	@Override
 	public void addDust(int meta, String name, int colorMultiplier, IDustType dustType) {
-		if (!ConfigurationHandler.shouldRegisterDusts && !(dustType instanceof DustTypes.DustAlwaysVallid))
+		if (!ConfigurationHandler.shouldRegisterDusts && !(dustType instanceof DustTypes.DustAlwaysValid))
 		{
 			Logger.info("Dust registering is disabled via config.");
 			Logger.info("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + (dustType != null ? dustType.getName() : "null"));
