@@ -20,4 +20,5 @@ eclipse/
 *.mtl
 *.xcf
 *.bat
+**/.DS_Store
 curse.properties
