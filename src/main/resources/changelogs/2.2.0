@@ -1,0 +1,9 @@
+Added rocket boots
+Changed some of the recipes
+Fix crash on world load when dust registration is dissabled
+Added multiblock crash protection
+Heated furnace respects meta and nbt now
+New textures
+fixed integration table recipe (they no longer require chipsets as well)
+recipes use the oredict now
+A few other crashing bugs
