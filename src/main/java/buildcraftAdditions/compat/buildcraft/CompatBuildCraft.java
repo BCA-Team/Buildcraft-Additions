@@ -1,19 +1,18 @@
 package buildcraftAdditions.compat.buildcraft;
 
-import net.minecraft.item.Item;
-
-import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.compat.CompatModule;
 import buildcraftAdditions.compat.buildcraft.actions.Actions;
 import buildcraftAdditions.compat.buildcraft.schematics.BCASchematics;
 import buildcraftAdditions.compat.buildcraft.triggers.Triggers;
+import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.items.ItemRobotDebugTool;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
+import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -36,7 +35,8 @@ public class CompatBuildCraft {
 
 	@CompatModule.Handler
 	public void doneLoading(FMLLoadCompleteEvent event) {
-		RefineryRecipeConverter.doYourThing();
+		if (!ConfigurationHandler.forceEnableBCRefinery)
+			RefineryRecipeConverter.doYourThing();
 		Triggers.register();
 		Actions.register();
 		BuildcraftAdditions.proxy.addPowerplant();
