@@ -177,6 +177,8 @@ public class BuildcraftAdditions {
 				mapping.remap(ItemLoader.kineticMultiTool);
 			} else if (mapping.name.equals(Variables.MOD.ID + ":robotDebugTool")) {
 				mapping.ignore();
+			} else if (mapping.name.contains("converter")) {
+				mapping.ignore();
 			}
 		}
 	}
