@@ -1,11 +1,10 @@
 package buildcraftAdditions.config;
 
-import java.io.File;
-import java.util.HashSet;
-
+import buildcraftAdditions.core.VersionCheck;
 import net.minecraftforge.common.config.Configuration;
 
-import buildcraftAdditions.core.VersionCheck;
+import java.io.File;
+import java.util.HashSet;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -19,13 +18,84 @@ public class ConfigurationHandler {
 	public static final int[] powerDifficultyModifiers = new int[4];
 	private static final HashSet<String> enabledFeatures = new HashSet<String>();
 	public static Configuration configFile;
-	public static boolean shouldPrintChangelog, shouldRegisterDusts, powerloss, eurekaIntegration;
-	public static int basePowerModifier, entityHitModifier, hoeCost, toolHarvestLevel, KEB1powerloss, KEB2powerloss, KEB3powerloss, heatedFurnaceHeatRequired, basicCoilHeat, lavaCoilHeat, kineticCoilHeatModifier, portableLaserPowerUse, portableLaserLaserPower, portableLaserEntityBurnTime, capacityPipeColoringTool, maxTransferColoringTool, energyUseColoringTool, capacityPowerCapsuleTier1, maxTransferPowerCapsuleTier1, capacityPowerCapsuleTier2, maxTransferPowerCapsuleTier2, capacityPowerCapsuleTier3, maxTransferPowerCapsuleTier3, capacityKEBTier1, maxTransferKEBTier1, capacityKEBTier2, maxTransferKEBTier2, capacityKEBTier3, maxTransferKEBTier3, capacityChargingStation, maxTransferChargingStation, capacityFluidicCompressor, maxTransferFluidicCompressor, capacityMechanicalDuster, maxTransferMechanicalDuster, energyUseMechanicalDuster, capacityRefinery, maxTransferRefinery, energyUseRefineryMultiplier;
-	public static float portableLaserEntityDamage, toolEfficiencyPickaxe, toolEfficiencyShovel, toolEfficiencyAxe, toolEfficiencyAreaMultiplier, entityDamage;
-	public static int refineryAutoExportMaxTransfer, refineryAutoImportMaxTransfer, refinerySpeed1SpeedModifier, refinerySpeed2SpeedModifier, refinerySpeed3SpeedModifier;
-	public static double refineryEfficiency1EnergyCostModifier, refineryEfficiency2EnergyCostModifier, refineryEfficiency3EnergyCostModifier, refinerySpeed1EnergyCostModifier, refinerySpeed2EnergyCostModifier, refinerySpeed3EnergyCostModifier;
-	public static int coolingTowerAutoExportMaxTransfer, coolingTowerAutoImportMaxTransfer, coolingTowerSpeed1SpeedModifier, coolingTowerSpeed2SpeedModifier, coolingTowerSpeed3SpeedModifier;
-	public static float coolingTowerEfficiency1CoolingModifier, coolingTowerEfficiency2CoolingModifier, coolingTowerEfficiency3CoolingModifier;
+
+	public static boolean
+			shouldPrintChangelog,
+			shouldRegisterDusts,
+			powerloss,
+			eurekaIntegration,
+			dusterParticles,
+			forceEnableBCRefinery;
+
+	public static int
+			basePowerModifier,
+			entityHitModifier,
+			hoeCost,
+			toolHarvestLevel,
+			KEB1powerloss, KEB2powerloss,
+			KEB3powerloss,
+			heatedFurnaceHeatRequired,
+			basicCoilHeat,
+			lavaCoilHeat,
+			kineticCoilHeatModifier,
+			portableLaserPowerUse,
+			portableLaserLaserPower,
+			portableLaserEntityBurnTime,
+			capacityPipeColoringTool,
+			maxTransferColoringTool,
+			energyUseColoringTool,
+			capacityPowerCapsuleTier1,
+			maxTransferPowerCapsuleTier1,
+			capacityPowerCapsuleTier2,
+			maxTransferPowerCapsuleTier2,
+			capacityPowerCapsuleTier3,
+			maxTransferPowerCapsuleTier3,
+			capacityKEBTier1,
+			maxTransferKEBTier1,
+			capacityKEBTier2,
+			maxTransferKEBTier2,
+			capacityKEBTier3,
+			maxTransferKEBTier3,
+			capacityChargingStation,
+			maxTransferChargingStation,
+			capacityFluidicCompressor,
+			maxTransferFluidicCompressor,
+			capacityMechanicalDuster,
+			maxTransferMechanicalDuster,
+			energyUseMechanicalDuster,
+			capacityRefinery,
+			maxTransferRefinery,
+			energyUseRefineryMultiplier,
+			refineryAutoExportMaxTransfer,
+			refineryAutoImportMaxTransfer,
+			refinerySpeed1SpeedModifier,
+			refinerySpeed2SpeedModifier,
+			refinerySpeed3SpeedModifier,
+			coolingTowerAutoExportMaxTransfer,
+			coolingTowerAutoImportMaxTransfer,
+			coolingTowerSpeed1SpeedModifier,
+			coolingTowerSpeed2SpeedModifier,
+			coolingTowerSpeed3SpeedModifier,
+			particleCount;
+
+	public static float
+			portableLaserEntityDamage,
+			toolEfficiencyPickaxe,
+			toolEfficiencyShovel,
+			toolEfficiencyAxe,
+			toolEfficiencyAreaMultiplier,
+			entityDamage,
+			coolingTowerEfficiency1CoolingModifier,
+			coolingTowerEfficiency2CoolingModifier,
+			coolingTowerEfficiency3CoolingModifier;
+
+	public static double
+			refineryEfficiency1EnergyCostModifier,
+			refineryEfficiency2EnergyCostModifier,
+			refineryEfficiency3EnergyCostModifier,
+			refinerySpeed1EnergyCostModifier,
+			refinerySpeed2EnergyCostModifier,
+			refinerySpeed3EnergyCostModifier;
 
 	public static void init(File file) {
 		configFile = new Configuration(file);
@@ -144,6 +214,9 @@ public class ConfigurationHandler {
 		configFile.addCustomCategoryComment("Misc", "Stuff that didn't fit in any other category");
 		shouldRegisterDusts = configFile.get("Misc", "shouldRegisterDusts", true).setRequiresMcRestart(true).getBoolean();
 		eurekaIntegration = configFile.get("Misc", "eurekaIntegration", true).setRequiresMcRestart(true).getBoolean();
+		dusterParticles = configFile.get("Misc", "dusterParticles", true).getBoolean();
+		particleCount = configFile.get("Misc", "particleCount", 100).setMinValue(0).getInt();
+		forceEnableBCRefinery = !enabled("MultiBlockRefining") || configFile.get("Misc", "forceEnableBCRefinery", false).setRequiresMcRestart(true).getBoolean();
 
 		registerFeature("ChargingStation");
 		registerFeature("ColorSorter");

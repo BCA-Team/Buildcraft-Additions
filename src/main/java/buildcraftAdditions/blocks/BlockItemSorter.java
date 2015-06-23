@@ -18,7 +18,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.tools.IToolWrench;
 
 import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.client.render.blocks.RendererSidedTextures;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.utils.RenderUtils;
@@ -43,15 +42,15 @@ public class BlockItemSorter extends BlockBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
-		textureSide = RenderUtils.registerIcon(register, "itemSorterSide");
-		textureSide2 = RenderUtils.registerIcon(register, "itemSorterSide2");
-		textureIn = RenderUtils.registerIcon(register, "itemSorterIn");
-		textureOut = RenderUtils.registerIcon(register, "itemSorterOut");
+		textureSide = RenderUtils.registerIcon(register, "sorter/Side");
+		textureSide2 = RenderUtils.registerIcon(register, "sorter/Side2");
+		textureIn = RenderUtils.registerIcon(register, "sorter/In");
+		textureOut = RenderUtils.registerIcon(register, "sorter/Out");
 	}
 
 	@Override
 	public int getRenderType() {
-		return Variables.RenderIDs.SIDED_TEXTURES_RENDER_ID;
+		return Variables.RenderIDs.SORTER;
 	}
 
 	@Override

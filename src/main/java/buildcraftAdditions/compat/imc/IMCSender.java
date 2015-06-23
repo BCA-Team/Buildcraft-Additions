@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.event.FMLInterModComms;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemLoader;
 
 public class IMCSender {
 
@@ -13,8 +13,8 @@ public class IMCSender {
 	}
 
 	private static void tinkersConstruct() {
-		FMLInterModComms.sendMessage("TConstruct", "addFluxBattery", new ItemStack(ItemsAndBlocks.powerCapsuleTier1));
-		FMLInterModComms.sendMessage("TConstruct", "addFluxBattery", new ItemStack(ItemsAndBlocks.powerCapsuleTier2));
-		FMLInterModComms.sendMessage("TConstruct", "addFluxBattery", new ItemStack(ItemsAndBlocks.powerCapsuleTier3));
+		FMLInterModComms.sendMessage("TConstruct", "addFluxBattery", new ItemStack(ItemLoader.powerCapsuleTier1));
+		FMLInterModComms.sendMessage("TConstruct", "addFluxBattery", new ItemStack(ItemLoader.powerCapsuleTier2));
+		FMLInterModComms.sendMessage("TConstruct", "addFluxBattery", new ItemStack(ItemLoader.powerCapsuleTier3));
 	}
 }

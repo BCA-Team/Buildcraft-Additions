@@ -123,11 +123,11 @@ public class BlockHeatedFurnace extends BlockBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
-		front = RenderUtils.registerIcon(register, "furnaceFront");
-		frontActivated = RenderUtils.registerIcon(register, "furnaceFront_on");
-		top = RenderUtils.registerIcon(register, "furnaceTop");
-		back = RenderUtils.registerIcon(register, "furnaceBack");
-		bottom = RenderUtils.registerIcon(register, "furnaceBottom");
-		sides = RenderUtils.registerIcon(register, "furnaceSide");
+		front = RenderUtils.registerIcon(register, "heatedFurnace/Front");
+		frontActivated = RenderUtils.registerIcon(register, "heatedFurnace/Front_on");
+		top = RenderUtils.registerIcon(register, "heatedFurnace/Top");
+		back = RenderUtils.registerIcon(register, "heatedFurnace/Back");
+		bottom = RenderUtils.registerIcon(register, "heatedFurnace/Bottom");
+		sides = RenderUtils.registerIcon(register, "heatedFurnace/Side");
 	}
 }

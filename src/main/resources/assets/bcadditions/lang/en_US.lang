@@ -24,9 +24,9 @@ tile.backpackStand.name=Backpack Stand
 item.ironCanister.name=Iron Canister
 item.goldCanister.name=Gold Canister
 item.diamondCanister.name=Diamond Canister
-item.PowerCapsuleTier1.name=Kinetic Capsule Tier 1
-item.PowerCapsuleTier2.name=Kinetic Capsule Tier 2
-item.PowerCapsuleTier3.name=Kinetic Capsule Tier 3
+item.powerCapsuleTier1.name=Kinetic Capsule Tier 1
+item.powerCapsuleTier2.name=Kinetic Capsule Tier 2
+item.powerCapsuleTier3.name=Kinetic Capsule Tier 3
 item.stickIron.name=Iron Stick
 item.stickGold.name=Gold Stick
 item.stickDiamond.name=Diamond Stick
@@ -81,6 +81,13 @@ item.kineticBackpack.name=Kinetic Backpack
 item.gildedRedMetalIngot.name=Gilded Red Metal Ingot
 item.conductivePlateRaw.name=Raw Conductive Plating
 item.conductivePlate.name=Conductive Plating
+item.spring.name=Spring
+item.thruster.name=Thruster
+item.lightPlating.name=Light Plating
+item.fluxConductor.name=Flux Conductor
+item.fluxDisperser.name=Flux Disperser
+item.rocketPants.name=Rocket Pants
+item.hoverBoots.name=Hover Boots
 
 material.iron.name=Iron
 material.gold.name=Gold
@@ -170,6 +177,9 @@ material.graphite.name=Graphite
 material.cyanite.name=Cyanite
 material.blutonium.name=Blutonium
 material.ludicrite.name=Ludicrite
+material.pyrotheum.name=Pyrotheum
+material.cryotheum.name=Cryotheum
+material.blizz.name=Blizz
 
 entity.bcadditions.bcaLaserShot.name=Laser Shot
 
@@ -432,3 +442,10 @@ waila.duster.recipe=%s -> %s
 waila.duster.progress=Progress
 
 backpack.info=Place on a backpackstand and click with kinetic capsules on the holes in the back to install capsules
+
+keybinding.toggleBoots=Toggle hover boots
+
+hud.backpack=Backpack charge level:
+hud.boots=Hover boots status:
+hud.enabled=Enabled
+hud.dissabled=Disabled

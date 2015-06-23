@@ -19,7 +19,8 @@ public abstract class TileMachineBase extends TileBase implements IEnergyReceive
 	protected final int capacity, maxTransfer;
 	protected int energy;
 
-	protected TileMachineBase(int capacity, int maxTransfer) {
+	protected TileMachineBase(int capacity, int maxTransfer, int identifier) {
+		super(identifier);
 		this.capacity = capacity;
 		this.maxTransfer = maxTransfer;
 	}

@@ -3,11 +3,7 @@ package buildcraftAdditions.blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
@@ -23,11 +19,8 @@ import eureka.api.EurekaAPI;
  */
 public class BlockSemiAutomaticDuster extends BlockDusterBase {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon front, sides, top, bottom;
-
 	public BlockSemiAutomaticDuster() {
-		super("SemiAutomatic", "dusterSemiAutomatic");
+		super("SemiAutomatic", "dusters/semiAutomatic/");
 	}
 
 	@Override

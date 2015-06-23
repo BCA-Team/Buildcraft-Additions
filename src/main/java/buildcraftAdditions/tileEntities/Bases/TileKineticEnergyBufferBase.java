@@ -49,8 +49,8 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	public EntityPlayer destroyer;
 	private UUID owner;
 
-
-	public TileKineticEnergyBufferBase(int capacity, int maxTransfer, int loss, int tier) {
+	public TileKineticEnergyBufferBase(int capacity, int maxTransfer, int loss, int tier, int identifier) {
+		super(identifier);
 		this.capacity = capacity;
 		this.maxTransfer = maxTransfer;
 		this.loss = loss;
@@ -92,13 +92,15 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		energy = tag.getInteger("energy");
-		capacity = tag.getInteger("maxEnergy");
-		maxTransfer = Math.max(tag.getInteger("maxTransfer"), Math.max(tag.getInteger("maxInput"), tag.getInteger("maxOutput")));
-		loss = tag.getInteger("loss");
-		engineControl = tag.getBoolean("engineControl");
-		configuration.readFromNBT(tag);
-		owner = PlayerUtils.readFromNBT(tag);
+		if (tag.hasKey("energy")) {
+			energy = tag.getInteger("energy");
+			capacity = tag.getInteger("maxEnergy");
+			maxTransfer = Math.max(tag.getInteger("maxTransfer"), Math.max(tag.getInteger("maxInput"), tag.getInteger("maxOutput")));
+			loss = tag.getInteger("loss");
+			engineControl = tag.getBoolean("engineControl");
+			configuration.readFromNBT(tag);
+			owner = PlayerUtils.readFromNBT(tag);
+		}
 	}
 
 	@Override

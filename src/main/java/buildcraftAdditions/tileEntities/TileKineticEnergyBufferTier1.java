@@ -8,7 +8,8 @@ import cofh.api.energy.IEnergyReceiver;
 
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.config.ConfigurationHandler;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.BlockLoader;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.Location;
 
@@ -24,7 +25,7 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 	private boolean creative, init;
 
 	public TileKineticEnergyBufferTier1() {
-		super(ConfigurationHandler.capacityKEBTier1, ConfigurationHandler.maxTransferKEBTier1, ConfigurationHandler.KEB1powerloss, 1);
+		super(ConfigurationHandler.capacityKEBTier1, ConfigurationHandler.maxTransferKEBTier1, ConfigurationHandler.KEB1powerloss, 1, Variables.SyncIDs.KEBT1.ordinal());
 		creative = false;
 		init = false;
 	}
@@ -47,7 +48,7 @@ public class TileKineticEnergyBufferTier1 extends TileKineticEnergyBufferBase {
 		if (capacity == 0)
 			return;
 		energyState = (energy * 8) / capacity;
-		if (lastEnergyState != energyState && worldObj.getBlock(xCoord, yCoord, zCoord) == ItemsAndBlocks.kebT1)
+		if (lastEnergyState != energyState && worldObj.getBlock(xCoord, yCoord, zCoord) == BlockLoader.kebT1)
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, energyState, 2);
 		lastEnergyState = energyState;
 	}

@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -15,6 +14,7 @@ import cofh.api.energy.IEnergyContainerItem;
 
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.items.bases.ItemBlockBase;
 import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.utils.PlayerUtils;
 import buildcraftAdditions.utils.Utils;
@@ -26,10 +26,10 @@ import buildcraftAdditions.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemBlockKEB extends ItemBlock implements IEnergyContainerItem {
+public class ItemBlockKEB extends ItemBlockBase implements IEnergyContainerItem {
 
 	public ItemBlockKEB(Block block) {
-		super(block);
+		super(block, "", "", "", BuildcraftAdditions.bcadditions);
 		setMaxStackSize(1);
 		setHasSubtypes(true);
 	}

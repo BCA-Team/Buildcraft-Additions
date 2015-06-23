@@ -17,7 +17,7 @@ import buildcraftAdditions.utils.Utils;
 public class TileBasicDuster extends TileBaseDuster {
 
 	public TileBasicDuster() {
-		super(Variables.Eureka.DustT1Key);
+		super(Variables.Eureka.DustT1Key, Variables.SyncIDs.BASIC_DUSTER.ordinal());
 	}
 
 	@Override

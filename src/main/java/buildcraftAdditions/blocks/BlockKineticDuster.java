@@ -1,5 +1,6 @@
 package buildcraftAdditions.blocks;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -48,5 +49,10 @@ public class BlockKineticDuster extends BlockDusterBase implements ILaserTargetB
 	@Override
 	public int getRenderType() {
 		return -1;
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+
 	}
 }

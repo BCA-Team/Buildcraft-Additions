@@ -17,6 +17,7 @@ import buildcraft.api.transport.IPipeConnection;
 import buildcraft.api.transport.IPipeTile;
 
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.interfaces.IWidgetListener;
 
@@ -33,6 +34,10 @@ public class TileItemSorter extends TileBase implements ISidedInventory, IPipeCo
 	public byte[] colors = new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
 	private ForgeDirection rotation = ForgeDirection.UP;
 	private boolean reloadRotation = false;
+
+	public TileItemSorter() {
+		super(Variables.SyncIDs.ITEM_SORTER.ordinal());
+	}
 
 	@Override
 	public void updateEntity() {

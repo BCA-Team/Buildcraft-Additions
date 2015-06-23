@@ -8,6 +8,7 @@ package buildcraftAdditions.inventories.containers;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
@@ -21,7 +22,9 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
+import buildcraftAdditions.client.gui.GuiBase;
 import buildcraftAdditions.inventories.slots.SlotOutput;
+import buildcraftAdditions.proxy.ClientProxy;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 
 public class ContainerFluidicCompressor extends ContainerBase<TileFluidicCompressor> {
@@ -78,6 +81,7 @@ public class ContainerFluidicCompressor extends ContainerBase<TileFluidicCompres
 		switch (id) {
 			case 0:
 				inventory.fill = value != 0;
+				redrawOpenGui();
 				break;
 			case 1:
 				if (value >= 0)

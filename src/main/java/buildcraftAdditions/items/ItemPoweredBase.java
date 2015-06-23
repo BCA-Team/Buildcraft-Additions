@@ -15,6 +15,7 @@ import net.minecraftforge.common.util.Constants;
 
 import cofh.api.energy.IEnergyContainerItem;
 
+import buildcraftAdditions.items.bases.ItemBase;
 import buildcraftAdditions.utils.Utils;
 
 /**
@@ -30,22 +31,22 @@ public class ItemPoweredBase extends ItemBase implements IEnergyContainerItem {
 	protected int maxReceive;
 	protected int maxExtract;
 
-	public ItemPoweredBase(String name) {
-		super(name);
+	public ItemPoweredBase(String name, String gameRegistryName) {
+		super(name, name, gameRegistryName);
 		setHasSubtypes(true);
 		setMaxStackSize(1);
 	}
 
-	public ItemPoweredBase(String name, int capacity) {
-		this(name, capacity, capacity, capacity);
+	public ItemPoweredBase(String name, String gameregistryName, int capacity) {
+		this(name, gameregistryName, capacity, capacity, capacity);
 	}
 
 	public ItemPoweredBase(String name, int capacity, int maxTransfer) {
-		this(name, capacity, maxTransfer, maxTransfer);
+		this(name, name, capacity, maxTransfer, maxTransfer);
 	}
 
-	public ItemPoweredBase(String name, int capacity, int maxReceive, int maxExtract) {
-		this(name);
+	public ItemPoweredBase(String name, String gameRegistryName, int capacity, int maxReceive, int maxExtract) {
+		this(name, gameRegistryName);
 		this.capacity = capacity;
 		this.maxReceive = maxReceive;
 		this.maxExtract = maxExtract;

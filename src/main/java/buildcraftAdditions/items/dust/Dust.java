@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.item.dust.IDustType;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemLoader;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -48,6 +48,6 @@ public class Dust implements IDust {
 
 	@Override
 	public ItemStack getDustStack() {
-		return new ItemStack(ItemsAndBlocks.dust, 1, getMeta());
+		return new ItemStack(ItemLoader.dust, 1, getMeta());
 	}
 }

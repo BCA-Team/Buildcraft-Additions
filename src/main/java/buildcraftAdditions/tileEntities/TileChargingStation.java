@@ -19,6 +19,7 @@ import cofh.api.energy.IEnergyContainerItem;
 
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileMachineBase;
 
 public class TileChargingStation extends TileMachineBase implements IInventory {
@@ -26,7 +27,7 @@ public class TileChargingStation extends TileMachineBase implements IInventory {
 	private final CustomInventory inventory = new CustomInventory("ChargingStation", 1, 1, this);
 
 	public TileChargingStation() {
-		super(ConfigurationHandler.capacityChargingStation, ConfigurationHandler.maxTransferChargingStation);
+		super(ConfigurationHandler.capacityChargingStation, ConfigurationHandler.maxTransferChargingStation, Variables.SyncIDs.CHARGING_STATION.ordinal());
 	}
 
 	@Override

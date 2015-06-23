@@ -1,22 +1,8 @@
 package buildcraftAdditions.utils.fluids;
 
-import java.util.Collection;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 import buildcraft.api.recipes.CraftingResult;
 import buildcraft.api.recipes.IFlexibleRecipe;
-
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.blocks.FluidBlockBase;
@@ -26,6 +12,16 @@ import buildcraftAdditions.items.ItemBucketBCA;
 import buildcraftAdditions.items.itemBlocks.ItemBlockFluid;
 import buildcraftAdditions.utils.DummyFlexibleCrafter;
 import buildcraftAdditions.utils.Utils;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.util.Collection;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -50,16 +46,18 @@ public class RefineryRecipeConverter {
 		for (IFlexibleRecipe<FluidStack> recipe : recipes) {
 			DummyFlexibleCrafter dummy = new DummyFlexibleCrafter();
 			for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
-				dummy.input.setFluid(new FluidStack(fluid, 1000));
-				dummy.output.setFluid(null);
-				CraftingResult<FluidStack> currentResult = recipe.craft(dummy, false);
-				if (currentResult != null) {
-					results[teller] = currentResult;
-					dummy.output.fill(currentResult.crafted.copy(), true);
-					outputs[teller] = dummy.output.getFluid();
-					inputs[teller] = new FluidStack(dummy.input.getFluid(), 1000 - dummy.input.getFluidAmount());
-					teller++;
-					Logger.info("Buildcraft refinery recipe detected, input: " + dummy.input.getFluid().getLocalizedName() + ", output: " + dummy.output.getFluid().getLocalizedName());
+				if (fluid != null) {
+					dummy.input.setFluid(new FluidStack(fluid, 1000));
+					dummy.output.setFluid(null);
+					CraftingResult<FluidStack> currentResult = recipe.craft(dummy, false);
+					if (currentResult != null) {
+						results[teller] = currentResult;
+						dummy.output.fill(currentResult.crafted.copy(), true);
+						outputs[teller] = dummy.output.getFluid();
+						inputs[teller] = new FluidStack(dummy.input.getFluid(), 1000 - dummy.input.getFluidAmount());
+						teller++;
+						Logger.info("Buildcraft refinery recipe detected, input: " + dummy.input.getFluid().getLocalizedName() + ", output: " + dummy.output.getFluid().getLocalizedName());
+					}
 				}
 			}
 		}
@@ -84,8 +82,6 @@ public class RefineryRecipeConverter {
 				GameRegistry.registerBlock(fluidBlock, inputs[t].getFluid().getName() + "Block");
 			}
 
-			BuildcraftRecipeRegistry.refinery.removeRecipe(results[t].recipe);
-			BuildcraftRecipeRegistry.refinery.addRecipe(results[t].recipe.getId() + "_GAS", inputs[t], new FluidStack(fluid, outputs[t].amount), results[t].energyCost, 0);
 			BCARecipeManager.cooling.addRecipe(new FluidStack(fluid, 1), new FluidStack(outputs[t], 1), ((float) results[t].energyCost) / 2000);
 			BCARecipeManager.refinery.addRecipe(inputs[t], new FluidStack(fluid, outputs[t].amount), results[t].energyCost);
 		}

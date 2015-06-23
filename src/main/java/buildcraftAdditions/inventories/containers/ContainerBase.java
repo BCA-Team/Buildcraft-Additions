@@ -1,5 +1,6 @@
 package buildcraftAdditions.inventories.containers;
 
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -7,6 +8,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import buildcraftAdditions.client.gui.GuiBase;
 import buildcraftAdditions.inventories.slots.SlotPhantom;
 
 /**
@@ -48,6 +54,8 @@ public class ContainerBase<T> extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
+		if (inventorySlots.isEmpty())
+			return null;
 		int numSlots = inventorySlots.size();
 		if (slotIndex < 0 || slotIndex >= numSlots)
 			return null;
@@ -160,5 +168,12 @@ public class ContainerBase<T> extends Container {
 		super.onContainerClosed(player);
 		if (player.worldObj != null && !player.worldObj.isRemote && inventory instanceof IInventory)
 			((IInventory) inventory).closeInventory();
+	}
+
+	@SideOnly(Side.CLIENT)
+	protected void redrawOpenGui() {
+		GuiScreen gui = FMLClientHandler.instance().getClient().currentScreen;
+		if (gui instanceof GuiBase)
+			((GuiBase) gui).redraw();
 	}
 }

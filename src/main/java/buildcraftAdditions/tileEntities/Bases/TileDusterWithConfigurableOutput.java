@@ -29,8 +29,8 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 
 	protected final SideConfiguration configuration = new SideConfiguration();
 
-	public TileDusterWithConfigurableOutput(String key) {
-		super(key);
+	public TileDusterWithConfigurableOutput(String key, int identifier) {
+		super(key, identifier);
 	}
 
 	@Override

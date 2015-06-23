@@ -12,6 +12,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 import buildcraftAdditions.utils.fluids.RestrictedTank;
 import buildcraftAdditions.utils.fluids.WhitelistedTank;
@@ -28,7 +29,7 @@ public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
 	private final RestrictedTank tank = new WhitelistedTank("LavaTank", 3 * FluidContainerRegistry.BUCKET_VOLUME, this, FluidRegistry.LAVA);
 
 	public TileLavaCoil() {
-		super();
+		super(Variables.SyncIDs.LAVA_COIL.ordinal());
 		burnTime = 0;
 		fullBurnTime = 0;
 		shouldHeat = false;
@@ -68,7 +69,7 @@ public class TileLavaCoil extends TileCoilBase implements IFluidHandler {
 			burning = false;
 		if (!isBurning() && shouldHeat && tank.getFluidAmount() >= 100) {
 			tank.drain(100, true);
-			burnTime = 10000;
+			burnTime = 5000;
 			increment = ConfigurationHandler.lavaCoilHeat;
 			burning = true;
 		}

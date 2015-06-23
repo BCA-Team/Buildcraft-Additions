@@ -10,7 +10,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemLoader;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -35,7 +35,7 @@ public class TabCanisters extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ItemStack getIconItemStack() {
-		return ItemsAndBlocks.diamondCanister.getFilledItemStack(new FluidStack(FluidRegistry.getFluid("fuel"), 1));
+		return ItemLoader.diamondCanister.getFilledItemStack(new FluidStack(FluidRegistry.getFluid("fuel"), 1));
 	}
 
 	@Override

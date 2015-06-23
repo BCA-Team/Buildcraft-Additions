@@ -16,6 +16,10 @@ public abstract class TileCoilBase extends TileBase {
 	public int increment;
 	public int burnTime, fullBurnTime;
 
+	public TileCoilBase(int identifier) {
+		super(identifier);
+	}
+
 	public void startHeating() {
 		shouldHeat = true;
 		sync();

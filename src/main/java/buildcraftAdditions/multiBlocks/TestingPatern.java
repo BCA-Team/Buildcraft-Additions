@@ -16,7 +16,7 @@ import net.minecraft.init.Blocks;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.BlockLoader;
 import buildcraftAdditions.utils.Location;
 import buildcraftAdditions.utils.RotationUtils;
 
@@ -38,8 +38,8 @@ public class TestingPatern {
 		int rotation = 3;
 		directions = RotationUtils.rotateDirections(rotation, directions);
 		Arrays.fill(identifiers, "walls");
-		blocks.put("walls", ItemsAndBlocks.coolingTowerWalls);
-		blocks.put("valve", ItemsAndBlocks.coolingTowerValve);
+		blocks.put("walls", BlockLoader.coolingTowerWalls);
+		blocks.put("valve", BlockLoader.coolingTowerValve);
 		blocks.put("air", Blocks.air);
 		identifiers[3] = "valve";
 		identifiers[6] = "valve";

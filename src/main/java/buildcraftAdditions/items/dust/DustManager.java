@@ -1,19 +1,15 @@
 package buildcraftAdditions.items.dust;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import net.minecraft.item.Item;
-import net.minecraft.util.StringUtils;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-
 import buildcraftAdditions.api.item.dust.IDust;
 import buildcraftAdditions.api.item.dust.IDustManager;
 import buildcraftAdditions.api.item.dust.IDustType;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.Logger;
+import net.minecraft.util.StringUtils;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -28,9 +24,10 @@ public class DustManager implements IDustManager {
 
 	@Override
 	public void addDust(int meta, String name, int colorMultiplier, IDustType dustType) {
-		if (!ConfigurationHandler.shouldRegisterDusts) {
-			Logger.debug("Dust registering is disabled via config.");
-			Logger.debug("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + (dustType != null ? dustType.getName() : "null"));
+		if (!ConfigurationHandler.shouldRegisterDusts && !(dustType instanceof DustTypes.DustAlwaysValid))
+		{
+			Logger.info("Dust registering is disabled via config.");
+			Logger.info("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + (dustType != null ? dustType.getName() : "null"));
 			return;
 		}
 		if (meta < 0 || meta >= dusts.length) {
@@ -65,12 +62,10 @@ public class DustManager implements IDustManager {
 		dust = new Dust(meta, name, colorMultiplier, dustType);
 		if (dustType.isValid(meta, name, dust.getDustStack())) {
 			dusts[meta] = dust;
-			Item converter = new ItemConverter(dust);
-			GameRegistry.registerItem(converter, "converter" + name.toLowerCase());
 			Logger.info("Successfully added a dust: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + dustType.getName());
 		} else {
-			Logger.debug("The dust with the name '" + name + "' will not be registered because it is invalid in this environment! Skipping.");
-			Logger.debug("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + dustType.getName());
+			Logger.info("The dust with the name '" + name + "' will not be registered because it is invalid in this environment! Skipping.");
+			Logger.info("Was trying to add: Meta: " + meta + ", Name: " + name + ", Color multiplier: " + colorMultiplier + ", Dust type: " + dustType.getName());
 		}
 	}
 

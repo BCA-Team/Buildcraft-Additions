@@ -16,7 +16,7 @@ import buildcraftAdditions.tileEntities.Bases.TileDusterWithConfigurableOutput;
 public class TileSemiAutomaticDuster extends TileDusterWithConfigurableOutput {
 
 	public TileSemiAutomaticDuster() {
-		super(Variables.Eureka.DustT2Key1);
+		super(Variables.Eureka.DustT2Key1, Variables.SyncIDs.SEMI_AUTOMATIC_DUSTER.ordinal());
 	}
 
 	@Override

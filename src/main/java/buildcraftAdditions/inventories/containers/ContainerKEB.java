@@ -2,8 +2,11 @@ package buildcraftAdditions.inventories.containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 import buildcraftAdditions.api.networking.MessageByteBuff;
+import buildcraftAdditions.inventories.slots.SlotFake;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.Bases.TileKineticEnergyBufferBase;
 import buildcraftAdditions.utils.PlayerUtils;
@@ -35,6 +38,31 @@ public class ContainerKEB extends ContainerBase<TileKineticEnergyBufferBase> {
 					PacketHandler.instance.sendTo(msg, (EntityPlayerMP) o);
 		}
 		energy = inventory.energy;
+	}
+
+	@Override
+	protected void addPlayerInventory(int x, int y) {
+
+	}
+
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
+		return null;
+	}
+
+	@Override
+	public ItemStack slotClick(int slotNum, int mouseButton, int modifier, EntityPlayer player) {
+		return null;
+	}
+
+	@Override
+	protected Slot addSlotToContainer(Slot slot) {
+		return null;
+	}
+
+	@Override
+	public Slot getSlot(int id) {
+		return new SlotFake(null, -5, -5, 0);
 	}
 
 }

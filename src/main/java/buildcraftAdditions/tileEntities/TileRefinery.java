@@ -67,6 +67,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 	private String inputFluid, outputFluid;
 
 	public TileRefinery() {
+		super(Variables.SyncIDs.REFINERY.ordinal());
 		maxEnergy = ConfigurationHandler.capacityRefinery;
 		maxTransfer = ConfigurationHandler.maxTransferRefinery;
 		lastRequiredHeat = 20;

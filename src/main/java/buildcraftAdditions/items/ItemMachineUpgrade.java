@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import buildcraftAdditions.items.bases.ItemBase;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.utils.RenderUtils;
@@ -53,7 +54,7 @@ public class ItemMachineUpgrade extends ItemBase {
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return super.getUnlocalizedName(stack) + "." + EnumMachineUpgrades.values()[stack.getItemDamage()].getTextureName();
+		return super.getUnlocalizedName(stack) + "." + EnumMachineUpgrades.values()[stack.getItemDamage()].getTag();
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -33,11 +34,11 @@ public abstract class MultiBlockBase extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	private IIcon altIcon;
 
-	public MultiBlockBase(String blockName, char identifier, MultiBlockPatern patern, String textureName) {
-		this(blockName, identifier, patern, textureName, "multiBlockSeeInvisible");
+	public MultiBlockBase(String blockName, char identifier, MultiBlockPatern patern, String textureName, String gameRegistryName) {
+		this(blockName, identifier, patern, textureName, "multiBlockSeeInvisible", gameRegistryName);
 	}
 
-	public MultiBlockBase(String blockName, char identifier, MultiBlockPatern patern, String textureName, String altTexture) {
+	public MultiBlockBase(String blockName, char identifier, MultiBlockPatern patern, String textureName, String altTexture, String gameregistryName) {
 		super(Material.iron);
 		setHardness(5);
 		setResistance(10);
@@ -47,6 +48,7 @@ public abstract class MultiBlockBase extends BlockContainer {
 		this.identifier = identifier;
 		this.patern = patern;
 		this.altTexture = altTexture;
+		GameRegistry.registerBlock(this, gameregistryName);
 	}
 
 	@Override

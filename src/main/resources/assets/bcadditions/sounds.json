@@ -1,0 +1,14 @@
+{
+  "laser": {
+    "category": "neutral",
+    "sounds": [
+      "laser"
+    ]
+  },
+  "laser_pew": {
+    "category": "neutral",
+    "sounds": [
+      "laser_pew"
+    ]
+  }
+}

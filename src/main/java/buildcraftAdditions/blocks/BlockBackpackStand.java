@@ -9,7 +9,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.BlockLoader;
 import buildcraftAdditions.tileEntities.TileBackpackStand;
 import buildcraftAdditions.utils.Raytracing;
 import buildcraftAdditions.utils.Utils;
@@ -25,7 +25,7 @@ public class BlockBackpackStand extends BlockRotationBase {
 	public IIcon icon;
 
 	public BlockBackpackStand() {
-		super("backpackStand", "", false);
+		super("backpackStand", "", false, "backpackStand");
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class BlockBackpackStand extends BlockRotationBase {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
-			if (world.getBlock(x, y + 1, z) != ItemsAndBlocks.backpackStandGhost)
+			if (world.getBlock(x, y + 1, z) != BlockLoader.backpackStandGhost)
 				return true;
 			TileEntity entity = world.getTileEntity(x, y, z);
 			if (entity != null && entity instanceof TileBackpackStand) {
@@ -60,7 +60,7 @@ public class BlockBackpackStand extends BlockRotationBase {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
 		super.onBlockPlacedBy(world, x, y, z, entity, stack);
-		world.setBlock(x, y + 1, z, ItemsAndBlocks.backpackStandGhost);
+		world.setBlock(x, y + 1, z, BlockLoader.backpackStandGhost);
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class BlockBackpackStand extends BlockRotationBase {
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-		if (world.getBlock(x, y + 1, z) != ItemsAndBlocks.backpackStandGhost) {
+		if (world.getBlock(x, y + 1, z) != BlockLoader.backpackStandGhost) {
 			world.setBlockToAir(x, y, z);
 			if (!world.isRemote)
 				dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);

@@ -19,6 +19,7 @@ import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import buildcraftAdditions.api.configurableOutput.SideConfiguration;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.Bases.TileBase;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
@@ -43,6 +44,7 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	private SideConfiguration configuration = new SideConfiguration(EnumSideStatus.BOTH);
 
 	public TileHeatedFurnace() {
+		super(Variables.SyncIDs.HEATED_FURNACE.ordinal());
 		progress = 0;
 		isCooking = false;
 		coils = new TileCoilBase[6];
@@ -78,16 +80,17 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 				isCooking = true;
 			if (progress >= ConfigurationHandler.heatedFurnaceHeatRequired) {
 				ItemStack inputStack = getStackInSlot(0);
-				ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inputStack);
-				if (getStackInSlot(1) == null) {
+				ItemStack outputStack = getStackInSlot(1);
+				ItemStack result = getResult(inputStack);
+				if (outputStack == null) {
 					setInventorySlotContents(1, result.copy());
 				} else {
-					getStackInSlot(1).stackSize += result.stackSize;
+					outputStack.stackSize += result.stackSize;
 				}
-				if (getStackInSlot(0).stackSize <= 1)
+				if (inputStack.stackSize <= 1)
 					setInventorySlotContents(0, null);
 				else
-					getStackInSlot(0).stackSize--;
+					inputStack.stackSize--;
 				progress = 0;
 			} else {
 				for (TileCoilBase coil : coils)
@@ -125,10 +128,12 @@ public class TileHeatedFurnace extends TileBase implements ISidedInventory, IUpg
 	public boolean canCook() {
 		ItemStack stack0 = getStackInSlot(0);
 		ItemStack stack1 = getStackInSlot(1);
-		if (stack0 == null || getResult(stack0) == null)
+		if (stack0 == null || stack0.getItem() == null || stack0.stackSize <= 0)
 			return false;
 		ItemStack result = getResult(stack0);
-		return stack1 == null || (result.getItem() == stack1.getItem() && result.stackSize + stack1.stackSize <= result.getMaxStackSize());
+		if (result == null || result.getItem() == null || result.stackSize <= 0)
+			return false;
+		return Utils.areItemStacksMergeableStrict(stack1, result);
 	}
 
 	public ItemStack getResult(ItemStack stack) {

@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 
 import buildcraftAdditions.inventories.InventoryPortableLaser;
 import buildcraftAdditions.items.Tools.ItemPortableLaser;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemLoader;
 
 import eureka.api.IDropHandler;
 
@@ -31,7 +31,7 @@ public class PortableLaserDropHandler implements IDropHandler {
 		ArrayList<ItemStack> list = new ArrayList<ItemStack>();
 		list.add(new ItemStack(Blocks.glass));
 		list.add(new ItemStack(Items.diamond));
-		list.add(new ItemStack(ItemsAndBlocks.blazeStick, 2));
+		list.add(new ItemStack(ItemLoader.blazeStick, 2));
 		InventoryPortableLaser inv = new InventoryPortableLaser(stack);
 		for (int t = 0; t < inv.getSizeInventory(); t++) {
 			list.add(inv.getStackInSlot(t));

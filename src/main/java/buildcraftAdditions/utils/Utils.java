@@ -107,7 +107,7 @@ public class Utils {
 	}
 
 	public static String getRFInfoTooltip(int energy, int maxEnergy) {
-		int percent = maxEnergy > 0 ? ((energy * 100) / maxEnergy) : 0;
+		int percent = maxEnergy > 0 ? (int) ((energy / (double) maxEnergy) * 100) : 0;
 		String color = "";
 		if (percent >= 75)
 			color += EnumChatFormatting.DARK_GREEN;
@@ -122,6 +122,24 @@ public class Utils {
 		else
 			color += EnumChatFormatting.DARK_RED;
 		return color + localizeFormatted("rf.info", energy, maxEnergy);
+	}
+
+	public static String getRFPercentTooltip(int energy, int maxEnergy) {
+		int percent = maxEnergy > 0 ? (int) ((energy / (double) maxEnergy) * 100) : 0;
+		String color = "";
+		if (percent >= 75)
+			color += EnumChatFormatting.DARK_GREEN;
+		else if (percent >= 60)
+			color += EnumChatFormatting.GREEN;
+		else if (percent >= 45)
+			color += EnumChatFormatting.YELLOW;
+		else if (percent >= 30)
+			color += EnumChatFormatting.GOLD;
+		else if (percent >= 15)
+			color += EnumChatFormatting.RED;
+		else
+			color += EnumChatFormatting.DARK_RED;
+		return color + percent + "%";
 	}
 
 	public static String colorText(String text, EnumChatFormatting color) {
@@ -198,6 +216,10 @@ public class Utils {
 
 	public static boolean areItemStacksMergeable(ItemStack existingStack, ItemStack stackToAdd) {
 		return existingStack == null || stackToAdd == null || (existingStack != null && stackToAdd != null && existingStack.isItemEqual(stackToAdd) && ItemStack.areItemStackTagsEqual(existingStack, stackToAdd));
+	}
+
+	public static boolean areItemStacksMergeableStrict(ItemStack existingStack, ItemStack stackToAdd) {
+		return existingStack == null || stackToAdd == null || (existingStack != null && stackToAdd != null && existingStack.isItemEqual(stackToAdd) && ItemStack.areItemStackTagsEqual(existingStack, stackToAdd) && existingStack.stackSize + stackToAdd.stackSize <= existingStack.getMaxStackSize());
 	}
 
 	public static ItemStack outputStack(Location from, ItemStack output, SideConfiguration configuration) {

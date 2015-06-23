@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.BlockLoader;
 
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
@@ -23,7 +23,7 @@ import mcp.mobius.waila.api.IWailaDataProvider;
  */
 public class BackbackStandGhostBlockProvider implements IWailaDataProvider {
 
-	private final ItemStack stack = new ItemStack(ItemsAndBlocks.backpackStand);
+	private final ItemStack stack = new ItemStack(BlockLoader.backpackStand);
 
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {

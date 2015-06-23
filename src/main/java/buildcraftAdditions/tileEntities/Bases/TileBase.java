@@ -22,7 +22,12 @@ import buildcraftAdditions.reference.Variables;
  */
 public abstract class TileBase extends TileEntity implements ISynchronizedTile {
 
+	protected final int IDENTIFIER;
 	public int timer;
+
+	public TileBase(int identifier) {
+		IDENTIFIER = identifier;
+	}
 
 	@Override
 	public void updateEntity() {
@@ -61,6 +66,11 @@ public abstract class TileBase extends TileEntity implements ISynchronizedTile {
 	@Override
 	public int getZ() {
 		return zCoord;
+	}
+
+	@Override
+	public int getIdentifier() {
+		return IDENTIFIER;
 	}
 
 	@Override

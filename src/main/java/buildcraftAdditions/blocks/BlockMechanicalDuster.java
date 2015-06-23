@@ -93,13 +93,13 @@ public class BlockMechanicalDuster extends BlockDusterBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
-		front = RenderUtils.registerIcon(register, "duster" + type + "Front");
-		sides = RenderUtils.registerIcon(register, "duster" + type + "Sides");
-		bottom = RenderUtils.registerIcon(register, "duster" + type + "Bottom");
+		front = RenderUtils.registerIcon(register, "dusters/" + type.toLowerCase() + "/Front");
+		sides = RenderUtils.registerIcon(register, "dusters/" + type.toLowerCase() + "/Sides");
+		bottom = RenderUtils.registerIcon(register, "dusters/" + type.toLowerCase() + "/Bottom");
 		top = new IIcon[4];
-		top[0] = RenderUtils.registerIcon(register, "duster" + type + "Top0");
-		top[1] = RenderUtils.registerIcon(register, "duster" + type + "Top1");
-		top[2] = RenderUtils.registerIcon(register, "duster" + type + "Top2");
-		top[3] = RenderUtils.registerIcon(register, "duster" + type + "Top3");
+		top[0] = RenderUtils.registerIcon(register, "dusters/" + type.toLowerCase() + "/Top0");
+		top[1] = RenderUtils.registerIcon(register, "dusters/" + type.toLowerCase() + "/Top1");
+		top[2] = RenderUtils.registerIcon(register, "dusters/" + type.toLowerCase() + "/Top2");
+		top[3] = RenderUtils.registerIcon(register, "dusters/" + type.toLowerCase() + "/Top3");
 	}
 }

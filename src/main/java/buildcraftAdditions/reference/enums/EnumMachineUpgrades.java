@@ -4,7 +4,7 @@ package buildcraftAdditions.reference.enums;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemLoader;
 import buildcraftAdditions.reference.Variables;
 
 /**
@@ -32,7 +32,7 @@ public enum EnumMachineUpgrades {
 	private EnumMachineUpgrades(String tag, boolean multipleInstalls) {
 		this.tag = tag;
 		this.multipleInstalls = multipleInstalls;
-		texture = new ResourceLocation(Variables.MOD.ID, "textures/items/" + tag + ".png");
+		texture = new ResourceLocation(Variables.MOD.ID, "textures/items/upgrades/" + tag.substring(7).toLowerCase() + ".png");
 	}
 
 	public String getTag() {
@@ -44,7 +44,7 @@ public enum EnumMachineUpgrades {
 	}
 
 	public ItemStack getItemStack() {
-		return new ItemStack(ItemsAndBlocks.upgrade, 1, ordinal());
+		return new ItemStack(ItemLoader.upgrade, 1, ordinal());
 	}
 
 	public ResourceLocation getTexture() {
@@ -52,7 +52,7 @@ public enum EnumMachineUpgrades {
 	}
 
 	public String getTextureName() {
-		return tag;
+		return "upgrades/" + tag.substring(7).toLowerCase();
 	}
 
 

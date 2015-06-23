@@ -6,6 +6,7 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -32,10 +33,11 @@ public class ItemBucketBCA extends ItemBucket {
 
 	public ItemBucketBCA(Fluid fluid) {
 		super(fluid.getBlock());
-		this.fluid = new FluidStack(fluid.getID(), FluidContainerRegistry.BUCKET_VOLUME);
+		this.fluid = new FluidStack(fluid, FluidContainerRegistry.BUCKET_VOLUME);
 		setContainerItem(Items.bucket);
 		setCreativeTab(BuildcraftAdditions.bcadditions);
 		setUnlocalizedName("bcaBucket." + fluid.getName());
+		GameRegistry.registerItem(this, fluid.getName() + "Bucket");
 	}
 
 	@Override

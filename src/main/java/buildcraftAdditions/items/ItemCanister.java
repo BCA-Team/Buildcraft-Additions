@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -42,6 +43,7 @@ public class ItemCanister extends ItemFluidContainer {
 		setUnlocalizedName(name);
 		setCapacity(canisterCapacity);
 		setTextureName("bcadditions:" + name);
+		GameRegistry.registerItem(this, name);
 	}
 
 	@Override
@@ -80,7 +82,7 @@ public class ItemCanister extends ItemFluidContainer {
 		super.getSubItems(item, tab, list);
 		for (Fluid fluid : FluidRegistry.getRegisteredFluids().values())
 			if (fluid != null)
-				list.add(getFilledItemStack(new FluidStack(fluid.getID(), capacity)));
+				list.add(getFilledItemStack(new FluidStack(fluid, capacity)));
 	}
 
 	@SideOnly(Side.CLIENT)

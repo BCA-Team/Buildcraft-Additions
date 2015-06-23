@@ -18,23 +18,23 @@ import net.minecraft.village.MerchantRecipeList;
 
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemLoader;
 
 public class VillagerTradeHandler implements IVillageTradeHandler {
 
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) {
 		//canisters
-		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1), null, new ItemStack(ItemsAndBlocks.ironCanister, 2)));
-		recipeList.add(new MerchantRecipe(new ItemStack(ItemsAndBlocks.ironCanister, 1), new ItemStack(Items.emerald, 1), new ItemStack(ItemsAndBlocks.goldCanister, 1)));
-		recipeList.add(new MerchantRecipe(new ItemStack(ItemsAndBlocks.goldCanister, 1), new ItemStack(Items.emerald, 4), new ItemStack(ItemsAndBlocks.diamondCanister, 1)));
+		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1), null, new ItemStack(ItemLoader.ironCanister, 2)));
+		recipeList.add(new MerchantRecipe(new ItemStack(ItemLoader.ironCanister, 1), new ItemStack(Items.emerald, 1), new ItemStack(ItemLoader.goldCanister, 1)));
+		recipeList.add(new MerchantRecipe(new ItemStack(ItemLoader.goldCanister, 1), new ItemStack(Items.emerald, 4), new ItemStack(ItemLoader.diamondCanister, 1)));
 
 		//kinetic capsules
-		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2), null, new ItemStack(ItemsAndBlocks.powerCapsuleTier1, 1)));
-		recipeList.add(new MerchantRecipe(new ItemStack(ItemsAndBlocks.powerCapsuleTier1, 1), new ItemStack(Items.emerald, 3), new ItemStack(ItemsAndBlocks.powerCapsuleTier2, 1)));
-		recipeList.add(new MerchantRecipe(new ItemStack(ItemsAndBlocks.powerCapsuleTier2, 1), new ItemStack(Items.emerald, 10), new ItemStack(ItemsAndBlocks.powerCapsuleTier3, 1)));
+		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2), null, new ItemStack(ItemLoader.powerCapsuleTier1, 1)));
+		recipeList.add(new MerchantRecipe(new ItemStack(ItemLoader.powerCapsuleTier1, 1), new ItemStack(Items.emerald, 3), new ItemStack(ItemLoader.powerCapsuleTier2, 1)));
+		recipeList.add(new MerchantRecipe(new ItemStack(ItemLoader.powerCapsuleTier2, 1), new ItemStack(Items.emerald, 10), new ItemStack(ItemLoader.powerCapsuleTier3, 1)));
 
 		//emerald stick
-		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 15), null, new ItemStack(ItemsAndBlocks.emeraldStick, 1)));
+		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 15), null, new ItemStack(ItemLoader.emeraldStick, 1)));
 	}
 
 }

@@ -38,7 +38,7 @@ public abstract class GuiBase extends GuiContainer {
 	public int titleXoffset = 5;
 	public int titleYoffset = 8;
 	public boolean shouldDrawWidgets = true;
-	public int textColor = 0xFFCC00;
+	public int textColor = 0x003A81;
 	public boolean centerTitle = true;
 	public int tileGuiYSize = 0;
 	private boolean drawPlayerInv = false;

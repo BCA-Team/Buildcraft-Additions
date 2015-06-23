@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.inventories.CustomInventory;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 
 /**
@@ -21,6 +22,7 @@ public class TileBasicCoil extends TileCoilBase implements IInventory {
 	private final CustomInventory inventory = new CustomInventory("BasicCoil", 1, 64, this);
 
 	public TileBasicCoil() {
+		super(Variables.SyncIDs.BASIC_COIL.ordinal());
 		burnTime = 0;
 		fullBurnTime = 0;
 		shouldHeat = false;

@@ -16,7 +16,7 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import buildcraftAdditions.items.ItemBase;
+import buildcraftAdditions.items.bases.ItemBase;
 import buildcraftAdditions.utils.Utils;
 
 public class ItemToolUpgrade extends ItemBase {
@@ -24,7 +24,11 @@ public class ItemToolUpgrade extends ItemBase {
 	private final String type;
 
 	public ItemToolUpgrade(String type) {
-		super("toolUpgrade" + type);
+		this(type, type);
+	}
+
+	public ItemToolUpgrade(String type, String texture) {
+		super("toolUpgrade" + type, texture);
 		setMaxStackSize(16);
 		this.type = type;
 	}

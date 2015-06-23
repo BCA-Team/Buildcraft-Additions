@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraftforge.oredict.OreDictionary;
 
+import buildcraftAdditions.items.bases.ItemBase;
 import buildcraftAdditions.utils.Utils;
 
 /**

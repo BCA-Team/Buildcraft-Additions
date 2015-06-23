@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 import buildcraftAdditions.inventories.InventoryKineticMultiTool;
 import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
-import buildcraftAdditions.reference.ItemsAndBlocks;
+import buildcraftAdditions.reference.ItemLoader;
 
 import eureka.api.IDropHandler;
 
@@ -29,8 +29,8 @@ public class KineticToolDropHandler implements IDropHandler {
 	public List<ItemStack> getDrops(ItemStack stack) {
 		List<ItemStack> list = new ArrayList<ItemStack>();
 		list.add(new ItemStack(Items.diamond, 3));
-		list.add(new ItemStack(ItemsAndBlocks.ironStick));
-		list.add(new ItemStack(ItemsAndBlocks.toolCore));
+		list.add(new ItemStack(ItemLoader.ironStick));
+		list.add(new ItemStack(ItemLoader.toolCore));
 		InventoryKineticMultiTool inventory = new InventoryKineticMultiTool(stack);
 		for (int t = 0; t < inventory.getSizeInventory(); t++) {
 			if (inventory.getStackInSlot(t) != null)

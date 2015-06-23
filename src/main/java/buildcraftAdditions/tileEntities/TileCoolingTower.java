@@ -62,9 +62,18 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private TileCoolingTower master;
 	private ICoolingTowerRecipe recipe;
 
+	public TileCoolingTower() {
+		super(Variables.SyncIDs.COOLING_TOWER.ordinal());
+	}
+
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
+		if (getMasterX() == xCoord && getMasterY() == yCoord && getMasterZ() == zCoord && !isMaster()) {
+			data.invalidataMultiblock(worldObj);
+			master = null;
+			return;
+		}
 		if (data.moved) {
 			data.afterMoveCheck(worldObj);
 			worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 80);
@@ -229,6 +238,11 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	}
 
 	private void findMaster() {
+		if (getMasterX() == xCoord && getMasterY() == yCoord && getMasterZ() == zCoord) {
+			data.invalidataMultiblock(worldObj);
+			master = null;
+			return;
+		}
 		TileEntity entity = worldObj.getTileEntity(data.masterX, data.masterY, data.masterZ);
 		if (entity instanceof TileCoolingTower && ((TileCoolingTower) entity).isMaster())
 			master = (TileCoolingTower) entity;

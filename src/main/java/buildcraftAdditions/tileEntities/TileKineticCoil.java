@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import buildcraft.api.power.ILaserTarget;
 
 import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
 
 /**
@@ -16,6 +17,10 @@ import buildcraftAdditions.tileEntities.Bases.TileCoilBase;
  */
 public class TileKineticCoil extends TileCoilBase implements ILaserTarget {
 	public static int buffer;
+
+	public TileKineticCoil() {
+		super(Variables.SyncIDs.KINETIC_COIL.ordinal());
+	}
 
 	@Override
 	public boolean requiresLaserEnergy() {

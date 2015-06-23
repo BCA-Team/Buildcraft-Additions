@@ -9,6 +9,8 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
+import buildcraftAdditions.core.Logger;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -19,7 +21,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 public class MessageByteBuff implements IMessage, IMessageHandler<MessageByteBuff, IMessage> {
 
 	public ISynchronizedTile tile;
-	public int x, y, z;
+	public int x, y, z, identifier;
 
 	public MessageByteBuff() {
 	}
@@ -29,6 +31,7 @@ public class MessageByteBuff implements IMessage, IMessageHandler<MessageByteBuf
 		x = tile.getX();
 		y = tile.getY();
 		z = tile.getZ();
+		identifier = tile.getIdentifier();
 	}
 
 	@Override
@@ -36,11 +39,18 @@ public class MessageByteBuff implements IMessage, IMessageHandler<MessageByteBuf
 		x = buf.readInt();
 		y = buf.readInt();
 		z = buf.readInt();
+		identifier = buf.readInt();
 		if (FMLClientHandler.instance().getClient().theWorld != null) {
 			TileEntity entity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(x, y, z);
 			if (entity instanceof ISynchronizedTile) {
 				tile = (ISynchronizedTile) entity;
-				tile.readFromByteBuff(buf);
+				if (identifier != tile.getIdentifier())
+					return;
+				try {
+					tile.readFromByteBuff(buf);
+				} catch (Throwable t) {
+					Logger.error("Error while reading message, TE:" + entity.getClass());
+				}
 			}
 		}
 	}
@@ -50,6 +60,7 @@ public class MessageByteBuff implements IMessage, IMessageHandler<MessageByteBuf
 		buf.writeInt(x);
 		buf.writeInt(y);
 		buf.writeInt(z);
+		buf.writeInt(identifier);
 		tile.writeToByteBuff(buf);
 	}
 

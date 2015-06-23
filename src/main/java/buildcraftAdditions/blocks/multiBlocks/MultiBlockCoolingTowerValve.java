@@ -18,7 +18,7 @@ import buildcraftAdditions.tileEntities.TileCoolingTower;
 public class MultiBlockCoolingTowerValve extends MultiBlockBase {
 
 	public MultiBlockCoolingTowerValve() {
-		super("blockCoolingTowerValve", Variables.Identifiers.COOLING_TOWER_VALVE, Variables.Paterns.COOLING_TOWER, "refineryValve_2", "coolingtowerValve");
+		super("blockCoolingTowerValve", Variables.Identifiers.COOLING_TOWER_VALVE, Variables.Paterns.COOLING_TOWER, "refineryValve_2", "coolingtowerValve", "blockCoolingTowerValve");
 	}
 
 	@Override

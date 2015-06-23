@@ -18,6 +18,7 @@ import buildcraftAdditions.inventories.InventoryItem;
 import buildcraftAdditions.inventories.InventoryPortableLaser;
 import buildcraftAdditions.items.ItemInventoryPoweredBase;
 import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.utils.PlayerUtils;
 import buildcraftAdditions.utils.RenderUtils;
 
 /**
@@ -75,7 +76,10 @@ public class ItemPortableLaser extends ItemInventoryPoweredBase {
 		if (getEnergyStored(stack) < energyUse)
 			return;
 		extractEnergy(stack, energyUse, false);
-		world.playSoundAtEntity(player, "random.bow", 1, 1 / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+		if (PlayerUtils.playerMatches(Variables.UUIDs.FORECASTER, BuildcraftAdditions.proxy.getClientPlayer()))
+			world.playSoundAtEntity(player, "bcadditions:laser_pew", 1, 1 / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+		else
+			world.playSoundAtEntity(player, "bcadditions:laser", 1, 1 / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 		if (!world.isRemote)
 			world.spawnEntityInWorld(new EntityLaserShot(world, player, f));
 	}
@@ -101,10 +105,10 @@ public class ItemPortableLaser extends ItemInventoryPoweredBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
-		super.registerIcons(register);
+		this.itemIcon = RenderUtils.registerIcon(register, "portableLaser/base");
 		icons = new IIcon[5];
 		for (int i = 0; i < icons.length; i++)
-			icons[i] = RenderUtils.registerIcon(register, getName() + "_" + i);
+			icons[i] = RenderUtils.registerIcon(register, "portableLaser/" + i);
 	}
 
 	@Override

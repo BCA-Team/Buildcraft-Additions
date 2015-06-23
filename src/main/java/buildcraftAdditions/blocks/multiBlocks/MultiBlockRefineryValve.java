@@ -19,7 +19,7 @@ import buildcraftAdditions.tileEntities.TileRefinery;
 public class MultiBlockRefineryValve extends MultiBlockBase {
 
 	public MultiBlockRefineryValve() {
-		super("blockRefineryValve", Variables.Identifiers.REFINERY_VALVE, new MultiBlockPaternRefinery(), "refineryValve_2", "refineryValve");
+		super("blockRefineryValve", Variables.Identifiers.REFINERY_VALVE, new MultiBlockPaternRefinery(), "refineryValve_2", "refineryValve", "refineryValve");
 	}
 
 	@Override

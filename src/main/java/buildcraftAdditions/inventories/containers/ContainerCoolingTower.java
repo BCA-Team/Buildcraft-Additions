@@ -1,7 +1,9 @@
 package buildcraftAdditions.inventories.containers;
 
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -10,6 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+import buildcraftAdditions.inventories.slots.SlotFake;
 import buildcraftAdditions.tileEntities.TileCoolingTower;
 
 /**
@@ -23,8 +26,9 @@ public class ContainerCoolingTower extends ContainerBase<TileCoolingTower> {
 
 	private int heat, fluidIDInput, fluidAmountInput, fluidIDOutput, fluidAmountOutput, fluidIDCoolant, fluidAmountCoolant;
 
-	public ContainerCoolingTower(InventoryPlayer inventoryPlayer, TileCoolingTower tile) {
-		super(inventoryPlayer, tile);
+	public ContainerCoolingTower(TileCoolingTower tile) {
+		super(null, tile);
+		setCanShift(false);
 	}
 
 	@Override
@@ -41,7 +45,6 @@ public class ContainerCoolingTower extends ContainerBase<TileCoolingTower> {
 
 	@Override
 	public void detectAndSendChanges() {
-		super.detectAndSendChanges();
 		super.detectAndSendChanges();
 		if (crafters != null) {
 			for (Object o : crafters) {
@@ -122,4 +125,28 @@ public class ContainerCoolingTower extends ContainerBase<TileCoolingTower> {
 		}
 	}
 
+	@Override
+	protected void addPlayerInventory(int x, int y) {
+
+	}
+
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
+		return null;
+	}
+
+	@Override
+	public ItemStack slotClick(int slotNum, int mouseButton, int modifier, EntityPlayer player) {
+		return null;
+	}
+
+	@Override
+	protected Slot addSlotToContainer(Slot slot) {
+		return null;
+	}
+
+	@Override
+	public Slot getSlot(int id) {
+		return new SlotFake(null, -5, -5, 0);
+	}
 }
