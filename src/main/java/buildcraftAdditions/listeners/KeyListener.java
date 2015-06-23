@@ -1,17 +1,9 @@
 package buildcraftAdditions.listeners;
 
-import org.lwjgl.input.Keyboard;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.KeyBinding;
-
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
-
-import buildcraftAdditions.networking.MessageToggleBoots;
-import buildcraftAdditions.networking.PacketHandler;
-import buildcraftAdditions.reference.ArmorLoader;
+import net.minecraft.client.Minecraft;
+import org.lwjgl.input.Keyboard;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -23,10 +15,10 @@ import buildcraftAdditions.reference.ArmorLoader;
 public class KeyListener {
 	private static final int jumpkey = Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode();
 	private static final int forwardKey = Minecraft.getMinecraft().gameSettings.keyBindForward.getKeyCode();
-	private static final KeyBinding toggleKey = new KeyBinding("keybinding.toggleBoots", Keyboard.KEY_F, "Buildcraft Additions");
+	//private static final KeyBinding toggleKey = new KeyBinding("keybinding.toggleBoots", Keyboard.KEY_F, "Buildcraft Additions");
 
 	public KeyListener() {
-		ClientRegistry.registerKeyBinding(toggleKey);
+		//ClientRegistry.registerKeyBinding(toggleKey);
 	}
 
 
@@ -42,11 +34,11 @@ public class KeyListener {
 			newStatus = Keyboard.isKeyDown(forwardKey);
 			if (oldStatus != newStatus)
 				FlightTracker.setMoving(mc.thePlayer, newStatus);
-			if (toggleKey.getIsKeyPressed()) {
+			/*if (toggleKey.getIsKeyPressed()) {
 				if (mc.thePlayer.getCurrentArmor(0) != null && mc.thePlayer.getCurrentArmor(0).getItem() == ArmorLoader.hoverBoots) {
 					PacketHandler.instance.sendToServer(new MessageToggleBoots());
 				}
-			}
+			}*/
 		}
 	}
 }

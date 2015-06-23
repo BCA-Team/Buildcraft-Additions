@@ -576,6 +576,7 @@ public class ModelHoverBoots extends ModelBiped {
 		GL11.glTranslatef(-this.shape5_6.rotationPointX * f5, -this.shape5_6.rotationPointY * f5, -this.shape5_6.rotationPointZ * f5);
 		this.shape5_6.render(f5);
 		GL11.glPopMatrix();
+		GL11.glPopMatrix();
 	}
 
 	/**
