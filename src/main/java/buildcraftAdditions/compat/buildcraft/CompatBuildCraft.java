@@ -5,7 +5,6 @@ import buildcraftAdditions.compat.CompatModule;
 import buildcraftAdditions.compat.buildcraft.actions.Actions;
 import buildcraftAdditions.compat.buildcraft.schematics.BCASchematics;
 import buildcraftAdditions.compat.buildcraft.triggers.Triggers;
-import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.items.ItemRobotDebugTool;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
@@ -35,8 +34,7 @@ public class CompatBuildCraft {
 
 	@CompatModule.Handler
 	public void doneLoading(FMLLoadCompleteEvent event) {
-		if (!ConfigurationHandler.forceEnableBCRefinery)
-			RefineryRecipeConverter.doYourThing();
+		RefineryRecipeConverter.doYourThing();
 		Triggers.register();
 		Actions.register();
 		BuildcraftAdditions.proxy.addPowerplant();

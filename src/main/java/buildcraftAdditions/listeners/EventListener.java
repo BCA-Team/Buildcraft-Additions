@@ -1,26 +1,6 @@
 package buildcraftAdditions.listeners;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
-
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.event.entity.item.ItemTossEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.fluids.FluidRegistry;
-
 import buildcraft.api.tools.IToolWrench;
-
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.core.VersionCheck;
@@ -31,8 +11,23 @@ import buildcraftAdditions.reference.Variables;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.utils.fluids.RefineryRecipeConverter;
-
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import eureka.api.EurekaAPI;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -109,6 +104,8 @@ public class EventListener {
 		@SubscribeEvent
 		@SideOnly(Side.CLIENT)
 		public void textures(TextureStitchEvent.Post event) {
+			if (ConfigurationHandler.forceEnableBCRefinery)
+				return;
 			if (event.map.getTextureType() == 0) {
 				for (int t = 0; t < RefineryRecipeConverter.inputs.length; t++) {
 					if (RefineryRecipeConverter.inputs[t] != null && RefineryRecipeConverter.outputs[t] != null)

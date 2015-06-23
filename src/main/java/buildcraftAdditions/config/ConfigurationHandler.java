@@ -1,11 +1,10 @@
 package buildcraftAdditions.config;
 
-import java.io.File;
-import java.util.HashSet;
-
+import buildcraftAdditions.core.VersionCheck;
 import net.minecraftforge.common.config.Configuration;
 
-import buildcraftAdditions.core.VersionCheck;
+import java.io.File;
+import java.util.HashSet;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -217,7 +216,7 @@ public class ConfigurationHandler {
 		eurekaIntegration = configFile.get("Misc", "eurekaIntegration", true).setRequiresMcRestart(true).getBoolean();
 		dusterParticles = configFile.get("Misc", "dusterParticles", true).getBoolean();
 		particleCount = configFile.get("Misc", "particleCount", 100).setMinValue(0).getInt();
-		forceEnableBCRefinery = !enabled("MultiBlockRefining") || configFile.get("Misc", "forceEnableBCRefinery", false).getBoolean();
+		forceEnableBCRefinery = !enabled("MultiBlockRefining") || configFile.get("Misc", "forceEnableBCRefinery", false).setRequiresMcRestart(true).getBoolean();
 
 		registerFeature("ChargingStation");
 		registerFeature("ColorSorter");
