@@ -38,18 +38,18 @@ public class ItemRocketPants extends ItemPoweredArmor {
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		setDamage(itemStack, 0);
-		if (FlightTracker.wantsToFly(player.getDisplayName()) || !player.onGround) {
+		if (FlightTracker.wantsToFly(player) || !player.onGround) {
 			ItemStack stack = player.getCurrentArmor(2);
 			if (stack != null && stack.getItem() == ArmorLoader.kineticBackpack) {
 				ItemKineticBackpack backpack = (ItemKineticBackpack) stack.getItem();
 				if (backpack.extractEnergy(stack, 40, true) == 40) {
-					if (FlightTracker.wantsToMove(player.getDisplayName())) {
+					if (FlightTracker.wantsToMove(player)) {
 						player.moveFlying(0, .2f, .2f);
 					}
 					player.motionX *= 1.025;
 					player.motionZ *= 1.025;
 					backpack.extractEnergy(stack, SPEED_POWER, false);
-					if (player.motionY < MAX_LIFT && FlightTracker.wantsToFly(player.getDisplayName())) {
+					if (player.motionY < MAX_LIFT && FlightTracker.wantsToFly(player)) {
 						backpack.extractEnergy(stack, FLY_POWER, false);
 						player.motionY += 0.1;
 						player.fallDistance = 0;
