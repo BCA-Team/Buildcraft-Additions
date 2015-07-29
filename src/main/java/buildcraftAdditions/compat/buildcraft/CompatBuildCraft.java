@@ -26,10 +26,10 @@ public class CompatBuildCraft {
 
 	@CompatModule.Handler
 	public void preInit(FMLPreInitializationEvent event) {
-		addItemSorter();
 		StripesHandler.register();
 		BCASchematics.registerSchematics();
-		addRobotDebugTool();
+		robotDebugTool = new ItemRobotDebugTool();
+		GameRegistry.registerTileEntity(TileItemSorter.class, "ItemSorter");
 	}
 
 	@CompatModule.Handler
@@ -38,15 +38,6 @@ public class CompatBuildCraft {
 		Triggers.register();
 		Actions.register();
 		BuildcraftAdditions.proxy.addPowerplant();
-	}
-
-	private void addItemSorter() {
-		GameRegistry.registerTileEntity(TileItemSorter.class, "ItemSorter");
-	}
-
-	private void addRobotDebugTool() {
-		robotDebugTool = new ItemRobotDebugTool();
-		GameRegistry.registerItem(robotDebugTool, "robotDebugTool");
 	}
 
 }

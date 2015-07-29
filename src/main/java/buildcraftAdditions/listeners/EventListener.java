@@ -104,7 +104,7 @@ public class EventListener {
 		@SubscribeEvent
 		@SideOnly(Side.CLIENT)
 		public void textures(TextureStitchEvent.Post event) {
-			if (ConfigurationHandler.forceEnableBCRefinery)
+			if (RefineryRecipeConverter.inputs == null || RefineryRecipeConverter.inputs.length == 0)
 				return;
 			if (event.map.getTextureType() == 0) {
 				for (int t = 0; t < RefineryRecipeConverter.inputs.length; t++) {
