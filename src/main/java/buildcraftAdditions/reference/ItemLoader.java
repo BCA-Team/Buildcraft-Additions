@@ -16,6 +16,7 @@ import buildcraftAdditions.compat.buildcraft.BCItems;
 import buildcraftAdditions.compat.buildcraft.recipe.BCAIntegrationRecipe;
 import buildcraftAdditions.compat.buildcraft.recipe.KineticToolUpgradeHandler;
 import buildcraftAdditions.compat.buildcraft.recipe.ToolCoreRecipe;
+import buildcraftAdditions.compat.buildcraft.recipe.UpgradeRecipeStick;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemMachineConfigurator;
@@ -236,6 +237,9 @@ public class ItemLoader {
 		KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("slimeStick", true, slimeStick));
 		KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("blazeStick", true, blazeStick));
 
+		BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeStick("goldStick", "stickGold"));
+		BuildcraftRecipeRegistry.integrationTable.addRecipe(new UpgradeRecipeStick("diamondStick", "stickDiamond", "goldStick"));
+
 		if (ConfigurationHandler.enabled("ColoringTool"))
 			GameRegistry.addRecipe(new ShapedOreRecipe(pipeColoringTool, "  S", " C ", "W  ", 'W', new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 'S', "stickIron", 'C', powerCapsuleTier1));
 
@@ -248,7 +252,8 @@ public class ItemLoader {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fluxConductor), "GIG", "GRG", "GIG", 'G', "ingotGold", 'I', "ingotIron", 'R', "dustRedstone"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fluxDisperser), "IGI", "IRI", "IGI", 'G', "ingotGold", 'I', "ingotIron", 'R', "dustRedstone"));
 
-		BuildcraftRecipeRegistry.integrationTable.addRecipe(new KineticToolUpgradeHandler());
+		//TODO: Remove
+		//BuildcraftRecipeRegistry.integrationTable.addRecipe(new KineticToolUpgradeHandler());
 	}
 
 	private static void addUpgradeRecipe(ItemToolUpgrade upgrade, Object... inputs) {
