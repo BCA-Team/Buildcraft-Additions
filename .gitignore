@@ -22,3 +22,5 @@ eclipse/
 *.bat
 **/.DS_Store
 curse.properties
+github
+github.pub
