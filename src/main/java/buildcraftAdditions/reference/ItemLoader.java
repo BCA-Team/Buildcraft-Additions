@@ -13,9 +13,8 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 
 import buildcraftAdditions.compat.buildcraft.BCItems;
-import buildcraftAdditions.compat.buildcraft.recipe.BCAIntegrationRecipe;
-import buildcraftAdditions.compat.buildcraft.recipe.KineticToolUpgradeHandler;
 import buildcraftAdditions.compat.buildcraft.recipe.ToolCoreRecipe;
+import buildcraftAdditions.compat.buildcraft.recipe.tool.KineticToolUpgradeRecipe;
 import buildcraftAdditions.config.ConfigurationHandler;
 import buildcraftAdditions.items.ItemCanister;
 import buildcraftAdditions.items.ItemMachineConfigurator;
@@ -164,6 +163,7 @@ public class ItemLoader {
 	public static void addRecipes() {
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(grindingWheel), "FFF", "FGF", "FFF", 'F', Items.flint, 'G', "gearStone"));
+		KineticToolUpgradeRecipe kineticToolUpgradeRecipe = new KineticToolUpgradeRecipe();
 		if (ConfigurationHandler.enabled("MultiTools")) {
 			addStickRecipe(ItemLoader.ironStick, 1000, "ingotIron");
 			addStickRecipe(ItemLoader.goldStick, 2000, "ingotGold");
@@ -181,19 +181,19 @@ public class ItemLoader {
 			addUpgradeRecipe(ItemLoader.toolUpgradeDigger);
 			addUpgradeRecipe(ItemLoader.toolUpgradeHoe);
 			BuildcraftRecipeRegistry.integrationTable.addRecipe(new ToolCoreRecipe());
-			KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("drill", false, toolUpgradeDrill));
-			KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("digger", false, toolUpgradeDigger));
-			KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("chainsaw", false, toolUpgradeChainsaw));
-			KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("hoe", false, toolUpgradeHoe));
+			kineticToolUpgradeRecipe.register("drill", toolUpgradeDrill);
+			kineticToolUpgradeRecipe.register("digger", toolUpgradeDigger);
+			kineticToolUpgradeRecipe.register("chainsaw", toolUpgradeChainsaw);
+			kineticToolUpgradeRecipe.register("hoe", toolUpgradeHoe);
 		}
 
 		if (ConfigurationHandler.enabled("MultiToolsArea")) {
-			KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("area", false, toolUpgradeArea));
+			kineticToolUpgradeRecipe.register("area", toolUpgradeArea);
 			addUpgradeRecipe(ItemLoader.toolUpgradeArea, new ItemStack(Blocks.sticky_piston), new ItemStack(Items.ender_pearl), "ingotGold");
 		}
 
 		if (ConfigurationHandler.enabled("MultiToolsSilky")) {
-			KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("silky", false, toolUpgradeSilky));
+			kineticToolUpgradeRecipe.register("silky", toolUpgradeSilky);
 			addUpgradeRecipe(ItemLoader.toolUpgradeSilky, new ItemStack(Items.string, 3), "slimeball", "ingotGold");
 		}
 
@@ -201,9 +201,9 @@ public class ItemLoader {
 			addUpgradeRecipe(ItemLoader.toolUpgradeFortune1, new ItemStack(Items.string, 3), "gemLapis", "blockLapis", "ingotGold");
 			addUpgradeRecipe(ItemLoader.toolUpgradeFortune2, new ItemStack(ItemLoader.toolUpgradeFortune1), "gemDiamond", "blockLapis", "ingotGold");
 			addUpgradeRecipe(ItemLoader.toolUpgradeFortune3, new ItemStack(ItemLoader.toolUpgradeFortune2), "gemEmerald", "blockLapis", "ingotGold");
-			KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("fortune1", false, toolUpgradeFortune1));
-			KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("fortune2", false, toolUpgradeFortune2));
-			KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("fortune3", false, toolUpgradeFortune3));
+			kineticToolUpgradeRecipe.register("fortune1", toolUpgradeFortune1);
+			kineticToolUpgradeRecipe.register("fortune2", toolUpgradeFortune2);
+			kineticToolUpgradeRecipe.register("fortune3", toolUpgradeFortune3);
 		}
 
 		if (ConfigurationHandler.enabled("FluidCanisters")) {
@@ -225,16 +225,19 @@ public class ItemLoader {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(machineConfigurator), "RIB", " W ", "YIY", 'B', "dyeBlue", 'I', "ingotIron", 'R', "dyeRed", 'W', BCItems.WRENCH, 'Y', "dyeYellow"));
 		}
 
-		KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("goldStick", true, goldStick));
-		KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("diamondStick", true, diamondStick));
-		KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("emeraldStick", true, emeraldStick));
-		KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("netherStarStick", true, netherStarStick));
-		KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("quartzStick", true, quartzStick));
-		KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("enderStick", true, enderStick));
-		KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("redstoneStick", true, redstoneStick));
-		KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("glowstoneStick", true, glowstoneStick));
-		KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("slimeStick", true, slimeStick));
-		KineticToolUpgradeHandler.addRecipe(new BCAIntegrationRecipe("blazeStick", true, blazeStick));
+		kineticToolUpgradeRecipe.register("goldStick", "stickGold");
+		kineticToolUpgradeRecipe.register("diamondStick", "stickDiamond", "goldStick");
+		kineticToolUpgradeRecipe.register("enderStick", "stickEnder", "goldStick");
+		kineticToolUpgradeRecipe.register("emeraldStick", "stickEmerald", "diamondStick");
+		kineticToolUpgradeRecipe.register("netherStarStick", "stickNetherStar", "emeraldStick");
+
+		kineticToolUpgradeRecipe.register("redstoneStick", "stickRedstone");
+		kineticToolUpgradeRecipe.register("slimeStick", "stickSlime", "redstoneStick");
+		kineticToolUpgradeRecipe.register("blazeStick", "stickBlaze", "redstoneStick");
+		kineticToolUpgradeRecipe.register("glowstoneStick", "stickGlowstone", "redstoneStick");
+		kineticToolUpgradeRecipe.register("quartzStick", "stickQuartz", "glowstoneStick");
+
+		BuildcraftRecipeRegistry.integrationTable.addRecipe(kineticToolUpgradeRecipe);
 
 		if (ConfigurationHandler.enabled("ColoringTool"))
 			GameRegistry.addRecipe(new ShapedOreRecipe(pipeColoringTool, "  S", " C ", "W  ", 'W', new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 'S', "stickIron", 'C', powerCapsuleTier1));
@@ -248,7 +251,6 @@ public class ItemLoader {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fluxConductor), "GIG", "GRG", "GIG", 'G', "ingotGold", 'I', "ingotIron", 'R', "dustRedstone"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fluxDisperser), "IGI", "IRI", "IGI", 'G', "ingotGold", 'I', "ingotIron", 'R', "dustRedstone"));
 
-		BuildcraftRecipeRegistry.integrationTable.addRecipe(new KineticToolUpgradeHandler());
 	}
 
 	private static void addUpgradeRecipe(ItemToolUpgrade upgrade, Object... inputs) {

@@ -20,7 +20,7 @@ import net.minecraft.item.Item;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-@CompatModule(id = "Buildcraft", requiredMods = "BuildCraft|Core")
+@CompatModule(id = "Buildcraft", requiredMods = "BuildCraft|Core,BuildCraft|Builders,BuildCraft|Energy,BuildCraft|Factory,BuildCraft|Silicon,BuildCraft|Transport,BuildCraft|Robotics")
 public class CompatBuildCraft {
 	public static Item robotDebugTool;
 

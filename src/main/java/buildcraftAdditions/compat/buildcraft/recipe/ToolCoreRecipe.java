@@ -3,12 +3,15 @@ package buildcraftAdditions.compat.buildcraft.recipe;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.base.Strings;
+
 import net.minecraft.item.ItemStack;
+
+import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraft.api.recipes.IIntegrationRecipe;
 import buildcraft.silicon.ItemRedstoneChipset;
 
-import buildcraftAdditions.compat.buildcraft.BCItems;
 import buildcraftAdditions.reference.ItemLoader;
 
 /**
@@ -26,12 +29,12 @@ public class ToolCoreRecipe implements IIntegrationRecipe {
 
 	@Override
 	public List<ItemStack> getExampleInput() {
-		return Arrays.asList(new ItemStack(BCItems.GOLD_GEAR));
+		return OreDictionary.getOres("gearGold");
 	}
 
 	@Override
 	public List<List<ItemStack>> getExampleExpansions() {
-		return Arrays.asList(Arrays.asList(ItemRedstoneChipset.Chipset.DIAMOND.getStack()));
+		return Arrays.asList((List<ItemStack>) OreDictionary.getOres("chipset" + ItemRedstoneChipset.Chipset.DIAMOND.name().toUpperCase().substring(0, 1) + ItemRedstoneChipset.Chipset.DIAMOND.name().toLowerCase().substring(1)));
 	}
 
 	@Override
@@ -41,12 +44,36 @@ public class ToolCoreRecipe implements IIntegrationRecipe {
 
 	@Override
 	public boolean isValidInput(ItemStack input) {
-		return input != null && input.getItem() == BCItems.GOLD_GEAR;
+		if (input != null && input.getItem() != null && input.stackSize > 0) {
+			int[] oreIDs = OreDictionary.getOreIDs(input);
+			if (oreIDs != null && oreIDs.length > 0) {
+				for (int oreID : oreIDs) {
+					String oreName = OreDictionary.getOreName(oreID);
+					if (!Strings.isNullOrEmpty(oreName)) {
+						if (oreName.equals("gearGold"))
+							return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override
 	public boolean isValidExpansion(ItemStack input, ItemStack expansion) {
-		return expansion != null && expansion.getItem() == ItemRedstoneChipset.Chipset.DIAMOND.getStack().getItem();
+		if (expansion != null && expansion.getItem() != null && expansion.stackSize > 0) {
+			int[] oreIDs = OreDictionary.getOreIDs(expansion);
+			if (oreIDs != null && oreIDs.length > 0) {
+				for (int oreID : oreIDs) {
+					String oreName = OreDictionary.getOreName(oreID);
+					if (!Strings.isNullOrEmpty(oreName)) {
+						if (oreName.equals("chipset" + ItemRedstoneChipset.Chipset.DIAMOND.name().toUpperCase().substring(0, 1) + ItemRedstoneChipset.Chipset.DIAMOND.name().toLowerCase().substring(1)))
+							return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override
