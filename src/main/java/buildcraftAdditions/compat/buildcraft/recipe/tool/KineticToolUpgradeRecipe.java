@@ -1,18 +1,15 @@
 package buildcraftAdditions.compat.buildcraft.recipe.tool;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import buildcraft.api.recipes.IIntegrationRecipe;
+import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
+import buildcraftAdditions.reference.ItemLoader;
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import buildcraft.api.recipes.IIntegrationRecipe;
-
-import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
-import buildcraftAdditions.reference.ItemLoader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -31,7 +28,7 @@ public class KineticToolUpgradeRecipe implements IIntegrationRecipe {
 	}
 
 	public void register(String stickName, String inputStickOreDictName) {
-		register(stickName, inputStickOreDictName, null);
+		register(stickName, inputStickOreDictName, "NONE");
 	}
 
 	public void register(String stickName, String inputStickOreDictName, String prevStickName) {

@@ -1,12 +1,9 @@
 package buildcraftAdditions.compat.buildcraft.recipe.tool;
 
-import com.google.common.base.Strings;
-
-import net.minecraft.item.ItemStack;
-
-import net.minecraftforge.oredict.OreDictionary;
-
 import buildcraftAdditions.items.Tools.ItemKineticMultiTool;
+import com.google.common.base.Strings;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -20,7 +17,7 @@ public class KineticToolStickUpgrade implements IKineticToolUpgrade {
 	private final String stickName, inputStickOreDictName, prevStickName;
 
 	public KineticToolStickUpgrade(String stickName, String inputStickOreDictName) {
-		this(stickName, inputStickOreDictName, null);
+		this(stickName, inputStickOreDictName, "NONE");
 	}
 
 	public KineticToolStickUpgrade(String stickName, String inputStickOreDictName, String prevStickName) {
@@ -31,7 +28,7 @@ public class KineticToolStickUpgrade implements IKineticToolUpgrade {
 
 	@Override
 	public boolean canUpgradeBeApplied(ItemStack input) {
-		return !ItemKineticMultiTool.isUpgradeInstalled(input, stickName) && (Strings.isNullOrEmpty(prevStickName) || ItemKineticMultiTool.isUpgradeInstalled(input, prevStickName));
+		return !ItemKineticMultiTool.isUpgradeInstalled(input, stickName) && ("NONE".equals(prevStickName) || ItemKineticMultiTool.isUpgradeInstalled(input, prevStickName));
 	}
 
 	@Override
