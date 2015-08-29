@@ -1,6 +1,7 @@
 package buildcraftAdditions.listeners;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -15,35 +16,45 @@ import buildcraftAdditions.networking.PacketHandler;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class FlightTracker {
-	private static final HashMap<String, Boolean>
-			jumpers = new HashMap<String, Boolean>(),
-			movers = new HashMap<String, Boolean>();
+	private static final HashMap<UUID, Boolean>
+			jumpers = new HashMap<UUID, Boolean>(),
+			movers = new HashMap<UUID, Boolean>();
 
 
-	public static boolean wantsToFly(String player) {
-		if (!jumpers.containsKey(player))
-			jumpers.put(player, false);
-		return jumpers.get(player);
+	public static boolean wantsToFly(EntityPlayer player) {
+		if (player == null || player.getGameProfile() == null || player.getGameProfile().getId() == null)
+			return false;
+		if (!jumpers.containsKey(player.getGameProfile().getId()))
+			jumpers.put(player.getGameProfile().getId(), false);
+		return jumpers.get(player.getGameProfile().getId());
 	}
 
-	public static boolean wantsToMove(String player) {
-		if (!movers.containsKey(player))
-			movers.put(player, false);
-		return movers.get(player);
+	public static boolean wantsToMove(EntityPlayer player) {
+		if (player == null || player.getGameProfile() == null || player.getGameProfile().getId() == null)
+			return false;
+		if (!movers.containsKey(player.getGameProfile().getId()))
+			movers.put(player.getGameProfile().getId(), false);
+		return movers.get(player.getGameProfile().getId());
 	}
 
 	public static void setJumping(EntityPlayer player, boolean newStatus) {
-		jumpers.put(player.getDisplayName(), newStatus);
+		if (player == null || player.getGameProfile() == null || player.getGameProfile().getId() == null)
+			return;
+		jumpers.put(player.getGameProfile().getId(), newStatus);
 		sync(player);
 	}
 
 	public static void setMoving(EntityPlayer player, boolean moving) {
-		movers.put(player.getDisplayName(), moving);
+		if (player == null || player.getGameProfile() == null || player.getGameProfile().getId() == null)
+			return;
+		movers.put(player.getGameProfile().getId(), moving);
 		sync(player);
 	}
 
 	private static void sync(EntityPlayer player) {
+		if (player == null || player.worldObj == null)
+			return;
 		if (player.worldObj.isRemote)
-			PacketHandler.instance.sendToServer(new MessageFlightSync(wantsToFly(player.getDisplayName()), wantsToMove(player.getDisplayName())));
+			PacketHandler.instance.sendToServer(new MessageFlightSync(wantsToFly(player), wantsToMove(player)));
 	}
 }

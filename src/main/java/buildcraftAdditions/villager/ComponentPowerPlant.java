@@ -8,9 +8,8 @@ package buildcraftAdditions.villager;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import java.util.List;
-import java.util.Random;
-
+import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.reference.BlockLoader;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -18,7 +17,8 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 
-import buildcraftAdditions.reference.BlockLoader;
+import java.util.List;
+import java.util.Random;
 
 public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 
@@ -84,15 +84,17 @@ public class ComponentPowerPlant extends StructureVillagePieces.House1 {
 		fillWithMetadataBlocks(world, sbb, 2, -2, 2, 2, -2, 7, Blocks.unpowered_repeater, 2, Blocks.unpowered_repeater, 2, false);
 		fillWithMetadataBlocks(world, sbb, 4, -2, 8, 6, -2, 8, Blocks.unpowered_repeater, 1, Blocks.unpowered_repeater, 1, false);
 
-		fillWithBlocks(world, sbb, 7, -1, 1, 7, -1, 7, BlockLoader.kinesisPipeWood, BlockLoader.kinesisPipeWood, false);
-		fillWithBlocks(world, sbb, 7, 0, 1, 7, 0, 7, BlockLoader.kinisisPipeStone, BlockLoader.kinisisPipeStone, false);
-		fillWithBlocks(world, sbb, 3, -1, 2, 3, -1, 7, BlockLoader.kinesisPipeWood, BlockLoader.kinesisPipeWood, false);
-		fillWithBlocks(world, sbb, 3, 0, 2, 3, 0, 7, BlockLoader.kinisisPipeStone, BlockLoader.kinisisPipeStone, false);
-		fillWithBlocks(world, sbb, 4, -1, 7, 6, -1, 7, BlockLoader.kinesisPipeWood, BlockLoader.kinesisPipeWood, false);
-		fillWithBlocks(world, sbb, 4, 0, 7, 6, 0, 7, BlockLoader.kinisisPipeStone, BlockLoader.kinisisPipeStone, false);
+		if (ConfigurationHandler.powerpipesInPowerPlant) {
+			fillWithBlocks(world, sbb, 7, -1, 1, 7, -1, 7, BlockLoader.kinesisPipeWood, BlockLoader.kinesisPipeWood, false);
+			fillWithBlocks(world, sbb, 7, 0, 1, 7, 0, 7, BlockLoader.kinisisPipeStone, BlockLoader.kinisisPipeStone, false);
+			fillWithBlocks(world, sbb, 3, -1, 2, 3, -1, 7, BlockLoader.kinesisPipeWood, BlockLoader.kinesisPipeWood, false);
+			fillWithBlocks(world, sbb, 3, 0, 2, 3, 0, 7, BlockLoader.kinisisPipeStone, BlockLoader.kinisisPipeStone, false);
+			fillWithBlocks(world, sbb, 4, -1, 7, 6, -1, 7, BlockLoader.kinesisPipeWood, BlockLoader.kinesisPipeWood, false);
+			fillWithBlocks(world, sbb, 4, 0, 7, 6, 0, 7, BlockLoader.kinisisPipeStone, BlockLoader.kinisisPipeStone, false);
 
-		fillWithBlocks(world, sbb, 5, 0, 5, 5, 7, 5, BlockLoader.kinisisPipeStone, BlockLoader.kinisisPipeStone, false);
-		placeBlockAtCurrentPosition(world, BlockLoader.kinisisPipeStone, 0, 5, 0, 6, sbb);
+			fillWithBlocks(world, sbb, 5, 0, 5, 5, 7, 5, BlockLoader.kinisisPipeStone, BlockLoader.kinisisPipeStone, false);
+			placeBlockAtCurrentPosition(world, BlockLoader.kinisisPipeStone, 0, 5, 0, 6, sbb);
+		}
 
 		spawnVillagers(world, sbb, 0, 0, 0, 2);
 		return true;

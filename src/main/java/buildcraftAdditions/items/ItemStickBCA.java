@@ -32,8 +32,7 @@ public class ItemStickBCA extends ItemBase {
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advancedItemTooltips) {
 		if (!getName().endsWith("Iron")) {
 			list.add(Utils.localize("tooltip.forKineticMultiTool"));
-			list.add(Utils.localizeAllFormatted("tooltip.stick.0", "tooltip." + getName() + ".chipset"));
-			list.add(Utils.localizeAllFormatted("tooltip.stick.1", "tooltip." + getName() + ".stick"));
+			list.add(Utils.localizeAllFormatted("tooltip.stick.0", "tooltip." + getName() + ".stick"));
 		}
 	}
 }

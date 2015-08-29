@@ -25,7 +25,8 @@ public class ConfigurationHandler {
 			powerloss,
 			eurekaIntegration,
 			dusterParticles,
-			forceEnableBCRefinery;
+			forceEnableBCRefinery,
+			powerpipesInPowerPlant;
 
 	public static int
 			basePowerModifier,
@@ -113,6 +114,25 @@ public class ConfigurationHandler {
 	}
 
 	public static void readConfig() {
+
+		registerFeature("ChargingStation");
+		registerFeature("ColorSorter");
+		registerFeature("ColoringTool");
+		registerFeature("Duster");
+		registerFeature("Coils");
+		registerFeature("HeatedFurnace");
+		registerFeature("FluidCanisters");
+		registerFeature("KineticBackpack");
+		registerFeature("KineticEnergyBuffer");
+		registerFeature("MachineUpgrades");
+		registerFeature("MultiBlockRefining");
+		registerFeature("MultiTools");
+		registerFeature("MultiToolsArea");
+		registerFeature("MultiToolsFortune");
+		registerFeature("MultiToolsSilky");
+		registerFeature("PortableLaser");
+		registerFeature("PowerCapsules");
+
 		configFile.addCustomCategoryComment("Updates", "Section about updates");
 		if (configFile.get("Updates", "shouldCheckForUpdates", true).getBoolean())
 			VersionCheck.start();
@@ -216,25 +236,9 @@ public class ConfigurationHandler {
 		eurekaIntegration = configFile.get("Misc", "eurekaIntegration", true).setRequiresMcRestart(true).getBoolean();
 		dusterParticles = configFile.get("Misc", "dusterParticles", true).getBoolean();
 		particleCount = configFile.get("Misc", "particleCount", 100).setMinValue(0).getInt();
-		forceEnableBCRefinery = !enabled("MultiBlockRefining") || configFile.get("Misc", "forceEnableBCRefinery", false).setRequiresMcRestart(true).getBoolean();
+		forceEnableBCRefinery = !enabled("MultiBlockRefining") | configFile.get("Misc", "forceEnableBCRefinery", false).setRequiresMcRestart(true).getBoolean();
+		powerpipesInPowerPlant = configFile.get("Misc", "powerpipesInPowerPlant", true).getBoolean();
 
-		registerFeature("ChargingStation");
-		registerFeature("ColorSorter");
-		registerFeature("ColoringTool");
-		registerFeature("Duster");
-		registerFeature("Coils");
-		registerFeature("HeatedFurnace");
-		registerFeature("FluidCanisters");
-		registerFeature("KineticBackpack");
-		registerFeature("KineticEnergyBuffer");
-		registerFeature("MachineUpgrades");
-		registerFeature("MultiBlockRefining");
-		registerFeature("MultiTools");
-		registerFeature("MultiToolsArea");
-		registerFeature("MultiToolsFortune");
-		registerFeature("MultiToolsSilky");
-		registerFeature("PortableLaser");
-		registerFeature("PowerCapsules");
 
 		if (configFile.hasChanged())
 			configFile.save();

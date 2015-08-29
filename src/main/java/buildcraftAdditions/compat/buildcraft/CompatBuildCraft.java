@@ -20,16 +20,16 @@ import net.minecraft.item.Item;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-@CompatModule(id = "Buildcraft", requiredMods = "BuildCraft|Core")
+@CompatModule(id = "Buildcraft", requiredMods = "BuildCraft|Core,BuildCraft|Builders,BuildCraft|Energy,BuildCraft|Factory,BuildCraft|Silicon,BuildCraft|Transport,BuildCraft|Robotics")
 public class CompatBuildCraft {
 	public static Item robotDebugTool;
 
 	@CompatModule.Handler
 	public void preInit(FMLPreInitializationEvent event) {
-		addItemSorter();
 		StripesHandler.register();
 		BCASchematics.registerSchematics();
-		addRobotDebugTool();
+		robotDebugTool = new ItemRobotDebugTool();
+		GameRegistry.registerTileEntity(TileItemSorter.class, "ItemSorter");
 	}
 
 	@CompatModule.Handler
@@ -38,15 +38,6 @@ public class CompatBuildCraft {
 		Triggers.register();
 		Actions.register();
 		BuildcraftAdditions.proxy.addPowerplant();
-	}
-
-	private void addItemSorter() {
-		GameRegistry.registerTileEntity(TileItemSorter.class, "ItemSorter");
-	}
-
-	private void addRobotDebugTool() {
-		robotDebugTool = new ItemRobotDebugTool();
-		GameRegistry.registerItem(robotDebugTool, "robotDebugTool");
 	}
 
 }

@@ -75,7 +75,6 @@ public class RefineryRecipeConverter {
 			GameRegistry.registerBlock(fluidBlock, ItemBlockFluid.class, fluid.getName() + "Block");
 			fluid.setBlock(fluidBlock);
 			Item bucket = new ItemBucketBCA(fluid);
-			GameRegistry.registerItem(bucket, fluid.getName() + "Bucket");
 			BucketHandler.registerBucket(fluid, new ItemStack(bucket));
 			if (inputs[t].getFluid().getBlock() == null) {
 				fluidBlock = new FluidBlockBase(inputs[t].getFluid());
