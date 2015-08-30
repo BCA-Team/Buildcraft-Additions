@@ -4,6 +4,8 @@ import buildcraftAdditions.client.models.ModelHoverBoots;
 import buildcraftAdditions.reference.ArmorLoader;
 import buildcraftAdditions.utils.IHUD;
 import buildcraftAdditions.utils.Utils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,6 +57,7 @@ public class ItemHoverBoots extends ItemPoweredArmor implements IHUD {
 		return EnumChatFormatting.GOLD + Utils.localize("hud.boots") + " " + (stack.stackTagCompound.getBoolean("enabled") ? EnumChatFormatting.GREEN + Utils.localize("hud.enabled") : EnumChatFormatting.DARK_RED + Utils.localize("hud.dissabled"));
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
 		return ModelHoverBoots.INSTANCE;
