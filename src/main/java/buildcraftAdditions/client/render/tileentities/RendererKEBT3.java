@@ -35,7 +35,7 @@ public class RendererKEBT3 extends TileEntitySpecialRenderer {
 		TileKEBT3 keb = (TileKEBT3) entity;
 		if (!keb.isMaster())
 			return;
-		bindTexture(sides[keb.energyState]);
+		bindTexture(sides[Math.max(Math.min(keb.energyState, sides.length - 1), 0)]);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
