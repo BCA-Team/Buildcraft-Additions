@@ -133,6 +133,8 @@ public abstract class TileKineticEnergyBufferBase extends TileBase implements IE
 			energy -= loss;
 		if (energy < 0)
 			energy = 0;
+		if(energy > capacity)
+			energy = capacity;
 		outputEnergy();
 	}
 
