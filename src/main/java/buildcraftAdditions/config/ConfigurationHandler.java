@@ -26,7 +26,8 @@ public class ConfigurationHandler {
 			eurekaIntegration,
 			dusterParticles,
 			forceEnableBCRefinery,
-			powerpipesInPowerPlant;
+			powerpipesInPowerPlant,
+			slimesUsingDusters;
 
 	public static int
 			basePowerModifier,
@@ -238,6 +239,7 @@ public class ConfigurationHandler {
 		particleCount = configFile.get("Misc", "particleCount", 100).setMinValue(0).getInt();
 		forceEnableBCRefinery = !enabled("MultiBlockRefining") | configFile.get("Misc", "forceEnableBCRefinery", false).setRequiresMcRestart(true).getBoolean();
 		powerpipesInPowerPlant = configFile.get("Misc", "powerpipesInPowerPlant", true).getBoolean();
+		slimesUsingDusters = configFile.get("Misc", "slimesUsingDusters", false).getBoolean();
 
 
 		if (configFile.hasChanged())

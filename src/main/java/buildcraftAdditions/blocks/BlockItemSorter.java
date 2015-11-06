@@ -1,5 +1,13 @@
 package buildcraftAdditions.blocks;
 
+import buildcraft.api.tools.IToolWrench;
+import buildcraftAdditions.BuildcraftAdditions;
+import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.tileEntities.TileItemSorter;
+import buildcraftAdditions.utils.RenderUtils;
+import buildcraftAdditions.utils.Utils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,19 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraftforge.common.util.ForgeDirection;
-
-import buildcraft.api.tools.IToolWrench;
-
-import buildcraftAdditions.BuildcraftAdditions;
-import buildcraftAdditions.reference.Variables;
-import buildcraftAdditions.tileEntities.TileItemSorter;
-import buildcraftAdditions.utils.RenderUtils;
-import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -100,14 +96,17 @@ public class BlockItemSorter extends BlockBase {
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		TileItemSorter tile = (TileItemSorter) world.getTileEntity(x, y, z);
-		tile.openInventory();
-		ItemStack stack = tile.getStackInSlot(0);
-		if (stack != null) {
-			tile.setInventorySlotContents(0, null);
-			Utils.dropItemstack(world, x, y, z, stack);
+		TileEntity te = world.getTileEntity(x, y, z);
+		if (te instanceof TileItemSorter) {
+			TileItemSorter tile = (TileItemSorter) te;
+			tile.openInventory();
+			ItemStack stack = tile.getStackInSlot(0);
+			if (stack != null) {
+				tile.setInventorySlotContents(0, null);
+				Utils.dropItemstack(world, x, y, z, stack);
+			}
+			tile.closeInventory();
 		}
-		tile.closeInventory();
 	}
 
 	@Override

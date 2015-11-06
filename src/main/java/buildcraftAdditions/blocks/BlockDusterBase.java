@@ -1,13 +1,12 @@
 package buildcraftAdditions.blocks;
 
+import buildcraftAdditions.api.recipe.BCARecipeManager;
+import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
+import buildcraftAdditions.utils.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import buildcraftAdditions.api.recipe.BCARecipeManager;
-import buildcraftAdditions.tileEntities.Bases.TileBaseDuster;
-import buildcraftAdditions.utils.Utils;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -30,7 +29,7 @@ public abstract class BlockDusterBase extends BlockRotationBase {
 		if (player.isSneaking())
 			return false;
 		TileEntity tile = world.getTileEntity(x, y, z);
-		if (tile != null && tile instanceof TileBaseDuster) {
+		if (tile instanceof TileBaseDuster) {
 			TileBaseDuster duster = (TileBaseDuster) tile;
 			if (duster.getStackInSlot(0) == null && player.getCurrentEquippedItem() != null) {
 				ItemStack stack = player.getCurrentEquippedItem().copy();

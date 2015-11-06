@@ -1,15 +1,15 @@
 package buildcraftAdditions.blocks;
 
+import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.tileEntities.TileBasicDuster;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import buildcraftAdditions.tileEntities.TileBasicDuster;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -34,7 +34,7 @@ public class BlockBasicDuster extends BlockDusterBase {
 
 	@Override
 	public void onFallenUpon(World world, int x, int y, int z, Entity entity, float fallDistance) {
-		if (entity instanceof EntityPlayer) {
+		if (entity instanceof EntityPlayer || (ConfigurationHandler.slimesUsingDusters && entity instanceof EntitySlime)) {
 			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof TileBasicDuster)
 				((TileBasicDuster) tileEntity).makeProgress((EntityPlayer) entity);

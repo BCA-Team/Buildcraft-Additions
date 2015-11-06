@@ -1,14 +1,14 @@
 package buildcraftAdditions.blocks;
 
+import buildcraftAdditions.config.ConfigurationHandler;
+import buildcraftAdditions.reference.Variables;
+import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
+import eureka.api.EurekaAPI;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import buildcraftAdditions.reference.Variables;
-import buildcraftAdditions.tileEntities.TileSemiAutomaticDuster;
-
-import eureka.api.EurekaAPI;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -30,7 +30,7 @@ public class BlockSemiAutomaticDuster extends BlockDusterBase {
 
 	@Override
 	public void onFallenUpon(World world, int x, int y, int z, Entity entity, float fallDistance) {
-		if (entity instanceof EntityPlayer) {
+		if (entity instanceof EntityPlayer || (ConfigurationHandler.slimesUsingDusters && entity instanceof EntitySlime)) {
 			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof TileSemiAutomaticDuster) {
 				EntityPlayer player = (EntityPlayer) entity;
