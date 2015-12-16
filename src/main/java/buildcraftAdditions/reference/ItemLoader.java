@@ -222,7 +222,7 @@ public class ItemLoader {
 			GameRegistry.addRecipe(new ItemStack(toolUpgradeDigger), "U", 'U', toolUpgradeDrill);
 			GameRegistry.addRecipe(new ItemStack(toolUpgradeDrill), "U", 'U', toolUpgradeHoe);
 			GameRegistry.addRecipe(new ItemStack(toolUpgradeHoe), "U", 'U', toolUpgradeChainsaw);
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(machineConfigurator), "RIB", " W ", "YIY", 'B', "dyeBlue", 'I', "ingotIron", 'R', "dyeRed", 'W', BCItems.WRENCH, 'Y', "dyeYellow"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(machineConfigurator), "RIB", " W ", "YIY", 'B', "dyeBlue", 'I', "ingotIron", 'R', "dyeRed", 'W', BCItems.WRENCH != null ? BCItems.WRENCH : Items.iron_ingot, 'Y', "dyeYellow"));
 		}
 
 		kineticToolUpgradeRecipe.register("goldStick", "stickGold");
