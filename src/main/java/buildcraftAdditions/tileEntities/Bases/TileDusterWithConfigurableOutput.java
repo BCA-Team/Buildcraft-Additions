@@ -99,6 +99,7 @@ public abstract class TileDusterWithConfigurableOutput extends TileBaseDuster im
 
 	@Override
 	public void dust() {
+		if (worldObj.isRemote) return;
 		ItemStack output = BCARecipeManager.duster.getRecipe(getStackInSlot(0)).getOutput(getStackInSlot(0));
 		Utils.outputStack(new Location(this), output, configuration);
 		if (output != null && output.stackSize > 0 && output.getItem() != null)
