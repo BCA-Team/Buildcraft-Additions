@@ -68,33 +68,33 @@ public final class GuiHandler implements IGuiHandler {
 		switch (Variables.Gui.values()[ID]) {
 			case FLUIDIC_COMPRESSOR:
 				if (tile instanceof TileFluidicCompressor)
-					return new ContainerFluidicCompressor(player.inventory, (TileFluidicCompressor) tile);
+					return new ContainerFluidicCompressor(player, (TileFluidicCompressor) tile);
 			case CHARGING_STATION:
 				if (tile instanceof TileChargingStation)
-					return new ContainerChargingStation(player.inventory, (TileChargingStation) tile);
+					return new ContainerChargingStation(player, (TileChargingStation) tile);
 			case KINETIC_MULTI_TOOL:
 				if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKineticMultiTool)
-					return new ContainerKineticMultiTool(player.inventory, new InventoryKineticMultiTool(player.getHeldItem()));
+					return new ContainerKineticMultiTool(player, new InventoryKineticMultiTool(player.getHeldItem()));
 			case PORTABLE_LASER:
 				if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemPortableLaser)
-					return new ContainerPortableLaser(player.inventory, new InventoryPortableLaser(player.getHeldItem()));
+					return new ContainerPortableLaser(player, new InventoryPortableLaser(player.getHeldItem()));
 			case HEATED_FURNACE:
 				if (tile instanceof TileHeatedFurnace)
-					return new ContainerHeatedFurnace(player.inventory, (TileHeatedFurnace) tile);
+					return new ContainerHeatedFurnace(player, (TileHeatedFurnace) tile);
 			case BASIC_COIL:
 				if (tile instanceof TileBasicCoil)
-					return new ContainerBasicCoil(player.inventory, (TileBasicCoil) tile);
+					return new ContainerBasicCoil(player, (TileBasicCoil) tile);
 			case KEB:
 				if (tile instanceof TileKineticEnergyBufferBase)
 					return new ContainerKEB(player, (TileKineticEnergyBufferBase) tile);
 			case MACHINE_CONFIGURATOR:
-				return new ContainerMachineConfigurator(player.inventory, tile);
+				return new ContainerMachineConfigurator(player, tile);
 			case REFINERY:
-				return new ContainerRefinery(player.inventory, (TileRefinery) tile);
+				return new ContainerRefinery(player, (TileRefinery) tile);
 			case COOLING_TOWER:
-				return new ContainerCoolingTower((TileCoolingTower) tile);
+				return new ContainerCoolingTower(player, (TileCoolingTower) tile);
 			case ITEM_SORTER:
-				return new ContainerItemSorter(player.inventory, (TileItemSorter) tile);
+				return new ContainerItemSorter(player, (TileItemSorter) tile);
 			case PIPE_COLORING_TOOL:
 				if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemPipeColoringTool)
 					return new ContainerPipeColoringTool();
@@ -108,22 +108,22 @@ public final class GuiHandler implements IGuiHandler {
 		switch (Variables.Gui.values()[ID]) {
 			case FLUIDIC_COMPRESSOR:
 				if (tile instanceof TileFluidicCompressor)
-					return new GuiFluidicCompressor(player.inventory, (TileFluidicCompressor) tile);
+					return new GuiFluidicCompressor(player, (TileFluidicCompressor) tile);
 			case CHARGING_STATION:
 				if (tile instanceof TileChargingStation)
-					return new GuiChargingStation(player.inventory, (TileChargingStation) tile);
+					return new GuiChargingStation(player, (TileChargingStation) tile);
 			case KINETIC_MULTI_TOOL:
 				if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKineticMultiTool)
-					return new GuiKineticMultiTool(player.inventory, new InventoryKineticMultiTool(player.getHeldItem()));
+					return new GuiKineticMultiTool(player, new InventoryKineticMultiTool(player.getHeldItem()));
 			case PORTABLE_LASER:
 				if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemPortableLaser)
-					return new GuiPortableLaser(player.inventory, new InventoryPortableLaser(player.getHeldItem()));
+					return new GuiPortableLaser(player, new InventoryPortableLaser(player.getHeldItem()));
 			case HEATED_FURNACE:
 				if (tile instanceof TileHeatedFurnace)
-					return new GuiHeatedFurnace(player.inventory, (TileHeatedFurnace) tile);
+					return new GuiHeatedFurnace(player, (TileHeatedFurnace) tile);
 			case BASIC_COIL:
 				if (tile instanceof TileBasicCoil)
-					return new GuiBasicCoil(player.inventory, (TileBasicCoil) tile);
+					return new GuiBasicCoil(player, (TileBasicCoil) tile);
 			case KEB:
 				if (tile instanceof TileKineticEnergyBufferBase)
 					return new GuiKEB((TileKineticEnergyBufferBase) tile, player);
@@ -136,16 +136,16 @@ public final class GuiHandler implements IGuiHandler {
 						tile = world.getTileEntity(multiblock.getMasterX(), multiblock.getMasterY(), multiblock.getMasterZ());
 				}
 				if (tile instanceof IConfigurableOutput || tile instanceof IUpgradableMachine)
-					return new GuiMachineConfigurator(player.inventory, tile);
+					return new GuiMachineConfigurator(player, tile);
 			case REFINERY:
 				if (tile instanceof TileRefinery)
-					return new GuiRefinery(player.inventory, (TileRefinery) tile);
+					return new GuiRefinery(player, (TileRefinery) tile);
 			case COOLING_TOWER:
 				if (tile instanceof TileCoolingTower)
-					return new GuiCoolingTower((TileCoolingTower) tile);
+					return new GuiCoolingTower(player, (TileCoolingTower) tile);
 			case ITEM_SORTER:
 				if (tile instanceof TileItemSorter)
-					return new GuiItemSorter(player.inventory, (TileItemSorter) tile);
+					return new GuiItemSorter(player, (TileItemSorter) tile);
 			case PIPE_COLORING_TOOL:
 				if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemPipeColoringTool)
 					return new GuiPipeColoringTool(player.getCurrentEquippedItem());

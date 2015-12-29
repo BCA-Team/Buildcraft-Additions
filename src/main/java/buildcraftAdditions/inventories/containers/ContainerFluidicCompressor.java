@@ -8,32 +8,26 @@ package buildcraftAdditions.inventories.containers;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.InventoryPlayer;
+import buildcraftAdditions.inventories.slots.SlotOutput;
+import buildcraftAdditions.tileEntities.TileFluidicCompressor;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
-
-import buildcraftAdditions.client.gui.GuiBase;
-import buildcraftAdditions.inventories.slots.SlotOutput;
-import buildcraftAdditions.proxy.ClientProxy;
-import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 
 public class ContainerFluidicCompressor extends ContainerBase<TileFluidicCompressor> {
 
 	private boolean fill;
 	private int fluidID, fluidAmount;
 
-	public ContainerFluidicCompressor(InventoryPlayer inventoryPlayer, TileFluidicCompressor tile) {
-		super(inventoryPlayer, tile);
+	public ContainerFluidicCompressor(EntityPlayer player, TileFluidicCompressor tile) {
+		super(player, tile);
 		addSlotToContainer(new Slot(tile, 0, 89, 39) {
 
 			@Override

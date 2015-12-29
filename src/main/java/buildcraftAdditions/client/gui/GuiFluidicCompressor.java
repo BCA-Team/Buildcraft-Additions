@@ -1,13 +1,5 @@
 package buildcraftAdditions.client.gui;
 
-import java.util.List;
-
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import buildcraftAdditions.client.gui.widgets.WidgetBase;
 import buildcraftAdditions.client.gui.widgets.WidgetButtonUpdate;
 import buildcraftAdditions.client.gui.widgets.WidgetFluidTank;
@@ -16,6 +8,12 @@ import buildcraftAdditions.networking.MessageWidgetUpdate;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.TileFluidicCompressor;
 import buildcraftAdditions.utils.Utils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -29,8 +27,8 @@ public class GuiFluidicCompressor extends GuiInventory<TileFluidicCompressor> {
 
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiFluidicCompressor.png");
 
-	public GuiFluidicCompressor(InventoryPlayer inventoryPlayer, TileFluidicCompressor fluidicCompressor) {
-		super(new ContainerFluidicCompressor(inventoryPlayer, fluidicCompressor), fluidicCompressor);
+	public GuiFluidicCompressor(EntityPlayer player, TileFluidicCompressor fluidicCompressor) {
+		super(new ContainerFluidicCompressor(player, fluidicCompressor), fluidicCompressor);
 		setDrawPlayerInv(true);
 	}
 

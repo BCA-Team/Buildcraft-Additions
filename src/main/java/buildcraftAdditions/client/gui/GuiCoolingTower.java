@@ -1,5 +1,6 @@
 package buildcraftAdditions.client.gui;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 import cpw.mods.fml.relauncher.Side;
@@ -22,8 +23,8 @@ public class GuiCoolingTower extends GuiBase {
 	public static final ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/guiCoolingTower.png");
 	private final TileCoolingTower tower;
 
-	public GuiCoolingTower(TileCoolingTower tower) {
-		super(new ContainerCoolingTower(tower));
+	public GuiCoolingTower(EntityPlayer player, TileCoolingTower tower) {
+		super(new ContainerCoolingTower(player, tower));
 		this.tower = tower;
 		setTitleXOffset(70);
 		setTitleYOffset(3);

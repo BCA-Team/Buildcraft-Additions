@@ -1,14 +1,12 @@
 package buildcraftAdditions.inventories.containers;
 
-import net.minecraft.entity.player.InventoryPlayer;
+import buildcraftAdditions.tileEntities.TileHeatedFurnace;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import buildcraftAdditions.tileEntities.TileHeatedFurnace;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -21,8 +19,8 @@ public class ContainerHeatedFurnace extends ContainerBase<TileHeatedFurnace> {
 
 	private int progress;
 
-	public ContainerHeatedFurnace(InventoryPlayer inventoryPlayer, TileHeatedFurnace tile) {
-		super(inventoryPlayer, tile);
+	public ContainerHeatedFurnace(EntityPlayer player, TileHeatedFurnace tile) {
+		super(player, tile);
 		addSlotToContainer(new Slot(tile, 0, 56, 34));
 		addSlotToContainer(new SlotFurnace(inventoryPlayer.player, tile, 1, 116, 34));
 		addPlayerInventory(8, 84);

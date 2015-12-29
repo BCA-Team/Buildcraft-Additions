@@ -1,14 +1,12 @@
 package buildcraftAdditions.client.gui;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import buildcraftAdditions.inventories.InventoryPortableLaser;
 import buildcraftAdditions.inventories.containers.ContainerPortableLaser;
 import buildcraftAdditions.reference.Variables;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -22,8 +20,8 @@ public class GuiPortableLaser extends GuiInventory<InventoryPortableLaser> {
 
 	private static final ResourceLocation texture = new ResourceLocation(Variables.MOD.ID, "textures/gui/guiPortableLaser.png");
 
-	public GuiPortableLaser(InventoryPlayer inventoryPlayer, InventoryPortableLaser inventory) {
-		super(new ContainerPortableLaser(inventoryPlayer, inventory), inventory);
+	public GuiPortableLaser(EntityPlayer player, InventoryPortableLaser inventory) {
+		super(new ContainerPortableLaser(player, inventory), inventory);
 		setDrawPlayerInv(true);
 	}
 

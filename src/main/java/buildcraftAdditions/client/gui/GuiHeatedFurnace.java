@@ -1,13 +1,11 @@
 package buildcraftAdditions.client.gui;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import buildcraftAdditions.inventories.containers.ContainerHeatedFurnace;
 import buildcraftAdditions.tileEntities.TileHeatedFurnace;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -21,8 +19,8 @@ public class GuiHeatedFurnace extends GuiInventory<TileHeatedFurnace> {
 
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiHeatedFurnace.png");
 
-	public GuiHeatedFurnace(InventoryPlayer inventoryplayer, TileHeatedFurnace furnace) {
-		super(new ContainerHeatedFurnace(inventoryplayer, furnace), furnace);
+	public GuiHeatedFurnace(EntityPlayer player, TileHeatedFurnace furnace) {
+		super(new ContainerHeatedFurnace(player, furnace), furnace);
 		setDrawPlayerInv(true);
 	}
 

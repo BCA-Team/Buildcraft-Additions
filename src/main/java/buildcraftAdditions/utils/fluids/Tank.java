@@ -1,19 +1,14 @@
 package buildcraftAdditions.utils.fluids;
 
+import buildcraftAdditions.api.networking.ISyncObject;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-
-import cpw.mods.fml.common.network.ByteBufUtils;
-
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-
-import buildcraftAdditions.api.networking.ISyncObject;
-import buildcraftAdditions.tileEntities.Bases.TileBase;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -57,8 +52,6 @@ public class Tank extends FluidTank implements ISyncObject {
 	public FluidStack drain(FluidStack resource, boolean doDrain) {
 		FluidStack drained = null;
 		if (fluid != null && fluid.isFluidEqual(resource)) {
-			if (tile instanceof TileBase)
-				((TileBase) tile).sync();
 			drained = drain(resource.amount, doDrain);
 		}
 		return drained;

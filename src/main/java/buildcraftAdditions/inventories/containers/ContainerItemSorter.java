@@ -1,16 +1,11 @@
 package buildcraftAdditions.inventories.containers;
 
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
-
+import buildcraftAdditions.inventories.slots.SlotPhantom;
+import buildcraftAdditions.tileEntities.TileItemSorter;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import buildcraftAdditions.client.gui.GuiBase;
-import buildcraftAdditions.inventories.slots.SlotPhantom;
-import buildcraftAdditions.proxy.ClientProxy;
-import buildcraftAdditions.tileEntities.TileItemSorter;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ICrafting;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -23,8 +18,8 @@ public class ContainerItemSorter extends ContainerBase<TileItemSorter> {
 
 	private final byte[] colors = new byte[inventory.colors.length];
 
-	public ContainerItemSorter(InventoryPlayer inventoryPlayer, TileItemSorter tile) {
-		super(inventoryPlayer, tile);
+	public ContainerItemSorter(EntityPlayer player, TileItemSorter tile) {
+		super(player, tile);
 		for (int i = 0; i < 8; i++)
 			addSorterSlotColumn(26 + i * 18, 18, 1 + i * 6);
 		addPlayerInventory(8, 160);

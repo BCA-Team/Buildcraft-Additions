@@ -1,13 +1,5 @@
 package buildcraftAdditions.client.gui;
 
-import java.util.List;
-
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import buildcraftAdditions.client.gui.widgets.WidgetBase;
 import buildcraftAdditions.client.gui.widgets.WidgetColor;
 import buildcraftAdditions.inventories.containers.ContainerItemSorter;
@@ -15,6 +7,12 @@ import buildcraftAdditions.networking.MessageWidgetUpdate;
 import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.tileEntities.TileItemSorter;
 import buildcraftAdditions.utils.Utils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -28,8 +26,8 @@ public class GuiItemSorter extends GuiInventory<TileItemSorter> {
 
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/guiItemSorter.png");
 
-	public GuiItemSorter(InventoryPlayer playerInv, TileItemSorter tile) {
-		super(new ContainerItemSorter(playerInv, tile), tile);
+	public GuiItemSorter(EntityPlayer player, TileItemSorter tile) {
+		super(new ContainerItemSorter(player, tile), tile);
 		setDrawPlayerInv(true);
 	}
 

@@ -1,19 +1,15 @@
 package buildcraftAdditions.inventories.containers;
 
+import buildcraftAdditions.inventories.slots.SlotFake;
+import buildcraftAdditions.tileEntities.TileRefinery;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-
-import buildcraftAdditions.inventories.slots.SlotFake;
-import buildcraftAdditions.tileEntities.TileRefinery;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -26,8 +22,8 @@ public class ContainerRefinery extends ContainerBase<TileRefinery> {
 
 	private int currentHeat, requiredHeat, energyCost, fluidIDInput, fluidAmountInput, fluidIDOutput, fluidAmountOutput;
 
-	public ContainerRefinery(InventoryPlayer inventoryPlayer, TileRefinery tile) {
-		super(inventoryPlayer, tile);
+	public ContainerRefinery(EntityPlayer player, TileRefinery tile) {
+		super(player, tile);
 	}
 
 	@Override

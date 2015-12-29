@@ -1,12 +1,11 @@
 package buildcraftAdditions.inventories.containers;
 
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.tileentity.TileEntity;
-
 import buildcraftAdditions.api.networking.ISynchronizedTile;
 import buildcraftAdditions.api.networking.MessageByteBuff;
 import buildcraftAdditions.networking.PacketHandler;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -17,8 +16,8 @@ import buildcraftAdditions.networking.PacketHandler;
  */
 public class ContainerMachineConfigurator extends ContainerBase<TileEntity> {
 
-	public ContainerMachineConfigurator(InventoryPlayer inventoryPlayer, TileEntity tile) {
-		super(inventoryPlayer, tile);
+	public ContainerMachineConfigurator(EntityPlayer player, TileEntity tile) {
+		super(player, tile);
 	}
 
 	@Override

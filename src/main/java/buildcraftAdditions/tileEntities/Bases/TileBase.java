@@ -1,17 +1,16 @@
 package buildcraftAdditions.tileEntities.Bases;
 
+import buildcraftAdditions.api.networking.ISynchronizedTile;
+import buildcraftAdditions.api.networking.MessageByteBuff;
+import buildcraftAdditions.networking.PacketHandler;
+import buildcraftAdditions.reference.Variables;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-
-import cpw.mods.fml.common.network.NetworkRegistry;
-
-import buildcraftAdditions.api.networking.ISynchronizedTile;
-import buildcraftAdditions.api.networking.MessageByteBuff;
-import buildcraftAdditions.networking.PacketHandler;
-import buildcraftAdditions.reference.Variables;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -23,25 +22,20 @@ import buildcraftAdditions.reference.Variables;
 public abstract class TileBase extends TileEntity implements ISynchronizedTile {
 
 	protected final int IDENTIFIER;
-	public int timer;
 
 	public TileBase(int identifier) {
 		IDENTIFIER = identifier;
-	}
-
-	@Override
-	public void updateEntity() {
-		if (timer <= 0) {
-			sync();
-			timer = 20;
-		} else
-			timer--;
 	}
 
 	public void sync() {
 		if (!worldObj.isRemote) {
 			PacketHandler.instance.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), Variables.NETWORK_RANGE));
 		}
+	}
+
+	public void syncToPlayer(EntityPlayerMP player) {
+		if (!worldObj.isRemote)
+			PacketHandler.instance.sendTo(new MessageByteBuff(this), player);
 	}
 
 	@Override

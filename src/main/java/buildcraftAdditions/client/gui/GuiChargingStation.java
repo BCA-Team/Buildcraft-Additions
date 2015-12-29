@@ -1,13 +1,11 @@
 package buildcraftAdditions.client.gui;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import buildcraftAdditions.inventories.containers.ContainerChargingStation;
 import buildcraftAdditions.tileEntities.TileChargingStation;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -21,8 +19,8 @@ public class GuiChargingStation extends GuiInventory<TileChargingStation> {
 
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiChargingStation.png");
 
-	public GuiChargingStation(InventoryPlayer inventoryPlayer, TileChargingStation tile) {
-		super(new ContainerChargingStation(inventoryPlayer, tile), tile);
+	public GuiChargingStation(EntityPlayer player, TileChargingStation tile) {
+		super(new ContainerChargingStation(player, tile), tile);
 		setDrawPlayerInv(true);
 	}
 

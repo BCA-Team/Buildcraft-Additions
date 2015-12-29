@@ -1,14 +1,5 @@
 package buildcraftAdditions.client.gui;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import net.minecraftforge.common.util.ForgeDirection;
-
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import buildcraftAdditions.client.gui.widgets.WidgetBase;
 import buildcraftAdditions.client.gui.widgets.WidgetButtonText;
@@ -19,6 +10,12 @@ import buildcraftAdditions.networking.PacketHandler;
 import buildcraftAdditions.reference.enums.EnumMachineUpgrades;
 import buildcraftAdditions.tileEntities.interfaces.IUpgradableMachine;
 import buildcraftAdditions.utils.Utils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -39,8 +36,8 @@ public class GuiMachineConfigurator extends GuiBase {
 	private WidgetImage upgrades[];
 	private boolean configurationMode;
 
-	public GuiMachineConfigurator(InventoryPlayer inventoryPlayer, TileEntity entity) {
-		super(new ContainerMachineConfigurator(inventoryPlayer, entity));
+	public GuiMachineConfigurator(EntityPlayer player, TileEntity entity) {
+		super(new ContainerMachineConfigurator(player, entity));
 		if (entity instanceof IConfigurableOutput) {
 			configurableOutput = (IConfigurableOutput) entity;
 			configurable = true;

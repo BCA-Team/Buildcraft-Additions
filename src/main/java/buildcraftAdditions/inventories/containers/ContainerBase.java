@@ -1,7 +1,9 @@
 package buildcraftAdditions.inventories.containers;
 
+import buildcraftAdditions.tileEntities.Bases.TileBase;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -25,12 +27,31 @@ import buildcraftAdditions.inventories.slots.SlotPhantom;
 public class ContainerBase<T> extends Container {
 
 	protected final InventoryPlayer inventoryPlayer;
+	protected final EntityPlayerMP player;
 	protected final T inventory;
 	private boolean canShift = true;
 
-	public ContainerBase(InventoryPlayer inventoryPlayer, T inventory) {
-		this.inventoryPlayer = inventoryPlayer;
+	public ContainerBase(EntityPlayer player, T inventory) {
+		if (player != null) {
+			this.inventoryPlayer = player.inventory;
+			if (player instanceof EntityPlayerMP)
+				this.player = (EntityPlayerMP) player;
+			else
+				this.player = null;
+		} else {
+			inventoryPlayer = null;
+			this.player = null;
+		}
 		this.inventory = inventory;
+	}
+
+	@Override
+	public void detectAndSendChanges() {
+		super.detectAndSendChanges();
+		if (player == null) return;
+		if (inventory instanceof TileBase) {
+			((TileBase) inventory).syncToPlayer(player);
+		}
 	}
 
 	private static boolean canStacksMerge(ItemStack stack1, ItemStack stack2) {

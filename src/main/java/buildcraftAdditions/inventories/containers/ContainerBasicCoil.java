@@ -1,13 +1,11 @@
 package buildcraftAdditions.inventories.containers;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Slot;
-
+import buildcraftAdditions.tileEntities.TileBasicCoil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import buildcraftAdditions.tileEntities.TileBasicCoil;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Slot;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -20,8 +18,8 @@ public class ContainerBasicCoil extends ContainerBase<TileBasicCoil> {
 
 	private int burnTime, fullBurnTime;
 
-	public ContainerBasicCoil(InventoryPlayer inventoryPlayer, TileBasicCoil tile) {
-		super(inventoryPlayer, tile);
+	public ContainerBasicCoil(EntityPlayer player, TileBasicCoil tile) {
+		super(player, tile);
 		addSlotToContainer(new Slot(tile, 0, 78, 43));
 		addPlayerInventory(8, 84);
 	}

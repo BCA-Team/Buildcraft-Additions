@@ -1,13 +1,11 @@
 package buildcraftAdditions.client.gui;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import buildcraftAdditions.inventories.containers.ContainerBasicCoil;
 import buildcraftAdditions.tileEntities.TileBasicCoil;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -22,8 +20,8 @@ public class GuiBasicCoil extends GuiInventory<TileBasicCoil> {
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions", "textures/gui/guiBasicCoil.png");
 	private final TileBasicCoil coil;
 
-	public GuiBasicCoil(InventoryPlayer inventoryplayer, TileBasicCoil coil) {
-		super(new ContainerBasicCoil(inventoryplayer, coil), coil);
+	public GuiBasicCoil(EntityPlayer player, TileBasicCoil coil) {
+		super(new ContainerBasicCoil(player, coil), coil);
 		setDrawPlayerInv(true);
 		this.coil = coil;
 	}

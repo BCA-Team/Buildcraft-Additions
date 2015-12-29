@@ -1,9 +1,8 @@
 package buildcraftAdditions.inventories.containers;
 
-import net.minecraft.entity.player.InventoryPlayer;
-
 import buildcraftAdditions.inventories.InventoryPortableLaser;
 import buildcraftAdditions.inventories.slots.SlotBattery;
+import net.minecraft.entity.player.EntityPlayer;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -14,8 +13,8 @@ import buildcraftAdditions.inventories.slots.SlotBattery;
  */
 public class ContainerPortableLaser extends ContainerBase<InventoryPortableLaser> {
 
-	public ContainerPortableLaser(InventoryPlayer inventoryPlayer, InventoryPortableLaser inventory) {
-		super(inventoryPlayer, inventory);
+	public ContainerPortableLaser(EntityPlayer player, InventoryPortableLaser inventory) {
+		super(player, inventory);
 		addSlotToContainer(new SlotBattery(inventory, 0, 60, 29));
 		addSlotToContainer(new SlotBattery(inventory, 1, 78, 29));
 		addSlotToContainer(new SlotBattery(inventory, 2, 96, 29));

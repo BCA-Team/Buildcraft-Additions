@@ -1,15 +1,13 @@
 package buildcraftAdditions.client.gui;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import buildcraftAdditions.client.gui.widgets.WidgetFluidTank;
 import buildcraftAdditions.inventories.containers.ContainerRefinery;
 import buildcraftAdditions.tileEntities.TileRefinery;
 import buildcraftAdditions.utils.Utils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -24,8 +22,8 @@ public class GuiRefinery extends GuiBase {
 	private static final ResourceLocation texture = new ResourceLocation("bcadditions:textures/gui/guiRefinery.png");
 	private final TileRefinery refinery;
 
-	public GuiRefinery(InventoryPlayer inventoryPlayer, TileRefinery refinery) {
-		super(new ContainerRefinery(inventoryPlayer, refinery));
+	public GuiRefinery(EntityPlayer player, TileRefinery refinery) {
+		super(new ContainerRefinery(player, refinery));
 		setTitleXOffset(70);
 		setTitleYOffset(3);
 		this.refinery = refinery;

@@ -23,7 +23,7 @@ public class ContainerKEB extends ContainerBase<TileKineticEnergyBufferBase> {
 	private int energy;
 
 	public ContainerKEB(EntityPlayer player, TileKineticEnergyBufferBase tile) {
-		super(player.inventory, tile);
+		super(player, tile);
 		if (PlayerUtils.playerMatches(tile, player))
 			tile.destroyer = player;
 	}

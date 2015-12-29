@@ -26,8 +26,8 @@ public class ContainerCoolingTower extends ContainerBase<TileCoolingTower> {
 
 	private int heat, fluidIDInput, fluidAmountInput, fluidIDOutput, fluidAmountOutput, fluidIDCoolant, fluidAmountCoolant;
 
-	public ContainerCoolingTower(TileCoolingTower tile) {
-		super(null, tile);
+	public ContainerCoolingTower(EntityPlayer player, TileCoolingTower tile) {
+		super(player, tile);
 		setCanShift(false);
 	}
 

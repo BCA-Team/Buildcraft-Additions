@@ -1,29 +1,9 @@
 package buildcraftAdditions.tileEntities;
 
-import java.util.EnumSet;
-import java.util.Set;
-
-import com.google.common.collect.ImmutableSet;
-
-import io.netty.buffer.ByteBuf;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-
-import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
-
 import buildcraft.api.fuels.ICoolant;
 import buildcraft.api.transport.IPipeConnection;
 import buildcraft.api.transport.IPipeTile;
 import buildcraft.energy.fuels.CoolantManager;
-
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.networking.ISynchronizedTile;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
@@ -42,6 +22,21 @@ import buildcraftAdditions.utils.fluids.CoolantTank;
 import buildcraftAdditions.utils.fluids.CoolingRecipeTank;
 import buildcraftAdditions.utils.fluids.ITankHolder;
 import buildcraftAdditions.utils.fluids.Tank;
+import com.google.common.collect.ImmutableSet;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
+
+import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -327,8 +322,9 @@ public class TileCoolingTower extends TileBase implements IMultiBlockTile, IFlui
 	private int fill(FluidStack resouce, boolean doFill, int tankID) {
 		Tank tank = getTanks()[tankID];
 		int filled = tank.fill(resouce, doFill);
-		updateRecipe();
-		sync();
+		if (doFill) {
+			updateRecipe();
+		}
 		return filled;
 	}
 

@@ -1,31 +1,7 @@
 package buildcraftAdditions.tileEntities;
 
-import java.util.EnumSet;
-import java.util.Set;
-
-import com.google.common.collect.ImmutableSet;
-
-import io.netty.buffer.ByteBuf;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-
-import cpw.mods.fml.common.network.ByteBufUtils;
-
-import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
-
-import cofh.api.energy.IEnergyReceiver;
-
 import buildcraft.api.transport.IPipeConnection;
 import buildcraft.api.transport.IPipeTile;
-
 import buildcraftAdditions.BuildcraftAdditions;
 import buildcraftAdditions.api.recipe.BCARecipeManager;
 import buildcraftAdditions.api.recipe.refinery.IRefineryRecipe;
@@ -44,6 +20,23 @@ import buildcraftAdditions.utils.Utils;
 import buildcraftAdditions.utils.fluids.ITankHolder;
 import buildcraftAdditions.utils.fluids.RefineryRecipeTank;
 import buildcraftAdditions.utils.fluids.Tank;
+import cofh.api.energy.IEnergyReceiver;
+import com.google.common.collect.ImmutableSet;
+import cpw.mods.fml.common.network.ByteBufUtils;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
+
+import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -75,6 +68,7 @@ public class TileRefinery extends TileBase implements IMultiBlockTile, IFluidHan
 		inputFluid = "";
 		outputFluid = "";
 	}
+
 
 	public void updateEntity() {
 		super.updateEntity();

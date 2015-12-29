@@ -1,11 +1,10 @@
 package buildcraftAdditions.client.gui;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
 import buildcraftAdditions.inventories.InventoryKineticMultiTool;
 import buildcraftAdditions.inventories.containers.ContainerKineticMultiTool;
 import buildcraftAdditions.reference.Variables;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -18,8 +17,8 @@ public class GuiKineticMultiTool extends GuiInventory<InventoryKineticMultiTool>
 
 	private static final ResourceLocation texture = new ResourceLocation(Variables.MOD.ID, "textures/gui/guiKineticTool.png");
 
-	public GuiKineticMultiTool(InventoryPlayer inventoryPlayer, InventoryKineticMultiTool inventory) {
-		super(new ContainerKineticMultiTool(inventoryPlayer, inventory), inventory);
+	public GuiKineticMultiTool(EntityPlayer player, InventoryKineticMultiTool inventory) {
+		super(new ContainerKineticMultiTool(player, inventory), inventory);
 		setDrawPlayerInv(true);
 	}
 

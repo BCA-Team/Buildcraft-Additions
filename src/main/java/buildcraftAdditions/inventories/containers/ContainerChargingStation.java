@@ -1,13 +1,11 @@
 package buildcraftAdditions.inventories.containers;
 
 
-import net.minecraft.entity.player.InventoryPlayer;
+import buildcraftAdditions.tileEntities.TileChargingStation;
+import cofh.api.energy.IEnergyContainerItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import cofh.api.energy.IEnergyContainerItem;
-
-import buildcraftAdditions.tileEntities.TileChargingStation;
 
 /**
  * Copyright (c) 2014-2015, AEnterprise
@@ -18,8 +16,8 @@ import buildcraftAdditions.tileEntities.TileChargingStation;
  */
 public class ContainerChargingStation extends ContainerBase<TileChargingStation> {
 
-	public ContainerChargingStation(InventoryPlayer inventoryPlayer, TileChargingStation tile) {
-		super(inventoryPlayer, tile);
+	public ContainerChargingStation(EntityPlayer player, TileChargingStation tile) {
+		super(player, tile);
 		addSlotToContainer(new Slot(tile, 0, 80, 30) {
 
 			@Override
